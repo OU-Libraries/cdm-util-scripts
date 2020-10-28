@@ -15,6 +15,7 @@ All these scripts will give help if asked via `python SCRIPTNAME -h`.
 ## ftp2catcher.py
 
 `ftp2catcher.py` takes
+* A CONTENTdm repository URL
 * A CONTENTdm collection alias
 * The CONTENTdm collection's field nickname for the identifier used in FromThePage's IIIF `dc:source` metadata field
 * The CONTENTdm field nickname for the collection's transcript field
@@ -36,7 +37,7 @@ FromThePage provides its own set of IIIF manifests for transcribed CONTENTdm obj
 
 Please consult FromThePage's API [documentation on renderings](https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#sequence-level-rendering) for up-to-date explanations and examples.
 
-`ftp2catcher.py` currently provides `Verbatim Plaintext`.
+`ftp2catcher.py` currently defaults to `Verbatim Plaintext`, but there is an optional `--transcript_type` argument where you can specify the transcript flavor.
 
 FromThePage IIIF manifests do not contain explicit links back to CONTENTdm objects, but they do publish a `dc:source` metadata field that contains an object identifier (perhaps based on designated `dc:identifier` in collection field data?):
 
@@ -63,10 +64,11 @@ FromThePage IIIF manifests do not contain explicit links back to CONTENTdm objec
 
 Example:
 ```
-$ cat test.txt
+$ cat ftp-manifest-urls.txt
 https://fromthepage.com/iiif/45434/manifest
 https://fromthepage.com/iiif/36866/manifest
-$ python ftp2catcher.py p15808coll15 identi descri test.txt test.json
+(base) /mnt/c/Users/versteeg/dev/cdm-util-scripts
+$ python ftp2catcher.py http://media.library.ohio.edu p15808coll15 identi descri ftp-manifest-urls.txt cdm-catcher-edits.json
 Requesting 'https://fromthepage.com/iiif/45434/manifest'...
 Searching 'p15808coll15' field 'identi' for 'ryan_box013-tld_f01'...
 'p15808coll15' dmrecord 5193 is type 'Document-PDF'
@@ -77,7 +79,7 @@ Searching 'p15808coll15' field 'identi' for 'ryan_box013-tld_f31'...
 Requesting 11 'Verbatim Plaintext' page transcripts: 1 2 3 4 5 6 7 8 9 10 11
 Writing JSON file...
 Done
-$ head test.json
+$ head cdm-catcher-edits.json
 [
   {
     "dmrecord": "5173",
