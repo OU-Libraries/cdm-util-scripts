@@ -117,6 +117,9 @@ name                  nick         type      size   find    req   search   hide 
 ```
 
 If you make too many of the same request (10+?), OCLC will start rejecting them, resulting in an error, so it's a good idea to record frequently used queries. You can do this using bash, as:
+
     python printcdminfo.py https://media.library.ohio.edu >ou-collections.txt
+
 `printcdminfo.py` also has an `--output` option that will write CSV and JSON, as:
+
     python printcdminfo.py https://media.library.ohio.edu --alias donswaim --output csv >donswaim-fields.csv
