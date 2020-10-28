@@ -6,6 +6,8 @@ Clone the repo to get a local copy of the scripts: `git clone https://github.com
 
 You'll need to have Python and the Python `requests` library installed (`pip install requests`).
 
+All these scripts will give help if asked via `python SCRIPTNAME -h`.
+
 ## csv2json.py
 
 `csv2json.py` accepts a CSV, TSV or other delimited file and transposes its rows into a list of JSON objects with column headers as keys, hopefully suitable for use with the Washington State Library's [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher) metadata `edit` action.
@@ -32,7 +34,7 @@ FromThePage provides its own set of IIIF manifests for transcribed CONTENTdm obj
 * `TEI-XML` provides the "existing TEI-XML export of the work"
 * `Subject CSV` provides a CSV of the "subjects mentioned within the work"
 
-Please consult FromThePage's API [documentation on renderings](https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#sequence-level-rendering) for up-to-date explications and examples.
+Please consult FromThePage's API [documentation on renderings](https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#sequence-level-rendering) for up-to-date explanations and examples.
 
 `ftp2catcher.py` currently provides `Verbatim Plaintext`.
 
