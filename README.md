@@ -65,10 +65,16 @@ Example:
 ```
 $ cat test.txt
 https://fromthepage.com/iiif/45434/manifest
+https://fromthepage.com/iiif/36866/manifest
 $ python ftp2catcher.py p15808coll15 identi descri test.txt test.json
 Requesting 'https://fromthepage.com/iiif/45434/manifest'...
 Searching 'p15808coll15' field 'identi' for 'ryan_box013-tld_f01'...
+'p15808coll15' dmrecord 5193 is type 'Document-PDF'
 Requesting 20 'Verbatim Plaintext' page transcripts: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Requesting 'https://fromthepage.com/iiif/36866/manifest'...
+Searching 'p15808coll15' field 'identi' for 'ryan_box013-tld_f31'...
+'p15808coll15' dmrecord 5172 is type 'Document-PDF'
+Requesting 11 'Verbatim Plaintext' page transcripts: 1 2 3 4 5 6 7 8 9 10 11
 Writing JSON file...
 Done
 $ head test.json

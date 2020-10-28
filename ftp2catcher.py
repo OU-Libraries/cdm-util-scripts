@@ -7,18 +7,13 @@ from itertools import count
 from typing import List
 
 
-def get_compound_object_info(alias: str, dmrecord: str, session: requests.Session) -> dict:
+def get_cdm_page_pointers(alias: str, dmrecord: str, session: requests.Session) -> List[str]:
     response = session.get(f"https://media.library.ohio.edu/digital/bl/dmwebservices/index.php?q=dmGetCompoundObjectInfo/{alias}/{dmrecord}/json")
     response.raise_for_status()
-    return response.json()
-
-
-def get_documentpdf_page_pointers(alias: str, dmrecord: str, session: requests.Session) -> List[str]:
-    dmGetCompoundObjectInfo = get_compound_object_info(alias, dmrecord, session)
+    dmGetCompoundObjectInfo = response.json()
     if 'code' in dmGetCompoundObjectInfo:
         raise ValueError(dmGetCompoundObjectInfo['message'])
-    if dmGetCompoundObjectInfo['type'] != 'Document-PDF':
-        raise ValueError(f"{dmrecord} is not a Document-PDF")
+    print(f"{alias!r} dmrecord {dmrecord!r} is type {dmGetCompoundObjectInfo['type']!r}")
     return [page['pageptr'] for page in dmGetCompoundObjectInfo['page']]
 
 
@@ -93,9 +88,9 @@ def main():
                                                session=session)
             if len(cdm_object_pointers) != 1:
                 raise ValueError(f"No unique object found for {source!r} in {args.source_nick!r}")
-            page_pointers = get_documentpdf_page_pointers(alias=args.collection_alias,
-                                                          dmrecord=cdm_object_pointers[0],
-                                                          session=session)
+            page_pointers = get_cdm_page_pointers(alias=args.collection_alias,
+                                                  dmrecord=cdm_object_pointers[0],
+                                                  session=session)
             transcript_urls = get_ftp_manifest_transcript_urls(manifest=manifest,
                                                                label=transcript_type_label)
             if len(page_pointers) != len(transcript_urls):
