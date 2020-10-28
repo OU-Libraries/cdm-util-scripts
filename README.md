@@ -2,13 +2,13 @@
 
 cdm-util-scripts are Python scripts developed to support Ohio University Libraries' CONTENTdm operations.
 
-Clone the repo to get a local copy of the scripts `git clone https://github.com/versteeg-ou/cdm-util-scripts`. Do `git pull` to get the latest versions.
+Clone the repo to get a local copy of the scripts: `git clone https://github.com/versteeg-ou/cdm-util-scripts`. Do `git fetch` in the repo directory to see if there are updates available; do `git pull` to get the latest versions.
 
-You'll need to have the Python `requests` library installed (`pip install requests`).
+You'll need to have Python and the Python `requests` library installed (`pip install requests`).
 
 ## csv2json.py
 
-`csv2json.py` accepts a CSV, TSV or other delimited file and transposes its rows into a list of JSON objects hopefully suitable for use with the Washington State Library's [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher) metadata `edit` action.
+`csv2json.py` accepts a CSV, TSV or other delimited file and transposes its rows into a list of JSON objects with column headers as keys, hopefully suitable for use with the Washington State Library's [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher) metadata `edit` action.
 
 ## ftp2catcher.py
 
@@ -20,6 +20,44 @@ You'll need to have the Python `requests` library installed (`pip install reques
 * An output file name
 
 and outputs a JSON file of FromThePage transcripts hopefully suitable for upload to CONTENTdm with cdm-catcher.
+
+FromThePage provides its own set of IIIF manifests for transcribed CONTENTdm objects. These manifests contain links to transcripts corresponding to the pages of the object in several flavors:
+
+* `Verbatim Plaintext` provides "the verbatim text, with all formatting, emendation, and subject linking stripped out" designed for "human download."
+* `Emended Plaintext` differs from `Verbatim Plaintext` by applying "normalization ... to all subjects mentioned so that while the verbatim text may read `"I greeted Mr. Jones and his wife this morning."`, the emended plaintext will read `"I greeted James Jones and Elizabeth Smith Jones this morning"`.
+* `Verbatim Translation Plaintext` provides a `Verbatim Plaintext` version of the text of a translation
+* `Emended Translation Plaintext` provides an `Emended Plaintext` version of the text of a translation
+* `Searchable Plaintext` provides a plaintext transcript with "words broken by hyphenated newlines are joined together, and a list of the canonical names mentioned within each page is appended to the end of the page"
+* `XHTML` provides the "existing XHTML export... with all formatting, emendation, and subject linking stripped out" 
+* `TEI-XML` provides the "existing TEI-XML export of the work"
+* `Subject CSV` provides a CSV of the "subjects mentioned within the work"
+
+Please consult FromThePage's API [documentation on renderings](https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#sequence-level-rendering) for up-to-date explications and examples.
+
+`ftp2catcher.py` currently provides `Verbatim Plaintext`.
+
+FromThePage IIIF manifests do not contain explicit links back to CONTENTdm objects, but they do publish a `dc:source` metadata field that contains an object identifier (perhaps based on designated `dc:identifier` in collection field data?):
+
+```
+{
+  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@id": "https://fromthepage.com/iiif/45434/manifest",
+  "@type": "sc:Manifest",
+  "label": "Box 013, folder 01: 4th Infantry Division, after action reports",
+  "metadata": [
+    {
+      "label": "dc:source",
+      "value": "ryan_box013-tld_f01"
+    }
+  ],
+  ...
+```
+
+`ftp2catcher.py` uses this `"metadata"` `"value"` to search CONTENTdm for the corresponding object so it can provide `dmrecord` numbers for cdm-catcher. To search for this identifier, `ftp2catcher.py` needs to know the field nickname to search in. This may be `identi` (because of the way CONTENTdm names `dc:identifer` fields), but should be ascertained from the CONTENTdm collection admin page, inspecting item page source, or `printcdminfo.py`.
+
+`ftp2catcher.py` associates transcripts with object pages by assuming that they're in the same order in FromThePage and CONTENTdm, "zipping" them together. It may be a good idea to check that this assumption is reliable.
+
+`ftp2catcher.py` must also be provided with the field nickname for the transcript field in the target collection. This field will be type `FTS` in `printcdminfo.py` output.
 
 Example:
 ```
@@ -46,10 +84,9 @@ $ head test.json
 
 ## printcdminfo.py
 
-`printcdminfo.py` takes a CONTENTdm repository URL and prints collections and field metadata, including collection and field nicknames.
+`printcdminfo.py` takes a CONTENTdm repository URL and prints collections and field metadata, including collection and field nicknames. If given a repository base URL it will print a table of collection data for that repository; if passed the `--alias` option with a collection alias, it will print the field information for that collection.
 
 Example:
-
 ```
 $ python printcdminfo.py https://cdmdemo.contentdm.oclc.org/ --alias oclcsample
 name                  nick         type      size   find    req   search   hide   vocdb   vocab   dc        admin   readonly
@@ -78,3 +115,5 @@ name                  nick         type      size   find    req   search   hide 
 'CONTENTdm number'    'dmrecord'   'TEXT'    0      'BLANK' 1     0        1      0       ''      'BLANK'   1       1
 'CONTENTdm file name' 'find'       'TEXT'    0      'BLANK' 1     0        1      0       ''      'BLANK'   1       1
 ```
+
+If you make too many of the same request (10+?), OCLC will start rejecting them, resulting in an error, so it's a good idea to record frequently used queries. You can do this using bash, as `python printcdminfo.py https://media.library.ohio.edu >ou-collection.txt`. `printcdminfo.py` also has an `--output` option that will write CSV and JSON, as `python printcdminfo.py https://media.library.ohio.edu --alias donswaim --output csv >donswaim-fields.csv`.
