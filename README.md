@@ -67,7 +67,6 @@ Example:
 $ cat ftp-manifest-urls.txt
 https://fromthepage.com/iiif/45434/manifest
 https://fromthepage.com/iiif/36866/manifest
-(base) /mnt/c/Users/versteeg/dev/cdm-util-scripts
 $ python ftp2catcher.py http://media.library.ohio.edu p15808coll15 identi descri ftp-manifest-urls.txt cdm-catcher-edits.json
 Requesting 'https://fromthepage.com/iiif/45434/manifest'...
 Searching 'p15808coll15' field 'identi' for 'ryan_box013-tld_f01'...
