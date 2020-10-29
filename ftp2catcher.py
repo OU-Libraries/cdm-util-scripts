@@ -45,7 +45,8 @@ def get_ftp_transcript(url: str, session: requests.Session) -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Get FromThePage transcripts and output them in cdm-catcher JSON")
+    parser = argparse.ArgumentParser(description="Get FromThePage transcripts and output them in cdm-catcher JSON",
+                                     fromfile_prefix_chars='@')
     parser.add_argument('repository_url',
                         type=str,
                         help="CONTENTdm repository URL")
@@ -106,7 +107,7 @@ def main():
             print(f"Requesting {len(transcript_urls)} {transcript_type_label!r} page transcripts: ", end='')
             n = count(1)
             for dmrecord, transcript_url in zip(page_pointers, transcript_urls):
-                print(f"{next(n)} ", end='')
+                print(f"{next(n)} ", end='', flush=True)
                 transcript_text = get_ftp_transcript(transcript_url, session)
                 catcher_fields.append({
                     'dmrecord': dmrecord,

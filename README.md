@@ -91,6 +91,21 @@ $ head cdm-catcher-edits.json
   {
 ```
 
+`ftp2catcher.py` can also have its arguments specified via a text file, prefixed with `@`:
+```
+$ cat arguments.txt
+http://media.library.ohio.edu
+p15808coll15
+identi
+descri
+ftp-manifest-urls.txt
+cdm-catcher-edits.json
+$ python ftp2catcher.py @arguments.txt
+```
+The optional argument can also be provided with file-specified arguments:
+
+    python ftp2catcher.py @arguments.txt --transcript_type 'Searchable Plaintext'
+
 ## printcdminfo.py
 
 `printcdminfo.py` takes a CONTENTdm repository URL and prints collections and field metadata, including collection and field nicknames. If given a repository base URL it will print a table of collection data for that repository; if passed the `--alias` option with a collection alias, it will print the field information for that collection.
