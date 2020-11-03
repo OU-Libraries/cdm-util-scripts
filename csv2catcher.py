@@ -6,7 +6,7 @@ import argparse
 from dataclasses import dataclass
 from itertools import count
 
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 
 @dataclass
@@ -45,6 +45,7 @@ def get_cdm_collection(repo_url: str,
                                                                  alias=alias,
                                                                  dmrecord=cdm_object.pointer,
                                                                  session=session)
+        print(end='\n')
     return cdm_collection
 
 
@@ -56,6 +57,38 @@ def get_cdm_page_pointers(repo_url: str, alias: str, dmrecord: str, session: req
         raise ValueError(f"CONTENTdm error {dmGetCompoundObjectInfo['message']!r}")
     # print(f"Found {len(dmGetCompoundObjectInfo)} pages in {dmrecord!r} of type {dmGetCompoundObjectInfo['type']}", flush=True)
     return [page['pageptr'] for page in dmGetCompoundObjectInfo['page']]
+
+
+def build_cdm_identifier_index(cdm_collection: List[CdmObject]) -> Dict[str, CdmObject]:
+    cdm_index = dict()
+    for cdm_object in cdm_collection:
+        if cdm_object.identifier in cdm_index:
+            raise ValueError(f"{cdm_object.identifier} not unique in collection")
+        cdm_index[cdm_object.identifier] = cdm_object
+    return cdm_index
+
+
+def object_level_catcher_json(cdm_index: Dict[str, CdmObject],
+                              catcher_records: List[dict],
+                              key_nick: str,
+                              object_page: int) -> List[dict]:
+    return [{'dmrecord': cdm_index[record[key_nick]].pointer, **record}
+            for record in catcher_records
+            if int(record['Page Position']) == object_page]
+
+
+def page_level_catcher_json(cdm_index: Dict[str, CdmObject],
+                            catcher_records: List[dict],
+                            key_nick: str) -> List[dict]:
+    cdm_catcher_json = []
+    for record in catcher_records:
+        cdm_object = cdm_index[record[key_nick]]
+        cdm_catcher_json.append({
+            'dmrecord': (cdm_object.page_pointers[int(record['Page Position']) - 1]
+                         if cdm_object.is_cpd else cdm_object.pointer),
+            **record
+        })
+    return cdm_catcher_json
 
 
 def main():
@@ -102,7 +135,9 @@ def main():
         catcher_records = [{nick: row[name] for name, nick in name_nick_map.items()}
                            for row in csv.DictReader(fp)]
 
-    if all(reconciliation_args):
+    if not all(reconciliation_args):
+        cdm_catcher_json = catcher_records
+    else:
         with requests.Session() as session:
             cdm_collection = get_cdm_collection(
                 repo_url=args.repository_url,
@@ -111,24 +146,20 @@ def main():
                 session=session,
                 page_data=False if args.object_page else True
             )
-            cdm_index = dict()
-            for cdm_object in cdm_collection:
-                if cdm_object.identifier in cdm_index:
-                    raise ValueError(f"{cdm_object.identifier} not unique in collection")
-                cdm_index[cdm_object.identifier] = cdm_object
-            if args.object_page:
-                cdm_catcher_json = [{'dmrecord': cdm_index[record[args.key_nick]].pointer, **record}
-                                    for record in catcher_records
-                                    if int(record['Page Position']) == args.object_page]
-            else:
-                cdm_catcher_json = []
-                for record in catcher_records:
-                    cdm_object = cdm_index[record[args.key_nick]]
-                    cdm_catcher_json.append({
-                        'dmrecord': (cdm_object.page_pointers[int(record['Page Position']) - 1]
-                                     if cdm_object.is_cpd else cdm_object.pointer),
-                        **record
-                    })
+        cdm_index = build_cdm_identifier_index(cdm_collection)
+        if args.object_page:
+            cdm_catcher_json = object_level_catcher_json(
+                cdm_index=cdm_index,
+                catcher_records=catcher_records,
+                key_nick=args.key_nick,
+                object_page=args.object_page
+            )
+        else:
+            cdm_catcher_json = page_level_catcher_json(
+                cdm_index=cdm_index,
+                catcher_records=catcher_records,
+                key_nick=args.key_nick
+            )
 
     with open(args.output_file, mode='w') as fp:
         json.dump(cdm_catcher_json, fp, indent=2)
