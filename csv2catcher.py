@@ -3,13 +3,14 @@ import requests
 import json
 import csv
 import argparse
+import sys
 from dataclasses import dataclass
 from collections import defaultdict
 from itertools import count
 
 from ftp2catcher import get_cdm_page_pointers
 
-from typing import List, Optional, Dict, Sequence, Any
+from typing import List, Optional, Dict, Sequence
 
 
 @dataclass
@@ -40,10 +41,10 @@ class CdmObject:
         return a or b
 
 
-def get_cdm_collection_object_records(repo_url: str,
-                                      alias: str,
-                                      field_nicks: Sequence[str],
-                                      session: requests.Session) -> List[dict]:
+def request_cdm_collection_object_records(repo_url: str,
+                                          alias: str,
+                                          field_nicks: Sequence[str],
+                                          session: requests.Session) -> List[dict]:
     cdm_records = []
     total = 1
     start = 1
@@ -58,94 +59,98 @@ def get_cdm_collection_object_records(repo_url: str,
     return cdm_records
 
 
-def build_identifier_to_object_pointer_index(cdm_records: List[dict], identifier_nick: str) -> Dict[str, CdmObject]:
-    identifier_index = dict()
-    for record in cdm_records:
-        identifier = record[identifier_nick]
-        if identifier in identifier_index:
-            raise KeyError(f"{identifier!r} duplicated")
-        identifier_index[identifier] = CdmObject(pointer=record['pointer'],
-                                                 identifier=identifier,
-                                                 is_cpd=record['find'].endswith('.cpd'))
-    return identifier_index
+def build_cdm_collection_from_records(cdm_records: List[dict], identifier_nick: str) -> List[CdmObject]:
+    return [CdmObject(pointer=record['pointer'],
+                      identifier=record[identifier_nick],
+                      is_cpd=record['find'].endswith('.cpd')) for record in cdm_records]
 
 
-def build_identifier_to_object_and_page_pointer_index(repo_url: str,
-                                                      alias: str,
-                                                      identifier_to_object_pointer_index: Dict[str, CdmObject],
-                                                      session: requests.Session,
-                                                      verbose: bool = True) -> Dict[str, CdmObject]:
+def request_collection_page_pointers(cdm_collection: Sequence[CdmObject],
+                                     repo_url: str,
+                                     alias: str,
+                                     session: requests.Session,
+                                     verbose: bool = True) -> None:
     if verbose:
-        total_cpd = sum(1 if o.is_cpd else 0 for o in identifier_to_object_pointer_index.values())
+        total_cpd = sum(1 if o.is_cpd else 0 for o in cdm_collection)
         request_count = count(1)
-    object_and_page_pointer_index = dict()
-    for identifier, cdm_object in identifier_to_object_pointer_index.items():
+    for cdm_object in cdm_collection:
         if cdm_object.is_cpd:
             if verbose:
                 n = next(request_count)
-                print(f"Requesting page pointers: {n}/{total_cpd} {(n // total_cpd) * 100}%",
+                print(f"Requesting page pointers: {n}/{total_cpd} {(n / total_cpd) * 100:2.0f}%",
                       end='\r',
                       flush=True)
-            page_pointers = get_cdm_page_pointers(
+            cdm_object.page_pointers = get_cdm_page_pointers(
                 repo_url=repo_url,
                 alias=alias,
                 dmrecord=cdm_object.pointer,
                 session=session
             )
-        else:
-            page_pointers = None
-        verbose and print(end='\n')
-        object_and_page_pointer_index[identifier] = cdm_object + CdmObject(page_pointers=page_pointers)
-    return object_and_page_pointer_index
+    if verbose:
+        print(end='\n')
+
+
+def cdm_object_from_row(row: dict,
+                        column_mapping: dict,
+                        identifier_nick: Optional[str]) -> CdmObject:
+    fields = {nick: row[name] for name, nick in column_mapping.items()}
+    identifier = fields.pop(identifier_nick) if identifier_nick else None
+    return CdmObject(identifier=identifier,
+                     page_position=int(row['Page Position']),
+                     fields=fields)
 
 
 def build_cdm_collection_from_rows(rows: Sequence[dict],
                                    column_mapping: dict,
-                                   identifier_nick: Optional[str] = None) -> List[CdmObject]:
+                                   identifier_nick: Optional[str]) -> List[CdmObject]:
     return [cdm_object_from_row(row=row,
                                 column_mapping=column_mapping,
                                 identifier_nick=identifier_nick)
             for row in rows]
 
 
-def cdm_object_from_row(row: dict,
-                        column_mapping: dict,
-                        identifier_nick: Optional[str] = None) -> CdmObject:
-    fields = {nick: row[name] for name, nick in column_mapping.items()}
-    return CdmObject(identifier=fields[identifier_nick] if identifier_nick else None,
-                     page_position=int(row['Page Position']),
-                     fields=fields)
-
-
 def build_identifier_to_object_index(cdm_collection: List[CdmObject]) -> Dict[str, List[CdmObject]]:
     cdm_index = defaultdict(list)
     for cdm_object in cdm_collection:
         cdm_index[cdm_object.identifier].append(cdm_object)
-    for entry in cdm_index.values():
-        entry.sort(key=lambda cdm_object: cdm_object.page_position)
-    return cdm_index
+    return dict(cdm_index)
 
 
-def reconcile_indexes_by_object(identifier_to_object_index: Dict[str, List[CdmObject]],
-                                identifier_to_object_pointer_index: Dict[str, CdmObject],
-                                object_page: int) -> List[CdmObject]:
+def reconcile_indexes_by_object(objects_index: Dict[str, List[CdmObject]],
+                                pages_index: Dict[str, List[CdmObject]],
+                                page_position: int) -> List[CdmObject]:
     reconciled = []
-    for identifier, cdm_object_pointer in identifier_to_object_pointer_index.items():
-        cdm_object_fields = identifier_to_object_index[identifier][object_page - 1]
-        reconciled.append(cdm_object_pointer + cdm_object_fields)
+    for identifier, pages in pages_index.items():
+        position_matches = [page for page in pages if page.page_position == page_position]
+        if len(position_matches) == 0:
+            raise ValueError(f"missing page at position {page_position} for identifier {identifier!r}")
+        if len(position_matches) > 1:
+            raise ValueError(f"page position collision on {page_position} for {identifier!r}")
+        for cdm_object in objects_index[identifier]:
+            reconciled.append(cdm_object + position_matches[0])
     return reconciled
 
 
-def reconcile_indexes_by_page(identifier_to_object_index: Dict[str, List[CdmObject]],
-                              identifier_to_object_and_page_pointer_index: Dict[str, CdmObject]) -> List[dict]:
+def reconcile_indexes_by_page(objects_index: Dict[str, List[CdmObject]],
+                              pages_index: Dict[str, List[CdmObject]]) -> List[dict]:
     reconciled = []
-    for identifier, cdm_object_pointer in identifier_to_object_and_page_pointer_index.items():
-        for pointer, cdm_object in zip(cdm_object_pointer.page_pointers, identifier_to_object_index[identifier]):
-            reconciled.append(cdm_object + CdmObject(pointer=pointer))
+    for identifier, pages in pages_index.items():
+        for page in pages:
+            for cdm_object in objects_index[identifier]:
+                reconciled.append(
+                    page + CdmObject(pointer=cdm_object.page_pointers[page.page_position - 1])
+                )
+    return reconciled
 
 
 def serialize_cdm_objects(cdm_objects: Sequence[CdmObject]) -> List[dict]:
-    return [{'dmrecord': cdm_object.pointer, **cdm_object.fields} for cdm_object in cdm_objects]
+    series = []
+    for cdm_object in cdm_objects:
+        fields = cdm_object.fields.copy()
+        if cdm_object.pointer:
+            fields['dmrecord'] = cdm_object.pointer
+        series.append(fields)
+    return series
 
 
 def main():
@@ -189,44 +194,56 @@ def main():
         column_mapping = {row['name']: row['nick'] for row in reader}
 
     with open(args.ftp_all_table_data, mode='r') as fp:
-        cdm_collection = build_cdm_collection_from_rows(
+        cdm_collection_from_rows = build_cdm_collection_from_rows(
             rows=csv.DictReader(fp),
             column_mapping=column_mapping,
             identifier_nick=args.identifier_nick
         )
 
     if all(reconciliation_args):
-        identifier_to_object_index = build_identifier_to_object_index(cdm_collection)
+        row_object_index = build_identifier_to_object_index(cdm_collection_from_rows)
         with requests.Session() as session:
-            cdm_records = get_cdm_collection_object_records(
+            cdm_records = request_cdm_collection_object_records(
                 repo_url=args.repository_url,
                 alias=args.collection_alias,
+                field_nicks=[args.identifier_nick],
                 session=session
             )
-            identifier_to_object_pointer_index = build_identifier_to_object_pointer_index(
-                records=cdm_records,
+            cdm_collection_from_records = build_cdm_collection_from_records(
+                cdm_records=cdm_records,
                 identifier_nick=args.identifier_nick
             )
+            cdm_collection_from_records = [cdm_object for cdm_object in cdm_collection_from_records
+                                           if cdm_object.identifier in row_object_index]
             if args.object_page:
-                reduced_identifier_to_object_pointer_index = {identifier: identifier_to_object_pointer_index[identifier]
-                                                              for identifier in identifier_to_object_index.keys()}
-                identifier_to_object_and_page_pointer_index = build_identifier_to_object_and_page_pointer_index(
-                    repo_url=args.repository_url,
-                    alias=args.collection_alias,
-                    identifier_to_object_pointer_index=reduced_identifier_to_object_pointer_index,
-                    session=session
-                )
-        if args.object_page:
+                request_collection_page_pointers(cdm_collection=cdm_collection_from_records,
+                                                 repo_url=args.repo_url,
+                                                 alias=args.alias,
+                                                 session=session)
+        record_object_index = build_identifier_to_object_index(cdm_collection_from_records)
+        unreconcilable_identifiers = [identifier for identifier in row_object_index.keys()
+                                      if identifier not in record_object_index]
+        multiple_identifiers = [identifier for identifier, cdm_objects in record_object_index.items()
+                                if len(cdm_objects) > 1]
+        if unreconcilable_identifiers or multiple_identifiers:
+            for identifier in unreconcilable_identifiers:
+                print(f"Couldn't find {identifier!r} in field {args.identifier_nick!r}")
+            for identifier in multiple_identifiers:
+                print(f"Multiple results for {identifier!r} in field {args.identifier_nick!r}")
+            sys.exit()
+        elif args.object_page:
             catcher_data = reconcile_indexes_by_object(
-                identifier_to_object_index=identifier_to_object_index,
-                identifier_to_object_pointer_index=identifier_to_object_pointer_index,
-                object_page=args.object_page
+                objects_index=record_object_index,
+                pages_index=row_object_index,
+                page_position=args.object_page
             )
         else:
             catcher_data = reconcile_indexes_by_page(
-                identifier_to_object_index=identifier_to_object_index,
-                identifier_to_object_and_page_pointer_index=identifier_to_object_and_page_pointer_index
+                objects_index=record_object_index,
+                pages_index=row_object_index
             )
+    else:
+        catcher_data = cdm_collection_from_rows
 
     with open(args.output_file, mode='w') as fp:
         json.dump(serialize_cdm_objects(catcher_data), fp, indent=2)
