@@ -165,9 +165,8 @@ def test_reconcile_indexes_by_object(cdm_collection_rows, cdm_collection_row_map
         cdm_collection=record_collection
     )
     reconciled = csv2catcher.reconcile_indexes_by_object(
-        objects_index=index_from_records,
-        pages_index=index_from_rows,
-        page_position=1
+        records_index=index_from_records,
+        rows_index=index_from_rows
     )
     assert len(reconciled) == len(index_from_rows)
     for cdm_object in reconciled:
@@ -187,16 +186,18 @@ def test_reconcile_indexes_by_page(cdm_collection_rows, cdm_collection_row_mappi
         identifier_nick='identi'
     )
     with cdm_vcr.use_cassette('test_request_collection_page_pointers.yml'):
-        csv2catcher.request_collection_page_pointers(cdm_collection=record_collection,
-                                                     repo_url='https://media.library.ohio.edu',
-                                                     alias='p15808coll15',
-                                                     session=session)
+        csv2catcher.request_collection_page_pointers(
+            cdm_collection=record_collection,
+            repo_url='https://media.library.ohio.edu',
+            alias='p15808coll15',
+            session=session
+        )
     index_from_records = csv2catcher.build_identifier_to_object_index(
         cdm_collection=record_collection
     )
     reconciled = csv2catcher.reconcile_indexes_by_page(
-        objects_index=index_from_records,
-        pages_index=index_from_rows
+        records_index=index_from_records,
+        rows_index=index_from_rows
     )
     assert len(reconciled) == len(row_collection)
     for cdm_object in reconciled:
