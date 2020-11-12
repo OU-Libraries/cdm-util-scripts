@@ -10,7 +10,7 @@ from itertools import count
 
 from ftp2catcher import get_cdm_page_pointers
 
-from typing import List, Optional, Dict, Sequence
+from typing import List, Optional, Dict, Sequence, Iterator, TextIO
 
 
 @dataclass
@@ -41,14 +41,27 @@ class CdmObject:
         return a or b
 
 
+def csv_dict_reader_with_join(fp: TextIO, seperator: str = '; ') -> Iterator[Dict[str, str]]:
+    reader = csv.reader(fp)
+    header = next(reader)
+    for csv_row in reader:
+        row = dict()
+        for column_name, cell in zip(header, csv_row):
+            row[column_name] = seperator.join([row[column_name], cell]) if column_name in row else cell
+        yield row
+
+
 def request_cdm_collection_object_records(repo_url: str,
                                           alias: str,
                                           field_nicks: Sequence[str],
-                                          session: requests.Session) -> List[dict]:
+                                          session: requests.Session,
+                                          verbose: bool = True) -> List[dict]:
     cdm_records = []
     total = 1
     start = 1
     maxrecs = 1024
+    if verbose:
+        print("Requesting object pointers: ", end='')
     while len(cdm_records) < total:
         response = session.get(f"{repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmQuery/{alias}/CISOSEARCHALL/{'!'.join(field_nicks)}/pointer/{maxrecs}/{start}/1/0/0/0/0/1/json")
         response.raise_for_status()
@@ -56,11 +69,16 @@ def request_cdm_collection_object_records(repo_url: str,
         total = int(dmQuery['pager']['total'])
         start += maxrecs
         cdm_records += dmQuery['records']
+        if verbose:
+            print(f"{len(cdm_records)}/{total}... ",
+                  end='',
+                  flush=True)
+    print("Done")
     return cdm_records
 
 
 def build_cdm_collection_from_records(cdm_records: List[dict], identifier_nick: str) -> List[CdmObject]:
-    return [CdmObject(pointer=record['pointer'],
+    return [CdmObject(pointer=str(record['pointer']),
                       identifier=record[identifier_nick],
                       is_cpd=record['find'].endswith('.cpd')) for record in cdm_records]
 
@@ -77,7 +95,7 @@ def request_collection_page_pointers(cdm_collection: Sequence[CdmObject],
         if cdm_object.is_cpd:
             if verbose:
                 n = next(request_count)
-                print(f"Requesting page pointers: {n}/{total_cpd} {(n / total_cpd) * 100:2.0f}%",
+                print(f"Requesting page pointers: {n}/{total_cpd} {(n / total_cpd) * 100:2.0f}%... ",
                       end='\r',
                       flush=True)
             cdm_object.page_pointers = get_cdm_page_pointers(
@@ -87,13 +105,15 @@ def request_collection_page_pointers(cdm_collection: Sequence[CdmObject],
                 session=session
             )
     if verbose:
-        print(end='\n')
+        print("Done")
 
 
 def cdm_object_from_row(row: dict,
                         column_mapping: dict,
                         identifier_nick: Optional[str]) -> CdmObject:
-    fields = {nick: row[name] for name, nick in column_mapping.items()}
+    fields = dict()
+    for name, nick in column_mapping.items():
+        fields[nick] = '; '.join([fields[nick], row[name]]) if nick in fields else row[name]
     identifier = fields.pop(identifier_nick) if identifier_nick else None
     return CdmObject(identifier=identifier,
                      page_position=int(row['Page Position']),
@@ -142,9 +162,10 @@ def reconcile_indexes_by_page(records_index: Dict[str, List[CdmObject]],
 def serialize_cdm_objects(cdm_objects: Sequence[CdmObject]) -> List[dict]:
     series = []
     for cdm_object in cdm_objects:
-        fields = cdm_object.fields.copy()
+        fields = dict()
         if cdm_object.pointer:
             fields['dmrecord'] = cdm_object.pointer
+        fields.update(cdm_object.fields)
         series.append(fields)
     return series
 
@@ -174,7 +195,7 @@ def main():
                         action='store',
                         help="Column name to use as a search field to get dmrecord numbers")
     parser.add_argument('--match_mode',
-                        type=int,
+                        type=str,
                         action='store',
                         default='page',
                         help="Match CSV rows to 'page' level metadata or 'object' level metadata, default 'page'")
@@ -198,7 +219,7 @@ def main():
 
     with open(args.ftp_all_table_csv, mode='r') as fp:
         cdm_collection_from_rows = build_cdm_collection_from_rows(
-            rows=csv.DictReader(fp),
+            rows=csv_dict_reader_with_join(fp),
             column_mapping=column_mapping,
             identifier_nick=args.identifier_nick
         )
@@ -219,14 +240,15 @@ def main():
                 cdm_records=cdm_records,
                 identifier_nick=args.identifier_nick
             )
+
             # Drop unneeded record objects to keep page pointer requests to the minimum
             cdm_collection_from_records = [cdm_object for cdm_object in cdm_collection_from_records
                                            if cdm_object.identifier in row_object_index]
             if args.match_mode == 'page':
                 request_collection_page_pointers(
                     cdm_collection=cdm_collection_from_records,
-                    repo_url=args.repo_url,
-                    alias=args.alias,
+                    repo_url=args.repository_url,
+                    alias=args.collection_alias,
                     session=session
                 )
         record_object_index = build_identifier_to_object_index(cdm_collection_from_records)

@@ -3,7 +3,7 @@ import vcr
 import requests
 
 import sys
-import csv
+from io import StringIO
 from pathlib import Path
 
 sys.path.append(str(Path('.').absolute()))
@@ -24,8 +24,8 @@ def session():
 
 @pytest.fixture()
 def cdm_collection_rows():
-    with open('tests/inputs/fromthepage_tables_export_1021_2020-11-02T14 02 28Z.csv') as fp:
-        rows = [row for row in csv.DictReader(fp)]
+    with open('tests/inputs/fromthepage-tables-export_ryan-test-rows.csv') as fp:
+        rows = [row for row in csv2catcher.csv_dict_reader_with_join(fp)]
     return rows
 
 
@@ -45,7 +45,20 @@ def cdm_records():
 def cdm_collection_row_mapping():
     return {
         'Work Title': 'identi',
-        'Respondent name (last, first middle) (text)': 'testfi'
+        'Respondent name (last, first middle) (text)': 'testfi',
+        'Format of folder materials (text)': 'testfa',
+        'Additional formats (text)': 'testfa'
+    }
+
+
+@pytest.fixture()
+def cdm_row():
+    return {
+        'Work Title': 'Test title',
+        'Page Position': '1',
+        'Respondent name (last, first middle) (text)': 'Testname, Testname',
+        'Format of folder materials (text)': 'format-1',
+        'Additional formats (text)': 'format-2'
     }
 
 
@@ -77,6 +90,14 @@ def test_CdmObject___add__():
     d = csv2catcher.CdmObject(identifier='d')
     with pytest.raises(ValueError):
         a + d
+
+
+def test_csv_dict_reader_with_join(cdm_collection_rows):
+    test_csv = ("h1,h2,h1,h3\n"
+                "c1a,c2,c1b,c3\n")
+    reader = csv2catcher.csv_dict_reader_with_join(StringIO(test_csv))
+    row = next(reader)
+    assert row == {'h2': 'c2', 'h3': 'c3', 'h1': 'c1a; c1b'}
 
 
 def test_request_cdm_collection_object_records(session):
@@ -120,12 +141,14 @@ def test_request_collection_page_pointers(cdm_records, session):
             assert cdm_object.page_pointers
 
 
-def test_cdm_object_from_row(cdm_collection_rows, cdm_collection_row_mapping):
-    cdm_object = csv2catcher.cdm_object_from_row(row=cdm_collection_rows[0],
+def test_cdm_object_from_row(cdm_row, cdm_collection_row_mapping):
+    cdm_object = csv2catcher.cdm_object_from_row(row=cdm_row,
                                                  column_mapping=cdm_collection_row_mapping,
                                                  identifier_nick='identi')
-    identifier = cdm_collection_rows[0][[name for name, nick in cdm_collection_row_mapping.items() if nick == 'identi'][0]]
+    identifier = cdm_row[[name for name, nick in cdm_collection_row_mapping.items()
+                          if nick == 'identi'][0]]
     assert cdm_object.identifier == identifier
+    assert cdm_object.fields['testfa'] == 'format-1; format-2'
 
 
 def test_build_cdm_collection_from_rows(cdm_collection_rows, cdm_collection_row_mapping):
