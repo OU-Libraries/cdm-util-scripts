@@ -20,7 +20,7 @@ def get_cdm_page_pointers(repo_url: str, alias: str, dmrecord: str, session: req
     dmGetCompoundObjectInfo = response.json()
     if 'code' in dmGetCompoundObjectInfo:
         raise ValueError(f"CONTENTdm error {dmGetCompoundObjectInfo['message']!r}")
-    print(f"{alias!r} dmrecord {dmrecord!r} is type {dmGetCompoundObjectInfo['type']!r}")
+    # print(f"{alias!r} dmrecord {dmrecord!r} is type {dmGetCompoundObjectInfo['type']!r}")
     return [page['pageptr'] for page in dmGetCompoundObjectInfo['page']]
 
 
