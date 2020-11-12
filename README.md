@@ -12,6 +12,33 @@ All these scripts will give help if asked via `python SCRIPTNAME -h`.
 
 `csv2json.py` accepts a CSV, TSV or other delimited file and transposes its rows into a list of JSON objects with column headers as keys, hopefully suitable for use with the Washington State Library's [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher) metadata `edit` action.
 
+## csv2catcher.py
+
+`csv2catcher.py` takes
+* A FromThePage `Export All Table Data as CSV` CSV
+* A CSV mapping its column names to collection field nicknames
+* An output file name
+* An optional set of repository reconciliation parameters:
+   * `--repository_url` the CONTENTdm instance URL
+   * `--colletion_alias` the collection CONTENTdm alias
+   * `--identifier_nick` the CONTENTdm nickname for a metadata field to match CSV rows to CONTENTdm objects
+   * `--match_mode` one of `page`, to match compound object rows to page-level metadata, or `object` to match compound object rows to object-level metadata; default `page`
+
+and outputs a JSON file for use with cdm-catcher.
+
+The column mapping CSV must have two columns named `name` and `nick` in that order, and must include a mapping for the `--identifier_nick` option if provided. Column names must be unique; columns mapped to the same field nickname will be joined with a semicolon. Example:
+```
+name,nick
+"Work Title",identi
+"Page Contributors",contrib
+"Respondent name (last, first middle) (text)",name
+"Respondent nationality (text)",national
+...
+```
+
+The reconciliation mode matches CSV rows to pages using the `Page Position` column. If the `object` reconciliation mode is selected, each CSV row must correspond uniquely to its identifier.
+
+
 ## ftp2catcher.py
 
 `ftp2catcher.py` takes
