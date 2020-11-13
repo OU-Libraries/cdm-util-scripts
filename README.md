@@ -2,7 +2,7 @@
 
 cdm-util-scripts are Python scripts developed to support Ohio University Libraries' CONTENTdm operations.
 
-Clone the repo to get a local copy of the scripts: `git clone https://github.com/versteeg-ou/cdm-util-scripts`. Do `git fetch` in the repo directory to see if there are updates available; do `git pull` to get the latest versions.
+Clone the repo to get a local copy of the scripts: `git clone https://github.com/OU-Libraries/cdm-util-scripts`. Do `git fetch` in the repo directory to see if there are updates available; do `git pull` to get the latest versions.
 
 You'll need to have Python and the Python `requests` library installed (`pip install requests`).
 
