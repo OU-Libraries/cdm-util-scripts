@@ -20,24 +20,64 @@ All these scripts will give help if asked via `python SCRIPTNAME -h`.
 * An output file name
 * An optional set of repository reconciliation parameters:
    * `--repository_url` the CONTENTdm instance URL
-   * `--colletion_alias` the collection CONTENTdm alias
+   * `--collection_alias` the collection CONTENTdm alias
    * `--identifier_nick` the CONTENTdm nickname for a metadata field to match CSV rows to CONTENTdm objects
    * `--match_mode` one of `page`, to match compound object rows to page-level metadata, or `object` to match compound object rows to object-level metadata; default `page`
 
 and outputs a JSON file for use with cdm-catcher.
 
-The column mapping CSV must have two columns named `name` and `nick` in that order, and must include a mapping for the `--identifier_nick` option if provided. Column names must be unique; columns mapped to the same field nickname will be joined with a semicolon. Example:
+The column mapping CSV must have two columns named `name` and `nick` in that order, and must include a mapping for the `--identifier_nick` option if provided. Columns with identical names (in the exported CSV) or mapped to the same field nickname (in the column mapping CSV) will have their contents joined with a semicolon. Example of a column mapping CSV:
 ```
 name,nick
 "Work Title",identi
-"Page Contributors",contrib
-"Respondent name (last, first middle) (text)",name
-"Respondent nationality (text)",national
-...
+"Respondent name (last, first middle) (text)",creato
+"Respondent nationality (text)",respoa
+"Respondent branch of service (text)",respon
+"Respondent rank (text)",respod
+"Rank, if other (text)",respod
+"Respondent formation (examples include divisions and corps) (text)",respob
+"Formation, if other (text)",respob
+"Respondent unit (examples include battalions, brigades, regiments, and squadrons) (text)",respoc
+"Unit, if other (text)",respoc
+"Format of folder materials (text)",format
+"Additional formats (text)",format
 ```
 
 The reconciliation mode matches CSV rows to pages using the `Page Position` column. If the `object` reconciliation mode is selected, each CSV row must correspond uniquely to its identifier.
 
+Example, using the `object` mode:
+```
+$ python csv2catcher.py col-map.csv fromthepage-tables-export.csv csv2catcher_objects.json --repository_url https://media.library.ohio.edu --collection_alias p15808coll15 --identifier_nick identi --match_mode object
+Requesting object pointers: 397/397... Done
+$ head csv2catcher_objects.json
+[
+  {
+    "dmrecord": "5193",
+    "creato": "",
+    "respoa": "United States of America",
+    "respon": "Army",
+    "respod": "",
+    "respob": "4th Infantry Division",
+    "respoc": "8th Infantry Regiment",
+```
+
+Example, using the `page` mode: 
+```
+$ python csv2catcher.py col-map.csv fromthepage-tables-export.csv csv2catcher_pages.json --repository_url https://media.library.ohio.edu --collection_alias p15808coll15 --identifier_nick identi --match_mode page
+Requesting object pointers: 397/397... Done
+Requesting page pointers: 4/4 100%... Done
+$ head csv2catcher_pages.json
+[
+  {
+    "dmrecord": "5173",
+    "creato": "",
+    "respoa": "United States of America",
+    "respon": "Army",
+    "respod": "",
+    "respob": "4th Infantry Division",
+    "respoc": "8th Infantry Regiment",
+```
+Note that the `dmrecord` pointer now points to a page in the object referenced in the previous example.
 
 ## ftp2catcher.py
 
