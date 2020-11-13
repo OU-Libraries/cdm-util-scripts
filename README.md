@@ -48,7 +48,7 @@ The reconciliation mode matches CSV rows to pages using the `Page Position` colu
 Example, using the `object` mode:
 ```
 $ python csv2catcher.py col-map.csv fromthepage-tables-export.csv csv2catcher_objects.json --repository_url https://media.library.ohio.edu --collection_alias p15808coll15 --identifier_nick identi --match_mode object
-Requesting object pointers: 397/397... Done
+Requesting object pointers: 397/397 100%
 $ head csv2catcher_objects.json
 [
   {
@@ -64,8 +64,8 @@ $ head csv2catcher_objects.json
 Example, using the `page` mode: 
 ```
 $ python csv2catcher.py col-map.csv fromthepage-tables-export.csv csv2catcher_pages.json --repository_url https://media.library.ohio.edu --collection_alias p15808coll15 --identifier_nick identi --match_mode page
-Requesting object pointers: 397/397... Done
-Requesting page pointers: 4/4 100%... Done
+Requesting object pointers: 397/397 100%
+Requesting page pointers: 4/4 100%
 $ head csv2catcher_pages.json
 [
   {

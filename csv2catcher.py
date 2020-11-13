@@ -65,19 +65,20 @@ def request_cdm_collection_object_records(repo_url: str,
     start = 1
     maxrecs = 1024
     if verbose:
-        print("Requesting object pointers: ", end='')
+        print("Requesting object pointers: ", end='\r')
     while len(cdm_records) < total:
         response = session.get(f"{repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmQuery/{alias}/CISOSEARCHALL/{'!'.join(field_nicks)}/pointer/{maxrecs}/{start}/1/0/0/0/0/1/json")
         response.raise_for_status()
         dmQuery = response.json()
         total = int(dmQuery['pager']['total'])
         start += maxrecs
-        cdm_records += dmQuery['records']
         if verbose:
-            print(f"{len(cdm_records)}/{total}... ",
-                  end='',
+            print(f"Requesting object pointers: {len(cdm_records)}/{total} {(len(cdm_records) / total) * 100:2.0f}%",
+                  end='\r',
                   flush=True)
-    print("Done")
+        cdm_records += dmQuery['records']
+    if verbose:
+        print(end='\n')
     return cdm_records
 
 
@@ -99,7 +100,7 @@ def request_collection_page_pointers(cdm_collection: Sequence[CdmObject],
         if cdm_object.is_cpd:
             if verbose:
                 n = next(request_count)
-                print(f"Requesting page pointers: {n}/{total_cpd} {(n / total_cpd) * 100:2.0f}%... ",
+                print(f"Requesting page pointers: {n}/{total_cpd} {(n / total_cpd) * 100:2.0f}%",
                       end='\r',
                       flush=True)
             cdm_object.page_pointers = get_cdm_page_pointers(
@@ -109,7 +110,7 @@ def request_collection_page_pointers(cdm_collection: Sequence[CdmObject],
                 session=session
             )
     if verbose:
-        print("Done")
+        print(end='\n')
 
 
 def cdm_object_from_row(row: dict,
