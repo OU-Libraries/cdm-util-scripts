@@ -62,6 +62,17 @@ def cdm_row():
     }
 
 
+@pytest.fixture()
+def cdm_row_blanks():
+    return {
+        'Work Title': 'Test title',
+        'Page Position': '1',
+        'Respondent name (last, first middle) (text)': 'Testname, Testname',
+        'Format of folder materials (text)': '',
+        'Additional formats (text)': ''
+    }
+
+
 def test_CdmObject__combine():
     assert csv2catcher.CdmObject._combine(None, 'b') == 'b'
     assert csv2catcher.CdmObject._combine('a', None) == 'a'
@@ -98,6 +109,12 @@ def test_csv_dict_reader_with_join(cdm_collection_rows):
     reader = csv2catcher.csv_dict_reader_with_join(StringIO(test_csv))
     row = next(reader)
     assert row == {'h2': 'c2', 'h3': 'c3', 'h1': 'c1a; c1b'}
+
+    test_csv_blanks = ("h1,h2,h1,h3\n"
+                       ",c2,,c3\n")
+    reader = csv2catcher.csv_dict_reader_with_join(StringIO(test_csv_blanks))
+    row = next(reader)
+    assert row == {'h2': 'c2', 'h3': 'c3', 'h1': ''}
 
 
 def test_request_cdm_collection_object_records(session):
@@ -145,10 +162,22 @@ def test_cdm_object_from_row(cdm_row, cdm_collection_row_mapping):
     cdm_object = csv2catcher.cdm_object_from_row(row=cdm_row,
                                                  column_mapping=cdm_collection_row_mapping,
                                                  identifier_nick='identi')
-    identifier = cdm_row[[name for name, nick in cdm_collection_row_mapping.items()
-                          if nick == 'identi'][0]]
+    identifier_column_name = [name for name, nick in cdm_collection_row_mapping.items()
+                              if nick == 'identi'][0]
+    identifier = cdm_row[identifier_column_name]
     assert cdm_object.identifier == identifier
     assert cdm_object.fields['testfa'] == 'format-1; format-2'
+
+
+def test_cdm_object_from_row_blanks(cdm_row_blanks, cdm_collection_row_mapping):
+    cdm_object = csv2catcher.cdm_object_from_row(row=cdm_row_blanks,
+                                                 column_mapping=cdm_collection_row_mapping,
+                                                 identifier_nick='identi')
+    identifier_column_name = [name for name, nick in cdm_collection_row_mapping.items()
+                              if nick == 'identi'][0]
+    identifier = cdm_row_blanks[identifier_column_name]
+    assert cdm_object.identifier == identifier
+    assert cdm_object.fields['testfa'] == ''
 
 
 def test_build_cdm_collection_from_rows(cdm_collection_rows, cdm_collection_row_mapping):
@@ -172,7 +201,6 @@ def test_build_identifier_to_object_index(cdm_records):
             assert cdm_object.identifier == identifier
 
 
-# The spreadsheet and CONTENTdm identifiers don't match up. Figure out Ryan
 def test_reconcile_indexes_by_object(cdm_collection_rows, cdm_collection_row_mapping, cdm_records):
     row_collection = csv2catcher.build_cdm_collection_from_rows(
         rows=cdm_collection_rows,

@@ -47,7 +47,11 @@ def csv_dict_reader_with_join(fp: TextIO, seperator: str = '; ') -> Iterator[Dic
     for csv_row in reader:
         row = dict()
         for column_name, cell in zip(header, csv_row):
-            row[column_name] = seperator.join([row[column_name], cell]) if column_name in row else cell
+            if column_name in row:
+                if cell:
+                    row[column_name] = seperator.join([row[column_name], cell])
+            else:
+                row[column_name] = cell
         yield row
 
 
@@ -113,7 +117,11 @@ def cdm_object_from_row(row: dict,
                         identifier_nick: Optional[str]) -> CdmObject:
     fields = dict()
     for name, nick in column_mapping.items():
-        fields[nick] = '; '.join([fields[nick], row[name]]) if nick in fields else row[name]
+        if nick in fields:
+            if row[name]:
+                fields[nick] = '; '.join([fields[nick], row[name]])
+        else:
+            fields[nick] = row[name]
     identifier = fields.pop(identifier_nick) if identifier_nick else None
     return CdmObject(identifier=identifier,
                      page_position=int(row['Page Position']),
