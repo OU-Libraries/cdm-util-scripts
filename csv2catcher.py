@@ -45,6 +45,8 @@ def csv_dict_reader_with_join(fp: TextIO, seperator: str = '; ') -> Iterator[Dic
     reader = csv.reader(fp)
     header = next(reader)
     for csv_row in reader:
+        if len(csv_row) != len(header):
+            raise ValueError("CSV header and row length mismatch")
         row = dict()
         for column_name, cell in zip(header, csv_row):
             if column_name in row:
@@ -180,45 +182,51 @@ def serialize_cdm_objects(cdm_objects: Sequence[CdmObject]) -> List[dict]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Render a FromThePage All Table Data as cdm-catcher JSON",
+    parser = argparse.ArgumentParser(description="Transform and reconcile CSVs into cdm-catcher JSON",
                                      fromfile_prefix_chars='@')
+    parser.add_argument('reconciliation_config',
+                        type=str,
+                        help="Path to a collection reconciliation JSON configuration file")
     parser.add_argument('column_mapping_csv',
                         type=str,
                         help="Path to CSV with columns 'name' and 'nick' mapping column names to CONTENTdm field nicknames")
-    parser.add_argument('ftp_all_table_csv',
+    parser.add_argument('field_data_csv',
                         type=str,
-                        help="Path to FromThePage All Table Data CSV")
+                        help="Path to field data CSV")
     parser.add_argument('output_file',
                         type=str,
                         help="Path to output cdm-catcher JSON")
-    parser.add_argument('--repository_url',
-                        type=str,
-                        action='store',
-                        help="CONTENTdm repository URL")
-    parser.add_argument('--collection_alias',
-                        type=str,
-                        action='store',
-                        help="CONTENTdm collection alias")
-    parser.add_argument('--identifier_nick',
-                        type=str,
-                        action='store',
-                        help="Column name to use as a search field to get dmrecord numbers")
-    parser.add_argument('--match_mode',
-                        type=str,
-                        action='store',
-                        default='page',
-                        help="Match CSV rows to 'page' level metadata or 'object' level metadata, default 'page'")
     args = parser.parse_args()
 
-    reconciliation_args = (args.identifier_nick, args.repository_url, args.collection_alias)
+    # Read reconciliation_config
+    with open(args.reconcilation_config, mode='r') as fp:
+        reconcilation_config = json.load(fp)
+
+    repository_url = reconcilation_config.get('repository-url', None)
+    collection_alias = reconcilation_config.get('collection-alias', None)
+    identifier_nick = reconcilation_config.get('identifier-nick', None)
+    match_mode = reconcilation_config.get('match-mode', None)
+    page_position_column = reconcilation_config.get('page-position-column', None)
+
+    # Validate reconcilation_config settings
+    reconciliation_args = (repository_url, collection_alias, identifier_nick)
     if any(reconciliation_args) and not all(reconciliation_args):
-        print("All of --repository_url, --collection_alias and --identifier_nick must be specified for reconciliation")
+        print(f"{args.reconciliation_config!r}: all of repository-url, collection-alias, identifier-nick and match-mode must be specified for reconciliation")
         sys.exit()
 
-    if args.match_mode not in ('page', 'object'):
-        print(f"Unknown --match_mode value {args.match_mode!r}")
+    if not match_mode:
+        print(f"{args.reconciliation_config!r}: match-mode must be specified")
         sys.exit()
 
+    if match_mode not in ('page', 'object'):
+        print(f"{args.reconciliation_config!r}: invalid match-mode value {match_mode!r}")
+        sys.exit()
+
+    if match_mode == 'page' and not page_position_column:
+        print(f"{args.reconciliation_config!r}: page match-mode requires a page-position-column name")
+        sys.exit()
+
+    # Read column_mapping_csv
     with open(args.column_mapping_csv, mode='r') as fp:
         reader = csv.DictReader(fp)
         if reader.fieldnames != ['name', 'nick']:
@@ -226,11 +234,12 @@ def main():
             sys.exit()
         column_mapping = {row['name']: row['nick'] for row in reader}
 
-    with open(args.ftp_all_table_csv, mode='r') as fp:
+    # Read field_data_csv
+    with open(args.field_data_csv, mode='r') as fp:
         cdm_collection_from_rows = build_cdm_collection_from_rows(
             rows=csv_dict_reader_with_join(fp),
             column_mapping=column_mapping,
-            identifier_nick=args.identifier_nick
+            identifier_nick=identifier_nick
         )
 
     if not all(reconciliation_args):
@@ -240,24 +249,24 @@ def main():
         row_object_index = build_identifier_to_object_index(cdm_collection_from_rows)
         with requests.Session() as session:
             cdm_records = request_cdm_collection_object_records(
-                repo_url=args.repository_url,
-                alias=args.collection_alias,
-                field_nicks=[args.identifier_nick],
+                repo_url=repository_url,
+                alias=collection_alias,
+                field_nicks=[identifier_nick],
                 session=session
             )
             cdm_collection_from_records = build_cdm_collection_from_records(
                 cdm_records=cdm_records,
-                identifier_nick=args.identifier_nick
+                identifier_nick=identifier_nick
             )
 
             # Drop unneeded record objects to keep page pointer requests to the minimum
             cdm_collection_from_records = [cdm_object for cdm_object in cdm_collection_from_records
                                            if cdm_object.identifier in row_object_index]
-            if args.match_mode == 'page':
+            if match_mode == 'page':
                 request_collection_page_pointers(
                     cdm_collection=cdm_collection_from_records,
-                    repo_url=args.repository_url,
-                    alias=args.collection_alias,
+                    repo_url=repository_url,
+                    alias=collection_alias,
                     session=session
                 )
         record_object_index = build_identifier_to_object_index(cdm_collection_from_records)
@@ -272,22 +281,22 @@ def main():
 
         if unreconcilable_row_identifiers or confused_cdm_identifiers:
             for identifier in unreconcilable_row_identifiers:
-                print(f"Couldn't find {identifier!r} in field {args.identifier_nick!r}")
+                print(f"Couldn't find {identifier!r} in field {identifier_nick!r}")
             for identifier in confused_cdm_identifiers:
-                print(f"Multiple results for {identifier!r} in field {args.identifier_nick!r}")
+                print(f"Multiple results for {identifier!r} in field {identifier_nick!r}")
             sys.exit()
-        elif args.match_mode == 'object':
+        elif match_mode == 'object':
             catcher_data = reconcile_indexes_by_object(
                 records_index=record_object_index,
                 rows_index=row_object_index
             )
-        elif args.match_mode == 'page':
+        elif match_mode == 'page':
             catcher_data = reconcile_indexes_by_page(
                 records_index=record_object_index,
                 rows_index=row_object_index
             )
         else:
-            print(f"Unknown --match_mode {args.match_mode!r}")
+            print(f"Invalid match-mode {match_mode!r}")
             sys.exit()
 
     with open(args.output_file, mode='w') as fp:

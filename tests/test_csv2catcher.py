@@ -116,6 +116,12 @@ def test_csv_dict_reader_with_join(cdm_collection_rows):
     row = next(reader)
     assert row == {'h2': 'c2', 'h3': 'c3', 'h1': ''}
 
+    test_csv_mismatch = ("h1,h2,h3\n"
+                         "c1,c2,c3,c4\n")
+    with pytest.raises(ValueError):
+        for row in csv2catcher.csv_dict_reader_with_join(StringIO(test_csv_mismatch)):
+            pass
+
 
 def test_request_cdm_collection_object_records(session):
     field_nicks = ['identi']
