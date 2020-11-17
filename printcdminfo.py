@@ -28,16 +28,16 @@ def ljust_row(row: dict,
                    for key, value in row.items())
 
 
-def print_as_csv(json):
+def print_as_csv(dm_json):
     with StringIO() as output:
-        writer = csv.DictWriter(output, fieldnames=json[0].keys())
+        writer = csv.DictWriter(output, fieldnames=dm_json[0].keys())
         writer.writeheader()
-        writer.writerows(json)
+        writer.writerows(dm_json)
         print(output.getvalue(), end='')
 
 
-def print_as_json(json):
-    print(json.dumps(json))
+def print_as_json(dm_json):
+    print(dm_json.dumps(dm_json))
 
 
 output_formats = {
@@ -59,6 +59,10 @@ def main():
     parser.add_argument('--output',
                         action='store',
                         help=f"Print output as any of {', '.join(repr(key) for key in output_formats.keys())}")
+    parser.add_argument('--columns',
+                        type=str,
+                        action='store',
+                        help="Specify columns to print in a column seperated string, as --columns 'nick,name'")
     args = parser.parse_args()
     base_url = args.repository_url.rstrip('/')
     if args.alias:
@@ -71,11 +75,15 @@ def main():
                               'digital/bl/dmwebservices/index.php?q=dmGetCollectionList/json'])
     response = requests.get(query_url)
     response.raise_for_status()
-    json = response.json()
-    if 'code' in json:
-        print(json['message'])
+    dm_result = response.json()
+    if 'code' in dm_result:
+        print(dm_result['message'])
     else:
-        output_formats[args.output or 'table'](json)
+        if args.columns:
+            columns = set(args.columns.split(','))
+            dm_result = [{key: value for key, value in entry.items() if key in columns}
+                         for entry in dm_result]
+        output_formats[args.output or 'table'](dm_result)
 
 
 if __name__ == '__main__':
