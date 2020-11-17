@@ -214,3 +214,19 @@ If you make too many of the same request (10+?), OCLC will start rejecting them,
 `printcdminfo.py` also has an `--output` option that will write CSV and JSON, as:
 
     python printcdminfo.py https://media.library.ohio.edu --alias donswaim --output csv >donswaim-fields.csv
+
+There is also a `--columns` option that takes a list of column names separated with commas and no spaces and returns only those columns.
+
+Example:
+```
+$ python printcdminfo.py https://media.library.ohio.edu --alias p15808coll15 --output csv --columns nick,name
+name,nick
+Title,title
+Transcript,descri
+Respondent,creato
+Respondent- rank (during this event),respod
+Respondent- nationality,respoa
+Respondent- branch of service,respon
+Respondent- formation,respob
+...
+```
