@@ -3,6 +3,7 @@ import requests
 import argparse
 import csv
 import json
+import sys
 from io import StringIO
 from typing import Dict, Sequence, Callable, Any
 
@@ -37,7 +38,7 @@ def print_as_csv(dm_json):
 
 
 def print_as_json(dm_json):
-    print(dm_json.dumps(dm_json))
+    print(json.dumps(dm_json))
 
 
 output_formats = {
@@ -62,7 +63,7 @@ def main():
     parser.add_argument('--columns',
                         type=str,
                         action='store',
-                        help="Specify columns to print in a column seperated string, as --columns 'nick,name'")
+                        help="Specify columns to print in a comma separated string, as --columns name,nick")
     args = parser.parse_args()
     base_url = args.repository_url.rstrip('/')
     if args.alias:
@@ -77,12 +78,20 @@ def main():
     response.raise_for_status()
     dm_result = response.json()
     if 'code' in dm_result:
-        print(dm_result['message'])
+        print(dm_result['message'], file=sys.stderr)
+        sys.exit(1)
     else:
         if args.columns:
-            columns = set(args.columns.split(','))
-            dm_result = [{key: value for key, value in entry.items() if key in columns}
-                         for entry in dm_result]
+            columns = args.columns.split(',')
+            try:
+                dm_result = [{column: entry[column] for column in columns}
+                             for entry in dm_result]
+            except KeyError as err:
+                print(f"{err.args[0]!r} is not a valid column name", file=sys.stderr)
+                sys.exit(1)
+        if args.output and args.output not in output_formats:
+            print(f"{args.output!r} is not a valid output format", file=sys.stderr)
+            sys.exit(1)
         output_formats[args.output or 'table'](dm_result)
 
 
