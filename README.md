@@ -219,7 +219,7 @@ There is also a `--columns` option that takes a list of column names separated w
 
 Example:
 ```
-$ python printcdminfo.py https://media.library.ohio.edu --alias p15808coll15 --output csv --columns nick,name
+$ python printcdminfo.py https://media.library.ohio.edu --alias p15808coll15 --output csv --columns name,nick
 name,nick
 Title,title
 Transcript,descri

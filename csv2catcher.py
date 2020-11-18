@@ -12,6 +12,11 @@ from ftp2catcher import get_cdm_page_pointers
 
 from typing import List, Optional, Dict, Sequence, Iterator, TextIO
 
+try:
+    import yaml
+except ImportError:
+    pass
+
 
 @dataclass
 class CdmObject:
@@ -90,11 +95,13 @@ def build_cdm_collection_from_records(cdm_records: List[dict], identifier_nick: 
                       is_cpd=record['find'].endswith('.cpd')) for record in cdm_records]
 
 
-def request_collection_page_pointers(cdm_collection: Sequence[CdmObject],
-                                     repo_url: str,
-                                     alias: str,
-                                     session: requests.Session,
-                                     verbose: bool = True) -> None:
+def request_collection_page_pointers(
+        cdm_collection: Sequence[CdmObject],
+        repo_url: str,
+        alias: str,
+        session: requests.Session,
+        verbose: bool = True
+) -> None:
     if verbose:
         total_cpd = sum(1 if o.is_cpd else 0 for o in cdm_collection)
         request_count = count(1)
@@ -115,9 +122,12 @@ def request_collection_page_pointers(cdm_collection: Sequence[CdmObject],
         print(end='\n')
 
 
-def cdm_object_from_row(row: dict,
-                        column_mapping: dict,
-                        identifier_nick: Optional[str]) -> CdmObject:
+def cdm_object_from_row(
+        row: dict,
+        column_mapping: dict,
+        identifier_nick: Optional[str],
+        page_position_column_name: Optional[str]
+) -> CdmObject:
     fields = dict()
     for name, nick in column_mapping.items():
         if nick in fields:
@@ -126,17 +136,24 @@ def cdm_object_from_row(row: dict,
         else:
             fields[nick] = row[name]
     identifier = fields.pop(identifier_nick) if identifier_nick else None
+    page_position = int(row[page_position_column_name]) if page_position_column_name else None
     return CdmObject(identifier=identifier,
-                     page_position=int(row['Page Position']),
+                     page_position=page_position,
                      fields=fields)
 
 
-def build_cdm_collection_from_rows(rows: Sequence[dict],
-                                   column_mapping: dict,
-                                   identifier_nick: Optional[str]) -> List[CdmObject]:
-    return [cdm_object_from_row(row=row,
-                                column_mapping=column_mapping,
-                                identifier_nick=identifier_nick)
+def build_cdm_collection_from_rows(
+        rows: Sequence[dict],
+        column_mapping: dict,
+        identifier_nick: Optional[str],
+        page_position_column_name: Optional[str]
+) -> List[CdmObject]:
+    return [cdm_object_from_row(
+        row=row,
+        column_mapping=column_mapping,
+        identifier_nick=identifier_nick,
+        page_position_column_name=page_position_column_name
+    )
             for row in rows]
 
 
@@ -186,7 +203,7 @@ def main():
                                      fromfile_prefix_chars='@')
     parser.add_argument('reconciliation_config',
                         type=str,
-                        help="Path to a collection reconciliation JSON configuration file")
+                        help="Path to a collection reconciliation JSON or YAML configuration file")
     parser.add_argument('column_mapping_csv',
                         type=str,
                         help="Path to CSV with columns 'name' and 'nick' mapping column names to CONTENTdm field nicknames")
@@ -199,14 +216,21 @@ def main():
     args = parser.parse_args()
 
     # Read reconciliation_config
-    with open(args.reconcilation_config, mode='r') as fp:
-        reconcilation_config = json.load(fp)
+    with open(args.reconciliation_config, mode='r') as fp:
+        if args.reconciliation_config.endswith(('.yaml', '.yml')):
+            if yaml:
+                reconciliation_config = yaml.safe_load(fp)
+            else:
+                print(f"{args.reconciliation_config!r}: unable to parse YAML file because YAML module could not be imported. Is 'pyyaml' installed?")
+                sys.exit()
+        else:
+            reconciliation_config = json.load(fp)
 
-    repository_url = reconcilation_config.get('repository-url', None)
-    collection_alias = reconcilation_config.get('collection-alias', None)
-    identifier_nick = reconcilation_config.get('identifier-nick', None)
-    match_mode = reconcilation_config.get('match-mode', None)
-    page_position_column = reconcilation_config.get('page-position-column', None)
+    repository_url = reconciliation_config.get('repository-url', None)
+    collection_alias = reconciliation_config.get('collection-alias', None)
+    identifier_nick = reconciliation_config.get('identifier-nick', None)
+    match_mode = reconciliation_config.get('match-mode', None)
+    page_position_column_name = reconciliation_config.get('page-position-column-name', None)
 
     # Validate reconcilation_config settings
     reconciliation_args = (repository_url, collection_alias, identifier_nick)
@@ -222,15 +246,15 @@ def main():
         print(f"{args.reconciliation_config!r}: invalid match-mode value {match_mode!r}")
         sys.exit()
 
-    if match_mode == 'page' and not page_position_column:
-        print(f"{args.reconciliation_config!r}: page match-mode requires a page-position-column name")
+    if match_mode == 'page' and not page_position_column_name:
+        print(f"{args.reconciliation_config!r}: match-mode page requires page-position-column-name")
         sys.exit()
 
     # Read column_mapping_csv
     with open(args.column_mapping_csv, mode='r') as fp:
         reader = csv.DictReader(fp)
         if reader.fieldnames != ['name', 'nick']:
-            print("Column mapping CSV must have 'name' and 'nick' column titles in that order")
+            print(f"{args.column_mapping_csv!r}: column mapping CSV must have 'name' and 'nick' column titles in that order")
             sys.exit()
         column_mapping = {row['name']: row['nick'] for row in reader}
 
@@ -239,7 +263,8 @@ def main():
         cdm_collection_from_rows = build_cdm_collection_from_rows(
             rows=csv_dict_reader_with_join(fp),
             column_mapping=column_mapping,
-            identifier_nick=identifier_nick
+            identifier_nick=identifier_nick,
+            page_position_column_name=page_position_column_name
         )
 
     if not all(reconciliation_args):
@@ -271,7 +296,7 @@ def main():
                 )
         record_object_index = build_identifier_to_object_index(cdm_collection_from_records)
 
-        # Are there rows in the FtP CSV for which CONTENTdm objects could not be found?
+        # Are there rows in the field data CSV for which CONTENTdm objects could not be found?
         unreconcilable_row_identifiers = [identifier for identifier in row_object_index.keys()
                                           if identifier not in record_object_index]
 
