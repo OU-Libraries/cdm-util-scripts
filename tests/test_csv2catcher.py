@@ -167,7 +167,8 @@ def test_request_collection_page_pointers(cdm_records, session):
 def test_cdm_object_from_row(cdm_row, cdm_collection_row_mapping):
     cdm_object = csv2catcher.cdm_object_from_row(row=cdm_row,
                                                  column_mapping=cdm_collection_row_mapping,
-                                                 identifier_nick='identi')
+                                                 identifier_nick='identi',
+                                                 page_position_column_name='Page Position')
     identifier_column_name = [name for name, nick in cdm_collection_row_mapping.items()
                               if nick == 'identi'][0]
     identifier = cdm_row[identifier_column_name]
@@ -178,7 +179,8 @@ def test_cdm_object_from_row(cdm_row, cdm_collection_row_mapping):
 def test_cdm_object_from_row_blanks(cdm_row_blanks, cdm_collection_row_mapping):
     cdm_object = csv2catcher.cdm_object_from_row(row=cdm_row_blanks,
                                                  column_mapping=cdm_collection_row_mapping,
-                                                 identifier_nick='identi')
+                                                 identifier_nick='identi',
+                                                 page_position_column_name='Page Position')
     identifier_column_name = [name for name, nick in cdm_collection_row_mapping.items()
                               if nick == 'identi'][0]
     identifier = cdm_row_blanks[identifier_column_name]
@@ -189,7 +191,8 @@ def test_cdm_object_from_row_blanks(cdm_row_blanks, cdm_collection_row_mapping):
 def test_build_cdm_collection_from_rows(cdm_collection_rows, cdm_collection_row_mapping):
     cdm_collection = csv2catcher.build_cdm_collection_from_rows(rows=cdm_collection_rows,
                                                                 column_mapping=cdm_collection_row_mapping,
-                                                                identifier_nick='identi')
+                                                                identifier_nick='identi',
+                                                                page_position_column_name='Page Position')
     assert len(cdm_collection) == len(cdm_collection_rows)
     for cdm_object in cdm_collection:
         assert cdm_object.identifier
@@ -211,7 +214,8 @@ def test_reconcile_indexes_by_object(cdm_collection_rows, cdm_collection_row_map
     row_collection = csv2catcher.build_cdm_collection_from_rows(
         rows=cdm_collection_rows,
         column_mapping=cdm_collection_row_mapping,
-        identifier_nick='identi'
+        identifier_nick='identi',
+        page_position_column_name='Page Position'
     )
     index_from_rows = csv2catcher.build_identifier_to_object_index(row_collection)
     record_collection = csv2catcher.build_cdm_collection_from_records(
@@ -235,7 +239,8 @@ def test_reconcile_indexes_by_page(cdm_collection_rows, cdm_collection_row_mappi
     row_collection = csv2catcher.build_cdm_collection_from_rows(
         rows=cdm_collection_rows,
         column_mapping=cdm_collection_row_mapping,
-        identifier_nick='identi'
+        identifier_nick='identi',
+        page_position_column_name='Page Position'
     )
     index_from_rows = csv2catcher.build_identifier_to_object_index(row_collection)
     record_collection = csv2catcher.build_cdm_collection_from_records(
