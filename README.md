@@ -15,18 +15,46 @@ All these scripts will give help if asked via `python SCRIPTNAME -h`.
 ## csv2catcher.py
 
 `csv2catcher.py` takes
-* A FromThePage `Export All Table Data as CSV` CSV
-* A CSV mapping its column names to collection field nicknames
+* A YAML or JSON reconciliation configuration file
+* A CSV mapping field data CSV column names to CONTENTdm collection field nicknames
+* A field data CSV containing the new metadata values to be uploaded to CONTENTdm
 * An output file name
-* An optional set of repository reconciliation parameters:
-   * `--repository_url` the CONTENTdm instance URL
-   * `--collection_alias` the collection CONTENTdm alias
-   * `--identifier_nick` the CONTENTdm nickname for a metadata field to match CSV rows to CONTENTdm objects
-   * `--match_mode` one of `page`, to match compound object rows to page-level metadata, or `object` to match compound object rows to object-level metadata; default `page`
 
-and outputs a JSON file for use with cdm-catcher.
+and outputs a JSON file for use with cdm-catcher's edit mode.
 
-The column mapping CSV must have two columns named `name` and `nick` in that order, and must include a mapping for the `--identifier_nick` option if provided. Columns with identical names (in the exported CSV) or mapped to the same field nickname (in the column mapping CSV) will have their contents joined with a semicolon. Example of a column mapping CSV:
+The reconciliation configuration file specifies these parameters:
+* `repository-url` the CONTENTdm instance URL
+* `collection-alias` the collection CONTENTdm alias
+* `identifier-nick` the CONTENTdm nickname for a metadata field to match CSV rows to CONTENTdm objects
+* `match-mode` one of `page`, to match compound object rows to page-level metadata, or `object` to match compound object rows to object-level metadata
+* `page-position-column-name` the name of the column in the field data CSV that enumerates the page the CSV row corresponds to if `match-mode` is `page`
+
+Only `match-mode` is required (this will simply translate the field data CSV into JSON). If any of `repository-url`, `collection-alias`, or `identifier-nick` is specified, they must all be specified. If `match-mode` is `page`, `page-position-column-name` must be specified (otherwise it is ignored).
+
+Example of a JSON reconciliation configuration file:
+```
+{
+    "repository-url": "https://media.library.ohio.edu",
+    "collection-alias": "p15808coll15",
+    "identifier-nick": "identi",
+    "match-mode": "object"
+}
+```
+
+If [PyYAML](https://github.com/yaml/pyyaml) is installed in the current environment, you may use a `.yaml` or `.yml` configuration file instead of JSON.
+
+Example of a YAML reconciliation configuration file:
+```
+repository-url: https://media.library.ohio.edu
+collection-alias: p15808coll15
+identifier-nick: identi
+match-mode: page
+page-position-column-name: Page Position
+```
+
+The column mapping CSV must have two columns named `name` and `nick` in that order, and must include a mapping for the `identifier-nick` nickname if specified. Columns with identical names (in the exported CSV) or mapped to the same field nickname (in the column mapping CSV) will have their contents joined with a semicolon.
+
+Example of a column mapping CSV:
 ```
 name,nick
 "Work Title",identi
@@ -43,7 +71,7 @@ name,nick
 "Additional formats (text)",format
 ```
 
-The reconciliation mode matches CSV rows to pages using the `Page Position` column. If the `object` reconciliation mode is selected, each CSV row must correspond uniquely to its identifier.
+The reconciliation mode matches CSV rows to pages using the specified page position column. If the `object` reconciliation mode is selected, each CSV row must correspond uniquely to its identifier.
 
 Example, using the `object` mode:
 ```
