@@ -72,18 +72,18 @@ def request_cdm_collection_object_records(repo_url: str,
     start = 1
     maxrecs = 1024
     if verbose:
-        print("Requesting object pointers: ", end='\r')
+        print("Requesting object pointers...", end='\r')
     while len(cdm_records) < total:
         response = session.get(f"{repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmQuery/{alias}/CISOSEARCHALL/{'!'.join(field_nicks)}/pointer/{maxrecs}/{start}/1/0/0/0/0/1/json")
         response.raise_for_status()
         dmQuery = response.json()
         total = int(dmQuery['pager']['total'])
         start += maxrecs
+        cdm_records += dmQuery['records']
         if verbose:
             print(f"Requesting object pointers: {len(cdm_records)}/{total} {(len(cdm_records) / total) * 100:2.0f}%",
                   end='\r',
                   flush=True)
-        cdm_records += dmQuery['records']
     if verbose:
         print(end='\n')
     return cdm_records
