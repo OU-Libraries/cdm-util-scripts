@@ -198,6 +198,70 @@ def serialize_cdm_objects(cdm_objects: Sequence[CdmObject]) -> List[dict]:
     return series
 
 
+def reconcile_cdm_collection(
+        cdm_collection: Sequence[CdmObject],
+        repository_url: str,
+        collection_alias: str,
+        identifier_nick: str,
+        match_mode: str,
+        verbose: bool = True
+) -> List[CdmObject]:
+    row_object_index = build_identifier_to_object_index(cdm_collection)
+    with requests.Session() as session:
+        cdm_records = request_cdm_collection_object_records(
+            repo_url=repository_url,
+            alias=collection_alias,
+            field_nicks=[identifier_nick],
+            session=session
+        )
+        cdm_collection_from_records = build_cdm_collection_from_records(
+            cdm_records=cdm_records,
+            identifier_nick=identifier_nick
+        )
+
+        # Drop unneeded record objects to keep page pointer requests to the minimum
+        cdm_collection_from_records = [cdm_object for cdm_object in cdm_collection_from_records
+                                       if cdm_object.identifier in row_object_index]
+        if match_mode == 'page':
+            request_collection_page_pointers(
+                cdm_collection=cdm_collection_from_records,
+                repo_url=repository_url,
+                alias=collection_alias,
+                session=session
+            )
+    record_object_index = build_identifier_to_object_index(cdm_collection_from_records)
+
+    # Are there rows in the field data CSV for which CONTENTdm objects could not be found?
+    unreconcilable_row_identifiers = [identifier for identifier in row_object_index.keys()
+                                      if identifier not in record_object_index]
+
+    # Are there multiple CONTENTdm objects with the same identifier?
+    confused_cdm_identifiers = [identifier for identifier, cdm_objects in record_object_index.items()
+                                if len(cdm_objects) > 1]
+
+    if unreconcilable_row_identifiers or confused_cdm_identifiers:
+        if verbose:
+            for identifier in unreconcilable_row_identifiers:
+                print(f"Couldn't find {identifier!r} in field {identifier_nick!r}")
+            for identifier in confused_cdm_identifiers:
+                print(f"Multiple results for {identifier!r} in field {identifier_nick!r}")
+        raise KeyError("identifier mismatch(es)")
+    elif match_mode == 'object':
+        catcher_data = reconcile_indexes_by_object(
+            records_index=record_object_index,
+            rows_index=row_object_index
+        )
+    elif match_mode == 'page':
+        catcher_data = reconcile_indexes_by_page(
+            records_index=record_object_index,
+            rows_index=row_object_index
+        )
+    else:
+        raise ValueError(f"invalid match-mode {match_mode!r}")
+
+    return catcher_data
+
+
 def main():
     parser = argparse.ArgumentParser(description="Transform and reconcile CSVs into cdm-catcher JSON",
                                      fromfile_prefix_chars='@')
@@ -222,7 +286,7 @@ def main():
                 reconciliation_config = yaml.safe_load(fp)
             else:
                 print(f"{args.reconciliation_config!r}: unable to parse YAML file because YAML module could not be imported. Is 'pyyaml' installed?")
-                sys.exit()
+                sys.exit(1)
         else:
             reconciliation_config = json.load(fp)
 
@@ -232,30 +296,30 @@ def main():
     match_mode = reconciliation_config.get('match-mode', None)
     page_position_column_name = reconciliation_config.get('page-position-column-name', None)
 
-    # Validate reconcilation_config settings
+    # Validate reconciliation_config settings
     reconciliation_args = (repository_url, collection_alias, identifier_nick)
     if any(reconciliation_args) and not all(reconciliation_args):
         print(f"{args.reconciliation_config!r}: all of repository-url, collection-alias, identifier-nick and match-mode must be specified for reconciliation")
-        sys.exit()
+        sys.exit(1)
 
     if not match_mode:
         print(f"{args.reconciliation_config!r}: match-mode must be specified")
-        sys.exit()
+        sys.exit(1)
 
     if match_mode not in ('page', 'object'):
         print(f"{args.reconciliation_config!r}: invalid match-mode value {match_mode!r}")
-        sys.exit()
+        sys.exit(1)
 
     if match_mode == 'page' and not page_position_column_name:
         print(f"{args.reconciliation_config!r}: match-mode page requires page-position-column-name")
-        sys.exit()
+        sys.exit(1)
 
     # Read column_mapping_csv
     with open(args.column_mapping_csv, mode='r') as fp:
         reader = csv.DictReader(fp)
         if reader.fieldnames != ['name', 'nick']:
             print(f"{args.column_mapping_csv!r}: column mapping CSV must have 'name' and 'nick' column titles in that order")
-            sys.exit()
+            sys.exit(1)
         column_mapping = {row['name']: row['nick'] for row in reader}
 
     # Read field_data_csv
@@ -268,61 +332,20 @@ def main():
         )
 
     if not all(reconciliation_args):
-        # If no reconciliation args, transpose the CSV to Catcher JSON without dmrecord pointers
+        # If no reconciliation args, just transpose the CSV to Catcher JSON (list of dicts)
         catcher_data = cdm_collection_from_rows
     else:
-        row_object_index = build_identifier_to_object_index(cdm_collection_from_rows)
-        with requests.Session() as session:
-            cdm_records = request_cdm_collection_object_records(
-                repo_url=repository_url,
-                alias=collection_alias,
-                field_nicks=[identifier_nick],
-                session=session
+        try:
+            catcher_data = reconcile_cdm_collection(
+                cdm_collection=cdm_collection_from_rows,
+                repository_url=repository_url,
+                collection_alias=collection_alias,
+                identifier_nick=identifier_nick,
+                match_mode=match_mode
             )
-            cdm_collection_from_records = build_cdm_collection_from_records(
-                cdm_records=cdm_records,
-                identifier_nick=identifier_nick
-            )
-
-            # Drop unneeded record objects to keep page pointer requests to the minimum
-            cdm_collection_from_records = [cdm_object for cdm_object in cdm_collection_from_records
-                                           if cdm_object.identifier in row_object_index]
-            if match_mode == 'page':
-                request_collection_page_pointers(
-                    cdm_collection=cdm_collection_from_records,
-                    repo_url=repository_url,
-                    alias=collection_alias,
-                    session=session
-                )
-        record_object_index = build_identifier_to_object_index(cdm_collection_from_records)
-
-        # Are there rows in the field data CSV for which CONTENTdm objects could not be found?
-        unreconcilable_row_identifiers = [identifier for identifier in row_object_index.keys()
-                                          if identifier not in record_object_index]
-
-        # Are there multiple CONTENTdm objects with the same identifier?
-        confused_cdm_identifiers = [identifier for identifier, cdm_objects in record_object_index.items()
-                                    if len(cdm_objects) > 1]
-
-        if unreconcilable_row_identifiers or confused_cdm_identifiers:
-            for identifier in unreconcilable_row_identifiers:
-                print(f"Couldn't find {identifier!r} in field {identifier_nick!r}")
-            for identifier in confused_cdm_identifiers:
-                print(f"Multiple results for {identifier!r} in field {identifier_nick!r}")
-            sys.exit()
-        elif match_mode == 'object':
-            catcher_data = reconcile_indexes_by_object(
-                records_index=record_object_index,
-                rows_index=row_object_index
-            )
-        elif match_mode == 'page':
-            catcher_data = reconcile_indexes_by_page(
-                records_index=record_object_index,
-                rows_index=row_object_index
-            )
-        else:
-            print(f"Invalid match-mode {match_mode!r}")
-            sys.exit()
+        except (ValueError, KeyError) as err:
+            print(f"Reconciliation failure: {err}")
+            sys.exit(1)
 
     with open(args.output_file, mode='w') as fp:
         json.dump(serialize_cdm_objects(catcher_data), fp, indent=2)

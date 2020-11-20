@@ -16,10 +16,10 @@ cdm_vcr = vcr.VCR(
 )
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope='session')
 def session():
-    with requests.Session() as session:
-        yield session
+    with requests.Session() as module_session:
+        yield module_session
 
 
 @pytest.fixture()
@@ -103,7 +103,7 @@ def test_CdmObject___add__():
         a + d
 
 
-def test_csv_dict_reader_with_join(cdm_collection_rows):
+def test_csv_dict_reader_with_join():
     test_csv = ("h1,h2,h1,h3\n"
                 "c1a,c2,c1b,c3\n")
     reader = csv2catcher.csv_dict_reader_with_join(StringIO(test_csv))
@@ -265,3 +265,36 @@ def test_reconcile_indexes_by_page(cdm_collection_rows, cdm_collection_row_mappi
     for cdm_object in reconciled:
         assert cdm_object.pointer
         assert cdm_object.fields
+
+
+def test_reconcile_cdm_collection_as_object(cdm_collection_rows, cdm_collection_row_mapping):
+    right_answers = {
+        "ryan_box013-tld_f01": "5193",
+        "ryan_box023-tld_f41": "5223",
+        "ryan_box021-tld_f09": "5648",
+        "ryan_box021-tld_f05": "5240"
+    }
+    row_collection = csv2catcher.build_cdm_collection_from_rows(
+        rows=cdm_collection_rows,
+        column_mapping=cdm_collection_row_mapping,
+        identifier_nick='identi',
+        page_position_column_name='Page Position'
+    )
+    with cdm_vcr.use_cassette('test_get_cdm_collection_object_records.yml'):
+        catcher_data = csv2catcher.reconcile_cdm_collection(
+            cdm_collection=row_collection,
+            repository_url='https://media.library.ohio.edu',
+            collection_alias='p15808coll15',
+            identifier_nick='identi',
+            match_mode='object'
+        )
+    assert len(cdm_collection_rows) == len(catcher_data)
+    row_index = csv2catcher.build_identifier_to_object_index(row_collection)
+    rec_index = csv2catcher.build_identifier_to_object_index(catcher_data)
+    for identifier, cdm_objects in row_index.items():
+        rec_objects = rec_index[identifier]
+        assert len(cdm_objects) == 1 and len(rec_objects) == 1
+        dmrecord = right_answers[cdm_objects[0].identifier]
+        assert rec_objects[0].pointer == dmrecord
+        assert rec_objects[0].fields == cdm_objects[0].fields
+
