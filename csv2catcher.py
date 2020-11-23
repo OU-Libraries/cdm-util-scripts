@@ -7,6 +7,7 @@ import sys
 from dataclasses import dataclass
 from collections import defaultdict
 from itertools import count
+from enum import Enum
 
 from ftp2catcher import get_cdm_page_pointers
 
@@ -15,7 +16,7 @@ from typing import List, Optional, Dict, Sequence, Iterator, TextIO
 try:
     import yaml
 except ImportError:
-    pass
+    yaml = None
 
 
 @dataclass
@@ -44,6 +45,11 @@ class CdmObject:
         if a and b:
             raise ValueError("combination collision: {a!r} and {b!r}")
         return a or b
+
+
+class MatchMode(Enum):
+    PAGE = 'page'
+    OBJECT = 'object'
 
 
 def csv_dict_reader_with_join(fp: TextIO, seperator: str = '; ') -> Iterator[Dict[str, str]]:
@@ -203,7 +209,7 @@ def reconcile_cdm_collection(
         repository_url: str,
         collection_alias: str,
         identifier_nick: str,
-        match_mode: str,
+        match_mode: MatchMode,
         verbose: bool = True
 ) -> List[CdmObject]:
     row_object_index = build_identifier_to_object_index(cdm_collection)
@@ -222,7 +228,7 @@ def reconcile_cdm_collection(
         # Drop unneeded record objects to keep page pointer requests to the minimum
         cdm_collection_from_records = [cdm_object for cdm_object in cdm_collection_from_records
                                        if cdm_object.identifier in row_object_index]
-        if match_mode == 'page':
+        if match_mode is MatchMode.PAGE:
             request_collection_page_pointers(
                 cdm_collection=cdm_collection_from_records,
                 repo_url=repository_url,
@@ -246,12 +252,12 @@ def reconcile_cdm_collection(
             for identifier in confused_cdm_identifiers:
                 print(f"Multiple results for {identifier!r} in field {identifier_nick!r}")
         raise KeyError("identifier mismatch(es)")
-    elif match_mode == 'object':
+    elif match_mode is MatchMode.OBJECT:
         catcher_data = reconcile_indexes_by_object(
             records_index=record_object_index,
             rows_index=row_object_index
         )
-    elif match_mode == 'page':
+    elif match_mode is MatchMode.PAGE:
         catcher_data = reconcile_indexes_by_page(
             records_index=record_object_index,
             rows_index=row_object_index
@@ -293,7 +299,7 @@ def main():
     repository_url = reconciliation_config.get('repository-url', None)
     collection_alias = reconciliation_config.get('collection-alias', None)
     identifier_nick = reconciliation_config.get('identifier-nick', None)
-    match_mode = reconciliation_config.get('match-mode', None)
+    match_mode_value = reconciliation_config.get('match-mode', None)
     page_position_column_name = reconciliation_config.get('page-position-column-name', None)
 
     # Validate reconciliation_config settings
@@ -302,15 +308,18 @@ def main():
         print(f"{args.reconciliation_config!r}: all of repository-url, collection-alias, identifier-nick and match-mode must be specified for reconciliation")
         sys.exit(1)
 
-    if not match_mode:
+    if not match_mode_value:
         print(f"{args.reconciliation_config!r}: match-mode must be specified")
         sys.exit(1)
 
-    if match_mode not in ('page', 'object'):
-        print(f"{args.reconciliation_config!r}: invalid match-mode value {match_mode!r}")
+    match_mode_index = {mode.value: mode for mode in iter(MatchMode)}
+    if match_mode_value not in match_mode_index:
+        print(f"{args.reconciliation_config!r}: invalid match-mode value {match_mode_value!r}")
         sys.exit(1)
+    else:
+        match_mode = match_mode_index[match_mode_value]
 
-    if match_mode == 'page' and not page_position_column_name:
+    if match_mode == MatchMode.PAGE and not page_position_column_name:
         print(f"{args.reconciliation_config!r}: match-mode page requires page-position-column-name")
         sys.exit(1)
 
@@ -332,7 +341,7 @@ def main():
         )
 
     if not all(reconciliation_args):
-        # If no reconciliation args, just transpose the CSV to Catcher JSON (list of dicts)
+        # If no reconciliation args, just transpose the CSV to Catcher JSON
         catcher_data = cdm_collection_from_rows
     else:
         try:
