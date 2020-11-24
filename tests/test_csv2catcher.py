@@ -6,7 +6,6 @@ import sys
 from io import StringIO
 from pathlib import Path
 
-sys.path.append(str(Path('.').absolute()))
 import csv2catcher
 
 

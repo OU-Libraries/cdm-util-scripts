@@ -5,7 +5,6 @@ import requests
 import sys
 from pathlib import Path
 
-sys.path.append(str(Path('.').absolute()))
 import ftp2catcher
 
 
