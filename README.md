@@ -37,7 +37,7 @@ You can reactivate the virtual environment from the `cdm-util-scripts` directory
 
 ## Update
 
-Do `git fetch` in the `cdm-util-scripts` directory to see if there are updates available; do `git pull` to get the latest versions; make sure the virtual environment is activated and do `python -m pip install .` to upgrade the package.
+In the `cdm-util-scripts` directory do `git pull` to update the Git repo to the latest version. Make sure the virtual environment is activated and do `python -m pip install .` to upgrade the package.
 
 You can also delete the cloned repo and repeat the installation instructions.
 
@@ -120,7 +120,7 @@ The reconciliation configuration file specifies these parameters:
 * `match-mode` one of `page`, to match compound object rows to page-level metadata, or `object` to match compound object rows to object-level metadata
 * `page-position-column-name` the name of the column in the field data CSV that enumerates the page the CSV row corresponds to if `match-mode` is `page`
 
-Only `match-mode` is required (this will simply translate the field data CSV into JSON). If any of `repository-url`, `collection-alias`, or `identifier-nick` is specified, they must all be specified. If `match-mode` is `page`, `page-position-column-name` must be specified (otherwise it is ignored).
+Only `match-mode` is required (this will simply transpose the field data CSV into JSON). If any of `repository-url`, `collection-alias`, or `identifier-nick` is specified, they must all be specified. If `match-mode` is `page`, `page-position-column-name` must be specified (otherwise it is ignored).
 
 Example of a JSON reconciliation configuration file:
 ```

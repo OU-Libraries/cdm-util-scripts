@@ -129,18 +129,19 @@ def request_collection_page_pointers(
 
 
 def cdm_object_from_row(
-        row: dict,
-        column_mapping: dict,
+        row: Dict[str, str],
+        column_mapping: Dict[str, List[str]],
         identifier_nick: Optional[str],
         page_position_column_name: Optional[str]
 ) -> CdmObject:
     fields = dict()
-    for name, nick in column_mapping.items():
-        if nick in fields:
-            if row[name]:
-                fields[nick] = '; '.join([fields[nick], row[name]])
-        else:
-            fields[nick] = row[name]
+    for name, nicks in column_mapping.items():
+        for nick in nicks:
+            if nick in fields:
+                if row[name]:
+                    fields[nick] = '; '.join([fields[nick], row[name]])
+            else:
+                fields[nick] = row[name]
     identifier = fields.pop(identifier_nick) if identifier_nick else None
     page_position = int(row[page_position_column_name]) if page_position_column_name else None
     return CdmObject(identifier=identifier,
@@ -149,8 +150,8 @@ def cdm_object_from_row(
 
 
 def build_cdm_collection_from_rows(
-        rows: Sequence[dict],
-        column_mapping: dict,
+        rows: Sequence[Dict[str, str]],
+        column_mapping: Dict[str, List[str]],
         identifier_nick: Optional[str],
         page_position_column_name: Optional[str]
 ) -> List[CdmObject]:
@@ -329,7 +330,10 @@ def main():
         if reader.fieldnames != ['name', 'nick']:
             print(f"{args.column_mapping_csv!r}: column mapping CSV must have 'name' and 'nick' column titles in that order")
             sys.exit(1)
-        column_mapping = {row['name']: row['nick'] for row in reader}
+        column_mapping = defaultdict(list)
+        for row in reader:
+            column_mapping[row['name']].append(row['nick'])
+        column_mapping = dict(column_mapping)
 
     # Read field_data_csv
     with open(args.field_data_csv, mode='r') as fp:

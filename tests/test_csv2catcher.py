@@ -44,10 +44,10 @@ def cdm_records():
 @pytest.fixture()
 def cdm_collection_row_mapping():
     return {
-        'Work Title': 'identi',
-        'Respondent name (last, first middle) (text)': 'testfi',
-        'Format of folder materials (text)': 'testfa',
-        'Additional formats (text)': 'testfa'
+        'Work Title': ['identi', 'debug'],
+        'Respondent name (last, first middle) (text)': ['testfi'],
+        'Format of folder materials (text)': ['testfa'],
+        'Additional formats (text)': ['testfa']
     }
 
 
@@ -165,12 +165,14 @@ def test_request_collection_page_pointers(cdm_records, session):
 
 
 def test_cdm_object_from_row(cdm_row, cdm_collection_row_mapping):
-    cdm_object = csv2catcher.cdm_object_from_row(row=cdm_row,
-                                                 column_mapping=cdm_collection_row_mapping,
-                                                 identifier_nick='identi',
-                                                 page_position_column_name='Page Position')
-    identifier_column_name = [name for name, nick in cdm_collection_row_mapping.items()
-                              if nick == 'identi'][0]
+    cdm_object = csv2catcher.cdm_object_from_row(
+        row=cdm_row,
+        column_mapping=cdm_collection_row_mapping,
+        identifier_nick='identi',
+        page_position_column_name='Page Position'
+    )
+    identifier_column_name = [name for name, nicks in cdm_collection_row_mapping.items()
+                              if 'identi' in nicks][0]
     identifier = cdm_row[identifier_column_name]
     assert cdm_object.identifier == identifier
     assert cdm_object.fields['testfa'] == 'format-1; format-2'
@@ -181,8 +183,8 @@ def test_cdm_object_from_row_blanks(cdm_row_blanks, cdm_collection_row_mapping):
                                                  column_mapping=cdm_collection_row_mapping,
                                                  identifier_nick='identi',
                                                  page_position_column_name='Page Position')
-    identifier_column_name = [name for name, nick in cdm_collection_row_mapping.items()
-                              if nick == 'identi'][0]
+    identifier_column_name = [name for name, nicks in cdm_collection_row_mapping.items()
+                              if 'identi' in nicks][0]
     identifier = cdm_row_blanks[identifier_column_name]
     assert cdm_object.identifier == identifier
     assert cdm_object.fields['testfa'] == ''
