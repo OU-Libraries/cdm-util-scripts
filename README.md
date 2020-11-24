@@ -4,28 +4,33 @@ cdm-util-scripts are Python scripts developed to support Ohio University Librari
 
 ## Installation
 
-Clone the repo to a local directory: 
-   
+These instructions require that you are using Python 3 (3.7+) as your `python` and are using a Unix shell with Git installed (like Git bash on Windows).
+
+Clone the repo to a convenient local directory:
+
     git clone https://github.com/OU-Libraries/cdm-util-scripts
+
+Enter your `OU-Libraries` GitHub credentials and `cd` into the repo:
+
     cd cdm-util-scripts
 
 In the `cdm-util-scripts` directory create a virtual environment and activate it:
-   
+
     python -m venv env
     source env/bin/activate
-   
-Install `cdm-util-scripts`:
+
+Install `cdm-util-scripts` in the virtual environment:
 
     python -m pip install .
-   
-Check to see if the scripts have been installed properly:
+
+`pip` might ask you to upgrade itself, which is a good idea. Check to see if the scripts have been installed properly:
 
     printcdminfo -h
-   
-The scripts are now available via their names in any directory through your command line as long as the virtual environment is active. You can deactivate the virtual environment to switch script access off:
+
+should print its help information. The scripts are now available via their names in any directory through your command line as long as the virtual environment is active. You can deactivate the virtual environment to switch script access off:
 
     deactivate
-   
+
 You can reactivate the virtual environment from the `cdm-util-scripts` directory to regain access to the scripts:
 
     source env/bin/activate
@@ -33,6 +38,8 @@ You can reactivate the virtual environment from the `cdm-util-scripts` directory
 ## Update
 
 Do `git fetch` in the `cdm-util-scripts` directory to see if there are updates available; do `git pull` to get the latest versions; make sure the virtual environment is activated and do `python -m pip install .` to upgrade the package.
+
+You can also delete the cloned repo and repeat the installation instructions.
 
 ## Usage
 
@@ -72,7 +79,7 @@ name                  nick         type      size   find    req   search   hide 
 'CONTENTdm file name' 'find'       'TEXT'    0      'BLANK' 1     0        1      0       ''      'BLANK'   1       1
 ```
 
-If you make too many of the same request (10+?), OCLC will start rejecting them, resulting in an error, so it's a good idea to record frequently used queries. You can do this using bash, as:
+If you make too many of the same request (10+?), OCLC will start rejecting them, resulting in an error, so it's a good idea to record frequently used queries. You can do this using bash's `>`, as:
 
     printcdminfo https://media.library.ohio.edu > ou-collections.txt
 
@@ -104,7 +111,7 @@ Respondent- formation,respob
 * A field data CSV containing the new metadata values to be uploaded to CONTENTdm
 * An output file name
 
-and outputs a JSON file for use with [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher)'s `edit` action.
+and outputs a JSON file containing the field data from the CSV reconciled against the specified CONTENTdm collection for use with [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher)'s `edit` action.
 
 The reconciliation configuration file specifies these parameters:
 * `repository-url` the CONTENTdm instance URL
