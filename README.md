@@ -6,29 +6,29 @@ cdm-util-scripts are Python scripts developed to support Ohio University Librari
 
 Clone the repo to a local directory: 
    
-   git clone https://github.com/OU-Libraries/cdm-util-scripts
-   cd cdm-util-scripts
+    git clone https://github.com/OU-Libraries/cdm-util-scripts
+    cd cdm-util-scripts
 
 In the `cdm-util-scripts` directory create a virtual environment and activate it:
    
-   python -m venv env
-   source env/bin/activate
+    python -m venv env
+    source env/bin/activate
    
 Install `cdm-util-scripts`:
 
-   python -m pip install .
+    python -m pip install .
    
 Check to see if the scripts have been installed properly:
 
-   printcdminfo -h
+    printcdminfo -h
    
 The scripts are now available via their names in any directory through your command line as long as the virtual environment is active. You can deactivate the virtual environment to switch script access off:
 
-   deactivate
+    deactivate
    
 You can reactivate the virtual environment from the `cdm-util-scripts` directory to regain access to the scripts:
 
-   source env/bin/activate
+    source env/bin/activate
 
 ## Update
 
