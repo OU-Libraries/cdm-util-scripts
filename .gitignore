@@ -1,0 +1,6 @@
+.pytest_cache
+__pycache__
+env/
+tests/__pycache__
+tests/cassettes
+tests/outputs
