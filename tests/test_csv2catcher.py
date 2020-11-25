@@ -63,6 +63,16 @@ def cdm_row():
 
 
 @pytest.fixture()
+def cdm_row_blank():
+    return {
+        'Work Title': 'Test title',
+        'Page Position': '1',
+        'Respondent name (last, first middle) (text)': 'Testname, Testname',
+        'Format of folder materials (text)': '',
+        'Additional formats (text)': 'format-2'
+    }
+
+@pytest.fixture()
 def cdm_row_blanks():
     return {
         'Work Title': 'Test title',
@@ -178,11 +188,27 @@ def test_cdm_object_from_row(cdm_row, cdm_collection_row_mapping):
     assert cdm_object.fields['testfa'] == 'format-1; format-2'
 
 
+def test_cdm_object_from_row_blank(cdm_row_blank, cdm_collection_row_mapping):
+    cdm_object = csv2catcher.cdm_object_from_row(
+        row=cdm_row_blank,
+        column_mapping=cdm_collection_row_mapping,
+        identifier_nick='identi',
+        page_position_column_name='Page Position'
+    )
+    identifier_column_name = [name for name, nicks in cdm_collection_row_mapping.items()
+                              if 'identi' in nicks][0]
+    identifier = cdm_row_blank[identifier_column_name]
+    assert cdm_object.identifier == identifier
+    assert cdm_object.fields['testfa'] == 'format-2'
+
+
 def test_cdm_object_from_row_blanks(cdm_row_blanks, cdm_collection_row_mapping):
-    cdm_object = csv2catcher.cdm_object_from_row(row=cdm_row_blanks,
-                                                 column_mapping=cdm_collection_row_mapping,
-                                                 identifier_nick='identi',
-                                                 page_position_column_name='Page Position')
+    cdm_object = csv2catcher.cdm_object_from_row(
+        row=cdm_row_blanks,
+        column_mapping=cdm_collection_row_mapping,
+        identifier_nick='identi',
+        page_position_column_name='Page Position'
+    )
     identifier_column_name = [name for name, nicks in cdm_collection_row_mapping.items()
                               if 'identi' in nicks][0]
     identifier = cdm_row_blanks[identifier_column_name]

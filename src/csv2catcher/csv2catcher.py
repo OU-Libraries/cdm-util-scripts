@@ -136,12 +136,16 @@ def cdm_object_from_row(
 ) -> CdmObject:
     fields = dict()
     for name, nicks in column_mapping.items():
+        field = row[name]
         for nick in nicks:
             if nick in fields:
-                if row[name]:
-                    fields[nick] = '; '.join([fields[nick], row[name]])
+                if field:
+                    if fields[nick]:
+                        fields[nick] = '; '.join([fields[nick], field])
+                    else:
+                        fields[nick] = field
             else:
-                fields[nick] = row[name]
+                fields[nick] = field
     identifier = fields.pop(identifier_nick) if identifier_nick else None
     page_position = int(row[page_position_column_name]) if page_position_column_name else None
     return CdmObject(identifier=identifier,
