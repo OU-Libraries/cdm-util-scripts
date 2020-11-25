@@ -143,7 +143,7 @@ match-mode: page
 page-position-column-name: Page Position
 ```
 
-The column mapping CSV must have two columns named `name` and `nick` in that order, and must include a mapping for the `identifier-nick` nickname if specified. Columns with identical names (in the exported CSV) or mapped to the same field nickname (in the column mapping CSV) will have their contents joined with a semicolon.
+The column mapping CSV must have two columns named `name` and `nick` in that order, and must include a mapping for the `identifier-nick` nickname if specified. Columns with identical names in the field data CSV will have their contents joined with a semicolon. Columns mapped to the same field nickname in the column mapping CSV will have their contents joined with a semicolon. You can enter the same column name multiple times with different field nicknames in the column mapping CSV and its contents will be added to each of the fields specified. The `identifier-nick` field will only be used for reconciliation and will not be included in the output edit records.
 
 Example of a column mapping CSV:
 ```
