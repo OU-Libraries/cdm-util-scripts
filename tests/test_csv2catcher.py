@@ -41,48 +41,6 @@ def cdm_records():
     return cdm_records
 
 
-@pytest.fixture()
-def cdm_collection_row_mapping():
-    return {
-        'Work Title': ['identi', 'debug'],
-        'Respondent name (last, first middle) (text)': ['testfi'],
-        'Format of folder materials (text)': ['testfa'],
-        'Additional formats (text)': ['testfa']
-    }
-
-
-@pytest.fixture()
-def cdm_row():
-    return {
-        'Work Title': 'Test title',
-        'Page Position': '1',
-        'Respondent name (last, first middle) (text)': 'Testname, Testname',
-        'Format of folder materials (text)': 'format-1',
-        'Additional formats (text)': 'format-2'
-    }
-
-
-@pytest.fixture()
-def cdm_row_blank():
-    return {
-        'Work Title': 'Test title',
-        'Page Position': '1',
-        'Respondent name (last, first middle) (text)': 'Testname, Testname',
-        'Format of folder materials (text)': '',
-        'Additional formats (text)': 'format-2'
-    }
-
-@pytest.fixture()
-def cdm_row_blanks():
-    return {
-        'Work Title': 'Test title',
-        'Page Position': '1',
-        'Respondent name (last, first middle) (text)': 'Testname, Testname',
-        'Format of folder materials (text)': '',
-        'Additional formats (text)': ''
-    }
-
-
 def test_CdmObject__combine():
     assert csv2catcher.CdmObject._combine(None, 'b') == 'b'
     assert csv2catcher.CdmObject._combine('a', None) == 'a'
@@ -113,23 +71,35 @@ def test_CdmObject___add__():
         a + d
 
 
-def test_csv_dict_reader_with_join():
-    test_csv = ("h1,h2,h1,h3\n"
-                "c1a,c2,c1b,c3\n")
-    reader = csv2catcher.csv_dict_reader_with_join(StringIO(test_csv))
+@pytest.mark.parametrize('csv, expected_row', [
+    (("h1,h2,h3\n"
+      "c1,c2,c3\n"),
+     {'h1': 'c1', 'h2': 'c2', 'h3': 'c3'}),
+    (("h1,h2,h1,h3\n"
+      "c1a,c2,c1b,c3\n"),
+     {'h1': 'c1a; c1b', 'h2': 'c2', 'h3': 'c3'}),
+    (("h1,h2,h1,h3\n"
+      ",c2,,c3\n"),
+     {'h1': '', 'h2': 'c2', 'h3': 'c3'}),
+    (("h1,h2,h1,h3\n"
+      ",c2,c1,c3\n"),
+     {'h1': 'c1', 'h2': 'c2', 'h3': 'c3'}),
+    (("h1,h2,h1,h3\n"
+      "c1,c2,,c3\n"),
+     {'h1': 'c1', 'h2': 'c2', 'h3': 'c3'})
+])
+def test_csv_dict_reader_with_join(csv, expected_row):
+    reader = csv2catcher.csv_dict_reader_with_join(StringIO(csv), seperator='; ')
     row = next(reader)
-    assert row == {'h2': 'c2', 'h3': 'c3', 'h1': 'c1a; c1b'}
+    assert row == expected_row
 
-    test_csv_blanks = ("h1,h2,h1,h3\n"
-                       ",c2,,c3\n")
-    reader = csv2catcher.csv_dict_reader_with_join(StringIO(test_csv_blanks))
-    row = next(reader)
-    assert row == {'h2': 'c2', 'h3': 'c3', 'h1': ''}
 
+def test_csv_dict_reader_with_join_raises():
     test_csv_mismatch = ("h1,h2,h3\n"
                          "c1,c2,c3,c4\n")
     with pytest.raises(ValueError):
-        for row in csv2catcher.csv_dict_reader_with_join(StringIO(test_csv_mismatch)):
+        reader = csv2catcher.csv_dict_reader_with_join(StringIO(test_csv_mismatch))
+        for row in reader:
             pass
 
 
@@ -165,62 +135,107 @@ def test_request_collection_page_pointers(cdm_records, session):
         identifier_nick='identi'
     )
     with cdm_vcr.use_cassette('test_request_collection_page_pointers.yml'):
-        csv2catcher.request_collection_page_pointers(cdm_collection=cdm_collection,
-                                                     repo_url='https://media.library.ohio.edu',
-                                                     alias='p15808coll15',
-                                                     session=session)
+        csv2catcher.request_collection_page_pointers(
+            cdm_collection=cdm_collection,
+            repo_url='https://media.library.ohio.edu',
+            alias='p15808coll15',
+            session=session
+        )
     for cdm_object in cdm_collection:
         if cdm_object.is_cpd:
             assert cdm_object.page_pointers
 
 
-def test_cdm_object_from_row(cdm_row, cdm_collection_row_mapping):
+@pytest.fixture()
+def cdm_collection_row_mapping():
+    return {
+        'Work Title': ['identi', 'debug'],
+        'Respondent name (last, first middle) (text)': ['testfi'],
+        'Format of folder materials (text)': ['testfa'],
+        'Additional formats (text)': ['testfa']
+    }
+
+
+@pytest.mark.parametrize('row,expected_fields', [
+    # Two filled formats
+    ({
+        'Work Title': 'Test title',
+        'Page Position': '1',
+        'Respondent name (last, first middle) (text)': 'Testname, Testname',
+        'Format of folder materials (text)': 'format-1',
+        'Additional formats (text)': 'format-2'
+    },
+     {
+         'debug': 'Test title',
+         'testfi': 'Testname, Testname',
+         'testfa': 'format-1; format-2',
+     }),
+
+    # Right blank format
+    ({
+        'Work Title': 'Test title',
+        'Page Position': '1',
+        'Respondent name (last, first middle) (text)': 'Testname, Testname',
+        'Format of folder materials (text)': '',
+        'Additional formats (text)': 'format-2'
+    },
+     {
+         'debug': 'Test title',
+         'testfi': 'Testname, Testname',
+         'testfa': 'format-2',
+     }),
+
+    # Left blank format
+    ({
+        'Work Title': 'Test title',
+        'Page Position': '1',
+        'Respondent name (last, first middle) (text)': 'Testname, Testname',
+        'Format of folder materials (text)': 'format-1',
+        'Additional formats (text)': ''
+    },
+     {
+         'debug': 'Test title',
+         'testfi': 'Testname, Testname',
+         'testfa': 'format-1',
+     }),
+
+    # Two blank formats
+    ({
+        'Work Title': 'Test title',
+        'Page Position': '1',
+        'Respondent name (last, first middle) (text)': 'Testname, Testname',
+        'Format of folder materials (text)': '',
+        'Additional formats (text)': ''
+    },
+     {
+         'debug': 'Test title',
+         'testfi': 'Testname, Testname',
+         'testfa': '',
+     })
+])
+def test_cdm_object_from_row(cdm_collection_row_mapping, row, expected_fields):
+    page_position_column_name = 'Page Position'
     cdm_object = csv2catcher.cdm_object_from_row(
-        row=cdm_row,
+        row=row,
         column_mapping=cdm_collection_row_mapping,
         identifier_nick='identi',
-        page_position_column_name='Page Position'
+        page_position_column_name=page_position_column_name
     )
     identifier_column_name = [name for name, nicks in cdm_collection_row_mapping.items()
                               if 'identi' in nicks][0]
-    identifier = cdm_row[identifier_column_name]
+    identifier = row[identifier_column_name]
     assert cdm_object.identifier == identifier
-    assert cdm_object.fields['testfa'] == 'format-1; format-2'
-
-
-def test_cdm_object_from_row_blank(cdm_row_blank, cdm_collection_row_mapping):
-    cdm_object = csv2catcher.cdm_object_from_row(
-        row=cdm_row_blank,
-        column_mapping=cdm_collection_row_mapping,
-        identifier_nick='identi',
-        page_position_column_name='Page Position'
-    )
-    identifier_column_name = [name for name, nicks in cdm_collection_row_mapping.items()
-                              if 'identi' in nicks][0]
-    identifier = cdm_row_blank[identifier_column_name]
-    assert cdm_object.identifier == identifier
-    assert cdm_object.fields['testfa'] == 'format-2'
-
-
-def test_cdm_object_from_row_blanks(cdm_row_blanks, cdm_collection_row_mapping):
-    cdm_object = csv2catcher.cdm_object_from_row(
-        row=cdm_row_blanks,
-        column_mapping=cdm_collection_row_mapping,
-        identifier_nick='identi',
-        page_position_column_name='Page Position'
-    )
-    identifier_column_name = [name for name, nicks in cdm_collection_row_mapping.items()
-                              if 'identi' in nicks][0]
-    identifier = cdm_row_blanks[identifier_column_name]
-    assert cdm_object.identifier == identifier
-    assert cdm_object.fields['testfa'] == ''
+    assert cdm_object.page_position == int(row[page_position_column_name])
+    assert cdm_object.fields == expected_fields
 
 
 def test_build_cdm_collection_from_rows(cdm_collection_rows, cdm_collection_row_mapping):
-    cdm_collection = csv2catcher.build_cdm_collection_from_rows(rows=cdm_collection_rows,
-                                                                column_mapping=cdm_collection_row_mapping,
-                                                                identifier_nick='identi',
-                                                                page_position_column_name='Page Position')
+    cdm_collection = csv2catcher.build_cdm_collection_from_rows(
+        rows=cdm_collection_rows,
+        column_mapping=cdm_collection_row_mapping,
+        identifier_nick='identi',
+        page_position_column_name='Page Position'
+    )
     assert len(cdm_collection) == len(cdm_collection_rows)
     for cdm_object in cdm_collection:
         assert cdm_object.identifier

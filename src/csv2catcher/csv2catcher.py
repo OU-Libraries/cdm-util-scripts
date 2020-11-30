@@ -62,7 +62,10 @@ def csv_dict_reader_with_join(fp: TextIO, seperator: str = '; ') -> Iterator[Dic
         for column_name, cell in zip(header, csv_row):
             if column_name in row:
                 if cell:
-                    row[column_name] = seperator.join([row[column_name], cell])
+                    if row[column_name]:
+                        row[column_name] = seperator.join([row[column_name], cell])
+                    else:
+                        row[column_name] = cell
             else:
                 row[column_name] = cell
         yield row
