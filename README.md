@@ -10,7 +10,7 @@ Clone the repo to a convenient local directory:
 
     git clone https://github.com/OU-Libraries/cdm-util-scripts
 
-Enter your `OU-Libraries` GitHub credentials and `cd` into the repo:
+Enter your `OU-Libraries` GitHub credentials upon request and `cd` into the repo:
 
     cd cdm-util-scripts
 
@@ -39,7 +39,7 @@ You can reactivate the virtual environment from the `cdm-util-scripts` directory
 
 In the `cdm-util-scripts` directory do `git pull` to update the Git repo to the latest version. Make sure the virtual environment is activated and do `python -m pip install .` to upgrade the package.
 
-You can also delete the cloned repo and repeat the installation instructions.
+You can also delete the cloned repo directory and repeat the installation instructions.
 
 ## Usage
 
@@ -79,7 +79,7 @@ name                  nick         type      size   find    req   search   hide 
 'CONTENTdm file name' 'find'       'TEXT'    0      'BLANK' 1     0        1      0       ''      'BLANK'   1       1
 ```
 
-If you make too many of the same request (10+?), OCLC will start rejecting them, resulting in an error, so it's a good idea to record frequently used queries. You can do this using bash's `>`, as:
+If you make too many of the same request (10+?), OCLC will start rejecting them, resulting in an error, so it's a good idea to record frequently used queries. You can do this using bash's file redirection operator `>`, as:
 
     printcdminfo https://media.library.ohio.edu > ou-collections.txt
 
@@ -132,10 +132,11 @@ Example of a JSON reconciliation configuration file:
 }
 ```
 
-If [PyYAML](https://github.com/yaml/pyyaml) is installed in the current environment, you may use a `.yaml` or `.yml` configuration file instead of JSON.
+If [PyYAML](https://github.com/yaml/pyyaml) is installed in the current environment, you may use a `.yaml` or `.yml` configuration file instead of JSON. You can install it when the virtual environment is active with `pip install pyyaml`.
 
 Example of a YAML reconciliation configuration file:
 ```
+# You can have comments in YAML
 repository-url: https://media.library.ohio.edu
 collection-alias: p15808coll15
 identifier-nick: identi
