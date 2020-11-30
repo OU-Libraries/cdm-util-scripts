@@ -4,7 +4,7 @@ cdm-util-scripts are Python scripts developed to support Ohio University Librari
 
 ## Installation
 
-These instructions require that you are using Python 3 (3.7+) as your `python` and are using a Unix shell with Git installed (like Git bash on Windows).
+These instructions require that you are using Python 3 (3.7+) as your `python` and are using a Unix shell with Git installed (like [Git bash on Windows](https://gitforwindows.org/)).
 
 Clone the repo to a convenient local directory:
 
@@ -27,7 +27,7 @@ Install `cdm-util-scripts` in the virtual environment:
 
     printcdminfo -h
 
-should print its help information. The scripts are now available via their names in any directory through your command line as long as the virtual environment is active. You can deactivate the virtual environment to switch script access off:
+should print its help information. The scripts are now available via their names in any directory through your command line as long as the virtual environment is active. You should be able to tell the environment is active because it will prepend its name to your prompt in parenthesis (`(env)`). You can deactivate the virtual environment to switch script access off:
 
     deactivate
 
@@ -116,11 +116,11 @@ and outputs a JSON file containing the field data from the CSV reconciled agains
 The reconciliation configuration file specifies these parameters:
 * `repository-url` the CONTENTdm instance URL
 * `collection-alias` the collection CONTENTdm alias
-* `identifier-nick` the CONTENTdm nickname for a metadata field to match CSV rows to CONTENTdm objects
-* `match-mode` one of `page`, to match compound object rows to page-level metadata, or `object` to match compound object rows to object-level metadata
-* `page-position-column-name` the name of the column in the field data CSV that enumerates the page the CSV row corresponds to if `match-mode` is `page`
+* `identifier-nick` the CONTENTdm nickname for an object-level metadata field to match CSV rows to CONTENTdm objects
+* `match-mode` one of `page`, to match field data CSV rows to page-level metadata, or `object` to match field data CSV rows to object-level metadata
+* `page-position-column-name` the name of the column in the field data CSV that enumerates the page the CSV row corresponds to in a compound object if `match-mode` is `page`
 
-Only `match-mode` is required (this will simply transpose the field data CSV into JSON). If any of `repository-url`, `collection-alias`, or `identifier-nick` is specified, they must all be specified. If `match-mode` is `page`, `page-position-column-name` must be specified (otherwise it is ignored).
+Only `match-mode` is required (if provided by itself csv2catcher will simply transpose the field data CSV into JSON). If any of `repository-url`, `collection-alias`, or `identifier-nick` is specified, they must all be specified. If `match-mode` is `page`, `page-position-column-name` must be specified (otherwise it is ignored).
 
 Example of a JSON reconciliation configuration file:
 ```
@@ -144,7 +144,7 @@ match-mode: page
 page-position-column-name: Page Position
 ```
 
-The column mapping CSV must have two columns named `name` and `nick` in that order, and must include a mapping for the `identifier-nick` nickname if specified. Columns with identical names in the field data CSV will have their contents joined with a semicolon. Columns mapped to the same field nickname in the column mapping CSV will have their contents joined with a semicolon. You can enter the same column name multiple times with different field nicknames in the column mapping CSV and its contents will be added to each of the fields specified. The `identifier-nick` field will only be used for reconciliation and will not be included in the output edit records.
+The column mapping CSV must have two columns named `name` and `nick` in that order, and must include a mapping for the `identifier-nick` nickname if specified. Columns mapped to the same field nickname in the column mapping CSV will have their field data CSV contents joined with a semicolon. Multiple rows in the column mapping CSV with the same column name will have their field data CSV contents joined with a semicolon to each of the fields specified in their respective `nick` values. The designated `identifier-nick` field will only be used for reconciliation and will not be included in the output edit records.
 
 Example of a column mapping CSV:
 ```
@@ -163,7 +163,9 @@ name,nick
 "Additional formats (text)",format
 ```
 
-The reconciliation mode matches CSV rows to pages using the specified page position column. If the `object` reconciliation mode is selected, each CSV row must correspond uniquely to its identifier.
+All cell values in the field data CSV will have leading and trailing whitespace removed. Columns with identical names in the field data CSV will have their contents joined with a semicolon before being mapped according to the column mapping CSV.
+
+The `page` reconciliation mode matches field data CSV rows to page level-metadata in CONTENTdm compound objects using the object-level `identifier-nick` key and the specified page number in the `page-position-column-name` column. The `object` reconciliation mode matches field data CSV rows to object level metadata using the `identifier-nick` key, which must be unique in the field data CSV.
 
 Example, using the `object` mode:
 ```
@@ -174,9 +176,9 @@ $ cat object-config.json
     "identifier-nick": "identi",
     "match-mode": "object"
 }
-$ csv2catcher object-config.json col-map.csv fromthepage-tables-export.csv csv2catcher_objects.json
+$ csv2catcher object-config.json col-map.csv fromthepage-tables-export.csv csv2catcher-objects.json
 Requesting object pointers: 397/397 100%
-$ head csv2catcher_objects.json
+$ head csv2catcher-objects.json
 [
   {
     "dmrecord": "5193",
@@ -196,10 +198,10 @@ collection-alias: p15808coll15
 identifier-nick: identi
 match-mode: page
 page-position-column-name: Page Position
-$ csv2catcher page-config.yaml col-map.csv fromthepage-tables-export.csv csv2catcher_pages.json
+$ csv2catcher page-config.yaml col-map.csv fromthepage-tables-export.csv csv2catcher-pages.json
 Requesting object pointers: 397/397 100%
 Requesting page pointers: 4/4 100%
-$ head csv2catcher_pages.json
+$ head csv2catcher-pages.json
 [
   {
     "dmrecord": "5173",

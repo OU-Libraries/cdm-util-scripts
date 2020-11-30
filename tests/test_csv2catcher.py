@@ -72,21 +72,30 @@ def test_CdmObject___add__():
 
 
 @pytest.mark.parametrize('csv, expected_row', [
+    # No join
     (("h1,h2,h3\n"
       "c1,c2,c3\n"),
      {'h1': 'c1', 'h2': 'c2', 'h3': 'c3'}),
+    # Join
     (("h1,h2,h1,h3\n"
       "c1a,c2,c1b,c3\n"),
      {'h1': 'c1a; c1b', 'h2': 'c2', 'h3': 'c3'}),
+    # Join two blanks
     (("h1,h2,h1,h3\n"
       ",c2,,c3\n"),
      {'h1': '', 'h2': 'c2', 'h3': 'c3'}),
+    # Join left blank
     (("h1,h2,h1,h3\n"
       ",c2,c1,c3\n"),
      {'h1': 'c1', 'h2': 'c2', 'h3': 'c3'}),
+    # Join right blank
     (("h1,h2,h1,h3\n"
       "c1,c2,,c3\n"),
-     {'h1': 'c1', 'h2': 'c2', 'h3': 'c3'})
+     {'h1': 'c1', 'h2': 'c2', 'h3': 'c3'}),
+    # Strip whitespace
+    (("h1,h2,h3\n"
+      "c1, c2 ,c3\n"),
+     {'h1': 'c1', 'h2': 'c2', 'h3': 'c3'}),
 ])
 def test_csv_dict_reader_with_join(csv, expected_row):
     reader = csv2catcher.csv_dict_reader_with_join(StringIO(csv), seperator='; ')
@@ -156,7 +165,7 @@ def cdm_collection_row_mapping():
     }
 
 
-@pytest.mark.parametrize('row,expected_fields', [
+@pytest.mark.parametrize('row, expected_fields', [
     # Two filled formats
     ({
         'Work Title': 'Test title',

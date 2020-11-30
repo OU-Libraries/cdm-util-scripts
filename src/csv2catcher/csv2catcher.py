@@ -54,12 +54,16 @@ class MatchMode(Enum):
 
 def csv_dict_reader_with_join(fp: TextIO, seperator: str = '; ') -> Iterator[Dict[str, str]]:
     reader = csv.reader(fp)
-    header = next(reader)
+    try:
+        header = [column_name.strip() for column_name in next(reader)]
+    except StopIteration:
+        raise ValueError("empty CSV")
     for csv_row in reader:
         if len(csv_row) != len(header):
             raise ValueError("CSV header and row length mismatch")
         row = dict()
         for column_name, cell in zip(header, csv_row):
+            cell = cell.strip()
             if column_name in row:
                 if cell:
                     if row[column_name]:
