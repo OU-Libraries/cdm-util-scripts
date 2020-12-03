@@ -11,6 +11,7 @@ setup(
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
     install_requires=['requests'],
+    python_requires='>=3.7',
     entry_points={
         'console_scripts': [
             'csv2catcher=csv2catcher.csv2catcher:main',

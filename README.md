@@ -17,9 +17,9 @@ Enter your `OU-Libraries` GitHub credentials upon request and `cd` into the repo
 In the `cdm-util-scripts` directory create a virtual environment and activate it:
 
     python -m venv env
-    source env/bin/activate
+    source env/Scripts/activate
 
-Install `cdm-util-scripts` in the virtual environment:
+(Try `source env/bin/activate` on Linux and macOS.) Install `cdm-util-scripts` in the virtual environment:
 
     python -m pip install .
 
@@ -33,7 +33,7 @@ should print its help information. The scripts are now available via their names
 
 You can reactivate the virtual environment from the `cdm-util-scripts` directory to regain access to the scripts:
 
-    source env/bin/activate
+    source env/Scripts/activate
 
 ## Update
 
