@@ -2,7 +2,11 @@ from requests import Session
 
 import argparse
 import re
+import sys
+import csv
+import json
 import xml.etree.ElementTree as ET
+from collections import defaultdict
 from dataclasses import dataclass
 
 from ftp2catcher import get_ftp_manifest, get_cdm_page_pointers
@@ -134,6 +138,19 @@ def map_cdm_object_as_object(
     }
 
 
+def map_cdm_objects_as_objects(
+        cdm_objects: Iterable[CdmObject],
+        field_mapping: Dict[str, Sequence[str]],
+        page_picker: Callable[[List[Dict[str, str]]], Dict[str, str]]
+) -> Iterable[Dict[str, str]]:
+    for cdm_object in cdm_objects:
+        yield map_cdm_object_as_object(
+            cdm_object=cdm_object,
+            field_mapping=field_mapping,
+            page_picker=page_picker
+        )
+
+
 class PagePickers:
     def first_page(pages: List[Dict[str, str]]) -> Dict[str, str]:
         return pages[0]
@@ -169,10 +186,37 @@ def map_cdm_object_as_pages(
     return page_data
 
 
+def map_cdm_objects_as_pages(
+        cdm_objects: Iterable[CdmObject],
+        field_mapping: Dict[str, Sequence[str]],
+        session: Session,
+        verbose: bool = True
+) -> Iterable[Dict[str, str]]:
+    for cdm_object in cdm_objects:
+        pages = map_cdm_object_as_pages(
+            cdm_object=cdm_object,
+            field_mapping=field_mapping,
+            session=session,
+            verbose=verbose
+        )
+        yield from pages
+
+
+class MatchModes:
+    by_object = 'object'
+    by_page = 'page'
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Get FromThePage metadata and map it into cdm-catcher JSON",
         fromfile_prefix_chars='@'
+    )
+    parser.add_argument(
+        'match_mode',
+        type=str,
+        choices=[MatchModes.by_object, MatchModes.by_page],
+        help="Mode for matching FromThePage metadata to CONTENTdm objects"
     )
     parser.add_argument(
         'slug',
@@ -185,16 +229,26 @@ def main():
         help="CONTENTdm collection name used by FromThePage"
     )
     parser.add_argument(
-        'field_mappings',
+        'field_mapping',
         type=str,
         help="CSV file if FromThePage field labels mapped to CONTENTdm nicknames"
     )
     parser.add_argument(
-        'match_mode',
+        'output_file',
         type=str,
-        help="Match mode 'object' or 'page'"
+        help="File name for cdm-catcher JSON output"
     )
     args = parser.parse_args()
+
+    with open(args.field_mapping, mode='r') as fp:
+        reader = csv.DictReader(fp)
+        if reader.fieldnames != ['name', 'nick']:
+            print(f"{args.column_mapping_csv!r}: column mapping CSV must have 'name' and 'nick' column titles in that order")
+            sys.exit(1)
+        field_mapping = defaultdict(list)
+        for row in reader:
+            field_mapping[row['name']].append(row['nick'])
+        field_mapping = dict(field_mapping)
 
     with Session() as session:
         collection_manifest_url = get_collection_manifest_url(
@@ -207,6 +261,28 @@ def main():
             session=session
         )
         get_objects_pages_from_TEI(ftp_collection)
+
+        if args.match_mode == MatchModes.by_object:
+            catcher_data = list(
+                map_cdm_objects_as_objects(
+                    cdm_objects=ftp_collection,
+                    field_mapping=field_mapping,
+                    page_picker=PagePickers.first_page
+                )
+            )
+        elif args.match_mode == MatchModes.by_page:
+            catcher_data = list(
+                map_cdm_objects_as_pages(
+                    cdm_objects=ftp_collection,
+                    field_mapping=field_mapping,
+                    session=session
+                )
+            )
+        else:
+            raise KeyError(f"invalid match mode {args.match_mode!r}")
+
+    with open(args.output_file, mode='w') as fp:
+        json.dump(catcher_data, fp, indent=2)
 
 
 if __name__ == '__main__':

@@ -183,9 +183,9 @@ def test_map_cdm_object_as_object(cdm_object, page_picker, result):
         'Label': ['nick']
     }
     page = ftpmd2catcher.map_cdm_object_as_object(
-        cdm_object,
-        field_mapping,
-        page_picker
+        cdm_object=cdm_object,
+        field_mapping=field_mapping,
+        page_picker=page_picker
     )
     assert page == result
 
@@ -205,9 +205,9 @@ def test_map_cdm_object_as_pages(monkeypatch):
 
     monkeypatch.setattr('ftpmd2catcher.ftpmd2catcher.get_cdm_page_pointers', mock)
     page_data = ftpmd2catcher.map_cdm_object_as_pages(
-        cdm_object,
-        field_mapping,
-        None
+        cdm_object=cdm_object,
+        field_mapping=field_mapping,
+        session=None
     )
     assert page_data == [
         {'dmrecord': '1', 'nick': 'value1'},
