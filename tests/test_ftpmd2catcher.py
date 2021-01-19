@@ -1,6 +1,7 @@
 import pytest
 import vcr
 import requests
+import re
 
 import ftpmd2catcher
 
@@ -48,15 +49,24 @@ def test_get_ftp_collection(session):
 
 
 @ftp_vcr.use_cassette()
-def test_get_rendering(session):
+@pytest.mark.parametrize('label, match_pattern', [
+    ('TEI Export', r'https://fromthepage\.com/iiif/[^/]*/export/tei'),
+    ('XHTML Export', r'https://fromthepage\.com/iiif/[^/]*/export/html')
+])
+def test_get_rendering(label, match_pattern, session):
     response = session.get('https://fromthepage.com/iiif/48258/manifest')
     ftp_manifest = response.json()
     rendering = ftpmd2catcher.get_rendering(
         ftp_manifest=ftp_manifest,
-        label='TEI Export'
+        label=label
     )
-    assert rendering['@id'] == 'https://fromthepage.com/export/tei?work_id=48258'
+    assert re.fullmatch(match_pattern, rendering['@id']) is not None
 
+
+@ftp_vcr.use_cassette()
+def test_get_rendering_raises(session):
+    response = session.get('https://fromthepage.com/iiif/48258/manifest')
+    ftp_manifest = response.json()
     with pytest.raises(KeyError):
         ftpmd2catcher.get_rendering(
             ftp_manifest=ftp_manifest,
@@ -64,11 +74,10 @@ def test_get_rendering(session):
         )
 
 
-@pytest.mark.skip()
 @ftp_vcr.use_cassette()
 @pytest.mark.parametrize('url, check_fields',
 [
-    ('https://fromthepage.com/export/tei?work_id=48254',
+    ('https://fromthepage.com/iiif/an-evening-of-dance-florida-state-university-poster-february-22-24/export/tei',
      [
          {
              'Title':  'An Evening of Dance, Florida State University poster, February 22-24',
@@ -96,7 +105,7 @@ Reservations:
          }
      ]
     ),
-    ('https://fromthepage.com/export/tei?work_id=46453',
+    ('https://fromthepage.com/iiif/ryan-box023-tld-f41-31956cd7-4e66-4f1d-b830-40b33d8dc77d/export/tei',
      [
          {
              'Title': 'Box 023, folder 41: Background notes, 1st Parachute Battalion',
@@ -116,7 +125,6 @@ def test_extract_fields_from_TEI(url, check_fields, session):
             assert page[key] == value
 
 
-@pytest.mark.skip()
 @ftp_vcr.use_cassette()
 def test_get_object_pages_from_TEI(session):
     cdm_object = ftpmd2catcher.CdmObject(
@@ -124,6 +132,7 @@ def test_get_object_pages_from_TEI(session):
     )
     ftpmd2catcher.get_object_pages_from_TEI(cdm_object, session)
     assert cdm_object.pages
+
 
 @pytest.mark.parametrize('field_mapping, result', [
     ({'label': ['nick']}, {'nick': 'value'}),
