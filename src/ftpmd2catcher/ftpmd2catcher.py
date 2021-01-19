@@ -231,7 +231,7 @@ def main():
     parser.add_argument(
         'field_mapping',
         type=str,
-        help="CSV file if FromThePage field labels mapped to CONTENTdm nicknames"
+        help="CSV file of FromThePage field labels mapped to CONTENTdm nicknames"
     )
     parser.add_argument(
         'output_file',
@@ -260,7 +260,7 @@ def main():
             url=collection_manifest_url,
             session=session
         )
-        get_objects_pages_from_TEI(ftp_collection)
+        get_objects_pages_from_TEI(ftp_collection, session=session)
 
         if args.match_mode == MatchModes.by_object:
             catcher_data = list(
