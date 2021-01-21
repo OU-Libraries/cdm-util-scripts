@@ -74,13 +74,15 @@ def test_get_rendering_raises(session):
         )
 
 
-@ftp_vcr.use_cassette()
-@pytest.mark.parametrize('url, check_fields',
-[
+extraction_test_values = [
+    # https://fromthepage.com/iiif/48254/manifest
     ('https://fromthepage.com/iiif/an-evening-of-dance-florida-state-university-poster-february-22-24/export/tei',
+     'https://fromthepage.com/iiif/an-evening-of-dance-florida-state-university-poster-february-22-24/export/html',
      [
          {
              'Title':  'An Evening of Dance, Florida State University poster, February 22-24',
+             'Creator (artist)': '',
+             # Whitespace required after "Davis, ", "Fichter, ", and "Sias and "
              'Transcribed poster text': """
 FSU Department of Dance
 An Evening of Dance
@@ -89,9 +91,9 @@ February 22 & 23 8:00 pm
 February 24 2:30 pm
 RUBY DIAMOND AUDITORIUM
 Works by:
-Gwynne Ashton, Lynda Davis,
-Nancy Smith Fichter,
-Richard Sias and
+Gwynne Ashton, Lynda Davis, 
+Nancy Smith Fichter, 
+Richard Sias and 
 Alwin Nikolais
 
 FSU Fine Arts,
@@ -103,9 +105,11 @@ Reservations:
 644-6277
              """.strip()
          }
-     ]
-    ),
+     ]),
+
+    # https://fromthepage.com/iiif/46453/manifest
     ('https://fromthepage.com/iiif/ryan-box023-tld-f41-31956cd7-4e66-4f1d-b830-40b33d8dc77d/export/tei',
+     'https://fromthepage.com/iiif/ryan-box023-tld-f41-31956cd7-4e66-4f1d-b830-40b33d8dc77d/export/html',
      [
          {
              'Title': 'Box 023, folder 41: Background notes, 1st Parachute Battalion',
@@ -116,21 +120,38 @@ Reservations:
              'Respondent nationality': ''
          }
      ])
-])
-def test_extract_fields_from_TEI(url, check_fields, session):
-    response = session.get(url)
-    pages = ftpmd2catcher.extract_fields_from_TEI(tei=response.text)
-    for page, check_field in zip(pages, check_fields):
-        for key, value in check_field.items():
+]
+
+
+@pytest.mark.skip(reason="TEI endpoint returning status 500")
+@ftp_vcr.use_cassette()
+@pytest.mark.parametrize('tei_url, html_url, check_pages', extraction_test_values)
+def test_extract_fields_from_tei(tei_url, html_url, check_pages, session):
+    response = session.get(tei_url)
+    pages = ftpmd2catcher.extract_fields_from_tei(tei=response.text)
+    for page, check_page in zip(pages, check_pages):
+        for key, value in check_page.items():
             assert page[key] == value
 
 
 @ftp_vcr.use_cassette()
-def test_get_object_pages_from_TEI(session):
+@pytest.mark.parametrize('tei_url, html_url, check_pages', extraction_test_values)
+def test_extract_fields_from_html(tei_url, html_url, check_pages, session):
+    response = session.get(html_url)
+    pages = ftpmd2catcher.extract_fields_from_html(html=response.text)
+    for page, check_page in zip(pages, check_pages):
+        for key, value in check_page.items():
+            assert page[key] == value
+
+
+@pytest.mark.skip(reason="TEI endpoint returning status 500")
+@ftp_vcr.use_cassette()
+@pytest.mark.parametrize('rendering_label', ftpmd2catcher.rendering_extractors.keys())
+def test_get_object_pages(rendering_label, session):
     cdm_object = ftpmd2catcher.CdmObject(
-        ftp_manifest_url='https://fromthepage.com/iiif/45440/manifest'
+        ftp_manifest_url='https://fromthepage.com/iiif/47397/manifest'
     )
-    ftpmd2catcher.get_object_pages_from_TEI(cdm_object, session)
+    ftpmd2catcher.get_object_pages(cdm_object, rendering_label, session)
     assert cdm_object.pages
 
 

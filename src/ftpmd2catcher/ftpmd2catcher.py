@@ -65,48 +65,93 @@ def get_rendering(ftp_manifest: dict, label: str) -> dict:
     raise KeyError("label not found in manifest")
 
 
-def extract_fields_from_TEI(tei: str) -> List[Dict[str, str]]:
+def rchomp(s: str, suffix: str) -> str:
+    if s.endswith(suffix):
+        return s[:-len(suffix)]
+    return s
+
+
+def extract_fields_from_p_span_xml(
+        xml_ps: List[ET.Element],
+        namespaces: Dict[str, str]
+) -> List[Dict[str, str]]:
+    fields = dict()
+    last_label = None
+    for xml_p in xml_ps:
+        label = xml_p.find('span', namespaces=namespaces)
+        # Element truthiness is on existence of child Elements, so test for None
+        if label is not None:
+            label_text = last_label = rchomp(label.text, ': ')
+            fields[label_text] = ''.join(
+                list(xml_p.itertext())[1:]
+            ).strip()
+        else:
+            fields[last_label] = '\n\n'.join([
+                fields[last_label],
+                ''.join(xml_p.itertext())
+            ]).strip()
+    return fields
+
+
+def extract_fields_from_tei(tei: str) -> List[Dict[str, str]]:
     NS = {'': 'http://www.tei-c.org/ns/1.0'}
     tei_root = ET.fromstring(tei)
     tei_pages = tei_root.findall('./text/body/div', namespaces=NS)
     pages = []
     for tei_page in tei_pages:
         tei_fields = tei_page.findall('p', namespaces=NS)
-        fields = dict()
-        last_label = None
-        for tei_field in tei_fields:
-            label = tei_field.find('span', namespaces=NS)
-            # Element truthiness is on existence of child Elements, so test for None
-            if label is not None:
-                label_text = last_label = label.text.partition(': ')[0]
-                fields[label_text] = ''.join(
-                    list(tei_field.itertext())[1:]
-                ).strip()
-            else:
-                fields[last_label] = '\n\n'.join([
-                    fields[last_label],
-                    ''.join(tei_field.itertext())
-                ]).strip()
-        pages.append(fields)
+        pages.append(extract_fields_from_p_span_xml(tei_fields, namespaces=NS))
     return pages
 
 
-def get_object_pages_from_TEI(cdm_object: CdmObject, session: Session, verbose: bool = True) -> None:
+def extract_fields_from_html(html: str) -> List[Dict[str, str]]:
+    NS = {'': 'http://www.w3.org/1999/xhtml'}
+    # The FromThePage XHTML Export isn't valid XHTML because of the JS blob on line 6
+    html_no_scripts = re.sub(r"<script>.*</script>", '', html)
+    html_root = ET.fromstring(html_no_scripts)
+    html_pages = html_root.findall("body/div[@class='pages']/div", namespaces=NS)
+    pages = []
+    for html_page in html_pages:
+        html_fields = html_page.findall("div[@class='page-content']/p", namespaces=NS)
+        pages.append(extract_fields_from_p_span_xml(html_fields, namespaces=NS))
+    return pages
+
+
+rendering_extractors = {
+    'XHTML Export': extract_fields_from_html,
+    'TEI Export': extract_fields_from_tei
+}
+
+
+def get_object_pages(
+        cdm_object: CdmObject,
+        rendering_label: str,
+        session: Session,
+        verbose: bool = True
+) -> None:
     if verbose:
         print(f"Requesting FromThePage manifest {cdm_object.ftp_manifest_url!r}...")
     ftp_manifest = get_ftp_manifest(url=cdm_object.ftp_manifest_url, session=session)
-    tei_rendering = get_rendering(ftp_manifest=ftp_manifest, label='TEI Export')
+    rendering = get_rendering(ftp_manifest=ftp_manifest, label=rendering_label)
     if verbose:
-        print(f"Requesting TEI transcript {tei_rendering['@id']}...")
-    response = session.get(tei_rendering['@id'])
+        print(f"Requesting {rendering['@id']!r}...")
+    response = session.get(rendering['@id'])
     response.raise_for_status()
-    tei = response.text
-    cdm_object.pages = extract_fields_from_TEI(tei=tei)
+    rendering_text = response.text
+    cdm_object.pages = rendering_extractors[rendering_label](rendering_text)
 
 
-def get_objects_pages_from_TEI(cdm_objects: Iterable[CdmObject], session: Session) -> None:
+def get_objects_pages(
+        cdm_objects: Iterable[CdmObject],
+        rendering_label: str,
+        session: Session
+) -> None:
     for cdm_object in cdm_objects:
-        get_object_pages_from_TEI(cdm_object=cdm_object, session=session)
+        get_object_pages(
+            cdm_object=cdm_object,
+            rendering_label=rendering_label,
+            session=session
+        )
 
 
 def apply_field_mapping(ftp_fields: Dict[str, str], field_mapping: Dict[str, Sequence[str]]) -> Dict[str, str]:
@@ -260,7 +305,7 @@ def main():
             url=collection_manifest_url,
             session=session
         )
-        get_objects_pages_from_TEI(ftp_collection, session=session)
+        get_objects_pages(ftp_collection, 'XHTML Export', session=session)
 
         if args.match_mode == MatchModes.by_object:
             catcher_data = list(
