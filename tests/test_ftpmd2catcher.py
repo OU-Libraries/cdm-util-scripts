@@ -7,7 +7,7 @@ import ftpmd2catcher
 
 ftp_vcr = vcr.VCR(
     cassette_library_dir='tests/cassettes/ftpmd2catcher',
-    record_mode='new_episodes'
+    record_mode='none'
 )
 
 
@@ -147,11 +147,11 @@ def test_extract_fields_from_html(tei_url, html_url, check_pages, session):
 @pytest.mark.skip(reason="TEI endpoint returning status 500")
 @ftp_vcr.use_cassette()
 @pytest.mark.parametrize('rendering_label', ftpmd2catcher.rendering_extractors.keys())
-def test_get_object_pages(rendering_label, session):
+def test_load_object_pages(rendering_label, session):
     cdm_object = ftpmd2catcher.CdmObject(
         ftp_manifest_url='https://fromthepage.com/iiif/47397/manifest'
     )
-    ftpmd2catcher.get_object_pages(cdm_object, rendering_label, session)
+    ftpmd2catcher.load_object_pages(cdm_object, rendering_label, session)
     assert cdm_object.pages
 
 
@@ -175,16 +175,6 @@ def test_apply_mapping(field_mapping, result):
     assert mapped == result
 
 
-@pytest.mark.parametrize('pages', [
-    ([
-        {'Label': 'value0'},
-        {'Label': 'value1'}
-    ]),
-])
-def test_PagePickers_first_page(pages):
-    assert ftpmd2catcher.PagePickers.first_page(pages) is pages[0]
-
-
 @pytest.mark.parametrize('pages, check_index', [
     ([
         {'Label0': '', 'Label1': ''},
@@ -193,14 +183,32 @@ def test_PagePickers_first_page(pages):
     ],
      1),
     ([
-        {'Label0': '', 'Label1': ''},
-        {'Label0': '', 'Label1': ''},
-        {'Label0': '', 'Label1': ''}
+        None,
+        None,
+        {'Label0': 'value0', 'Label1': ''}
     ],
-     0),
+     2),
 ])
-def test_PagePickers_first_filled_page_or_blank(pages, check_index):
-    assert ftpmd2catcher.PagePickers.first_filled_page_or_blank(pages) is pages[check_index]
+def test_PagePickers_first_filled_page(pages, check_index):
+    assert ftpmd2catcher.PagePickers.first_filled_page(pages) is pages[check_index]
+
+
+@pytest.mark.parametrize('pages', [
+    [
+        None,
+        None,
+        None,
+    ],
+    [],
+    [
+        {'Label0': '', 'Label1': ''},
+        {'Label0': '', 'Label1': ''},
+        {'Label0': '', 'Label1': ''},
+    ],
+])
+def test_PagePickers_first_filled_page_raises(pages):
+    with pytest.raises(LookupError):
+        ftpmd2catcher.PagePickers.first_filled_page(pages)
 
 
 @pytest.mark.parametrize('cdm_object, page_picker, result', [

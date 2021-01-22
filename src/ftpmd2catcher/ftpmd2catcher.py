@@ -21,6 +21,8 @@ class CdmObject:
     repo_url: Optional[str] = None
     cdm_source_url: Optional[str] = None
     ftp_manifest_url: Optional[str] = None
+    ftp_url: Optional[str] = None
+    ftp_label: Optional[str] = None
     pages: Optional[list] = None
 
 
@@ -51,7 +53,9 @@ def get_ftp_collection(url: str, session: Session) -> List[CdmObject]:
                 collection_alias=collection_alias,
                 repo_url=repo_url,
                 cdm_source_url=cdm_source_url,
-                ftp_manifest_url=manifest['@id']
+                ftp_manifest_url=manifest['@id'],
+                ftp_label=manifest['label'],
+                ftp_url=manifest['@id']
             )
         )
     return ftp_collection
@@ -90,21 +94,22 @@ def extract_fields_from_p_span_xml(
                 fields[last_label],
                 ''.join(xml_p.itertext())
             ]).strip()
-    return fields
+    return fields or None
 
 
-def extract_fields_from_tei(tei: str) -> List[Dict[str, str]]:
+def extract_fields_from_tei(tei: str) -> List[Optional[Dict[str, str]]]:
     NS = {'': 'http://www.tei-c.org/ns/1.0'}
     tei_root = ET.fromstring(tei)
     tei_pages = tei_root.findall('./text/body/div', namespaces=NS)
     pages = []
     for tei_page in tei_pages:
         tei_fields = tei_page.findall('p', namespaces=NS)
-        pages.append(extract_fields_from_p_span_xml(tei_fields, namespaces=NS))
+        fields = extract_fields_from_p_span_xml(tei_fields, namespaces=NS)
+        pages.append(fields)
     return pages
 
 
-def extract_fields_from_html(html: str) -> List[Dict[str, str]]:
+def extract_fields_from_html(html: str) -> List[Optional[Dict[str, str]]]:
     NS = {'': 'http://www.w3.org/1999/xhtml'}
     # The FromThePage XHTML Export isn't valid XHTML because of the JS blob on line 6
     html_no_scripts = re.sub(r"<script>.*</script>", '', html)
@@ -113,7 +118,8 @@ def extract_fields_from_html(html: str) -> List[Dict[str, str]]:
     pages = []
     for html_page in html_pages:
         html_fields = html_page.findall("div[@class='page-content']/p", namespaces=NS)
-        pages.append(extract_fields_from_p_span_xml(html_fields, namespaces=NS))
+        fields = extract_fields_from_p_span_xml(html_fields, namespaces=NS)
+        pages.append(fields)
     return pages
 
 
@@ -123,7 +129,7 @@ rendering_extractors = {
 }
 
 
-def get_object_pages(
+def load_object_pages(
         cdm_object: CdmObject,
         rendering_label: str,
         session: Session,
@@ -141,13 +147,13 @@ def get_object_pages(
     cdm_object.pages = rendering_extractors[rendering_label](rendering_text)
 
 
-def get_objects_pages(
+def load_objects_pages(
         cdm_objects: Iterable[CdmObject],
         rendering_label: str,
         session: Session
 ) -> None:
     for cdm_object in cdm_objects:
-        get_object_pages(
+        load_object_pages(
             cdm_object=cdm_object,
             rendering_label=rendering_label,
             session=session
@@ -183,28 +189,42 @@ def map_cdm_object_as_object(
     }
 
 
+def print_about_drop(cdm_object: CdmObject) -> None:
+    print("Dropping FromThePage work without any filled pages:",
+          f"   {cdm_object.ftp_label!r}",
+          f"   {cdm_object.ftp_url!r}",
+          sep='\n')
+
+
 def map_cdm_objects_as_objects(
         cdm_objects: Iterable[CdmObject],
         field_mapping: Dict[str, Sequence[str]],
         page_picker: Callable[[List[Dict[str, str]]], Dict[str, str]]
 ) -> Iterable[Dict[str, str]]:
     for cdm_object in cdm_objects:
-        yield map_cdm_object_as_object(
-            cdm_object=cdm_object,
-            field_mapping=field_mapping,
-            page_picker=page_picker
-        )
+        try:
+            yield map_cdm_object_as_object(
+                cdm_object=cdm_object,
+                field_mapping=field_mapping,
+                page_picker=page_picker
+            )
+        except LookupError:
+            print_about_drop(cdm_object)
+            continue
 
 
+# Should the PagePickers raise exceptions or return None?
 class PagePickers:
-    def first_page(pages: List[Dict[str, str]]) -> Dict[str, str]:
-        return pages[0]
+    def first_page(pages: List[Optional[Dict[str, str]]]) -> Optional[Dict[str, str]]:
+        if pages:
+            return pages[0]
+        raise LookupError("no first page")
 
-    def first_filled_page_or_blank(pages: List[Dict[str, str]]) -> Dict[str, str]:
+    def first_filled_page(pages: List[Optional[Dict[str, str]]]) -> Optional[Dict[str, str]]:
         for page in pages:
-            if any(page.values()):
+            if page and any(page.values()):
                 return page
-        return pages[0]
+        raise LookupError("no filled page")
 
 
 def map_cdm_object_as_pages(
@@ -213,6 +233,9 @@ def map_cdm_object_as_pages(
         session: Session,
         verbose: bool = True
 ) -> List[Dict[str, str]]:
+    if not any(cdm_object.pages):
+        print_about_drop(cdm_object)
+        return []
     if verbose:
         print(f"Requesting page pointers for {cdm_object.dmrecord!r} in {cdm_object.collection_alias!r} @ {cdm_object.repo_url!r}...")
     page_pointers = get_cdm_page_pointers(
@@ -223,11 +246,12 @@ def map_cdm_object_as_pages(
     )
     page_data = []
     for page_pointer, ftp_fields in zip(page_pointers, cdm_object.pages):
-        page_data.append({
-            'dmrecord': page_pointer,
-            **apply_field_mapping(ftp_fields=ftp_fields,
-                                  field_mapping=field_mapping)
-        })
+        if ftp_fields:
+            page_data.append({
+                'dmrecord': page_pointer,
+                **apply_field_mapping(ftp_fields=ftp_fields,
+                                      field_mapping=field_mapping)
+            })
     return page_data
 
 
@@ -274,7 +298,7 @@ def main():
         help="CONTENTdm collection name used by FromThePage"
     )
     parser.add_argument(
-        'field_mapping',
+        'field_mapping_csv',
         type=str,
         help="CSV file of FromThePage field labels mapped to CONTENTdm nicknames"
     )
@@ -285,7 +309,7 @@ def main():
     )
     args = parser.parse_args()
 
-    with open(args.field_mapping, mode='r') as fp:
+    with open(args.field_mapping_csv, mode='r') as fp:
         reader = csv.DictReader(fp)
         if reader.fieldnames != ['name', 'nick']:
             print(f"{args.column_mapping_csv!r}: column mapping CSV must have 'name' and 'nick' column titles in that order")
@@ -305,14 +329,14 @@ def main():
             url=collection_manifest_url,
             session=session
         )
-        get_objects_pages(ftp_collection, 'XHTML Export', session=session)
+        load_objects_pages(ftp_collection, 'XHTML Export', session=session)
 
         if args.match_mode == MatchModes.by_object:
             catcher_data = list(
                 map_cdm_objects_as_objects(
                     cdm_objects=ftp_collection,
                     field_mapping=field_mapping,
-                    page_picker=PagePickers.first_page
+                    page_picker=PagePickers.first_filled_page
                 )
             )
         elif args.match_mode == MatchModes.by_page:
