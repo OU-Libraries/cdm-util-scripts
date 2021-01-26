@@ -7,7 +7,7 @@ import ftpmd2catcher
 
 ftp_vcr = vcr.VCR(
     cassette_library_dir='tests/cassettes/ftpmd2catcher',
-    record_mode='none'
+    record_mode='new_episodes'
 )
 
 
@@ -82,7 +82,7 @@ extraction_test_values = [
          {
              'Title':  'An Evening of Dance, Florida State University poster, February 22-24',
              'Creator (artist)': '',
-             # Whitespace required after "Davis, ", "Fichter, ", and "Sias and "
+             # Whitespace required at the end of "Davis, ", "Fichter, ", and "Sias and "
              'Transcribed poster text': """
 FSU Department of Dance
 An Evening of Dance
@@ -147,12 +147,13 @@ def test_extract_fields_from_html(tei_url, html_url, check_pages, session):
 @pytest.mark.skip(reason="TEI endpoint returning status 500")
 @ftp_vcr.use_cassette()
 @pytest.mark.parametrize('rendering_label', ftpmd2catcher.rendering_extractors.keys())
-def test_load_object_pages(rendering_label, session):
+def test_load_ftp_manifest_data(rendering_label, session):
     cdm_object = ftpmd2catcher.CdmObject(
         ftp_manifest_url='https://fromthepage.com/iiif/47397/manifest'
     )
-    ftpmd2catcher.load_object_pages(cdm_object, rendering_label, session)
+    ftpmd2catcher.load_ftp_manifest_data(cdm_object, rendering_label, session)
     assert cdm_object.pages
+    assert cdm_object.ftp_work_url
 
 
 @pytest.mark.parametrize('field_mapping, result', [
@@ -228,27 +229,60 @@ def test_map_cdm_object_as_object(cdm_object, page_picker, result):
     assert page == result
 
 
-def test_map_cdm_object_as_pages(monkeypatch):
-    cdm_object = ftpmd2catcher.CdmObject(pages=[
-        {'Label': 'value1'},
-        {'Label': 'value2'},
-        {'Label': 'value3'}
-    ])
+@ftp_vcr.use_cassette()
+def test_get_cdm_item_info(session):
+    cdm_object = ftpmd2catcher.CdmObject(
+        repo_url='https://cdmdemo.contentdm.oclc.org',
+        collection_alias='oclcsample',
+        dmrecord='102'
+    )
+    item_info = ftpmd2catcher.get_cdm_item_info(cdm_object, session)
+    assert item_info['dmrecord'] == cdm_object.dmrecord
+    assert item_info['find']
+
+
+@ftp_vcr.use_cassette()
+@pytest.mark.parametrize('cdm_object, dmrecords', [
+    # Compound Object
+    (
+        ftpmd2catcher.CdmObject(
+            repo_url='https://cdmdemo.contentdm.oclc.org',
+            collection_alias='oclcsample',
+            dmrecord='12',
+            pages=[
+                {'Label': 'value1'},
+                {'Label': 'value2'},
+            ]
+        ),
+        ['10', '11']
+    ),
+
+    # Single Item
+    (
+        ftpmd2catcher.CdmObject(
+            repo_url='https://cdmdemo.contentdm.oclc.org',
+            collection_alias='oclcsample',
+            dmrecord='64',
+            pages=[
+                {'Label': 'value1'}
+            ]
+        ),
+        ['64']
+    )
+])
+def test_map_cdm_object_as_pages(cdm_object, dmrecords, session):
     field_mapping = {
         'Label': ['nick']
     }
 
-    def mock(*args, **kwargs):
-        return ['1', '2', '3']
-
-    monkeypatch.setattr('ftpmd2catcher.ftpmd2catcher.get_cdm_page_pointers', mock)
-    page_data = ftpmd2catcher.map_cdm_object_as_pages(
+    pages_data = ftpmd2catcher.map_cdm_object_as_pages(
         cdm_object=cdm_object,
         field_mapping=field_mapping,
-        session=None
+        session=session
     )
-    assert page_data == [
-        {'dmrecord': '1', 'nick': 'value1'},
-        {'dmrecord': '2', 'nick': 'value2'},
-        {'dmrecord': '3', 'nick': 'value3'}
-    ]
+
+    for dmrecord, page, page_data  in zip(dmrecords, cdm_object.pages, pages_data):
+        assert page_data == {
+            'dmrecord': dmrecord,
+            **ftpmd2catcher.apply_field_mapping(page, field_mapping)
+        }

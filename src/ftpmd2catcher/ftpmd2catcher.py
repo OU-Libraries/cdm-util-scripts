@@ -17,13 +17,13 @@ from typing import Optional, List, Iterable, Dict, Sequence, Callable
 @dataclass
 class CdmObject:
     dmrecord: Optional[str] = None
-    collection_alias: Optional[str] = None
     repo_url: Optional[str] = None
+    collection_alias: Optional[str] = None
     cdm_source_url: Optional[str] = None
     ftp_manifest_url: Optional[str] = None
-    ftp_url: Optional[str] = None
-    ftp_label: Optional[str] = None
-    pages: Optional[list] = None
+    ftp_work_url: Optional[str] = None
+    ftp_work_label: Optional[str] = None
+    pages: Optional[List[Optional[Dict[str, str]]]] = None
 
 
 def get_collection_manifest_url(slug: str, collection_name: str, session: Session) -> str:
@@ -50,12 +50,11 @@ def get_ftp_collection(url: str, session: Session) -> List[CdmObject]:
         ftp_collection.append(
             CdmObject(
                 dmrecord=dmrecord,
-                collection_alias=collection_alias,
                 repo_url=repo_url,
+                collection_alias=collection_alias,
                 cdm_source_url=cdm_source_url,
                 ftp_manifest_url=manifest['@id'],
-                ftp_label=manifest['label'],
-                ftp_url=manifest['@id']
+                ftp_work_label=manifest['label']
             )
         )
     return ftp_collection
@@ -129,7 +128,7 @@ rendering_extractors = {
 }
 
 
-def load_object_pages(
+def load_ftp_manifest_data(
         cdm_object: CdmObject,
         rendering_label: str,
         session: Session,
@@ -140,24 +139,12 @@ def load_object_pages(
     ftp_manifest = get_ftp_manifest(url=cdm_object.ftp_manifest_url, session=session)
     rendering = get_rendering(ftp_manifest=ftp_manifest, label=rendering_label)
     if verbose:
-        print(f"Requesting {rendering['@id']!r}...")
+        print(f"Requesting {rendering_label!r} rendering {rendering['@id']!r}...")
     response = session.get(rendering['@id'])
     response.raise_for_status()
     rendering_text = response.text
     cdm_object.pages = rendering_extractors[rendering_label](rendering_text)
-
-
-def load_objects_pages(
-        cdm_objects: Iterable[CdmObject],
-        rendering_label: str,
-        session: Session
-) -> None:
-    for cdm_object in cdm_objects:
-        load_object_pages(
-            cdm_object=cdm_object,
-            rendering_label=rendering_label,
-            session=session
-        )
+    cdm_object.ftp_work_url = ftp_manifest['related'][0]['@id']
 
 
 def apply_field_mapping(ftp_fields: Dict[str, str], field_mapping: Dict[str, Sequence[str]]) -> Dict[str, str]:
@@ -191,15 +178,16 @@ def map_cdm_object_as_object(
 
 def print_about_drop(cdm_object: CdmObject) -> None:
     print("Dropping FromThePage work without any filled pages:",
-          f"   {cdm_object.ftp_label!r}",
-          f"   {cdm_object.ftp_url!r}",
+          f"   {cdm_object.ftp_work_label!r}",
+          f"   {cdm_object.ftp_work_url!r}",
           sep='\n')
 
 
 def map_cdm_objects_as_objects(
         cdm_objects: Iterable[CdmObject],
         field_mapping: Dict[str, Sequence[str]],
-        page_picker: Callable[[List[Dict[str, str]]], Dict[str, str]]
+        page_picker: Callable[[List[Dict[str, str]]], Dict[str, str]],
+        verbose: bool = True
 ) -> Iterable[Dict[str, str]]:
     for cdm_object in cdm_objects:
         try:
@@ -209,7 +197,8 @@ def map_cdm_objects_as_objects(
                 page_picker=page_picker
             )
         except LookupError:
-            print_about_drop(cdm_object)
+            if verbose:
+                print_about_drop(cdm_object)
             continue
 
 
@@ -227,6 +216,13 @@ class PagePickers:
         raise LookupError("no filled page")
 
 
+def get_cdm_item_info(cdm_object: CdmObject, session: Session) -> Dict[str, str]:
+    response = session.get(f"{cdm_object.repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/{cdm_object.collection_alias}/{cdm_object.dmrecord}/json")
+    response.raise_for_status()
+    item_info = response.json()
+    return item_info
+
+
 def map_cdm_object_as_pages(
         cdm_object: CdmObject,
         field_mapping: Dict[str, Sequence[str]],
@@ -234,16 +230,23 @@ def map_cdm_object_as_pages(
         verbose: bool = True
 ) -> List[Dict[str, str]]:
     if not any(cdm_object.pages):
-        print_about_drop(cdm_object)
+        if verbose:
+            print_about_drop(cdm_object)
         return []
     if verbose:
-        print(f"Requesting page pointers for {cdm_object.dmrecord!r} in {cdm_object.collection_alias!r} @ {cdm_object.repo_url!r}...")
-    page_pointers = get_cdm_page_pointers(
-        repo_url=cdm_object.repo_url,
-        alias=cdm_object.collection_alias,
-        dmrecord=cdm_object.dmrecord,
-        session=session
-    )
+        print(f"Requesting CONTENTdm item info for {cdm_object.dmrecord!r}...")
+    item_info = get_cdm_item_info(cdm_object, session)
+    if item_info['find'].endswith('.cpd'):
+        if verbose:
+            print(f"Requesting page pointers for {cdm_object.dmrecord!r} in {cdm_object.collection_alias!r} @ {cdm_object.repo_url!r}...")
+        page_pointers = get_cdm_page_pointers(
+            repo_url=cdm_object.repo_url,
+            alias=cdm_object.collection_alias,
+            dmrecord=cdm_object.dmrecord,
+            session=session
+        )
+    else:
+        page_pointers = [cdm_object.dmrecord]
     page_data = []
     for page_pointer, ftp_fields in zip(page_pointers, cdm_object.pages):
         if ftp_fields:
@@ -329,8 +332,16 @@ def main():
             url=collection_manifest_url,
             session=session
         )
-        load_objects_pages(ftp_collection, 'XHTML Export', session=session)
+        for cdm_object in ftp_collection:
+            load_ftp_manifest_data(
+                cdm_object=cdm_object,
+                rendering_label='XHTML Export',
+                session=session
+            )
 
+        # Non-compound objects metadata is mapped both as
+        # page-level and object-level. The match mode
+        # only matters for compound objects.
         if args.match_mode == MatchModes.by_object:
             catcher_data = list(
                 map_cdm_objects_as_objects(
