@@ -123,7 +123,6 @@ Reservations:
 ]
 
 
-@pytest.mark.skip(reason="TEI endpoint returning status 500")
 @ftp_vcr.use_cassette()
 @pytest.mark.parametrize('tei_url, html_url, check_pages', extraction_test_values)
 def test_extract_fields_from_tei(tei_url, html_url, check_pages, session):
@@ -144,7 +143,6 @@ def test_extract_fields_from_html(tei_url, html_url, check_pages, session):
             assert page[key] == value
 
 
-@pytest.mark.skip(reason="TEI endpoint returning status 500")
 @ftp_vcr.use_cassette()
 @pytest.mark.parametrize('rendering_label', ftpmd2catcher.rendering_extractors.keys())
 def test_load_ftp_manifest_data(rendering_label, session):
