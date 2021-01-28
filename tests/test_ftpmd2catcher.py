@@ -50,17 +50,18 @@ def test_get_ftp_collection(session):
 
 @ftp_vcr.use_cassette()
 @pytest.mark.parametrize('label, match_pattern', [
-    ('TEI Export', r'https://fromthepage\.com/iiif/[^/]*/export/tei'),
-    ('XHTML Export', r'https://fromthepage\.com/iiif/[^/]*/export/html')
+    ('TEI Export', r'<TEI xmlns="http://www\.tei-c\.org/ns/1.0"'),
+    ('XHTML Export', r'<html xmlns="http://www\.w3\.org/1999/xhtml"')
 ])
 def test_get_rendering(label, match_pattern, session):
     response = session.get('https://fromthepage.com/iiif/48258/manifest')
     ftp_manifest = response.json()
-    rendering = ftpmd2catcher.get_rendering(
+    rendering_text = ftpmd2catcher.get_rendering(
         ftp_manifest=ftp_manifest,
-        label=label
+        label=label,
+        session=session
     )
-    assert re.fullmatch(match_pattern, rendering['@id']) is not None
+    assert re.search(match_pattern, rendering_text) is not None
 
 
 @ftp_vcr.use_cassette()
@@ -70,7 +71,8 @@ def test_get_rendering_raises(session):
     with pytest.raises(KeyError):
         ftpmd2catcher.get_rendering(
             ftp_manifest=ftp_manifest,
-            label='Does Not Exist'
+            label='Does Not Exist',
+            session=None
         )
 
 

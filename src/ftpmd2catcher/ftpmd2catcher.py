@@ -60,12 +60,19 @@ def get_ftp_collection(url: str, session: Session) -> List[CdmObject]:
     return ftp_collection
 
 
-def get_rendering(ftp_manifest: dict, label: str) -> dict:
+def get_rendering(ftp_manifest: dict, label: str, session: Session, verbose: bool = True) -> str:
     renderings = ftp_manifest['sequences'][0]['rendering']
     for rendering in renderings:
         if rendering['label'] == label:
-            return rendering
-    raise KeyError("label not found in manifest")
+            rendering_url = rendering['@id']
+            break
+    else:
+        raise KeyError("label not found in manifest")
+    if verbose:
+        print(f"Requesting {label!r} rendering for {rendering_url!r}...")
+    response = session.get(rendering_url)
+    response.raise_for_status()
+    return response.text
 
 
 def rchomp(s: str, suffix: str) -> str:
@@ -136,13 +143,15 @@ def load_ftp_manifest_data(
 ) -> None:
     if verbose:
         print(f"Requesting FromThePage manifest {cdm_object.ftp_manifest_url!r}...")
-    ftp_manifest = get_ftp_manifest(url=cdm_object.ftp_manifest_url, session=session)
-    rendering = get_rendering(ftp_manifest=ftp_manifest, label=rendering_label)
-    if verbose:
-        print(f"Requesting {rendering_label!r} rendering {rendering['@id']!r}...")
-    response = session.get(rendering['@id'])
-    response.raise_for_status()
-    rendering_text = response.text
+    ftp_manifest = get_ftp_manifest(
+        url=cdm_object.ftp_manifest_url,
+        session=session
+    )
+    rendering_text = get_rendering(
+        ftp_manifest=ftp_manifest,
+        label=rendering_label,
+        session=session
+    )
     cdm_object.pages = rendering_extractors[rendering_label](rendering_text)
     cdm_object.ftp_work_url = ftp_manifest['related'][0]['@id']
 
