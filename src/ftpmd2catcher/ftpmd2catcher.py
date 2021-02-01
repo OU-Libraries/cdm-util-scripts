@@ -150,7 +150,8 @@ def load_ftp_manifest_data(
     rendering_text = get_rendering(
         ftp_manifest=ftp_manifest,
         label=rendering_label,
-        session=session
+        session=session,
+        verbose=verbose
     )
     cdm_object.pages = rendering_extractors[rendering_label](rendering_text)
     cdm_object.ftp_work_url = ftp_manifest['related'][0]['@id']
