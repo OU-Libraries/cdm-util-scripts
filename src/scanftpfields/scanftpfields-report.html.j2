@@ -4,50 +4,68 @@
         <meta charset="UTF-8">
         <title>{{ collection_number }} scanftpfields report</title>
     </head>
+    <style type="text/css">
+     .container {
+         max-width: 1170px;
+         margin-right: auto;
+         margin-left: auto;
+     }
+
+     tr {
+         font-family: monospace;
+         outline: thin solid;
+     }
+    </style>
 
     <body>
-        <h1>FromThePage field scan report for collection {{ collection_number }}</h1>
-        <p>
-            Report date: {{ report_date }}<br/>
-            Collection manifest: <a href="{{ collection_manifest }}">{{ collection_manifest }}</a><br/>
-            Export used: &quot;{{ export_label_used }}&quot;<br/>
-        </p>
+        <div class="container">
+            <h1>FromThePage field scan report for collection {{ collection_number }}</h1>
+            <p>
+                Report date: {{ report_date }}<br/>
+                Collection manifest: <a href="{{ collection_manifest }}">{{ collection_manifest }}</a><br/>
+                Export used: &quot;{{ export_label_used }}&quot;<br/>
+            </p>
 
-        <h2>Field label frequencies</h2>
-        <p>There are {{ filled_pages_count }} filled pages, out of {{ works_count }} works.</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Frequency</th>
-                    <th>Field label</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for label, count in field_label_frequencies.items() %}
+            <h2>Field label frequencies</h2>
+            <p>
+                Works: {{ works_count }}<br/>
+                Filled pages: {{ filled_pages_count }}<br/>
+            </p>
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ count }}</td>
-                        <td>&quot;{{ label }}&quot;</td>
+                        <th>Frequency</th>
+                        <th>Field label</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for label, count in field_label_frequencies.items() %}
+                        <tr>
+                            <td>{{ count }}</td>
+                            <td>&quot;{{ label }}&quot;</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-        <h2>Field sets</h2>
-        <p>There are {{ works_with_field_sets|length }} field sets.</p>
-        {% for field_set in works_with_field_sets %}
-            <h3>{{ field_set['works']|length }} works</h3>
-            <h4>Field set</h4>
-            <ul>
-                {% for field in field_set['field_set'] %}
-                    <li><pre>{{ field }}</pre></li>
-                {% endfor %}
-            </ul>
-            <h4>Works</h4>
-            <ul>
-                {% for work_data in field_set['works'] %}
-                    <li><a href="{{ work_data['ftp_work_url'] }}">{{ work_data['ftp_work_label'] }}</a></li>
-                {% endfor %}
-            </ul>
-        {% endfor %}
+            <h2>Field sets</h2>
+            <p>There are {{ works_with_field_sets|length }} field sets.</p>
+            {% for field_set in works_with_field_sets %}
+                <h3>{{ field_set['works']|length }} works</h3>
+                <h4>Field set</h4>
+                <ul>
+                    {% for field in field_set['field_set'] %}
+                        <li><pre>{{ field }}</pre></li>
+                    {% endfor %}
+                </ul>
+                <h4>Works</h4>
+                <ul>
+                    {% for work_data in field_set['works'] %}
+                        <li><a href="{{ work_data['ftp_work_url'] }}">{{ work_data['ftp_work_label'] }}</a></li>
+                    {% endfor %}
+                </ul>
+                <hr/>
+            {% endfor %}
+        </div>
     </body>
 </html>
