@@ -83,12 +83,12 @@ def main():
     parser.add_argument('ftp_collection_number',
                         type=int)
     parser.add_argument('--output',
-                        choices=['json', 'html'],
+                        choices=['html', 'json'],
                         default='html',
                         type=str)
     parser.add_argument('--label',
                         choices=list(ftpmd2catcher.rendering_extractors.keys()),
-                        default='TEI Export',
+                        default='XHTML Export',
                         type=str)
     args = parser.parse_args()
 
