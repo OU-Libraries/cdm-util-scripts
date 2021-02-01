@@ -5,6 +5,10 @@
         <title>{{ collection_number }} scanftpfields report</title>
     </head>
     <style type="text/css">
+     body {
+         margin-bottom: 1em;
+     }
+
      .container {
          max-width: 1170px;
          margin-right: auto;
@@ -12,8 +16,17 @@
      }
 
      tr {
-         font-family: monospace;
          outline: thin solid;
+     }
+
+     .field-label {
+         font-family: monospace;
+     }
+
+     .field-set {
+         margin-left: 1em;
+         padding-left: 1em;
+         border-left: thin solid;
      }
     </style>
 
@@ -42,29 +55,30 @@
                     {% for label, count in field_label_frequencies.items() %}
                         <tr>
                             <td>{{ count }}</td>
-                            <td>&quot;{{ label }}&quot;</td>
+                            <td><span class="field-label">{{ label }}</span></td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
 
             <h2>Field sets</h2>
-            <p>There are {{ works_with_field_sets|length }} field sets.</p>
+            <p>There are {{ works_with_field_sets|length }} field sets used in this collection.</p>
             {% for field_set in works_with_field_sets %}
                 <h3>{{ field_set['works']|length }} works</h3>
-                <h4>Field set</h4>
-                <ul>
-                    {% for field in field_set['field_set'] %}
-                        <li><pre>{{ field }}</pre></li>
-                    {% endfor %}
-                </ul>
-                <h4>Works</h4>
-                <ul>
-                    {% for work_data in field_set['works'] %}
-                        <li><a href="{{ work_data['ftp_work_url'] }}">{{ work_data['ftp_work_label'] }}</a></li>
-                    {% endfor %}
-                </ul>
-                <hr/>
+                <div class="field-set">
+                    <h4>Field set</h4>
+                    <ul>
+                        {% for field in field_set['field_set'] %}
+                            <li><span class="field-label">{{ field }}</span></li>
+                        {% endfor %}
+                    </ul>
+                    <h4>Works using this set</h4>
+                    <ul>
+                        {% for work_data in field_set['works'] %}
+                            <li><a href="{{ work_data['ftp_work_url'] }}">{{ work_data['ftp_work_label'] }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endfor %}
         </div>
     </body>

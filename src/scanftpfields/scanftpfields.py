@@ -19,7 +19,7 @@ def request_collection(collection_url: str, label: str, session: Session) -> Lis
         session=session
     )
     for n, cdm_object in enumerate(ftp_collection):
-        print(f"Requesting manifest and {label!r} renderings {n}/{len(ftp_collection)}...", end='\r')
+        print(f"Requesting manifests and {label!r} renderings {n}/{len(ftp_collection)}...", end='\r')
         ftpmd2catcher.load_ftp_manifest_data(
             cdm_object=cdm_object,
             rendering_label=label,
