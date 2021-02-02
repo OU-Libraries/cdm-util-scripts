@@ -28,6 +28,10 @@
          padding-left: 1em;
          border-left: thin solid;
      }
+
+     .undercount {
+         background-color: #ffe7bc;
+     }
     </style>
 
     <body>
@@ -54,7 +58,13 @@
                 <tbody>
                     {% for label, count in field_label_frequencies.items() %}
                         <tr>
-                            <td>{{ count }}</td>
+                            <td>
+                                {%- if count < filled_pages_count|int -%}
+                                    <span class="undercount">{{ count }}</span>
+                                {%- else -%}
+                                    <span>{{ count }}</span>
+                                {%- endif -%}
+                            </td>
                             <td><span class="field-label">{{ label }}</span></td>
                         </tr>
                     {% endfor %}
@@ -69,7 +79,11 @@
                     <h4>Field set</h4>
                     <ul>
                         {% for field in field_set['field_set'] %}
-                            <li><span class="field-label">{{ field }}</span></li>
+                            {% if field_label_frequencies[field] < filled_pages_count|int %}
+                                <li><span class="field-label undercount">{{ field }}</span></li>
+                            {% else %}
+                                <li><span class="field-label">{{ field }}</span></li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
                     <h4>Works using this set</h4>
