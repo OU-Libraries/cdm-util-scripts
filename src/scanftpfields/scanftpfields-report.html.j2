@@ -72,8 +72,8 @@
             </table>
 
             <h2>Field sets</h2>
-            <p>There are {{ works_with_field_sets|length }} field sets used in this collection.</p>
-            {% for field_set in works_with_field_sets %}
+            <p>There are {{ field_sets|length }} field sets used in this collection.</p>
+            {% for field_set in field_sets %}
                 <h3>{{ field_set['works']|length }} works</h3>
                 <div class="field-set">
                     <h4>Field set</h4>

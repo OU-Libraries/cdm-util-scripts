@@ -51,12 +51,12 @@ def compile_field_frequencies(filled_pages: List[dict]) -> Counter:
 
 
 def compile_field_sets(filled_pages: List[dict]) -> List[dict]:
-    works_with_field_sets = defaultdict(dict)
+    field_sets = defaultdict(dict)
     for page in filled_pages:
-        works_with_field_set = works_with_field_sets[page['fields']]
+        field_set = field_sets[page['fields']]
         cdm_object = page['cdm_object']
-        if cdm_object.ftp_manifest_url not in works_with_field_set:
-            works_with_field_set[cdm_object.ftp_manifest_url] = {
+        if cdm_object.ftp_manifest_url not in field_set:
+            field_set[cdm_object.ftp_manifest_url] = {
                 'ftp_work_label': cdm_object.ftp_work_label,
                 'ftp_work_url': cdm_object.ftp_work_url,
             }
@@ -69,7 +69,7 @@ def compile_field_sets(filled_pages: List[dict]) -> List[dict]:
                  for manifest_url, work_data in works.items()],
                 key=lambda work: work['ftp_manifest']
             )
-        } for field_set, works in works_with_field_sets.items()
+        } for field_set, works in field_sets.items()
     ]
 
 
@@ -105,7 +105,7 @@ def main():
     report_date = datetime.now()
     filled_pages = collection_as_filled_pages(ftp_collection)
     field_label_frequencies = compile_field_frequencies(filled_pages)
-    works_with_field_sets = compile_field_sets(filled_pages)
+    field_sets = compile_field_sets(filled_pages)
 
     report = {
         'collection_number': args.ftp_collection_number,
@@ -115,7 +115,7 @@ def main():
         'works_count': len(ftp_collection),
         'filled_pages_count': len(filled_pages),
         'field_label_frequencies': dict(field_label_frequencies),
-        'works_with_field_sets': works_with_field_sets,
+        'field_sets': field_sets,
     }
 
     if args.output == 'json':
