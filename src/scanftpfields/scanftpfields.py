@@ -12,17 +12,17 @@ import ftpmd2catcher
 from typing import List
 
 
-def request_collection(collection_url: str, label: str, session: Session) -> List[ftpmd2catcher.CdmObject]:
-    print(f"Requesting {collection_url}...")
+def request_collection(manifest_url: str, rendering_label: str, session: Session) -> ftpmd2catcher.FTPCollection:
+    print(f"Requesting {manifest_url}...")
     ftp_collection = ftpmd2catcher.get_ftp_collection(
-        url=collection_url,
+        manifest_url=manifest_url,
         session=session
     )
-    for n, cdm_object in enumerate(ftp_collection):
-        print(f"Requesting manifests and {label!r} renderings {n}/{len(ftp_collection)}...", end='\r')
+    for n, ftp_work in enumerate(ftp_collection.works):
+        print(f"Requesting manifests and {rendering_label!r} renderings {n}/{len(ftp_collection.works)}...", end='\r')
         ftpmd2catcher.load_ftp_manifest_data(
-            cdm_object=cdm_object,
-            rendering_label=label,
+            ftp_work=ftp_work,
+            rendering_label=rendering_label,
             session=session,
             verbose=False
         )
@@ -30,15 +30,15 @@ def request_collection(collection_url: str, label: str, session: Session) -> Lis
     return ftp_collection
 
 
-def collection_as_filled_pages(ftp_collection: List[ftpmd2catcher.CdmObject]) -> List[dict]:
+def collection_as_filled_pages(ftp_collection: ftpmd2catcher.FTPCollection) -> List[dict]:
     filled_pages = []
-    for cdm_object in ftp_collection:
-        for page in cdm_object.pages:
+    for ftp_work in ftp_collection.works:
+        for page in ftp_work.pages:
             if not page:
                 continue
             filled_pages.append({
                 'fields': frozenset(page.keys()),
-                'cdm_object': cdm_object,
+                'ftp_work': ftp_work,
             })
     return filled_pages
 
@@ -54,11 +54,11 @@ def compile_field_sets(filled_pages: List[dict]) -> List[dict]:
     field_sets = defaultdict(dict)
     for page in filled_pages:
         field_set = field_sets[page['fields']]
-        cdm_object = page['cdm_object']
-        if cdm_object.ftp_manifest_url not in field_set:
-            field_set[cdm_object.ftp_manifest_url] = {
-                'ftp_work_label': cdm_object.ftp_work_label,
-                'ftp_work_url': cdm_object.ftp_work_url,
+        ftp_work = page['ftp_work']
+        if ftp_work.ftp_manifest_url not in field_set:
+            field_set[ftp_work.ftp_manifest_url] = {
+                'ftp_work_label': ftp_work.ftp_work_label,
+                'ftp_work_url': ftp_work.ftp_work_url,
             }
     return [
         {
@@ -73,8 +73,26 @@ def compile_field_sets(filled_pages: List[dict]) -> List[dict]:
     ]
 
 
+def compile_report(ftp_collection: ftpmd2catcher.FTPCollection):
+    filled_pages = collection_as_filled_pages(ftp_collection)
+    report = {
+        'collection_number': ftp_collection.number,
+        'collection_label': ftp_collection.label,
+        'collection_manifest': ftp_collection.manifest_url,
+        'works_count': len(ftp_collection.works),
+        'filled_pages_count': len(filled_pages),
+        'field_label_frequencies': dict(compile_field_frequencies(filled_pages)),
+        'field_sets': compile_field_sets(filled_pages),
+    }
+    return report
+
+
 def report_to_html(report: dict) -> str:
-    env = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(os.path.abspath(__file__))))
+    env = jinja2.Environment(
+        loader=jinja2.FileSystemLoader(
+            os.path.dirname(os.path.abspath(__file__))
+        )
+    )
     return env.get_template('scanftpfields-report.html.j2').render(report)
 
 
@@ -92,31 +110,18 @@ def main():
                         type=str)
     args = parser.parse_args()
 
-    collection_url = f'https://fromthepage.com/iiif/collection/{args.ftp_collection_number}'
-
     with Session() as session:
         ftp_collection = request_collection(
-            collection_url=collection_url,
-            label=args.label,
+            manifest_url=f'https://fromthepage.com/iiif/collection/{args.ftp_collection_number}',
+            rendering_label=args.label,
             session=session
         )
 
     print("Compiling report...")
     report_date = datetime.now()
-    filled_pages = collection_as_filled_pages(ftp_collection)
-    field_label_frequencies = compile_field_frequencies(filled_pages)
-    field_sets = compile_field_sets(filled_pages)
-
-    report = {
-        'collection_number': args.ftp_collection_number,
-        'collection_manifest': collection_url,
-        'report_date': report_date.isoformat(),
-        'export_label_used': args.label,
-        'works_count': len(ftp_collection),
-        'filled_pages_count': len(filled_pages),
-        'field_label_frequencies': dict(field_label_frequencies),
-        'field_sets': field_sets,
-    }
+    report = compile_report(ftp_collection)
+    report['export_label_used'] = args.label
+    report['report_date'] = report_date.isoformat(),
 
     if args.output == 'json':
         report_str = json.dumps(report, indent=2)
