@@ -10,7 +10,7 @@ import ftp2catcher
 
 cdm_vcr = vcr.VCR(
     cassette_library_dir='tests/cassettes/ftp2catcher',
-    record_mode='once'
+    record_mode='none'
 )
 
 

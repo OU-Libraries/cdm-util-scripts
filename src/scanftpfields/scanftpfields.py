@@ -121,7 +121,7 @@ def main():
     report_date = datetime.now()
     report = compile_report(ftp_collection)
     report['export_label_used'] = args.label
-    report['report_date'] = report_date.isoformat(),
+    report['report_date'] = report_date.isoformat()
 
     if args.output == 'json':
         report_str = json.dumps(report, indent=2)

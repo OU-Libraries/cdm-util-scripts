@@ -8,7 +8,7 @@ import scanftpfields
 
 ftp_vcr = vcr.VCR(
     cassette_library_dir='tests/cassettes/scanftpfields',
-    record_mode='new_episodes'
+    record_mode='none'
 )
 
 
