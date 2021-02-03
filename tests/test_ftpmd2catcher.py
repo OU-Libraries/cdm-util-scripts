@@ -167,7 +167,7 @@ def test_load_ftp_manifest_data(rendering_label, session):
         ftp_manifest_url='https://fromthepage.com/iiif/47397/manifest'
     )
     ftpmd2catcher.load_ftp_manifest_data(ftp_work, rendering_label, session)
-    assert ftp_work.pages
+    assert all(isinstance(page, ftpmd2catcher.FTPPage) for page in ftp_work.pages)
     assert ftp_work.ftp_work_url
 
 
@@ -193,15 +193,15 @@ def test_apply_mapping(field_mapping, result):
 
 @pytest.mark.parametrize('pages, check_index', [
     ([
-        {'Label0': '', 'Label1': ''},
-        {'Label0': '', 'Label1': 'value1'},
-        {'Label0': '', 'Label1': ''}
+        ftpmd2catcher.FTPPage(fields={'Label0': '', 'Label1': ''}),
+        ftpmd2catcher.FTPPage(fields={'Label0': '', 'Label1': 'value1'}),
+        ftpmd2catcher.FTPPage(fields={'Label0': '', 'Label1': ''}),
     ],
      1),
     ([
-        None,
-        None,
-        {'Label0': 'value0', 'Label1': ''}
+        ftpmd2catcher.FTPPage(fields=None),
+        ftpmd2catcher.FTPPage(fields=None),
+        ftpmd2catcher.FTPPage(fields={'Label0': 'value0', 'Label1': ''}),
     ],
      2),
 ])
@@ -211,24 +211,23 @@ def test_PagePickers_first_filled_page(pages, check_index):
 
 @pytest.mark.parametrize('pages', [
     [
-        None,
-        None,
-        None,
+        ftpmd2catcher.FTPPage(fields=None),
+        ftpmd2catcher.FTPPage(fields=None),
+        ftpmd2catcher.FTPPage(fields=None),
     ],
     [],
     [
-        {'Label0': '', 'Label1': ''},
-        {'Label0': '', 'Label1': ''},
-        {'Label0': '', 'Label1': ''},
+        ftpmd2catcher.FTPPage(fields={'Label0': '', 'Label1': ''}),
+        ftpmd2catcher.FTPPage(fields={'Label0': '', 'Label1': ''}),
+        ftpmd2catcher.FTPPage(fields={'Label0': '', 'Label1': ''}),
     ],
 ])
-def test_PagePickers_first_filled_page_raises(pages):
-    with pytest.raises(LookupError):
-        ftpmd2catcher.PagePickers.first_filled_page(pages)
+def test_PagePickers_first_filled_page_is_none(pages):
+    assert ftpmd2catcher.PagePickers.first_filled_page(pages) is None
 
 
 @pytest.mark.parametrize('ftp_work, page_picker, result', [
-    (ftpmd2catcher.FTPWork(dmrecord='1', pages=[{'Label': 'value'}]),
+    (ftpmd2catcher.FTPWork(dmrecord='1', pages=[ftpmd2catcher.FTPPage(fields={'Label': 'value'})]),
      ftpmd2catcher.PagePickers.first_page,
      {'dmrecord': '1', 'nick': 'value'})
 ])
@@ -265,8 +264,8 @@ def test_get_cdm_item_info(session):
             cdm_collection_alias='oclcsample',
             dmrecord='12',
             pages=[
-                {'Label': 'value1'},
-                {'Label': 'value2'},
+                ftpmd2catcher.FTPPage(fields={'Label': 'value1'}),
+                ftpmd2catcher.FTPPage(fields={'Label': 'value2'}),
             ]
         ),
         ['10', '11']
@@ -279,7 +278,7 @@ def test_get_cdm_item_info(session):
             cdm_collection_alias='oclcsample',
             dmrecord='64',
             pages=[
-                {'Label': 'value1'}
+                ftpmd2catcher.FTPPage(fields={'Label': 'value1'}),
             ]
         ),
         ['64']
@@ -299,5 +298,5 @@ def test_map_ftp_work_as_cdm_pages(ftp_work, dmrecords, session):
     for dmrecord, page, page_data in zip(dmrecords, ftp_work.pages, pages_data):
         assert page_data == {
             'dmrecord': dmrecord,
-            **ftpmd2catcher.apply_field_mapping(page, field_mapping)
+            **ftpmd2catcher.apply_field_mapping(page.fields, field_mapping)
         }

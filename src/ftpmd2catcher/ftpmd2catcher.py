@@ -15,6 +15,15 @@ from typing import Optional, List, Iterable, Dict, Sequence, Callable
 
 
 @dataclass
+class FTPPage:
+    label: Optional[str] = None
+    display_url: Optional[str] = None
+    transcription_url: Optional[str] = None
+    dmrecord: Optional[str] = None
+    fields: Optional[Dict[str, str]] = None
+
+
+@dataclass
 class FTPWork:
     dmrecord: Optional[str] = None
     cdm_repo_url: Optional[str] = None
@@ -23,7 +32,7 @@ class FTPWork:
     ftp_manifest_url: Optional[str] = None
     ftp_work_url: Optional[str] = None
     ftp_work_label: Optional[str] = None
-    pages: Optional[List[Optional[Dict[str, str]]]] = None
+    pages: Optional[FTPPage] = None
 
 
 @dataclass
@@ -166,8 +175,21 @@ def load_ftp_manifest_data(
         session=session,
         verbose=verbose
     )
-    ftp_work.pages = rendering_extractors[rendering_label](rendering_text)
     ftp_work.ftp_work_url = ftp_manifest['related'][0]['@id']
+    pages = rendering_extractors[rendering_label](rendering_text)
+    canvases = ftp_manifest['sequences'][0]['canvases']
+    if len(pages) != len(canvases):
+        raise ValueError('canvas and transcript rendering mismatch')
+    ftp_work.pages = []
+    for page, canvas in zip(pages, canvases):
+        ftp_work.pages.append(
+            FTPPage(
+                label=canvas['label'],
+                fields=page,
+                display_url=canvas['related'][0]['@id'],
+                transcription_url=canvas['related'][1]['@id']
+            )
+        )
 
 
 def apply_field_mapping(ftp_fields: Dict[str, str], field_mapping: Dict[str, Sequence[str]]) -> Dict[str, str]:
@@ -189,12 +211,14 @@ def apply_field_mapping(ftp_fields: Dict[str, str], field_mapping: Dict[str, Seq
 def map_ftp_work_as_cdm_object(
         ftp_work: FTPWork,
         field_mapping: Dict[str, Sequence[str]],
-        page_picker: Callable[[List[Dict[str, str]]], Dict[str, str]]
+        page_picker: Callable[[List[FTPPage]], Optional[FTPPage]]
 ) -> Dict[str, str]:
     object_page = page_picker(ftp_work.pages)
+    if not object_page:
+        raise LookupError('could not map work to object')
     return {
         'dmrecord': ftp_work.dmrecord,
-        **apply_field_mapping(object_page,
+        **apply_field_mapping(object_page.fields,
                               field_mapping)
     }
 
@@ -225,18 +249,17 @@ def map_ftp_works_as_cdm_objects(
             continue
 
 
-# Should the PagePickers raise exceptions or return None?
 class PagePickers:
-    def first_page(pages: List[Optional[Dict[str, str]]]) -> Optional[Dict[str, str]]:
+    def first_page(pages: List[FTPPage]) -> Optional[FTPPage]:
         if pages:
             return pages[0]
-        raise LookupError("no first page")
+        return None
 
-    def first_filled_page(pages: List[Optional[Dict[str, str]]]) -> Optional[Dict[str, str]]:
+    def first_filled_page(pages: List[FTPPage]) -> Optional[FTPPage]:
         for page in pages:
-            if page and any(page.values()):
+            if page.fields and any(page.fields.values()):
                 return page
-        raise LookupError("no filled page")
+        return None
 
 
 def get_cdm_item_info(ftp_work: FTPWork, session: Session) -> Dict[str, str]:
@@ -246,13 +269,26 @@ def get_cdm_item_info(ftp_work: FTPWork, session: Session) -> Dict[str, str]:
     return item_info
 
 
+def load_cdm_page_pointers(ftp_work: FTPWork, session: Session, verbose: bool = True) -> None:
+    if verbose:
+        print(f"Requesting page pointers for {ftp_work.dmrecord!r} in {ftp_work.cdm_collection_alias!r} @ {ftp_work.cdm_repo_url!r}...")
+    page_pointers = get_cdm_page_pointers(
+        repo_url=ftp_work.cdm_repo_url,
+        alias=ftp_work.cdm_collection_alias,
+        dmrecord=ftp_work.dmrecord,
+        session=session
+    )
+    for page, pointer in zip(ftp_work.pages, page_pointers):
+        page.dmrecord = pointer
+
+
 def map_ftp_work_as_cdm_pages(
         ftp_work: FTPWork,
         field_mapping: Dict[str, Sequence[str]],
         session: Session,
         verbose: bool = True
 ) -> List[Dict[str, str]]:
-    if not any(ftp_work.pages):
+    if not any(page.fields for page in ftp_work.pages):
         if verbose:
             print_about_drop(ftp_work)
         return []
@@ -260,22 +296,16 @@ def map_ftp_work_as_cdm_pages(
         print(f"Requesting CONTENTdm item info for {ftp_work.dmrecord!r}...")
     item_info = get_cdm_item_info(ftp_work, session)
     if item_info['find'].endswith('.cpd'):
-        if verbose:
-            print(f"Requesting page pointers for {ftp_work.dmrecord!r} in {ftp_work.cdm_collection_alias!r} @ {ftp_work.cdm_repo_url!r}...")
-        page_pointers = get_cdm_page_pointers(
-            repo_url=ftp_work.cdm_repo_url,
-            alias=ftp_work.cdm_collection_alias,
-            dmrecord=ftp_work.dmrecord,
-            session=session
-        )
+        load_cdm_page_pointers(ftp_work, session, verbose)
     else:
-        page_pointers = [ftp_work.dmrecord]
+        # It's a simple object, the object is its own page
+        ftp_work.pages[0].dmrecord = ftp_work.dmrecord
     page_data = []
-    for page_pointer, ftp_fields in zip(page_pointers, ftp_work.pages):
-        if ftp_fields:
+    for page in ftp_work.pages:
+        if page.fields:
             page_data.append({
-                'dmrecord': page_pointer,
-                **apply_field_mapping(ftp_fields=ftp_fields,
+                'dmrecord': page.dmrecord,
+                **apply_field_mapping(ftp_fields=page.fields,
                                       field_mapping=field_mapping)
             })
     return page_data

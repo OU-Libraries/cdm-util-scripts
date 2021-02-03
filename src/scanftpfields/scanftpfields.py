@@ -34,10 +34,10 @@ def collection_as_filled_pages(ftp_collection: ftpmd2catcher.FTPCollection) -> L
     filled_pages = []
     for ftp_work in ftp_collection.works:
         for page in ftp_work.pages:
-            if not page:
+            if not page.fields:
                 continue
             filled_pages.append({
-                'fields': frozenset(page.keys()),
+                'fields': frozenset(page.fields.keys()),
                 'ftp_work': ftp_work,
             })
     return filled_pages
