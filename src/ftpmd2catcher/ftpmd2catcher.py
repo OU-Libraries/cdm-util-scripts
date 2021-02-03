@@ -11,7 +11,7 @@ from dataclasses import dataclass
 
 from ftp2catcher import get_ftp_manifest, get_cdm_page_pointers
 
-from typing import Optional, List, Iterable, Dict, Sequence, Callable
+from typing import Optional, List, Iterable, Dict, Sequence, Callable, Tuple
 
 
 @dataclass
@@ -82,7 +82,7 @@ def get_ftp_collection(manifest_url: str, session: Session) -> FTPCollection:
     return ftp_collection
 
 
-def get_rendering(ftp_manifest: dict, label: str, session: Session, verbose: bool = True) -> str:
+def get_rendering(ftp_manifest: dict, label: str, session: Session) -> str:
     renderings = ftp_manifest['sequences'][0]['rendering']
     for rendering in renderings:
         if rendering['label'] == label:
@@ -90,8 +90,6 @@ def get_rendering(ftp_manifest: dict, label: str, session: Session, verbose: boo
             break
     else:
         raise KeyError("label not found in manifest")
-    if verbose:
-        print(f"Requesting {label!r} rendering for {rendering_url!r}...")
     response = session.get(rendering_url)
     response.raise_for_status()
     return response.text
@@ -160,11 +158,8 @@ rendering_extractors = {
 def load_ftp_manifest_data(
         ftp_work: FTPWork,
         rendering_label: str,
-        session: Session,
-        verbose: bool = True
+        session: Session
 ) -> None:
-    if verbose:
-        print(f"Requesting FromThePage manifest {ftp_work.ftp_manifest_url!r}...")
     ftp_manifest = get_ftp_manifest(
         url=ftp_work.ftp_manifest_url,
         session=session
@@ -172,14 +167,13 @@ def load_ftp_manifest_data(
     rendering_text = get_rendering(
         ftp_manifest=ftp_manifest,
         label=rendering_label,
-        session=session,
-        verbose=verbose
+        session=session
     )
     ftp_work.ftp_work_url = ftp_manifest['related'][0]['@id']
     pages = rendering_extractors[rendering_label](rendering_text)
     canvases = ftp_manifest['sequences'][0]['canvases']
     if len(pages) != len(canvases):
-        raise ValueError('canvas and transcript rendering mismatch')
+        raise ValueError('canvas and transcript rendering page count mismatch')
     ftp_work.pages = []
     for page, canvas in zip(pages, canvases):
         ftp_work.pages.append(
@@ -190,6 +184,17 @@ def load_ftp_manifest_data(
                 transcription_url=canvas['related'][1]['@id']
             )
         )
+
+
+def get_field_mapping(filename: str) -> Dict[str, List[str]]:
+    with open(filename, mode='r') as fp:
+        reader = csv.DictReader(fp)
+        if reader.fieldnames != ['name', 'nick']:
+            raise ValueError("column mapping CSV must have 'name' and 'nick' column titles in that order")
+        field_mapping = defaultdict(list)
+        for row in reader:
+            field_mapping[row['name']].append(row['nick'])
+    return dict(field_mapping)
 
 
 def apply_field_mapping(ftp_fields: Dict[str, str], field_mapping: Dict[str, Sequence[str]]) -> Dict[str, str]:
@@ -208,14 +213,39 @@ def apply_field_mapping(ftp_fields: Dict[str, str], field_mapping: Dict[str, Seq
     return accumulator
 
 
+def get_and_load_ftp_collection(
+        manifest_url: str,
+        rendering_label: str,
+        session: Session,
+        verbose: bool = True
+) -> FTPCollection:
+    if verbose:
+        print(f"Requesting project manifest {manifest_url}...")
+    ftp_collection = get_ftp_collection(
+        manifest_url=manifest_url,
+        session=session
+    )
+    for n, ftp_work in enumerate(ftp_collection.works):
+        if verbose:
+            print(f"Requesting work manifests and {rendering_label!r} renderings {n}/{len(ftp_collection.works)}...", end='\r')
+        load_ftp_manifest_data(
+            ftp_work=ftp_work,
+            rendering_label=rendering_label,
+            session=session
+        )
+    if verbose:
+        print(end='\n')
+    return ftp_collection
+
+
 def map_ftp_work_as_cdm_object(
         ftp_work: FTPWork,
         field_mapping: Dict[str, Sequence[str]],
         page_picker: Callable[[List[FTPPage]], Optional[FTPPage]]
-) -> Dict[str, str]:
+) -> Optional[Dict[str, str]]:
     object_page = page_picker(ftp_work.pages)
     if not object_page:
-        raise LookupError('could not map work to object')
+        return None
     return {
         'dmrecord': ftp_work.dmrecord,
         **apply_field_mapping(object_page.fields,
@@ -223,30 +253,29 @@ def map_ftp_work_as_cdm_object(
     }
 
 
-def print_about_drop(ftp_work: FTPWork) -> None:
-    print("Dropping FromThePage work without any filled pages:",
-          f"   {ftp_work.ftp_work_label!r}",
-          f"   {ftp_work.ftp_work_url!r}",
-          sep='\n')
-
-
 def map_ftp_works_as_cdm_objects(
         ftp_works: Iterable[FTPWork],
         field_mapping: Dict[str, Sequence[str]],
         page_picker: Callable[[List[Dict[str, str]]], Dict[str, str]],
         verbose: bool = True
-) -> Iterable[Dict[str, str]]:
+) -> Tuple[List[Dict[str, str]], List[FTPWork]]:
+    catcher_data = []
+    dropped_works = []
     for ftp_work in ftp_works:
-        try:
-            yield map_ftp_work_as_cdm_object(
-                ftp_work=ftp_work,
-                field_mapping=field_mapping,
-                page_picker=page_picker
-            )
-        except LookupError:
-            if verbose:
-                print_about_drop(ftp_work)
-            continue
+        if verbose:
+            print(f"Mapping FromThePage data {len(catcher_data)}/{len(dropped_works)}/{len(ftp_works)}", end='\r')
+        cdm_object = map_ftp_work_as_cdm_object(
+            ftp_work=ftp_work,
+            field_mapping=field_mapping,
+            page_picker=page_picker
+        )
+        if cdm_object:
+            catcher_data.append(cdm_object)
+        else:
+            dropped_works.append(ftp_work)
+    if verbose:
+        print(end='\n')
+    return catcher_data, dropped_works
 
 
 class PagePickers:
@@ -269,9 +298,7 @@ def get_cdm_item_info(ftp_work: FTPWork, session: Session) -> Dict[str, str]:
     return item_info
 
 
-def load_cdm_page_pointers(ftp_work: FTPWork, session: Session, verbose: bool = True) -> None:
-    if verbose:
-        print(f"Requesting page pointers for {ftp_work.dmrecord!r} in {ftp_work.cdm_collection_alias!r} @ {ftp_work.cdm_repo_url!r}...")
+def load_cdm_page_pointers(ftp_work: FTPWork, session: Session) -> None:
     page_pointers = get_cdm_page_pointers(
         repo_url=ftp_work.cdm_repo_url,
         alias=ftp_work.cdm_collection_alias,
@@ -285,18 +312,13 @@ def load_cdm_page_pointers(ftp_work: FTPWork, session: Session, verbose: bool = 
 def map_ftp_work_as_cdm_pages(
         ftp_work: FTPWork,
         field_mapping: Dict[str, Sequence[str]],
-        session: Session,
-        verbose: bool = True
+        session: Session
 ) -> List[Dict[str, str]]:
     if not any(page.fields for page in ftp_work.pages):
-        if verbose:
-            print_about_drop(ftp_work)
         return []
-    if verbose:
-        print(f"Requesting CONTENTdm item info for {ftp_work.dmrecord!r}...")
     item_info = get_cdm_item_info(ftp_work, session)
     if item_info['find'].endswith('.cpd'):
-        load_cdm_page_pointers(ftp_work, session, verbose)
+        load_cdm_page_pointers(ftp_work, session)
     else:
         # It's a simple object, the object is its own page
         ftp_work.pages[0].dmrecord = ftp_work.dmrecord
@@ -312,19 +334,28 @@ def map_ftp_work_as_cdm_pages(
 
 
 def map_ftp_works_as_cdm_pages(
-        ftp_works: Iterable[FTPWork],
+        ftp_works: Sequence[FTPWork],
         field_mapping: Dict[str, Sequence[str]],
         session: Session,
         verbose: bool = True
-) -> Iterable[Dict[str, str]]:
-    for ftp_work in ftp_works:
+) -> Tuple[List[Dict[str, str]], List[FTPWork]]:
+    catcher_data = []
+    dropped_works = []
+    for n, ftp_work in enumerate(ftp_works):
+        if verbose:
+            print(f"Requesting CONTENTdm page pointers and mapping FromThePage data {n}/{len(dropped_works)}/{len(ftp_works)}", end='\r')
         pages = map_ftp_work_as_cdm_pages(
             ftp_work=ftp_work,
             field_mapping=field_mapping,
-            session=session,
-            verbose=verbose
+            session=session
         )
-        yield from pages
+        if pages:
+            catcher_data.extend(pages)
+        else:
+            dropped_works.append(ftp_works)
+    if verbose:
+        print(end='\n')
+    return catcher_data, dropped_works
 
 
 class MatchModes:
@@ -365,15 +396,11 @@ def main():
     )
     args = parser.parse_args()
 
-    with open(args.field_mapping_csv, mode='r') as fp:
-        reader = csv.DictReader(fp)
-        if reader.fieldnames != ['name', 'nick']:
-            print(f"{args.column_mapping_csv!r}: column mapping CSV must have 'name' and 'nick' column titles in that order")
-            sys.exit(1)
-        field_mapping = defaultdict(list)
-        for row in reader:
-            field_mapping[row['name']].append(row['nick'])
-        field_mapping = dict(field_mapping)
+    try:
+        field_mapping = get_field_mapping(args.field_mapping_csv)
+    except ValueError as err:
+        print(f"{args.field_mapping_csv}: {err}")
+        sys.exit(1)
 
     with Session() as session:
         collection_manifest_url = get_collection_manifest_url(
@@ -381,38 +408,39 @@ def main():
             collection_name=args.collection_name,
             session=session
         )
-        ftp_collection = get_ftp_collection(
+        ftp_collection = get_and_load_ftp_collection(
             manifest_url=collection_manifest_url,
+            rendering_label='XHTML Export',
             session=session
         )
-        for ftp_work in ftp_collection.works:
-            load_ftp_manifest_data(
-                ftp_work=ftp_work,
-                rendering_label='XHTML Export',
-                session=session
-            )
 
         # Non-compound objects metadata is mapped both as
         # page-level and object-level. The match mode
         # only matters for compound objects.
         if args.match_mode == MatchModes.by_object:
-            catcher_data = list(
-                map_ftp_works_as_cdm_objects(
-                    ftp_works=ftp_collection.works,
-                    field_mapping=field_mapping,
-                    page_picker=PagePickers.first_filled_page
-                )
+            catcher_data, dropped_works = map_ftp_works_as_cdm_objects(
+                ftp_works=ftp_collection.works,
+                field_mapping=field_mapping,
+                page_picker=PagePickers.first_filled_page
             )
+            print(f"Mapped {len(catcher_data)} CONTENTdm objects from {len(ftp_collection.works)} FromThePage works")
         elif args.match_mode == MatchModes.by_page:
-            catcher_data = list(
-                map_ftp_works_as_cdm_pages(
-                    ftp_works=ftp_collection.works,
-                    field_mapping=field_mapping,
-                    session=session
-                )
+            catcher_data, dropped_works = map_ftp_works_as_cdm_pages(
+                ftp_works=ftp_collection.works,
+                field_mapping=field_mapping,
+                session=session
             )
+            print(f"Mapped {len(catcher_data)} CONTENTdm pages from {len(ftp_collection.works)} FromThePage works")
         else:
             raise KeyError(f"invalid match mode {args.match_mode!r}")
+
+    if not dropped_works:
+        print("All FromThePage works were mapped")
+    else:
+        print(f"{len(dropped_works)} works were not mapped")
+        print("work-label,url")
+        for ftp_work in dropped_works:
+            print(ftp_work.ftp_work_label, ftp_work.ftp_work_url, sep=',')
 
     with open(args.output_file, mode='w') as fp:
         json.dump(catcher_data, fp, indent=2)

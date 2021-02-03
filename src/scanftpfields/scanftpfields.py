@@ -12,24 +12,6 @@ import ftpmd2catcher
 from typing import List
 
 
-def request_collection(manifest_url: str, rendering_label: str, session: Session) -> ftpmd2catcher.FTPCollection:
-    print(f"Requesting {manifest_url}...")
-    ftp_collection = ftpmd2catcher.get_ftp_collection(
-        manifest_url=manifest_url,
-        session=session
-    )
-    for n, ftp_work in enumerate(ftp_collection.works):
-        print(f"Requesting manifests and {rendering_label!r} renderings {n}/{len(ftp_collection.works)}...", end='\r')
-        ftpmd2catcher.load_ftp_manifest_data(
-            ftp_work=ftp_work,
-            rendering_label=rendering_label,
-            session=session,
-            verbose=False
-        )
-    print(end='\n')
-    return ftp_collection
-
-
 def collection_as_filled_pages(ftp_collection: ftpmd2catcher.FTPCollection) -> List[dict]:
     filled_pages = []
     for ftp_work in ftp_collection.works:
@@ -111,7 +93,7 @@ def main():
     args = parser.parse_args()
 
     with Session() as session:
-        ftp_collection = request_collection(
+        ftp_collection = ftpmd2catcher.get_and_load_ftp_collection(
             manifest_url=f'https://fromthepage.com/iiif/collection/{args.ftp_collection_number}',
             rendering_label=args.label,
             session=session
