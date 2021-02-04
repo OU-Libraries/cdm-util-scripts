@@ -37,11 +37,11 @@ def test_get_collection_manifest_url(session):
 @ftp_vcr.use_cassette()
 def test_get_ftp_collection(session):
     ftp_collection = ftpmd2catcher.get_ftp_collection(
-        manifest_url='https://fromthepage.com/iiif/collection/1073',
+        manifest_url='https://fromthepage.com/iiif/collection/dance-posters-metadata',
         session=session
     )
     assert ftp_collection.manifest_url
-    assert ftp_collection.number == '1073'
+    assert ftp_collection.alias == 'dance-posters-metadata'
     assert ftp_collection.label
     for ftp_work in ftp_collection.works:
         assert ftp_work.dmrecord.isdigit()
@@ -52,11 +52,11 @@ def test_get_ftp_collection(session):
         assert ftp_work.ftp_manifest_url
 
     ftp_collection = ftpmd2catcher.get_ftp_collection(
-        manifest_url='https://fromthepage.com/iiif/collection/1021',
+        manifest_url='https://fromthepage.com/iiif/collection/ryan-metadata',
         session=session
     )
     assert ftp_collection.manifest_url
-    assert ftp_collection.number == '1021'
+    assert ftp_collection.alias == 'ryan-metadata'
     assert ftp_collection.label
     for ftp_work in ftp_collection.works:
         assert ftp_work.ftp_work_label

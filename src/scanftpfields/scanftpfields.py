@@ -66,7 +66,8 @@ def compile_field_sets(filled_pages: List[dict]) -> List[dict]:
 def compile_report(ftp_collection: ftpmd2catcher.FTPCollection):
     filled_pages = collection_as_filled_pages(ftp_collection)
     report = {
-        'collection_number': ftp_collection.number,
+        'slug': ftp_collection.slug,
+        'collection_alias': ftp_collection.alias,
         'collection_label': ftp_collection.label,
         'collection_manifest': ftp_collection.manifest_url,
         'works_count': len(ftp_collection.works),
@@ -88,21 +89,36 @@ def report_to_html(report: dict) -> str:
 
 def main():
     parser = argparse.ArgumentParser(description="Scan and report on a FromThePage collection's field-based transcription labels")
-    parser.add_argument('ftp_collection_number',
-                        type=int)
-    parser.add_argument('--output',
-                        choices=['html', 'json'],
-                        default='html',
-                        type=str)
-    parser.add_argument('--label',
-                        choices=list(ftpmd2catcher.rendering_extractors.keys()),
-                        default='XHTML Export',
-                        type=str)
+    parser.add_argument(
+        'slug',
+        type=str,
+        help="FromThePage user slug"
+    )
+    parser.add_argument(
+        'collection_name',
+        type=str,
+        help="Exact FromThePage project name"
+    )
+    parser.add_argument(
+        '--output',
+        choices=['html', 'json'],
+        default='html',
+        type=str,
+        help="Specify report format"
+    )
+    parser.add_argument(
+        '--label',
+        choices=list(ftpmd2catcher.rendering_extractors.keys()),
+        default='XHTML Export',
+        type=str,
+        help="Choose the export to use for parsing fields"
+    )
     args = parser.parse_args()
 
     with Session() as session:
         ftp_collection = ftpmd2catcher.get_and_load_ftp_collection(
-            manifest_url=f'https://fromthepage.com/iiif/collection/{args.ftp_collection_number}',
+            slug=args.slug,
+            collection_name=args.collection_name,
             rendering_label=args.label,
             session=session
         )
@@ -121,7 +137,7 @@ def main():
         raise ValueError(f"invalid output type {args.output!r}")
 
     date_str = report_date.strftime('%Y-%m-%d_%I-%M-%S%p')
-    filename = f"field-label-report_{args.ftp_collection_number}_{date_str}.{args.output}"
+    filename = f"field-label-report_{ftp_collection.alias}_{date_str}.{args.output}"
     print(f"Writing report as {filename!r}")
     with open(filename, mode='w') as fp:
         fp.write(report_str)

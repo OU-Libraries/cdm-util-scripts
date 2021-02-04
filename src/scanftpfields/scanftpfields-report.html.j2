@@ -43,7 +43,8 @@
             <h1>FromThePage field scan report for project {{ collection_label }}</h1>
             <p>
                 Report date: {{ report_date }}<br/>
-                Collection number: {{ collection_number }}<br/>
+                User slug: {{ slug }}<br/>
+                Collection alias: {{ collection_alias }}<br/>
                 Collection manifest: <a href="{{ collection_manifest }}">{{ collection_manifest }}</a><br/>
                 Export used: &quot;{{ export_label_used }}&quot;<br/>
             </p>
@@ -84,28 +85,40 @@
                     <h4>Field set</h4>
                     <ul>
                         {%- for field in field_set['field_set'] -%}
-                            {%- if field_label_frequencies[field] < filled_pages_count|int -%}
+                            {%- if field_label_frequencies[field] < filled_pages_count|int %}
                                 <li><span class="field-label undercount">{{ field }}</span></li>
                             {%- else -%}
                                 <li><span class="field-label">{{ field }}</span></li>
                             {%- endif -%}
-                        {%- endfor -%}
+                        {%- endfor %}
+                    </ul>
+                    <h4>Omitted fields</h4>
+                    <ul>
+                        {%- for field in field_label_frequencies.keys() -%}
+                            {%- if field not in field_set['field_set'] %}
+                                <li><span class="field-label undercount">{{ field }}</span></li>
+                            {%- endif -%}
+                        {%- endfor %}
                     </ul>
                     <h4>Works using this set</h4>
                     <ul>
-                        {%- for work_data in field_set['works'] -%}
+                        {%- for work_data in field_set['works'] %}
                             <li>
                                 <a href="{{ work_data['ftp_work_url'] }}">{{ work_data['ftp_work_label'] }}</a>
+                                {% if work_data['pages']|length > 1 %}{{ work_data['pages']|length }} pages{% endif %}
                                 <ul class="page-list">
-                                    {%- for page_data in work_data['pages'] -%}
-                                        <li><a href="{{ page_data['transcription_url'] }}">{{ page_data['ftp_page_label'] }}</a></li>
-                                    {%- endfor -%}
+                                    {%- for page_data in work_data['pages'] %}
+                                        <li>
+                                            <a href="{{ page_data['ftp_page_display_url'] }}">{{ page_data['ftp_page_label'] }}</a>
+                                            <a href="{{ page_data['transcription_url'] }}">✍</a>
+                                        </li>
+                                    {%- endfor %}
                                 </ul>
                             </li>
-                        {%- endfor -%}
+                        {%- endfor %}
                     </ul>
                 </div>
-            {% endfor %}
+            {%- endfor %}
         </div>
     </body>
 </html>

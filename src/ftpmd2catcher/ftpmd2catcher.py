@@ -7,7 +7,7 @@ import csv
 import json
 import xml.etree.ElementTree as ET
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from ftp2catcher import get_ftp_manifest, get_cdm_page_pointers
 
@@ -37,10 +37,11 @@ class FTPWork:
 
 @dataclass
 class FTPCollection:
-    manifest_url: str
-    number: str
-    label: str
-    works: List[FTPWork]
+    manifest_url: Optional[str] = None
+    alias: Optional[str] = None
+    label: Optional[str] = None
+    slug: Optional[str] = None
+    works: List[FTPWork] = field(default_factory=list)
 
 
 def get_collection_manifest_url(slug: str, collection_name: str, session: Session) -> str:
@@ -59,7 +60,7 @@ def get_ftp_collection(manifest_url: str, session: Session) -> FTPCollection:
     collection_manifest = response.json()
     ftp_collection = FTPCollection(
         manifest_url=collection_manifest['@id'],  # Same as manifest_url
-        number=collection_manifest['@id'].partition('collection/')[2],
+        alias=collection_manifest['@id'].partition('collection/')[2],
         label=collection_manifest['label'],
         works=[]
     )
@@ -214,18 +215,27 @@ def apply_field_mapping(ftp_fields: Dict[str, str], field_mapping: Dict[str, Seq
 
 
 def get_and_load_ftp_collection(
-        manifest_url: str,
+        slug: str,
+        collection_name: str,
         rendering_label: str,
         session: Session,
         verbose: bool = True
 ) -> FTPCollection:
+    if verbose:
+        print(f"Looking up {collection_name!r} @ {slug}...")
+    manifest_url = get_collection_manifest_url(
+        slug=slug,
+        collection_name=collection_name,
+        session=session
+    )
     if verbose:
         print(f"Requesting project manifest {manifest_url}...")
     ftp_collection = get_ftp_collection(
         manifest_url=manifest_url,
         session=session
     )
-    for n, ftp_work in enumerate(ftp_collection.works):
+    ftp_collection.slug = slug
+    for n, ftp_work in enumerate(ftp_collection.works, start=1):
         if verbose:
             print(f"Requesting work manifests and {rendering_label!r} renderings {n}/{len(ftp_collection.works)}...", end='\r')
         load_ftp_manifest_data(
@@ -341,7 +351,7 @@ def map_ftp_works_as_cdm_pages(
 ) -> Tuple[List[Dict[str, str]], List[FTPWork]]:
     catcher_data = []
     dropped_works = []
-    for n, ftp_work in enumerate(ftp_works):
+    for n, ftp_work in enumerate(ftp_works, start=1):
         if verbose:
             print(f"Requesting CONTENTdm page pointers and mapping FromThePage data {n}/{len(dropped_works)}/{len(ftp_works)}", end='\r')
         pages = map_ftp_work_as_cdm_pages(
@@ -403,13 +413,9 @@ def main():
         sys.exit(1)
 
     with Session() as session:
-        collection_manifest_url = get_collection_manifest_url(
+        ftp_collection = get_and_load_ftp_collection(
             slug=args.slug,
             collection_name=args.collection_name,
-            session=session
-        )
-        ftp_collection = get_and_load_ftp_collection(
-            manifest_url=collection_manifest_url,
             rendering_label='XHTML Export',
             session=session
         )

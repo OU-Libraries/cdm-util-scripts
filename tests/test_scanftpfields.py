@@ -13,8 +13,8 @@ ftp_vcr = vcr.VCR(
 )
 
 
-ftp_collection_number = '1073'
-ftp_manifest_url = f'https://fromthepage.com/iiif/collection/{ftp_collection_number}'
+slug = 'ohiouniversitylibraries'
+collection_name = 'Dance Posters Metadata'
 rendering_label = 'XHTML Export'
 
 
@@ -29,7 +29,8 @@ def session():
 def ftp_collection():
     with requests.Session() as session:
         ftp_collection = ftpmd2catcher.get_and_load_ftp_collection(
-            manifest_url=ftp_manifest_url,
+            slug=slug,
+            collection_name=collection_name,
             rendering_label=rendering_label,
             session=session
         )
