@@ -179,7 +179,7 @@ def load_ftp_manifest_data(
         ftp_work.pages.append(
             FTPPage(
                 label=canvas['label'],
-                fields=page,
+                fields=page if page and any(page.values()) else None,
                 display_url=canvas['related'][0]['@id'],
                 transcription_url=canvas['related'][1]['@id']
             )
