@@ -3,36 +3,40 @@
     <head>
         <meta charset="UTF-8">
         <title>{{ collection_number }} scanftpfields report</title>
+        <style type="text/css">
+         body {
+             margin-bottom: 3em;
+         }
+
+         .container {
+             max-width: 1170px;
+             margin-right: auto;
+             margin-left: auto;
+         }
+
+         tr {
+             outline: thin solid;
+         }
+
+         .field-label {
+             font-family: monospace;
+         }
+
+         .field-set {
+             margin-left: 1em;
+             padding-left: 1em;
+             border-left: thin solid;
+         }
+
+         .undercount {
+             background-color: #ffe7bc;
+         }
+
+         .page-list {
+
+         }
+        </style>
     </head>
-    <style type="text/css">
-     body {
-         margin-bottom: 3em;
-     }
-
-     .container {
-         max-width: 1170px;
-         margin-right: auto;
-         margin-left: auto;
-     }
-
-     tr {
-         outline: thin solid;
-     }
-
-     .field-label {
-         font-family: monospace;
-     }
-
-     .field-set {
-         margin-left: 1em;
-         padding-left: 1em;
-         border-left: thin solid;
-     }
-
-     .undercount {
-         background-color: #ffe7bc;
-     }
-    </style>
 
     <body>
         <div class="container">
@@ -79,19 +83,26 @@
                 <div class="field-set">
                     <h4>Field set</h4>
                     <ul>
-                        {% for field in field_set['field_set'] %}
-                            {% if field_label_frequencies[field] < filled_pages_count|int %}
+                        {%- for field in field_set['field_set'] -%}
+                            {%- if field_label_frequencies[field] < filled_pages_count|int -%}
                                 <li><span class="field-label undercount">{{ field }}</span></li>
-                            {% else %}
+                            {%- else -%}
                                 <li><span class="field-label">{{ field }}</span></li>
-                            {% endif %}
-                        {% endfor %}
+                            {%- endif -%}
+                        {%- endfor -%}
                     </ul>
                     <h4>Works using this set</h4>
                     <ul>
-                        {% for work_data in field_set['works'] %}
-                            <li><a href="{{ work_data['ftp_work_url'] }}">{{ work_data['ftp_work_label'] }}</a></li>
-                        {% endfor %}
+                        {%- for work_data in field_set['works'] -%}
+                            <li>
+                                <a href="{{ work_data['ftp_work_url'] }}">{{ work_data['ftp_work_label'] }}</a>
+                                <ul class="page-list">
+                                    {%- for page_data in work_data['pages'] -%}
+                                        <li><a href="{{ page_data['transcription_url'] }}">{{ page_data['ftp_page_label'] }}</a></li>
+                                    {%- endfor -%}
+                                </ul>
+                            </li>
+                        {%- endfor -%}
                     </ul>
                 </div>
             {% endfor %}
