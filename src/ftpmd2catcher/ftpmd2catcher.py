@@ -8,6 +8,7 @@ import json
 import xml.etree.ElementTree as ET
 from collections import defaultdict
 from dataclasses import dataclass, field
+from io import StringIO
 
 from ftp2catcher import get_ftp_manifest, get_cdm_page_pointers
 
@@ -444,9 +445,11 @@ def main():
         print("All FromThePage works were mapped")
     else:
         print(f"{len(dropped_works)} works were not mapped")
-        print("work-label,url")
-        for ftp_work in dropped_works:
-            print(ftp_work.ftp_work_label, ftp_work.ftp_work_url, sep=',')
+        with StringIO() as output:
+            writer = csv.writer(output)
+            writer.writerow(('work-label', 'url'))
+            for ftp_work in dropped_works:
+                writer.writerow((ftp_work.ftp_work_label, ftp_work.ftp_work_url))
 
     with open(args.output_file, mode='w') as fp:
         json.dump(catcher_data, fp, indent=2)
