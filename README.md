@@ -103,6 +103,33 @@ Respondent- formation,respob
 ...
 ```
 
+### printftpinfo
+
+`printftpinfo` takes a FromThePage user slug (like `ohiouniversitylibraries`) and prints the collections available from that user on fromthepage.com. It is designed to be helpful for getting exact collection/project names for FromThePage projects.
+
+```
+$ printftpinfo ohiouniversitylibraries
+@id                                                                                        @type           label
+---                                                                                        -----           -----
+'https://fromthepage.com/iiif/collection/ohio-university-board-of-trustees-minutes'        'sc:Collection' 'Board of Trustees minutes, Ohio University'
+'https://fromthepage.com/iiif/collection/cornelius-ryan-collection-of-world-war-ii-papers' 'sc:Collection' 'Cornelius Ryan Collection of World War II Papers'
+'https://fromthepage.com/iiif/collection/william-e-peters-papers'                          'sc:Collection' 'William E. Peters Papers'
+'https://fromthepage.com/iiif/collection/farfel-research-notebooks'                        'sc:Collection' 'Farfel Research Notebooks'
+'https://fromthepage.com/iiif/collection/los-amigos-records-1947-1952'                     'sc:Collection' 'Los Amigos records, 1947-1952'
+'https://fromthepage.com/iiif/collection/ryan-metadata'                                    'sc:Collection' 'Ryan collection metadata'
+'https://fromthepage.com/iiif/collection/dance-posters-metadata'                           'sc:Collection' 'Dance Posters Metadata'
+```
+
+### scanftpfields
+
+`scanftpfields` takes
+* A FromThePage user slug
+* A FromThePage project label
+
+and outputs a detailed report on the field schemas in use in that FromThePage project. The report is output in the current directory and has a name of the form `field-label-report_<collection-alias>_<year>-<month>-<day>_<hour>-<minutes>-<seconds><AM|PM>.<format>`. This report is designed to be helpful for ensuring schema consistency inside of a collection.
+
+Optionally, the format of the report can be specified using the `--output` argument, which defaults to `html`, but can be changed to `json` to output a machine-readable version of the report's data.
+
 ### csv2catcher
 
 `csv2catcher` takes
@@ -213,6 +240,28 @@ $ head csv2catcher-pages.json
     "respoc": "8th Infantry Regiment",
 ```
 Note that the `dmrecord` pointer now points to a page in the object referenced in the previous example.
+
+### ftpmd2catcher
+
+`ftpmd2catcher` takes
+* A match mode, either `object` or `page`
+* A FromThePage user slug
+* A FromThePage project label
+* A CSV mapping field data CSV column names to CONTENTdm collection field nicknames
+* An output file name
+
+and outputs a JSON file containing field data from FromThePage project for use with [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher)'s `edit` action.
+
+The FromThePage project _must_:
+1. Be field-based
+2. Have the same field schema for each transcript
+3. Have been loaded from CONTENTdm (so that FromThePage stored the corresponding CONTENTdm object URLs)
+
+The match modes differ only in their treatment of compound objects. Both match field-based transcriptions for simple, single-item objects. There can be only one match mode per-collection.
+
+Match mode `page` matches each field-based transcription to the page-level metadata for the corresponding page inside the page's compound object. If a page's field-based transcription is blank, it silently skips it. If there are no filled pages in a work, it silently skips that work.
+
+Match mode `object` matches a single field-based transcription page to the object-level metadata for a compound object. It chooses the first filled page,  meaning the first page in an object that has a non-empty value in any field. It ignores any filled pages after the first. If there are no filled pages in a FromThePage work, it exports nothing but prints a warning on finishing.
 
 ### ftp2catcher
 
