@@ -4,7 +4,7 @@ cdm-util-scripts are Python scripts developed to support Ohio University Librari
 
 ## Installation
 
-These instructions require that you are using Python 3 (3.7+) as your `python` and are using a Unix shell with Git installed (like [Git bash on Windows](https://gitforwindows.org/)).
+These instructions require that you are using Python 3 (3.7+) as your `python` and are using a Unix shell with Git installed (like [Git bash on Windows](https://gitforwindows.org/) or the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/)).
 
 Clone the repo to a convenient local directory:
 
@@ -259,9 +259,9 @@ The FromThePage project _must_:
 
 The match modes differ only in their treatment of compound objects. Both match field-based transcriptions for simple, single-item objects. There can be only one match mode per-collection.
 
-Match mode `page` matches each field-based transcription to the page-level metadata for the corresponding page inside the page's compound object. If a page's field-based transcription is blank, it silently skips it. If there are no filled pages in a work, it silently skips that work.
+Match mode `page` matches each field-based transcription to the page-level metadata for the corresponding page inside the page's compound object. If a page's field-based transcription is blank, it skips it.
 
-Match mode `object` matches a single field-based transcription page to the object-level metadata for a compound object. It chooses the first filled page,  meaning the first page in an object that has a non-empty value in any field. It ignores any filled pages after the first. If there are no filled pages in a FromThePage work, it exports nothing but prints a warning on finishing.
+Match mode `object` matches a single field-based transcription page to the object-level metadata for a compound object. It chooses the first filled page,  meaning the first page in an object that has a non-empty value in any field. It ignores any filled pages after the first. If there are no filled pages in a FromThePage work, it skips it.
 
 ### ftp2catcher
 
