@@ -126,7 +126,7 @@ $ printftpinfo ohiouniversitylibraries
 * A FromThePage user slug
 * A FromThePage project label
 
-and outputs a detailed report on the field schemas in use in that FromThePage project. The report is output in the current directory and has a name of the form `field-label-report_<collection-alias>_<year>-<month>-<day>_<hour>-<minutes>-<seconds><AM|PM>.<format>`. This report is designed to be helpful for ensuring schema consistency inside of a collection.
+and outputs a detailed report on the field schemas in use in that FromThePage project. The report is output in the current directory and has a name of the form `field-label-report_<collection-alias>_<year>-<month>-<day>_<24-hour>-<minutes>-<seconds>.<format>`. This report is designed to be helpful for ensuring schema consistency inside of a collection.
 
 Optionally, the format of the report can be specified using the `--output` argument, which defaults to `html`, but can be changed to `json` to output a machine-readable version of the report's data.
 
