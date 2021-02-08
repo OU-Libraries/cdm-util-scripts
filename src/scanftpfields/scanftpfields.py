@@ -9,71 +9,82 @@ import os
 
 import ftpmd2catcher
 
-from typing import List
+from typing import List, Dict, Any, Tuple
 
 
-def collection_as_filled_pages(ftp_collection: ftpmd2catcher.FTPCollection) -> List[dict]:
-    filled_pages = []
-    for ftp_work in ftp_collection.works:
-        for ftp_page in ftp_work.pages:
-            if not ftp_page.fields:
-                continue
-            filled_pages.append({
-                'fields': frozenset(ftp_page.fields.keys()),
-                'ftp_page': ftp_page,
-                'ftp_work': ftp_work,
-            })
-    return filled_pages
+def count_filled_pages(ftp_collection: ftpmd2catcher.FTPCollection) -> int:
+    return sum(1
+               for ftp_work in ftp_collection.works
+               for ftp_page in ftp_work.pages if ftp_page.fields)
 
 
-def compile_field_frequencies(filled_pages: List[dict]) -> Counter:
-    return Counter(label for page in filled_pages for label in page['fields'])
+def compile_field_frequencies(ftp_collection: ftpmd2catcher.FTPCollection) -> Counter:
+    return Counter(label
+                   for ftp_work in ftp_collection.works
+                   for ftp_page in ftp_work.pages if ftp_page.fields
+                   for label in ftp_page.fields.keys())
 
 
-def compile_field_sets(filled_pages: List[dict]) -> List[dict]:
+def make_work_record(ftp_work: ftpmd2catcher.FTPWork) -> Dict[str, Any]:
+    return {
+        'ftp_manifest_url': ftp_work.ftp_manifest_url,
+        'ftp_work_label': ftp_work.ftp_work_label,
+        'ftp_work_url': ftp_work.ftp_work_url,
+        'page_count': len(ftp_work.pages),
+        'filled_pages': [],
+    }
+
+
+def make_page_record(ftp_page: ftpmd2catcher.FTPPage) -> Dict[str, str]:
+    return {
+        'ftp_page_label': ftp_page.label,
+        'ftp_page_display_url': ftp_page.display_url,
+        'transcription_url': ftp_page.transcription_url,
+    }
+
+
+def compile_field_sets(ftp_collection: ftpmd2catcher.FTPCollection) -> Tuple[List[dict], List[dict]]:
     field_sets_accumulator = defaultdict(dict)
-    for filled_page in filled_pages:
-        ftp_work = filled_page['ftp_work']
-        ftp_page = filled_page['ftp_page']
-        field_set = field_sets_accumulator[filled_page['fields']]
-        if ftp_work.ftp_manifest_url not in field_set:
-            field_set[ftp_work.ftp_manifest_url] = {
-                'ftp_manifest_url': ftp_work.ftp_manifest_url,
-                'ftp_work_label': ftp_work.ftp_work_label,
-                'ftp_work_url': ftp_work.ftp_work_url,
-                'pages': [],
-            }
-        field_set[ftp_work.ftp_manifest_url]['pages'].append({
-            'ftp_page_label': ftp_page.label,
-            'ftp_page_display_url': ftp_page.display_url,
-            'transcription_url': ftp_page.transcription_url,
-        })
+    blank_works = []
+    for ftp_work in ftp_collection.works:
+        if not any(ftp_page.fields for ftp_page in ftp_work.pages):
+            blank_works.append(make_work_record(ftp_work))
+        else:
+            for ftp_page in ftp_work.pages:
+                if not ftp_page.fields:
+                    continue
+                field_set = frozenset(ftp_page.fields.keys())
+                if ftp_work.ftp_manifest_url not in field_sets_accumulator[field_set]:
+                    field_sets_accumulator[field_set][ftp_work.ftp_manifest_url] = make_work_record(ftp_work)
+                field_sets_accumulator[field_set][ftp_work.ftp_manifest_url]['filled_pages'].append(make_page_record(ftp_page))
     field_sets = []
     for field_set, works in field_sets_accumulator.items():
         work_entries = list(works.values())
         work_entries.sort(key=lambda w: w['ftp_manifest_url'])
         for work in work_entries:
-            work['pages'].sort(key=lambda p: p['ftp_page_label'])
+            work['filled_pages'].sort(key=lambda p: p['ftp_page_label'])
         field_sets.append({
             'field_set': sorted(list(field_set)),
             'number_of_works': len(works),
-            'number_of_pages': sum(len(work['pages']) for work in works.values()),
+            'number_of_pages': sum(len(work['filled_pages']) for work in works.values()),
             'works': work_entries,
         })
-    return field_sets
+    blank_works.sort(key=lambda w: w['ftp_manifest_url'])
+    return field_sets, blank_works
 
 
 def compile_report(ftp_collection: ftpmd2catcher.FTPCollection):
-    filled_pages = collection_as_filled_pages(ftp_collection)
+    field_sets, blank_works = compile_field_sets(ftp_collection)
     report = {
         'slug': ftp_collection.slug,
         'collection_alias': ftp_collection.alias,
         'collection_label': ftp_collection.label,
         'collection_manifest': ftp_collection.manifest_url,
         'works_count': len(ftp_collection.works),
-        'filled_pages_count': len(filled_pages),
-        'field_label_frequencies': dict(compile_field_frequencies(filled_pages)),
-        'field_sets': compile_field_sets(filled_pages),
+        'filled_pages_count': count_filled_pages(ftp_collection),
+        'field_label_frequencies': dict(compile_field_frequencies(ftp_collection)),
+        'field_sets': field_sets,
+        'bank_works': blank_works,
     }
     return report
 
@@ -136,7 +147,7 @@ def main():
     else:
         raise ValueError(f"invalid output type {args.output!r}")
 
-    date_str = report_date.strftime('%Y-%m-%d_%I-%M-%S%p')
+    date_str = report_date.strftime('%Y-%m-%d_%H-%M-%S')
     filename = f"field-label-report_{ftp_collection.alias}_{date_str}.{args.output}"
     print(f"Writing report as {filename!r}")
     with open(filename, mode='w') as fp:

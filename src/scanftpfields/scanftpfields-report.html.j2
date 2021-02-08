@@ -14,8 +14,18 @@
              margin-left: auto;
          }
 
+         th, td {
+             padding: 0 1em 0 1em;
+             text-align: left;
+             vertical-align: text-top;
+         }
+
          tr {
              outline: thin solid;
+         }
+
+         td ul {
+             margin: 0.3em 0 0.3em 0;
          }
 
          .field-label {
@@ -101,24 +111,44 @@
                         {%- endfor %}
                     </ul>
                     <h4>Works using this set</h4>
-                    <ul>
-                        {%- for work_data in field_set['works'] %}
-                            <li>
-                                <a href="{{ work_data['ftp_work_url'] }}">{{ work_data['ftp_work_label'] }}</a>
-                                {% if work_data['pages']|length > 1 %}{{ work_data['pages']|length }} pages{% endif %}
-                                <ul class="page-list">
-                                    {%- for page_data in work_data['pages'] %}
-                                        <li>
-                                            <a href="{{ page_data['ftp_page_display_url'] }}">{{ page_data['ftp_page_label'] }}</a>
-                                            <a href="{{ page_data['transcription_url'] }}">✍</a>
-                                        </li>
-                                    {%- endfor %}
-                                </ul>
-                            </li>
-                        {%- endfor %}
-                    </ul>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Work</th>
+                                <th>Filled pages</th>
+                                <th>Work pages</th>
+                                <th>Pages</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%- for work_data in field_set['works'] %}
+                                <tr>
+                                    <td><a href="{{ work_data['ftp_work_url'] }}">{{ work_data['ftp_work_label'] }}</a></td>
+                                    <td>{{ work_data['filled_pages']|length }}</td>
+                                    <td>{{ work_data['page_count'] }}</td>
+                                    <td>
+                                        <ul class="page-list">
+                                            {%- for page_data in work_data['filled_pages'] %}
+                                                <li>
+                                                    <a href="{{ page_data['ftp_page_display_url'] }}">{{ page_data['ftp_page_label'] }}</a>
+                                                    <a href="{{ page_data['transcription_url'] }}">✍</a>
+                                                </li>
+                                            {%- endfor %}
+                                        </ul>
+                                    </td>
+                                </tr>
+                            {%- endfor %}
+                        </tbody>
+                    </table>
                 </div>
             {%- endfor %}
+            <h2>Works without any filled pages</h2>
+            <p>There are {{ blank_works|length }} works without any filled pages in this collection.</p>
+            <ul>
+                {%- for work_data in blank_works %}
+                    <li><a href="{{ work_data['ftp_work_url'] }}">{{ work_data['ftp_work_label'] }}</a>, {{ work_data['page_count'] }} pages</li>
+                {%- endfor %}
+            </ul>
         </div>
     </body>
 </html>
