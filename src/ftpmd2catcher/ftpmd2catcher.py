@@ -8,7 +8,6 @@ import json
 import xml.etree.ElementTree as ET
 from collections import defaultdict
 from dataclasses import dataclass, field
-from io import StringIO
 
 from ftp2catcher import get_ftp_manifest, get_cdm_page_pointers
 
@@ -207,7 +206,10 @@ def apply_field_mapping(ftp_fields: Dict[str, str], field_mapping: Dict[str, Seq
             if nick in accumulator:
                 if ftp_field:
                     if accumulator[nick]:
-                        accumulator[nick] = '; '.join([accumulator[nick], ftp_field])
+                        accumulator[nick] = '; '.join([
+                            accumulator[nick],
+                            ftp_field
+                        ])
                     else:
                         accumulator[nick] = ftp_field
             else:
@@ -274,7 +276,7 @@ def map_ftp_works_as_cdm_objects(
     dropped_works = []
     for ftp_work in ftp_works:
         if verbose:
-            print(f"Mapping FromThePage data {len(catcher_data)}/{len(dropped_works)}/{len(ftp_works)}", end='\r')
+            print(f"Mapping FromThePage data {len(catcher_data)}/{len(dropped_works)}/{len(ftp_works)}...", end='\r')
         cdm_object = map_ftp_work_as_cdm_object(
             ftp_work=ftp_work,
             field_mapping=field_mapping,
@@ -414,43 +416,35 @@ def main():
         sys.exit(1)
 
     with Session() as session:
-        ftp_collection = get_and_load_ftp_collection(
-            slug=args.slug,
-            collection_name=args.collection_name,
-            rendering_label='XHTML Export',
-            session=session
-        )
+        try:
+            ftp_collection = get_and_load_ftp_collection(
+                slug=args.slug,
+                collection_name=args.collection_name,
+                rendering_label='XHTML Export',
+                session=session
+            )
+        except KeyError as err:
+            print(f"Error: {err}")
+            sys.exit(1)
 
-        # Non-compound objects metadata is mapped both as
-        # page-level and object-level. The match mode
-        # only matters for compound objects.
         if args.match_mode == MatchModes.by_object:
             catcher_data, dropped_works = map_ftp_works_as_cdm_objects(
                 ftp_works=ftp_collection.works,
                 field_mapping=field_mapping,
                 page_picker=PagePickers.first_filled_page
             )
-            print(f"Mapped {len(catcher_data)} CONTENTdm objects from {len(ftp_collection.works)} FromThePage works")
+            print(f"Mapped {len(catcher_data)} CONTENTdm object edits from {len(ftp_collection.works)} FromThePage works.")
         elif args.match_mode == MatchModes.by_page:
             catcher_data, dropped_works = map_ftp_works_as_cdm_pages(
                 ftp_works=ftp_collection.works,
                 field_mapping=field_mapping,
                 session=session
             )
-            print(f"Mapped {len(catcher_data)} CONTENTdm pages from {len(ftp_collection.works)} FromThePage works")
+            print(f"Mapped {len(catcher_data)} CONTENTdm page edits from {len(ftp_collection.works)} FromThePage works.")
         else:
             raise KeyError(f"invalid match mode {args.match_mode!r}")
 
-    if not dropped_works:
-        print("All FromThePage works were mapped")
-    else:
-        print(f"{len(dropped_works)} works were not mapped")
-        with StringIO() as output:
-            writer = csv.writer(output)
-            writer.writerow(('work-label', 'url'))
-            for ftp_work in dropped_works:
-                writer.writerow((ftp_work.ftp_work_label, ftp_work.ftp_work_url))
-
+    print(f"{len(dropped_works)} FromThePage works had no edits mapped from them.")
     with open(args.output_file, mode='w') as fp:
         json.dump(catcher_data, fp, indent=2)
 
