@@ -5,7 +5,7 @@ import requests
 from datetime import datetime
 
 import scanftpfields
-import ftpmd2catcher
+import ftpfields2catcher
 
 
 ftp_vcr = vcr.VCR(
@@ -21,7 +21,7 @@ ftp_vcr = vcr.VCR(
 @ftp_vcr.use_cassette()
 def ftp_collection(request):
     with requests.Session() as session:
-        ftp_collection = ftpmd2catcher.get_and_load_ftp_collection(
+        ftp_collection = ftpfields2catcher.get_and_load_ftp_collection(
             **request.param,
             session=session
         )

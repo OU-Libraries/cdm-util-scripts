@@ -241,9 +241,9 @@ $ head csv2catcher-pages.json
 ```
 Note that the `dmrecord` pointer now points to a page in the object referenced in the previous example.
 
-### ftpmd2catcher
+### ftpfields2catcher
 
-`ftpmd2catcher` takes
+`ftpfields2catcher` takes
 * A match mode, either `object` or `page`
 * A FromThePage user slug
 * A FromThePage project label
