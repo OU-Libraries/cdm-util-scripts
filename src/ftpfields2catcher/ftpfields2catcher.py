@@ -233,7 +233,7 @@ def get_and_load_ftp_collection(
         session=session
     )
     if verbose:
-        print(f"Requesting project manifest {manifest_url}...")
+        print(f"Requesting project manifest...")
     ftp_collection = get_ftp_collection(
         manifest_url=manifest_url,
         session=session
@@ -277,7 +277,7 @@ def map_ftp_works_as_cdm_objects(
     dropped_works = []
     for ftp_work in ftp_works:
         if verbose:
-            print(f"Mapping FromThePage data {len(catcher_data)}/{len(dropped_works)}/{len(ftp_works)}...", end='\r')
+            print(f"Mapping FromThePage data {len(catcher_data)+1}/{len(ftp_works)}...", end='\r')
         cdm_object = map_ftp_work_as_cdm_object(
             ftp_work=ftp_work,
             field_mapping=field_mapping,
@@ -359,7 +359,7 @@ def map_ftp_works_as_cdm_pages(
     dropped_works = []
     for n, ftp_work in enumerate(ftp_works, start=1):
         if verbose:
-            print(f"Requesting CONTENTdm page pointers and mapping FromThePage data {n}/{len(dropped_works)}/{len(ftp_works)}", end='\r')
+            print(f"Requesting CONTENTdm page pointers and mapping FromThePage data {n}/{len(ftp_works)}", end='\r')
         pages = map_ftp_work_as_cdm_pages(
             ftp_work=ftp_work,
             field_mapping=field_mapping,
@@ -436,18 +436,17 @@ def main():
                 field_mapping=field_mapping,
                 page_picker=PagePickers.first_filled_page
             )
-            print(f"Mapped {len(catcher_data)} CONTENTdm object edits from {len(ftp_collection.works)} FromThePage works.")
+            print(f"Collected {len(catcher_data)} CONTENTdm object edits from {len(ftp_collection.works)} FromThePage works.")
         elif args.match_mode == MatchModes.by_page:
             catcher_data, dropped_works = map_ftp_works_as_cdm_pages(
                 ftp_works=ftp_collection.works,
                 field_mapping=field_mapping,
                 session=session
             )
-            print(f"Mapped {len(catcher_data)} CONTENTdm page edits from {len(ftp_collection.works)} FromThePage works.")
+            print(f"Collected {len(catcher_data)} CONTENTdm page edits from {len(ftp_collection.works)} FromThePage works.")
         else:
             raise KeyError(f"invalid match mode {args.match_mode!r}")
 
-    print(f"{len(dropped_works)} FromThePage works had no edits mapped from them.")
     with open(args.output_file, mode='w') as fp:
         json.dump(catcher_data, fp, indent=2)
 
