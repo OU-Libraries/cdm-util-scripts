@@ -245,13 +245,13 @@ def test_map_ftp_work_as_cdm_object(ftp_work, page_picker, result):
 
 
 @ftp_vcr.use_cassette()
-def test_get_cdm_item_info(session):
+def test_get_ftp_work_cdm_item_info(session):
     ftp_work = ftpfields2catcher.FTPWork(
         cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
         cdm_collection_alias='oclcsample',
         dmrecord='102'
     )
-    item_info = ftpfields2catcher.get_cdm_item_info(ftp_work, session)
+    item_info = ftpfields2catcher.get_ftp_work_cdm_item_info(ftp_work, session)
     assert item_info['dmrecord'] == ftp_work.dmrecord
     assert item_info['find']
 
