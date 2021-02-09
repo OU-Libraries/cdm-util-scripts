@@ -10,6 +10,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 
 from ftp2catcher import get_ftp_manifest, get_cdm_page_pointers
+from catcherdiff import get_cdm_item_info
 
 from typing import Optional, List, Iterable, Dict, Sequence, Callable, Tuple
 
@@ -90,7 +91,7 @@ def get_rendering(ftp_manifest: dict, label: str, session: Session) -> str:
             rendering_url = rendering['@id']
             break
     else:
-        raise KeyError("label not found in manifest")
+        raise KeyError(f"label {label!r} not found in manifest renderings")
     response = session.get(rendering_url)
     response.raise_for_status()
     return response.text
@@ -304,11 +305,13 @@ class PagePickers:
         return None
 
 
-def get_cdm_item_info(ftp_work: FTPWork, session: Session) -> Dict[str, str]:
-    response = session.get(f"{ftp_work.cdm_repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/{ftp_work.cdm_collection_alias}/{ftp_work.dmrecord}/json")
-    response.raise_for_status()
-    item_info = response.json()
-    return item_info
+def get_ftp_work_cdm_item_info(ftp_work: FTPWork, session: Session) -> Dict[str, str]:
+    return get_cdm_item_info(
+        cdm_repo_url=ftp_work.cdm_repo_url,
+        cdm_collection_alias=ftp_work.cdm_collection_alias,
+        dmrecord=ftp_work.dmrecord,
+        session=session
+    )
 
 
 def load_cdm_page_pointers(ftp_work: FTPWork, session: Session) -> None:
@@ -329,7 +332,7 @@ def map_ftp_work_as_cdm_pages(
 ) -> List[Dict[str, str]]:
     if not any(page.fields for page in ftp_work.pages):
         return []
-    item_info = get_cdm_item_info(ftp_work, session)
+    item_info = get_ftp_work_cdm_item_info(ftp_work, session)
     if item_info['find'].endswith('.cpd'):
         load_cdm_page_pointers(ftp_work, session)
     else:
