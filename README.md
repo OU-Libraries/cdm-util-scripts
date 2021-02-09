@@ -55,6 +55,7 @@ You can also delete the cloned repo directory and repeat the installation instru
 All the scripts will give help from the command line if asked via `SCRIPTNAME -h`.
 
 <a name="printcdminfo"/>
+
 ### printcdminfo
 
 `printcdminfo` takes a CONTENTdm repository URL and prints collections and field metadata, including collection and field nicknames. If given a repository base URL it will print a table of collection data for that repository; if passed the `--alias` option with a collection alias, it will print the field information for that collection.
@@ -114,6 +115,7 @@ Respondent- formation,respob
 ```
 
 <a name="printftpinfo"/>
+
 ### printftpinfo
 
 `printftpinfo` takes a FromThePage user slug (like `ohiouniversitylibraries`) and prints the collections available from that user on fromthepage.com. It is designed to be helpful for getting exact collection/project names for FromThePage projects.
@@ -132,6 +134,7 @@ $ printftpinfo ohiouniversitylibraries
 ```
 
 <a name="scanftpfields"/>
+
 ### scanftpfields
 
 `scanftpfields` takes
@@ -143,6 +146,7 @@ and outputs a detailed report on the field schemas in use in that FromThePage pr
 Optionally, the format of the report can be specified using the `--output` argument, which defaults to `html`, but can be changed to `json` to output a machine-readable version of the report's data.
 
 <a name="catcherdiff"/>
+
 ### catcherdiff
 
 `catcherdiff` takes
@@ -154,6 +158,7 @@ Optionally, the format of the report can be specified using the `--output` argum
 and outputs an HTML report showing on a per-record basis what fields would be changed in a CONTENTdm collection if that cdm-catcher JSON file were made the subject of a cdm-catcher `edit` action. This script is intended to be useful for cross-checking the output of the `2catcher` series of scripts and checking to see if a Catcher edit action has been completely implemented by the Catcher service.
 
 <a name="csv2catcher"/>
+
 ### csv2catcher
 
 `csv2catcher` takes
@@ -266,6 +271,7 @@ $ head csv2catcher-pages.json
 Note that the `dmrecord` pointer now points to a page in the object referenced in the previous example.
 
 <a name="ftpfields2catcher"/>
+
 ### ftpfields2catcher
 
 `ftpfields2catcher` takes
@@ -289,6 +295,7 @@ Match mode `page` matches each field-based transcription to the page-level metad
 Match mode `object` matches a single field-based transcription page to the object-level metadata for a compound object. It chooses the first filled page,  meaning the first page in an object that has a non-empty value in any field. It ignores any filled pages after the first. If there are no filled pages in a FromThePage work, it skips it.
 
 <a name="ftp2catcher"/>
+
 ### ftp2catcher
 
 `ftp2catcher` takes
@@ -382,6 +389,7 @@ The optional argument can also be provided with file-specified arguments:
     ftp2catcher @arguments.txt --transcript_type 'Searchable Plaintext'
 
 <a name="csv2json"/>
+
 ### csv2json
 
 `csv2json` accepts a CSV, TSV or other delimited file and transposes its rows into a list of JSON objects with column headers as keys, hopefully suitable for use with the Washington State Library's [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher) metadata `edit` action.
