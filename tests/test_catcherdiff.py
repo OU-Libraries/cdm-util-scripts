@@ -29,6 +29,14 @@ def test_get_cdm_item_info(session):
     for key, value in item_info.items():
         assert isinstance(value, str)
 
+    with pytest.raises(ValueError):
+        catcherdiff.get_cdm_item_info(
+            cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
+            cdm_collection_alias='oclcsample',
+            dmrecord='999',
+            session=session
+        )
+
 
 @pytest.mark.parametrize('cdm_catcher_edits, cdm_items_info, result', [
     (
@@ -43,6 +51,20 @@ def test_collate_deltas(cdm_catcher_edits, cdm_items_info, result):
         cdm_items_info=cdm_items_info
     )
     assert deltas == result
+
+
+@pytest.mark.parametrize('cdm_catcher_edits, cdm_items_info', [
+    (
+        [{'dmrecord': '1', 'nick': 'value1', 'wrong': 'wrong1'}],
+        [{'dmrecord': '1', 'nick': 'value2', 'extra': 'extra'}]
+    )
+])
+def test_collate_deltas_raises(cdm_catcher_edits, cdm_items_info):
+    with pytest.raises(KeyError):
+        catcherdiff.collate_deltas(
+            cdm_catcher_edits=cdm_catcher_edits,
+            cdm_items_info=cdm_items_info
+        )
 
 
 def test_report_to_html():

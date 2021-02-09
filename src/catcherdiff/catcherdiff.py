@@ -4,6 +4,7 @@ import jinja2
 import json
 import argparse
 import os
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -19,6 +20,8 @@ def get_cdm_item_info(
     response = session.get(f"{cdm_repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/{cdm_collection_alias}/{dmrecord}/json")
     response.raise_for_status()
     item_info = response.json()
+    if 'code' in item_info and 'message' in item_info:
+        raise ValueError(f"{item_info['message']}")
     return {nick: value or '' for nick, value in item_info.items()}
 
 
@@ -100,13 +103,19 @@ def main():
             session=session
         )
 
+    try:
+        deltas = collate_deltas(cdm_catcher_edits, cdm_items_info)
+    except KeyError as err:
+        print(f"Error: field nick not found in field info: {err}")
+        sys.exit(1)
+
     report = {
-        'cdm_repo_url': args.cdm_repo_url,
+        'cdm_repo_url': args.cdm_repo_url.rstrip('/'),
         'cdm_collection_alias': args.cdm_collection_alias,
         'catcher_json_file': Path(args.catcher_json_file).name,
         'report_file': args.report_file,
         'report_datetime': datetime.now().isoformat(),
-        'deltas': collate_deltas(cdm_catcher_edits, cdm_items_info),
+        'deltas': deltas,
     }
 
     report_html = report_to_html(report)
