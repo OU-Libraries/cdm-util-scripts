@@ -5,6 +5,7 @@ import re
 
 import ftpfields2catcher
 
+
 ftp_vcr = vcr.VCR(
     cassette_library_dir='tests/cassettes/ftpfields2catcher',
     record_mode='none'
