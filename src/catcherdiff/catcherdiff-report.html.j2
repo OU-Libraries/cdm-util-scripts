@@ -8,45 +8,59 @@
              max-width: 1170px;
              margin-right: auto;
              margin-left: auto;
+             margin-bottom: 3em;
          }
          .value {
              font-family: monospace;
          }
-         th, td {
-             padding: 0 1em 0 1em;
+         th {
+             padding: 0.1em 1em 0.1em 1em;
+             text-align: left;
+         }
+         td {
+             padding: 0.1em 1em 0.1em 1em;
              text-align: left;
              vertical-align: text-top;
          }
          tr {
              outline: thin solid;
          }
-         .equal {
-             background-color: #Ee8262;
+         .equal-values {
+             background-color: #Dcdcdc;
          }
-         .overwrite-blank {
-             background-color: #6e8b3d;
+         .equal-blanks {
          }
-         .overwrite {
-             background-color: #Ff8c00;
+         .overwrite-blank-with-value {
+             background-color: #00ee00;
+         }
+         .overwrite-value-with-value {
+             background-color: #Ee9a00;
+         }
+         .overwrite-value-with-blank {
+             background-color: #Ff0000;
+         }
+         .filename {
+             font-family: monospace;
          }
         </style>
     </head>
 
     <body>
         <div class="container">
-            <h1>{{ catcher_json_file }} catcherdiff report</h1>
+            <h1><span class="filename">{{ catcher_json_file }}</span> catcherdiff report</h1>
 
             <p>
                 Report datetime: {{ report_datetime }}<br/>
                 CONTENTdm repository: {{ cdm_repo_url }}<br/>
                 Collection alias: {{ cdm_collection_alias }}<br/>
-                cdm-catcher file name: {{ catcher_json_file }}<br/>
+                cdm-catcher file name: <span class="filename">{{ catcher_json_file }}</span><br/>
             </p>
 
-            <h2>Changes</h2>
+            <h2>Edit actions</h2>
 
             {% for edit, cdm_info in deltas %}
-                <h3><a href="{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}">{{ edit['dmrecord'] }}</a></h3>
+                <h3>dmrecord {{ edit['dmrecord'] }}</h3>
+                <p><a href="{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}">{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}</a></p>
                 <table>
                     <thead>
                         <tr>
@@ -57,20 +71,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for nick, value in edit.items() %}
+                        {% for nick, value in edit.items() if nick != 'dmrecord' %}
                             <tr>
                                 <td><pre>{{ nick }}</pre></td>
-                                <td><span class="value">{{ cdm_info[nick] }}</span></td>
+                                <td><p class="value">{{ cdm_info[nick]|replace('\n', '¶') }}</p></td>
                                 <td>
-                                    {%- if cdm_info[nick] == value %}
-                                        <span class="equal">=</span>
-                                    {%- elif not cdm_info[nick] %}
-                                        <span class="overwrite-blank">&lt;</span>
+                                    {%- if not cdm_info[nick] and not value %}
+                                        <span class="equal-blanks">∅</span>
+                                    {%- elif cdm_info[nick] and not value %}
+                                        <span class="overwrite-value-with-blank">−−</span>
+                                    {%- elif not cdm_info[nick] and value %}
+                                        <span class="overwrite-blank-with-value">++</span>
+                                    {%- elif cdm_info[nick] == value %}
+                                        <span class="equal-values">==</span>
                                     {%- else %}
-                                        <span class="overwrite">&lt;&lt;&lt;</span>
+                                        <span class="overwrite-value-with-value">&lt;&lt;</span>
                                     {%- endif %}
                                 </td>
-                                <td><span class="value">{{ value }}</span></td>
+                                <td><p class="value">{{ value|replace('\n', '¶') }}</p></td>
                             </tr>
                         {% endfor %}
                     </tbody>

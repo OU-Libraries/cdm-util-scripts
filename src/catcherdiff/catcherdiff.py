@@ -43,6 +43,15 @@ def get_cdm_items_info(
         )
     if verbose:
         print(end='\n')
+    return cdm_items_info
+
+
+def collate_deltas(
+        cdm_catcher_edits: List[Dict[str, str]],
+        cdm_items_info: List[Dict[str, str]]
+):
+    return [(edit, {nick: item_info[nick] for nick in edit.keys()})
+            for edit, item_info in zip(cdm_catcher_edits, cdm_items_info)]
 
 
 def report_to_html(report: dict) -> str:
@@ -91,17 +100,13 @@ def main():
             session=session
         )
 
-    deltas = []
-    for edit, item_info in zip(cdm_catcher_edits, cdm_items_info):
-        deltas.append((edit, {nick: item_info[nick] for nick in edit.keys()}))
-
     report = {
         'cdm_repo_url': args.cdm_repo_url,
         'cdm_collection_alias': args.cdm_collection_alias,
         'catcher_json_file': Path(args.catcher_json_file).name,
         'report_file': args.report_file,
         'report_datetime': datetime.now().isoformat(),
-        'deltas': deltas,
+        'deltas': collate_deltas(cdm_catcher_edits, cdm_items_info),
     }
 
     report_html = report_to_html(report)

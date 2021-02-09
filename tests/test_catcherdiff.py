@@ -30,6 +30,21 @@ def test_get_cdm_item_info(session):
         assert isinstance(value, str)
 
 
+@pytest.mark.parametrize('cdm_catcher_edits, cdm_items_info, result', [
+    (
+        [{'dmrecord': '1', 'nick': 'value1'}],
+        [{'dmrecord': '1', 'nick': 'value2', 'extra': 'extra'}],
+        [({'dmrecord': '1', 'nick': 'value1'}, {'dmrecord': '1', 'nick': 'value2'})]
+    )
+])
+def test_collate_deltas(cdm_catcher_edits, cdm_items_info, result):
+    deltas = catcherdiff.collate_deltas(
+        cdm_catcher_edits=cdm_catcher_edits,
+        cdm_items_info=cdm_items_info
+    )
+    assert deltas == result
+
+
 def test_report_to_html():
     report_html = catcherdiff.report_to_html({
         'cdm_repo_url': 'https://cdmdemo.contentdm.oclc.org',
