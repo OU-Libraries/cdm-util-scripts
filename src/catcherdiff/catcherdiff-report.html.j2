@@ -20,6 +20,15 @@
          tr {
              outline: thin solid;
          }
+         .equal {
+             background-color: #Ee8262;
+         }
+         .overwrite-blank {
+             background-color: #6e8b3d;
+         }
+         .overwrite {
+             background-color: #Ff8c00;
+         }
         </style>
     </head>
 
@@ -43,6 +52,7 @@
                         <tr>
                             <th>CONTENTdm field nick</th>
                             <th>Current value</th>
+                            <th>Action</th>
                             <th>Edit value</th>
                         </tr>
                     </thead>
@@ -51,6 +61,15 @@
                             <tr>
                                 <td><pre>{{ nick }}</pre></td>
                                 <td><span class="value">{{ cdm_info[nick] }}</span></td>
+                                <td>
+                                    {%- if cdm_info[nick] == value %}
+                                        <span class="equal">=</span>
+                                    {%- elif not cdm_info[nick] %}
+                                        <span class="overwrite-blank">&lt;</span>
+                                    {%- else %}
+                                        <span class="overwrite">&lt;&lt;&lt;</span>
+                                    {%- endif %}
+                                </td>
                                 <td><span class="value">{{ value }}</span></td>
                             </tr>
                         {% endfor %}

@@ -28,3 +28,20 @@ def test_get_cdm_item_info(session):
     assert item_info['dmrecord']
     for key, value in item_info.items():
         assert isinstance(value, str)
+
+
+def test_report_to_html():
+    report_html = catcherdiff.report_to_html({
+        'cdm_repo_url': 'https://cdmdemo.contentdm.oclc.org',
+        'cdm_collection_alias': 'oclcsample',
+        'catcher_json_file': 'catcher-edits.json',
+        'report_file': 'catcherdiff-report.html',
+        'report_datetime': '2021-01-01T00:00:00.000000',
+        'deltas': [
+            (
+                {'dmrecord': '1', 'nick': 'value1'},
+                {'dmrecord': '1', 'nick': 'value2'}
+            )
+        ],
+    })
+    assert report_html
