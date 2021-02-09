@@ -61,7 +61,7 @@ All the scripts will give help from the command line if asked via `SCRIPTNAME -h
 `printcdminfo` takes a CONTENTdm repository URL and prints collections and field metadata, including collection and field nicknames. If given a repository base URL it will print a table of collection data for that repository; if passed the `--alias` option with a collection alias, it will print the field information for that collection.
 
 Example:
-```
+```console
 $ printcdminfo https://cdmdemo.contentdm.oclc.org/ --alias oclcsample
 name                  nick         type      size   find    req   search   hide   vocdb   vocab   dc        admin   readonly
 ----                  ----         ----      ----   ----    ---   ------   ----   -----   -----   --        -----   --------
@@ -101,7 +101,7 @@ If you make too many of the same request (10+?), OCLC will start rejecting them,
 There is also a `--columns` option that takes a list of column names separated with commas and no spaces and returns only those columns.
 
 Example:
-```
+```console
 $ printcdminfo https://media.library.ohio.edu --alias p15808coll15 --output csv --columns name,nick
 name,nick
 Title,title
@@ -120,7 +120,7 @@ Respondent- formation,respob
 
 `printftpinfo` takes a FromThePage user slug (like `ohiouniversitylibraries`) and prints the collections available from that user on fromthepage.com. It is designed to be helpful for getting exact collection/project names for FromThePage projects.
 
-```
+```console
 $ printftpinfo ohiouniversitylibraries
 @id                                                                                        @type           label
 ---                                                                                        -----           -----
@@ -145,6 +145,17 @@ and outputs a detailed report on the field schemas in use in that FromThePage pr
 
 Optionally, the format of the report can be specified using the `--output` argument, which defaults to `html`, but can be changed to `json` to output a machine-readable version of the report's data.
 
+```console
+$ scanftpfields ohiouniversitylibraries 'Dance Posters Metadata'
+Looking up 'Dance Posters Metadata' @ ohiouniversitylibraries...
+Requesting project manifest https://fromthepage.com/iiif/collection/dance-posters-metadata...
+Requesting work manifests and 'XHTML Export' renderings 52/52...
+Compiling report...
+Writing report as 'field-label-report_dance-posters-metadata_2021-02-09_17-59-00.html'
+$ ls
+field-label-report_dance-posters-metadata_2021-02-09_17-59-00.html
+```
+
 <a name="catcherdiff"/>
 
 ### catcherdiff
@@ -156,6 +167,25 @@ Optionally, the format of the report can be specified using the `--output` argum
 * An output file name
 
 and outputs an HTML report showing on a per-record basis what fields would be changed in a CONTENTdm collection if that cdm-catcher JSON file were made the subject of a cdm-catcher `edit` action. This script is intended to be useful for cross-checking the output of the `2catcher` series of scripts and checking to see if a Catcher edit action has been completely implemented by the Catcher service.
+
+```console
+$ head cdm-catcher.json
+[
+  {
+    "dmrecord": "119",
+    "title": "An Evening of Dance, Florida State University poster, February 22-24",
+    "creatb": "",
+    "creata": "Nikolais, Alwin",
+    "creato": "",
+    "dancea": "",
+    "dance": "",
+    "langua": "English",
+$ catcherdiff https://media.library.ohio.edu p15808coll16 cdm-catcher.json report.html
+Requesting CONTENTdm item info 52/52...
+$ ls
+cdm-catcher.json
+report.html
+```
 
 <a name="csv2catcher"/>
 
@@ -179,7 +209,7 @@ The reconciliation configuration file specifies these parameters:
 Only `match-mode` is required (if provided by itself csv2catcher will simply transpose the field data CSV into JSON). If any of `repository-url`, `collection-alias`, or `identifier-nick` is specified, they must all be specified. If `match-mode` is `page`, `page-position-column-name` must be specified (otherwise it is ignored).
 
 Example of a JSON reconciliation configuration file:
-```
+```json
 {
     "repository-url": "https://media.library.ohio.edu",
     "collection-alias": "p15808coll15",
@@ -191,7 +221,7 @@ Example of a JSON reconciliation configuration file:
 If [PyYAML](https://github.com/yaml/pyyaml) is installed in the current environment, you may use a `.yaml` or `.yml` configuration file instead of JSON. You can install it when the virtual environment is active with `pip install pyyaml`.
 
 Example of a YAML reconciliation configuration file:
-```
+```yaml
 # You can have comments in YAML
 repository-url: https://media.library.ohio.edu
 collection-alias: p15808coll15
@@ -224,7 +254,7 @@ All cell values in the field data CSV will have leading and trailing whitespace 
 The `page` reconciliation mode matches field data CSV rows to page level-metadata in CONTENTdm compound objects using the object-level `identifier-nick` key and the specified page number in the `page-position-column-name` column. The `object` reconciliation mode matches field data CSV rows to object level metadata using the `identifier-nick` key, which must be unique in the field data CSV.
 
 Example, using the `object` mode:
-```
+```console
 $ cat object-config.json
 {
     "repository-url": "https://media.library.ohio.edu",
@@ -247,7 +277,7 @@ $ head csv2catcher-objects.json
 ```
 
 Example, using the `page` mode: 
-```
+```console
 $ cat page-config.yaml
 repository-url: https://media.library.ohio.edu
 collection-alias: p15808coll15
@@ -294,6 +324,27 @@ Match mode `page` matches each field-based transcription to the page-level metad
 
 Match mode `object` matches a single field-based transcription page to the object-level metadata for a compound object. It chooses the first filled page,  meaning the first page in an object that has a non-empty value in any field. It ignores any filled pages after the first. If there are no filled pages in a FromThePage work, it skips it.
 
+```console
+$ ftpfields2catcher object ohiouniversitylibraries 'Dance Posters Metadata' dpm-mapping.csv dpm-catcher.json
+Looking up 'Dance Posters Metadata' @ ohiouniversitylibraries...
+Requesting project manifest https://fromthepage.com/iiif/collection/dance-posters-metadata...
+Requesting work manifests and 'XHTML Export' renderings 52/52...
+Mapping FromThePage data 51/0/52...
+Mapped 52 CONTENTdm object edits from 52 FromThePage works.
+0 FromThePage works had no edits mapped from them.
+$ head dpm-catcher.json
+[
+  {
+    "dmrecord": "119",
+    "title": "An Evening of Dance, Florida State University poster, February 22-24",
+    "creatb": "",
+    "creata": "Nikolais, Alwin",
+    "creato": "",
+    "dancea": "",
+    "dance": "",
+    "langua": "English",
+```
+
 <a name="ftp2catcher"/>
 
 ### ftp2catcher
@@ -325,7 +376,7 @@ Please consult FromThePage's API [documentation on renderings](https://github.co
 
 FromThePage IIIF manifests do not contain explicit links back to CONTENTdm objects, but they do publish a `dc:source` metadata field that contains an object identifier (perhaps based on designated `dc:identifier` in collection field data?):
 
-```
+```json
 {
   "@context": "http://iiif.io/api/presentation/2/context.json",
   "@id": "https://fromthepage.com/iiif/45434/manifest",
@@ -347,7 +398,7 @@ FromThePage IIIF manifests do not contain explicit links back to CONTENTdm objec
 `ftp2catcher` must also be provided with the field nickname for the transcript field in the target collection. This field will be type `FTS` in `printcdminfo` output.
 
 Example:
-```
+```console
 $ cat ftp-manifest-urls.txt
 https://fromthepage.com/iiif/45434/manifest
 https://fromthepage.com/iiif/36866/manifest
@@ -374,7 +425,7 @@ $ head cdm-catcher-edits.json
 ```
 
 `ftp2catcher` can also have its arguments specified via a text file, prefixed with `@`:
-```
+```console
 $ cat arguments.txt
 http://media.library.ohio.edu
 p15808coll15
