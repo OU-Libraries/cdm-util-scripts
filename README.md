@@ -329,10 +329,11 @@ The FromThePage project _must_:
 
 The match modes differ only in their treatment of compound objects. Both modes match field-based transcriptions for simple, single-item objects to their single metadata records.
 
-Match mode `page` matches each field-based transcription to the page-level metadata for the corresponding page inside the page's compound object. If a page's field-based transcription is blank, it skips it.
+Match mode `page` matches each field-based transcription to the page-level metadata for the corresponding page inside the page's compound object. If a page's field-based transcription is blank, it skips that page. If there are no filled pages in a FromThePage work, it skips that work.
 
-Match mode `object` matches a single field-based transcription page to the object-level metadata for a compound object. It chooses the first filled page,  meaning the first page in an object that has a non-empty value in any field. It ignores any filled pages after the first. If there are no filled pages in a FromThePage work, it skips it.
+Match mode `object` matches a single field-based transcription page to the object-level metadata for a compound object. It chooses the first filled page,  meaning the first page in an object that has a non-empty value in any field. It ignores any filled pages after the first. If there are no filled pages in a FromThePage work, it skips that work.
 
+Example using `object` mode:
 ```console
 $ ftpfields2catcher object ohiouniversitylibraries 'Dance Posters Metadata' dpm-mapping.csv dpm-catcher.json
 Looking up 'Dance Posters Metadata' @ ohiouniversitylibraries...
@@ -340,6 +341,27 @@ Requesting project manifest...
 Requesting work manifests and 'XHTML Export' renderings 52/52...
 Mapping FromThePage data 52/52...
 Mapped 52 CONTENTdm object edits from 52 FromThePage works.
+$ head dpm-catcher.json
+[
+  {
+    "dmrecord": "119",
+    "title": "An Evening of Dance, Florida State University poster, February 22-24",
+    "creatb": "",
+    "creata": "Nikolais, Alwin",
+    "creato": "",
+    "dancea": "",
+    "dance": "",
+    "langua": "English",
+```
+
+Example using `page` mode:
+```console
+$ ftpfields2catcher page ohiouniversitylibraries 'Dance Posters Metadata' dpm-mapping.csv dpm-catcher.json
+Looking up 'Dance Posters Metadata' @ ohiouniversitylibraries...
+Requesting project manifest...
+Requesting work manifests and 'XHTML Export' renderings 52/52...
+Requesting CONTENTdm page pointers and mapping FromThePage data 52/52
+Collected 52 CONTENTdm page edits from 52 FromThePage works.
 $ head dpm-catcher.json
 [
   {
