@@ -3,12 +3,12 @@
 cdm-util-scripts are Python scripts developed to support Ohio University Libraries' CONTENTdm operations.
 
 * [printcdminfo](#printcdminfo) prints CONTENTdm collection information to the terminal, including collection aliases and field nicknames
-* :new: [printftpinfo](#printftpinfo) prints FromThePage project information to the terminal, including FromThePage collection labels
+* :new: [printftpinfo](#printftpinfo) prints FromThePage project information to the terminal, including FromThePage project labels
 * :new: [scanftpfields](#scanftpfields) reports on what field-based transcription field schemas are in use in a FromThePage project
 * :new: [catcherdiff](#catcherdiff) generates a report showing what item metadata will be changed if a `cdm-catcher` `edit` action JSON file is implemented
-* [csv2catcher](#csv2catcher) takes a CSV with CONTENTdm metadata edits, reconciles it to CONTENTdm items, and outputs a `cdm-catcher` `edit` action JSON upload
-* :new: [ftpfields2catcher](#ftpfields2catcher) downloads a FromThePage field-based transcription project and translates it into a `cdm-catcher` `edit` action JSON upload
-* [ftp2catcher](#ftp2catcher) reconciles a FromThePage transcription project to a CONTENTdm collection based on uploaded file names and outputs a `cdm-catcher` `edit` action JSON upload
+* [csv2catcher](#csv2catcher) takes a CSV with CONTENTdm metadata edits, maps its columns onto CONTENTdm fields, reconciles it to a CONTENTdm collection, and outputs a `cdm-catcher` `edit` action JSON upload
+* :new: [ftpfields2catcher](#ftpfields2catcher) requests a FromThePage field-based transcription project, maps its fields onto CONTENTdm fields, and outputs a `cdm-catcher` `edit` action JSON upload
+* [ftp2catcher](#ftp2catcher) reconciles a FromThePage transcription project to CONTENTdm compound object pages based on uploaded file names and outputs a `cdm-catcher` `edit` action JSON upload
 * [csv2json](#csv2json) transposes a CSV into a list of rows in JSON using column names as keys, one use of which is to transform a CSV with CONTENTdm field nicks as column names into a `cdm-catcher` `edit` action JSON upload
 
 ## Installation
@@ -329,9 +329,9 @@ The FromThePage project _must_:
 
 The match modes differ only in their treatment of compound objects. Both modes match field-based transcriptions for simple, single-item objects to their single metadata records.
 
-Match mode `page` matches each field-based transcription to the page-level metadata for the corresponding page inside the page's compound object. If a page's field-based transcription is blank, it skips that page. If there are no filled pages in a FromThePage work, it skips that work.
+Match mode `page` matches each filled page in a FromThePage work to its corresponding CONTENTdm compound object page-level metadata. If a page's field-based transcription is blank, it skips that page. If there are no filled pages in a FromThePage work, it skips that work.
 
-Match mode `object` matches a single field-based transcription page to the object-level metadata for a compound object. It chooses the first filled page,  meaning the first page in an object that has a non-empty value in any field. It ignores any filled pages after the first. If there are no filled pages in a FromThePage work, it skips that work.
+Match mode `object` matches a _single_ FromThePage field-based transcription page to its parent CONTENTdm compound object's object-level metadata. It chooses the first filled page, meaning the first page in a FromThePage work that has a non-empty value in any field. It ignores any filled pages after the first. If there are no filled pages in a FromThePage work, it skips that work.
 
 Example using `object` mode:
 ```console
