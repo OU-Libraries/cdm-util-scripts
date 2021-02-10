@@ -120,6 +120,7 @@ Respondent- formation,respob
 
 `printftpinfo` takes a FromThePage user slug (like `ohiouniversitylibraries`) and prints the collections available from that user on fromthepage.com. It is designed to be helpful for getting exact collection/project names for FromThePage projects.
 
+Example:
 ```console
 $ printftpinfo ohiouniversitylibraries
 @id                                                                                        @type           label
@@ -145,16 +146,19 @@ and outputs a detailed report on the field schemas in use in that FromThePage pr
 
 Optionally, the format of the report can be specified using the `--output` argument, which defaults to `html`, but can be changed to `json` to output a machine-readable version of the report's data.
 
+Example:
 ```console
 $ scanftpfields ohiouniversitylibraries 'Dance Posters Metadata'
 Looking up 'Dance Posters Metadata' @ ohiouniversitylibraries...
-Requesting project manifest https://fromthepage.com/iiif/collection/dance-posters-metadata...
+Requesting project manifest...
 Requesting work manifests and 'XHTML Export' renderings 52/52...
 Compiling report...
 Writing report as 'field-label-report_dance-posters-metadata_2021-02-09_17-59-00.html'
 $ ls
 field-label-report_dance-posters-metadata_2021-02-09_17-59-00.html
 ```
+
+The HTML report can then be reviewed by opening it in a browser.
 
 <a name="catcherdiff"/>
 
@@ -166,8 +170,9 @@ field-label-report_dance-posters-metadata_2021-02-09_17-59-00.html
 * A cdm-catcher `edit` action JSON file
 * An output file name
 
-and outputs an HTML report showing on a per-record basis what fields would be changed in a CONTENTdm collection if that cdm-catcher JSON file were made the subject of a cdm-catcher `edit` action. This script is intended to be useful for cross-checking the output of the `2catcher` series of scripts and checking to see if a Catcher edit action has been completely implemented by the Catcher service.
+and outputs an HTML report showing on a per-item basis what fields would be changed in a CONTENTdm collection if that cdm-catcher JSON file were used in a cdm-catcher `edit` action. This script is intended to be useful for cross-checking the output of the `2catcher` series of scripts and checking to see if a Catcher edit action has been completely implemented by the Catcher service.
 
+Example:
 ```console
 $ head cdm-catcher.json
 [
@@ -186,6 +191,8 @@ $ ls
 cdm-catcher.json
 report.html
 ```
+
+The HTML report can then be reviewed by opening it in a browser.
 
 <a name="csv2catcher"/>
 
@@ -233,7 +240,7 @@ page-position-column-name: Page Position
 The column mapping CSV must have two columns named `name` and `nick` in that order, and must include a mapping for the `identifier-nick` nickname if specified. Columns mapped to the same field nickname in the column mapping CSV will have their field data CSV contents joined with a semicolon. Multiple rows in the column mapping CSV with the same column name will have their field data CSV contents joined with a semicolon to each of the fields specified in their respective `nick` values. The designated `identifier-nick` field will only be used for reconciliation and will not be included in the output edit records.
 
 Example of a column mapping CSV:
-```
+```csv
 name,nick
 "Work Title",identi
 "Respondent name (last, first middle) (text)",creato
@@ -327,11 +334,10 @@ Match mode `object` matches a single field-based transcription page to the objec
 ```console
 $ ftpfields2catcher object ohiouniversitylibraries 'Dance Posters Metadata' dpm-mapping.csv dpm-catcher.json
 Looking up 'Dance Posters Metadata' @ ohiouniversitylibraries...
-Requesting project manifest https://fromthepage.com/iiif/collection/dance-posters-metadata...
+Requesting project manifest...
 Requesting work manifests and 'XHTML Export' renderings 52/52...
-Mapping FromThePage data 51/0/52...
+Mapping FromThePage data 52/52...
 Mapped 52 CONTENTdm object edits from 52 FromThePage works.
-0 FromThePage works had no edits mapped from them.
 $ head dpm-catcher.json
 [
   {
