@@ -4,12 +4,12 @@ cdm-util-scripts are Python scripts developed to support Ohio University Librari
 
 * [printcdminfo](#printcdminfo) prints CONTENTdm collection information to the terminal, including collection aliases and field nicknames
 * :new: [printftpinfo](#printftpinfo) prints FromThePage project information to the terminal, including FromThePage collection labels
-* :new: [scanftpfields](#scanftpfields) generates a report on what field-based transcription field sets are in use in a FromThePage project
+* :new: [scanftpfields](#scanftpfields) reports on what field-based transcription field schemas are in use in a FromThePage project
 * :new: [catcherdiff](#catcherdiff) generates a report showing what item metadata will be changed if a `cdm-catcher` `edit` action JSON file is implemented
 * [csv2catcher](#csv2catcher) takes a CSV with CONTENTdm metadata edits, reconciles it to CONTENTdm items, and outputs a `cdm-catcher` `edit` action JSON upload
-* :new: [ftpfields2catcher](#ftpfields2catcher) translates a FromThePage field-based transcription project into a `cdm-catcher` `edit` action JSON upload
+* :new: [ftpfields2catcher](#ftpfields2catcher) downloads a FromThePage field-based transcription project and translates it into a `cdm-catcher` `edit` action JSON upload
 * [ftp2catcher](#ftp2catcher) reconciles a FromThePage transcription project to a CONTENTdm collection based on uploaded file names and outputs a `cdm-catcher` `edit` action JSON upload
-* [csv2json](#csv2json) transposes a CSV into a list of rows in JSON using column names as keys, one use of which is to transform a CSV with CONTENTdm field nicks column names into a `cdm-catcher` `edit` action JSON upload
+* [csv2json](#csv2json) transposes a CSV into a list of rows in JSON using column names as keys, one use of which is to transform a CSV with CONTENTdm field nicks as column names into a `cdm-catcher` `edit` action JSON upload
 
 ## Installation
 
@@ -28,7 +28,7 @@ In the `cdm-util-scripts` directory create a virtual environment and activate it
     python -m venv env
     source env/Scripts/activate
 
-(Try `source env/bin/activate` on Linux and macOS.) Install `cdm-util-scripts` in the virtual environment:
+(Use `source env/bin/activate` on Linux and macOS.) Install `cdm-util-scripts` in the virtual environment:
 
     python -m pip install .
 
@@ -58,7 +58,7 @@ All the scripts will give help from the command line if asked via `SCRIPTNAME -h
 
 ### printcdminfo
 
-`printcdminfo` takes a CONTENTdm repository URL and prints collections and field metadata, including collection and field nicknames. If given a repository base URL it will print a table of collection data for that repository; if passed the `--alias` option with a collection alias, it will print the field information for that collection.
+`printcdminfo` takes a CONTENTdm repository URL and prints collections and field metadata, including collection and field nicknames. If given a repository base URL it will print a table of collection data for that repository; if passed the `--alias` option with a collection alias, it will print the field information for that collection. This script is intended to be useful for looking up collection aliases and field nicknames for use with other cdm-util-scripts.
 
 Example:
 ```console
@@ -94,7 +94,7 @@ If you make too many of the same request (10+?), OCLC will start rejecting them,
 
     printcdminfo https://media.library.ohio.edu > ou-collections.txt
 
-`printcdminfo` also has an `--output` option that will write CSV and JSON, as:
+This will create a text file called `ou-collections.txt` containing `printcdminfo` output in the current directory. `printcdminfo` also has an `--output` option that will write CSV and JSON, as:
 
     printcdminfo https://media.library.ohio.edu --alias donswaim --output csv > donswaim-fields.csv
 
@@ -114,11 +114,13 @@ Respondent- formation,respob
 ...
 ```
 
+The above example output could then be edited to create a CSV field mapping file for use with the `2catcher` series of scripts.
+
 <a name="printftpinfo"/>
 
 ### printftpinfo
 
-`printftpinfo` takes a FromThePage user slug (like `ohiouniversitylibraries`) and prints the collections available from that user on fromthepage.com. It is designed to be helpful for getting exact collection/project names for FromThePage projects.
+`printftpinfo` takes a FromThePage user slug (like `ohiouniversitylibraries`) and prints the collections available from that user on fromthepage.com. It is intended to be helpful for getting exact collection/project names for FromThePage projects.
 
 Example:
 ```console
@@ -142,7 +144,7 @@ $ printftpinfo ohiouniversitylibraries
 * A FromThePage user slug
 * A FromThePage project label
 
-and outputs a detailed report on the field schemas in use in that FromThePage project. The report is output in the current directory and has a name of the form `field-label-report_<collection-alias>_<year>-<month>-<day>_<24-hour>-<minutes>-<seconds>.<format>`. This report is designed to be helpful for ensuring schema consistency inside of a collection.
+and outputs a detailed report on the field schemas in use in that FromThePage project. The report is output in the current directory and has a name of the form `field-label-report_<collection-alias>_<year>-<month>-<day>_<24-hour>-<minutes>-<seconds>.<format>`. This report is intended to be useful for ensuring schema consistency inside of a collection, and is especially useful for checking if a FromThePage project can be loaded into CONTENTdm using `ftpfields2catcher`.
 
 Optionally, the format of the report can be specified using the `--output` argument, which defaults to `html`, but can be changed to `json` to output a machine-readable version of the report's data.
 
@@ -158,7 +160,7 @@ $ ls
 field-label-report_dance-posters-metadata_2021-02-09_17-59-00.html
 ```
 
-The HTML report can then be reviewed by opening it in a browser.
+The HTML report can then be reviewed by opening it in a web browser.
 
 <a name="catcherdiff"/>
 
@@ -192,7 +194,7 @@ cdm-catcher.json
 report.html
 ```
 
-The HTML report can then be reviewed by opening it in a browser.
+The HTML report can then be reviewed by opening it in a web browser.
 
 <a name="csv2catcher"/>
 
@@ -213,7 +215,7 @@ The reconciliation configuration file specifies these parameters:
 * `match-mode` one of `page`, to match field data CSV rows to page-level metadata, or `object` to match field data CSV rows to object-level metadata
 * `page-position-column-name` the name of the column in the field data CSV that enumerates the page the CSV row corresponds to in a compound object if `match-mode` is `page`
 
-Only `match-mode` is required (if provided by itself csv2catcher will simply transpose the field data CSV into JSON). If any of `repository-url`, `collection-alias`, or `identifier-nick` is specified, they must all be specified. If `match-mode` is `page`, `page-position-column-name` must be specified (otherwise it is ignored).
+Only `match-mode` is required. If `match-mode` is provided by itself `csv2catcher` will simply transpose the field data CSV into JSON, like `csv2json`. If any of `repository-url`, `collection-alias`, or `identifier-nick` is specified, they must all be specified. If `match-mode` is `page`, `page-position-column-name` must be specified (otherwise it is ignored).
 
 Example of a JSON reconciliation configuration file:
 ```json
@@ -237,10 +239,10 @@ match-mode: page
 page-position-column-name: Page Position
 ```
 
-The column mapping CSV must have two columns named `name` and `nick` in that order, and must include a mapping for the `identifier-nick` nickname if specified. Columns mapped to the same field nickname in the column mapping CSV will have their field data CSV contents joined with a semicolon. Multiple rows in the column mapping CSV with the same column name will have their field data CSV contents joined with a semicolon to each of the fields specified in their respective `nick` values. The designated `identifier-nick` field will only be used for reconciliation and will not be included in the output edit records.
+The column mapping CSV must have only two columns named `name` and `nick` in that order, and must include a mapping for the `identifier-nick` nickname if it is specified in the configuration file. Columns mapped to the same field nickname in the column mapping CSV will have their field data CSV contents joined with a semicolon. Multiple rows in the column mapping CSV with the same column name will have their field data CSV contents joined with a semicolon to each of the fields specified in their respective `nick` values. The designated `identifier-nick` field will only be used for reconciliation and will not be included in the output edit records.
 
 Example of a column mapping CSV:
-```csv
+```CSV
 name,nick
 "Work Title",identi
 "Respondent name (last, first middle) (text)",creato
@@ -325,7 +327,7 @@ The FromThePage project _must_:
 2. Have the same field schema for each transcript
 3. Have been loaded from CONTENTdm (so that FromThePage stored the corresponding CONTENTdm object URLs)
 
-The match modes differ only in their treatment of compound objects. Both match field-based transcriptions for simple, single-item objects. There can be only one match mode per-collection.
+The match modes differ only in their treatment of compound objects. Both modes match field-based transcriptions for simple, single-item objects to their single metadata records.
 
 Match mode `page` matches each field-based transcription to the page-level metadata for the corresponding page inside the page's compound object. If a page's field-based transcription is blank, it skips it.
 
@@ -359,28 +361,15 @@ $ head dpm-catcher.json
 * A CONTENTdm repository URL
 * A CONTENTdm collection alias
 * The CONTENTdm collection's field nickname for the identifier used in FromThePage's IIIF `dc:source` metadata field
-* The CONTENTdm field nickname for the collection's transcript field
+* The CONTENTdm field nickname for the collection's full-text transcript field
 * A text file listing the URLs for FromThePage's IIIF manifests separated by newlines
 * An output file name
 
-and outputs a JSON file of FromThePage transcripts hopefully suitable for upload to CONTENTdm with cdm-catcher.
+and outputs a JSON file of FromThePage transcripts matched to CONTENTdm compound object pages for upload to CONTENTdm with the `cdm-catcher` `edit` action.
 
-FromThePage provides its own set of IIIF manifests for transcribed CONTENTdm objects. These manifests contain links to transcripts corresponding to the pages of the object in several flavors:
+FromThePage provides its own set of IIIF manifests for transcribed CONTENTdm objects. These manifests contain links to transcripts corresponding to the pages of the object in several flavors. Please consult FromThePage's API [documentation on renderings](https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#seealso) for up-to-date explanations and examples. `ftp2catcher` currently defaults to `Verbatim Plaintext`, but there is an optional `--transcript_type` argument where you can specify the transcript flavor.
 
-* `Verbatim Plaintext` provides "the verbatim text, with all formatting, emendation, and subject linking stripped out" designed for "human download."
-* `Emended Plaintext` differs from `Verbatim Plaintext` by applying "normalization ... to all subjects mentioned so that while the verbatim text may read `"I greeted Mr. Jones and his wife this morning."`, the emended plaintext will read `"I greeted James Jones and Elizabeth Smith Jones this morning"`.
-* `Verbatim Translation Plaintext` provides a `Verbatim Plaintext` version of the text of a translation
-* `Emended Translation Plaintext` provides an `Emended Plaintext` version of the text of a translation
-* `Searchable Plaintext` provides a plaintext transcript with "words broken by hyphenated newlines are joined together, and a list of the canonical names mentioned within each page is appended to the end of the page"
-* `XHTML` provides the "existing XHTML export... with all formatting, emendation, and subject linking stripped out" 
-* `TEI-XML` provides the "existing TEI-XML export of the work"
-* `Subject CSV` provides a CSV of the "subjects mentioned within the work"
-
-Please consult FromThePage's API [documentation on renderings](https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#sequence-level-rendering) for up-to-date explanations and examples.
-
-`ftp2catcher` currently defaults to `Verbatim Plaintext`, but there is an optional `--transcript_type` argument where you can specify the transcript flavor.
-
-FromThePage IIIF manifests do not contain explicit links back to CONTENTdm objects, but they do publish a `dc:source` metadata field that contains an object identifier (perhaps based on designated `dc:identifier` in collection field data?):
+FromThePage IIIF manifests for works uploaded directly to the platform (instead of being harvested from CONTENTdm) have their file names recorded in a `dc:source` metadata field:
 
 ```json
 {
@@ -397,9 +386,7 @@ FromThePage IIIF manifests do not contain explicit links back to CONTENTdm objec
   ...
 ```
 
-`ftp2catcher` uses this `"metadata"` `"value"` to search CONTENTdm for the corresponding object so it can provide `dmrecord` numbers for cdm-catcher. To search for this identifier, `ftp2catcher` needs to know the field nickname to search in. This may be `identi` (because of the way CONTENTdm names `dc:identifer` fields), but should be ascertained from the CONTENTdm collection admin page, inspecting item page source, or `printcdminfo`.
-
-`ftp2catcher` associates transcripts with object pages by assuming that they're in the same order in FromThePage and CONTENTdm, "zipping" them together. It may be a good idea to check that this assumption is reliable.
+`ftp2catcher` uses this `"metadata"` `"value"` to search CONTENTdm for the corresponding object so it can provide `dmrecord` numbers for cdm-catcher. To search for this identifier, `ftp2catcher` needs to know the CONTENTdm field nickname to search in. This may often be `identi` (because of the way CONTENTdm names `dc:identifer` fields), but should be ascertained from the CONTENTdm collection admin page, inspecting item page source, or `printcdminfo`. If there is no CONTENTdm field that corresponds to FromThePage's `dc:source` value, `ftp2catcher` won't work.
 
 `ftp2catcher` must also be provided with the field nickname for the transcript field in the target collection. This field will be type `FTS` in `printcdminfo` output.
 
@@ -449,4 +436,4 @@ The optional argument can also be provided with file-specified arguments:
 
 ### csv2json
 
-`csv2json` accepts a CSV, TSV or other delimited file and transposes its rows into a list of JSON objects with column headers as keys, hopefully suitable for use with the Washington State Library's [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher) metadata `edit` action.
+`csv2json` accepts a CSV, TSV or other delimited file and transposes its rows into a list of JSON objects with column headers as keys, perhaps suitable for use with [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher)'s `edit` action if the column names are CONTENTdm field nicks.
