@@ -6,6 +6,7 @@ from datetime import datetime
 from collections import Counter, defaultdict
 import argparse
 import os
+from sys import platform
 
 import ftpfields2catcher
 
@@ -90,11 +91,11 @@ def compile_report(ftp_collection: ftpfields2catcher.FTPCollection):
 
 
 def report_to_html(report: dict) -> str:
-    env = jinja2.Environment(
-        loader=jinja2.FileSystemLoader(
-            os.path.dirname(os.path.abspath(__file__))
-        )
-    )
+    path = os.path.dirname(os.path.abspath(__file__))
+    # https://github.com/pallets/jinja/issues/767
+    if platform == 'win32':
+        path = path.replace('\\', '/')
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader(path))
     return env.get_template('scanftpfields-report.html.j2').render(report)
 
 
@@ -150,7 +151,7 @@ def main():
     date_str = report_date.strftime('%Y-%m-%d_%H-%M-%S')
     filename = f"field-label-report_{ftp_collection.alias}_{date_str}.{args.output}"
     print(f"Writing report as {filename!r}")
-    with open(filename, mode='w') as fp:
+    with open(filename, mode='w', encoding='utf-8') as fp:
         fp.write(report_str)
 
 

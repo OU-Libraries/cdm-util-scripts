@@ -7,6 +7,7 @@ import os
 import sys
 from datetime import datetime
 from pathlib import Path
+from sys import platform
 
 from typing import Dict, List
 
@@ -58,12 +59,12 @@ def collate_deltas(
 
 
 def report_to_html(report: dict) -> str:
-    env = jinja2.Environment(
-        loader=jinja2.FileSystemLoader(
-            os.path.dirname(os.path.abspath(__file__))
-        )
-    )
-    return env.get_template('catcherdiff-report.html.j2').render(report)
+    path = os.path.dirname(os.path.abspath(__file__))
+    # https://github.com/pallets/jinja/issues/767
+    if platform == 'win32':
+        path = path.replace('\\', '/')
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader(path))
+    return env.get_template('scanftpfields-report.html.j2').render(report)
 
 
 def main():
@@ -119,7 +120,7 @@ def main():
     }
 
     report_html = report_to_html(report)
-    with open(args.report_file, mode='w') as fp:
+    with open(args.report_file, mode='w', encoding='utf-8') as fp:
         fp.write(report_html)
 
 
