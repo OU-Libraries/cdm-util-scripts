@@ -64,7 +64,7 @@ def report_to_html(report: dict) -> str:
     if platform == 'win32':
         path = path.replace('\\', '/')
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(path))
-    return env.get_template('scanftpfields-report.html.j2').render(report)
+    return env.get_template('catcherdiff-report.html.j2').render(report)
 
 
 def main():
