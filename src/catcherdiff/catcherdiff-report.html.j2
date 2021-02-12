@@ -1,4 +1,4 @@
-{%- macro showwhitespace(s) %}{{ s|replace('\n', '¶')|replace(' ', '⋅') }}{% endmacro -%}
+{%- macro showwhitespace(s) %}{{ s|replace('\n', '↵') }}{% endmacro -%}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,42 +6,58 @@
         <title>{{ catcher_json_file }} catcherdiff report</title>
         <style type="text/css">
          .container {
-             max-width: 1170px;
-             margin-right: auto;
-             margin-left: auto;
-             margin-bottom: 3em;
+             max-width: 70rem;
+             margin: 0 auto 3em auto;
          }
-         .value {
-             font-family: monospace;
+
+         table {
+             width: 100%
+             table-layout: fixed;
+         }
+         th, td {
+             text-align: left;
          }
          th {
-             padding: 0.1em 1em 0.1em 1em;
-             text-align: left;
+             padding: 0.5em;
          }
          td {
-             padding: 0.1em 1em 0.1em 1em;
-             text-align: left;
+             padding: 0 0.5em 0 0.5em;
              vertical-align: text-top;
          }
          tr {
              outline: thin solid;
          }
+         .value-col {
+             width: 42.5%;
+         }
+         .change-col {
+             width: 5%;
+         }
+         .nick-col {
+             width: 10%;
+         }
+
+         .value {
+             background-color: ghostwhite;
+             font-family: monospace;
+             white-space: pre-wrap;
+         }
+         .filename {
+             font-family: monospace;
+         }
+
          .equal-values {
-             background-color: #Dcdcdc;
          }
          .equal-blanks {
          }
          .overwrite-blank-with-value {
-             background-color: #00ee00;
+             background-color: lime;
          }
          .overwrite-value-with-value {
-             background-color: #Ee9a00;
+             background-color: orange;
          }
          .overwrite-value-with-blank {
-             background-color: #Ff0000;
-         }
-         .filename {
-             font-family: monospace;
+             background-color: red;
          }
         </style>
     </head>
@@ -65,31 +81,31 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>CONTENTdm field nick</th>
-                            <th>Current value</th>
-                            <th>Action</th>
-                            <th>Edit value</th>
+                            <th class="nick-col">Field nick</th>
+                            <th class="value-col">Current value</th>
+                            <th class="change-col">Change</th>
+                            <th class="value-col">Edit value</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for nick, value in edit.items() if nick != 'dmrecord' %}
                             <tr>
-                                <td><pre>{{ nick }}</pre></td>
-                                <td><p class="value">{{ showwhitespace(cdm_info[nick]) }}</p></td>
-                                <td>
+                                <td class="nick-col"><pre>{{ nick }}</pre></td>
+                                <td class="value-col"><p><span class="value">{{ showwhitespace(cdm_info[nick]) }}</span></p></td>
+                                <td class="change-col">
                                     {%- if not cdm_info[nick] and not value %}
-                                        <span class="equal-blanks">∅</span>
+                                        <span class="equal-blanks">none</span>
                                     {%- elif cdm_info[nick] and not value %}
-                                        <span class="overwrite-value-with-blank">−−</span>
+                                        <span class="overwrite-value-with-blank">delete</span>
                                     {%- elif not cdm_info[nick] and value %}
-                                        <span class="overwrite-blank-with-value">++</span>
+                                        <span class="overwrite-blank-with-value">new</span>
                                     {%- elif cdm_info[nick] == value %}
-                                        <span class="equal-values">==</span>
+                                        <span class="equal-values">none<span>
                                     {%- else %}
-                                        <span class="overwrite-value-with-value">&lt;&lt;</span>
+                                        <span class="overwrite-value-with-value">replace</span>
                                     {%- endif %}
                                 </td>
-                                <td><p class="value">{{ showwhitespace(value) }}</p></td>
+                                <td class="value-col"><p><span class="value">{{ showwhitespace(value) }}</span></p></td>
                             </tr>
                         {% endfor %}
                     </tbody>
