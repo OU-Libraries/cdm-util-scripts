@@ -1,3 +1,4 @@
+{%- macro showwhitespace(s) %}{{ s|replace('\n', '¶')|replace(' ', '⋅') }}{% endmacro -%}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -74,7 +75,7 @@
                         {% for nick, value in edit.items() if nick != 'dmrecord' %}
                             <tr>
                                 <td><pre>{{ nick }}</pre></td>
-                                <td><p class="value">{{ cdm_info[nick]|replace('\n', '¶') }}</p></td>
+                                <td><p class="value">{{ showwhitespace(cdm_info[nick]) }}</p></td>
                                 <td>
                                     {%- if not cdm_info[nick] and not value %}
                                         <span class="equal-blanks">∅</span>
@@ -88,7 +89,7 @@
                                         <span class="overwrite-value-with-value">&lt;&lt;</span>
                                     {%- endif %}
                                 </td>
-                                <td><p class="value">{{ value|replace('\n', '¶') }}</p></td>
+                                <td><p class="value">{{ showwhitespace(value) }}</p></td>
                             </tr>
                         {% endfor %}
                     </tbody>
