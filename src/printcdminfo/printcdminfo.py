@@ -8,6 +8,37 @@ from io import StringIO
 from typing import Dict, Sequence, Callable, Any
 
 
+class DmError(Exception):
+    pass
+
+
+def get_dm(url: str, session: requests.Session):
+    response = session.get(url)
+    response.raise_for_status()
+    dm_result = response.json()
+    if 'code' in dm_result and 'message' in dm_result:
+        raise DmError(dm_result['message'])
+    return dm_result
+
+
+def get_collection_field_info(repo_url: str, collection_alias: str, session: requests.Session) -> dict:
+    query_url = '/'.join([
+        repo_url.rstrip('/'),
+        'digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldInfo',
+        collection_alias,
+        'json'
+    ])
+    return get_dm(query_url, session)
+
+
+def get_collection_list(repo_url: str, session: requests.Session) -> list:
+    query_url = '/'.join([
+        repo_url.rstrip('/'),
+        'digital/bl/dmwebservices/index.php?q=dmGetCollectionList/json'
+    ])
+    return get_dm(query_url, session)
+
+
 def print_as_table(rows: Sequence[dict]) -> None:
     widths = {name: col_max(rows, name) + 1 for name in rows[0].keys()}
     print(ljust_row({key: key for key in rows[0].keys()}, widths, serializer=str))
@@ -58,41 +89,38 @@ def main():
                         type=str,
                         help="CONTENTdm collection alias")
     parser.add_argument('--output',
+                        type=str,
                         action='store',
-                        help=f"Print output as any of {', '.join(repr(key) for key in output_formats.keys())}")
+                        choices=list(output_formats.keys()),
+                        default='table',
+                        help=f"Output format, default table")
     parser.add_argument('--columns',
                         type=str,
                         action='store',
                         help="Specify columns to print in a comma separated string, as --columns name,nick")
     args = parser.parse_args()
-    base_url = args.repository_url.rstrip('/')
-    if args.alias:
-        query_url = '/'.join([base_url,
-                              'digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldInfo',
-                              args.alias,
-                              'json'])
-    else:
-        query_url = '/'.join([base_url,
-                              'digital/bl/dmwebservices/index.php?q=dmGetCollectionList/json'])
-    response = requests.get(query_url)
-    response.raise_for_status()
-    dm_result = response.json()
-    if 'code' in dm_result:
-        print(dm_result['message'], file=sys.stderr)
+
+    try:
+        if args.alias:
+            dm_result = get_collection_field_info(args.repository_url, args.alias, requests)
+        else:
+            dm_result = get_collection_list(args.repository_url, requests)
+    except DmError as err:
+        print(err, file=sys.stderr)
         sys.exit(1)
-    else:
-        if args.columns:
-            columns = args.columns.split(',')
-            try:
-                dm_result = [{column: entry[column] for column in columns}
-                             for entry in dm_result]
-            except KeyError as err:
-                print(f"{err.args[0]!r} is not a valid column name", file=sys.stderr)
-                sys.exit(1)
-        if args.output and args.output not in output_formats:
-            print(f"{args.output!r} is not a valid output format", file=sys.stderr)
+
+    if args.columns:
+        columns = args.columns.split(',')
+        try:
+            dm_result = [{column: entry[column] for column in columns}
+                         for entry in dm_result]
+        except KeyError as err:
+            print(f"{err.args[0]!r} is not a valid column name", file=sys.stderr)
             sys.exit(1)
-        output_formats[args.output or 'table'](dm_result)
+    if args.output and args.output not in output_formats:
+        print(f"{args.output!r} is not a valid output format", file=sys.stderr)
+        sys.exit(1)
+    output_formats[args.output](dm_result)
 
 
 if __name__ == '__main__':
