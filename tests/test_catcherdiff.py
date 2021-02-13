@@ -71,6 +71,11 @@ def test_report_to_html():
     report_html = catcherdiff.report_to_html({
         'cdm_repo_url': 'https://cdmdemo.contentdm.oclc.org',
         'cdm_collection_alias': 'oclcsample',
+        'cdm_fields_info': [{
+            'name': 'Field',
+            'nick': 'nick',
+            'admin': 0
+        }],
         'catcher_json_file': 'catcher-edits.json',
         'report_file': 'catcherdiff-report.html',
         'report_datetime': '2021-01-01T00:00:00.000000',

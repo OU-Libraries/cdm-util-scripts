@@ -37,8 +37,11 @@
              width: 10%;
          }
 
+         .has-vocab:before {
+             content: "🕮 "
+         }
          .value {
-             background-color: ghostwhite;
+             background-color: aliceblue;
              font-family: monospace;
              white-space: pre-wrap;
          }
@@ -73,6 +76,29 @@
                 cdm-catcher file name: <span class="filename">{{ catcher_json_file }}</span><br/>
             </p>
 
+            <p>catcherdiff found {{ edits_with_changes_count }} out of {{ deltas|length }} total edit actions would be effective.</p>
+
+            <h2>Field info</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        {%- for key in cdm_fields_info[0].keys() %}
+                            <th>{{ key }}</th>
+                        {%- endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {%- for field_info in cdm_fields_info if field_info['admin'] == 0 %}
+                        <tr>
+                            {%- for value in field_info.values() %}
+                                <td>{{ value }}</td>
+                            {%- endfor %}
+                        </tr>
+                    {%- endfor %}
+                </tbody>
+            </table>
+
             <h2>Edit actions</h2>
 
             {% for edit, cdm_info in deltas %}
@@ -90,7 +116,13 @@
                     <tbody>
                         {% for nick, value in edit.items() if nick != 'dmrecord' %}
                             <tr>
-                                <td class="nick-col"><pre>{{ nick }}</pre></td>
+                                <td class="nick-col">
+                                    {%- if has_vocab[nick] %}
+                                        <pre class="has-vocab">{{ nick }}</pre>
+                                    {%- else %}
+                                        <pre>{{ nick }}</pre>
+                                    {%- endif %}
+                                </td>
                                 <td class="value-col"><p><span class="value">{{ showwhitespace(cdm_info[nick]) }}</span></p></td>
                                 <td class="change-col">
                                     {%- if not cdm_info[nick] and not value %}
@@ -100,7 +132,7 @@
                                     {%- elif not cdm_info[nick] and value %}
                                         <span class="overwrite-blank-with-value">new</span>
                                     {%- elif cdm_info[nick] == value %}
-                                        <span class="equal-values">none<span>
+                                        <span class="equal-values">none</span>
                                     {%- else %}
                                         <span class="overwrite-value-with-value">replace</span>
                                     {%- endif %}

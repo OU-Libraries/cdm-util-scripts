@@ -9,6 +9,8 @@ from datetime import datetime
 from pathlib import Path
 from sys import platform
 
+from printcdminfo import get_collection_field_info
+
 from typing import Dict, List
 
 
@@ -97,6 +99,12 @@ def main():
         cdm_catcher_edits = json.load(fp)
 
     with Session() as session:
+        print("Requesting CONTENTdm field info...")
+        cdm_fields_info = get_collection_field_info(
+            repo_url=args.cdm_repo_url,
+            collection_alias=args.cdm_collection_alias,
+            session=session
+        )
         cdm_items_info = get_cdm_items_info(
             cdm_repo_url=args.cdm_repo_url,
             cdm_collection_alias=args.cdm_collection_alias,
@@ -110,12 +118,24 @@ def main():
         print(f"Error: field nick not found in field info: {err}")
         sys.exit(1)
 
+    edits_with_changes_count = 0
+    for delta in deltas:
+        for nick, value in delta[0].items():
+            if value != delta[1][nick]:
+                edits_with_changes_count += 1
+                break
+    print(f"catcherdiff found {edits_with_changes_count} out of {len(deltas)} total edit actions would be effective.")
+
     report = {
         'cdm_repo_url': args.cdm_repo_url.rstrip('/'),
         'cdm_collection_alias': args.cdm_collection_alias,
+        'cdm_fields_info': cdm_fields_info,
+        'has_vocab': {field_info['nick']: bool(field_info['vocab'])
+                      for field_info in cdm_fields_info},
         'catcher_json_file': Path(args.catcher_json_file).name,
         'report_file': args.report_file,
         'report_datetime': datetime.now().isoformat(),
+        'edits_with_changes_count': edits_with_changes_count,
         'deltas': deltas,
     }
 
