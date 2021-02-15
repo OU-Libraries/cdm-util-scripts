@@ -9,9 +9,9 @@ from datetime import datetime
 from pathlib import Path
 from sys import platform
 
-from printcdminfo import get_collection_field_info
+from printcdminfo import get_collection_field_info, get_dm
 
-from typing import Dict, List
+from typing import Dict, List, Union, Optional
 
 
 def get_cdm_item_info(
@@ -20,12 +20,65 @@ def get_cdm_item_info(
         dmrecord: str,
         session: Session
 ) -> Dict[str, str]:
-    response = session.get(f"{cdm_repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/{cdm_collection_alias}/{dmrecord}/json")
-    response.raise_for_status()
-    item_info = response.json()
-    if 'code' in item_info and 'message' in item_info:
-        raise ValueError(f"{item_info['message']}")
+    url = f"{cdm_repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/{cdm_collection_alias}/{dmrecord}/json"
+    item_info = get_dm(url, session)
     return {nick: value or '' for nick, value in item_info.items()}
+
+
+def get_cdm_collection_field_vocab(
+        cdm_repo_url: str,
+        cdm_collection_alias: str,
+        cdm_field_nick: str,
+        session: Session
+) -> List[str]:
+    url = f"{cdm_repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary/{cdm_collection_alias}/{cdm_field_nick}/0/1/json"
+    return get_dm(url, session)
+
+
+def get_cdm_collection_vocabs(
+        cdm_repo_url: str,
+        cdm_collection_alias: str,
+        session: Session,
+        cdm_fields_info: Optional[List[Dict[str, Union[str, int]]]] = None,
+        verbose: bool = True
+) -> Dict[str, List[str]]:
+    if not cdm_fields_info:
+        cdm_fields_info = get_collection_field_info(
+            cdm_repo_url,
+            cdm_collection_alias,
+            session
+        )
+    fields_with_vocabs = [field_info
+                          for field_info in cdm_fields_info
+                          if field_info['vocab']]
+    vocdbs = dict()
+    vocabs = dict()
+    for field_info in fields_with_vocabs:
+        nick = field_info['nick']
+        vocdb = field_info['vocdb']
+        if verbose:
+            print(f"Requesting vocab for {nick!r}... ", end='')
+        if vocdb and vocdb in vocdbs:
+            if verbose:
+                print(f"{nick!r} matched to {vocdb!r}.")
+            vocabs[nick] = vocdbs[vocdb]
+            continue
+        vocab = get_cdm_collection_field_vocab(
+            cdm_repo_url=cdm_repo_url,
+            cdm_collection_alias=cdm_collection_alias,
+            cdm_field_nick=nick,
+            session=session
+        )
+        if vocdb:
+            vocdbs[vocdb] = vocab
+            vocabs[nick] = vocab
+            if verbose:
+                print(f"matched to {vocdb!r} ({len(vocab)} terms)")
+        else:
+            vocabs[nick] = vocab
+            if verbose:
+                print(f"found {len(vocab)} terms.")
+    return vocabs
 
 
 def get_cdm_items_info(
@@ -93,6 +146,12 @@ def main():
         type=str,
         help="Diff output file name"
     )
+    parser.add_argument(
+        '--check_vocabs',
+        action='store_const',
+        const=True,
+        help="Check controlled vocabulary terms"
+    )
     args = parser.parse_args()
 
     with open(args.catcher_json_file, mode='r') as fp:
@@ -111,6 +170,17 @@ def main():
             cdm_catcher_edits=cdm_catcher_edits,
             session=session
         )
+        if args.check_vocabs:
+            cdm_field_vocabs = get_cdm_collection_vocabs(
+                cdm_repo_url=args.cdm_repo_url,
+                cdm_collection_alias=args.cdm_collection_alias,
+                session=session,
+                cdm_fields_info=cdm_fields_info
+            )
+        else:
+            cdm_field_vocabs = {field_info['nick']
+                                for field_info in cdm_fields_info
+                                if field_info['vocab']}
 
     try:
         deltas = collate_deltas(cdm_catcher_edits, cdm_items_info)
@@ -124,14 +194,13 @@ def main():
             if value != delta[1][nick]:
                 edits_with_changes_count += 1
                 break
-    print(f"catcherdiff found {edits_with_changes_count} out of {len(deltas)} total edit actions would be effective.")
+    print(f"catcherdiff found {edits_with_changes_count} out of {len(deltas)} total edit actions would change at least one field.")
 
     report = {
         'cdm_repo_url': args.cdm_repo_url.rstrip('/'),
         'cdm_collection_alias': args.cdm_collection_alias,
         'cdm_fields_info': cdm_fields_info,
-        'has_vocab': {field_info['nick']: bool(field_info['vocab'])
-                      for field_info in cdm_fields_info},
+        'vocabs': cdm_field_vocabs,
         'catcher_json_file': Path(args.catcher_json_file).name,
         'report_file': args.report_file,
         'report_datetime': datetime.now().isoformat(),
