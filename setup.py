@@ -12,6 +12,10 @@ setup(
     package_dir={'': 'src'},
     install_requires=['requests', 'jinja2'],
     python_requires='>=3.7',
+    package_data={
+        'catcherdiff': ['templates/catcherdiff-report.html.j2'],
+        'scanftpfields': ['templates/scanftpfields-report.html.j2'],
+    },
     entry_points={
         'console_scripts': [
             'catcherdiff=catcherdiff.catcherdiff:main',
