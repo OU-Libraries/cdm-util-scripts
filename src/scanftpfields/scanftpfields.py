@@ -5,8 +5,6 @@ import json
 from datetime import datetime
 from collections import Counter, defaultdict
 import argparse
-import os
-from sys import platform
 
 import ftpfields2catcher
 
@@ -91,11 +89,7 @@ def compile_report(ftp_collection: ftpfields2catcher.FTPCollection):
 
 
 def report_to_html(report: dict) -> str:
-    path = os.path.dirname(os.path.abspath(__file__))
-    # https://github.com/pallets/jinja/issues/767
-    if platform == 'win32':
-        path = path.replace('\\', '/')
-    env = jinja2.Environment(loader=jinja2.FileSystemLoader(path))
+    env = jinja2.Environment(loader=jinja2.PackageLoader(__package__))
     return env.get_template('scanftpfields-report.html.j2').render(report)
 
 

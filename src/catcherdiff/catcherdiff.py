@@ -3,11 +3,9 @@ import jinja2
 
 import json
 import argparse
-import os
 import sys
 from datetime import datetime
 from pathlib import Path
-from sys import platform
 
 from printcdminfo import get_collection_field_info, get_dm
 
@@ -114,11 +112,7 @@ def collate_deltas(
 
 
 def report_to_html(report: dict) -> str:
-    path = os.path.dirname(os.path.abspath(__file__))
-    # https://github.com/pallets/jinja/issues/767
-    if platform == 'win32':
-        path = path.replace('\\', '/')
-    env = jinja2.Environment(loader=jinja2.FileSystemLoader(path))
+    env = jinja2.Environment(loader=jinja2.PackageLoader(__package__))
     return env.get_template('catcherdiff-report.html.j2').render(report)
 
 
