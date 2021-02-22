@@ -128,7 +128,7 @@
                         {% for nick, value in edit.items() if nick != 'dmrecord' %}
                             <tr>
                                 <td class="nick-col">
-                                    {%- if nick in vocabs %}
+                                    {%- if nick in vocabs_index %}
                                         <pre class="has-vocab">{{ nick }}</pre>
                                     {%- else %}
                                         <pre>{{ nick }}</pre>
@@ -150,10 +150,10 @@
                                 </td>
                                 <td class="value-col">
                                     <p><span class="value">{{ showwhitespace(value) }}</span></p>
-                                    {%- if nick in vocabs %}
+                                    {%- if nick in vocabs_index and vocabs is not none %}
                                         <ul class="terms-list">
                                             {%- for term in value.split('; ') if term %}
-                                                {%- if term in vocabs[nick] %}
+                                                {%- if term in vocabs[vocabs_index[nick]['type']][vocabs_index[nick]['name']] %}
                                                     <li class="controlled-term"><span class="value">{{ term }}</span></li>
                                                 {%- else %}
                                                     <li class="uncontrolled-term"><span class="value">{{ term }}</span></li>

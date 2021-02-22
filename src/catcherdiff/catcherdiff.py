@@ -9,7 +9,7 @@ from pathlib import Path
 
 from printcdminfo import get_collection_field_info, get_dm
 
-from typing import Dict, List, Union, Optional
+from typing import Dict, List, Union, Tuple
 
 
 def get_cdm_item_info(
@@ -33,50 +33,46 @@ def get_cdm_collection_field_vocab(
     return get_dm(url, session)
 
 
-def get_cdm_collection_vocabs(
+def build_vocabs_index(cdm_fields_info: List[Dict[str, Union[str, int]]]) -> Dict[str, Dict[str, str]]:
+    vocabs_index = dict()
+    for field_info in cdm_fields_info:
+        if field_info['vocab']:
+            nick = field_info['nick']
+            vocdb = field_info['vocdb']
+            vocabs_index[nick] = {
+                'type': 'vocdb' if vocdb else 'vocab',
+                'name': vocdb if vocdb else nick,
+            }
+    return vocabs_index
+
+
+def get_vocabs(
         cdm_repo_url: str,
         cdm_collection_alias: str,
+        vocabs_index: Dict[str, Dict[str, str]],
         session: Session,
-        cdm_fields_info: Optional[List[Dict[str, Union[str, int]]]] = None,
         verbose: bool = True
-) -> Dict[str, List[str]]:
-    if not cdm_fields_info:
-        cdm_fields_info = get_collection_field_info(
-            cdm_repo_url,
-            cdm_collection_alias,
-            session
-        )
-    fields_with_vocabs = [field_info
-                          for field_info in cdm_fields_info
-                          if field_info['vocab']]
-    vocdbs = dict()
-    vocabs = dict()
-    for field_info in fields_with_vocabs:
-        nick = field_info['nick']
-        vocdb = field_info['vocdb']
-        if verbose:
-            print(f"Requesting vocab for {nick!r}... ", end='')
-        if vocdb and vocdb in vocdbs:
-            if verbose:
-                print(f"{nick!r} matched to {vocdb!r}.")
-            vocabs[nick] = vocdbs[vocdb]
+) -> Dict[str, Dict[str, List[str]]]:
+    vocses = {
+        'vocab': dict(),
+        'vocdb': dict(),
+    }
+    for nick, index in vocabs_index.items():
+        vocs = vocses[index['type']]
+        if index['name'] in vocs:
             continue
+        if verbose:
+            print(f"Requesting {index['type']} for {nick!r}... ", end='')
         vocab = get_cdm_collection_field_vocab(
             cdm_repo_url=cdm_repo_url,
             cdm_collection_alias=cdm_collection_alias,
             cdm_field_nick=nick,
             session=session
         )
-        if vocdb:
-            vocdbs[vocdb] = vocab
-            vocabs[nick] = vocab
-            if verbose:
-                print(f"matched to {vocdb!r} ({len(vocab)} terms)")
-        else:
-            vocabs[nick] = vocab
-            if verbose:
-                print(f"found {len(vocab)} terms.")
-    return vocabs
+        if verbose:
+            print(f"found {len(vocab)} terms.")
+        vocs[index['name']] = vocab
+    return vocses
 
 
 def get_cdm_items_info(
@@ -106,9 +102,19 @@ def get_cdm_items_info(
 def collate_deltas(
         cdm_catcher_edits: List[Dict[str, str]],
         cdm_items_info: List[Dict[str, str]]
-):
+) -> List[Tuple[dict, dict]]:
     return [(edit, {nick: item_info[nick] for nick in edit.keys()})
             for edit, item_info in zip(cdm_catcher_edits, cdm_items_info)]
+
+
+def count_changes(deltas: List[Tuple[dict, dict]]) -> int:
+    edits_with_changes_count = 0
+    for delta in deltas:
+        for nick, value in delta[0].items():
+            if value != delta[1][nick]:
+                edits_with_changes_count += 1
+                break
+    return edits_with_changes_count
 
 
 def report_to_html(report: dict) -> str:
@@ -164,17 +170,16 @@ def main():
             cdm_catcher_edits=cdm_catcher_edits,
             session=session
         )
+        vocabs_index = build_vocabs_index(cdm_fields_info)
         if args.check_vocabs:
-            cdm_field_vocabs = get_cdm_collection_vocabs(
+            cdm_field_vocabs = get_vocabs(
                 cdm_repo_url=args.cdm_repo_url,
                 cdm_collection_alias=args.cdm_collection_alias,
-                session=session,
-                cdm_fields_info=cdm_fields_info
+                vocabs_index=vocabs_index,
+                session=session
             )
         else:
-            cdm_field_vocabs = {field_info['nick']
-                                for field_info in cdm_fields_info
-                                if field_info['vocab']}
+            cdm_field_vocabs = None
 
     try:
         deltas = collate_deltas(cdm_catcher_edits, cdm_items_info)
@@ -182,18 +187,14 @@ def main():
         print(f"Error: field nick not found in field info: {err}")
         sys.exit(1)
 
-    edits_with_changes_count = 0
-    for delta in deltas:
-        for nick, value in delta[0].items():
-            if value != delta[1][nick]:
-                edits_with_changes_count += 1
-                break
+    edits_with_changes_count = count_changes(deltas)
     print(f"catcherdiff found {edits_with_changes_count} out of {len(deltas)} total edit actions would change at least one field.")
 
     report = {
         'cdm_repo_url': args.cdm_repo_url.rstrip('/'),
         'cdm_collection_alias': args.cdm_collection_alias,
         'cdm_fields_info': cdm_fields_info,
+        'vocabs_index': vocabs_index,
         'vocabs': cdm_field_vocabs,
         'catcher_json_file': Path(args.catcher_json_file).name,
         'report_file': args.report_file,
