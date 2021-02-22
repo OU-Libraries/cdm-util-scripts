@@ -194,6 +194,26 @@ cdm-catcher.json
 report.html
 ```
 
+Optionally, the `--check_vocabs` flag can be used, which will add a list to each controlled vocabulary field edit indicating if its terms are in that field's controlled vocabulary.
+```console
+$ catcherdiff https://media.library.ohio.edu p15808coll16 dpm-catcher.json dpm-catcher-diff.html --check_vocabs
+Requesting CONTENTdm field info...
+Requesting CONTENTdm item info 52/52...
+Requesting vocab for 'collec'... found 1 terms.
+Requesting vocab for 'creatb'... found 8 terms.
+Requesting vocab for 'creata'... found 2 terms.
+Requesting vocab for 'creato'... found 22 terms.
+Requesting vocab for 'dancea'... found 9 terms.
+Requesting vocab for 'dance'... found 121 terms.
+Requesting vocab for 'datea'... found 33 terms.
+Requesting vocab for 'series'... found 2 terms.
+Requesting vocab for 'sub'... found 1 terms.
+Requesting vocab for 'subjea'... found 2 terms.
+Requesting vocab for 'origin'... found 21 terms.
+Requesting vocab for 'publis'... found 2 terms.
+catcherdiff found 52 out of 52 total edit actions would change at least one field.
+```
+
 The HTML report can then be reviewed by opening it in a web browser.
 
 <a name="csv2catcher"/>
