@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ collection_label }} scanftpfields report</title>
+        <style type="text/css">
+         body {
+             margin-bottom: 3em;
+         }
+
+         .container {
+             max-width: 1170px;
+             margin-right: auto;
+             margin-left: auto;
+         }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>FromThePage vocab scan report for project {{ ftp_project_name }}</h1>
+            <p>
+                Report date: {{ report_date }}<br/>
+                <br/>
+                FromThePage user slug: {{ ftp_slug }}<br/>
+                FromThePage project name: {{ ftp_project_name }}<br/>
+                Export used: &quot;{{ label }}&quot;<br/>
+                <br/>
+                CONTENTdm repository URL: {{ cdm_repo_url }}<br/>
+                CONTENTdm collection alias: {{ cdm_collection_alias }}<br/>
+            </p>
+
+            <h2>CONTENTdm controlled field info</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        {%- for key in cdm_fields_info[0].keys() %}
+                            <th>{{ key }}</th>
+                        {%- endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {%- for field_info in cdm_fields_info if field_info['vocab'] == 1 %}
+                        <tr>
+                            {%- for value in field_info.values() %}
+                                <td>{{ value }}</td>
+                            {%- endfor %}
+                        </tr>
+                    {%- endfor %}
+                </tbody>
+            </table>
+
+            <h2>FromThePage to CONTENTdm field mapping</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>FromThePage label</th>
+                        <th>CONTENTdm field nicks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%- for label, nicks in field_mapping.items() %}
+                        <tr>
+                            <td>{{ label }}</td>
+                            <td>{{ nicks|join('; ') }}</td>
+                        </tr>
+                    {%- endfor %}
+                </tbody>
+            </table>
+
+            <h2>Uncontrolled vocab terms</h2>
+
+            {%- for nick, uncontrolled_terms in field_scans.items() %}
+                <h3>{{ nick }}</h3>
+                <dl>
+                    {%- for term, pages in uncontrolled_terms.items() %}
+                        <dt>{{ term }}</dt>
+                        <dd>
+                            <ul>
+                                {%- for page in pages %}
+                                    <li><a href="{{ page.display_url }}">{{ page.label }}</a> <a href="{{ page.transcription_url }}">✍</a></li>
+                                {%-  endfor %}
+                            </ul>
+                        </dd>
+                    {%- endfor %}
+                </dl>
+            {%- endfor %}
+        </div>
+    </body>
+</html>

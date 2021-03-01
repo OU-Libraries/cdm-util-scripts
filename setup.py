@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 # setup patterned after _Python Testing with pytest_ (Okken, 2017), "Creating an Installable Package"
 setup(
     name='cdm-util-scripts',
-    version='0.3.5',
+    version='0.3.6',
     description="Ohio University CONTENTdm utility scripts",
     url='https://github.com/OU-Libraries/cdm-util-scripts',
     author='Nick Ver Steegh',
@@ -15,6 +15,7 @@ setup(
     package_data={
         'catcherdiff': ['templates/catcherdiff-report.html.j2'],
         'scanftpfields': ['templates/scanftpfields-report.html.j2'],
+        'scanftpvocabs': ['templates/scanftpvocabs-report.html.j2'],
     },
     entry_points={
         'console_scripts': [
@@ -26,6 +27,7 @@ setup(
             'printcdminfo=printcdminfo.printcdminfo:main',
             'printftpinfo=printftpinfo.printftpinfo:main',
             'scanftpfields=scanftpfields.scanftpfields:main',
+            'scanftpvocabs=scanftpvocabs.scanftpvocabs:main',
         ]
     }
 )
