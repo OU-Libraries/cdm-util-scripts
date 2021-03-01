@@ -4,6 +4,8 @@ import json
 import argparse
 from itertools import count
 
+from cdm_api import get_cdm_page_pointers
+
 from typing import List
 
 
@@ -12,16 +14,6 @@ def find_cdm_objects(repo_url: str, alias: str, field_nick: str, value: str, ses
     response.raise_for_status()
     dmQuery = response.json()
     return [record['pointer'] for record in dmQuery['records']]
-
-
-def get_cdm_page_pointers(repo_url: str, alias: str, dmrecord: str, session: requests.Session) -> List[str]:
-    response = session.get(f"{repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmGetCompoundObjectInfo/{alias}/{dmrecord}/json")
-    response.raise_for_status()
-    dmGetCompoundObjectInfo = response.json()
-    if 'code' in dmGetCompoundObjectInfo:
-        raise ValueError(f"CONTENTdm error {dmGetCompoundObjectInfo['message']!r}")
-    # print(f"{alias!r} dmrecord {dmrecord!r} is type {dmGetCompoundObjectInfo['type']!r}")
-    return [page['pageptr'] for page in dmGetCompoundObjectInfo['page']]
 
 
 def get_ftp_manifest(url: str, session: requests.Session) -> dict:

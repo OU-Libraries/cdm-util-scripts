@@ -7,36 +7,7 @@ import sys
 from io import StringIO
 from typing import Dict, Sequence, Callable, Any
 
-
-class DmError(Exception):
-    pass
-
-
-def get_dm(url: str, session: requests.Session):
-    response = session.get(url)
-    response.raise_for_status()
-    dm_result = response.json()
-    if 'code' in dm_result and 'message' in dm_result:
-        raise DmError(dm_result['message'])
-    return dm_result
-
-
-def get_collection_field_info(repo_url: str, collection_alias: str, session: requests.Session) -> dict:
-    query_url = '/'.join([
-        repo_url.rstrip('/'),
-        'digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldInfo',
-        collection_alias,
-        'json'
-    ])
-    return get_dm(query_url, session)
-
-
-def get_collection_list(repo_url: str, session: requests.Session) -> list:
-    query_url = '/'.join([
-        repo_url.rstrip('/'),
-        'digital/bl/dmwebservices/index.php?q=dmGetCollectionList/json'
-    ])
-    return get_dm(query_url, session)
+from cdm_api import get_collection_field_info, get_collection_list, DmError
 
 
 def print_as_table(rows: Sequence[dict]) -> None:

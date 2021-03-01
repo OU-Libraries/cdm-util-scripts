@@ -7,30 +7,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from printcdminfo import get_collection_field_info, get_dm
+from cdm_api import get_cdm_item_info, get_cdm_collection_field_vocab, get_collection_field_info
 
 from typing import Dict, List, Union, Tuple
-
-
-def get_cdm_item_info(
-        cdm_repo_url: str,
-        cdm_collection_alias: str,
-        dmrecord: str,
-        session: Session
-) -> Dict[str, str]:
-    url = f"{cdm_repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/{cdm_collection_alias}/{dmrecord}/json"
-    item_info = get_dm(url, session)
-    return {nick: value or '' for nick, value in item_info.items()}
-
-
-def get_cdm_collection_field_vocab(
-        cdm_repo_url: str,
-        cdm_collection_alias: str,
-        cdm_field_nick: str,
-        session: Session
-) -> List[str]:
-    url = f"{cdm_repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary/{cdm_collection_alias}/{cdm_field_nick}/0/1/json"
-    return get_dm(url, session)
 
 
 def build_vocabs_index(cdm_fields_info: List[Dict[str, Union[str, int]]]) -> Dict[str, Dict[str, str]]:

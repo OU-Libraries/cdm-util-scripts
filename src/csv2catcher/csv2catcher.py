@@ -9,7 +9,7 @@ from collections import defaultdict
 from itertools import count
 from enum import Enum
 
-from ftp2catcher import get_cdm_page_pointers
+from cdm_api import get_cdm_page_pointers
 
 from typing import List, Optional, Dict, Sequence, Iterator, TextIO
 

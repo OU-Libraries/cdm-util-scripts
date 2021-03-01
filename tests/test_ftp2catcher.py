@@ -2,9 +2,6 @@ import pytest
 import vcr
 import requests
 
-import sys
-from pathlib import Path
-
 import ftp2catcher
 
 
@@ -35,17 +32,6 @@ def test_find_cdm_objects(session):
             value='ryan_box058-tlb_f26',
             session=session
         )
-
-
-def test_get_cdm_page_pointers(session):
-    with cdm_vcr.use_cassette('test_get_cdm_page_pointers.yml'):
-        pointers = ftp2catcher.get_cdm_page_pointers(
-            repo_url='https://media.library.ohio.edu',
-            alias='p15808coll15',
-            dmrecord='4613',
-            session=session
-        )
-        assert pointers
 
 
 def test_get_ftp_manifest(session):
