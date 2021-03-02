@@ -3,11 +3,12 @@
 cdm-util-scripts are Python scripts developed to support Ohio University Libraries' CONTENTdm operations.
 
 * [printcdminfo](#printcdminfo) prints CONTENTdm collection information to the terminal, including collection aliases and field nicknames
-* :new: [printftpinfo](#printftpinfo) prints FromThePage project information to the terminal, including FromThePage project labels
-* :new: [scanftpfields](#scanftpfields) reports on what field-based transcription field schemas are in use in a FromThePage project
-* :new: [catcherdiff](#catcherdiff) generates a report showing what item metadata will be changed if a `cdm-catcher` `edit` action JSON file is implemented
+* [printftpinfo](#printftpinfo) prints FromThePage project information to the terminal, including FromThePage project labels
+* [scanftpfields](#scanftpfields) reports on what field-based transcription field schemas are in use in a FromThePage project
+* :new: [scanftpvocabs](#scanftpvocabs) reports on CONTENTdm controlled vocabulary terms being used in FromThePage
+* [catcherdiff](#catcherdiff) generates a report showing what item metadata will be changed if a `cdm-catcher` `edit` action JSON file is implemented
 * [csv2catcher](#csv2catcher) takes a CSV with CONTENTdm metadata edits, maps its columns onto CONTENTdm fields, reconciles it to a CONTENTdm collection, and outputs a `cdm-catcher` `edit` action JSON upload
-* :new: [ftpfields2catcher](#ftpfields2catcher) requests a FromThePage field-based transcription project, maps its fields onto CONTENTdm fields, and outputs a `cdm-catcher` `edit` action JSON upload
+* [ftpfields2catcher](#ftpfields2catcher) requests a FromThePage field-based transcription project, maps its fields onto CONTENTdm fields, and outputs a `cdm-catcher` `edit` action JSON upload
 * [ftp2catcher](#ftp2catcher) reconciles a FromThePage transcription project to CONTENTdm compound object pages based on uploaded file names and outputs a `cdm-catcher` `edit` action JSON upload
 * [csv2json](#csv2json) transposes a CSV into a list of rows in JSON using column names as keys, one use of which is to transform a CSV with CONTENTdm field nicks as column names into a `cdm-catcher` `edit` action JSON upload
 
@@ -161,6 +162,45 @@ field-label-report_dance-posters-metadata_2021-02-09_17-59-00.html
 ```
 
 The HTML report can then be reviewed by opening it in a web browser.
+
+<a name="scanftpvocabs"/>
+
+### scanftpvocabs
+
+`scanftpvocabs` takes
+* A FromThePage user slug
+* A FromThePage project label
+* A CONTENTdm repository URL
+* A CONTENTdm collection alias
+* A CSV mapping FromThePage field labels to CONTENTdm collection field nicknames
+
+and outputs a detailed report on what terms exist in FromThePage fields that are not in CONTENTdm controlled vocabularies. The report is output in the same manner as `scanftpfields`, but using the prefix `vocab-report`. The FromThePage field-based transcription project must be using a single field set. This report is intended to be useful for synchronizing controlled vocabularies during field-based transcription projects.
+
+Optionally, the report can be specified as `json` using the `--output` option for a machine-readable version.
+
+Example:
+```console
+$ scanftpvocabs ohiouniversitylibraries 'Dance Posters Metadata' https://media.library.ohio.edu p15808coll16 dpm-mapping.csv
+Looking up 'Dance Posters Metadata' @ ohiouniversitylibraries...
+Requesting project manifest...
+Requesting work manifests and 'XHTML Export' renderings 52/52...
+Requesting vocab for 'collec'... found 1 terms.
+Requesting vocab for 'creatb'... found 20 terms.
+Requesting vocab for 'creata'... found 12 terms.
+Requesting vocab for 'creato'... found 28 terms.
+Requesting vocab for 'dancea'... found 10 terms.
+Requesting vocab for 'contri'... found 18 terms.
+Requesting vocab for 'dance'... found 137 terms.
+Requesting vocab for 'datea'... found 39 terms.
+Requesting vocab for 'series'... found 2 terms.
+Requesting vocab for 'sub'... found 1 terms.
+Requesting vocab for 'subjea'... found 3 terms.
+Requesting vocab for 'origin'... found 21 terms.
+Requesting vocab for 'publis'... found 2 terms.
+7 fields with controlled vocabularies unmapped: ['collec', 'contri', 'origin', 'publis', 'series', 'sub', 'subjea']
+Compiling report...
+Writing report as 'vocab-report_dance-posters-metadata_2021-03-02_14-45-06.html'
+```
 
 <a name="catcherdiff"/>
 
@@ -337,7 +377,7 @@ Note that the `dmrecord` pointer now points to a page in the object referenced i
 * A match mode, either `object` or `page`
 * A FromThePage user slug
 * A FromThePage project label
-* A CSV mapping field data CSV column names to CONTENTdm collection field nicknames
+* A CSV mapping FromThePage field labels to CONTENTdm collection field nicknames
 * An output file name
 
 and outputs a JSON file containing field data from FromThePage project for use with [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher)'s `edit` action.
