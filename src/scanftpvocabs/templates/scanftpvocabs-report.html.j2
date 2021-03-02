@@ -2,16 +2,41 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>{{ collection_label }} scanftpfields report</title>
+        <title>{{ collection_label }} scanftpvocabs report</title>
         <style type="text/css">
-         body {
-             margin-bottom: 3em;
-         }
-
          .container {
-             max-width: 1170px;
-             margin-right: auto;
-             margin-left: auto;
+             max-width: 70rem;
+             margin: 0 auto 3em auto;
+         }
+         th, td {
+             text-align: left;
+         }
+         th {
+             padding: 0.5em;
+         }
+         td {
+             padding: 0 0.5em 0 0.5em;
+             vertical-align: text-top;
+         }
+         .field-table tr {
+             outline: thin solid;
+         }
+         .uncontrolled-term {
+             background-color: whitesmoke;
+             font-family: monospace;
+         }
+         .ftp-label {
+             background-color: #EDB;
+             font-family: monospace;
+         }
+         .cdm-label {
+             font-weight: bold;
+         }
+         .cdm-nick {
+             font-family: monospace;
+         }
+         .controlled:before {
+             content: "🔒 ";
          }
         </style>
     </head>
@@ -19,20 +44,21 @@
     <body>
         <div class="container">
             <h1>FromThePage vocab scan report for project {{ ftp_project_name }}</h1>
-            <p>
-                Report date: {{ report_date }}<br/>
-                <br/>
-                FromThePage user slug: {{ ftp_slug }}<br/>
-                FromThePage project name: {{ ftp_project_name }}<br/>
-                Export used: &quot;{{ label }}&quot;<br/>
-                <br/>
-                CONTENTdm repository URL: {{ cdm_repo_url }}<br/>
-                CONTENTdm collection alias: {{ cdm_collection_alias }}<br/>
-            </p>
-
-            <h2>CONTENTdm controlled field info</h2>
 
             <table>
+                <tbody>
+                    <tr><td>Report date</td><td>{{ report_date }}</td></tr>
+                    <tr><td>FromThePage user slug</td><td>{{ ftp_slug }}</td></tr>
+                    <tr><td>FromThePage project name</td><td>{{ ftp_project_name }}</td></tr>
+                    <tr><td>Export used</td><td>{{ label }}</td></tr>
+                    <tr><td>CONTENTdm repository URL</td><td>{{ cdm_repo_url }}</td></tr>
+                    <tr><td>CONTENTdm collection alias</td><td>{{ cdm_collection_alias }}</td></tr>
+                </tbody>
+            </table>
+
+            <h2>CONTENTdm controlled fields info</h2>
+
+            <table class="field-table">
                 <thead>
                     <tr>
                         {%- for key in cdm_fields_info[0].keys() %}
@@ -41,7 +67,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%- for field_info in cdm_fields_info if field_info['vocab'] == 1 %}
+                    {%- for field_info in cdm_fields_info if field_info['admin'] == 0 %}
                         <tr>
                             {%- for value in field_info.values() %}
                                 <td>{{ value }}</td>
@@ -53,7 +79,7 @@
 
             <h2>FromThePage to CONTENTdm field mapping</h2>
 
-            <table>
+            <table class="field-table">
                 <thead>
                     <tr>
                         <th>FromThePage label</th>
@@ -63,29 +89,45 @@
                 <tbody>
                     {%- for label, nicks in field_mapping.items() %}
                         <tr>
-                            <td>{{ label }}</td>
-                            <td>{{ nicks|join('; ') }}</td>
+                            <td><span class="ftp-label">{{ label }}</span></td>
+                            <td>{% for nick in nicks %} <span class="cdm-nick">{{ nick }}</span><br/> {% endfor %}</td>
                         </tr>
                     {%- endfor %}
                 </tbody>
             </table>
 
-            <h2>Uncontrolled vocab terms</h2>
+            <h2>Uncontrolled terms</h2>
 
             {%- for nick, uncontrolled_terms in field_scans.items() %}
-                <h3>{{ nick }}</h3>
-                <dl>
-                    {%- for term, pages in uncontrolled_terms.items() %}
-                        <dt>{{ term }}</dt>
-                        <dd>
-                            <ul>
-                                {%- for page in pages %}
-                                    <li><a href="{{ page.display_url }}">{{ page.label }}</a> <a href="{{ page.transcription_url }}">✍</a></li>
-                                {%-  endfor %}
-                            </ul>
-                        </dd>
-                    {%- endfor %}
-                </dl>
+                <h3>{% for field_info in cdm_fields_info if field_info['nick'] == nick %}<span class="cdm-label">{{ field_info['name'] }}</span>{% endfor %}</h3>
+                <p>
+                    = <span class="cdm-nick">{{ nick }}</span><br/>
+                    {% for label, nicks in field_mapping.items() if nick in nicks %}
+                        ← <span class="ftp-label">{{ label }}</span><br/>
+                    {% endfor %}
+                </p>
+
+                {%- if not uncontrolled_terms %}
+                    <p><em>All terms controlled.</em></p>
+                {%- else %}
+                    <textarea rows="10" cols="60" wrap="off">
+                        {%- for term in uncontrolled_terms.keys() %}
+{{ term }}
+                        {%- endfor -%}
+                    </textarea>
+                    <dl>
+                        {%- for term, pages in uncontrolled_terms.items() %}
+                            <dt><span class="uncontrolled-term">{{ term }}</span></dt>
+                            <dd>
+                                <ul>
+                                    {%- for page in pages %}
+                                        <li><a href="{{ page.display_url }}">{{ page.label }}</a> <a href="{{ page.transcription_url }}">✍</a></li>
+                                    {%-  endfor %}
+                                </ul>
+                            </dd>
+                        {%- endfor %}
+                    </dl>
+                {%- endif %}
             {%- endfor %}
         </div>
     </body>
