@@ -21,10 +21,10 @@ def scan_vocabs(
         vocabs: Dict[str, Dict[str, List[str]]],
         verbose: bool = True
 ) -> Dict[str, Dict[str, ftpfields2catcher.FTPPage]]:
-    mapped_nicks = []
+    mapped_nicks = set()
     for nicks in field_mapping.values():
-        mapped_nicks.extend(nicks)
-    mapped_controlled_fields = set(vocabs_index.keys()) & set(mapped_nicks)
+        mapped_nicks.update(nicks)
+    mapped_controlled_fields = set(vocabs_index.keys()) & mapped_nicks
     unmapped_fields = set(vocabs_index.keys()) - mapped_controlled_fields
     if verbose and unmapped_fields:
         print(f"{len(unmapped_fields)} fields with controlled vocabularies unmapped: {sorted(list(unmapped_fields))}")
@@ -141,6 +141,8 @@ def main():
         **vars(args),
         'report_date': report_date.isoformat(),
         'cdm_fields_info': cdm_fields_info,
+        'vocabs_index': vocabs_index,
+        'vocabs': vocabs,
         'field_mapping': field_mapping,
         'field_scans': field_scans,
     }
