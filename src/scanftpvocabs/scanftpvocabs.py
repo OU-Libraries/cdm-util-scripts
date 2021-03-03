@@ -150,7 +150,11 @@ def main():
     if args.output == 'json':
         report_str = json.dumps(report, indent=2)
     elif args.output == 'html':
-        report_str = report_to_html(report)
+        report_str = report_to_html({
+            **report,
+            'cdm_nick_to_name': {field_info['nick']: field_info['name']
+                                 for field_info in cdm_fields_info},
+        })
     else:
         raise ValueError(f"invalid output type {args.output!r}")
 

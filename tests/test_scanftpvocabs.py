@@ -51,5 +51,8 @@ def test_report_to_html():
             'FtP TGM label': ['nickdb']
         },
         'field_scans': {'nick': {'uncontrolled-term': [FTPPage(display_url='', label='', transcription_url='')]}},
+        'vocabs_index': {'nick': {'type': 'vocab', 'name': 'nick'}},
+        'vocabs': {'vocab': {'nick': ['controlled_term']}, 'vocdb': {}},
+        'cdm_nick_to_name': {'nick': 'Name'},
     })
     assert report
