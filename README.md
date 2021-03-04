@@ -174,7 +174,7 @@ The HTML report can then be reviewed by opening it in a web browser.
 * A CONTENTdm collection alias
 * A CSV mapping FromThePage field labels to CONTENTdm collection field nicknames
 
-and outputs a detailed report on what terms exist in FromThePage fields that are not in CONTENTdm controlled vocabularies. The report is output in the same manner as `scanftpfields`, but using the prefix `vocab-report`. The FromThePage field-based transcription project must include all the mapped controlled fields in every filled page's field set or `scanftpvocabs` will throw an error. This report is intended to be useful for synchronizing controlled vocabularies during field-based transcription projects.
+and outputs a detailed report on what terms exist in FromThePage fields that are not in CONTENTdm controlled vocabularies. The report is output in the same manner as `scanftpfields`, but using the prefix `vocab-report`. The FromThePage field-based transcription project must include all the mapped fields in every filled page's field schema or `scanftpvocabs` will throw an error. This report is intended to be useful for synchronizing controlled vocabularies during field-based transcription projects.
 
 Optionally, the report can be specified as `json` using the `--output` option for a machine-readable version.
 
@@ -385,10 +385,10 @@ and outputs a JSON file containing field data from FromThePage project for use w
 
 The FromThePage project _must_:
 1. Be field-based
-2. Have the same field schema for each transcript
+2. Have all the mapped fields in each work's field schema
 3. Have been loaded from CONTENTdm (so that FromThePage stored the corresponding CONTENTdm object URLs)
 
-The match modes differ only in their treatment of compound objects. Both modes match field-based transcriptions for simple, single-item objects to their single metadata records.
+The match modes differ only in their treatment of compound objects. Both modes match field-based transcriptions for simple (non-compound), single-item objects to their single metadata records.
 
 Match mode `page` matches each filled page in a FromThePage work to its corresponding CONTENTdm compound object page-level metadata. If a page's field-based transcription is blank, it skips that page. If there are no filled pages in a FromThePage work, it skips that work.
 
