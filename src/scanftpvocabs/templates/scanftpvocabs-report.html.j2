@@ -53,6 +53,9 @@
              top: 0;
              left: 0;
          }
+         .terms-as-text {
+             margin: 1em 0;
+         }
         </style>
     </head>
 
@@ -170,12 +173,14 @@
                 {%- if not field_scans[nick] %}
                     <p><em>All terms controlled.</em></p>
                 {%- else %}
-                    <label for="{{ nick }}">Uncontrolled terms as text:</label>
-                    <textarea name="{{ nick }}" rows="10" cols="60" wrap="off">
-                        {%- for term in field_scans[nick].keys() %}
+                    <div class="terms-as-text">
+                        <label for="{{ nick }}">Uncontrolled terms as text:</label>
+                        <textarea name="{{ nick }}" rows="10" cols="60" wrap="off">
+                            {%- for term in field_scans[nick].keys() %}
 {{ term }}
-                        {%- endfor -%}
-                    </textarea>
+                            {%- endfor -%}
+                        </textarea>
+                    </div>
                     <dl>
                         {%- for term, pages in field_scans[nick].items() %}
                             <dt><span class="uncontrolled-term">{{ term }}</span></dt>
