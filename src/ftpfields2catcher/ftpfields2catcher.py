@@ -195,7 +195,7 @@ def get_field_mapping(filename: str) -> Dict[str, List[str]]:
             raise ValueError("column mapping CSV must have 'name' and 'nick' column titles in that order")
         field_mapping = defaultdict(list)
         for row in reader:
-            field_mapping[row['name']].append(row['nick'])
+            field_mapping[row['name']].append(row['nick'].strip())
     return dict(field_mapping)
 
 

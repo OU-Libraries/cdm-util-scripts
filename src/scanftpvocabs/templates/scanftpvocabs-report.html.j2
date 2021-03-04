@@ -111,6 +111,8 @@
 
             <h2>FromThePage to CONTENTdm field mapping</h2>
 
+            <h3>Mapped controlled CONTENTdm fields</h3>
+
             <table class="field-table">
                 <thead>
                     <tr>
@@ -127,6 +129,14 @@
                     {%- endfor %}
                 </tbody>
             </table>
+
+            <h3>Unmapped controlled CONTENTdm fields</h3>
+
+            <ul>
+                {%- for field in unmapped_controlled_fields %}
+                    <li>{{ cdmnickandname(field) }}</li>
+                {%- endfor %}
+            </ul>
 
             <h2>Vocabularies</h2>
 

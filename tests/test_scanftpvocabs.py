@@ -19,13 +19,14 @@ def test_scan_vocabs():
     }
     vocabs_index = {
         'nickv': {'type': 'vocab', 'name': 'nickv'},
-        'nickdb': {'type': 'vocdb', 'name': 'LCTGM'}
+        'nickdb': {'type': 'vocdb', 'name': 'LCTGM'},
+        'unmapped': {'type': 'vocab', 'name': 'unmapped'},
     }
     vocabs = {
-        'vocab': {'nickv': ['controlled-term']},
-        'vocdb': {'LCTGM': ['Paddleboats']}
+        'vocab': {'nickv': ['controlled-term'], 'unmapped': ['controlled-term']},
+        'vocdb': {'LCTGM': ['Paddleboats']},
     }
-    field_scans = scanftpvocabs.scan_vocabs(
+    field_scans, unmapped_controlled_fields = scanftpvocabs.scan_vocabs(
         ftp_collection=ftp_collection,
         field_mapping=field_mapping,
         vocabs_index=vocabs_index,
@@ -33,6 +34,7 @@ def test_scan_vocabs():
     )
     assert 'uncontrolled-term' in field_scans['nickv']
     assert 'NotInTGM' in field_scans['nickdb']
+    assert 'unmapped' in unmapped_controlled_fields
 
 
 def test_report_to_html():

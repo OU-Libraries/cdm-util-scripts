@@ -11,23 +11,27 @@ import ftpfields2catcher
 import catcherdiff
 import cdm_api
 
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 
 def scan_vocabs(
         ftp_collection: ftpfields2catcher.FTPCollection,
         field_mapping: Dict[str, List[str]],
         vocabs_index: Dict[str, Dict[str, str]],
-        vocabs: Dict[str, Dict[str, List[str]]],
-        verbose: bool = True
-) -> Dict[str, Dict[str, ftpfields2catcher.FTPPage]]:
+        vocabs: Dict[str, Dict[str, List[str]]]
+) -> Tuple[Dict[str, Dict[str, ftpfields2catcher.FTPPage]], List[str]]:
     mapped_nicks = set()
     for nicks in field_mapping.values():
         mapped_nicks.update(nicks)
     mapped_controlled_fields = set(vocabs_index.keys()) & mapped_nicks
-    unmapped_fields = set(vocabs_index.keys()) - mapped_controlled_fields
-    if verbose and unmapped_fields:
-        print(f"{len(unmapped_fields)} fields with controlled vocabularies unmapped: {sorted(list(unmapped_fields))}")
+    unmapped_controlled_fields = set(vocabs_index.keys()) - mapped_controlled_fields
+
+    # Follow vocabs_index order which is CONTENTdm field order
+    mapped_controlled_fields = [nick for nick in vocabs_index.keys()
+                                if nick in mapped_controlled_fields]
+    unmapped_controlled_fields = [nick for nick in vocabs_index.keys()
+                                  if nick in unmapped_controlled_fields]
+
     field_scans = {nick: defaultdict(list) for nick in mapped_controlled_fields}
     for ftp_work in ftp_collection.works:
         for ftp_page in ftp_work.pages:
@@ -44,7 +48,7 @@ def scan_vocabs(
                 for term in terms:
                     if term and term not in vocab:
                         field_scans[nick][term].append(ftp_page)
-    return field_scans
+    return field_scans, unmapped_controlled_fields
 
 
 def report_to_html(report: dict) -> str:
@@ -128,7 +132,7 @@ def main():
             session=session
         )
 
-    field_scans = scan_vocabs(
+    field_scans, unmapped_controlled_fields = scan_vocabs(
         ftp_collection=ftp_collection,
         field_mapping=field_mapping,
         vocabs_index=vocabs_index,
@@ -144,6 +148,7 @@ def main():
         'vocabs_index': vocabs_index,
         'vocabs': vocabs,
         'field_mapping': field_mapping,
+        'unmapped_controlled_fields': unmapped_controlled_fields,
         'field_scans': field_scans,
     }
 
