@@ -174,7 +174,7 @@ The HTML report can then be reviewed by opening it in a web browser.
 * A CONTENTdm collection alias
 * A CSV mapping FromThePage field labels to CONTENTdm collection field nicknames
 
-and outputs a detailed report on what terms exist in FromThePage fields that are not in CONTENTdm controlled vocabularies. The report is output in the same manner as `scanftpfields`, but using the prefix `vocab-report`. The FromThePage field-based transcription project must be using a single field set. This report is intended to be useful for synchronizing controlled vocabularies during field-based transcription projects.
+and outputs a detailed report on what terms exist in FromThePage fields that are not in CONTENTdm controlled vocabularies. The report is output in the same manner as `scanftpfields`, but using the prefix `vocab-report`. The FromThePage field-based transcription project must include all the mapped controlled fields in every filled page's field set or `scanftpvocabs` will throw an error. This report is intended to be useful for synchronizing controlled vocabularies during field-based transcription projects.
 
 Optionally, the report can be specified as `json` using the `--output` option for a machine-readable version.
 
@@ -197,10 +197,11 @@ Requesting vocab for 'sub'... found 1 terms.
 Requesting vocab for 'subjea'... found 3 terms.
 Requesting vocab for 'origin'... found 21 terms.
 Requesting vocab for 'publis'... found 2 terms.
-7 fields with controlled vocabularies unmapped: ['collec', 'contri', 'origin', 'publis', 'series', 'sub', 'subjea']
 Compiling report...
 Writing report as 'vocab-report_dance-posters-metadata_2021-03-02_14-45-06.html'
 ```
+
+The HTML report can then be reviewed by opening it in a web browser.
 
 <a name="catcherdiff"/>
 
