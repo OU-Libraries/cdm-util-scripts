@@ -103,7 +103,8 @@ def main():
                 transcript_text = get_ftp_transcript(transcript_url, session)
                 catcher_fields.append({
                     'dmrecord': dmrecord,
-                    args.transcript_nick: transcript_text
+                    # CONTENTdm strips whitespace, so preempt it here for cleaner catcherdiffs
+                    args.transcript_nick: transcript_text.strip()
                 })
             print(end='\n')
     print("Writing JSON file...")
