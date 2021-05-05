@@ -5,7 +5,7 @@ cdm-util-scripts are Python scripts developed to support Ohio University Librari
 * [printcdminfo](#printcdminfo) prints CONTENTdm collection information to the terminal, including collection aliases and field nicknames
 * [printftpinfo](#printftpinfo) prints FromThePage project information to the terminal, including FromThePage project labels
 * [scanftpfields](#scanftpfields) reports on what field-based transcription field schemas are in use in a FromThePage project
-* :new: [scanftpvocabs](#scanftpvocabs) reports on CONTENTdm controlled vocabulary terms being used in FromThePage
+* [scanftpvocabs](#scanftpvocabs) reports on CONTENTdm controlled vocabulary terms being used in FromThePage
 * [catcherdiff](#catcherdiff) generates a report showing what item metadata will be changed if a `cdm-catcher` `edit` action JSON file is implemented
 * [csv2catcher](#csv2catcher) takes a CSV with CONTENTdm metadata edits, maps its columns onto CONTENTdm fields, reconciles it to a CONTENTdm collection, and outputs a `cdm-catcher` `edit` action JSON upload
 * [ftpfields2catcher](#ftpfields2catcher) requests a FromThePage field-based transcription project, maps its fields onto CONTENTdm fields, and outputs a `cdm-catcher` `edit` action JSON upload
@@ -16,24 +16,25 @@ cdm-util-scripts are Python scripts developed to support Ohio University Librari
 
 These instructions require that you are using Python 3 (3.7+) as your `python` and are using a Unix shell with Git installed (like [Git bash on Windows](https://gitforwindows.org/) or the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/)).
 
-Clone the repo to a convenient local directory:
+`cdm-util-scripts` can be installed directly from GitHub:
 
-    git clone https://github.com/OU-Libraries/cdm-util-scripts
+    python -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
 
-Enter your `OU-Libraries` GitHub credentials upon request and `cd` into the repo:
+However, it is a good idea to install it into a [virtual environment](https://docs.python.org/3/tutorial/venv.html) to keep things tidy and prevent future dependency conflicts. To use Python's built-in `venv` virtual environment tool, first create a project directory wherever convenient and `cd` into it:
 
-    cd cdm-util-scripts
+    mkdir project-directory
+    cd project-directory
 
-In the `cdm-util-scripts` directory create a virtual environment and activate it:
+In the project directory create a virtual environment and activate it:
 
     python -m venv env
     source env/Scripts/activate
 
-(Use `source env/bin/activate` on Linux and macOS.) Install `cdm-util-scripts` in the virtual environment:
+(Use `source env/bin/activate` on Linux and macOS.) `env` can be replaced with a more descriptive name, like `cdm`. Then install `cdm-util-scripts` while the virtual environment is active:
 
-    python -m pip install .
+    python -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
 
-`pip` might ask you to upgrade itself, which is a good idea. Check to see if the scripts have been installed properly:
+`pip` might ask you to upgrade itself, which is probably a good idea. Check to see if the scripts have been installed properly:
 
     printcdminfo -h
 
@@ -47,9 +48,11 @@ You can reactivate the virtual environment from the `cdm-util-scripts` directory
 
 ## Update
 
-In the `cdm-util-scripts` directory do `git pull` to update the Git repo to the latest version. Make sure the virtual environment is activated and do `python -m pip install .` to upgrade the package.
+To update `cdm-util-scripts` just reinstall the package:
 
-You can also delete the cloned repo directory and repeat the installation instructions.
+    python -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
+
+Make sure its virtual environment is active if you're using one.
 
 ## Usage
 
