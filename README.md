@@ -265,7 +265,7 @@ The HTML report can then be reviewed by opening it in a web browser.
 ### csv2catcher
 
 `csv2catcher` takes
-* A YAML or JSON reconciliation configuration file
+* A JSON reconciliation configuration file
 * A CSV mapping field data CSV column names to CONTENTdm collection field nicknames
 * A field data CSV containing the new metadata values to be uploaded to CONTENTdm
 * An output file name
@@ -289,18 +289,6 @@ Example of a JSON reconciliation configuration file:
     "identifier-nick": "identi",
     "match-mode": "object"
 }
-```
-
-If [PyYAML](https://github.com/yaml/pyyaml) is installed in the current environment, you may use a `.yaml` or `.yml` configuration file instead of JSON. You can install it when the virtual environment is active with `pip install pyyaml`.
-
-Example of a YAML reconciliation configuration file:
-```yaml
-# You can have comments in YAML
-repository-url: https://media.library.ohio.edu
-collection-alias: p15808coll15
-identifier-nick: identi
-match-mode: page
-page-position-column-name: Page Position
 ```
 
 The column mapping CSV must have only two columns named `name` and `nick` in that order, and must include a mapping for the `identifier-nick` nickname if it is specified in the configuration file. Columns mapped to the same field nickname in the column mapping CSV will have their field data CSV contents joined with a semicolon. Multiple rows in the column mapping CSV with the same column name will have their field data CSV contents joined with a semicolon to each of the fields specified in their respective `nick` values. The designated `identifier-nick` field will only be used for reconciliation and will not be included in the output edit records.
@@ -351,13 +339,15 @@ $ head csv2catcher-objects.json
 
 Example, using the `page` mode: 
 ```console
-$ cat page-config.yaml
-repository-url: https://media.library.ohio.edu
-collection-alias: p15808coll15
-identifier-nick: identi
-match-mode: page
-page-position-column-name: Page Position
-$ csv2catcher page-config.yaml col-map.csv fromthepage-tables-export.csv csv2catcher-pages.json
+$ cat page-config.json
+{
+    "repository-url": "https://media.library.ohio.edu",
+    "collection-alias": "p15808coll15",
+    "identifier-nick": "identi",
+    "match-mode": "object",
+    "page-position-column-name": "Page Position"
+}
+$ csv2catcher page-config.json col-map.csv fromthepage-tables-export.csv csv2catcher-pages.json
 Requesting object pointers: 397/397 100%
 Requesting page pointers: 4/4 100%
 $ head csv2catcher-pages.json

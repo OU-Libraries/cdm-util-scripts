@@ -13,11 +13,6 @@ from cdm_api import get_cdm_page_pointers
 
 from typing import List, Optional, Dict, Sequence, Iterator, TextIO
 
-try:
-    import yaml
-except ImportError:
-    yaml = None
-
 
 @dataclass
 class CdmObject:
@@ -285,7 +280,7 @@ def main():
                                      fromfile_prefix_chars='@')
     parser.add_argument('reconciliation_config',
                         type=str,
-                        help="Path to a collection reconciliation JSON or YAML configuration file")
+                        help="Path to a collection reconciliation JSON configuration file")
     parser.add_argument('column_mapping_csv',
                         type=str,
                         help="Path to CSV with columns 'name' and 'nick' mapping column names to CONTENTdm field nicknames")
@@ -299,14 +294,7 @@ def main():
 
     # Read reconciliation_config
     with open(args.reconciliation_config, mode='r') as fp:
-        if args.reconciliation_config.endswith(('.yaml', '.yml')):
-            if yaml:
-                reconciliation_config = yaml.safe_load(fp)
-            else:
-                print(f"{args.reconciliation_config!r}: unable to parse YAML file because YAML module could not be imported. Is 'pyyaml' installed?")
-                sys.exit(1)
-        else:
-            reconciliation_config = json.load(fp)
+        reconciliation_config = json.load(fp)
 
     repository_url = reconciliation_config.get('repository-url', None)
     collection_alias = reconciliation_config.get('collection-alias', None)
