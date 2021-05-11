@@ -14,7 +14,7 @@ cdm-util-scripts are Python scripts developed to support Ohio University Librari
 
 ## Installation
 
-These instructions require that you are using Python 3 (3.7+) as your `python` and are using a Unix shell with Git installed (like [Git bash on Windows](https://gitforwindows.org/) or the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/)).
+These instructions require that you are using Python 3 (3.7+) as your `python` and are using a bash shell of some kind (like [Git bash on Windows](https://gitforwindows.org/) or the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/)).
 
 `cdm-util-scripts` can be installed directly from GitHub:
 
@@ -53,6 +53,18 @@ To update `cdm-util-scripts` just reinstall the package:
     python -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
 
 Make sure its virtual environment is active if you're using one.
+
+## cdm-catcher
+
+Several cdm-util-scripts are intended for use with [cdm-catcher](https://github.com/Baledin/cdm-catcher). As of `cdm-catcher`'s May 27th, 2020 commit (`ede517f`), you can install it by cloning its GitHub repo and installing its requirements (shown here using a Windows virtual environment):
+
+    git clone https://github.com/Baledin/cdm-catcher
+    cd cdm-catcher
+    python -m venv env
+    source env/Scripts/activate
+    python -m pip install -r requirements.txt
+
+It should be configured according to its instructions. It can then be invoked from its cloned cdm-catcher directory.
 
 ## Usage
 
@@ -216,7 +228,7 @@ The HTML report can then be reviewed by opening it in a web browser.
 * A cdm-catcher `edit` action JSON file
 * An output file name
 
-and outputs an HTML report showing on a per-item basis what fields would be changed in a CONTENTdm collection if that cdm-catcher JSON file were used in a cdm-catcher `edit` action. This script is intended to be useful for cross-checking the output of the `2catcher` series of scripts and checking to see if a Catcher edit action has been completely implemented by the Catcher service.
+and outputs an HTML report showing on a per-item basis what fields would be changed in a CONTENTdm collection if that cdm-catcher JSON file were used in a [cdm-catcher](https://github.com/Baledin/cdm-catcher) `edit` action. This script is intended to be useful for cross-checking the output of the `2catcher` series of scripts and checking to see if a Catcher edit action has been completely implemented by the Catcher service.
 
 Example:
 ```console
@@ -270,7 +282,7 @@ The HTML report can then be reviewed by opening it in a web browser.
 * A field data CSV containing the new metadata values to be uploaded to CONTENTdm
 * An output file name
 
-and outputs a JSON file containing the field data from the CSV reconciled against the specified CONTENTdm collection for use with [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher)'s `edit` action.
+and outputs a JSON file containing the field data from the CSV reconciled against the specified CONTENTdm collection for use with [cdm-catcher](https://github.com/Baledin/cdm-catcher)'s `edit` action.
 
 The reconciliation configuration file specifies these parameters:
 * `repository-url` the CONTENTdm instance URL
@@ -374,7 +386,7 @@ Note that the `dmrecord` pointer now points to a page in the object referenced i
 * A CSV mapping FromThePage field labels to CONTENTdm collection field nicknames
 * An output file name
 
-and outputs a JSON file containing field data from FromThePage project for use with [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher)'s `edit` action.
+and outputs a JSON file containing field data from FromThePage project for use with [cdm-catcher](https://github.com/Baledin/cdm-catcher)'s `edit` action.
 
 The FromThePage project _must_:
 1. Be field-based
@@ -512,4 +524,4 @@ The optional argument can also be provided with file-specified arguments:
 
 ### csv2json
 
-`csv2json` accepts a CSV, TSV or other delimited file and transposes its rows into a list of JSON objects with column headers as keys, perhaps suitable for use with [cdm-catcher](https://github.com/wastatelibrary/cdm-catcher)'s `edit` action if the column names are CONTENTdm field nicks.
+`csv2json` accepts a CSV, TSV or other delimited file and transposes its rows into a list of JSON objects with column headers as keys, perhaps suitable for use with [cdm-catcher](https://github.com/Baledin/cdm-catcher)'s `edit` action if the column names are CONTENTdm field nicks.
