@@ -12,6 +12,12 @@ setup(
     package_dir={'': 'src'},
     install_requires=['requests', 'jinja2'],
     python_requires='>=3.7',
+    extras_require={
+        'dev': [
+            'pytest',
+            'vcrpy',
+        ],
+    },
     package_data={
         'catcherdiff': ['templates/catcherdiff-report.html.j2'],
         'scanftpfields': ['templates/scanftpfields-report.html.j2'],
