@@ -7,7 +7,7 @@ import cdm_api
 
 cdm_vcr = vcr.VCR(
     cassette_library_dir='tests/cassettes/cdm_api',
-    record_mode='new_episodes'
+    record_mode='none'
 )
 
 
