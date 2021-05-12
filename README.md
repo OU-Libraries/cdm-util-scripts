@@ -6,11 +6,11 @@ cdm-util-scripts are Python scripts developed to support Ohio University Librari
 * [printftpinfo](#printftpinfo) prints FromThePage project information to the terminal, including FromThePage project labels
 * [scanftpfields](#scanftpfields) reports on what field-based transcription field schemas are in use in a FromThePage project
 * [scanftpvocabs](#scanftpvocabs) reports on CONTENTdm controlled vocabulary terms being used in FromThePage
-* [catcherdiff](#catcherdiff) generates a report showing what item metadata will be changed if a `cdm-catcher` `edit` action JSON file is implemented
-* [csv2catcher](#csv2catcher) takes a CSV with CONTENTdm metadata edits, maps its columns onto CONTENTdm fields, reconciles it to a CONTENTdm collection, and outputs a `cdm-catcher` `edit` action JSON upload
-* [ftpfields2catcher](#ftpfields2catcher) requests a FromThePage field-based transcription project, maps its fields onto CONTENTdm fields, and outputs a `cdm-catcher` `edit` action JSON upload
-* [ftp2catcher](#ftp2catcher) reconciles a FromThePage transcription project to CONTENTdm compound object pages based on uploaded file names and outputs a `cdm-catcher` `edit` action JSON upload
-* [csv2json](#csv2json) transposes a CSV into a list of rows in JSON using column names as keys, one use of which is to transform a CSV with CONTENTdm field nicks as column names into a `cdm-catcher` `edit` action JSON upload
+* [catcherdiff](#catcherdiff) generates a report showing what item metadata will be changed if a cdm-catcher `edit` action JSON file is implemented
+* [csv2catcher](#csv2catcher) takes a CSV with CONTENTdm metadata edits, maps its columns onto CONTENTdm fields, reconciles it to a CONTENTdm collection, and outputs a cdm-catcher `edit` action JSON upload
+* [ftpfields2catcher](#ftpfields2catcher) requests a FromThePage field-based transcription project, maps its fields onto CONTENTdm fields, and outputs a cdm-catcher `edit` action JSON upload
+* [ftp2catcher](#ftp2catcher) reconciles a FromThePage transcription project to CONTENTdm compound object pages based on uploaded file names and outputs a cdm-catcher `edit` action JSON upload
+* [csv2json](#csv2json) transposes a CSV into a list of rows in JSON using column names as keys, one use of which is to transform a CSV with CONTENTdm field nicks as column names into a cdm-catcher `edit` action JSON upload
 
 ## Installation
 
@@ -56,7 +56,7 @@ Make sure its virtual environment is active if you're using one.
 
 ## cdm-catcher
 
-Several cdm-util-scripts are intended for use with [cdm-catcher](https://github.com/Baledin/cdm-catcher). As of `cdm-catcher`'s May 27th, 2020 commit (`ede517f`), you can install it by cloning its GitHub repo and installing its requirements (shown here using a Windows virtual environment):
+Several cdm-util-scripts are intended for use with [cdm-catcher](https://github.com/Baledin/cdm-catcher). As of cdm-catcher's May 27th, 2020 commit (`ede517f`), you can install it by cloning its GitHub repo and installing its requirements (shown here using a Windows virtual environment):
 
     git clone https://github.com/Baledin/cdm-catcher
     cd cdm-catcher
@@ -228,7 +228,7 @@ The HTML report can then be reviewed by opening it in a web browser.
 * A cdm-catcher `edit` action JSON file
 * An output file name
 
-and outputs an HTML report showing on a per-item basis what fields would be changed in a CONTENTdm collection if that cdm-catcher JSON file were used in a [cdm-catcher](https://github.com/Baledin/cdm-catcher) `edit` action. This script is intended to be useful for cross-checking the output of the `2catcher` series of scripts and checking to see if a Catcher edit action has been completely implemented by the Catcher service.
+and outputs an HTML report showing on a per-item basis what fields would be changed in a CONTENTdm collection if that cdm-catcher JSON file were used in a cdm-catcher `edit` action. This script is intended to be useful for cross-checking the output of the `2catcher` series of scripts and checking to see if a Catcher edit action has been completely implemented by the Catcher service.
 
 Example:
 ```console
@@ -282,7 +282,7 @@ The HTML report can then be reviewed by opening it in a web browser.
 * A field data CSV containing the new metadata values to be uploaded to CONTENTdm
 * An output file name
 
-and outputs a JSON file containing the field data from the CSV reconciled against the specified CONTENTdm collection for use with [cdm-catcher](https://github.com/Baledin/cdm-catcher)'s `edit` action.
+and outputs a JSON file containing the field data from the CSV reconciled against the specified CONTENTdm collection for use with cdm-catcher's `edit` action.
 
 The reconciliation configuration file specifies these parameters:
 * `repository-url` the CONTENTdm instance URL
@@ -386,7 +386,7 @@ Note that the `dmrecord` pointer now points to a page in the object referenced i
 * A CSV mapping FromThePage field labels to CONTENTdm collection field nicknames
 * An output file name
 
-and outputs a JSON file containing field data from FromThePage project for use with [cdm-catcher](https://github.com/Baledin/cdm-catcher)'s `edit` action.
+and outputs a JSON file containing field data from FromThePage project for use with cdm-catcher's `edit` action.
 
 The FromThePage project _must_:
 1. Be field-based
@@ -453,7 +453,7 @@ $ head dpm-catcher.json
 * A text file listing the URLs for FromThePage's IIIF manifests separated by newlines
 * An output file name
 
-and outputs a JSON file of FromThePage transcripts matched to CONTENTdm compound object pages for upload to CONTENTdm with the `cdm-catcher` `edit` action.
+and outputs a JSON file of FromThePage transcripts matched to CONTENTdm compound object pages for upload to CONTENTdm with the cdm-catcher `edit` action.
 
 FromThePage provides its own set of IIIF manifests for transcribed CONTENTdm objects. These manifests contain links to transcripts corresponding to the pages of the object in several flavors. Please consult FromThePage's API [documentation on renderings](https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#seealso) for up-to-date explanations and examples. `ftp2catcher` currently defaults to `Verbatim Plaintext`, but there is an optional `--transcript_type` argument where you can specify the transcript flavor.
 
@@ -524,4 +524,16 @@ The optional argument can also be provided with file-specified arguments:
 
 ### csv2json
 
-`csv2json` accepts a CSV, TSV or other delimited file and transposes its rows into a list of JSON objects with column headers as keys, perhaps suitable for use with [cdm-catcher](https://github.com/Baledin/cdm-catcher)'s `edit` action if the column names are CONTENTdm field nicks.
+`csv2json` accepts a CSV, TSV or other delimited file and transposes its rows into a list of JSON objects with column headers as keys, perhaps suitable for use with cdm-catcher's `edit` action if the column names are CONTENTdm field nicks.
+
+## Development
+
+cdm-util-scripts are tested with [pytest](https://pypi.org/project/pytest/) and [vcrpy](https://pypi.org/project/vcrpy/). These development dependencies can be installed using the `dev` extra, like so (using an editable installation of the development branch in a virtual environment on Windows):
+
+    git clone https://github.com/OU-Libraries/cdm-util-scripts
+    git checkout development
+    python -m venv env
+    source env/Scripts/activate
+    python -m pip install -e .[dev]
+
+vcrpy records real API responses in "cassettes" so tests can be run against them. Many of cdm-util-scripts' tests check for specific results from Ohio University FromThePage collections and OCLC's CONTENTdm demo instance, and will likely fail in the future.
