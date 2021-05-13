@@ -528,7 +528,7 @@ The optional argument can also be provided with file-specified arguments:
 
 ## Development
 
-cdm-util-scripts are tested with [pytest](https://pypi.org/project/pytest/) and [vcrpy](https://pypi.org/project/vcrpy/). These development dependencies can be installed using the `dev` extra, like so (using an editable installation of the development branch in a virtual environment on Windows):
+cdm-util-scripts is tested with [pytest](https://pypi.org/project/pytest/) and [vcrpy](https://pypi.org/project/vcrpy/). These development dependencies can be installed using the `dev` extra, like so (using an editable installation of the development branch in a virtual environment on Windows):
 
     git clone https://github.com/OU-Libraries/cdm-util-scripts
     cd cdm-util-scripts
@@ -537,4 +537,4 @@ cdm-util-scripts are tested with [pytest](https://pypi.org/project/pytest/) and 
     source env/Scripts/activate
     python -m pip install -e .[dev]
 
-vcrpy records real API responses in "cassettes" so tests can be run against them. vcrpy will need to have its test module `record_mode` settings set to `new_episodes` to record new API responses on any system where it hasn't cached cassettes. Because cdm-util-scripts is developed to cover specific use cases at Ohio University, many of its tests are currently written to check for specific results from Ohio University's FromThePage instance and OCLC's CONTENTdm demo instance, and will likely fail when these are inevitably changed.
+vcrpy records real API responses in "cassettes" so tests can be run against them. vcrpy will need to have its test module `record_mode` settings set to `new_episodes` to record new API responses on any system where it hasn't cached cassettes. Because cdm-util-scripts is developed to cover specific use cases at Ohio University Libraries, many of its tests are currently written to check for specific results from Ohio University Libraries' FromThePage instance and OCLC's CONTENTdm demo instance, and will likely fail when these are inevitably changed.
