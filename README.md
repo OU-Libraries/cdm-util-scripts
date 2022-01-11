@@ -9,7 +9,7 @@ cdm-util-scripts are Python scripts developed to support Ohio University Librari
 * [catcherdiff](#catcherdiff) generates a report showing what item metadata will be changed if a cdm-catcher `edit` action JSON file is implemented
 * [csv2catcher](#csv2catcher) takes a CSV with CONTENTdm metadata edits, maps its columns onto CONTENTdm fields, reconciles it to a CONTENTdm collection, and outputs a cdm-catcher `edit` action JSON upload
 * [ftpfields2catcher](#ftpfields2catcher) requests a FromThePage field-based transcription project, maps its fields onto CONTENTdm fields, and outputs a cdm-catcher `edit` action JSON upload
-* :NEW: [ftptr2catcher](#ftptr2catcher) requests transcripts from a list of FromThePage manifest URLs and outputs them as a cdm-catcher `edit` action
+* :new: [ftptr2catcher](#ftptr2catcher) requests transcripts from a list of FromThePage manifest URLs and outputs them as a cdm-catcher `edit` action
 * [ftp2catcher](#ftp2catcher) reconciles a FromThePage transcription project to CONTENTdm compound object pages based on uploaded file names and outputs a cdm-catcher `edit` action JSON upload
 * [csv2json](#csv2json) transposes a CSV into a list of rows in JSON using column names as keys, one use of which is to transform a CSV with CONTENTdm field nicks as column names into a cdm-catcher `edit` action JSON upload
 
