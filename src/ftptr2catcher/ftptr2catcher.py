@@ -10,8 +10,10 @@ from ftp2catcher import get_ftp_manifest, get_ftp_transcript
 def iter_manifest_sequence(manifest: Dict[str, Any], transcript_type: str) -> Iterator[Tuple[str, str]]:
     for canvas in manifest["sequences"][0]["canvases"]:
         dmrecord = canvas["@id"].split("/")[-3]
-        url = [seeAlso["@id"] for seeAlso in canvas["seeAlso"] if seeAlso["label"] == transcript_type][0]
-        yield dmrecord, url
+        url = [seeAlso["@id"] for seeAlso in canvas["seeAlso"] if seeAlso["label"] == transcript_type]
+        if not url:
+            raise ValueError(f"transcript type {transcript_type!r} not found")
+        yield dmrecord, url[0]
 
 
 def get_manifest_catcher_edits(manifest: Dict[str, Any], transcript_nick: str, transcript_type: str, session: requests.Session) -> List[Dict[str, str]]:
@@ -47,7 +49,8 @@ def get_manifests_catcher_edits(manifest_urls: Iterable[str], transcript_nick: s
 
 def main():
     parser = argparse.ArgumentParser(
-        description="",
+        description="Get transcripts from a list of FromThePage manuscripts in cdm-catcher JSON format",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
         "manifests_listing_path",
@@ -67,7 +70,7 @@ def main():
     parser.add_argument(
         "--transcript_type",
         type=str,
-        default="Verbatium Plaintext",
+        default="Verbatim Plaintext",
         help="FromThePage transcript type",
     )
     args = parser.parse_args()
