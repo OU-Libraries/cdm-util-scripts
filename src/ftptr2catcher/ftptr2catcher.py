@@ -17,17 +17,19 @@ def iter_manifest_sequence(manifest: Dict[str, Any], transcript_type: str) -> It
 
 
 def get_manifest_catcher_edits(manifest: Dict[str, Any], transcript_nick: str, transcript_type: str, session: requests.Session) -> List[Dict[str, str]]:
+    print(f"Requesting {len(manifest['sequences'][0]['canvases'])} {transcript_type!r} transcripts:", end='')
     catcher_edits = []
     for dmrecord, url in iter_manifest_sequence(
             manifest=manifest,
             transcript_type=transcript_type
     ):
-        print(f"Requesting {url!r}...")
+        print(f" {len(catcher_edits)+1}", end='')
         transcript_text = get_ftp_transcript(url=url, session=session)
         catcher_edits.append({
             "dmrecord": dmrecord,
             transcript_nick: transcript_text.strip(),
         })
+    print(end='\n')
     return catcher_edits
 
 
@@ -89,6 +91,7 @@ def main():
     print("Writing JSON file...")
     with open(args.output_file, mode="w", encoding="utf-8") as fp:
         json.dump(catcher_edits, fp, indent=2)
+    print("Done")
 
 
 if __name__ == "__main__":
