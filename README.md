@@ -9,6 +9,7 @@ cdm-util-scripts are Python scripts developed to support Ohio University Librari
 * [catcherdiff](#catcherdiff) generates a report showing what item metadata will be changed if a cdm-catcher `edit` action JSON file is implemented
 * [csv2catcher](#csv2catcher) takes a CSV with CONTENTdm metadata edits, maps its columns onto CONTENTdm fields, reconciles it to a CONTENTdm collection, and outputs a cdm-catcher `edit` action JSON upload
 * [ftpfields2catcher](#ftpfields2catcher) requests a FromThePage field-based transcription project, maps its fields onto CONTENTdm fields, and outputs a cdm-catcher `edit` action JSON upload
+* :NEW: [ftptr2catcher](#ftptr2catcher) requests transcripts from a list of FromThePage manifest URLs and outputs them as a cdm-catcher `edit` action
 * [ftp2catcher](#ftp2catcher) reconciles a FromThePage transcription project to CONTENTdm compound object pages based on uploaded file names and outputs a cdm-catcher `edit` action JSON upload
 * [csv2json](#csv2json) transposes a CSV into a list of rows in JSON using column names as keys, one use of which is to transform a CSV with CONTENTdm field nicks as column names into a cdm-catcher `edit` action JSON upload
 
@@ -439,6 +440,46 @@ $ head dpm-catcher.json
     "dancea": "",
     "dance": "",
     "langua": "English",
+```
+
+<a name="ftptr2catcher"/>
+
+### ftptr2catcher
+
+`ftptr2catcher` takes
+* A text file listing the URLs for FromThePage's IIIF manifests separated by newlines
+* The CONTENTdm field nickname for the collection's full-text transcript field
+* An output file name
+
+and outputs a JSON file of FromThePage transcripts matched to CONTENTdm objects for upload via cdm-catcher `edit` or diffing with `catcherdiff`. `ftptr2catcher` should to the same thing that FromThePage's "Export to CONTENTdm" feature does, but via a cdm-catcher JSON file that can be `catcherdiff`-ed.
+
+The listed FromThePage manifests _must_ have been ingested from CONTENTdm, so that the FromThePage manifest lists their CONTENTdm URLs.
+
+Optionally, a FromThePage [transcript type](https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#seealso) may be specified via the `--transcript_type` argument. The default is `Verbatim Plaintext`.
+
+Example:
+```console
+$ cat ftptr2catcher.txt
+https://fromthepage.com/iiif/45345/manifest
+https://fromthepage.com/iiif/45346/manifest
+$ ftptr2catcher ftptr2catcher.txt transc ftptr2catcher.json
+Requesting 'https://fromthepage.com/iiif/45345/manifest'...
+Requesting 188 'Verbatim Plaintext' transcripts: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188
+Requesting 'https://fromthepage.com/iiif/45346/manifest'...
+Requesting 188 'Verbatim Plaintext' transcripts: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188
+Writing JSON file...
+Done
+$ head ftptr2catcher.json
+[
+  {
+    "dmrecord": "1959",
+    "transc": ""
+  },
+  {
+    "dmrecord": "1960",
+    "transc": "#433\nFairfax\nMurray\nFol I Von sant Ambrosio  Dec 7\n(174) CLXXII - end of Sumateyls - S. Wendel Oct 21\n*(175) CLXXIII - begins Wintterteyl - St. Michel  Sept 29\n(387) CCCLXXXV - ends with - S. Eufrosina  Feb 11\n\" the democracy of the intellect\ncomes from the printed book\"\nWord Incunabula first used in connection with printing by\nBernard von Malincrodt [?Bernhard von Mallinckrodt?]  (1591 - 1664), dean of Munster Cathedral,\nin his book De ortus et progressu artis typographicae, Cologne:\napud. I Kinchium, 1639.  He contributed this tract] to the celebration\nof the 2nd centenary of Gutenberg's invention.  He describes the\nperiod from Gutenberg to 1500 as :  Prima Typographiae Incunabula\n= the Time when Typography was in its swaddling clothes.\n- incunabula period - encompasses a vital period of experimentation\nwith local scripts , all remnants of the later Middle Ages.\n$721.45"
+  },
+  {
 ```
 
 <a name="ftp2catcher"/>
