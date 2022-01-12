@@ -110,7 +110,7 @@ def extract_fields_from_p_span_xml(
     fields = dict()
     last_label = None
     for xml_p in xml_ps:
-        label = xml_p.find('span', namespaces=namespaces)
+        label = xml_p.find('ns:span', namespaces=namespaces)
         # Element truthiness is on existence of child Elements, so test for None
         if label is not None:
             label_text = last_label = rchomp(label.text, ': ')
@@ -126,26 +126,26 @@ def extract_fields_from_p_span_xml(
 
 
 def extract_fields_from_tei(tei: str) -> List[Optional[Dict[str, str]]]:
-    NS = {'': 'http://www.tei-c.org/ns/1.0'}
+    NS = {'ns': 'http://www.tei-c.org/ns/1.0'}
     tei_root = ET.fromstring(tei)
-    tei_pages = tei_root.findall('./text/body/div', namespaces=NS)
+    tei_pages = tei_root.findall('./ns:text/ns:body/ns:div', namespaces=NS)
     pages = []
     for tei_page in tei_pages:
-        tei_fields = tei_page.findall('p', namespaces=NS)
+        tei_fields = tei_page.findall('ns:p', namespaces=NS)
         fields = extract_fields_from_p_span_xml(tei_fields, namespaces=NS)
         pages.append(fields)
     return pages
 
 
 def extract_fields_from_html(html: str) -> List[Optional[Dict[str, str]]]:
-    NS = {'': 'http://www.w3.org/1999/xhtml'}
+    NS = {'ns': 'http://www.w3.org/1999/xhtml'}
     # The FromThePage XHTML Export isn't valid XHTML because of the JS blob on line 6
     html_no_scripts = re.sub(r"<script>.*</script>", '', html)
     html_root = ET.fromstring(html_no_scripts)
-    html_pages = html_root.findall("body/div[@class='pages']/div", namespaces=NS)
+    html_pages = html_root.findall("ns:body/ns:div[@class='pages']/ns:div", namespaces=NS)
     pages = []
     for html_page in html_pages:
-        html_fields = html_page.findall("div[@class='page-content']/p", namespaces=NS)
+        html_fields = html_page.findall("ns:div[@class='page-content']/ns:p", namespaces=NS)
         fields = extract_fields_from_p_span_xml(html_fields, namespaces=NS)
         pages.append(fields)
     return pages
