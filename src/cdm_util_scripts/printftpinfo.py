@@ -2,7 +2,7 @@ from requests import Session
 
 import argparse
 
-from printcdminfo import print_as_table
+from cdm_util_scripts.printcdminfo import print_as_table
 
 
 def get_slug_collections(slug: str, session: Session) -> dict:

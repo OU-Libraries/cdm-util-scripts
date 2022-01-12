@@ -4,8 +4,8 @@ import requests
 
 from datetime import datetime
 
-import scanftpfields
-import ftpfields2catcher
+from cdm_util_scripts import scanftpfields
+from cdm_util_scripts import ftpfields2catcher
 
 
 ftp_vcr = vcr.VCR(

@@ -6,7 +6,7 @@ import sys
 from io import StringIO
 from pathlib import Path
 
-import csv2catcher
+from cdm_util_scripts import csv2catcher
 
 
 cdm_vcr = vcr.VCR(

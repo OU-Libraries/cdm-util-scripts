@@ -4,7 +4,7 @@ from typing import Dict, Any, Iterator, Tuple, Iterable, List
 
 import requests
 
-from ftp2catcher import get_ftp_manifest, get_ftp_transcript
+from cdm_util_scripts.ftp2catcher import get_ftp_manifest, get_ftp_transcript
 
 
 def iter_manifest_sequence(manifest: Dict[str, Any], transcript_type: str) -> Iterator[Tuple[str, str]]:

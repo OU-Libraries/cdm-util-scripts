@@ -4,7 +4,7 @@ import json
 import argparse
 from itertools import count
 
-from cdm_api import get_cdm_page_pointers
+from cdm_util_scripts.cdm_api import get_cdm_page_pointers
 
 from typing import List
 

@@ -2,12 +2,12 @@ import requests
 import vcr
 import pytest
 
-import ftptr2catcher
+from cdm_util_scripts import ftptr2catcher
 
 
 ftp_vcr = vcr.VCR(
     cassette_library_dir="tests/cassettes/ftptr2catcher",
-    record_mode="once",
+    record_mode="none",
 )
 
 

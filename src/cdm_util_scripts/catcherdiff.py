@@ -7,7 +7,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from cdm_api import get_cdm_item_info, get_cdm_collection_field_vocab, get_collection_field_info
+from cdm_util_scripts.cdm_api import get_cdm_item_info, get_cdm_collection_field_vocab, get_collection_field_info
 
 from typing import Dict, List, Union, Tuple
 

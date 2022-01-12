@@ -7,7 +7,7 @@ import sys
 from io import StringIO
 from typing import Dict, Sequence, Callable, Any
 
-from cdm_api import get_collection_field_info, get_collection_list, DmError
+from cdm_util_scripts.cdm_api import get_collection_field_info, get_collection_list, DmError
 
 
 def print_as_table(rows: Sequence[dict]) -> None:

@@ -2,7 +2,7 @@ import requests
 import pytest
 import vcr
 
-import catcherdiff
+from cdm_util_scripts import catcherdiff
 
 
 cdm_vcr = vcr.VCR(

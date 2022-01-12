@@ -1,14 +1,13 @@
-from requests import Session
-import jinja2
-
 import json
+import argparse
 from datetime import datetime
 from collections import Counter, defaultdict
-import argparse
-
-import ftpfields2catcher
-
 from typing import List, Dict, Any, Tuple
+
+import jinja2
+from requests import Session
+
+from cdm_util_scripts import ftpfields2catcher
 
 
 def count_filled_pages(ftp_collection: ftpfields2catcher.FTPCollection) -> int:

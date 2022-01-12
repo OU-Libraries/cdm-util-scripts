@@ -2,7 +2,7 @@ import pytest
 import requests
 import vcr
 
-import cdm_api
+from cdm_util_scripts import cdm_api
 
 
 cdm_vcr = vcr.VCR(

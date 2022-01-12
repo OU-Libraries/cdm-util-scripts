@@ -1,1 +1,0 @@
-from scanftpvocabs.scanftpvocabs import *

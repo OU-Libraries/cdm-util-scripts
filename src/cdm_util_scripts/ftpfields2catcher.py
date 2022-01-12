@@ -9,8 +9,8 @@ import xml.etree.ElementTree as ET
 from collections import defaultdict
 from dataclasses import dataclass, field
 
-from cdm_api import get_cdm_page_pointers, get_cdm_item_info
-from ftp2catcher import get_ftp_manifest
+from cdm_util_scripts.cdm_api import get_cdm_page_pointers, get_cdm_item_info
+from cdm_util_scripts.ftp2catcher import get_ftp_manifest
 
 from typing import Optional, List, Iterable, Dict, Sequence, Callable, Tuple
 

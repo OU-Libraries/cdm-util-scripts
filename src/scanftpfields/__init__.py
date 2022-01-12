@@ -1,1 +1,0 @@
-from scanftpfields.scanftpfields import *

@@ -3,7 +3,7 @@ import vcr
 import requests
 import re
 
-import ftpfields2catcher
+from cdm_util_scripts import ftpfields2catcher
 
 
 ftp_vcr = vcr.VCR(

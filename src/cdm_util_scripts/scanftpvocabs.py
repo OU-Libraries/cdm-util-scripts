@@ -7,9 +7,9 @@ import json
 from datetime import datetime
 from collections import defaultdict
 
-import ftpfields2catcher
-import catcherdiff
-import cdm_api
+from cdm_util_scripts import ftpfields2catcher
+from cdm_util_scripts import catcherdiff
+from cdm_util_scripts import cdm_api
 
 from typing import Dict, List, Tuple
 

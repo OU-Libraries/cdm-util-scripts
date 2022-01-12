@@ -2,7 +2,7 @@ import pytest
 import vcr
 import requests
 
-import ftp2catcher
+from cdm_util_scripts import ftp2catcher
 
 
 cdm_vcr = vcr.VCR(

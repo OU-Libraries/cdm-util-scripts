@@ -2,8 +2,8 @@ import pytest
 
 from datetime import datetime
 
-from ftpfields2catcher import FTPCollection, FTPWork, FTPPage
-import scanftpvocabs
+from cdm_util_scripts.ftpfields2catcher import FTPCollection, FTPWork, FTPPage
+from cdm_util_scripts import scanftpvocabs
 
 
 def test_scan_vocabs():
