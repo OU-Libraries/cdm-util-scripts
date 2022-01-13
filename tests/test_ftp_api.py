@@ -111,53 +111,44 @@ def test_get_rendering_raises(session):
 
 
 extraction_test_values = [
-    # https://fromthepage.com/iiif/48254/manifest
-    ('https://fromthepage.com/iiif/an-evening-of-dance-florida-state-university-poster-february-22-24/export/tei',
-     'https://fromthepage.com/iiif/an-evening-of-dance-florida-state-university-poster-february-22-24/export/html',
-     [
-         {
-             'Title':  'An Evening of Dance, Florida State University poster, February 22-24',
-             'Creator (artist)': '',
-             # Whitespace required at the end of "Davis, ", "Fichter, ", and "Sias and "
-             'Transcribed poster text': """
-FSU Department of Dance
-An Evening of Dance
-February 22-24
-February 22 & 23 8:00 pm
-February 24 2:30 pm
-RUBY DIAMOND AUDITORIUM
-Works by:
-Gwynne Ashton, Lynda Davis, 
-Nancy Smith Fichter, 
-Richard Sias and 
-Alwin Nikolais
-
-FSU Fine Arts,
-Union Box Offices
-and at the door
-Ticket
-Reservations:
-644-6500 &
-644-6277
-             """.strip()
-         }
-     ]),
+    # https://fromthepage.com/iiif/56198/manifest
+    (
+        "https://fromthepage.com/iiif/56198/export/tei",
+        "https://fromthepage.com/iiif/56198/export/html",
+        [
+            {
+                "Title": "Nothing else like it in the world poster, Nikolais Dance Theatre",
+                "Creator (artist)": "Warner-Lasser Associates",
+                "Creator (artist) if other": "",
+                "Transcribed poster text": """
+nikolais
+dance theatre
+nothing else 
+like it in
+the world
+Printed in U.S.A
+Designed by Warner-Lasser Associates, Morristown, N.J. / Photograph by MaxWaldman, N.Y.
+                """.strip(),
+            }
+        ]
+    ),
 
     # https://fromthepage.com/iiif/46453/manifest
-    ('https://fromthepage.com/iiif/ryan-box023-tld-f41-31956cd7-4e66-4f1d-b830-40b33d8dc77d/export/tei',
-     'https://fromthepage.com/iiif/ryan-box023-tld-f41-31956cd7-4e66-4f1d-b830-40b33d8dc77d/export/html',
-     [
-         {
-             'Title': 'Box 023, folder 41: Background notes, 1st Parachute Battalion',
-             'Respondent unit (examples include battalions, brigades, regiments, and squadrons)': '1st Parachute Battalion',
-         },
-         {
-             'Respondent name (last, first middle)': '',
-             'Respondent nationality': '',
-         }
-     ])
+    (
+        "https://fromthepage.com/iiif/46453/export/tei",
+        "https://fromthepage.com/iiif/46453/export/html",
+        [
+            {
+                'Title': 'Box 023, folder 41: Background notes, 1st Parachute Battalion',
+                'Respondent unit (examples include battalions, brigades, regiments, and squadrons)': '1st Parachute Battalion',
+            },
+            {
+                'Respondent name (last, first middle)': '',
+                'Respondent nationality': '',
+            }
+        ]
+    ),
 ]
-
 
 @ftp_vcr.use_cassette(record_mode="new_episodes")
 @pytest.mark.parametrize('tei_url, html_url, check_pages', extraction_test_values)

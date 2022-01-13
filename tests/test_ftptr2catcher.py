@@ -39,7 +39,6 @@ def test_get_manifests_catcher_edits(session):
     catcher_edits = ftptr2catcher.get_manifests_catcher_edits(
         [
             "https://fromthepage.com/iiif/45345/manifest",
-            "https://fromthepage.com/iiif/45346/manifest",
         ],
         transcript_type=transcript_type,
         transcript_nick=transcript_nick,
