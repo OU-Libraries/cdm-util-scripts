@@ -133,7 +133,7 @@ def main():
     )
     args = parser.parse_args()
 
-    with open(args.catcher_json_file, mode='r') as fp:
+    with open(args.catcher_json_file, mode='r', encoding="utf-8") as fp:
         cdm_catcher_edits = json.load(fp)
 
     with Session() as session:

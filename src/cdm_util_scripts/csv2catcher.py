@@ -293,7 +293,7 @@ def main():
     args = parser.parse_args()
 
     # Read reconciliation_config
-    with open(args.reconciliation_config, mode='r') as fp:
+    with open(args.reconciliation_config, mode='r', encoding="utf-8") as fp:
         reconciliation_config = json.load(fp)
 
     repository_url = reconciliation_config.get('repository-url', None)
@@ -324,7 +324,7 @@ def main():
         sys.exit(1)
 
     # Read column_mapping_csv
-    with open(args.column_mapping_csv, mode='r') as fp:
+    with open(args.column_mapping_csv, mode='r', encoding="utf-8") as fp:
         reader = csv.DictReader(fp)
         if reader.fieldnames != ['name', 'nick']:
             print(f"{args.column_mapping_csv!r}: column mapping CSV must have 'name' and 'nick' column titles in that order")
@@ -335,7 +335,7 @@ def main():
         column_mapping = dict(column_mapping)
 
     # Read field_data_csv
-    with open(args.field_data_csv, mode='r') as fp:
+    with open(args.field_data_csv, mode='r', encoding="utf-8") as fp:
         cdm_collection_from_rows = build_cdm_collection_from_rows(
             rows=csv_dict_reader_with_join(fp),
             column_mapping=column_mapping,
@@ -359,7 +359,7 @@ def main():
             print(f"Reconciliation failure: {err}")
             sys.exit(1)
 
-    with open(args.output_file, mode='w') as fp:
+    with open(args.output_file, mode='w', encoding="utf-8") as fp:
         json.dump(serialize_cdm_objects(catcher_data), fp, indent=2)
 
 

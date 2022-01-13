@@ -46,7 +46,7 @@ def main():
 
     transcript_type_label = args.transcript_type or 'Verbatim Plaintext'
 
-    with open(args.manifests_file, mode='r') as fp:
+    with open(args.manifests_file, mode='r', encoding="utf-8") as fp:
         manifest_urls = [line.strip() for line in fp.readlines()]
 
     catcher_fields = []
@@ -89,7 +89,7 @@ def main():
                 })
             print(end='\n')
     print("Writing JSON file...")
-    with open(args.output_file, mode='w') as fp:
+    with open(args.output_file, mode='w', encoding="utf-8") as fp:
         json.dump(catcher_fields, fp, indent=2)
     print("Done")
 
