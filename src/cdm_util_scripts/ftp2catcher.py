@@ -4,36 +4,17 @@ import json
 import argparse
 from itertools import count
 
-from cdm_util_scripts.cdm_api import get_cdm_page_pointers
+from cdm_util_scripts import cdm_api
+from cdm_util_scripts.ftp_api import get_ftp_manifest, get_ftp_manifest_transcript_urls, get_ftp_transcript
 
 from typing import List
 
 
 def find_cdm_objects(repo_url: str, alias: str, field_nick: str, value: str, session: requests.Session) -> List[str]:
-    response = session.get(f"{repo_url.rstrip('/')}/digital/bl/dmwebservices/index.php?q=dmQuery/{alias}/{field_nick}^{value}^exact^and/dmrecord/dmrecord/1024/0/1/0/0/0/0/1/json")
-    response.raise_for_status()
-    dmQuery = response.json()
-    return [record['pointer'] for record in dmQuery['records']]
-
-
-def get_ftp_manifest(url: str, session: requests.Session) -> dict:
-    response = session.get(url)
-    response.raise_for_status()
-    return response.json()
-
-
-def get_ftp_manifest_transcript_urls(manifest: dict, label: str) -> List[str]:
-    canvases = manifest['sequences'][0]['canvases']
-    return [seeAlso['@id']
-            for canvas in canvases
-            for seeAlso in canvas['seeAlso']
-            if seeAlso['label'] == label]
-
-
-def get_ftp_transcript(url: str, session: requests.Session) -> str:
-    response = session.get(url)
-    response.raise_for_status()
-    return response.text
+    repo_url = repo_url.rstrip('/')
+    url = f"{repo_url}/digital/bl/dmwebservices/index.php?q=dmQuery/{alias}/{field_nick}^{value}^exact^and/dmrecord/dmrecord/1024/0/1/0/0/0/0/1/json"
+    result = cdm_api.get_dm(url, session)
+    return [record['pointer'] for record in result['records']]
 
 
 def main():
@@ -86,7 +67,7 @@ def main():
             )
             if len(cdm_object_pointers) != 1:
                 raise ValueError(f"No unique object found for {source!r} in {args.source_nick!r}")
-            page_pointers = get_cdm_page_pointers(
+            page_pointers = cdm_api.get_cdm_page_pointers(
                 repo_url=args.repository_url,
                 alias=args.collection_alias,
                 dmrecord=cdm_object_pointers[0],

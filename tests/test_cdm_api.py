@@ -7,14 +7,8 @@ from cdm_util_scripts import cdm_api
 
 cdm_vcr = vcr.VCR(
     cassette_library_dir='tests/cassettes/cdm_api',
-    record_mode='none'
+    record_mode='once',
 )
-
-
-@pytest.fixture(scope='session')
-def session():
-    with requests.Session() as module_session:
-        yield module_session
 
 
 @cdm_vcr.use_cassette()
@@ -47,3 +41,14 @@ def test_get_cdm_page_pointers(session):
         session=session
     )
     assert pointers
+
+
+@cdm_vcr.use_cassette()
+def test_get_cdm_collection_field_vocab(session):
+    vocab = cdm_api.get_cdm_collection_field_vocab(
+        cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
+        cdm_collection_alias='oclcsample',
+        cdm_field_nick='subjec',
+        session=session
+    )
+    assert vocab

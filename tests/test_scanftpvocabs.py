@@ -2,13 +2,13 @@ import pytest
 
 from datetime import datetime
 
-from cdm_util_scripts.ftpfields2catcher import FTPCollection, FTPWork, FTPPage
 from cdm_util_scripts import scanftpvocabs
+from cdm_util_scripts import ftp_api
 
 
 def test_scan_vocabs():
-    ftp_collection = FTPCollection(
-        works=[FTPWork(pages=[FTPPage(fields={
+    ftp_collection = ftp_api.FTPCollection(
+        works=[ftp_api.FTPWork(pages=[ftp_api.FTPPage(fields={
             'FtP vocab label': 'controlled-term; uncontrolled-term',
             'FtP TGM label': 'Paddleboats; NotInTGM',
         })])]
@@ -52,7 +52,7 @@ def test_report_to_html():
             'FtP vocab label': ['nickv'],
             'FtP TGM label': ['nickdb']
         },
-        'field_scans': {'nick': {'uncontrolled-term': [FTPPage(display_url='', label='', transcription_url='')]}},
+        'field_scans': {'nick': {'uncontrolled-term': [ftp_api.FTPPage(display_url='', label='', transcription_url='')]}},
         'vocabs_index': {'nick': {'type': 'vocab', 'name': 'nick'}},
         'vocabs': {'vocab': {'nick': ['controlled_term']}, 'vocdb': {}},
         'cdm_nick_to_name': {'nick': 'Name'},

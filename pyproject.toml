@@ -3,7 +3,7 @@ requires = ["setuptools>=42.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
-addopts = "--cov=cdm-util-scripts"
+addopts = "--cov=cdm_util_scripts --cov-report html:htmlcov"
 testpaths = [
     "tests",
 ]

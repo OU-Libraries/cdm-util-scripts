@@ -1,14 +1,9 @@
-from requests import Session
-
 import argparse
 
+from requests import Session
+
 from cdm_util_scripts.printcdminfo import print_as_table
-
-
-def get_slug_collections(slug: str, session: Session) -> dict:
-    response = session.get(f"https://fromthepage.com/iiif/collections/{slug}")
-    response.raise_for_status()
-    return response.json()
+from cdm_util_scripts.ftp_api import get_slug_collections
 
 
 def main():

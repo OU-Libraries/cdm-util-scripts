@@ -11,15 +11,8 @@ from cdm_util_scripts import csv2catcher
 
 cdm_vcr = vcr.VCR(
     cassette_library_dir='tests/cassettes/csv2catcher',
-    # 'once' will fail with parameterized tests, 'new_episodes' seems to work
-    record_mode='none'
+    record_mode='once',
 )
-
-
-@pytest.fixture(scope='session')
-def session():
-    with requests.Session() as module_session:
-        yield module_session
 
 
 @pytest.fixture()
@@ -31,14 +24,32 @@ def cdm_collection_rows():
 
 @pytest.fixture()
 def cdm_records():
-    with cdm_vcr.use_cassette('test_get_cdm_collection_object_records.yml'):
-        cdm_records = csv2catcher.request_cdm_collection_object_records(
-            repo_url='https://media.library.ohio.edu',
-            alias='p15808coll15',
-            field_nicks=['identi'],
-            session=requests
-        )
-    return cdm_records
+    return [
+        {'collection': '/p15808coll15',
+         'pointer': 5240,
+         'filetype': 'cpd',
+         'parentobject': -1,
+         'identi': 'ryan_box021-tld_f05',
+         'find': '5241.cpd'},
+        {'collection': '/p15808coll15',
+         'pointer': 5223,
+         'filetype': 'cpd',
+         'parentobject': -1,
+         'identi': 'ryan_box023-tld_f41',
+         'find': '5224.cpd'},
+        {'collection': '/p15808coll15',
+         'pointer': 5193,
+         'filetype': 'cpd',
+         'parentobject': -1,
+         'identi': 'ryan_box013-tld_f01',
+         'find': '5194.cpd'},
+        {'collection': '/p15808coll15',
+         'pointer': 5648,
+         'filetype': 'cpd',
+         'parentobject': -1,
+         'identi': 'ryan_box021-tld_f09',
+         'find': '5649.cpd'}
+    ]
 
 
 def test_CdmObject__combine():
@@ -112,15 +123,15 @@ def test_csv_dict_reader_with_join_raises():
             pass
 
 
+@cdm_vcr.use_cassette()
 def test_request_cdm_collection_object_records(session):
     field_nicks = ['identi']
-    with cdm_vcr.use_cassette('test_get_cdm_collection_object_records.yml'):
-        cdm_records = csv2catcher.request_cdm_collection_object_records(
-            repo_url='https://media.library.ohio.edu',
-            alias='p15808coll15',
-            field_nicks=field_nicks,
-            session=session
-        )
+    cdm_records = csv2catcher.request_cdm_collection_object_records(
+        repo_url='https://media.library.ohio.edu',
+        alias='p15808coll15',
+        field_nicks=field_nicks,
+        session=session
+    )
     for record in cdm_records:
         for field_nick in field_nicks:
             assert field_nick in record
@@ -138,18 +149,18 @@ def test_build_cdm_collection_from_records(cdm_records):
         assert isinstance(cdm_object.is_cpd, bool)
 
 
+@cdm_vcr.use_cassette()
 def test_request_collection_page_pointers(cdm_records, session):
     cdm_collection = csv2catcher.build_cdm_collection_from_records(
         cdm_records=cdm_records,
         identifier_nick='identi'
     )
-    with cdm_vcr.use_cassette('test_request_collection_page_pointers.yml'):
-        csv2catcher.request_collection_page_pointers(
-            cdm_collection=cdm_collection,
-            repo_url='https://media.library.ohio.edu',
-            alias='p15808coll15',
-            session=session
-        )
+    csv2catcher.request_collection_page_pointers(
+        cdm_collection=cdm_collection[:5],
+        repo_url='https://media.library.ohio.edu',
+        alias='p15808coll15',
+        session=session
+    )
     for cdm_object in cdm_collection:
         if cdm_object.is_cpd:
             assert cdm_object.page_pointers
@@ -252,7 +263,7 @@ def test_build_cdm_collection_from_rows(cdm_collection_rows, cdm_collection_row_
 
 def test_build_identifier_to_object_index(cdm_records):
     cdm_collection = csv2catcher.build_cdm_collection_from_records(
-        cdm_records=cdm_records,
+        cdm_records=cdm_records[:5],
         identifier_nick='identi'
     )
     index = csv2catcher.build_identifier_to_object_index(cdm_collection=cdm_collection)
@@ -287,6 +298,7 @@ def test_reconcile_indexes_by_object(cdm_collection_rows, cdm_collection_row_map
         assert cdm_object.fields
 
 
+@cdm_vcr.use_cassette()
 def test_reconcile_indexes_by_page(cdm_collection_rows, cdm_collection_row_mapping, cdm_records, session):
     row_collection = csv2catcher.build_cdm_collection_from_rows(
         rows=cdm_collection_rows,
@@ -299,13 +311,12 @@ def test_reconcile_indexes_by_page(cdm_collection_rows, cdm_collection_row_mappi
         cdm_records=cdm_records,
         identifier_nick='identi'
     )
-    with cdm_vcr.use_cassette('test_request_collection_page_pointers.yml'):
-        csv2catcher.request_collection_page_pointers(
-            cdm_collection=record_collection,
-            repo_url='https://media.library.ohio.edu',
-            alias='p15808coll15',
-            session=session
-        )
+    csv2catcher.request_collection_page_pointers(
+        cdm_collection=record_collection,
+        repo_url='https://media.library.ohio.edu',
+        alias='p15808coll15',
+        session=session
+    )
     index_from_records = csv2catcher.build_identifier_to_object_index(
         cdm_collection=record_collection
     )
@@ -319,6 +330,8 @@ def test_reconcile_indexes_by_page(cdm_collection_rows, cdm_collection_row_mappi
         assert cdm_object.fields
 
 
+# 'once' will fail with parameterized tests, 'new_episodes' seems to work
+@cdm_vcr.use_cassette(record_mode="new_episodes")
 @pytest.mark.parametrize('match_mode, right_answers',
                          [
                              (csv2catcher.MatchMode.OBJECT,
@@ -346,14 +359,13 @@ def test_reconcile_cdm_collection(cdm_collection_rows,
         identifier_nick='identi',
         page_position_column_name='Page Position'
     )
-    with cdm_vcr.use_cassette('test_reconcile_cdm_collection.yml'):
-        catcher_data = csv2catcher.reconcile_cdm_collection(
-            cdm_collection=row_collection,
-            repository_url='https://media.library.ohio.edu',
-            collection_alias='p15808coll15',
-            identifier_nick='identi',
-            match_mode=match_mode
-        )
+    catcher_data = csv2catcher.reconcile_cdm_collection(
+        cdm_collection=row_collection,
+        repository_url='https://media.library.ohio.edu',
+        collection_alias='p15808coll15',
+        identifier_nick='identi',
+        match_mode=match_mode
+    )
     assert len(cdm_collection_rows) == len(catcher_data)
     row_index = csv2catcher.build_identifier_to_object_index(row_collection)
     rec_index = csv2catcher.build_identifier_to_object_index(catcher_data)

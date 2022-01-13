@@ -5,27 +5,26 @@ import requests
 from datetime import datetime
 
 from cdm_util_scripts import scanftpfields
-from cdm_util_scripts import ftpfields2catcher
+from cdm_util_scripts import ftp_api
 
 
 ftp_vcr = vcr.VCR(
     cassette_library_dir='tests/cassettes/scanftpfields',
-    record_mode='none'
+    record_mode='once',
 )
 
 
+@ftp_vcr.use_cassette(record_mode="new_episodes")
 @pytest.fixture(params=[
     {'slug': 'ohiouniversitylibraries', 'collection_name': 'Dance Posters Metadata', 'rendering_label': 'XHTML Export'},
-    {'slug': 'ohiouniversitylibraries', 'collection_name': 'Ryan collection metadata', 'rendering_label': 'XHTML Export'},
+    # {'slug': 'ohiouniversitylibraries', 'collection_name': 'Ryan collection metadata', 'rendering_label': 'XHTML Export'},
 ])
-@ftp_vcr.use_cassette()
-def ftp_collection(request):
-    with requests.Session() as session:
-        ftp_collection = ftpfields2catcher.get_and_load_ftp_collection(
-            **request.param,
-            session=session
-        )
-    return ftp_collection
+def ftp_collection(request, session):
+    ftp_collection_ = ftp_api.get_and_load_ftp_collection(
+        **request.param,
+        session=session
+    )
+    return ftp_collection_
 
 
 def test_count_filled_pages(ftp_collection):

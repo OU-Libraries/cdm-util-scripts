@@ -7,19 +7,20 @@ import json
 from datetime import datetime
 from collections import defaultdict
 
-from cdm_util_scripts import ftpfields2catcher
 from cdm_util_scripts import catcherdiff
+from cdm_util_scripts import ftpfields2catcher
 from cdm_util_scripts import cdm_api
+from cdm_util_scripts import ftp_api
 
 from typing import Dict, List, Tuple
 
 
 def scan_vocabs(
-        ftp_collection: ftpfields2catcher.FTPCollection,
+        ftp_collection: ftp_api.FTPCollection,
         field_mapping: Dict[str, List[str]],
         vocabs_index: Dict[str, Dict[str, str]],
         vocabs: Dict[str, Dict[str, List[str]]]
-) -> Tuple[Dict[str, Dict[str, ftpfields2catcher.FTPPage]], List[str]]:
+) -> Tuple[Dict[str, Dict[str, ftp_api.FTPPage]], List[str]]:
     mapped_nicks = set()
     for nicks in field_mapping.values():
         mapped_nicks.update(nicks)
@@ -95,7 +96,7 @@ def main():
     )
     parser.add_argument(
         '--label',
-        choices=list(ftpfields2catcher.rendering_extractors.keys()),
+        choices=list(ftp_api.rendering_extractors.keys()),
         default='XHTML Export',
         type=str,
         help="Choose the export to use for parsing fields"
@@ -110,7 +111,7 @@ def main():
 
     with Session() as session:
         try:
-            ftp_collection = ftpfields2catcher.get_and_load_ftp_collection(
+            ftp_collection = ftp_api.get_and_load_ftp_collection(
                 slug=args.ftp_slug,
                 collection_name=args.ftp_project_name,
                 rendering_label='XHTML Export',

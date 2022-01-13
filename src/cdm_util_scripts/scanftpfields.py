@@ -7,23 +7,23 @@ from typing import List, Dict, Any, Tuple
 import jinja2
 from requests import Session
 
-from cdm_util_scripts import ftpfields2catcher
+from cdm_util_scripts import ftp_api
 
 
-def count_filled_pages(ftp_collection: ftpfields2catcher.FTPCollection) -> int:
+def count_filled_pages(ftp_collection: ftp_api.FTPCollection) -> int:
     return sum(1
                for ftp_work in ftp_collection.works
                for ftp_page in ftp_work.pages if ftp_page.fields)
 
 
-def compile_field_frequencies(ftp_collection: ftpfields2catcher.FTPCollection) -> Counter:
+def compile_field_frequencies(ftp_collection: ftp_api.FTPCollection) -> Counter:
     return Counter(label
                    for ftp_work in ftp_collection.works
                    for ftp_page in ftp_work.pages if ftp_page.fields
                    for label in ftp_page.fields.keys())
 
 
-def make_work_record(ftp_work: ftpfields2catcher.FTPWork) -> Dict[str, Any]:
+def make_work_record(ftp_work: ftp_api.FTPWork) -> Dict[str, Any]:
     return {
         'ftp_manifest_url': ftp_work.ftp_manifest_url,
         'ftp_work_label': ftp_work.ftp_work_label,
@@ -33,7 +33,7 @@ def make_work_record(ftp_work: ftpfields2catcher.FTPWork) -> Dict[str, Any]:
     }
 
 
-def make_page_record(ftp_page: ftpfields2catcher.FTPPage) -> Dict[str, str]:
+def make_page_record(ftp_page: ftp_api.FTPPage) -> Dict[str, str]:
     return {
         'ftp_page_label': ftp_page.label,
         'ftp_page_display_url': ftp_page.display_url,
@@ -41,7 +41,7 @@ def make_page_record(ftp_page: ftpfields2catcher.FTPPage) -> Dict[str, str]:
     }
 
 
-def compile_field_sets(ftp_collection: ftpfields2catcher.FTPCollection) -> Tuple[List[dict], List[dict]]:
+def compile_field_sets(ftp_collection: ftp_api.FTPCollection) -> Tuple[List[dict], List[dict]]:
     field_sets_accumulator = defaultdict(dict)
     blank_works = []
     for ftp_work in ftp_collection.works:
@@ -71,7 +71,7 @@ def compile_field_sets(ftp_collection: ftpfields2catcher.FTPCollection) -> Tuple
     return field_sets, blank_works
 
 
-def compile_report(ftp_collection: ftpfields2catcher.FTPCollection):
+def compile_report(ftp_collection: ftp_api.FTPCollection):
     field_sets, blank_works = compile_field_sets(ftp_collection)
     report = {
         'slug': ftp_collection.slug,
@@ -113,7 +113,7 @@ def main():
     )
     parser.add_argument(
         '--label',
-        choices=list(ftpfields2catcher.rendering_extractors.keys()),
+        choices=list(ftp_api.rendering_extractors.keys()),
         default='XHTML Export',
         type=str,
         help="Choose the export to use for parsing fields"
@@ -121,7 +121,7 @@ def main():
     args = parser.parse_args()
 
     with Session() as session:
-        ftp_collection = ftpfields2catcher.get_and_load_ftp_collection(
+        ftp_collection = ftp_api.get_and_load_ftp_collection(
             slug=args.slug,
             collection_name=args.collection_name,
             rendering_label=args.label,
