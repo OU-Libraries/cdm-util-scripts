@@ -1,3 +1,4 @@
+import re
 import json
 import argparse
 from typing import Dict, Any, Iterator, Tuple, Iterable, List, Optional
@@ -8,11 +9,18 @@ from rich.progress import track
 from cdm_util_scripts import ftp_api
 
 
+def parse_canvas_id(url: str) -> Tuple[str, str]:
+    match = re.search(r"/iiif/([A-Za-z0-9\-]+)[:/](\d+)/canvas/c\d+$", url)
+    if match:
+        return match.groups()
+    raise ValueError(f"Couldn't parse URL {url!r}")
+
+
 def iter_manifest_sequence(
     manifest: Dict[str, Any], transcript_type: str
 ) -> Iterator[Tuple[str, str]]:
     for canvas in manifest["sequences"][0]["canvases"]:
-        dmrecord = canvas["@id"].split("/")[-3]
+        _, dmrecord = parse_canvas_id(canvas["@id"])
         url = [
             seeAlso["@id"]
             for seeAlso in canvas["seeAlso"]

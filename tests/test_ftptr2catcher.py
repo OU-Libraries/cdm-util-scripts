@@ -22,6 +22,14 @@ def ftp_manifest(session):
     )
 
 
+@pytest.mark.parametrize("url,alias,dmrecord", [
+    ("https://cdm15808.contentdm.oclc.org/iiif/mss:188/canvas/c1", "mss", "188"),
+    ("https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll19/1959/canvas/c0", "p15808coll19", "1959"),
+])
+def test_parse_canvas_id(url, alias, dmrecord):
+    assert ftptr2catcher.parse_canvas_id(url) == (alias, dmrecord)
+
+
 def test_iter_manifest_sequence(ftp_manifest):
     for dmrecord, url in ftptr2catcher.iter_manifest_sequence(
         ftp_manifest, transcript_type="Verbatim Plaintext"
@@ -40,8 +48,8 @@ def test_get_manifest_catcher_edits(ftp_manifest, session):
         session=session,
     )
     for edit in catcher_edits:
-        assert set(edit) == {"dmrecord", transcript_nick}
         assert int(edit["dmrecord"])
+        assert set(edit) == {"dmrecord", transcript_nick}
 
 
 @ftp_vcr.use_cassette()
