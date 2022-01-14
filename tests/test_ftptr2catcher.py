@@ -2,7 +2,10 @@ import requests
 import vcr
 import pytest
 
+import json
+
 from cdm_util_scripts import ftptr2catcher
+from cdm_util_scripts import ftp_api
 
 
 ftp_vcr = vcr.VCR(
@@ -14,11 +17,15 @@ ftp_vcr = vcr.VCR(
 @pytest.fixture
 @ftp_vcr.use_cassette()
 def ftp_manifest(session):
-    return ftptr2catcher.get_ftp_manifest("https://fromthepage.com/iiif/45345/manifest", session)
+    return ftp_api.get_ftp_manifest(
+        "https://fromthepage.com/iiif/45345/manifest", session
+    )
 
 
 def test_iter_manifest_sequence(ftp_manifest):
-    for dmrecord, url in ftptr2catcher.iter_manifest_sequence(ftp_manifest, transcript_type="Verbatim Plaintext"):
+    for dmrecord, url in ftptr2catcher.iter_manifest_sequence(
+        ftp_manifest, transcript_type="Verbatim Plaintext"
+    ):
         assert int(dmrecord)
         assert url.startswith("https://")
 
@@ -26,7 +33,12 @@ def test_iter_manifest_sequence(ftp_manifest):
 @ftp_vcr.use_cassette()
 def test_get_manifest_catcher_edits(ftp_manifest, session):
     transcript_nick = "transc"
-    catcher_edits = ftptr2catcher.get_manifest_catcher_edits(ftp_manifest, transcript_nick=transcript_nick, transcript_type="Verbatim Plaintext", session=session)
+    catcher_edits = ftptr2catcher.get_manifest_catcher_edits(
+        ftp_manifest,
+        transcript_nick=transcript_nick,
+        transcript_type="Verbatim Plaintext",
+        session=session,
+    )
     for edit in catcher_edits:
         assert set(edit) == {"dmrecord", transcript_nick}
         assert int(edit["dmrecord"])
@@ -42,8 +54,24 @@ def test_get_manifests_catcher_edits(session):
         ],
         transcript_type=transcript_type,
         transcript_nick=transcript_nick,
-        session=session
+        session=session,
     )
     for edit in catcher_edits:
+        assert set(edit) == {"dmrecord", transcript_nick}
+        assert int(edit["dmrecord"])
+
+
+@ftp_vcr.use_cassette()
+def test_main(tmp_path, session):
+    manifests_listing_path = tmp_path / "manifests.txt"
+    manifests_listing_path.write_text(
+        "https://fromthepage.com/iiif/45345/manifest\n", encoding="utf-8"
+    )
+    output_path = tmp_path / "output.json"
+    transcript_nick = "transc"
+    ftptr2catcher.main([str(manifests_listing_path), transcript_nick, str(output_path)])
+    with open(output_path, mode="r", encoding="utf-8") as fp:
+        output_json = json.load(fp)
+    for edit in output_json:
         assert set(edit) == {"dmrecord", transcript_nick}
         assert int(edit["dmrecord"])

@@ -1,55 +1,71 @@
 import json
 import argparse
-from typing import Dict, Any, Iterator, Tuple, Iterable, List
+from typing import Dict, Any, Iterator, Tuple, Iterable, List, Optional
 
 import requests
+from rich.progress import track
 
-from cdm_util_scripts.ftp2catcher import get_ftp_manifest, get_ftp_transcript
+from cdm_util_scripts import ftp_api
 
 
-def iter_manifest_sequence(manifest: Dict[str, Any], transcript_type: str) -> Iterator[Tuple[str, str]]:
+def iter_manifest_sequence(
+    manifest: Dict[str, Any], transcript_type: str
+) -> Iterator[Tuple[str, str]]:
     for canvas in manifest["sequences"][0]["canvases"]:
         dmrecord = canvas["@id"].split("/")[-3]
-        url = [seeAlso["@id"] for seeAlso in canvas["seeAlso"] if seeAlso["label"] == transcript_type]
+        url = [
+            seeAlso["@id"]
+            for seeAlso in canvas["seeAlso"]
+            if seeAlso["label"] == transcript_type
+        ]
         if not url:
             raise ValueError(f"transcript type {transcript_type!r} not found")
         yield dmrecord, url[0]
 
 
-def get_manifest_catcher_edits(manifest: Dict[str, Any], transcript_nick: str, transcript_type: str, session: requests.Session) -> List[Dict[str, str]]:
-    print(f"Requesting {len(manifest['sequences'][0]['canvases'])} {transcript_type!r} transcripts:", end='')
+def get_manifest_catcher_edits(
+    manifest: Dict[str, Any],
+    transcript_nick: str,
+    transcript_type: str,
+    session: requests.Session,
+) -> List[Dict[str, str]]:
     catcher_edits = []
-    for dmrecord, url in iter_manifest_sequence(
-            manifest=manifest,
-            transcript_type=transcript_type
+    for dmrecord, url in track(
+        list(iter_manifest_sequence(manifest=manifest, transcript_type=transcript_type)),
+        description=f"Requesting {transcript_type!r} transcripts...",
     ):
-        print(f" {len(catcher_edits)+1}", end='')
-        transcript_text = get_ftp_transcript(url=url, session=session)
-        catcher_edits.append({
-            "dmrecord": dmrecord,
-            transcript_nick: transcript_text.strip(),
-        })
-    print(end='\n')
+        transcript_text = ftp_api.get_ftp_transcript(url=url, session=session)
+        catcher_edits.append(
+            {
+                "dmrecord": dmrecord,
+                transcript_nick: transcript_text.strip(),
+            }
+        )
     return catcher_edits
 
 
-def get_manifests_catcher_edits(manifest_urls: Iterable[str], transcript_nick: str, transcript_type: str, session: requests.Session) -> List[Dict[str, str]]:
+def get_manifests_catcher_edits(
+    manifest_urls: Iterable[str],
+    transcript_nick: str,
+    transcript_type: str,
+    session: requests.Session,
+) -> List[Dict[str, str]]:
     catcher_edits = []
     for manifest_url in manifest_urls:
         print(f"Requesting {manifest_url!r}...")
-        manifest = get_ftp_manifest(manifest_url, session)
+        manifest = ftp_api.get_ftp_manifest(manifest_url, session)
         catcher_edits.extend(
             get_manifest_catcher_edits(
                 manifest=manifest,
                 transcript_nick=transcript_nick,
                 transcript_type=transcript_type,
-                session=session
+                session=session,
             )
         )
     return catcher_edits
 
 
-def main():
+def main(test_args: Optional[Iterable[str]] = None) -> None:
     parser = argparse.ArgumentParser(
         description="Get transcripts from a list of FromThePage manuscripts in cdm-catcher JSON format",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
@@ -75,7 +91,7 @@ def main():
         default="Verbatim Plaintext",
         help="FromThePage transcript type",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(test_args)
 
     with open(args.manifests_listing_path, mode="r", encoding="utf-8") as fp:
         manifest_urls = [line.strip() for line in fp.readlines()]
@@ -85,13 +101,13 @@ def main():
             manifest_urls=manifest_urls,
             transcript_nick=args.transcript_nick,
             transcript_type=args.transcript_type,
-            session=session
+            session=session,
         )
 
     print("Writing JSON file...")
     with open(args.output_file, mode="w", encoding="utf-8") as fp:
         json.dump(catcher_edits, fp, indent=2)
-    print("Done")
+    print("Done.")
 
 
 if __name__ == "__main__":
