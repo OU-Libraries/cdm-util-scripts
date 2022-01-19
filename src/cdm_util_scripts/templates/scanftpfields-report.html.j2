@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>{{ collection_label }} scanftpfields report</title>
-        <style type="text/css">
-         body {
-             margin-bottom: 3em;
-         }
-
-         .container {
-             max-width: 1170px;
-             margin-right: auto;
-             margin-left: auto;
-         }
-
+{% extends 'base.html.j2' %}
+{% block headtitle %}{{ collection_label }} scanftpfields report{% endblock %}
+{% block style %}
          th, td {
              padding: 0 1em 0 1em;
              text-align: left;
@@ -43,19 +30,19 @@
          }
 
          .page-list {}
-        </style>
-    </head>
-
-    <body>
-        <div class="container">
-            <h1>FromThePage field scan report for project {{ collection_label }}</h1>
-            <p>
-                Report date: {{ report_date }}<br/>
-                User slug: {{ slug }}<br/>
-                Collection alias: {{ collection_alias }}<br/>
-                Collection manifest: <a href="{{ collection_manifest }}">{{ collection_manifest }}</a><br/>
-                Export used: &quot;{{ export_label_used }}&quot;<br/>
-            </p>
+{% endblock %}
+{% block doctitle %}FromThePage field scan report for project {{ collection_label }}{% endblock %}
+{% block content %}
+            <table>
+                <tbody>
+                    <tr><td>Report date</td><td>{{ report_date }}</td></tr>
+                    <tr><td>FromThePage user slug</td><td>{{ slug }}</td></tr>
+                    <tr><td>FromThePage project alias</td><td>{{ collection_alias }}</td></tr>
+                    <tr><td>FromThePage project label</td><td>{{ collection_label }}</td></tr>
+                    <tr><td>FromThePage project manifest</td><td><a href="{{ collection_manifest }}">{{ collection_manifest }}</a></td></tr>
+                    <tr><td>Export used</td><td>{{ export_label_used }}</td></tr>
+                </tbody>
+            </table>
 
             <h2>Field label frequencies</h2>
             <p>
@@ -147,6 +134,4 @@
                     <li><a href="{{ work_data['ftp_work_url'] }}">{{ work_data['ftp_work_label'] }}</a>, {{ work_data['page_count'] }} pages</li>
                 {%- endfor %}
             </ul>
-        </div>
-    </body>
-</html>
+{% endblock %}

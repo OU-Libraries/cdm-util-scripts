@@ -1,14 +1,7 @@
 {%- macro cdmnickandname(nick) %}<span class="cdm-label">{{ cdm_nick_to_name[nick] }}</span> &lt;<span class="cdm-nick">{{ nick }}</span>&gt;{% endmacro -%}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>{{ collection_label }} scanftpvocabs report</title>
-        <style type="text/css">
-         .container {
-             max-width: 70rem;
-             margin: 0 auto 3em auto;
-         }
+{% extends 'base.html.j2' %}
+{% block headtitle %}{{ collection_label }} scanftpvocabs report{% endblock %}
+{% block style %}
          th, td {
              text-align: left;
          }
@@ -56,13 +49,9 @@
          .terms-as-text {
              margin: 1em 0;
          }
-        </style>
-    </head>
-
-    <body>
-        <div class="container">
-            <h1>FromThePage vocab scan report for project {{ ftp_project_name }}</h1>
-
+{% endblock %}
+{% block doctitle %}FromThePage vocab scan report for project {{ ftp_project_name }}{% endblock %}
+{% block content %}
             <table>
                 <tbody>
                     <tr><td>Report date</td><td>{{ report_date }}</td></tr>
@@ -205,6 +194,4 @@
                     </dl>
                 {%- endif %}
             {%- endfor %}
-        </div>
-    </body>
-</html>
+{% endblock %}

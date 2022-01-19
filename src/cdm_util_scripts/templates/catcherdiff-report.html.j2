@@ -1,15 +1,6 @@
-{%- macro showwhitespace(s) %}{{ s|replace('\n', '↵') }}{% endmacro -%}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>{{ catcher_json_file }} catcherdiff report</title>
-        <style type="text/css">
-         .container {
-             max-width: 70rem;
-             margin: 0 auto 3em auto;
-         }
-
+{% extends 'base.html.j2' %}
+{% block headtitle  %}{{ catcher_json_file }} catcherdiff report{% endblock %}
+{% block style %}
          table {
              width: 100%
              table-layout: fixed;
@@ -73,19 +64,17 @@
              content: "☒ ";
              color: red;
          }
-        </style>
-    </head>
-
-    <body>
-        <div class="container">
-            <h1><span class="filename">{{ catcher_json_file }}</span> catcherdiff report</h1>
-
-            <p>
-                Report datetime: {{ report_datetime }}<br/>
-                CONTENTdm repository: {{ cdm_repo_url }}<br/>
-                Collection alias: {{ cdm_collection_alias }}<br/>
-                cdm-catcher file name: <span class="filename">{{ catcher_json_file }}</span><br/>
-            </p>
+{% endblock %}
+{% block doctitle %}<span class="filename">{{ catcher_json_file }}</span> catcherdiff report{% endblock %}
+{% block content %}
+            <table>
+                <tbody>
+                    <tr><td>Report datetime</td><td>{{ report_datetime }}</td></tr>
+                    <tr><td>CONTENTdm repository URL</td><td>{{ cdm_repo_url }}</td></tr>
+                    <tr><td>CONTENTdm collection alias</td><td>{{ cdm_collection_alias }}</td></tr>
+                    <tr><td>cdm-catcher file name:</td><td><span class="filename">{{ catcher_json_file }}</span></td></tr>
+                </tbody>
+            </table>
 
             <p>catcherdiff found {{ edits_with_changes_count }} out of {{ deltas|length }} total edit actions would change at least one field.</p>
 
@@ -167,6 +156,4 @@
                     </tbody>
                 </table>
             {% endfor %}
-        </div>
-    </body>
-</html>
+{% endblock %}
