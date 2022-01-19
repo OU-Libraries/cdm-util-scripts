@@ -180,6 +180,9 @@ def main():
         'report_datetime': datetime.now().isoformat(),
         'edits_with_changes_count': edits_with_changes_count,
         'deltas': deltas,
+        'cdm_nick_to_name': {
+            field_info['nick']: field_info['name'] for field_info in cdm_fields_info
+        },
     }
 
     report_html = report_to_html(report)

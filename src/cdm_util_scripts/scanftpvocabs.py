@@ -141,10 +141,10 @@ def main():
     )
 
     print("Compiling report...")
-    report_date = datetime.now()
+    report_datetime = datetime.now()
     report = {
         **vars(args),
-        'report_date': report_date.isoformat(),
+        'report_datetime': report_datetime.isoformat(),
         'cdm_fields_info': cdm_fields_info,
         'vocabs_index': vocabs_index,
         'vocabs': vocabs,

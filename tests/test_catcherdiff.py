@@ -85,6 +85,9 @@ def test_report_to_html(collection_field_info):
                 {'dmrecord': '1', 'subjec': 'value2'}
             )
         ],
+        'cdm_nick_to_name': {
+            field_info['nick']: field_info['name'] for field_info in collection_field_info
+        },
     }
 
     assert catcherdiff.report_to_html({

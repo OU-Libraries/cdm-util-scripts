@@ -1,17 +1,7 @@
 {% extends 'base.html.j2' %}
 {% block headtitle %}{{ collection_label }} scanftpfields report{% endblock %}
 {% block style %}
-         th, td {
-             padding: 0 1em 0 1em;
-             text-align: left;
-             vertical-align: text-top;
-         }
-
-         tr {
-             outline: thin solid;
-         }
-
-         td ul {
+         .field-info-table td ul {
              margin: 0.3em 0 0.3em 0;
          }
 
@@ -33,7 +23,7 @@
 {% endblock %}
 {% block doctitle %}FromThePage field scan report for project {{ collection_label }}{% endblock %}
 {% block content %}
-            <table>
+            <table class="report-metadata-table">
                 <tbody>
                     <tr><td>Report date</td><td>{{ report_date }}</td></tr>
                     <tr><td>FromThePage user slug</td><td>{{ slug }}</td></tr>
@@ -45,11 +35,13 @@
             </table>
 
             <h2>Field label frequencies</h2>
+
             <p>
                 Works: {{ works_count }}<br/>
                 Filled pages: {{ filled_pages_count }}<br/>
             </p>
-            <table>
+
+            <table class="field-info-table">
                 <thead>
                     <tr>
                         <th>Frequency</th>
@@ -96,7 +88,7 @@
                         {%- endfor %}
                     </ul>
                     <h4>Works using this set</h4>
-                    <table>
+                    <table class="field-info-table">
                         <thead>
                             <tr>
                                 <th>Work</th>

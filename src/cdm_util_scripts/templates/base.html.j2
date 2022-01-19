@@ -1,4 +1,5 @@
 {%- macro showwhitespace(s) %}{{ s|replace('\n', '↵') }}{% endmacro -%}
+{%- macro cdmnickandname(nick) %}<span class="cdm-label">{{ cdm_nick_to_name[nick] }}</span> &lt;<span class="cdm-nick">{{ nick }}</span>&gt;{% endmacro -%}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,12 +9,41 @@
          body {
              margin-bottom: 3em;
          }
-
          .container {
              max-width: 70rem;
              margin: 0 auto 3em auto;
          }
-
+         .cdm-label {
+             font-weight: normal;
+             background-color: #ffc9ff;
+         }
+         .cdm-nick {
+             font-family: monospace;
+         }
+         .controlled:before {
+             content: "🔒 ";
+         }
+         .report-metadata-table th {
+             text-align: left;
+             padding: 0.5em;
+         }
+         .report-metadata-table td {
+             text-align: left;
+             padding: 0 0.5em 0 0.5em;
+             vertical-align: text-top;
+         }
+         .field-info-table th {
+             text-align: left;
+             padding: 0.5em;
+         }
+         .field-info-table td {
+             text-align: left;
+             padding: 0 0.5em 0 0.5em;
+             vertical-align: text-top;
+         }
+         .field-info-table tr {
+             outline: thin solid;
+         }
          {% block style %}{% endblock %}
         </style>
     </head>

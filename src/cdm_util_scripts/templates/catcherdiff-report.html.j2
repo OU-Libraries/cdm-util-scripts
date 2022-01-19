@@ -1,35 +1,33 @@
 {% extends 'base.html.j2' %}
 {% block headtitle  %}{{ catcher_json_file }} catcherdiff report{% endblock %}
 {% block style %}
-         table {
+         .delta-table {
              width: 100%
              table-layout: fixed;
          }
-         th, td {
+         .delta-table th {
              text-align: left;
-         }
-         th {
              padding: 0.5em;
          }
-         td {
+         .delta-table td {
+             text-align: left;
              padding: 0 0.5em 0 0.5em;
              vertical-align: text-top;
          }
-         tr {
+         .delta-table tr {
              outline: thin solid;
          }
+         .controlled-col {
+             width: 5%
+         }
          .value-col {
-             width: 42.5%;
+             width: 40%;
          }
          .change-col {
              width: 5%;
          }
          .nick-col {
              width: 10%;
-         }
-
-         .has-vocab:before {
-             content: "🔒 "
          }
          .value {
              background-color: aliceblue;
@@ -39,7 +37,6 @@
          .filename {
              font-family: monospace;
          }
-
          .equal-values {
          }
          .equal-blanks {
@@ -67,12 +64,12 @@
 {% endblock %}
 {% block doctitle %}<span class="filename">{{ catcher_json_file }}</span> catcherdiff report{% endblock %}
 {% block content %}
-            <table>
+            <table class="report-metadata-table">
                 <tbody>
                     <tr><td>Report datetime</td><td>{{ report_datetime }}</td></tr>
                     <tr><td>CONTENTdm repository URL</td><td>{{ cdm_repo_url }}</td></tr>
                     <tr><td>CONTENTdm collection alias</td><td>{{ cdm_collection_alias }}</td></tr>
-                    <tr><td>cdm-catcher file name:</td><td><span class="filename">{{ catcher_json_file }}</span></td></tr>
+                    <tr><td>cdm-catcher file name</td><td><span class="filename">{{ catcher_json_file }}</span></td></tr>
                 </tbody>
             </table>
 
@@ -80,7 +77,7 @@
 
             <h2>Field info</h2>
 
-            <table>
+            <table class="field-info-table">
                 <thead>
                     <tr>
                         {%- for key in cdm_fields_info[0].keys() %}
@@ -104,10 +101,11 @@
             {% for edit, cdm_info in deltas %}
                 <h3>dmrecord {{ edit['dmrecord'] }}</h3>
                 <p><a href="{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}">{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}</a></p>
-                <table>
+                <table class="delta-table">
                     <thead>
                         <tr>
-                            <th class="nick-col">Field nick</th>
+                            <th class="controlled-col">🔒?</th>
+                            <th class="nick-col">Field</th>
                             <th class="value-col">Current value</th>
                             <th class="change-col">Change</th>
                             <th class="value-col">Edit value</th>
@@ -116,13 +114,8 @@
                     <tbody>
                         {% for nick, value in edit.items() if nick != 'dmrecord' %}
                             <tr>
-                                <td class="nick-col">
-                                    {%- if nick in vocabs_index %}
-                                        <pre class="has-vocab">{{ nick }}</pre>
-                                    {%- else %}
-                                        <pre>{{ nick }}</pre>
-                                    {%- endif %}
-                                </td>
+                                <td class="controlled-col">{% if nick in vocabs_index %}🔒{% endif %}</th>
+                                <td class="nick-col"><p><span class="cdm-label">{{ cdm_nick_to_name[nick] }}</span><br/>&lt;<span class="cdm-nick">{{ nick }}</span>&gt;</p></td>
                                 <td class="value-col"><p><span class="value">{{ showwhitespace(cdm_info[nick]) }}</span></p></td>
                                 <td class="change-col">
                                     {%- if not cdm_info[nick] and not value %}

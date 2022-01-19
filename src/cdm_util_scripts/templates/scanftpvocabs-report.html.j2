@@ -1,17 +1,6 @@
-{%- macro cdmnickandname(nick) %}<span class="cdm-label">{{ cdm_nick_to_name[nick] }}</span> &lt;<span class="cdm-nick">{{ nick }}</span>&gt;{% endmacro -%}
 {% extends 'base.html.j2' %}
 {% block headtitle %}{{ collection_label }} scanftpvocabs report{% endblock %}
 {% block style %}
-         th, td {
-             text-align: left;
-         }
-         th {
-             padding: 0.5em;
-         }
-         td {
-             padding: 0 0.5em 0 0.5em;
-             vertical-align: text-top;
-         }
          label {
              display: block;
          }
@@ -24,16 +13,6 @@
          }
          .ftp-label {
              background-color: #EDB;
-         }
-         .cdm-label {
-             font-weight: normal;
-             background-color: #ffc9ff;
-         }
-         .cdm-nick {
-             font-family: monospace;
-         }
-         .controlled:before {
-             content: "🔒 ";
          }
          .use-list {
              list-style-type: none;
@@ -52,9 +31,9 @@
 {% endblock %}
 {% block doctitle %}FromThePage vocab scan report for project {{ ftp_project_name }}{% endblock %}
 {% block content %}
-            <table>
+            <table class="report-metadata-table">
                 <tbody>
-                    <tr><td>Report date</td><td>{{ report_date }}</td></tr>
+                    <tr><td>Report datetime</td><td>{{ report_date }}</td></tr>
                     <tr><td>FromThePage user slug</td><td>{{ ftp_slug }}</td></tr>
                     <tr><td>FromThePage project name</td><td>{{ ftp_project_name }}</td></tr>
                     <tr><td>Export used</td><td>{{ label }}</td></tr>
@@ -65,7 +44,7 @@
 
             <h2>CONTENTdm field info</h2>
 
-            <table class="field-table">
+            <table class="field-info-table">
                 <thead>
                     <tr>
                         <th>name</th>
@@ -102,7 +81,7 @@
 
             <h3>Mapped controlled CONTENTdm fields</h3>
 
-            <table class="field-table">
+            <table class="field-info-table">
                 <thead>
                     <tr>
                         <th>FromThePage label</th>
@@ -129,7 +108,7 @@
 
             <h2>Vocabularies</h2>
 
-            <table class="field-table">
+            <table class="field-info-table">
                 <thead>
                     <tr>
                         <th>CONTENTdm field</th>
