@@ -1,0 +1,473 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=eqI7njisx1SkSkHXPl6TV5j4nfknfpXLVRHtJzZ7AUh%2FYEFMqpsnuHecjnT0Mira6ldD%2BBddqni60xsELM74JlRMd5wNIdao2aCZDYRypg24JsjiUoq%2FGmcWjcRlNJm6sDU6Q4UE0eX6V%2BsRgiJ44R7VwGcbsQJOh25bINzCB5VtVrC1JensywHWqhr2maaWBOJXtejpiR3ZHM5y4OjekCBLVcQtoWhVHQ6uadY930jooYHyFsZdWhM5dLvd4SsWUU4sKEIOWA2hxGJJQWrMDO%2F0ZpPdzxxbmjgWHD%2FdcFF7YqIeq8VIIw%3D%3D--0oli0iKipvTz%2BcJu--SlUirL%2B%2FSZ9GtbAbY5tnag%3D%3D;
+        ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; ahoy_visitor=7702fa2c-4775-4532-8349-b2afc8a08a50
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25000250/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/25000250/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"Box 006, folder 01: 29th Infantry Division,
+        after action reports\",\n  \"metadata\": [\n    {\n      \"label\": \"dc:source\",\n
+        \     \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll15/8031/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Box number\",\n      \"value\": \"006\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu:80/record=b5041891~S7\"\n
+        \   },\n    {\n      \"label\": \"Note\",\n      \"value\": \"Ohio University
+        Libraries has selected materials from this folder for digitization that a)
+        are of high research interest; b) focus on respondents' WWII experiences;
+        and c) are original documents, unique to the Ryan collection. In some cases,
+        a limited amount of undigitized ancillary material may be available for reference
+        upon request.\"\n    },\n    {\n      \"label\": \"Collection finding aid\",\n
+        \     \"value\": \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/cornelius-ryan\"\n
+        \   },\n    {\n      \"label\": \"Copyright status\",\n      \"value\": \"In
+        copyright\"\n    },\n    {\n      \"label\": \"Respondent\",\n      \"value\":
+        \"Cvitanovitch, A.; Malloy, P. W. J.\"\n    },\n    {\n      \"label\": \"Policy\",\n
+        \     \"value\": \"See Ohio University Libraries' Digital Archival Collections
+        Materials Selection and Rights policy at https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Folder number\",\n      \"value\": \"01\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Contact University Archivist and Records Manager Bill Kimok at https://www.ohio.edu/library/about/staff/kimok\"\n
+        \   },\n    {\n      \"label\": \"Format (AAT)\",\n      \"value\": \"after
+        action reports;\"\n    },\n    {\n      \"label\": \"Identifier\",\n      \"value\":
+        \"ryan_box006-tld_f01\"\n    },\n    {\n      \"label\": \"Language\",\n      \"value\":
+        \"English\"\n    },\n    {\n      \"label\": \"Series\",\n      \"value\":
+        \"The Longest Day;\"\n    },\n    {\n      \"label\": \"Repository\",\n      \"value\":
+        \"Ohio University Libraries. Mahn Center for Archives and Special Collections\"\n
+        \   },\n    {\n      \"label\": \"Respondent- nationality\",\n      \"value\":
+        \"United States of America;\"\n    },\n    {\n      \"label\": \"Respondent-
+        formation\",\n      \"value\": \"29th Infantry Division;\"\n    },\n    {\n
+        \     \"label\": \"Respondent- branch of service\",\n      \"value\": \"Army;\"\n
+        \   },\n    {\n      \"label\": \"RightsStatements.org URI\",\n      \"value\":
+        \"http://rightsstatements.org/vocab/InC/1.0/\"\n    },\n    {\n      \"label\":
+        \"Copyright status note\",\n      \"value\": \"Ohio University Libraries does
+        not own the copyright to these items.\"\n    },\n    {\n      \"label\": \"Collection\",\n
+        \     \"value\": \"Cornelius Ryan Collection of World War II Papers\"\n    },\n
+        \   {\n      \"label\": \"Title\",\n      \"value\": \"Box 006, folder 01:
+        29th Infantry Division, after action reports\"\n    },\n    {\n      \"label\":
+        \"DCMI type\",\n      \"value\": \"text\"\n    },\n    {\n      \"label\":
+        \"Repository\",\n      \"value\": \"Ohio University Libraries - Digital Archival
+        Collections\"\n    },\n    {\n      \"label\": \"Source\",\n      \"value\":
+        \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll15/id/8031\\\">Box
+        006, folder 01: 29th Infantry Division, after action reports</a></span>\"\n
+        \   },\n    {\n      \"label\": \"Title\",\n      \"value\": \"Box 006, folder
+        01: 29th Infantry Division, after action reports\"\n    },\n    {\n      \"label\":
+        \"Created On\",\n      \"value\": \"2021-04-20 20:20:37 UTC\"\n    },\n    {\n
+        \     \"label\": \"In Scope\",\n      \"value\": \"true\"\n    }\n  ],\n  \"description\":
+        \"This is an annotated version of the original manifest produced by FromThePage\",\n
+        \ \"within\": {\n    \"@type\": \"sc:Collection\",\n    \"label\": \"Cornelius
+        Ryan Collection of World War II Papers\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/cornelius-ryan-collection-of-world-war-ii-papers\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read Box 006, folder 01: 29th Infantry Division, after action reports\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for Box 006, folder 01: 29th Infantry Division, after action reports\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25000250/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25000250/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25000250/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25000250/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 0.0,\n      \"pctOcrCorrected\":
+        100.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0\n    }\n  ],\n  \"sequences\": [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/25000250/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/cornelius-ryan-collection-of-world-war-ii-papers/25000250/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/25000250/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/25000250/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8023/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 1\",\n          \"width\":
+        2262,\n          \"height\": 2816,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8023\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8023/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2262,\n                \"height\":
+        2816,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8023\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8023/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012395\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012395\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012395/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012395/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012395/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012395/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012395/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012395/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8024/canvas/c1\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 2\",\n          \"width\":
+        2016,\n          \"height\": 2569,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8024\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8024/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2016,\n                \"height\":
+        2569,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8024\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8024/canvas/c1\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012396\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012396\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012396/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012396/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012396/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012396/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012396/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012396/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8025/canvas/c2\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 3\",\n          \"width\":
+        2026,\n          \"height\": 2577,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8025\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8025/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2026,\n                \"height\":
+        2577,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8025\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8025/canvas/c2\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012397\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012397\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012397/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012397/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012397/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012397/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012397/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012397/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8026/canvas/c3\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 4\",\n          \"width\":
+        2011,\n          \"height\": 2571,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8026\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8026/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2011,\n                \"height\":
+        2571,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8026\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8026/canvas/c3\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012398\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012398\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012398/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012398/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012398/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012398/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012398/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012398/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8027/canvas/c4\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 5\",\n          \"width\":
+        2012,\n          \"height\": 2579,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8027\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8027/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2012,\n                \"height\":
+        2579,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8027\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8027/canvas/c4\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012399\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012399\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012399/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012399/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012399/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012399/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012399/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012399/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8028/canvas/c5\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 6\",\n          \"width\":
+        2006,\n          \"height\": 2574,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8028\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8028/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2006,\n                \"height\":
+        2574,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8028\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8028/canvas/c5\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012400\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012400\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012400/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012400/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012400/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012400/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012400/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012400/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8029/canvas/c6\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 7\",\n          \"width\":
+        1999,\n          \"height\": 2574,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8029\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8029/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 1999,\n                \"height\":
+        2574,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8029\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8029/canvas/c6\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012401\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012401\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012401/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012401/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012401/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012401/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012401/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012401/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8030/canvas/c7\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 8\",\n          \"width\":
+        1996,\n          \"height\": 2575,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8030\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8030/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 1996,\n                \"height\":
+        2575,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8030\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8030/canvas/c7\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012402\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012402\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012402/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012402/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012402/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012402/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012402/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012402/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        }\n      ]\n    }\n
+        \ ],\n  \"otherContent\": [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/25000250/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/25000250/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 13 Jan 2022 00:11:00 GMT
+      ETag:
+      - W/"6e6bd7b0b8286d6696ad44f502ec5c1e"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; path=/; expires=Thu, 13 Jan
+        2022 04:11:00 GMT; secure
+      - _fromthepage_session=pMOmjCKuI6BE91K7pu50uAJdzs33LV5%2FsCHvjmbWOt%2B22pPYqF1iK35%2BKdxrcdYSt6UmyaGnheas380Nap%2F6aHNugaxWAH74PXoomWYRHNQKdBkHiuWTWn2GjOZRQVbOuuhkKwYzp87PjyGoqG%2FDSm3w5cVdhxo0%2FqGiNOFLxc6xxcMlzRDKEfOwQMJoZYgeyL5cYR91J52LHxrPa3ws6M0EQ7z9EV8lE5pUkyKS%2Fnhozq1B2%2BubsWjDWAuFYR5oE6d2IA%3D%3D--K68JolvmOyFxD0bV--PAfOFcZqStKyCVzGxkCyQQ%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.2
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 860908d3-54ca-4f82-ab06-6bc96206cbee
+      X-Runtime:
+      - '0.187314'
+    status:
+      code: 200
+      message: OK
+version: 1

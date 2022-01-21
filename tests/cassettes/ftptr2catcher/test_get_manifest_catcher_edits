@@ -1,0 +1,153 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=BziaxYaPea2IVQV3TJfwfZljFXU1HcO63Vho%2BEkrflSMg3Wzv15gCNAsFLKDztdI2iJu4NbUbf4wwbsLxmfs0O3h2dArlx5b1qqNhSHcPfIWVP9yzXTW5Epj%2F3lpB7gqzkAukPe3S3gxY2EMAK1ifJRRh40jT5sKsxPmo3%2FWUelcn1kOF87VEsSzjVgr%2BFQlIKSc59ilhKb%2FvWVd8i%2F3MYYoNFMPGZwd23Czr%2B1TRr3zPFew6N5A9d9iPCwFtjw%2FR6FI3w%3D%3D--B0ZBr1eNcu1N1c57--iFC7GV94VIvf0Fv%2FLmp%2BEw%3D%3D;
+        ahoy_visit=12ae233e-ad53-4637-bd75-ad5a0b2c1d74; ahoy_visitor=7702fa2c-4775-4532-8349-b2afc8a08a50
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25000231/export/25012078/plaintext/verbatim
+  response:
+    body:
+      string: 'Task Unit 125.2.3 Utah
+
+        (Demolition Units)
+
+
+        Box 17, #28
+
+
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '57'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Fri, 21 Jan 2022 23:03:31 GMT
+      ETag:
+      - W/"3196110df2b93ac791483022e1115929"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=12ae233e-ad53-4637-bd75-ad5a0b2c1d74; path=/; expires=Sat, 22 Jan
+        2022 03:03:31 GMT; secure
+      - _fromthepage_session=%2B%2FcWtA2Ru%2BHLqF0SmfvH1p8YnCzuAaQvk3IyoR6Z80K89dT3GWiUhkTHBduJefxp2S3JSIhiW289WKq%2FRIS8kpgiPpD3QoRvWsPibhBZLjkmGiZFTLhY0dZQ%2F%2FBCSkFRB7nlhS01UritN6YT3y9VI0xGJG7SOKtOmKnL3ghkdGchkgeqAWypljPQE1kSgNId0SAoNlPxppTqxSG8NZc5F4HGGeIUPo9lYFd7JMsGZuV1mRzYcM8biMAoBSLdSavl15WNzv%2FZpSAHhDkLH%2FojK7AkqtKSX6oyhn2X642nMMgTzPUTZGnVYA%3D%3D--Xj2LbrZxkzmogqsR--lZ30rJkfFSikMFoQydwhsA%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Meta-Request-Version:
+      - 0.7.2
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 4e61d791-0874-484b-bdb1-e48b90961f6f
+      X-Runtime:
+      - '0.038925'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=%2B%2FcWtA2Ru%2BHLqF0SmfvH1p8YnCzuAaQvk3IyoR6Z80K89dT3GWiUhkTHBduJefxp2S3JSIhiW289WKq%2FRIS8kpgiPpD3QoRvWsPibhBZLjkmGiZFTLhY0dZQ%2F%2FBCSkFRB7nlhS01UritN6YT3y9VI0xGJG7SOKtOmKnL3ghkdGchkgeqAWypljPQE1kSgNId0SAoNlPxppTqxSG8NZc5F4HGGeIUPo9lYFd7JMsGZuV1mRzYcM8biMAoBSLdSavl15WNzv%2FZpSAHhDkLH%2FojK7AkqtKSX6oyhn2X642nMMgTzPUTZGnVYA%3D%3D--Xj2LbrZxkzmogqsR--lZ30rJkfFSikMFoQydwhsA%3D%3D;
+        ahoy_visit=12ae233e-ad53-4637-bd75-ad5a0b2c1d74; ahoy_visitor=7702fa2c-4775-4532-8349-b2afc8a08a50
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25000231/export/25012079/plaintext/verbatim
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA2VSTW/TQBC9768Y9ZxYSUMQUk8tAYoECWrSE+IwtsfxKvZuNLuOG078Ef4cv4S3
+        JjRRe/PK8968j1muNh/W9PFh9ZWuNhx29OhspOn1PLvOZn9+/Tbfl57WopYbWvpsPC68K0RdIC6i
+        PdhoJZCvaCGtb/DybmAIZPERuSZW4R/GvPdty64UpVdbaDymLzEjjJSa0b1oLhrpNqNvEkWDd5kx
+        0+mrFVlidQd/xA61BykpKruw9wCnrTfErqi94gfnvos0mU0mtBiXfAT06rOj4FuhgoOEERX+KfRs
+        YawXFeqSy4g3caDoqfEFD6vhVQVGfh58F0YmB++FsFVVWQAD1VxSLuIoQoHvtnVzpFytVEmNK2nb
+        2TIpruW8OUt5mwu2bkiyRlRpLhcukCfM7ffqn2zLUcA6eTubj+ie9k0XaE6tdV2UcGOCxCS897qj
+        pDsPkYsGbRWoQlxh3ZYq9S0F4Z61RCaoGnA5RYAZ3zk0AJ0W385JMcjqbawvFD0zZwaZtj7E/5mm
+        mVttjxSF2xNrA9XpODRhk4ZnohH6wIsHt2bJhyOBlYf+mmaYO5vo9sncgGXcSwlROvDCkouppfQP
+        1kwPMLzdIal36D9RvdB9LkuRPQ4po0Wn/7TZQJjaigGj34sORxBSoBsoo0+aYKnQRwcqeoCSu8Se
+        7Jcvm1x3VZXiNG9oZ5vmdAo47R5B4xwg05i/Zic6wpIDAAA=
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '548'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Fri, 21 Jan 2022 23:03:31 GMT
+      ETag:
+      - W/"754a37fb89290dbffdc1cb2b48ad5d63-gzip"
+      Keep-Alive:
+      - timeout=5, max=99
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=12ae233e-ad53-4637-bd75-ad5a0b2c1d74; path=/; expires=Sat, 22 Jan
+        2022 03:03:31 GMT; secure
+      - _fromthepage_session=Nsaxe8Ur8guu8oz3ZMYF0PiRxiAg6tISleOxZvvFThsC7EQT66iMqzCBLAkr5GY72kcfOa%2BCnSS8ZnIWCZdbbAdi%2B4Er1XHhuffEBCXmJfIyhwGyYLtwILfxQttHS9lzgrR9jan3LdkQ4QPnUd5HaEnWgg%2FcOoIa%2FpnZjBSrdU5D6kXPoRRHCXOLS6%2FQgDH5%2FnqTQa1V37BduywQxtKKnr4NeERCC3lnoJV%2F50larBSi9FdpRaBt6Ogc6%2BOwC597hGhMLdsyRVCukoDjhpsGiBL7hiHpmFnxM2PqCGUk6Rfyd5wv4iMoZg%3D%3D--ZR3oak4LdwmFtUEk--V6hXhdlKcO360OaAOvI%2B4w%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.2
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 7678ba18-d2c3-45e6-bfb0-4f53f16ba188
+      X-Runtime:
+      - '0.031127'
+    status:
+      code: 200
+      message: OK
+version: 1

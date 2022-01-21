@@ -1,0 +1,1007 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=9ez%2FlxAIodu7GvK6I5SEu4MA8rbbfqh9N%2BK%2FblpX3fYXibOdLA77yW3KlAjFxkaoyfCGTS6feZLz%2F4oyaEAejiqn23sIdAFbOC3YLFsAHFCNX3QnWml1WfQXFJqGHdCaNHkRgyuyk9anaQBBXOuDDAvZQ%2B9QJdqSsZNXVMDihS1YWpwF8k68SYdNmD%2BAbG0p1VfI8E9%2BH85wQYR2NW0go19ZqHzZJ4iil%2Ben04dNlZ3TFeEWfEj7su17LMZvMKkcpmRni8GVarCfDn11--28vJxCIohFVjPsfk--WGTNPpnMD7JnFF1vjJFyNA%3D%3D;
+        ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; ahoy_visitor=7702fa2c-4775-4532-8349-b2afc8a08a50
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/48258/manifest
+  response:
+    body:
+      string: "<!DOCTYPE html>\n<html>\n<head>\n<title>500 - Internal server error
+        | FromThePage</title>\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<link
+        rel=\"stylesheet\" href=\"//fonts.googleapis.com/css?family=Source+Serif+Pro:400,700\">\n<style>\nhtml,
+        body {\n  margin: 0;\n  height: 100%;\n}\nbody {\n  color: #200;\n  padding:
+        50px;\n  text-align: center;\n  background: #f9f4ea;\n  box-sizing: border-box;\n
+        \ font: normal 18px/1.4 \"Source Serif Pro\", Georgia, \"Times New Roman\",
+        Times, serif;\n}\n.centered {\n  width: 100%;\n  height: 100%;\n  white-space:
+        nowrap;\n}\n.centered:before {\n  width: 0;\n  content: '';\n  height: 100%;\n
+        \ display: inline-block;\n  vertical-align: middle;\n}\n.centered_content
+        {\n  max-width: 500px;\n  white-space: normal;\n  display: inline-block;\n
+        \ vertical-align: middle;\n}\n.centered_content:before {\n  opacity: 0.3;\n
+        \ content: '500';\n  display: block;\n  line-height: 1;\n  font-size: 1000%;\n
+        \ font-weight: bold;\n  margin-bottom: -0.1em;\n}\nh1 {\n  margin: 0;\n  font-size:
+        250%;\n}\np {\n  margin: 1em 0;\n}\n</style>\n</head>\n\n<body>\n  <div class=\"centered\">\n
+        \   <div class=\"centered_content\">\n      <h1>Internal Server Error</h1>\n
+        \     <p>We're sorry, but something went wrong. Please try to refresh the
+        page, if the problem persists feel free to contact us.</p>\n    </div>\n  </div>\n</body>\n</html>"
+    headers:
+      Connection:
+      - close
+      Content-Length:
+      - '1311'
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Thu, 13 Jan 2022 00:11:02 GMT
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Status:
+      - 500 Internal Server Error
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 662e0928-acd8-482b-9476-764eeda925af
+      X-Runtime:
+      - '0.018009'
+    status:
+      code: 500
+      message: Internal Server Error
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=9ez%2FlxAIodu7GvK6I5SEu4MA8rbbfqh9N%2BK%2FblpX3fYXibOdLA77yW3KlAjFxkaoyfCGTS6feZLz%2F4oyaEAejiqn23sIdAFbOC3YLFsAHFCNX3QnWml1WfQXFJqGHdCaNHkRgyuyk9anaQBBXOuDDAvZQ%2B9QJdqSsZNXVMDihS1YWpwF8k68SYdNmD%2BAbG0p1VfI8E9%2BH85wQYR2NW0go19ZqHzZJ4iil%2Ben04dNlZ3TFeEWfEj7su17LMZvMKkcpmRni8GVarCfDn11--28vJxCIohFVjPsfk--WGTNPpnMD7JnFF1vjJFyNA%3D%3D;
+        ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; ahoy_visitor=7702fa2c-4775-4532-8349-b2afc8a08a50
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25000250/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/25000250/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"Box 006, folder 01: 29th Infantry Division,
+        after action reports\",\n  \"metadata\": [\n    {\n      \"label\": \"dc:source\",\n
+        \     \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll15/8031/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Box number\",\n      \"value\": \"006\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu:80/record=b5041891~S7\"\n
+        \   },\n    {\n      \"label\": \"Note\",\n      \"value\": \"Ohio University
+        Libraries has selected materials from this folder for digitization that a)
+        are of high research interest; b) focus on respondents' WWII experiences;
+        and c) are original documents, unique to the Ryan collection. In some cases,
+        a limited amount of undigitized ancillary material may be available for reference
+        upon request.\"\n    },\n    {\n      \"label\": \"Collection finding aid\",\n
+        \     \"value\": \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/cornelius-ryan\"\n
+        \   },\n    {\n      \"label\": \"Copyright status\",\n      \"value\": \"In
+        copyright\"\n    },\n    {\n      \"label\": \"Respondent\",\n      \"value\":
+        \"Cvitanovitch, A.; Malloy, P. W. J.\"\n    },\n    {\n      \"label\": \"Policy\",\n
+        \     \"value\": \"See Ohio University Libraries' Digital Archival Collections
+        Materials Selection and Rights policy at https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Folder number\",\n      \"value\": \"01\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Contact University Archivist and Records Manager Bill Kimok at https://www.ohio.edu/library/about/staff/kimok\"\n
+        \   },\n    {\n      \"label\": \"Format (AAT)\",\n      \"value\": \"after
+        action reports;\"\n    },\n    {\n      \"label\": \"Identifier\",\n      \"value\":
+        \"ryan_box006-tld_f01\"\n    },\n    {\n      \"label\": \"Language\",\n      \"value\":
+        \"English\"\n    },\n    {\n      \"label\": \"Series\",\n      \"value\":
+        \"The Longest Day;\"\n    },\n    {\n      \"label\": \"Repository\",\n      \"value\":
+        \"Ohio University Libraries. Mahn Center for Archives and Special Collections\"\n
+        \   },\n    {\n      \"label\": \"Respondent- nationality\",\n      \"value\":
+        \"United States of America;\"\n    },\n    {\n      \"label\": \"Respondent-
+        formation\",\n      \"value\": \"29th Infantry Division;\"\n    },\n    {\n
+        \     \"label\": \"Respondent- branch of service\",\n      \"value\": \"Army;\"\n
+        \   },\n    {\n      \"label\": \"RightsStatements.org URI\",\n      \"value\":
+        \"http://rightsstatements.org/vocab/InC/1.0/\"\n    },\n    {\n      \"label\":
+        \"Copyright status note\",\n      \"value\": \"Ohio University Libraries does
+        not own the copyright to these items.\"\n    },\n    {\n      \"label\": \"Collection\",\n
+        \     \"value\": \"Cornelius Ryan Collection of World War II Papers\"\n    },\n
+        \   {\n      \"label\": \"Title\",\n      \"value\": \"Box 006, folder 01:
+        29th Infantry Division, after action reports\"\n    },\n    {\n      \"label\":
+        \"DCMI type\",\n      \"value\": \"text\"\n    },\n    {\n      \"label\":
+        \"Repository\",\n      \"value\": \"Ohio University Libraries - Digital Archival
+        Collections\"\n    },\n    {\n      \"label\": \"Source\",\n      \"value\":
+        \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll15/id/8031\\\">Box
+        006, folder 01: 29th Infantry Division, after action reports</a></span>\"\n
+        \   },\n    {\n      \"label\": \"Title\",\n      \"value\": \"Box 006, folder
+        01: 29th Infantry Division, after action reports\"\n    },\n    {\n      \"label\":
+        \"Created On\",\n      \"value\": \"2021-04-20 20:20:37 UTC\"\n    },\n    {\n
+        \     \"label\": \"In Scope\",\n      \"value\": \"true\"\n    }\n  ],\n  \"description\":
+        \"This is an annotated version of the original manifest produced by FromThePage\",\n
+        \ \"within\": {\n    \"@type\": \"sc:Collection\",\n    \"label\": \"Cornelius
+        Ryan Collection of World War II Papers\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/cornelius-ryan-collection-of-world-war-ii-papers\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read Box 006, folder 01: 29th Infantry Division, after action reports\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for Box 006, folder 01: 29th Infantry Division, after action reports\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25000250/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25000250/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25000250/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25000250/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 0.0,\n      \"pctOcrCorrected\":
+        100.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0\n    }\n  ],\n  \"sequences\": [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/25000250/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/cornelius-ryan-collection-of-world-war-ii-papers/25000250/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/25000250/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/25000250/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8023/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 1\",\n          \"width\":
+        2262,\n          \"height\": 2816,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8023\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8023/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2262,\n                \"height\":
+        2816,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8023\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8023/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012395\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012395\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012395/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012395/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012395/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012395/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012395/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012395/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8024/canvas/c1\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 2\",\n          \"width\":
+        2016,\n          \"height\": 2569,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8024\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8024/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2016,\n                \"height\":
+        2569,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8024\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8024/canvas/c1\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012396\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012396\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012396/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012396/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012396/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012396/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012396/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012396/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8025/canvas/c2\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 3\",\n          \"width\":
+        2026,\n          \"height\": 2577,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8025\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8025/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2026,\n                \"height\":
+        2577,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8025\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8025/canvas/c2\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012397\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012397\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012397/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012397/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012397/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012397/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012397/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012397/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8026/canvas/c3\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 4\",\n          \"width\":
+        2011,\n          \"height\": 2571,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8026\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8026/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2011,\n                \"height\":
+        2571,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8026\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8026/canvas/c3\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012398\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012398\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012398/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012398/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012398/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012398/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012398/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012398/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8027/canvas/c4\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 5\",\n          \"width\":
+        2012,\n          \"height\": 2579,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8027\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8027/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2012,\n                \"height\":
+        2579,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8027\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8027/canvas/c4\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012399\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012399\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012399/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012399/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012399/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012399/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012399/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012399/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8028/canvas/c5\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 6\",\n          \"width\":
+        2006,\n          \"height\": 2574,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8028\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8028/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2006,\n                \"height\":
+        2574,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8028\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8028/canvas/c5\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012400\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012400\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012400/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012400/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012400/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012400/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012400/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012400/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8029/canvas/c6\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 7\",\n          \"width\":
+        1999,\n          \"height\": 2574,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8029\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8029/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 1999,\n                \"height\":
+        2574,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8029\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8029/canvas/c6\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012401\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012401\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012401/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012401/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012401/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012401/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012401/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012401/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8030/canvas/c7\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 8\",\n          \"width\":
+        1996,\n          \"height\": 2575,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8030\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8030/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 1996,\n                \"height\":
+        2575,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll15/8030\",\n
+        \                 \"profile\": \"http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8030/canvas/c7\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25012402\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25012402\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/box-006-folder-01-29th-infantry-division-after-action-reports/annotation/25012402/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012402/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012402/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25000250/export/25012402/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25000250/25012402/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25012402/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        }\n      ]\n    }\n
+        \ ],\n  \"otherContent\": [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/25000250/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/25000250/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 13 Jan 2022 00:28:07 GMT
+      ETag:
+      - W/"6e6bd7b0b8286d6696ad44f502ec5c1e"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; path=/; expires=Thu, 13 Jan
+        2022 04:28:07 GMT; secure
+      - _fromthepage_session=JlEagezaEwLl%2BcuL0UCGetG6TthdhMrgZa73MdF2SGfOHQ4ApWswF4m%2F%2BAa3WYf8IfQl8Rv9nHXrukTh0ZBKG7NkJEf1xmab18HEw6M6fhgBlLm7pshZSyvVtxUwKe2MQd358eJBj5uH%2FLmGc0Mw1nb0XRDHCsN5%2By5WWtrSxy97T30szeQKsdjfxYL6MxP8ikBY3Uj6b6AnoYs0dC9XxzATkBuYjZVtugO7Er1ynbFm2baEXi0jxbNNVKOIGXDAPqbzuA%3D%3D--hCA9mFNgWCtv3Kdm--GkPUZm1rfc2BL01wGCWqvg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Meta-Request-Version:
+      - 0.7.2
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - af9f6f87-18fc-4b8c-9260-a61250843744
+      X-Runtime:
+      - '0.234771'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=JlEagezaEwLl%2BcuL0UCGetG6TthdhMrgZa73MdF2SGfOHQ4ApWswF4m%2F%2BAa3WYf8IfQl8Rv9nHXrukTh0ZBKG7NkJEf1xmab18HEw6M6fhgBlLm7pshZSyvVtxUwKe2MQd358eJBj5uH%2FLmGc0Mw1nb0XRDHCsN5%2By5WWtrSxy97T30szeQKsdjfxYL6MxP8ikBY3Uj6b6AnoYs0dC9XxzATkBuYjZVtugO7Er1ynbFm2baEXi0jxbNNVKOIGXDAPqbzuA%3D%3D--hCA9mFNgWCtv3Kdm--GkPUZm1rfc2BL01wGCWqvg%3D%3D;
+        ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; ahoy_visitor=7702fa2c-4775-4532-8349-b2afc8a08a50
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25000250/export/tei
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '8087'
+      Content-Type:
+      - application/xml; charset=utf-8
+      Date:
+      - Thu, 13 Jan 2022 00:28:08 GMT
+      ETag:
+      - W/"556061bbf2e884e2c729dcd41726b831-gzip"
+      Keep-Alive:
+      - timeout=5, max=99
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; path=/; expires=Thu, 13 Jan
+        2022 04:28:08 GMT; secure
+      - _fromthepage_session=PsNrKiftoJJqzOVB1G%2FMCdgIU4Re2UvorgC5LlnnUx7GuUwnjhgyjaG0u9yNizBGFGYf11q4dtvSi4EHz4V47QcIRnJWEKs4AiP6ZQcLkIfEYoJFWUWgXsJgW21RVc2PuU%2BBGNEQIYWG3AqvjPoCYPRDCTUeQe8dXomwfz3ukeAnMRb9P72yhasYj204BmVAnySt1KsvmPT44LWdGzx%2FRlQwf%2BMolqt9bIuaKE5peex1dRNBhw99JoMk9Be9eX%2FCbROw5eWRef4%3D--9LFTk6WcMhsohlyS--PtjKILxH3iNaBZrjBYJ2mg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.2
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - a279b2d7-446a-4b50-ac02-579348da41a8
+      X-Runtime:
+      - '0.433201'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=JlEagezaEwLl%2BcuL0UCGetG6TthdhMrgZa73MdF2SGfOHQ4ApWswF4m%2F%2BAa3WYf8IfQl8Rv9nHXrukTh0ZBKG7NkJEf1xmab18HEw6M6fhgBlLm7pshZSyvVtxUwKe2MQd358eJBj5uH%2FLmGc0Mw1nb0XRDHCsN5%2By5WWtrSxy97T30szeQKsdjfxYL6MxP8ikBY3Uj6b6AnoYs0dC9XxzATkBuYjZVtugO7Er1ynbFm2baEXi0jxbNNVKOIGXDAPqbzuA%3D%3D--hCA9mFNgWCtv3Kdm--GkPUZm1rfc2BL01wGCWqvg%3D%3D;
+        ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; ahoy_visitor=7702fa2c-4775-4532-8349-b2afc8a08a50
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25000250/export/html
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '11326'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Thu, 13 Jan 2022 00:28:08 GMT
+      ETag:
+      - W/"60210c9a37373855ebc189a87ac3d1ac-gzip"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; path=/; expires=Thu, 13 Jan
+        2022 04:28:08 GMT; secure
+      - _fromthepage_session=PF0FxzdErkjXv980lDOHnlcmgXRw9%2Bo748YTACIV4DZie%2FauJHjC6ts7A7z3KLqYf9E15hyCcWorreGprdnl1pYZxL3Wr%2Bvl590Rg1Pi3VcFvqjE2OXNpytu1x1jQhOcAR5KUcZZEAmw0grJGzNw64MvkUS%2FDOd4yN8VS24OG1i7mkSPrZz%2FyQ2GaN2UqW%2BmD4ZXoOIjDZ2RvnnrRY8cc0I5yAHFKMIayL7JildH21A0Q4%2BoOCT2TvgdGYFXxkNo7LRFw%2Bo33MQ%3D--dUgc6hkPCkeiFkhr--NVfqpn8%2B4CFb%2Fg8I2R1VZw%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.2
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 85a3bdc4-d206-4223-8a7b-8e6dbf455790
+      X-Runtime:
+      - '0.226636'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,551 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=Y9H0A63s0146UmCzAvEO3%2FM62lJbn3QegB8xYheKIYUme05wcdz%2FhMqTL8AkF635b6RUU9hZEDddHCjUEc9UZtWIzTYfFg92cFmyEMbFYC1c1BCdJmhD6u6E5g4oaO%2BSXiXRAitOQrdHchEbgizSpXL6STdvNMX1idQejIk6jZ1YyGCLhpmhFUWdyIzOrEav9Kqpnj7ENEqZ7NBaKUVtX2tlbYV0TjTzYTG47oVMAV3NalBE30xgFUY%2FtUEX5v67Zk4zR1T2Rddajk1GbQti%2BJBod7qRDRH6n%2BHrhcBhZOJetlz9ZQPp6kRVkkBMp8HSJvtIQ1Gd1FPvQQbrbWztI0BfBfVChbJB--H%2F%2F27UT41cxLi2bK--UMZXObroYxGKpIHeE%2Bvj2A%3D%3D;
+        ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; ahoy_visitor=7702fa2c-4775-4532-8349-b2afc8a08a50
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/47397/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/47397/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"ryan_box024-tld_f13\",\n  \"metadata\": [\n
+        \   {\n      \"label\": \"Title\",\n      \"value\": \"ryan_box024-tld_f13\"\n
+        \   },\n    {\n      \"label\": \"Created On\",\n      \"value\": \"2020-10-14
+        17:45:36 UTC\"\n    },\n    {\n      \"label\": \"In Scope\",\n      \"value\":
+        \"true\"\n    }\n  ],\n  \"within\": {\n    \"@type\": \"sc:Collection\",\n
+        \   \"label\": \"Ryan collection metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/ryan-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read ryan_box024-tld_f13\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/ryan-metadata/ryan-box024-tld-f13\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for ryan_box024-tld_f13\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/ryan-metadata/ryan-box024-tld-f13/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/47397/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/47397/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/47397/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/47397/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 40.0,\n      \"pctTranscribed\": 40.0,\n      \"pctOcrCorrected\":
+        0.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0\n    }\n  ],\n  \"sequences\": [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47397/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/ryan-metadata/47397/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/47397/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/47397/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://fromthepage.com/iiif/47397/canvas/1560779\",\n          \"@type\":
+        \"sc:Canvas\",\n          \"label\": \"page_0001\",\n          \"width\":
+        4428,\n          \"height\": 5460,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/image-service/1560779\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://fromthepage.com/image-service/1560779/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 4428,\n                \"height\":
+        5460,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://fromthepage.com/image-service/1560779\",\n
+        \                 \"profile\": \"http://iiif.io/api/image/2/level1.json\"\n
+        \               }\n              },\n              \"on\": \"https://fromthepage.com/iiif/47397/canvas/1560779\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1560779\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1560779\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/ryan-metadata/ryan-box024-tld-f13/annotation/1560779/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560779/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560779/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560779/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/47397/1560779/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1560779/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/47397/canvas/1560780\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"page_0002\",\n
+        \         \"width\": 3760,\n          \"height\": 6021,\n          \"images\":
+        [\n            {\n              \"@id\": \"https://fromthepage.com/image-service/1560780\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://fromthepage.com/image-service/1560780/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 3760,\n                \"height\":
+        6021,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://fromthepage.com/image-service/1560780\",\n
+        \                 \"profile\": \"http://iiif.io/api/image/2/level1.json\"\n
+        \               }\n              },\n              \"on\": \"https://fromthepage.com/iiif/47397/canvas/1560780\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1560780\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1560780\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/ryan-metadata/ryan-box024-tld-f13/annotation/1560780/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560780/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560780/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560780/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/47397/1560780/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1560780/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/47397/canvas/1560781\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"page_0003\",\n
+        \         \"width\": 3745,\n          \"height\": 6029,\n          \"images\":
+        [\n            {\n              \"@id\": \"https://fromthepage.com/image-service/1560781\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://fromthepage.com/image-service/1560781/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 3745,\n                \"height\":
+        6029,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://fromthepage.com/image-service/1560781\",\n
+        \                 \"profile\": \"http://iiif.io/api/image/2/level1.json\"\n
+        \               }\n              },\n              \"on\": \"https://fromthepage.com/iiif/47397/canvas/1560781\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1560781\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1560781\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/ryan-metadata/ryan-box024-tld-f13/annotation/1560781/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560781/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560781/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560781/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/47397/1560781/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\"\n
+        \         }\n        },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/47397/canvas/1560782\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"page_0004\",\n
+        \         \"width\": 3762,\n          \"height\": 6027,\n          \"images\":
+        [\n            {\n              \"@id\": \"https://fromthepage.com/image-service/1560782\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://fromthepage.com/image-service/1560782/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 3762,\n                \"height\":
+        6027,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://fromthepage.com/image-service/1560782\",\n
+        \                 \"profile\": \"http://iiif.io/api/image/2/level1.json\"\n
+        \               }\n              },\n              \"on\": \"https://fromthepage.com/iiif/47397/canvas/1560782\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1560782\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1560782\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/ryan-metadata/ryan-box024-tld-f13/annotation/1560782/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560782/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560782/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560782/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/47397/1560782/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\"\n
+        \         }\n        },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/47397/canvas/1560783\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"page_0005\",\n
+        \         \"width\": 4018,\n          \"height\": 5110,\n          \"images\":
+        [\n            {\n              \"@id\": \"https://fromthepage.com/image-service/1560783\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://fromthepage.com/image-service/1560783/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 4018,\n                \"height\":
+        5110,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://fromthepage.com/image-service/1560783\",\n
+        \                 \"profile\": \"http://iiif.io/api/image/2/level1.json\"\n
+        \               }\n              },\n              \"on\": \"https://fromthepage.com/iiif/47397/canvas/1560783\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1560783\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1560783\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/ryan-metadata/ryan-box024-tld-f13/annotation/1560783/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560783/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560783/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/47397/export/1560783/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/47397/1560783/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\"\n
+        \         }\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/47397/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47397/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 13 Jan 2022 00:11:06 GMT
+      ETag:
+      - W/"e2ef3b171c034e41b6991667ccf48b8c"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; path=/; expires=Thu, 13 Jan
+        2022 04:11:06 GMT; secure
+      - _fromthepage_session=yfwBFBM70qg5fRu9b0OmFX5M7X6QGKZKdp%2F%2FKPvxTSHDSld7bi4jRo2MnLt4KsrsbBh7ZucDHEXf9crpUiQGTPUPN%2FTl22sMQfsg8KA6xXkDbyViG0eTZ3lofloOXhE7ofsgmiXEyw2xTatYO0c35%2FLcp9gZ5KLSTcMXHo3txRiSP4qfkXd%2Fo2r2muuJn1G5ElDI%2B1PEzf9MBQjokM%2BQ7bPhU9CuxCEA0onN38NvR71yEcyJN4N7WbFOS006AIK1--4HL%2BMujMBqkgN9c8--ZB7UW2vbQ2ljmJ%2FnTkMRlw%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Meta-Request-Version:
+      - 0.7.2
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 26b00fea-7c43-4135-8e01-51d0d8535fab
+      X-Runtime:
+      - '0.189821'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=yfwBFBM70qg5fRu9b0OmFX5M7X6QGKZKdp%2F%2FKPvxTSHDSld7bi4jRo2MnLt4KsrsbBh7ZucDHEXf9crpUiQGTPUPN%2FTl22sMQfsg8KA6xXkDbyViG0eTZ3lofloOXhE7ofsgmiXEyw2xTatYO0c35%2FLcp9gZ5KLSTcMXHo3txRiSP4qfkXd%2Fo2r2muuJn1G5ElDI%2B1PEzf9MBQjokM%2BQ7bPhU9CuxCEA0onN38NvR71yEcyJN4N7WbFOS006AIK1--4HL%2BMujMBqkgN9c8--ZB7UW2vbQ2ljmJ%2FnTkMRlw%3D%3D;
+        ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; ahoy_visitor=7702fa2c-4775-4532-8349-b2afc8a08a50
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/47397/export/html
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '5293'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Thu, 13 Jan 2022 00:11:06 GMT
+      ETag:
+      - W/"34d8cd6b198dfc0774ab4c88efa2e3d1-gzip"
+      Keep-Alive:
+      - timeout=5, max=99
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; path=/; expires=Thu, 13 Jan
+        2022 04:11:06 GMT; secure
+      - _fromthepage_session=JLsQ6t6eKupjMhRyKUK8Uno6MkfedeMrVLbkpjrbTiXTqLFxzv%2F3HB4wgIsHMQuH77CbILU0BgUyGzn2WEpvO%2FOX8uS%2FSbie3rq7DejmokEmzMcy50JY8GoXw6hZefAFSCZYr8615YjuDKhKbfAml6clMMXcmchnKHAPbdPM27MtKAWyPT6K2Mecv3KMFr2j6H2%2FsdqdGVaODiCiIIQiOaidL111dYDimlEkSIlnGizgx3F9JECNclwjMCDerlJySHBS4g%3D%3D--ttceZypsnCFlRdze--SGKh%2B3ek40cpxK6c03Imww%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.2
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 0888ac01-ae4a-4c0e-8ed0-a66837b35929
+      X-Runtime:
+      - '0.076164'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=yfwBFBM70qg5fRu9b0OmFX5M7X6QGKZKdp%2F%2FKPvxTSHDSld7bi4jRo2MnLt4KsrsbBh7ZucDHEXf9crpUiQGTPUPN%2FTl22sMQfsg8KA6xXkDbyViG0eTZ3lofloOXhE7ofsgmiXEyw2xTatYO0c35%2FLcp9gZ5KLSTcMXHo3txRiSP4qfkXd%2Fo2r2muuJn1G5ElDI%2B1PEzf9MBQjokM%2BQ7bPhU9CuxCEA0onN38NvR71yEcyJN4N7WbFOS006AIK1--4HL%2BMujMBqkgN9c8--ZB7UW2vbQ2ljmJ%2FnTkMRlw%3D%3D;
+        ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; ahoy_visitor=7702fa2c-4775-4532-8349-b2afc8a08a50
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/47397/export/tei
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '1813'
+      Content-Type:
+      - application/xml; charset=utf-8
+      Date:
+      - Thu, 13 Jan 2022 00:11:07 GMT
+      ETag:
+      - W/"9237c9e391604da2932e45fd0231c8e8-gzip"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=338ea507-4290-41c5-ab97-b3373e4bc808; path=/; expires=Thu, 13 Jan
+        2022 04:11:07 GMT; secure
+      - _fromthepage_session=FoDJBFP68%2B5XDxuuSzKkjMeys4%2F%2FwEXX4YsiYoeCef0XiTMXBDqwXUwLR%2FF%2F1uipQ2JjnG%2BttgVuqAyw0uUg%2FN4gU7%2F%2F8pLmNyGeuLPvHausmZDZbcn%2F783YgSBwdzR32Oq2Ssc5w2IO5e0eskiSrdsLZCiUo7IN4aUWnk%2FC3bd99W54JyBlCy6DWZVcSh4nBBDN8JbZ3cqbEX96qTY0FM8TL%2FZHMwS3P6q68IiaK%2B3RS4i0R%2FFr%2B4EZdvI1eOwP1hK6SA%3D%3D--PE0QKLlvOC7nS8Fk--DXyNHlwlndaTNz3I1ItEdw%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.2
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - a002220f-9e6f-428d-89f9-c46f773c8f33
+      X-Runtime:
+      - '0.635272'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -18,7 +18,7 @@ ftp_vcr = vcr.VCR(
 @ftp_vcr.use_cassette()
 def ftp_manifest(session):
     return ftp_api.get_ftp_manifest(
-        "https://fromthepage.com/iiif/45345/manifest", session
+        "https://fromthepage.com/iiif/25000231/manifest", session
     )
 
 
@@ -58,7 +58,7 @@ def test_get_manifests_catcher_edits(session):
     transcript_type = "Verbatim Plaintext"
     catcher_edits = ftptr2catcher.get_manifests_catcher_edits(
         [
-            "https://fromthepage.com/iiif/45345/manifest",
+            "https://fromthepage.com/iiif/25000231/manifest",
         ],
         transcript_type=transcript_type,
         transcript_nick=transcript_nick,
@@ -73,7 +73,7 @@ def test_get_manifests_catcher_edits(session):
 def test_main(tmp_path, session):
     manifests_listing_path = tmp_path / "manifests.txt"
     manifests_listing_path.write_text(
-        "https://fromthepage.com/iiif/45345/manifest\n", encoding="utf-8"
+        "https://fromthepage.com/iiif/25000231/manifest\n", encoding="utf-8"
     )
     output_path = tmp_path / "output.json"
     transcript_nick = "transc"

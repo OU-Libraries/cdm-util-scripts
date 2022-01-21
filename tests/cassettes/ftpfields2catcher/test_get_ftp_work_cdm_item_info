@@ -1,0 +1,60 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://cdmdemo.contentdm.oclc.org/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/oclcsample/102/json
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA11STW/bMAz9K4IvuzSBYnRp1p22YD2t2GHbD1Ak2uZgiwJFrciK/vdRVoNlBQyI
+        fHz8evRzJygzdPfdpxNjGCGYR4o0sktTd9PlcvoFXqPfS04QM1I0jZc/miPFLFy8KKqeY2UInzUt
+        QPaMmvZjwmz0cya5BGyeGEVAa5yNTGAWl0VR31LVcicqsob8VXFDg1bIb0cwGM23Cam+NWV3sPZd
+        3mp/z+CEtP+DY8Y4CsUb8yUsJQbzUAmpnGbM3f3ziw7rpO6/O+zvNCLnVD1PS6JKpyqAmOVKlIF4
+        caIkwWGo3UjXrtseqbBAPtd5v8KE42R+RvwNnFGqLBh0S2xds3I9NHt2cSyu2Qyzu3A8ae4F12ry
+        OrErASE2W9jF7Js9lHnmV86AMdSt7O3Wp1BvsjjvIV+WXnBxI1ycVTCoCb3d7Ta23/T9mrNQwAGv
+        IvtNb9cI+dnHqvGhtx9sf7e/XWEGT9w61woMekVcr3iksOpcFQvLgDNk/LMi7/vD/2BTuA1kt9aa
+        x8+NkPSaksJQ8YZMLpPnfz7mCE95/dtW8OUv6NRRWeICAAA=
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '434'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 12 Jan 2022 21:13:52 GMT
+      Expires:
+      - Wed, 12 Jan 2022 21:13:52 GMT
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-OCLC-IIIF-Provider:
+      - cantaloupe
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1
