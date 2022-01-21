@@ -80,31 +80,33 @@ All the scripts will give help from the command line if asked via `SCRIPTNAME -h
 Example:
 ```console
 $ printcdminfo https://cdmdemo.contentdm.oclc.org/ --alias oclcsample
-name                  nick         type      size   find    req   search   hide   vocdb   vocab   dc        admin   readonly
-----                  ----         ----      ----   ----    ---   ------   ----   -----   -----   --        -----   --------
-'Title'               'title'      'TEXT'    0      'a0'    1     1        0      ''      0       'title'   0       0
-'Subject'             'subjec'     'TEXT'    0      'a5'    0     1        0      'LCTGM' 1       'subjec'  0       0
-'Description'         'descri'     'TEXT'    1      'b0'    0     1        0      ''      0       'descri'  0       0
-'Creator'             'creato'     'TEXT'    0      'b5'    0     1        0      ''      0       'creato'  0       0
-'Publisher'           'publis'     'TEXT'    0      'c0'    0     1        0      ''      0       'publis'  0       0
-'Date'                'date'       'DATE'    0      'd0'    0     1        0      ''      0       'date'    0       0
-'Type'                'type'       'TEXT'    0      'd5'    0     1        0      ''      0       'type'    0       0
-'Format'              'format'     'TEXT'    0      'e0'    0     1        0      ''      0       'format'  0       0
-'Contributors'        'contri'     'TEXT'    0      'BLANK' 0     0        0      ''      0       'contri'  0       0
-'Identifier'          'identi'     'TEXT'    0      'BLANK' 0     0        0      ''      0       'identi'  0       0
-'Source'              'source'     'TEXT'    0      'BLANK' 0     0        0      ''      0       'source'  0       0
-'Language'            'langua'     'TEXT'    0      'BLANK' 0     0        0      ''      0       'langua'  0       0
-'Relation'            'relati'     'TEXT'    0      'BLANK' 0     0        0      ''      0       'relati'  0       0
-'Coverage'            'covera'     'TEXT'    0      'BLANK' 0     0        0      ''      0       'covera'  0       0
-'Rights'              'rights'     'TEXT'    0      'BLANK' 0     0        0      ''      0       'rights'  0       0
-'Audience'            'audien'     'TEXT'    0      'BLANK' 0     0        0      ''      0       'audien'  0       0
-'Transcript'          'transc'     'FTS'     1      'i4'    0     1        0      ''      0       'describ' 0       0
-'Archival file'       'fullrs'     'FULLRES' 0      'BLANK' 0     0        1      0       ''      'BLANK'   1       0
-'OCLC number'         'dmoclcno'   'TEXT'    0      'BLANK' 0     0        1      0       ''      'BLANK'   1       0
-'Date created'        'dmcreated'  'DATE'    0      'f9'    1     1        0      0       ''      'BLANK'   1       1
-'Date modified'       'dmmodified' 'DATE'    0      'BLANK' 1     0        1      0       ''      'BLANK'   1       1
-'CONTENTdm number'    'dmrecord'   'TEXT'    0      'BLANK' 1     0        1      0       ''      'BLANK'   1       1
-'CONTENTdm file name' 'find'       'TEXT'    0      'BLANK' 1     0        1      0       ''      'BLANK'   1       1
+┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━┳━━━━━┳━━━━━━━━┳━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━┓
+┃ name                  ┃ nick         ┃ type      ┃ size ┃ find    ┃ req ┃ search ┃ hide ┃ vocdb   ┃ vocab ┃ dc        ┃ admin ┃ readonly ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━╇━━━━━╇━━━━━━━━╇━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━┩
+│ 'Title'               │ 'title'      │ 'TEXT'    │ 0    │ 'a0'    │ 1   │ 1      │ 0    │ ''      │ 0     │ 'title'   │ 0     │ 0        │
+│ 'Subject'             │ 'subjec'     │ 'TEXT'    │ 0    │ 'a5'    │ 0   │ 1      │ 0    │ 'LCTGM' │ 1     │ 'subjec'  │ 0     │ 0        │
+│ 'Description'         │ 'descri'     │ 'TEXT'    │ 1    │ 'b0'    │ 0   │ 1      │ 0    │ ''      │ 0     │ 'descri'  │ 0     │ 0        │
+│ 'Creator'             │ 'creato'     │ 'TEXT'    │ 0    │ 'b5'    │ 0   │ 1      │ 0    │ ''      │ 0     │ 'creato'  │ 0     │ 0        │
+│ 'Publisher'           │ 'publis'     │ 'TEXT'    │ 0    │ 'c0'    │ 0   │ 1      │ 0    │ ''      │ 0     │ 'publis'  │ 0     │ 0        │
+│ 'Date'                │ 'date'       │ 'DATE'    │ 0    │ 'd0'    │ 0   │ 1      │ 0    │ ''      │ 0     │ 'date'    │ 0     │ 0        │
+│ 'Type'                │ 'type'       │ 'TEXT'    │ 0    │ 'd5'    │ 0   │ 1      │ 0    │ ''      │ 0     │ 'type'    │ 0     │ 0        │
+│ 'Format'              │ 'format'     │ 'TEXT'    │ 0    │ 'e0'    │ 0   │ 1      │ 0    │ ''      │ 0     │ 'format'  │ 0     │ 0        │
+│ 'Contributors'        │ 'contri'     │ 'TEXT'    │ 0    │ 'BLANK' │ 0   │ 0      │ 0    │ ''      │ 0     │ 'contri'  │ 0     │ 0        │
+│ 'Identifier'          │ 'identi'     │ 'TEXT'    │ 0    │ 'BLANK' │ 0   │ 0      │ 0    │ ''      │ 0     │ 'identi'  │ 0     │ 0        │
+│ 'Source'              │ 'source'     │ 'TEXT'    │ 0    │ 'BLANK' │ 0   │ 0      │ 0    │ ''      │ 0     │ 'source'  │ 0     │ 0        │
+│ 'Language'            │ 'langua'     │ 'TEXT'    │ 0    │ 'BLANK' │ 0   │ 0      │ 0    │ ''      │ 0     │ 'langua'  │ 0     │ 0        │
+│ 'Relation'            │ 'relati'     │ 'TEXT'    │ 0    │ 'BLANK' │ 0   │ 0      │ 0    │ ''      │ 0     │ 'relati'  │ 0     │ 0        │
+│ 'Coverage'            │ 'covera'     │ 'TEXT'    │ 0    │ 'BLANK' │ 0   │ 0      │ 0    │ ''      │ 0     │ 'covera'  │ 0     │ 0        │
+│ 'Rights'              │ 'rights'     │ 'TEXT'    │ 0    │ 'BLANK' │ 0   │ 0      │ 0    │ ''      │ 0     │ 'rights'  │ 0     │ 0        │
+│ 'Audience'            │ 'audien'     │ 'TEXT'    │ 0    │ 'BLANK' │ 0   │ 0      │ 0    │ ''      │ 0     │ 'audien'  │ 0     │ 0        │
+│ 'Transcript'          │ 'transc'     │ 'FTS'     │ 1    │ 'i4'    │ 0   │ 1      │ 0    │ ''      │ 0     │ 'describ' │ 0     │ 0        │
+│ 'Archival file'       │ 'fullrs'     │ 'FULLRES' │ 0    │ 'BLANK' │ 0   │ 0      │ 1    │ ''      │ 0     │ 'BLANK'   │ 1     │ 0        │
+│ 'OCLC number'         │ 'dmoclcno'   │ 'TEXT'    │ 0    │ 'BLANK' │ 0   │ 0      │ 1    │ ''      │ 0     │ 'BLANK'   │ 1     │ 0        │
+│ 'Date created'        │ 'dmcreated'  │ 'DATE'    │ 0    │ 'f9'    │ 1   │ 1      │ 0    │ ''      │ 0     │ 'BLANK'   │ 1     │ 1        │
+│ 'Date modified'       │ 'dmmodified' │ 'DATE'    │ 0    │ 'BLANK' │ 1   │ 0      │ 1    │ ''      │ 0     │ 'BLANK'   │ 1     │ 1        │
+│ 'CONTENTdm number'    │ 'dmrecord'   │ 'TEXT'    │ 0    │ 'BLANK' │ 1   │ 0      │ 1    │ ''      │ 0     │ 'BLANK'   │ 1     │ 1        │
+│ 'CONTENTdm file name' │ 'find'       │ 'TEXT'    │ 0    │ 'BLANK' │ 1   │ 0      │ 1    │ ''      │ 0     │ 'BLANK'   │ 1     │ 1        │
+└───────────────────────┴──────────────┴───────────┴──────┴─────────┴─────┴────────┴──────┴─────────┴───────┴───────────┴───────┴──────────┘
 ```
 
 If you make too many of the same request (10+?), OCLC will start rejecting them, resulting in an error, so it's a good idea to record frequently used queries. You can do this using bash's file redirection operator `>`, as:
@@ -142,15 +144,19 @@ The above example output could then be edited to create a CSV field mapping file
 Example:
 ```console
 $ printftpinfo ohiouniversitylibraries
-@id                                                                                        @type           label
----                                                                                        -----           -----
-'https://fromthepage.com/iiif/collection/ohio-university-board-of-trustees-minutes'        'sc:Collection' 'Board of Trustees minutes, Ohio University'
-'https://fromthepage.com/iiif/collection/cornelius-ryan-collection-of-world-war-ii-papers' 'sc:Collection' 'Cornelius Ryan Collection of World War II Papers'
-'https://fromthepage.com/iiif/collection/william-e-peters-papers'                          'sc:Collection' 'William E. Peters Papers'
-'https://fromthepage.com/iiif/collection/farfel-research-notebooks'                        'sc:Collection' 'Farfel Research Notebooks'
-'https://fromthepage.com/iiif/collection/los-amigos-records-1947-1952'                     'sc:Collection' 'Los Amigos records, 1947-1952'
-'https://fromthepage.com/iiif/collection/ryan-metadata'                                    'sc:Collection' 'Ryan collection metadata'
-'https://fromthepage.com/iiif/collection/dance-posters-metadata'                           'sc:Collection' 'Dance Posters Metadata'
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ @id                                                                  ┃ @type           ┃ label                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 'https://fromthepage.com/iiif/collection/ohio-university-board-of-t… │ 'sc:Collection' │ 'Board of Trustees minutes, Ohio University'       │
+│ 'https://fromthepage.com/iiif/collection/cornelius-ryan-collection-… │ 'sc:Collection' │ 'Cornelius Ryan Collection of World War II Papers' │
+│ 'https://fromthepage.com/iiif/collection/william-e-peters-papers'    │ 'sc:Collection' │ 'William E. Peters Papers'                         │
+│ 'https://fromthepage.com/iiif/collection/farfel-research-notebooks'  │ 'sc:Collection' │ 'Farfel Research Notebooks'                        │
+│ 'https://fromthepage.com/iiif/collection/los-amigos-records-1947-19… │ 'sc:Collection' │ 'Los Amigos records, 1947-1952'                    │
+│ 'https://fromthepage.com/iiif/collection/ryan-metadata'              │ 'sc:Collection' │ 'Ryan collection metadata'                         │
+│ 'https://fromthepage.com/iiif/collection/dance-posters-metadata'     │ 'sc:Collection' │ 'Dance Posters Metadata'                           │
+│ 'https://fromthepage.com/iiif/collection/dance-posters-transcriptio… │ 'sc:Collection' │ 'Dance Posters Transcription'                      │
+│ 'https://fromthepage.com/iiif/collection/manuscripts-general'        │ 'sc:Collection' │ 'Manuscripts - General'                            │
+└──────────────────────────────────────────────────────────────────────┴─────────────────┴────────────────────────────────────────────────────┘
 ```
 
 <a name="scanftpfields"/>
@@ -464,11 +470,11 @@ https://fromthepage.com/iiif/45345/manifest
 https://fromthepage.com/iiif/45346/manifest
 $ ftptr2catcher ftptr2catcher.txt transc ftptr2catcher.json
 Requesting 'https://fromthepage.com/iiif/45345/manifest'...
-Requesting 188 'Verbatim Plaintext' transcripts: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188
+Requesting 'Verbatim Plaintext' transcripts... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
 Requesting 'https://fromthepage.com/iiif/45346/manifest'...
-Requesting 188 'Verbatim Plaintext' transcripts: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188
+Requesting 'Verbatim Plaintext' transcripts... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
 Writing JSON file...
-Done
+Done.
 $ head ftptr2catcher.json
 [
   {
@@ -527,12 +533,12 @@ https://fromthepage.com/iiif/36866/manifest
 $ ftp2catcher http://media.library.ohio.edu p15808coll15 identi descri ftp-manifest-urls.txt cdm-catcher-edits.json
 Requesting 'https://fromthepage.com/iiif/45434/manifest'...
 Searching 'p15808coll15' field 'identi' for 'ryan_box013-tld_f01'...
-Requesting 20 'Verbatim Plaintext' page transcripts: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Requesting 'Verbatim Plaintext'... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
 Requesting 'https://fromthepage.com/iiif/36866/manifest'...
 Searching 'p15808coll15' field 'identi' for 'ryan_box013-tld_f31'...
-Requesting 11 'Verbatim Plaintext' page transcripts: 1 2 3 4 5 6 7 8 9 10 11
+Requesting 'Verbatim Plaintext'... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
 Writing JSON file...
-Done
+Done.
 $ head cdm-catcher-edits.json
 [
   {
@@ -578,4 +584,4 @@ cdm-util-scripts is tested with [pytest](https://pypi.org/project/pytest/) and [
     source env/Scripts/activate
     python -m pip install -e .[dev]
 
-vcrpy records real API responses in "cassettes" so tests can be run against them. vcrpy will need to have its test module `record_mode` settings set to `new_episodes` to record new API responses on any system where it hasn't cached cassettes. Because cdm-util-scripts is developed to cover specific use cases at Ohio University Libraries, many of its tests are currently written to check for specific results from Ohio University Libraries' FromThePage instance and OCLC's CONTENTdm demo instance, and will likely fail when these are inevitably changed.
+vcrpy records web API responses in local cache files called "cassettes" so tests can be reliably run against real data without the expense of using the network every time they are run.
