@@ -1,7 +1,7 @@
 import re
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
-from typing import Optional, List, Dict
+from typing import Optional, List, Dict, Any
 
 from requests import Session
 
@@ -70,6 +70,13 @@ def get_collection_manifest_url(slug: str, collection_name: str, session: Sessio
         if collection['label'] == collection_name:
             return collection['@id']
     raise KeyError(f"no collection named {collection_name!r}")
+
+
+def get_collection_structured_data_configuration(manifest_url: str, level: str, session: Session) -> Dict[str, Any]:
+    collection_id = manifest_url.rpartition("/")[2]
+    response = session.get(f"https://fromthepage.com/iiif/{collection_id}/structured/config/{level}")
+    response.raise_for_status()
+    return response.json()
 
 
 def get_ftp_collection(manifest_url: str, session: Session) -> FTPCollection:
@@ -157,7 +164,7 @@ def extract_fields_from_tei(tei: str) -> List[Optional[Dict[str, str]]]:
 def extract_fields_from_html(html: str) -> List[Optional[Dict[str, str]]]:
     NS = {'ns': 'http://www.w3.org/1999/xhtml'}
     # The FromThePage XHTML Export isn't valid XHTML because of the JS blob on line 6
-    html_no_scripts = re.sub(r"<script>.*</script>", '', html).strip()
+    html_no_scripts = re.sub(r"<script>?.*</script>", '', html).strip()
     html_root = ET.fromstring(html_no_scripts)
     html_pages = html_root.findall("ns:body/ns:div[@class='pages']/ns:div", namespaces=NS)
     pages = []

@@ -1,7 +1,6 @@
 import pytest
 import vcr
 import requests
-import re
 
 from cdm_util_scripts import ftpfields2catcher
 from cdm_util_scripts import ftp_api

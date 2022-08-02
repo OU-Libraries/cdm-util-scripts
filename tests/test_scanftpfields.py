@@ -8,6 +8,7 @@ from cdm_util_scripts import scanftpfields
 from cdm_util_scripts import ftp_api
 
 
+# TODO: this library dir isn't being created?
 ftp_vcr = vcr.VCR(
     cassette_library_dir='tests/cassettes/scanftpfields',
     record_mode='once',

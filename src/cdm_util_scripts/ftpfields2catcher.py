@@ -1,8 +1,6 @@
 import argparse
 import sys
-import csv
 import json
-from collections import defaultdict
 
 from requests import Session
 
@@ -10,17 +8,6 @@ from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
 
 from typing import Optional, List, Iterable, Dict, Sequence, Callable, Tuple
-
-
-def get_field_mapping(filename: str) -> Dict[str, List[str]]:
-    with open(filename, mode='r', encoding='utf-8') as fp:
-        reader = csv.DictReader(fp)
-        if reader.fieldnames != ['name', 'nick']:
-            raise ValueError("column mapping CSV must have 'name' and 'nick' column titles in that order")
-        field_mapping = defaultdict(list)
-        for row in reader:
-            field_mapping[row['name']].append(row['nick'].strip())
-    return dict(field_mapping)
 
 
 def apply_field_mapping(ftp_fields: Dict[str, str], field_mapping: Dict[str, Sequence[str]]) -> Dict[str, str]:
@@ -206,7 +193,7 @@ def main():
     args = parser.parse_args()
 
     try:
-        field_mapping = get_field_mapping(args.field_mapping_csv)
+        field_mapping = cdm_api.read_csv_field_mapping(args.field_mapping_csv)
     except ValueError as err:
         print(f"{args.field_mapping_csv}: {err}")
         sys.exit(1)

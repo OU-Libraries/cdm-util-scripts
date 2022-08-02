@@ -1,5 +1,8 @@
 from requests import Session
 
+import csv
+import collections
+
 from typing import Dict, List
 
 
@@ -62,3 +65,14 @@ def get_cdm_page_pointers(repo_url: str, alias: str, dmrecord: str, session: Ses
     url = f"{repo_url}/digital/bl/dmwebservices/index.php?q=dmGetCompoundObjectInfo/{alias}/{dmrecord}/json"
     cpd_object_info = get_dm(url, session)
     return [page['pageptr'] for page in cpd_object_info['page']]
+
+
+def read_csv_field_mapping(filename: str) -> Dict[str, List[str]]:
+    with open(filename, mode='r', encoding='utf-8') as fp:
+        reader = csv.DictReader(fp)
+        if reader.fieldnames != ['name', 'nick']:
+            raise ValueError("column mapping CSV must have 'name' and 'nick' column titles in that order")
+        field_mapping = collections.defaultdict(list)
+        for row in reader:
+            field_mapping[row['name']].append(row['nick'].strip())
+    return dict(field_mapping)

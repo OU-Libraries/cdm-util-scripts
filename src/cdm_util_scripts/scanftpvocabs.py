@@ -104,7 +104,7 @@ def main():
     args = parser.parse_args()
 
     try:
-        field_mapping = ftpfields2catcher.get_field_mapping(args.field_mapping_csv)
+        field_mapping = cdm_api.read_csv_field_mapping(args.field_mapping_csv)
     except ValueError as err:
         print(f"{args.field_mapping_csv}: {err}")
         sys.exit(1)
