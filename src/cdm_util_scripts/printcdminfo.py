@@ -5,12 +5,12 @@ import csv
 import json
 import sys
 
-from typing import Dict, Iterable
+from typing import Dict, Sequence
 
 from cdm_util_scripts import cdm_api
 
 
-def print_as_records(dm_result: Iterable[Dict[str, str]]) -> None:
+def print_as_records(dm_result: Sequence[Dict[str, str]]) -> None:
     max_key_len = max(len(key) for key in dm_result[0].keys())
     for record in dm_result:
         for key, value in record.items():
@@ -19,13 +19,13 @@ def print_as_records(dm_result: Iterable[Dict[str, str]]) -> None:
             print(end="\n")
 
 
-def print_as_csv(dm_result: Iterable[Dict[str, str]]) -> None:
+def print_as_csv(dm_result: Sequence[Dict[str, str]]) -> None:
     writer = csv.DictWriter(sys.stdout, fieldnames=dm_result[0].keys())
     writer.writeheader()
     writer.writerows(dm_result)
 
 
-def print_as_json(dm_result: Iterable[Dict[str, str]]) -> None:
+def print_as_json(dm_result: Sequence[Dict[str, str]]) -> None:
     print(json.dumps(dm_result, indent=2))
 
 
