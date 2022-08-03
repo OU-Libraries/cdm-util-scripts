@@ -1,0 +1,1246 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=wuX3vJmoCDyO5xEZb%2F6gPfigFduVloVantX6YM%2FUQOsY9QdWcb5OGEtO80BslI18C1LJCRY4cOgwCGnS%2FM81eIq4Ux1xLJ4Iu9feARUM%2BlzJcvwMtab7j9kIe5SCrtI%2BvzOymDYpPVH5pvWWfsJDbJOeDu%2Bkr2k9vVjfRNiDWj5LbAiCgE7%2FeUoGZPDT3pmCRTqEhbH%2F8n%2BcdPwfzk%2FRUJeXK6yi13OTcDPc0GCtKDl2V1B%2FfJWd2EVsPP%2BEuWltW2kcLDH1P6xtgIams3XXREo%2FekkM7tTUdrwNUg%3D%3D--MqbnNkE5RzTc%2F%2BtB--Pfu4eFSwXlQnSNUsC5HXjg%3D%3D;
+        ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; ahoy_visitor=478620f9-a6b9-4e40-8932-e5aff14551ba
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/collection/dance-posters-metadata
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\",\n
+        \ \"@type\": \"sc:Collection\",\n  \"label\": \"Dance Posters Metadata\",\n
+        \ \"manifests\": [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56198/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"\\\"Nothing else like
+        it in the world\\\" Nikolais Dance Theatre poster\",\n      \"metadata\":
+        [\n        {\n          \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/237/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56198/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56195/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Brooklyn Academy of
+        Music, Murray Louis and Alwin Nikolais Dance\",\n      \"metadata\": [\n        {\n
+        \         \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/236/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56195/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56194/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Charleroi Danses poster,
+        Palais des Beaux-Arts, Charleroi, January 20, 1994\",\n      \"metadata\":
+        [\n        {\n          \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/240/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56194/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56196/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Legend of the Winds
+        poster, Henry Street Playhouse, December 22-30, 1954\",\n      \"metadata\":
+        [\n        {\n          \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/239/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56196/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56199/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Maison de la Culture
+        de Rennes poster, December 9, 1983\",\n      \"metadata\": [\n        {\n
+        \         \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/238/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56199/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56200/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Mulhouse, France, Nikolais
+        Dance Theatre poster, 1976\",\n      \"metadata\": [\n        {\n          \"label\":
+        \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/235/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56200/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56197/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Murray Louis and Nikolais
+        Dance poster, Greece, July 19, 1999\",\n      \"metadata\": [\n        {\n
+        \         \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/233/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56197/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56202/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Nikolais Dance Theatre
+        (featuring the Ririe-Woodbury Dance Co.) poster, November 28-29, 2006\",\n
+        \     \"metadata\": [\n        {\n          \"label\": \"dc:source\",\n          \"value\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/242/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56202/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56201/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"\u201CTotal Theater\\\"
+        production poster, Alwin Nikolais Dance Company poster\",\n      \"metadata\":
+        [\n        {\n          \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/241/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56201/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    }\n  ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 03 Aug 2022 19:52:29 GMT
+      ETag:
+      - W/"3e05c40cfda111d55b92a9d4b5604fd0"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; path=/; expires=Wed, 03 Aug
+        2022 23:52:29 GMT; secure
+      - _fromthepage_session=PA4MAoM%2FpKU%2BpnSNRK6Y4WMJG0rMqotFagL6nYymuQ6Td6k2FlPyP5SOCEyKbpvzBIDRcZJmhtpCQcnI%2FGAckBI1eD5MQyN1lDUkEL0tEyrq5tOXWM26WkUAFSArXnP4C0sDvLLs6VU6zU9zVKBR83SemWI3ArxvmDI1PdXdvtWMTNEpeaniGzOZnEjibe%2FW3qsa9Sa9eh2psmC29Hf0EL%2BcXi2Flq1A0ESt9KTK7T3Zb3mJyY1lgmSsGiNkwKvaU9W8gEAeKXc4Q7FcV1FAuOHVKfbRA%2Fwy--88JO25NAqUW%2Bb4zi--lIG2JVylcxqvcIjA4Na1ZA%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 969de456-97a1-4717-97af-c78a4f8016d5
+      X-Runtime:
+      - '0.115655'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=PA4MAoM%2FpKU%2BpnSNRK6Y4WMJG0rMqotFagL6nYymuQ6Td6k2FlPyP5SOCEyKbpvzBIDRcZJmhtpCQcnI%2FGAckBI1eD5MQyN1lDUkEL0tEyrq5tOXWM26WkUAFSArXnP4C0sDvLLs6VU6zU9zVKBR83SemWI3ArxvmDI1PdXdvtWMTNEpeaniGzOZnEjibe%2FW3qsa9Sa9eh2psmC29Hf0EL%2BcXi2Flq1A0ESt9KTK7T3Zb3mJyY1lgmSsGiNkwKvaU9W8gEAeKXc4Q7FcV1FAuOHVKfbRA%2Fwy--88JO25NAqUW%2Bb4zi--lIG2JVylcxqvcIjA4Na1ZA%3D%3D;
+        ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; ahoy_visitor=478620f9-a6b9-4e40-8932-e5aff14551ba
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/collection/ryan-metadata
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/collection/ryan-metadata\",\n  \"@type\":
+        \"sc:Collection\",\n  \"label\": \"Ryan collection metadata\",\n  \"manifests\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/46450/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box013-tld_f01\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/46450/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 5.0,\n        \"pctTranscribed\": 0.0,\n        \"pctOcrCorrected\":
+        5.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/46451/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box021-tld_f05\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/46451/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 7.69,\n        \"pctTranscribed\": 0.0,\n        \"pctOcrCorrected\":
+        7.69,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/46452/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box021-tld_f09\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/46452/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 16.67,\n        \"pctTranscribed\": 0.0,\n        \"pctOcrCorrected\":
+        16.67,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/46453/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box023-tld_f41\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/46453/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 0.0,\n        \"pctOcrCorrected\":
+        100.0,\n        \"pctIndexed\": 50.0,\n        \"pctMarkedBlank\": 50.0,\n
+        \       \"pctNeedsReview\": 0,\n        \"pctTranslationComplete\": 50.0,\n
+        \       \"pctTranslated\": 50.0,\n        \"pctTranslationNeedsReview\": 0,\n
+        \       \"pctTranslationIndexed\": 50.0,\n        \"pctTranslationMarkedBlank\":
+        50.0,\n        \"metadataStatus\": \"undescribed\"\n      }\n    },\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/47385/manifest\",\n      \"@type\":
+        \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f01\",\n      \"service\":
+        {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47385/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47386/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f02\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47386/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 12.5,\n        \"pctTranscribed\": 12.5,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47387/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f03\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47387/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 5.88,\n        \"pctTranscribed\": 5.88,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47388/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f04\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47388/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47389/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f05\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47389/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47390/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f06\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47390/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47391/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f07\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47391/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47392/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f08\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47392/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47393/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f09\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47393/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47394/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f10\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47394/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47395/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f11\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47395/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47396/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f12\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47396/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47397/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f13\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47397/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 40.0,\n        \"pctTranscribed\": 40.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47398/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f14\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47398/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 75.0,\n        \"pctMarkedBlank\": 75.0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 75.0,\n        \"pctTranslated\":
+        75.0,\n        \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        75.0,\n        \"pctTranslationMarkedBlank\": 75.0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47399/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f16\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47399/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47400/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f17\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47400/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 80.0,\n        \"pctMarkedBlank\": 80.0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 80.0,\n        \"pctTranslated\":
+        80.0,\n        \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        80.0,\n        \"pctTranslationMarkedBlank\": 80.0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47401/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f18\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47401/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 50.0,\n        \"pctTranscribed\": 50.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 25.0,\n        \"pctMarkedBlank\": 25.0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 25.0,\n        \"pctTranslated\":
+        25.0,\n        \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        25.0,\n        \"pctTranslationMarkedBlank\": 25.0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47402/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f19\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47402/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 16.67,\n        \"pctTranscribed\": 16.67,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47403/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f20\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47403/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47404/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f21\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47404/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 10.0,\n        \"pctTranscribed\": 10.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47405/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f23\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47405/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 14.29,\n        \"pctTranscribed\": 14.29,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47406/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f24\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47406/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47407/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f25\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47407/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47408/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f26\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47408/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47409/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f27\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47409/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 16.67,\n        \"pctTranscribed\": 16.67,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47410/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f28\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47410/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 8.33,\n        \"pctTranscribed\": 8.33,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47411/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f29\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47411/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47412/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f30\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47412/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47413/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f31\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47413/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47414/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f32\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47414/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47415/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f33\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47415/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47416/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f34\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47416/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47417/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f35\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47417/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 16.67,\n        \"pctTranscribed\": 16.67,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47418/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f36\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47418/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47419/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f37\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47419/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47420/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f38\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47420/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 6.25,\n        \"pctTranscribed\": 6.25,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47421/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f39\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47421/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47422/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f40\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47422/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 12.5,\n        \"pctTranscribed\": 12.5,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47423/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f41\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47423/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47424/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f42\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47424/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47425/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f43\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47425/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47426/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f44\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47426/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47427/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f45\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47427/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47428/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f47\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47428/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47429/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f48\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47429/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47430/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f49\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47430/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 7.14,\n        \"pctTranscribed\": 7.14,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47431/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f50\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47431/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 9.09,\n        \"pctTranscribed\": 9.09,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47432/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f51\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47432/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47433/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f52\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47433/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47434/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f53\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47434/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 33.33,\n        \"pctTranscribed\": 33.33,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47435/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f54\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47435/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47436/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f55\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47436/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 11.11,\n        \"pctTranscribed\": 11.11,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47437/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f56\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47437/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47438/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f57\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47438/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 16.67,\n        \"pctTranscribed\": 16.67,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47439/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f58\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47439/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47440/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f59\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47440/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47441/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f60\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47441/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47442/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f61\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47442/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47443/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f62\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47443/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47444/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f63\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47444/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47445/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f64\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47445/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47446/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box024-tld_f65\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47446/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 50.0,\n        \"pctTranscribed\": 50.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47447/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f01\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47447/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 14.29,\n        \"pctTranscribed\": 14.29,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47448/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f02\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47448/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47449/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f03\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47449/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47450/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f04\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47450/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47451/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f05\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47451/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 11.11,\n        \"pctTranscribed\": 11.11,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47452/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f06\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47452/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47453/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f07\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47453/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47454/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f08\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47454/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 5.88,\n        \"pctTranscribed\": 5.88,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47455/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f09\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47455/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47456/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f11\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47456/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 12.5,\n        \"pctTranscribed\": 12.5,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47457/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f12\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47457/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 12.5,\n        \"pctTranscribed\": 12.5,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47458/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f13\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47458/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 6.67,\n        \"pctTranscribed\": 6.67,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47459/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f14\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47459/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 5.56,\n        \"pctTranscribed\": 5.56,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47460/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f16\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47460/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 14.29,\n        \"pctTranscribed\": 14.29,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47461/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f17\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47461/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 12.5,\n        \"pctTranscribed\": 12.5,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47462/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f18\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47462/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47463/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f19\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47463/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47464/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f20\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47464/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47465/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f21\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47465/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 14.29,\n        \"pctTranscribed\": 14.29,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47466/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f22\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47466/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 16.67,\n        \"pctTranscribed\": 16.67,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47467/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f23\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47467/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 33.33,\n        \"pctTranscribed\": 33.33,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47468/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f24\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47468/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47469/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f25\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47469/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47470/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f26\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47470/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47471/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f27\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47471/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47472/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f28\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47472/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47473/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f29\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47473/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 10.0,\n        \"pctTranscribed\": 10.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47474/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f30\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47474/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 12.5,\n        \"pctTranscribed\": 12.5,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47475/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f31\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47475/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 20.0,\n        \"pctTranscribed\": 20.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47476/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f32\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47476/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 25.0,\n        \"pctTranscribed\": 25.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47477/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f33\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47477/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 12.5,\n        \"pctTranscribed\": 12.5,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47478/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f34\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47478/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 9.09,\n        \"pctTranscribed\": 9.09,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47479/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f35\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47479/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 14.29,\n        \"pctTranscribed\": 14.29,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/47480/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"ryan_box025-tld_f36\",\n
+        \     \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/47480/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 14.29,\n        \"pctTranscribed\": 14.29,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    }\n  ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 03 Aug 2022 19:52:30 GMT
+      ETag:
+      - W/"e5e7326616a49e45e745d362d5ed0cb9"
+      Keep-Alive:
+      - timeout=5, max=99
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; path=/; expires=Wed, 03 Aug
+        2022 23:52:30 GMT; secure
+      - _fromthepage_session=8CIq%2Fv%2BH9C3gal0dwR3gUjcIO5pW5Gp7v%2BaRWGlJ1DUYW6MuStZ%2Bm5KeG7gKtlBazs9zdx7ayCwzh7VYNUy20u9dRmlo%2FO0tp71x5P02zjgZOPLhxwjVk%2FKNLBjT%2FOGfe21DuDK17ybgkrfmwbVxvSb8Z1PHjJzeC4n1NPirMM%2FRnnAK80UQYNiCqROttZApK%2BsEaqTf3SKmGpHxBQO3vWQ0W9xp%2FDp%2BzSNuO0FWuUFrd0uj8N3zfsfgiYWjCHyvlw9faPtU1AVrVeF0--Ce8mTJI%2BYyj55kCi--KdgfFTimsQIT%2BbBX12oh4A%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - c722d3ed-877f-4b06-aa0e-e0f97b4c3995
+      X-Runtime:
+      - '0.221614'
+    status:
+      code: 200
+      message: OK
+version: 1

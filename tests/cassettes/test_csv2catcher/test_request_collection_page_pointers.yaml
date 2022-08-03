@@ -1,0 +1,216 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://media.library.ohio.edu/digital/bl/dmwebservices/index.php?q=dmGetCompoundObjectInfo/p15808coll15/5240/json
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3XSPw+CMBCH4a9iOqOhvbaAM3FmNw5GwZD4pzF1MITvbi1O3v22y137TO+k4jv0
+        aqvax+l16+9x3bU7VahwvKTtfspDHOP1+6ZL80r/rsOYd86YehPOQ/6wXEJ8LodKzYUgGCY0SKhl
+        gf4FKpHQyIJlggYClbLgmGCQoGXBM4GQYGShYoJFAslCzQSHBCsLDRM8Epws6JIRFSI8IFiVhKok
+        UKVmWRLKkkCWmnVpUZeUujzMH4rpRpN+AwAA
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '198'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Aug 2022 19:52:13 GMT
+      Expires:
+      - Wed, 03 Aug 2022 19:52:13 GMT
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-OCLC-IIIF-Provider:
+      - cantaloupe
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://media.library.ohio.edu/digital/bl/dmwebservices/index.php?q=dmGetCompoundObjectInfo/p15808coll15/5223/json
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWKqksSFWyUnLJTy7NTc0r0Q1wcVPSUSpITAeKRleDGSWZJTkgNQFAtoIhVDYt
+        EyxmamRkpFeQkgbWAJEpKCmCSBgq1epgMcEIwwRjXCYYKdXG1gIA+B7+PaQAAAA=
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '104'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Aug 2022 19:52:13 GMT
+      Expires:
+      - Wed, 03 Aug 2022 19:52:13 GMT
+      Keep-Alive:
+      - timeout=5, max=99
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-OCLC-IIIF-Provider:
+      - cantaloupe
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://media.library.ohio.edu/digital/bl/dmwebservices/index.php?q=dmGetCompoundObjectInfo/p15808coll15/5193/json
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3XSu07DQBCF4VeJtg7I4+sZ6ii1+4gCgY0iJcFCSxFFeXccm4ozpxvN7P7Vd0v5
+        Og3pJe2+3n/OwyU/9bt92qbp7XPeHm7LkI/59HjTz/PG/q7jcdk11tXP08e4fFgvU/5eD1W6b4NC
+        SYVGFeq4UFGhVYUmLtRU6FShjQsNFaAKXVxoqeCqgLjQ/S+gUAWPC6CCiQKKuOBUKFXB4oIVlKhU
+        ohQJUgmlEkKlEUsolhAsjVxCuYRwaQQTCiYETCOZUDIhZBrRhKIJQdPIpiubEDaNcLrC6QKnkU5X
+        Ol3oLEmnK50+63y9/wKcVa1ZUwUAAA==
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '250'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Aug 2022 19:52:13 GMT
+      Expires:
+      - Wed, 03 Aug 2022 19:52:13 GMT
+      Keep-Alive:
+      - timeout=5, max=98
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-OCLC-IIIF-Provider:
+      - cantaloupe
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://media.library.ohio.edu/digital/bl/dmwebservices/index.php?q=dmGetCompoundObjectInfo/p15808coll15/5648/json
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWKqksSFWyUnLJTy7NTc0r0Q1wcVPSUSpITAeKRleDGSWZJTkgNQFAtoIhVDYt
+        EyxmamZirFeQkgbWAJEpKCmCSBgp1epgMcEIwwQTXCYYYzfBGMMEU1wmmGA3wQTDBDNcJphiN8EU
+        wwRzXCaYYTfBDMMEC1wmmCvVxtYCAKMYPi2sAQAA
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '144'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Aug 2022 19:52:14 GMT
+      Expires:
+      - Wed, 03 Aug 2022 19:52:14 GMT
+      Keep-Alive:
+      - timeout=5, max=97
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-OCLC-IIIF-Provider:
+      - cantaloupe
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,19 +1,11 @@
-import json
-
 import pytest
-import vcr
-import requests
+
+import json
 
 from cdm_util_scripts import ftp2catcher
 
 
-cdm_vcr = vcr.VCR(
-    cassette_library_dir="tests/cassettes/ftp2catcher",
-    record_mode="once",
-)
-
-
-@cdm_vcr.use_cassette()
+@pytest.mark.vcr
 def test_find_cdm_objects(session):
     assert ftp2catcher.find_cdm_objects(
         repo_url="https://media.library.ohio.edu",
@@ -27,7 +19,7 @@ def test_find_cdm_objects(session):
 @pytest.mark.skip(
     reason="Can't find any live dc:source manifest examples in FromThePage"
 )
-@cdm_vcr.use_cassette()
+@pytest.mark.vcr
 def test_main(tmp_path, session):
     manifests_file_path = tmp_path / "manifests.txt"
     manifests_file_path.write_text(

@@ -1,5 +1,3 @@
-import requests
-import vcr
 import pytest
 
 import json
@@ -8,17 +6,14 @@ from cdm_util_scripts import ftptr2catcher
 from cdm_util_scripts import ftp_api
 
 
-ftp_vcr = vcr.VCR(
-    cassette_library_dir="tests/cassettes/ftptr2catcher",
-    record_mode="once",
-)
+SPECIMEN_MANIFEST_URL = "https://fromthepage.com/iiif/25013044/manifest"
 
 
-@pytest.fixture
-@ftp_vcr.use_cassette()
+@pytest.mark.vcr
+@pytest.fixture()
 def ftp_manifest(session):
     return ftp_api.get_ftp_manifest(
-        "https://fromthepage.com/iiif/25000231/manifest", session
+        SPECIMEN_MANIFEST_URL, session
     )
 
 
@@ -38,7 +33,7 @@ def test_iter_manifest_sequence(ftp_manifest):
         assert url.startswith("https://")
 
 
-@ftp_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_manifest_catcher_edits(ftp_manifest, session):
     transcript_nick = "transc"
     catcher_edits = ftptr2catcher.get_manifest_catcher_edits(
@@ -52,13 +47,13 @@ def test_get_manifest_catcher_edits(ftp_manifest, session):
         assert set(edit) == {"dmrecord", transcript_nick}
 
 
-@ftp_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_manifests_catcher_edits(session):
     transcript_nick = "transc"
     transcript_type = "Verbatim Plaintext"
     catcher_edits = ftptr2catcher.get_manifests_catcher_edits(
         [
-            "https://fromthepage.com/iiif/25000231/manifest",
+            SPECIMEN_MANIFEST_URL,
         ],
         transcript_type=transcript_type,
         transcript_nick=transcript_nick,
@@ -69,11 +64,11 @@ def test_get_manifests_catcher_edits(session):
         assert int(edit["dmrecord"])
 
 
-@ftp_vcr.use_cassette()
+@pytest.mark.vcr
 def test_main(tmp_path, session):
     manifests_listing_path = tmp_path / "manifests.txt"
     manifests_listing_path.write_text(
-        "https://fromthepage.com/iiif/25000231/manifest\n", encoding="utf-8"
+        SPECIMEN_MANIFEST_URL + "\n", encoding="utf-8"
     )
     output_path = tmp_path / "output.json"
     transcript_nick = "transc"

@@ -1,24 +1,16 @@
-import requests
 import pytest
-import vcr
 
 from cdm_util_scripts import catcherdiff
 from cdm_util_scripts import cdm_api
 
 
-cdm_vcr = vcr.VCR(
-    cassette_library_dir='tests/cassettes/catcherdiff',
-    record_mode='once',
-)
-
-
+@pytest.mark.vcr
 @pytest.fixture()
-@cdm_vcr.use_cassette()
-def collection_field_info():
+def collection_field_info(session):
     return cdm_api.get_collection_field_info(
         repo_url='https://cdmdemo.contentdm.oclc.org',
         collection_alias='oclcsample',
-        session=requests
+        session=session,
     )
 
 
@@ -27,7 +19,7 @@ def test_build_vocabs_index(collection_field_info):
     assert vocabs_index == {'subjec': {'type': 'vocdb', 'name': 'LCTGM'}}
 
 
-@cdm_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_vocabs(collection_field_info, session):
     vocabs_index = catcherdiff.build_vocabs_index(collection_field_info)
     vocabs = catcherdiff.get_vocabs(

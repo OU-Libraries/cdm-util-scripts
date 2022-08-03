@@ -1,15 +1,7 @@
 import pytest
-import vcr
-import requests
 
 from cdm_util_scripts import ftpfields2catcher
 from cdm_util_scripts import ftp_api
-
-
-ftp_vcr = vcr.VCR(
-    cassette_library_dir='tests/cassettes/ftpfields2catcher',
-    record_mode='once',
-)
 
 
 @pytest.mark.parametrize('field_mapping, result', [
@@ -84,7 +76,7 @@ def test_map_ftp_work_as_cdm_object(ftp_work, page_picker, result):
     assert page == result
 
 
-@ftp_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_ftp_work_cdm_item_info(session):
     ftp_work = ftp_api.FTPWork(
         cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
@@ -96,7 +88,8 @@ def test_get_ftp_work_cdm_item_info(session):
     assert item_info['find']
 
 
-@ftp_vcr.use_cassette(record_mode="new_episodes")
+@pytest.mark.default_cassette("test_map_ftp_work_as_cdm_pages.yaml")
+@pytest.mark.vcr
 @pytest.mark.parametrize('ftp_work, dmrecords', [
     # Compound Object
     (

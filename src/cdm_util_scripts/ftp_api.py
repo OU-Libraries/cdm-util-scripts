@@ -1,7 +1,7 @@
 import re
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Union
 
 from requests import Session
 
@@ -36,7 +36,7 @@ class FTPCollection:
     works: List[FTPWork] = field(default_factory=list)
 
 
-def get_ftp_manifest(url: str, session: Session) -> dict:
+def get_ftp_manifest(url: str, session: Session) -> Dict[str, Any]:
     response = session.get(url)
     response.raise_for_status()
     return response.json()
@@ -48,13 +48,13 @@ def get_ftp_transcript(url: str, session: Session) -> str:
     return response.text
 
 
-def get_slug_collections(slug: str, session: Session) -> dict:
+def get_slug_collections(slug: str, session: Session) -> Dict[str, Union[str, list]]:
     response = session.get(f"https://fromthepage.com/iiif/collections/{slug}")
     response.raise_for_status()
     return response.json()
 
 
-def get_ftp_manifest_transcript_urls(manifest: dict, label: str) -> List[str]:
+def get_ftp_manifest_transcript_urls(manifest: Dict[str, Union[str, list, dict]], label: str) -> List[str]:
     canvases = manifest['sequences'][0]['canvases']
     return [seeAlso['@id']
             for canvas in canvases
@@ -175,7 +175,7 @@ def extract_fields_from_html(html: str) -> List[Optional[Dict[str, str]]]:
     return pages
 
 
-rendering_extractors = {
+RENDERING_EXTRACTORS = {
     'XHTML Export': extract_fields_from_html,
     'TEI Export': extract_fields_from_tei
 }
@@ -196,7 +196,7 @@ def load_ftp_manifest_data(
         session=session
     )
     ftp_work.ftp_work_url = ftp_manifest['related'][0]['@id']
-    pages = rendering_extractors[rendering_label](rendering_text)
+    pages = RENDERING_EXTRACTORS[rendering_label](rendering_text)
     canvases = ftp_manifest['sequences'][0]['canvases']
     if len(pages) != len(canvases):
         raise ValueError('canvas and transcript rendering page count mismatch')

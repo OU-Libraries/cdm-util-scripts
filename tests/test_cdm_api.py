@@ -1,17 +1,9 @@
 import pytest
-import requests
-import vcr
 
 from cdm_util_scripts import cdm_api
 
 
-cdm_vcr = vcr.VCR(
-    cassette_library_dir='tests/cassettes/cdm_api',
-    record_mode='once',
-)
-
-
-@cdm_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_cdm_item_info(session):
     item_info = cdm_api.get_cdm_item_info(
         cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
@@ -32,7 +24,7 @@ def test_get_cdm_item_info(session):
         )
 
 
-@cdm_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_cdm_page_pointers(session):
     pointers = cdm_api.get_cdm_page_pointers(
         repo_url='https://media.library.ohio.edu',
@@ -43,7 +35,7 @@ def test_get_cdm_page_pointers(session):
     assert pointers
 
 
-@cdm_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_cdm_collection_field_vocab(session):
     vocab = cdm_api.get_cdm_collection_field_vocab(
         cdm_repo_url='https://cdmdemo.contentdm.oclc.org',

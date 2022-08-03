@@ -1,0 +1,906 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=F%2FjbGlJC4IW68pxiajpEjUgXSDVx9uErLVuSE9EJ1eY0hYvuLBuPUh1fED%2FpisswilXeyr%2FsnVCLdfJxgEh8LVkNlvvmyGVVtxrVuUDwt3GFrbEsHzJPC3PJojDeX7KG8TsbASs%2BjGIb51ycjKs2BVVpZRu1zQHxHoLldBx4t54qfZB7ShnH4yT34bvDA6VnvAEkjY6BrBuyMzJJe7HCZIBe8jBH7c31jZlN7cBUy1yZUf8ppyahdAaitS4egWeo0YfLlg%3D%3D--lZgIZ16FVuH43vhs--n9Jsb%2BgjpsB6SQIvF%2Br8tA%3D%3D;
+        ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; ahoy_visitor=478620f9-a6b9-4e40-8932-e5aff14551ba
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25013044/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/25013044/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"Cornelius Ryan WWII papers, box 015, folder
+        34: Delbert C. Harken\",\n  \"metadata\": [\n    {\n      \"label\": \"dc:source\",\n
+        \     \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll15/8364/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"About the collection\",\n      \"value\":
+        \"View the collection description at its landing page https://www.ohio.edu/library/collections/digital-archives/cornelius-ryan-wwii\"\n
+        \   },\n    {\n      \"label\": \"Box number\",\n      \"value\": \"015\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu:80/record=b5041891~S7\"\n
+        \   },\n    {\n      \"label\": \"Digitization note\",\n      \"value\": \"Ohio
+        University Libraries has selected materials from this folder for digitization
+        that a) are of high research interest; b) focus on respondents' WWII experiences;
+        and c) are original documents, unique to the Ryan collection. In some cases,
+        a limited amount of undigitized ancillary material may be available for reference
+        upon request.\"\n    },\n    {\n      \"label\": \"Collection finding aid\",\n
+        \     \"value\": \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/cornelius-ryan\"\n
+        \   },\n    {\n      \"label\": \"Copyright status\",\n      \"value\": \"In
+        copyright\"\n    },\n    {\n      \"label\": \"Respondent\",\n      \"value\":
+        \"Harken, Delbert C.\"\n    },\n    {\n      \"label\": \"Digital collection
+        description\",\n      \"value\": \"This digital collection contains a subset
+        of the analog research files of author and war correspondent Cornelius Ryan,
+        collected for use in his three major books on World War II: The Longest Day
+        (D-Day), The Last Battle (Battle of Berlin), and A Bridge too Far (Operation
+        Market Garden). Common document types are questionnaires and interviews of
+        those who participated in or witnessed the battles and surrounding events.\"\n
+        \   },\n    {\n      \"label\": \"Policy\",\n      \"value\": \"See Ohio University
+        Libraries' Digital Archival Collections Materials Selection and Rights policy
+        at https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Folder number\",\n      \"value\": \"34\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Contact University Archivist and Records Manager Bill Kimok at https://www.ohio.edu/library/about/staff/kimok\"\n
+        \   },\n    {\n      \"label\": \"Format-AAT\",\n      \"value\": \"letters
+        (correspondence); questionnaires;\"\n    },\n    {\n      \"label\": \"Identifier\",\n
+        \     \"value\": \"ryan_box015-tld_f34.pdf\"\n    },\n    {\n      \"label\":
+        \"Language\",\n      \"value\": \"English\"\n    },\n    {\n      \"label\":
+        \"Series\",\n      \"value\": \"The Longest Day\"\n    },\n    {\n      \"label\":
+        \"Repository\",\n      \"value\": \"Ohio University Libraries. Mahn Center
+        for Archives and Special Collections\"\n    },\n    {\n      \"label\": \"Respondent-
+        nationality\",\n      \"value\": \"United States of America\"\n    },\n    {\n
+        \     \"label\": \"Respondent- unit\",\n      \"value\": \"USS LST-134\"\n
+        \   },\n    {\n      \"label\": \"Respondent- rank (during this event)\",\n
+        \     \"value\": \"Motor Machinist's Mate\"\n    },\n    {\n      \"label\":
+        \"Respondent- branch of service\",\n      \"value\": \"Navy\"\n    },\n    {\n
+        \     \"label\": \"RightsStatements.org URI\",\n      \"value\": \"http://rightsstatements.org/vocab/InC/1.0/\"\n
+        \   },\n    {\n      \"label\": \"Copyright status note\",\n      \"value\":
+        \"Ohio University Libraries does not own the copyright to these items.\"\n
+        \   },\n    {\n      \"label\": \"Collection\",\n      \"value\": \"Cornelius
+        Ryan Collection of World War II Papers\"\n    },\n    {\n      \"label\":
+        \"Subject-LCSH\",\n      \"value\": \"World War, 1939-1945; World War, 1939-1945
+        -- Campaigns -- France -- Normandy; World War, 1939-1945 -- Personal narratives\"\n
+        \   },\n    {\n      \"label\": \"Title\",\n      \"value\": \"Cornelius Ryan
+        WWII papers, box 015, folder 34: Delbert C. Harken\"\n    },\n    {\n      \"label\":
+        \"DCMI type\",\n      \"value\": \"text\"\n    },\n    {\n      \"label\":
+        \"Repository\",\n      \"value\": \"Ohio University Libraries - Digital Archival
+        Collections\"\n    },\n    {\n      \"label\": \"Source\",\n      \"value\":
+        \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll15/id/8364\\\">Cornelius
+        Ryan WWII papers, box 015, folder 34: Delbert C. Harken</a></span>\"\n    },\n
+        \   {\n      \"label\": \"Title\",\n      \"value\": \"Cornelius Ryan WWII
+        papers, box 015, folder 34: Delbert C. Harken\"\n    },\n    {\n      \"label\":
+        \"Created On\",\n      \"value\": \"2021-10-01 18:11:54 UTC\"\n    },\n    {\n
+        \     \"label\": \"In Scope\",\n      \"value\": \"true\"\n    }\n  ],\n  \"description\":
+        \"This is an annotated version of the original manifest produced by FromThePage\",\n
+        \ \"within\": {\n    \"@type\": \"sc:Collection\",\n    \"label\": \"Cornelius
+        Ryan Collection of World War II Papers\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/cornelius-ryan-collection-of-world-war-ii-papers\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read Cornelius Ryan WWII papers, box 015, folder 34: Delbert C. Harken\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/cornelius-ryan-collection-of-world-war-ii-papers/cornelius-ryan-wwii-papers-box-015-folder-34-delbert-c-harken\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for Cornelius Ryan WWII papers, box 015, folder 34: Delbert C.
+        Harken\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/cornelius-ryan-collection-of-world-war-ii-papers/cornelius-ryan-wwii-papers-box-015-folder-34-delbert-c-harken/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25013044/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25013044/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25013044/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/25013044/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 0.0,\n      \"pctOcrCorrected\":
+        100.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0,\n      \"metadataStatus\": \"undescribed\"\n    }\n  ],\n  \"sequences\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/25013044/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/cornelius-ryan-collection-of-world-war-ii-papers/25013044/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/25013044/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/25013044/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8358/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 1\",\n          \"width\":
+        2516,\n          \"height\": 2516,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8358\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8358/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2516,\n                \"height\":
+        2516,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8358\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8358/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25204890\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25204890\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/cornelius-ryan-wwii-papers-box-015-folder-34-delbert-c-harken/annotation/25204890/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204890/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204890/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204890/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25013044/25204890/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25204890/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8359/canvas/c1\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 2\",\n          \"width\":
+        2017,\n          \"height\": 3273,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8359\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8359/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2017,\n                \"height\":
+        3273,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8359\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8359/canvas/c1\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25204891\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25204891\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/cornelius-ryan-wwii-papers-box-015-folder-34-delbert-c-harken/annotation/25204891/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204891/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204891/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204891/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25013044/25204891/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25204891/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8360/canvas/c2\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 3\",\n          \"width\":
+        2020,\n          \"height\": 3267,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8360\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8360/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 2020,\n                \"height\":
+        3267,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8360\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8360/canvas/c2\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25204892\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25204892\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/cornelius-ryan-wwii-papers-box-015-folder-34-delbert-c-harken/annotation/25204892/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204892/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204892/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204892/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25013044/25204892/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25204892/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8361/canvas/c3\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 4\",\n          \"width\":
+        1996,\n          \"height\": 3264,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8361\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8361/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 1996,\n                \"height\":
+        3264,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8361\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8361/canvas/c3\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25204893\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25204893\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/cornelius-ryan-wwii-papers-box-015-folder-34-delbert-c-harken/annotation/25204893/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204893/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204893/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204893/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25013044/25204893/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25204893/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8362/canvas/c4\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 5\",\n          \"width\":
+        1906,\n          \"height\": 2467,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8362\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8362/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 1906,\n                \"height\":
+        2467,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8362\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8362/canvas/c4\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25204894\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25204894\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/cornelius-ryan-wwii-papers-box-015-folder-34-delbert-c-harken/annotation/25204894/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204894/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204894/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204894/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25013044/25204894/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25204894/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8363/canvas/c5\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Page 6\",\n          \"width\":
+        1723,\n          \"height\": 2484,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8363\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8363/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 1723,\n                \"height\":
+        2484,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll15:8363\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll15:8363/canvas/c5\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=25204895\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=25204895\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/cornelius-ryan-collection-of-world-war-ii-papers/cornelius-ryan-wwii-papers-box-015-folder-34-delbert-c-harken/annotation/25204895/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204895/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204895/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25013044/export/25204895/plaintext/emended\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/25013044/25204895/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/25204895/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        }\n      ]\n    }\n
+        \ ],\n  \"otherContent\": [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/25013044/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/25013044/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 03 Aug 2022 19:52:37 GMT
+      ETag:
+      - W/"fea5665b6b48a61676a595ceaa14978a"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; path=/; expires=Wed, 03 Aug
+        2022 23:52:37 GMT; secure
+      - _fromthepage_session=txQ%2BNRXCq%2FNeG0iExnFtyFIBx6k6Q4k9pB1sHpFtqrhAAnxgaZUJguPPNhdujm4%2Bf%2FTN3FB0WMlBSaFrsbo2EZHTr%2BTaVGiRksmMAOS1skcFsHwgLMRpfJGCz%2FkG%2BRt67Pa5RTiuCzefidt66X7uSabdHWq0jXsjBmnlIQ28Y8n39LA2s9uOTATfKXK6OmP1kcL3GoQsCGeeTxlK1AEk10q8wxo8N95PCVn9HJPamwZ3QMVF7dYqlPzzSrKC4vWi%2F7GuXQ%3D%3D--6Z10nuUyfCi56%2FkS--X9rcIC2O4jtqQe27glWALg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 72e1cd96-1e1f-422e-84aa-55ce581f8ebc
+      X-Runtime:
+      - '0.159272'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=txQ%2BNRXCq%2FNeG0iExnFtyFIBx6k6Q4k9pB1sHpFtqrhAAnxgaZUJguPPNhdujm4%2Bf%2FTN3FB0WMlBSaFrsbo2EZHTr%2BTaVGiRksmMAOS1skcFsHwgLMRpfJGCz%2FkG%2BRt67Pa5RTiuCzefidt66X7uSabdHWq0jXsjBmnlIQ28Y8n39LA2s9uOTATfKXK6OmP1kcL3GoQsCGeeTxlK1AEk10q8wxo8N95PCVn9HJPamwZ3QMVF7dYqlPzzSrKC4vWi%2F7GuXQ%3D%3D--6Z10nuUyfCi56%2FkS--X9rcIC2O4jtqQe27glWALg%3D%3D;
+        ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; ahoy_visitor=478620f9-a6b9-4e40-8932-e5aff14551ba
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25013044/export/25204890/plaintext/verbatim
+  response:
+    body:
+      string: 'LST 134
+
+        HABKEN, Delbert C.    1a  4
+
+        0
+
+        Bo
+
+
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '43'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Wed, 03 Aug 2022 19:52:37 GMT
+      ETag:
+      - W/"018f52d2e4251d8ffdfcb4770a3dea17"
+      Keep-Alive:
+      - timeout=5, max=99
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; path=/; expires=Wed, 03 Aug
+        2022 23:52:37 GMT; secure
+      - _fromthepage_session=haQY9%2BDd0qNIuhf%2BGFl17exT6FAEhNUH0H9Tv0n8XjiOdQTzHnOW%2BGsVBKy7hX1J7FiNn4HIdENVlFTuPgz9vbqA9itOxl5cbL0PcTTes8k7MM%2B2kdhsZzhrIrn44%2Frthvdsa%2FrbNHL6mvYXEPTl4vHnhTMtqvmzE7jc2RXezFg3fkRxFT47piJQ7jPsTmyyEv3K9dTxZFluoVCqH2Y4yGP6ljUgmmcGFL4%2FhLzjIv9ZT1vt3Li%2Ba2kPlnS%2BEqR2w6h2TdSyTH2LB6KjUM%2BSBgx5ixjeuLJu3Fp1oFILvzQoDQl8B1BRzQ%3D%3D--A%2BjkKt%2FyPKpok083--Cu9pHdSbnk73FYW1DPUupg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - ef2a610d-dabd-47bd-a5a5-59406feaa28e
+      X-Runtime:
+      - '0.038793'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=haQY9%2BDd0qNIuhf%2BGFl17exT6FAEhNUH0H9Tv0n8XjiOdQTzHnOW%2BGsVBKy7hX1J7FiNn4HIdENVlFTuPgz9vbqA9itOxl5cbL0PcTTes8k7MM%2B2kdhsZzhrIrn44%2Frthvdsa%2FrbNHL6mvYXEPTl4vHnhTMtqvmzE7jc2RXezFg3fkRxFT47piJQ7jPsTmyyEv3K9dTxZFluoVCqH2Y4yGP6ljUgmmcGFL4%2FhLzjIv9ZT1vt3Li%2Ba2kPlnS%2BEqR2w6h2TdSyTH2LB6KjUM%2BSBgx5ixjeuLJu3Fp1oFILvzQoDQl8B1BRzQ%3D%3D--A%2BjkKt%2FyPKpok083--Cu9pHdSbnk73FYW1DPUupg%3D%3D;
+        ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; ahoy_visitor=478620f9-a6b9-4e40-8932-e5aff14551ba
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25013044/export/25204891/plaintext/verbatim
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3VVTY/bOAy961cQ2MO2QBq009kCewrSjmfGReJ0J5kdFEUPss3E2thSIMlJ8+/7
+        KMf9xB4Cx7b4SL73SM+rfcvnicpXT3OixULdOk/vnLfcmj7Qw1lb9da5PenS9ZFuXtzos8rndK3U
+        5n71uJ4XN2ta3dIyKya0KmiBByS/dTZP17ygzX1G8/xhQh/mD5v8Xf5hvsnGFyov/p2vc0QCpFg9
+        LBHzkd5mm6csK2iZ3xT53f2G3j8WGf01oVd/X18n2J/eqDfDmynlt/Rx9UhP2UOGajIBRZIlUi+y
+        +RplFGu8SxXdrhaL1VNe3NE/j9l6gxLWU6WeGh3JBDq73tO2b1uyuuOZuuG2ZB/pbkr32u/Z0oSu
+        X17Rla1pfuQpbucDlZS7k74AnfQFqbcmksbZ2hxNMM7O1ON6/WKx3tAf9Or1NdGzBV4bu6N1Yw60
+        0XYfngsKe0ZQLTCkvTdHJmOpcL7DeWQTUMkk6aKRUledbjS9ZV01dM+6JqhGkI2WkBUZgMrU8jZS
+        ZnetxMeGyZpdE6nkrUPC6KjTeyZNW7n43qqIrnxNJw6RgqmZ3JZuvbYV0wChLVXGVy3XVOpqL09V
+        g67HUn+lBLF7cpbe95bpIuBMLd1ySa/pU+VdCICC6T7TjD4xcvz0rPoVT+/4d7irl/SRtQ/SM/oS
+        EjthkRNp8TtphftF+5PZ8p/hov6zwp2e041rQU6gfPSAUjcXZRp9FB7OVDWmrT3s8T/wtUvncbHu
+        NFPzKormH1yInQ6R/e82Atao/x4xA6rcnaSjnZN46FUyHTQMCllETmOPevDZAHGCiuIIND6qDrKW
+        2sMkV5e5wpkGdoHojOmHUVKq4DqOjWQpzS7R/S1now8HYeGbEJI5evi3NbBN3ft0EA+TdHJzKe8d
+        7IIVMwOnqRfPHXcYsImC/4i/6O7Q8mRg1Nkj+6AjugkXslG8pwZkyO1BJ1ek3IlslSHg7OADqUn+
+        U2QbBqPmZDq9M3jZgXREuR7GD4lNNSy5Bh2ns2YrnJxc39YUen80Mug50dBs2hDGA6RyXamjSiHx
+        e9LKMx/OI5tiWykSommsFd1KgRJinTIWlesoGrVo9AiTgd6o271cv/MYpOqObZwSZnhv+YSE6idN
+        SpletDTusuQS4cb3nfNBVC+dTLI8w784oSAbB4QeYIu0XU6NgS2GYalZ/SjgjLCq1kLQgR00+qYc
+        haqPseVSunQJnbdbrsYxaFjdsWyCkPQ7gD2IttPBtSIGypKQE0jwiRUpxoqsjgJH4VWDbJyAm9Xg
+        M+cOgSoMKGp+Pk1rTaCtG3vVQ6dSUtqGwjgMiO9aok60FdVD1IngH5fOhEzb8s6ULX+mmnVshBjJ
+        u9VYeeLSg3elLtvz8DQZQfyXbHCBTkonL4BMZIB0Sbmt2aX2R2roQo1K1i5REPZoGEkpU/GXLRtH
+        izWsjwbZO9BXT1U+ePISgdFo8dUWy0mpmFPvviSLIeL1G1i8Bz8hei1rP5Wc5hz1yyjA0eL5/3r0
+        NI5LYBaSdEo4kpH0UkIwZiUtpRRYQtP9sEf5DETBl3qGL8OlgYQeGgbAkCONOHRU6isU5U9clggA
+        AA==
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '1198'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Wed, 03 Aug 2022 19:52:37 GMT
+      ETag:
+      - W/"d18993ac100593f3881539471368c549-gzip"
+      Keep-Alive:
+      - timeout=5, max=98
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; path=/; expires=Wed, 03 Aug
+        2022 23:52:37 GMT; secure
+      - _fromthepage_session=dTR2pHqUKX092tKd0qxHtISDXh2gNKE7EAqVdNOU0p3zfexf6qMG0bAinPRQUS1LUVgqnC3Qk78IC%2Bm0RS0v14%2F%2F2%2BwF7k5jvs7O7mqHGbdEU3cSNBlXIqLA3BrDiPD%2FDdu%2FGiQ5%2BpKzQCAxLjDbx4OOFAhYt2243D1Agxdon2anXSIv%2FvEXPdm58JOau%2BczQZ8GJqlBFdiAGgJqaHA5ocMRvmoYCQ8sk55t97FZXHa7rYYslZzVubFma6RaWun0t7UuwikwB7diEAJMbd1w6GNNiZRgJAji1NrLnbWid4DR1Dzyb3c89Q%3D%3D--OR9cbd91L%2FtMk2qu--3WkLL8%2FV8%2FYymVzfPM1iag%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - c39a2ded-db21-4561-94d8-c49a5dddf7d7
+      X-Runtime:
+      - '0.043514'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=dTR2pHqUKX092tKd0qxHtISDXh2gNKE7EAqVdNOU0p3zfexf6qMG0bAinPRQUS1LUVgqnC3Qk78IC%2Bm0RS0v14%2F%2F2%2BwF7k5jvs7O7mqHGbdEU3cSNBlXIqLA3BrDiPD%2FDdu%2FGiQ5%2BpKzQCAxLjDbx4OOFAhYt2243D1Agxdon2anXSIv%2FvEXPdm58JOau%2BczQZ8GJqlBFdiAGgJqaHA5ocMRvmoYCQ8sk55t97FZXHa7rYYslZzVubFma6RaWun0t7UuwikwB7diEAJMbd1w6GNNiZRgJAji1NrLnbWid4DR1Dzyb3c89Q%3D%3D--OR9cbd91L%2FtMk2qu--3WkLL8%2FV8%2FYymVzfPM1iag%3D%3D;
+        ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; ahoy_visitor=478620f9-a6b9-4e40-8932-e5aff14551ba
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25013044/export/25204892/plaintext/verbatim
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA2VUy27cMAy86yv4AZst0B8Iguyh7aGH9hAUQQ60RMfCypKhR1z36zuUs8m2AXyQ
+        KWo4HI50Q2PKdJ9ylOBboR8bR/pMN8b8Si1T5FnoJGGQXOn+SF84nyUac/KOttRo2IjjRnbiaIXO
+        IgsxOc95ozTSOnGliZdFojiqqR+pGnS83aKElAN9RcaL4NjYQng/O29UJL94wFrOWSQfaGiVYqpm
+        4Vy9bYEz8ZAQvGAe6VsrVSsNrWzkmj37+Ezf+Y8v5kGydLZA37S5MXuJrtDZhwB+0GFNLTosxddJ
+        Ms5nPY41BY5O1ymbq+hbG1Bk7y7LLDPU2mVJ8UVy4epTLH17YkcrwPX0TINAfNH1hrWF1sZyaRyq
+        lwLg76mS/GZbw39YuxSr4MN5xLEfUtH2nFklqiI5teeJip1SClDkWXpLSCDt/acvFb9l8gutXKi0
+        eDYp0olOKuPDK3RpywLcPrwxhZBWUhQf8SGkGgzCdjLKR2EQULgBmZFYB6U0s1gvL11jhyYUbUoB
+        v+No1H8Mq/ggR6I7eEBRR9FihUDJ152LDVzKzFUKfaJHH2GPKu5Jx/mIOdJVpKHGo82pKHUYBKE9
+        55/YOsHKFxHRUs3sI0Z7NLtXdGAXR/RpHD9MuTtcCaLn4M9yc9Ot6DEh9yF1nwCCBt3V7pAFFbvx
+        LvVKguZ5yb6Lrlga7flw/gR2tx+9VkR2b2I43M0J7J68Q2B/LrhfERVjWg+EWURTp+4QsHe4zUA/
+        qJRWxZNDP0M8t9Lhah9K9bO8XttZ2fcSBXJdc7KMEequj9Y7eBFY7HZyOXl70GXx8wJTg3/KPATU
+        gwEs7Foz7qxRpHm/GniO3pqRUFD/blTnDnvL8d2DtDspJG0bTIl7Yne0UekRUUsnmq/plV0ji0KD
+        OjXAYa/Sr3gYTIRYmYLoI3XtqQPps/Hswf5JX6veywYxzF9pko1CVAUAAA==
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '727'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Wed, 03 Aug 2022 19:52:37 GMT
+      ETag:
+      - W/"fd759f32f0cde244b46ae4df0a4ed03e-gzip"
+      Keep-Alive:
+      - timeout=5, max=97
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; path=/; expires=Wed, 03 Aug
+        2022 23:52:37 GMT; secure
+      - _fromthepage_session=AEK3W05iVI5oG%2BJnh54BtrNOY8bvqaK9DW0ypOu%2F0EGuuUnqPEFFTJF%2FRQTp16SuAFV0LJwXhX3qbeBafsCvK7FQnF%2B5Q%2BZOLiKuTmdLGGS6cZUOY1wX0LJqp21W8p%2BSAEpFLFct8luOqD0B0JEk0yGQfrVxz3SI32L7URI71ywj6MRXT0hCCZMiTOqpB%2BrLhzlyK%2BnXB7k7VfepEjcA1ZUE1QIonO4YodZ5u0U%2Fb11lRJDnHuHV%2BVsX4WEH2CpYEu%2FiuSYa7LIvxwQw1SoeJiSJnW4AF8fwBOazUfzqyWbyVLpBQ3iB3A%3D%3D--x1yIQkugFN%2FgJVWC--lUvbzal1dW%2B3vJS8pD9TRw%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 12d95c9b-9223-4bd7-a4bd-fdb6bd21574a
+      X-Runtime:
+      - '0.043120'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=AEK3W05iVI5oG%2BJnh54BtrNOY8bvqaK9DW0ypOu%2F0EGuuUnqPEFFTJF%2FRQTp16SuAFV0LJwXhX3qbeBafsCvK7FQnF%2B5Q%2BZOLiKuTmdLGGS6cZUOY1wX0LJqp21W8p%2BSAEpFLFct8luOqD0B0JEk0yGQfrVxz3SI32L7URI71ywj6MRXT0hCCZMiTOqpB%2BrLhzlyK%2BnXB7k7VfepEjcA1ZUE1QIonO4YodZ5u0U%2Fb11lRJDnHuHV%2BVsX4WEH2CpYEu%2FiuSYa7LIvxwQw1SoeJiSJnW4AF8fwBOazUfzqyWbyVLpBQ3iB3A%3D%3D--x1yIQkugFN%2FgJVWC--lUvbzal1dW%2B3vJS8pD9TRw%3D%3D;
+        ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; ahoy_visitor=478620f9-a6b9-4e40-8932-e5aff14551ba
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25013044/export/25204893/plaintext/verbatim
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA41WTY/bNhC981cMekkLeI02TQO0OQRaLzd240iuJWe7CHqgJXpFWCIFklrHt/6N
+        /r3+kr6hvPkoeqgPNpaa4bx5781or+jgPC2ct7ozY6DtWVn6ka6EuHejJ6t6TTe622sfaTGnpfJH
+        bYVYWYqm14HcgR68VpFqb4IJMxq0GzpND9pqr7ruTKF1J9ImttpfQo3F09HEMzkvgu4OVx7Fla31
+        K3IcF6hxiKq9bsyer4jjYBqKLTLDnG4cnd1IXve6BzBS9iz0R9WjbgI0FXsNlJ9jegTRl0GMqtcW
+        dysfNUVHfrSJDCQbLzrzyIEWt9O6rPDDALTXdFJ8Dlhq78ZIPz7/ng5ax8sVM44UiLQIjNrPWnup
+        VHt16nRDo230pQrtR3sMqWpQB33UekCLYo9rwR0ooEeFLxRU9KH2LgTko+gftHeupw8aoP513O+p
+        dmPXUKN715nQciU6tQ6iBGrNMBfibuqDv5hISNKbxpqHNnLDv45W008z+uHnFy9ei8J+fvjlE6RP
+        NyCDKyxaZeEhEH1ECzhS8f/UeXmpQ+lzUEfNJM4FYotetYqutapbarVqhLgIf2RGISEk3bsGsnYh
+        dUgdqAcTJ8NOAQSH8+cvIPUIS337VFtMbbBeX3f2kr5jqo09KBv9eUYPnWGpoI4yfs8zQtE7N8Dm
+        cC5XjM4daYCDyEw0IDBZJWhFbsAIROMs4hHcM2WYBhbn5E0yHUyauxlZF594NDYaxdI/qoBUqLUp
+        6RdaoUKgR+3P1CrfMPhhTEmDGiY7kR177d3IHdQAbmMQLAMSHjW+hgEzmTL7pFruPKYC/O0/UUzs
+        PGNF7SxKhQSer2Z+E+69Jq3COXldd/D3nMrovMGoJMUn60UN804JkRX9BGxQD9P0cf+wyYzCiNIq
+        iL1m16gYVX0EyP05dVTG8ajA3uUplAyDiaAnwMhTsoBitfL+zBFvNLdEA3aRs7xH9riOwUr7wOaY
+        0VaHeuQZC6N/NI8OMQcPaVK1MSD5ek6ZhXewLyoWm8pUiyV60JFRiyRwh2FNkzutgXhy0FdjmkP0
+        KpkKyJ6GBIRi0djYncVF57QqQjvG2KXmElK+GFfGdgL1hPoCdporTQ1W01fboPnvRcCrMREaePQm
+        o5/SYppQiRZHqWYDW11wJTMAWQe/cEF+C8iPuh4jqkK6g6m1F6A0JFfBlJ056Bl1LiSNoHwwH1lj
+        zlwv3m+ehbQTP7GX9pFjD7M5T0/WSi6NLjm/gRhoA+vD0q3nNwOuOGCbCoQfdJfSWvi1gcyQGzef
+        cYTaDCyRpfl1wYsaFr29KHwlfCrBCDaqNuhlTpspOzgQ0OD11ILfxj6LoDC9s8YwF5u1zEpJa1nR
+        rqRl9l5StVyV9NtOltWqyPNstZWUlVQWRc6/m6IsV9drOcMJQrOK7iQtslys8sV6dyPpvthtSf6+
+        kduVzBeypFWOOEnXRfF2zsHLYiOnTITS3Wq9pkWRV6t8NyWLsiq294Rypdxk26ySVC6lrHDTbcpn
+        kHlRAfRtReXu9na1QKmKtkXxDpTs1muRLd7mxd1a3ryR7/hRqnIt6c3qvcwZUUaLZbap5BbY14ij
+        b+6Wcsu45D1lWy5w90qkXvLsHRjIb+h9sciYEyq2VCwWu83019Pd61VZyRusNfSWv03N3SIy3bGU
+        6w2efP3fiBCTAwLdYfEJDLBWni1aQcUtlpb2f//5V6Abg90SBT7/AEFxe5zUCAAA
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '1302'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Wed, 03 Aug 2022 19:52:37 GMT
+      ETag:
+      - W/"8ef54a14f1e50aba36b9414677dcf673-gzip"
+      Keep-Alive:
+      - timeout=5, max=96
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; path=/; expires=Wed, 03 Aug
+        2022 23:52:37 GMT; secure
+      - _fromthepage_session=ZS%2FH9CakzWjQzJV7o62ikvflbZK4Aq1RFJZwwRC1w2HlQzivx8wXxPw0hk%2FlK9ILNMeW2qPqNrZmIAIFgiFS0P%2F73JqDfzCJabQraeNuGuFZHwjKpbO%2BDW86zQ1WGoe4l0Zma37%2F73LjG%2BNzHy01A%2BChPuZ0D0sh3PzAp8Fc7AU%2BBHjfw3pj4djw66Xiw3vlA8AYy9f3Sj9%2Bc72uM%2Fx7wbWnuBMqzkU0SnDMXn31vPe7lPkjLfUrn3S6vjHhaLet78UWiCdC6KBqoYcz7wG7F9ruKJcjpEvDefRHqBZPKB5qxCblCFzPFA%3D%3D--5ESYfGBzqmKij4v5--6sTrlfLLjzPyg1TKr%2FI8sA%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 9f7230f4-d0c1-47bd-83b8-ae90fb55e9ad
+      X-Runtime:
+      - '0.041402'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=ZS%2FH9CakzWjQzJV7o62ikvflbZK4Aq1RFJZwwRC1w2HlQzivx8wXxPw0hk%2FlK9ILNMeW2qPqNrZmIAIFgiFS0P%2F73JqDfzCJabQraeNuGuFZHwjKpbO%2BDW86zQ1WGoe4l0Zma37%2F73LjG%2BNzHy01A%2BChPuZ0D0sh3PzAp8Fc7AU%2BBHjfw3pj4djw66Xiw3vlA8AYy9f3Sj9%2Bc72uM%2Fx7wbWnuBMqzkU0SnDMXn31vPe7lPkjLfUrn3S6vjHhaLet78UWiCdC6KBqoYcz7wG7F9ruKJcjpEvDefRHqBZPKB5qxCblCFzPFA%3D%3D--5ESYfGBzqmKij4v5--6sTrlfLLjzPyg1TKr%2FI8sA%3D%3D;
+        ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; ahoy_visitor=478620f9-a6b9-4e40-8932-e5aff14551ba
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25013044/export/25204894/plaintext/verbatim
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA1WRQY/TMBCF7/MrnrQHQMpau9mCFm6FCFjUVBXtCvU4mwyNlcSObKcl/HrGFRLi
+        ZMsz8973xqu78hala7E+C62bfpClwJO/MNW8oHxX4P7920ei2saIz4FdIxE/OLT0XbiV8CqisieJ
+        icqHO+w49FelrVxw9KEvsDVHQ1QJB9Tc8ogPRE+4cIR32PowsmsXfBRuuk4V82t1W6l3Qd9mJ7gS
+        rFYmT0UJZ7m2bMzeHAxeb3TauhP2nZ1wYNfHN7i5f1gV9Kwd2PJ5MVhHMGqffEZoOutsTFGvSRNr
+        csaX2TkJWTd1ghd/QZpDkGT+keaCDibLA4a/pnogdnNKg7QU52karC7np9rwNAX/y45qMSxqMHqX
+        OkOHTgmx+FnT7K2uMuTy0c8hEt2UqGR4kZDwyeArN724Ajsf08gxSfj/d2iX8+1FXNZTx5BsM2RG
+        yqgbOVmlrvnEv60T9aM/x2lx6+oBAAA=
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '365'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Wed, 03 Aug 2022 19:52:37 GMT
+      ETag:
+      - W/"38b09a693fb53bf7135bb906fca35093-gzip"
+      Keep-Alive:
+      - timeout=5, max=95
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; path=/; expires=Wed, 03 Aug
+        2022 23:52:37 GMT; secure
+      - _fromthepage_session=uzCuPWyoVk52Yxt%2Fb1oMhotZZhq7BJelXsLKoiUwqpa9fdpQfDv1CXyygRKNT4unhVXvs%2FjKiA0Xvb%2BU5YaxiRi351SvZb9MxEROJogax9HNrZEwvN3JLJQaks2mZkl0anuGdFrdVwUwWFGQihW%2BiSzI3KAEgirqPQ1BXNKOkCKH7DEWGlEvP9QN2bd7ZsDG%2Fe11BkvXo8M%2BNVlujkG6Bb9bV08N9USqUjwzOiSSFGE8M5xoymsQOGdKpzTdf8wAEXxSQdeMHH83wItN6ZaL4BtMrXfYH%2BytGhIHbqO5FpL3va%2F9Kv32gA%3D%3D--S6qE%2FJ%2Bjk%2BVeyO0V--Ovrt14HW0U3R6itFRn1P0g%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 0b5bff1c-9298-4872-b706-84cf8afb5343
+      X-Runtime:
+      - '0.033410'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=uzCuPWyoVk52Yxt%2Fb1oMhotZZhq7BJelXsLKoiUwqpa9fdpQfDv1CXyygRKNT4unhVXvs%2FjKiA0Xvb%2BU5YaxiRi351SvZb9MxEROJogax9HNrZEwvN3JLJQaks2mZkl0anuGdFrdVwUwWFGQihW%2BiSzI3KAEgirqPQ1BXNKOkCKH7DEWGlEvP9QN2bd7ZsDG%2Fe11BkvXo8M%2BNVlujkG6Bb9bV08N9USqUjwzOiSSFGE8M5xoymsQOGdKpzTdf8wAEXxSQdeMHH83wItN6ZaL4BtMrXfYH%2BytGhIHbqO5FpL3va%2F9Kv32gA%3D%3D--S6qE%2FJ%2Bjk%2BVeyO0V--Ovrt14HW0U3R6itFRn1P0g%3D%3D;
+        ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; ahoy_visitor=478620f9-a6b9-4e40-8932-e5aff14551ba
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/25013044/export/25204895/plaintext/verbatim
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA21Vy3LjNhC84yvmlovMcjbZSrI5KRY3VizLLllrl48QOTQRgYACgOJyT/mN/F6+
+        JD2g5UdVLqKIx0xPd89we1nSppwvys13d7RY/l7ebdXtqpzfzdfb++VqVRKdEa2ppAd6pBva0JVS
+        f/SO6cPHGX3/y8eflboOBS3Y7jgkuijoUld7durWx9TpmDioebW3PM5o6Qet1IJ1ILkzHfyk1LbV
+        bk+j7+nIYaSur1pqfJCVQJYTYpB29evaYKw17slxjJQ8tWwP1Ecsp1Zd+ODYGrxuRu3+/fufSDvv
+        96R3vk+0OFvosaAltf7AOaXEkshP5siUWqaarR7JOBX4YEekkRQ57d4AhG8awPEN6RhNTNpV/CsN
+        TDowPQWdTGO4ntEOyaLveGh1Uh51DUDZ5Z0xpxm8qzk0vaXA8eBdxFJrUPkpFuqW5DqSliO9Tciq
+        BEfgv3qOKWZCjMNvh7zeFSC3DxkxEjj+mqjhgTrvUhuR2KcWx7FpIlW+dwlkC69YK/sAQmZZF+FN
+        ZVp2jD2wfzQ8SNhOu1FKl/CZSTrokExlDtoBztB60k+BWRirkDUY0MAKb3JDZCjoXiQ+BL/TOwtP
+        CBOSajCxlWtJ230WMotTn8rRiQ4cjK8LtXQ5WsfIaTpgjgYanGirWYs1phDRT5AP7A8WJ3Gm1ZC5
+        QfEoOynHFTykgQipaz6y9QdQgqprczR1r2ENY5m8I9bQBhgi/r8U+tZ+BXzMgaHGc6Z3Dqt8Bwhp
+        shi7yvrINZSsfKizCIFTH5A5SciOFSrOpkO3WAO1hdAjO4O7XNADAoXejpAIu9m5uIDYsFE2B+wQ
+        c2YVoV8GMhMvDQwwePYwhMlKjlSh4lyEyBZGmBrt9Y2zf0HYN7Qkdz4AhRKkOCX8VPq5muiDWPOt
+        E99bOTKjdZ5gzyXF1ve2Fmd1GBC5Y1iaAEH3zg8CLXoEwPPg0WE7K33BbjJq80roDhQdtbFaTkyN
+        8OzUzM4Ad7wZJ+IsqTzjTT5kG2d+e2fSTD23AcRAc4sX/MToIH0EoeTeJD4soavcPfHUCh1Plhgg
+        v0piggxh6o3eQsCRrMwgwBx0qF8GSp4woOVOHBwYx2Q5zpT6HGSwRHrA8XcvRKuV2kBmHVDWgiUJ
+        8if1+eETdsrsrB44wPVwojrzEFjXY2ZKv3JF0h7SRlPD/NnHpHSeGrUeIzmPClDNb5xHUZUn0utk
+        xxztI5oEwHWnoFrdp5E4p8N9miyZL9BN0+RQt5Y1TNowo7emWaGGYOClFyiTxrEt6H++DDK8c2HK
+        mn2eNFGCyEzLc/7UaLVYaC2GdCg7WyZwpzHX9WTncSq5y+4RzBBiU96V883FJS3K2/lme12utzP6
+        8MM54e2K5vfl+ktZ0LrEx/Bmc4V/BT0WRLQtV+Xt5c26pOsvm838kS7x7Szox7Ofzs/PlVL/ASXN
+        0UdnBwAA
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '1089'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Wed, 03 Aug 2022 19:52:37 GMT
+      ETag:
+      - W/"7fb84926e8708cb5c8acaa0718cfb10c-gzip"
+      Keep-Alive:
+      - timeout=5, max=94
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; path=/; expires=Wed, 03 Aug
+        2022 23:52:37 GMT; secure
+      - _fromthepage_session=QjU6ndxkqqIswZg6B5vxrPL311GEysqVHoMFtkerxhuAgDPDFH8L5Naw6t6NQF5ecPKhEXhYNr0oAHsxw2%2Bs6KQ159%2BTv0pY2afIn9k4GZw72Qlq0o8s8xtgkROPjF9TRN4wGDmgoIEgRtrBxrRXQXiFzFixAo32ATH9T3nDAKr%2BE%2FqzHAYlVZImehqlDLrrIDUlc91N5Wz%2B2%2F7UYr5W5jVlqYXphIFXx1DHvt9AjrPBImQf%2FRrCk1AjeIYrikeV%2FZ2hO2Z22iL69GKk86qlLBkNiGzhWaWTDeG%2FptzQEsfK0mejLmbteA%3D%3D--zhwtKlKNT20wxGsB--xVfefbrJXVz%2B8BeV5RCFwA%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 86103419-a3d9-4caf-a30e-f730280b15d9
+      X-Runtime:
+      - '0.046064'
+    status:
+      code: 200
+      message: OK
+version: 1

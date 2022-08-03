@@ -96,7 +96,7 @@ def main():
     )
     parser.add_argument(
         '--label',
-        choices=list(ftp_api.rendering_extractors.keys()),
+        choices=list(ftp_api.RENDERING_EXTRACTORS.keys()),
         default='XHTML Export',
         type=str,
         help="Choose the export to use for parsing fields"

@@ -1,18 +1,8 @@
 import pytest
-import vcr
-import requests
 
-import sys
 from io import StringIO
-from pathlib import Path
 
 from cdm_util_scripts import csv2catcher
-
-
-cdm_vcr = vcr.VCR(
-    cassette_library_dir='tests/cassettes/csv2catcher',
-    record_mode='once',
-)
 
 
 @pytest.fixture()
@@ -123,7 +113,7 @@ def test_csv_dict_reader_with_join_raises():
             pass
 
 
-@cdm_vcr.use_cassette()
+@pytest.mark.vcr
 def test_request_cdm_collection_object_records(session):
     field_nicks = ['identi']
     cdm_records = csv2catcher.request_cdm_collection_object_records(
@@ -149,7 +139,7 @@ def test_build_cdm_collection_from_records(cdm_records):
         assert isinstance(cdm_object.is_cpd, bool)
 
 
-@cdm_vcr.use_cassette()
+@pytest.mark.vcr
 def test_request_collection_page_pointers(cdm_records, session):
     cdm_collection = csv2catcher.build_cdm_collection_from_records(
         cdm_records=cdm_records,
@@ -298,7 +288,7 @@ def test_reconcile_indexes_by_object(cdm_collection_rows, cdm_collection_row_map
         assert cdm_object.fields
 
 
-@cdm_vcr.use_cassette()
+@pytest.mark.vcr
 def test_reconcile_indexes_by_page(cdm_collection_rows, cdm_collection_row_mapping, cdm_records, session):
     row_collection = csv2catcher.build_cdm_collection_from_rows(
         rows=cdm_collection_rows,
@@ -330,8 +320,8 @@ def test_reconcile_indexes_by_page(cdm_collection_rows, cdm_collection_row_mappi
         assert cdm_object.fields
 
 
-# 'once' will fail with parameterized tests, 'new_episodes' seems to work
-@cdm_vcr.use_cassette(record_mode="new_episodes")
+@pytest.mark.default_cassette("test_reconcile_cdm_collection.yaml")
+@pytest.mark.vcr
 @pytest.mark.parametrize('match_mode, right_answers',
                          [
                              (csv2catcher.MatchMode.OBJECT,

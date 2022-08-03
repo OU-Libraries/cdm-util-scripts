@@ -1,32 +1,27 @@
-import re
-
 import pytest
-import vcr
-import requests
+
+import re
 
 from cdm_util_scripts import ftp_api
 
 
-ftp_vcr = vcr.VCR(
-    cassette_library_dir='tests/cassettes/ftp_api',
-    record_mode='once',
-)
+SPECIMEN_MANIFEST_URL = "https://fromthepage.com/iiif/46453/manifest"
 
 
-@pytest.fixture
-@ftp_vcr.use_cassette()
+@pytest.mark.vcr
+@pytest.fixture()
 def ftp_manifest(session):
-    return ftp_api.get_ftp_manifest('https://fromthepage.com/iiif/25000250/manifest', session)
+    return ftp_api.get_ftp_manifest(SPECIMEN_MANIFEST_URL, session)
 
 
-@ftp_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_ftp_manifest(session):
-    assert ftp_api.get_ftp_manifest('https://fromthepage.com/iiif/25000250/manifest', session)
+    assert ftp_api.get_ftp_manifest(SPECIMEN_MANIFEST_URL, session)
 
 
-@ftp_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_ftp_transcript(session):
-    assert ftp_api.get_ftp_transcript('https://fromthepage.com/iiif/25000250/export/25012395/plaintext/verbatim', session).startswith("29th Divisio")
+    assert ftp_api.get_ftp_transcript('https://fromthepage.com/iiif/46453/export/1503071/plaintext/verbatim', session).startswith("Title: Box 023")
 
 
 def test_get_ftp_manifest_transcript_urls(ftp_manifest):
@@ -36,7 +31,7 @@ def test_get_ftp_manifest_transcript_urls(ftp_manifest):
     )
 
 
-@ftp_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_collection_manifest_url(session):
     url = ftp_api.get_collection_manifest_url(
         slug='ohiouniversitylibraries',
@@ -53,7 +48,7 @@ def test_get_collection_manifest_url(session):
         )
 
 
-@ftp_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_ftp_collection(session):
     ftp_collection = ftp_api.get_ftp_collection(
         manifest_url='https://fromthepage.com/iiif/collection/dance-posters-metadata',
@@ -82,13 +77,14 @@ def test_get_ftp_collection(session):
         assert ftp_work.ftp_manifest_url
 
 
-@ftp_vcr.use_cassette(record_mode="new_episodes")
+@pytest.mark.default_cassette("test_get_rendering.yaml")
+@pytest.mark.vcr
 @pytest.mark.parametrize('label, match_pattern', [
     ('TEI Export', r'<TEI xmlns="http://www\.tei-c\.org/ns/1.0"'),
     ('XHTML Export', r'<html xmlns="http://www\.w3\.org/1999/xhtml"')
 ])
 def test_get_rendering(label, match_pattern, session):
-    response = session.get('https://fromthepage.com/iiif/25000250/manifest')
+    response = session.get(SPECIMEN_MANIFEST_URL)
     ftp_manifest = response.json()
     rendering_text = ftp_api.get_rendering(
         ftp_manifest=ftp_manifest,
@@ -98,9 +94,9 @@ def test_get_rendering(label, match_pattern, session):
     assert re.search(match_pattern, rendering_text) is not None
 
 
-@ftp_vcr.use_cassette()
+@pytest.mark.vcr
 def test_get_rendering_raises(session):
-    response = session.get('https://fromthepage.com/iiif/25000250/manifest')
+    response = session.get(SPECIMEN_MANIFEST_URL)
     ftp_manifest = response.json()
     with pytest.raises(KeyError):
         ftp_api.get_rendering(
@@ -150,7 +146,8 @@ Designed by Warner-Lasser Associates, Morristown, N.J. / Photograph by MaxWaldma
     ),
 ]
 
-@ftp_vcr.use_cassette(record_mode="new_episodes")
+@pytest.mark.default_cassette("test_extract_fields_from_tei.yaml")
+@pytest.mark.vcr
 @pytest.mark.parametrize('tei_url, html_url, check_pages', extraction_test_values)
 def test_extract_fields_from_tei(tei_url, html_url, check_pages, session):
     response = session.get(tei_url)
@@ -160,7 +157,8 @@ def test_extract_fields_from_tei(tei_url, html_url, check_pages, session):
             assert page[key] == value
 
 
-@ftp_vcr.use_cassette(record_mode="new_episodes")
+@pytest.mark.default_cassette("test_extract_fields_from_html.yaml")
+@pytest.mark.vcr
 @pytest.mark.parametrize('tei_url, html_url, check_pages', extraction_test_values)
 def test_extract_fields_from_html(tei_url, html_url, check_pages, session):
     response = session.get(html_url)
@@ -170,8 +168,9 @@ def test_extract_fields_from_html(tei_url, html_url, check_pages, session):
             assert page[key] == value
 
 
-@ftp_vcr.use_cassette(record_mode="new_episodes")
-@pytest.mark.parametrize('rendering_label', ftp_api.rendering_extractors.keys())
+@pytest.mark.default_cassette("test_load_ftp_manifest_data.yaml")
+@pytest.mark.vcr
+@pytest.mark.parametrize('rendering_label', ftp_api.RENDERING_EXTRACTORS.keys())
 def test_load_ftp_manifest_data(rendering_label, session):
     ftp_work = ftp_api.FTPWork(
         ftp_manifest_url='https://fromthepage.com/iiif/47397/manifest'

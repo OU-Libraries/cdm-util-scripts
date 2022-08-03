@@ -1,0 +1,199 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=NUdw3%2FW12Oeng5BgyMcjsZk6OahGcYyUUS7Vv7zlZ5ynLoVi7HovTLzZ%2BptIL%2B4XoCLDnsxy6wbmkLba9wbZIG8r8dY12DY%2BlHc9Mx6IPAU8EwW8lWtSYXgDh3Ws7DT4WYGwyx8OV7KpYPmKzqoU3vdrYY6Edfw6%2FQEsB80gXr0KTHTTHZI7ndbTHyoxI2A9stucQqerOGDeogXBEnPScOcnYdabHVO2cq5Lv5%2FxYZZ%2FujLsLqr8z6UdbcJq%2B%2B4ESWKDRg%3D%3D--dVabAwXDSgwhcApo--%2BYVnFyA83Z%2F100n1yqGGog%3D%3D;
+        ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; ahoy_visitor=478620f9-a6b9-4e40-8932-e5aff14551ba
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://fromthepage.com/iiif/46453/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/46453/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"ryan_box023-tld_f41\",\n  \"metadata\": [\n
+        \   {\n      \"label\": \"Title\",\n      \"value\": \"ryan_box023-tld_f41\"\n
+        \   },\n    {\n      \"label\": \"Created On\",\n      \"value\": \"2020-09-23
+        18:24:57 UTC\"\n    },\n    {\n      \"label\": \"In Scope\",\n      \"value\":
+        \"true\"\n    }\n  ],\n  \"within\": {\n    \"@type\": \"sc:Collection\",\n
+        \   \"label\": \"Ryan collection metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/ryan-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read ryan_box023-tld_f41\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/ryan-metadata/ryan-box023-tld-f41-31956cd7-4e66-4f1d-b830-40b33d8dc77d\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for ryan_box023-tld_f41\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/ryan-metadata/ryan-box023-tld-f41-31956cd7-4e66-4f1d-b830-40b33d8dc77d/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/46453/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/46453/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/46453/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/46453/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 0.0,\n      \"pctOcrCorrected\":
+        100.0,\n      \"pctIndexed\": 50.0,\n      \"pctMarkedBlank\": 50.0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 50.0,\n      \"pctTranslated\": 50.0,\n
+        \     \"pctTranslationNeedsReview\": 0,\n      \"pctTranslationIndexed\":
+        50.0,\n      \"pctTranslationMarkedBlank\": 50.0,\n      \"metadataStatus\":
+        \"undescribed\"\n    }\n  ],\n  \"sequences\": [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/46453/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/ryan-metadata/46453/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/46453/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/46453/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://fromthepage.com/iiif/46453/canvas/1503071\",\n          \"@type\":
+        \"sc:Canvas\",\n          \"label\": \"page_0001\",\n          \"width\":
+        5534,\n          \"height\": 4462,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/image-service/1503071\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://fromthepage.com/image-service/1503071/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 5534,\n                \"height\":
+        4462,\n                \"service\": {\n                  \"@context\": \"https://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://fromthepage.com/image-service/1503071\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/2/level1.json\"\n
+        \               }\n              },\n              \"on\": \"https://fromthepage.com/iiif/46453/canvas/1503071\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1503071\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1503071\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/ryan-metadata/ryan-box023-tld-f41-31956cd7-4e66-4f1d-b830-40b33d8dc77d/annotation/1503071/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/46453/export/1503071/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/46453/export/1503071/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/46453/export/1503071/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/46453/structured/1503071\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/46453/1503071/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"ocrCorrected\",\n              \"hasTranscript\"\n
+        \           ]\n          },\n          \"otherContent\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/iiif/1503071/list/transcription\",\n
+        \             \"@type\": \"sc:AnnotationList\",\n              \"label\":
+        \"Transcription\"\n            }\n          ]\n        },\n        {\n          \"@id\":
+        \"https://fromthepage.com/iiif/46453/canvas/1503072\",\n          \"@type\":
+        \"sc:Canvas\",\n          \"label\": \"page_0002\",\n          \"width\":
+        4016,\n          \"height\": 5151,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://fromthepage.com/image-service/1503072\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://fromthepage.com/image-service/1503072/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 4016,\n                \"height\":
+        5151,\n                \"service\": {\n                  \"@context\": \"https://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://fromthepage.com/image-service/1503072\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/2/level1.json\"\n
+        \               }\n              },\n              \"on\": \"https://fromthepage.com/iiif/46453/canvas/1503072\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1503072\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1503072\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/ryan-metadata/ryan-box023-tld-f41-31956cd7-4e66-4f1d-b830-40b33d8dc77d/annotation/1503072/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/46453/export/1503072/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/46453/export/1503072/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/46453/export/1503072/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/46453/structured/1503072\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/46453/1503072/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"markedBlank\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1503072/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/46453/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/46453/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 03 Aug 2022 19:52:32 GMT
+      ETag:
+      - W/"8ddbf13e6501cdc2de4cf1c1b4e7f9d7"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=4ed3eac9-1e9b-441a-a120-526af26d8907; path=/; expires=Wed, 03 Aug
+        2022 23:52:32 GMT; secure
+      - _fromthepage_session=xUEAfyZnHsOZEED1%2FQPOcVcCTnyT%2B2z%2FXkknqG8ky1gYbF1c5y5La9gCPwkyO4e6lBdJQ11NwyxN9xYmUHGcW1Osy5zOC6NxRl5f%2Bk19fnm3QZFNbEgeByueUfn8JKw3ln%2Bv6Y7%2BIfRoQlKtJ%2FkndRx0JZqdzOX3x%2F9LjRSel2uitPb9kBMewj0Uifi%2BHx0lC9BhspNheAAMMvJTIRk9wiPf0wixMfeDsYO7xeEq9SyMY5g4z9PVhXWkaHCcG5eh--DYon%2BHr6920%2FoHcq--X%2Fb6GML%2FGW1dBdTDqIOA%2BQ%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 7244733f-3ca0-4670-9f03-ccd8ee9b50eb
+      X-Runtime:
+      - '0.073415'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,6 +1,4 @@
 import pytest
-import vcr
-import requests
 
 from datetime import datetime
 
@@ -8,24 +6,15 @@ from cdm_util_scripts import scanftpfields
 from cdm_util_scripts import ftp_api
 
 
-# TODO: this library dir isn't being created?
-ftp_vcr = vcr.VCR(
-    cassette_library_dir='tests/cassettes/scanftpfields',
-    record_mode='once',
-)
-
-
-@ftp_vcr.use_cassette(record_mode="new_episodes")
-@pytest.fixture(params=[
-    {'slug': 'ohiouniversitylibraries', 'collection_name': 'Dance Posters Metadata', 'rendering_label': 'XHTML Export'},
-    # {'slug': 'ohiouniversitylibraries', 'collection_name': 'Ryan collection metadata', 'rendering_label': 'XHTML Export'},
-])
-def ftp_collection(request, session):
-    ftp_collection_ = ftp_api.get_and_load_ftp_collection(
-        **request.param,
-        session=session
+@pytest.mark.vcr
+@pytest.fixture()
+def ftp_collection(session):
+    return ftp_api.get_and_load_ftp_collection(
+        slug="ohiouniversitylibraries",
+        collection_name="Dance Posters Metadata",
+        rendering_label="XHTML Export",
+        session=session,
     )
-    return ftp_collection_
 
 
 def test_count_filled_pages(ftp_collection):
