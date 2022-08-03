@@ -1,10 +1,10 @@
+import requests
+import tqdm
+
 import re
 import json
 import argparse
 from typing import Dict, Any, Iterator, Tuple, Iterable, List, Optional
-
-import requests
-from rich.progress import track
 
 from cdm_util_scripts import ftp_api
 
@@ -38,9 +38,8 @@ def get_manifest_catcher_edits(
     session: requests.Session,
 ) -> List[Dict[str, str]]:
     catcher_edits = []
-    for dmrecord, url in track(
+    for dmrecord, url in tqdm.tqdm(
         list(iter_manifest_sequence(manifest=manifest, transcript_type=transcript_type)),
-        description=f"Requesting {transcript_type!r} transcripts...",
     ):
         transcript_text = ftp_api.get_ftp_transcript(url=url, session=session)
         catcher_edits.append(

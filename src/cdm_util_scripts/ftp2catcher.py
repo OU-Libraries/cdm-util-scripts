@@ -1,10 +1,10 @@
+from requests import Session
+import tqdm
+
 import json
 import argparse
 from itertools import count
 from typing import List, Optional, Iterable
-
-from requests import Session
-from rich.progress import track
 
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
@@ -91,10 +91,9 @@ def main(test_args: Optional[Iterable[str]] = None):
             )
             if len(page_pointers) != len(transcript_urls):
                 raise ValueError(f"CONTENTdm/FromThePage object length mismatch")
-            for dmrecord, transcript_url in track(
+            for dmrecord, transcript_url in tqdm.tqdm(
                 zip(page_pointers, transcript_urls),
                 total=len(transcript_urls),
-                description=f"Requesting {args.transcript_type!r}...",
             ):
                 transcript_text = ftp_api.get_ftp_transcript(transcript_url, session)
                 catcher_fields.append(
