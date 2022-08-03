@@ -14,8 +14,9 @@ def print_as_records(dm_result: Iterable[Dict[str, str]]) -> None:
     max_key_len = max(len(key) for key in dm_result[0].keys())
     for record in dm_result:
         for key, value in record.items():
-            print(f"{key.rjust(max_key_len)} : {str(value)}")
-        print(end="\n")
+            print(f"{key.rjust(max_key_len)} : {value!r}")
+        if record is not dm_result[-1]:
+            print(end="\n")
 
 
 def print_as_csv(dm_result: Iterable[Dict[str, str]]) -> None:
