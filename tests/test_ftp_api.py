@@ -1,4 +1,5 @@
 import pytest
+import requests
 
 import re
 
@@ -8,22 +9,26 @@ from cdm_util_scripts import ftp_api
 SPECIMEN_MANIFEST_URL = "https://fromthepage.com/iiif/46453/manifest"
 
 
-@pytest.mark.vcr
-@pytest.fixture()
-def ftp_manifest(session):
-    return ftp_api.get_ftp_manifest(SPECIMEN_MANIFEST_URL, session)
+@pytest.fixture
+def ftp_manifest():
+    return ftp_api.get_ftp_manifest(url=SPECIMEN_MANIFEST_URL, session=requests)
 
 
 @pytest.mark.vcr
-def test_get_ftp_manifest(session):
-    assert ftp_api.get_ftp_manifest(SPECIMEN_MANIFEST_URL, session)
+def test_get_ftp_manifest():
+    assert ftp_api.get_ftp_manifest(url=SPECIMEN_MANIFEST_URL, session=requests)
 
 
 @pytest.mark.vcr
-def test_get_ftp_transcript(session):
-    assert ftp_api.get_ftp_transcript('https://fromthepage.com/iiif/46453/export/1503071/plaintext/verbatim', session).startswith("Title: Box 023")
+def test_get_ftp_transcript():
+    assert ftp_api.get_ftp_transcript(
+        url='https://fromthepage.com/iiif/46453/export/1503071/plaintext/verbatim',
+        session=requests,
+    ).startswith("Title: Box 023")
 
 
+@pytest.mark.default_cassette("ftp_manifest.yaml")
+@pytest.mark.vcr
 def test_get_ftp_manifest_transcript_urls(ftp_manifest):
     assert ftp_api.get_ftp_manifest_transcript_urls(
         ftp_manifest,
@@ -32,11 +37,11 @@ def test_get_ftp_manifest_transcript_urls(ftp_manifest):
 
 
 @pytest.mark.vcr
-def test_get_collection_manifest_url(session):
+def test_get_collection_manifest_url():
     url = ftp_api.get_collection_manifest_url(
         slug='ohiouniversitylibraries',
         collection_name='Dance Posters Metadata',
-        session=session
+        session=requests
     )
     assert url
 
@@ -44,15 +49,15 @@ def test_get_collection_manifest_url(session):
         ftp_api.get_collection_manifest_url(
             slug='ohiouniversitylibraries',
             collection_name='Does Not Exist',
-            session=session
+            session=requests,
         )
 
 
 @pytest.mark.vcr
-def test_get_ftp_collection(session):
+def test_get_ftp_collection():
     ftp_collection = ftp_api.get_ftp_collection(
         manifest_url='https://fromthepage.com/iiif/collection/dance-posters-metadata',
-        session=session
+        session=requests,
     )
     assert ftp_collection.manifest_url
     assert ftp_collection.alias == 'dance-posters-metadata'
@@ -67,7 +72,7 @@ def test_get_ftp_collection(session):
 
     ftp_collection = ftp_api.get_ftp_collection(
         manifest_url='https://fromthepage.com/iiif/collection/ryan-metadata',
-        session=session
+        session=requests
     )
     assert ftp_collection.manifest_url
     assert ftp_collection.alias == 'ryan-metadata'
@@ -83,20 +88,20 @@ def test_get_ftp_collection(session):
     ('TEI Export', r'<TEI xmlns="http://www\.tei-c\.org/ns/1.0"'),
     ('XHTML Export', r'<html xmlns="http://www\.w3\.org/1999/xhtml"')
 ])
-def test_get_rendering(label, match_pattern, session):
-    response = session.get(SPECIMEN_MANIFEST_URL)
+def test_get_rendering(label, match_pattern):
+    response = requests.get(SPECIMEN_MANIFEST_URL)
     ftp_manifest = response.json()
     rendering_text = ftp_api.get_rendering(
         ftp_manifest=ftp_manifest,
         label=label,
-        session=session
+        session=requests
     )
     assert re.search(match_pattern, rendering_text) is not None
 
 
 @pytest.mark.vcr
-def test_get_rendering_raises(session):
-    response = session.get(SPECIMEN_MANIFEST_URL)
+def test_get_rendering_raises():
+    response = requests.get(SPECIMEN_MANIFEST_URL)
     ftp_manifest = response.json()
     with pytest.raises(KeyError):
         ftp_api.get_rendering(
@@ -149,8 +154,8 @@ Designed by Warner-Lasser Associates, Morristown, N.J. / Photograph by MaxWaldma
 @pytest.mark.default_cassette("test_extract_fields_from_tei.yaml")
 @pytest.mark.vcr
 @pytest.mark.parametrize('tei_url, html_url, check_pages', extraction_test_values)
-def test_extract_fields_from_tei(tei_url, html_url, check_pages, session):
-    response = session.get(tei_url)
+def test_extract_fields_from_tei(tei_url, html_url, check_pages):
+    response = requests.get(tei_url)
     pages = ftp_api.extract_fields_from_tei(tei=response.text)
     for page, check_page in zip(pages, check_pages):
         for key, value in check_page.items():
@@ -160,8 +165,8 @@ def test_extract_fields_from_tei(tei_url, html_url, check_pages, session):
 @pytest.mark.default_cassette("test_extract_fields_from_html.yaml")
 @pytest.mark.vcr
 @pytest.mark.parametrize('tei_url, html_url, check_pages', extraction_test_values)
-def test_extract_fields_from_html(tei_url, html_url, check_pages, session):
-    response = session.get(html_url)
+def test_extract_fields_from_html(tei_url, html_url, check_pages):
+    response = requests.get(html_url)
     pages = ftp_api.extract_fields_from_html(html=response.text)
     for page, check_page in zip(pages, check_pages):
         for key, value in check_page.items():
@@ -171,10 +176,10 @@ def test_extract_fields_from_html(tei_url, html_url, check_pages, session):
 @pytest.mark.default_cassette("test_load_ftp_manifest_data.yaml")
 @pytest.mark.vcr
 @pytest.mark.parametrize('rendering_label', ftp_api.RENDERING_EXTRACTORS.keys())
-def test_load_ftp_manifest_data(rendering_label, session):
+def test_load_ftp_manifest_data(rendering_label):
     ftp_work = ftp_api.FTPWork(
         ftp_manifest_url='https://fromthepage.com/iiif/47397/manifest'
     )
-    ftp_api.load_ftp_manifest_data(ftp_work, rendering_label, session)
+    ftp_api.load_ftp_manifest_data(ftp_work, rendering_label, session=requests)
     assert all(isinstance(page, ftp_api.FTPPage) for page in ftp_work.pages)
     assert ftp_work.ftp_work_url

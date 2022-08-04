@@ -1,4 +1,5 @@
 import pytest
+import requests
 
 from cdm_util_scripts import ftpfields2catcher
 from cdm_util_scripts import ftp_api
@@ -77,13 +78,13 @@ def test_map_ftp_work_as_cdm_object(ftp_work, page_picker, result):
 
 
 @pytest.mark.vcr
-def test_get_ftp_work_cdm_item_info(session):
+def test_get_ftp_work_cdm_item_info():
     ftp_work = ftp_api.FTPWork(
         cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
         cdm_collection_alias='oclcsample',
         dmrecord='102'
     )
-    item_info = ftpfields2catcher.get_ftp_work_cdm_item_info(ftp_work, session)
+    item_info = ftpfields2catcher.get_ftp_work_cdm_item_info(ftp_work, session=requests)
     assert item_info['dmrecord'] == ftp_work.dmrecord
     assert item_info['find']
 
@@ -118,7 +119,7 @@ def test_get_ftp_work_cdm_item_info(session):
         ['64']
     )
 ])
-def test_map_ftp_work_as_cdm_pages(ftp_work, dmrecords, session):
+def test_map_ftp_work_as_cdm_pages(ftp_work, dmrecords):
     field_mapping = {
         'Label': ['nick']
     }
@@ -126,7 +127,7 @@ def test_map_ftp_work_as_cdm_pages(ftp_work, dmrecords, session):
     pages_data = ftpfields2catcher.map_ftp_work_as_cdm_pages(
         ftp_work=ftp_work,
         field_mapping=field_mapping,
-        session=session
+        session=requests,
     )
 
     for dmrecord, page, page_data in zip(dmrecords, ftp_work.pages, pages_data):

@@ -1,4 +1,5 @@
 import pytest
+import requests
 
 import json
 
@@ -9,11 +10,10 @@ from cdm_util_scripts import ftp_api
 SPECIMEN_MANIFEST_URL = "https://fromthepage.com/iiif/25013044/manifest"
 
 
-@pytest.mark.vcr
-@pytest.fixture()
-def ftp_manifest(session):
+@pytest.fixture
+def ftp_manifest():
     return ftp_api.get_ftp_manifest(
-        SPECIMEN_MANIFEST_URL, session
+        SPECIMEN_MANIFEST_URL, session=requests
     )
 
 
@@ -25,6 +25,8 @@ def test_parse_canvas_id(url, alias, dmrecord):
     assert ftptr2catcher.parse_canvas_id(url) == (alias, dmrecord)
 
 
+@pytest.mark.default_cassette("ftp_manifest.yaml")
+@pytest.mark.vcr
 def test_iter_manifest_sequence(ftp_manifest):
     for dmrecord, url in ftptr2catcher.iter_manifest_sequence(
         ftp_manifest, transcript_type="Verbatim Plaintext"
@@ -33,14 +35,15 @@ def test_iter_manifest_sequence(ftp_manifest):
         assert url.startswith("https://")
 
 
+@pytest.mark.default_cassette("ftp_manifest.yaml")
 @pytest.mark.vcr
-def test_get_manifest_catcher_edits(ftp_manifest, session):
+def test_get_manifest_catcher_edits(ftp_manifest):
     transcript_nick = "transc"
     catcher_edits = ftptr2catcher.get_manifest_catcher_edits(
         ftp_manifest,
         transcript_nick=transcript_nick,
         transcript_type="Verbatim Plaintext",
-        session=session,
+        session=requests,
     )
     for edit in catcher_edits:
         assert int(edit["dmrecord"])
@@ -48,7 +51,7 @@ def test_get_manifest_catcher_edits(ftp_manifest, session):
 
 
 @pytest.mark.vcr
-def test_get_manifests_catcher_edits(session):
+def test_get_manifests_catcher_edits():
     transcript_nick = "transc"
     transcript_type = "Verbatim Plaintext"
     catcher_edits = ftptr2catcher.get_manifests_catcher_edits(
@@ -57,7 +60,7 @@ def test_get_manifests_catcher_edits(session):
         ],
         transcript_type=transcript_type,
         transcript_nick=transcript_nick,
-        session=session,
+        session=requests,
     )
     for edit in catcher_edits:
         assert set(edit) == {"dmrecord", transcript_nick}
@@ -65,7 +68,7 @@ def test_get_manifests_catcher_edits(session):
 
 
 @pytest.mark.vcr
-def test_main(tmp_path, session):
+def test_main(tmp_path):
     manifests_listing_path = tmp_path / "manifests.txt"
     manifests_listing_path.write_text(
         SPECIMEN_MANIFEST_URL + "\n", encoding="utf-8"

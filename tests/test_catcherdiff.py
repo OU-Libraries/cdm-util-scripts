@@ -1,32 +1,35 @@
 import pytest
+import requests
 
 from cdm_util_scripts import catcherdiff
 from cdm_util_scripts import cdm_api
 
 
-@pytest.mark.vcr
-@pytest.fixture()
-def collection_field_info(session):
+@pytest.fixture
+def collection_field_info():
     return cdm_api.get_collection_field_info(
         repo_url='https://cdmdemo.contentdm.oclc.org',
         collection_alias='oclcsample',
-        session=session,
+        session=requests,
     )
 
 
+@pytest.mark.default_cassette("collection_field_info.yaml")
+@pytest.mark.vcr
 def test_build_vocabs_index(collection_field_info):
     vocabs_index = catcherdiff.build_vocabs_index(collection_field_info)
     assert vocabs_index == {'subjec': {'type': 'vocdb', 'name': 'LCTGM'}}
 
 
+@pytest.mark.default_cassette("collection_field_info.yaml")
 @pytest.mark.vcr
-def test_get_vocabs(collection_field_info, session):
+def test_get_vocabs(collection_field_info):
     vocabs_index = catcherdiff.build_vocabs_index(collection_field_info)
     vocabs = catcherdiff.get_vocabs(
         cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
         cdm_collection_alias='oclcsample',
         vocabs_index=vocabs_index,
-        session=session
+        session=requests,
     )
     assert len(vocabs_index) == (len(vocabs['vocab']) + len(vocabs['vocdb']))
     for nick, index in vocabs_index.items():
@@ -62,6 +65,8 @@ def test_collate_deltas_raises(cdm_catcher_edits, cdm_items_info):
         )
 
 
+@pytest.mark.default_cassette("collection_field_info.yaml")
+@pytest.mark.vcr
 def test_report_to_html(collection_field_info):
     report_base = {
         'cdm_repo_url': 'https://cdmdemo.contentdm.oclc.org',

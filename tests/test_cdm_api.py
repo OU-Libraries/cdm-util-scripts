@@ -1,15 +1,16 @@
 import pytest
+import requests
 
 from cdm_util_scripts import cdm_api
 
 
 @pytest.mark.vcr
-def test_get_cdm_item_info(session):
+def test_get_cdm_item_info():
     item_info = cdm_api.get_cdm_item_info(
         cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
         cdm_collection_alias='oclcsample',
         dmrecord='102',
-        session=session
+        session=requests,
     )
     assert item_info['dmrecord']
     for key, value in item_info.items():
@@ -20,27 +21,29 @@ def test_get_cdm_item_info(session):
             cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
             cdm_collection_alias='oclcsample',
             dmrecord='999',
-            session=session
+            session=requests,
         )
 
 
 @pytest.mark.vcr
-def test_get_cdm_page_pointers(session):
+def test_get_cdm_page_pointers():
+    session = requests.Session()
     pointers = cdm_api.get_cdm_page_pointers(
         repo_url='https://media.library.ohio.edu',
         alias='p15808coll15',
         dmrecord='4613',
-        session=session
+        session=requests,
     )
     assert pointers
 
 
 @pytest.mark.vcr
-def test_get_cdm_collection_field_vocab(session):
+def test_get_cdm_collection_field_vocab():
+    session = requests.Session()
     vocab = cdm_api.get_cdm_collection_field_vocab(
         cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
         cdm_collection_alias='oclcsample',
         cdm_field_nick='subjec',
-        session=session
+        session=requests,
     )
     assert vocab

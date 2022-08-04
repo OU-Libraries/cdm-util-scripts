@@ -1,18 +1,19 @@
 import pytest
+import requests
 
 from io import StringIO
 
 from cdm_util_scripts import csv2catcher
 
 
-@pytest.fixture()
+@pytest.fixture
 def cdm_collection_rows():
     with open('tests/inputs/fromthepage-tables-export_ryan-test-rows.csv') as fp:
         rows = [row for row in csv2catcher.csv_dict_reader_with_join(fp)]
     return rows
 
 
-@pytest.fixture()
+@pytest.fixture
 def cdm_records():
     return [
         {'collection': '/p15808coll15',
@@ -114,13 +115,13 @@ def test_csv_dict_reader_with_join_raises():
 
 
 @pytest.mark.vcr
-def test_request_cdm_collection_object_records(session):
+def test_request_cdm_collection_object_records():
     field_nicks = ['identi']
     cdm_records = csv2catcher.request_cdm_collection_object_records(
         repo_url='https://media.library.ohio.edu',
         alias='p15808coll15',
         field_nicks=field_nicks,
-        session=session
+        session=requests,
     )
     for record in cdm_records:
         for field_nick in field_nicks:
@@ -140,7 +141,7 @@ def test_build_cdm_collection_from_records(cdm_records):
 
 
 @pytest.mark.vcr
-def test_request_collection_page_pointers(cdm_records, session):
+def test_request_collection_page_pointers(cdm_records):
     cdm_collection = csv2catcher.build_cdm_collection_from_records(
         cdm_records=cdm_records,
         identifier_nick='identi'
@@ -149,14 +150,14 @@ def test_request_collection_page_pointers(cdm_records, session):
         cdm_collection=cdm_collection[:5],
         repo_url='https://media.library.ohio.edu',
         alias='p15808coll15',
-        session=session
+        session=requests,
     )
     for cdm_object in cdm_collection:
         if cdm_object.is_cpd:
             assert cdm_object.page_pointers
 
 
-@pytest.fixture()
+@pytest.fixture
 def cdm_collection_row_mapping():
     return {
         'Work Title': ['identi', 'debug'],
@@ -289,7 +290,7 @@ def test_reconcile_indexes_by_object(cdm_collection_rows, cdm_collection_row_map
 
 
 @pytest.mark.vcr
-def test_reconcile_indexes_by_page(cdm_collection_rows, cdm_collection_row_mapping, cdm_records, session):
+def test_reconcile_indexes_by_page(cdm_collection_rows, cdm_collection_row_mapping, cdm_records):
     row_collection = csv2catcher.build_cdm_collection_from_rows(
         rows=cdm_collection_rows,
         column_mapping=cdm_collection_row_mapping,
@@ -305,7 +306,7 @@ def test_reconcile_indexes_by_page(cdm_collection_rows, cdm_collection_row_mappi
         cdm_collection=record_collection,
         repo_url='https://media.library.ohio.edu',
         alias='p15808coll15',
-        session=session
+        session=requests,
     )
     index_from_records = csv2catcher.build_identifier_to_object_index(
         cdm_collection=record_collection

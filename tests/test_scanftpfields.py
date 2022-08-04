@@ -1,4 +1,5 @@
 import pytest
+import requests
 
 from datetime import datetime
 
@@ -6,29 +7,35 @@ from cdm_util_scripts import scanftpfields
 from cdm_util_scripts import ftp_api
 
 
-@pytest.mark.vcr
-@pytest.fixture()
-def ftp_collection(session):
+@pytest.fixture
+def ftp_collection():
     return ftp_api.get_and_load_ftp_collection(
         slug="ohiouniversitylibraries",
         collection_name="Dance Posters Metadata",
         rendering_label="XHTML Export",
-        session=session,
+        session=requests,
     )
 
-
+@pytest.mark.default_cassette("ftp_collection.yaml")
+@pytest.mark.vcr
 def test_count_filled_pages(ftp_collection):
     assert scanftpfields.count_filled_pages(ftp_collection)
 
 
+@pytest.mark.default_cassette("ftp_collection.yaml")
+@pytest.mark.vcr
 def test_compile_field_frequencies(ftp_collection):
     assert scanftpfields.compile_field_frequencies(ftp_collection)
 
 
+@pytest.mark.default_cassette("ftp_collection.yaml")
+@pytest.mark.vcr
 def test_compile_field_sets(ftp_collection):
     assert scanftpfields.compile_field_sets(ftp_collection)
 
 
+@pytest.mark.default_cassette("ftp_collection.yaml")
+@pytest.mark.vcr
 def test_report_to_html(ftp_collection):
     report = scanftpfields.compile_report(ftp_collection)
     report['export_label_used'] = '?'
