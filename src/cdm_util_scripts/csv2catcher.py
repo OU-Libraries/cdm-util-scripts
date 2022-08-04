@@ -275,7 +275,76 @@ def reconcile_cdm_collection(
     return catcher_data
 
 
-def main():
+def csv2catcher(
+        reconciliation_config_path: str,
+        column_mapping_csv_path: str,
+        field_data_csv_path: str,
+        output_file_path: str,
+) -> None:
+    # Read reconciliation_config
+    with open(reconciliation_config_path, mode='r', encoding="utf-8") as fp:
+        reconciliation_config = json.load(fp)
+
+    repository_url = reconciliation_config.get('repository-url')
+    collection_alias = reconciliation_config.get('collection-alias')
+    identifier_nick = reconciliation_config.get('identifier-nick')
+    match_mode_value = reconciliation_config.get('match-mode')
+    page_position_column_name = reconciliation_config.get('page-position-column-name')
+
+    # Validate reconciliation_config settings
+    reconciliation_args = (repository_url, collection_alias, identifier_nick)
+
+    if any(reconciliation_args) and not all(reconciliation_args):
+        raise ValueError(f"{reconciliation_config_path!r}: all of repository-url, collection-alias, identifier-nick and match-mode must be specified for reconciliation")
+
+    if not match_mode_value:
+        raise ValueError(f"{reconciliation_config_path!r}: match-mode must be specified")
+
+    match_mode_index = {mode.value: mode for mode in iter(MatchMode)}
+    if match_mode_value not in match_mode_index:
+        raise ValueError(f"{reconciliation_config_path!r}: invalid match-mode value {match_mode_value!r}")
+    else:
+        match_mode = match_mode_index[match_mode_value]
+
+    if match_mode == MatchMode.PAGE and not page_position_column_name:
+        raise ValueError(f"{reconciliation_config_path!r}: match-mode page requires page-position-column-name")
+
+    # Read column_mapping_csv
+    with open(column_mapping_csv_path, mode='r', encoding="utf-8") as fp:
+        reader = csv.DictReader(fp)
+        if reader.fieldnames != ['name', 'nick']:
+            raise ValueError(f"{column_mapping_csv_path!r}: column mapping CSV must have 'name' and 'nick' column titles in that order")
+        column_mapping = defaultdict(list)
+        for row in reader:
+            column_mapping[row['name']].append(row['nick'])
+        column_mapping = dict(column_mapping)
+
+    # Read field_data_csv
+    with open(field_data_csv_path, mode='r', encoding="utf-8") as fp:
+        cdm_collection_from_rows = build_cdm_collection_from_rows(
+            rows=csv_dict_reader_with_join(fp),
+            column_mapping=column_mapping,
+            identifier_nick=identifier_nick,
+            page_position_column_name=page_position_column_name
+        )
+
+    if not all(reconciliation_args):
+        # If no reconciliation args, just transpose the CSV to Catcher JSON
+        catcher_data = cdm_collection_from_rows
+    else:
+        catcher_data = reconcile_cdm_collection(
+            cdm_collection=cdm_collection_from_rows,
+            repository_url=repository_url,
+            collection_alias=collection_alias,
+            identifier_nick=identifier_nick,
+            match_mode=match_mode
+        )
+
+    with open(output_file_path, mode='w', encoding="utf-8") as fp:
+        json.dump(serialize_cdm_objects(catcher_data), fp, indent=2)
+
+
+def main() -> int:
     parser = argparse.ArgumentParser(description="Transform and reconcile CSVs into cdm-catcher JSON",
                                      fromfile_prefix_chars='@')
     parser.add_argument('reconciliation_config',
@@ -292,76 +361,15 @@ def main():
                         help="Path to output cdm-catcher JSON")
     args = parser.parse_args()
 
-    # Read reconciliation_config
-    with open(args.reconciliation_config, mode='r', encoding="utf-8") as fp:
-        reconciliation_config = json.load(fp)
+    csv2catcher(
+        reconciliation_config_path=args.reconciliation_config,
+        column_mapping_csv_path=args.column_mapping_csv,
+        field_data_csv_path=args.field_data_csv,
+        output_file_path=args.output_file,
+    )
 
-    repository_url = reconciliation_config.get('repository-url', None)
-    collection_alias = reconciliation_config.get('collection-alias', None)
-    identifier_nick = reconciliation_config.get('identifier-nick', None)
-    match_mode_value = reconciliation_config.get('match-mode', None)
-    page_position_column_name = reconciliation_config.get('page-position-column-name', None)
-
-    # Validate reconciliation_config settings
-    reconciliation_args = (repository_url, collection_alias, identifier_nick)
-    if any(reconciliation_args) and not all(reconciliation_args):
-        print(f"{args.reconciliation_config!r}: all of repository-url, collection-alias, identifier-nick and match-mode must be specified for reconciliation")
-        sys.exit(1)
-
-    if not match_mode_value:
-        print(f"{args.reconciliation_config!r}: match-mode must be specified")
-        sys.exit(1)
-
-    match_mode_index = {mode.value: mode for mode in iter(MatchMode)}
-    if match_mode_value not in match_mode_index:
-        print(f"{args.reconciliation_config!r}: invalid match-mode value {match_mode_value!r}")
-        sys.exit(1)
-    else:
-        match_mode = match_mode_index[match_mode_value]
-
-    if match_mode == MatchMode.PAGE and not page_position_column_name:
-        print(f"{args.reconciliation_config!r}: match-mode page requires page-position-column-name")
-        sys.exit(1)
-
-    # Read column_mapping_csv
-    with open(args.column_mapping_csv, mode='r', encoding="utf-8") as fp:
-        reader = csv.DictReader(fp)
-        if reader.fieldnames != ['name', 'nick']:
-            print(f"{args.column_mapping_csv!r}: column mapping CSV must have 'name' and 'nick' column titles in that order")
-            sys.exit(1)
-        column_mapping = defaultdict(list)
-        for row in reader:
-            column_mapping[row['name']].append(row['nick'])
-        column_mapping = dict(column_mapping)
-
-    # Read field_data_csv
-    with open(args.field_data_csv, mode='r', encoding="utf-8") as fp:
-        cdm_collection_from_rows = build_cdm_collection_from_rows(
-            rows=csv_dict_reader_with_join(fp),
-            column_mapping=column_mapping,
-            identifier_nick=identifier_nick,
-            page_position_column_name=page_position_column_name
-        )
-
-    if not all(reconciliation_args):
-        # If no reconciliation args, just transpose the CSV to Catcher JSON
-        catcher_data = cdm_collection_from_rows
-    else:
-        try:
-            catcher_data = reconcile_cdm_collection(
-                cdm_collection=cdm_collection_from_rows,
-                repository_url=repository_url,
-                collection_alias=collection_alias,
-                identifier_nick=identifier_nick,
-                match_mode=match_mode
-            )
-        except (ValueError, KeyError) as err:
-            print(f"Reconciliation failure: {err}")
-            sys.exit(1)
-
-    with open(args.output_file, mode='w', encoding="utf-8") as fp:
-        json.dump(serialize_cdm_objects(catcher_data), fp, indent=2)
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())

@@ -72,6 +72,28 @@ def get_manifests_catcher_edits(
     return catcher_edits
 
 
+def ftptr2catcher(
+        manifests_listing_path: str,
+        transcript_nick: str,
+        output_file_path: str,
+        transcript_type: str,
+) -> None:
+    with open(manifests_listing_path, mode="r", encoding="utf-8") as fp:
+        manifest_urls = [line.strip() for line in fp.readlines()]
+
+    with requests.Session() as session:
+        catcher_edits = get_manifests_catcher_edits(
+            manifest_urls=manifest_urls,
+            transcript_nick=transcript_nick,
+            transcript_type=transcript_type,
+            session=session,
+        )
+
+    print("Writing JSON file...")
+    with open(output_file_path, mode="w", encoding="utf-8") as fp:
+        json.dump(catcher_edits, fp, indent=2)
+
+
 def main(test_args: Optional[Iterable[str]] = None) -> None:
     parser = argparse.ArgumentParser(
         description="Get transcripts from a list of FromThePage manuscripts in cdm-catcher JSON format",
@@ -100,22 +122,15 @@ def main(test_args: Optional[Iterable[str]] = None) -> None:
     )
     args = parser.parse_args(test_args)
 
-    with open(args.manifests_listing_path, mode="r", encoding="utf-8") as fp:
-        manifest_urls = [line.strip() for line in fp.readlines()]
+    ftptr2catcher(
+        manifests_listing_path=args.manifests_listing_path,
+        transcript_nick=args.transcript_nick,
+        output_file_path=args.output_file,
+        transcript_type=args.transcript_type,
+    )
 
-    with requests.Session() as session:
-        catcher_edits = get_manifests_catcher_edits(
-            manifest_urls=manifest_urls,
-            transcript_nick=args.transcript_nick,
-            transcript_type=args.transcript_type,
-            session=session,
-        )
-
-    print("Writing JSON file...")
-    with open(args.output_file, mode="w", encoding="utf-8") as fp:
-        json.dump(catcher_edits, fp, indent=2)
-    print("Done.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

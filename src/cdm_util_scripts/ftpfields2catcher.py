@@ -159,6 +159,44 @@ class MatchModes:
     by_page = 'page'
 
 
+def ftpfields2catcher(
+        match_mode: str,
+        slug: str,
+        collection_name: str,
+        field_mapping_csv_path: str,
+        output_file_path: str,
+) -> None:
+    field_mapping = cdm_api.read_csv_field_mapping(field_mapping_csv_path)
+
+    with Session() as session:
+        ftp_collection = ftp_api.get_and_load_ftp_collection(
+            slug=slug,
+            collection_name=collection_name,
+            rendering_label='XHTML Export',
+            session=session
+        )
+
+        if match_mode == MatchModes.by_object:
+            catcher_data, dropped_works = map_ftp_works_as_cdm_objects(
+                ftp_works=ftp_collection.works,
+                field_mapping=field_mapping,
+                page_picker=PagePickers.first_filled_page
+            )
+            print(f"Collected {len(catcher_data)} CONTENTdm object edits from {len(ftp_collection.works)} FromThePage works.")
+        elif match_mode == MatchModes.by_page:
+            catcher_data, dropped_works = map_ftp_works_as_cdm_pages(
+                ftp_works=ftp_collection.works,
+                field_mapping=field_mapping,
+                session=session
+            )
+            print(f"Collected {len(catcher_data)} CONTENTdm page edits from {len(ftp_collection.works)} FromThePage works.")
+        else:
+            raise ValueError(f"invalid match mode {match_mode!r}")
+
+    with open(output_file_path, mode='w', encoding='utf-8') as fp:
+        json.dump(catcher_data, fp, indent=2)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Get FromThePage metadata and map it into cdm-catcher JSON",
@@ -192,44 +230,16 @@ def main():
     )
     args = parser.parse_args()
 
-    try:
-        field_mapping = cdm_api.read_csv_field_mapping(args.field_mapping_csv)
-    except ValueError as err:
-        print(f"{args.field_mapping_csv}: {err}")
-        sys.exit(1)
+    ftpfields2catcher(
+        match_mode=args.match_mode,
+        slug=args.slug,
+        collection_name=args.collection_name,
+        field_mapping_csv_path=args.field_mapping_csv,
+        output_file_path=args.output_file,
+    )
 
-    with Session() as session:
-        try:
-            ftp_collection = ftp_api.get_and_load_ftp_collection(
-                slug=args.slug,
-                collection_name=args.collection_name,
-                rendering_label='XHTML Export',
-                session=session
-            )
-        except KeyError as err:
-            print(f"Error: {err}")
-            sys.exit(1)
-
-        if args.match_mode == MatchModes.by_object:
-            catcher_data, dropped_works = map_ftp_works_as_cdm_objects(
-                ftp_works=ftp_collection.works,
-                field_mapping=field_mapping,
-                page_picker=PagePickers.first_filled_page
-            )
-            print(f"Collected {len(catcher_data)} CONTENTdm object edits from {len(ftp_collection.works)} FromThePage works.")
-        elif args.match_mode == MatchModes.by_page:
-            catcher_data, dropped_works = map_ftp_works_as_cdm_pages(
-                ftp_works=ftp_collection.works,
-                field_mapping=field_mapping,
-                session=session
-            )
-            print(f"Collected {len(catcher_data)} CONTENTdm page edits from {len(ftp_collection.works)} FromThePage works.")
-        else:
-            raise KeyError(f"invalid match mode {args.match_mode!r}")
-
-    with open(args.output_file, mode='w', encoding='utf-8') as fp:
-        json.dump(catcher_data, fp, indent=2)
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())

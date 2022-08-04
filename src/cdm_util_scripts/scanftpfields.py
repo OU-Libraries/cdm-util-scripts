@@ -92,6 +92,40 @@ def report_to_html(report: dict) -> str:
     return env.get_template('scanftpfields-report.html.j2').render(report)
 
 
+def scanftpfields(
+        slug: str,
+        collection_name: str,
+        report_format: str,
+        rendering_label: str,
+) -> None:
+    with Session() as session:
+        ftp_collection = ftp_api.get_and_load_ftp_collection(
+            slug=slug,
+            collection_name=collection_name,
+            rendering_label=rendering_label,
+            session=session
+        )
+
+    print("Compiling report...")
+    report_date = datetime.now()
+    report = compile_report(ftp_collection)
+    report['export_label_used'] = rendering_label
+    report['report_date'] = report_date.isoformat()
+
+    if report_format == 'json':
+        report_str = json.dumps(report, indent=2)
+    elif report_format == 'html':
+        report_str = report_to_html(report)
+    else:
+        raise ValueError(f"invalid output type {report_format!r}")
+
+    date_str = report_date.strftime('%Y-%m-%d_%H-%M-%S')
+    filename = f"field-label-report_{ftp_collection.alias}_{date_str}.{report_format}"
+    print(f"Writing report as {filename!r}")
+    with open(filename, mode='w', encoding='utf-8') as fp:
+        fp.write(report_str)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Scan and report on a FromThePage collection's field-based transcription labels")
     parser.add_argument(
@@ -113,40 +147,22 @@ def main():
     )
     parser.add_argument(
         '--label',
-        choices=list(ftp_api.RENDERING_EXTRACTORS.keys()),
+        choices=list(ftp_api.RENDERING_EXTRACTORS),
         default='XHTML Export',
         type=str,
         help="Choose the export to use for parsing fields"
     )
     args = parser.parse_args()
 
-    with Session() as session:
-        ftp_collection = ftp_api.get_and_load_ftp_collection(
-            slug=args.slug,
-            collection_name=args.collection_name,
-            rendering_label=args.label,
-            session=session
-        )
+    scanftpfields(
+        slug=args.slug,
+        collection_name=args.collection_name,
+        report_format=args.output,
+        rendering_label=args.label,
+    )
 
-    print("Compiling report...")
-    report_date = datetime.now()
-    report = compile_report(ftp_collection)
-    report['export_label_used'] = args.label
-    report['report_date'] = report_date.isoformat()
-
-    if args.output == 'json':
-        report_str = json.dumps(report, indent=2)
-    elif args.output == 'html':
-        report_str = report_to_html(report)
-    else:
-        raise ValueError(f"invalid output type {args.output!r}")
-
-    date_str = report_date.strftime('%Y-%m-%d_%H-%M-%S')
-    filename = f"field-label-report_{ftp_collection.alias}_{date_str}.{args.output}"
-    print(f"Writing report as {filename!r}")
-    with open(filename, mode='w', encoding='utf-8') as fp:
-        fp.write(report_str)
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())

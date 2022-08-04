@@ -3,13 +3,12 @@ import jinja2
 
 import json
 import argparse
-import sys
 from datetime import datetime
 from pathlib import Path
 
 from cdm_util_scripts.cdm_api import get_cdm_item_info, get_cdm_collection_field_vocab, get_collection_field_info
 
-from typing import Dict, List, Union, Tuple
+from typing import Dict, List, Union, Tuple, Any
 
 
 def build_vocabs_index(cdm_fields_info: List[Dict[str, Union[str, int]]]) -> Dict[str, Dict[str, str]]:
@@ -82,8 +81,10 @@ def collate_deltas(
         cdm_catcher_edits: List[Dict[str, str]],
         cdm_items_info: List[Dict[str, str]]
 ) -> List[Tuple[dict, dict]]:
-    return [(edit, {nick: item_info[nick] for nick in edit.keys()})
-            for edit, item_info in zip(cdm_catcher_edits, cdm_items_info)]
+    return [
+        (edit, {nick: item_info[nick] for nick in edit.keys()})
+        for edit, item_info in zip(cdm_catcher_edits, cdm_items_info)
+    ]
 
 
 def count_changes(deltas: List[Tuple[dict, dict]]) -> int:
@@ -96,12 +97,72 @@ def count_changes(deltas: List[Tuple[dict, dict]]) -> int:
     return edits_with_changes_count
 
 
-def report_to_html(report: dict) -> str:
+def report_to_html(report: Dict[str, Any]) -> str:
     env = jinja2.Environment(loader=jinja2.PackageLoader(__package__))
     return env.get_template('catcherdiff-report.html.j2').render(report)
 
 
-def main():
+def catcherdiff(
+        cdm_repo_url: str,
+        cdm_collection_alias: str,
+        catcher_json_file_path: str,
+        report_file_path: str,
+        check_vocabs: bool,
+) -> None:
+    with open(catcher_json_file_path, mode='r', encoding="utf-8") as fp:
+        cdm_catcher_edits = json.load(fp)
+
+    with Session() as session:
+        print("Requesting CONTENTdm field info...")
+        cdm_fields_info = get_collection_field_info(
+            repo_url=cdm_repo_url,
+            collection_alias=cdm_collection_alias,
+            session=session
+        )
+        cdm_items_info = get_cdm_items_info(
+            cdm_repo_url=cdm_repo_url,
+            cdm_collection_alias=cdm_collection_alias,
+            cdm_catcher_edits=cdm_catcher_edits,
+            session=session
+        )
+        vocabs_index = build_vocabs_index(cdm_fields_info)
+        if check_vocabs:
+            cdm_field_vocabs = get_vocabs(
+                cdm_repo_url=cdm_repo_url,
+                cdm_collection_alias=cdm_collection_alias,
+                vocabs_index=vocabs_index,
+                session=session
+            )
+        else:
+            cdm_field_vocabs = None
+
+    deltas = collate_deltas(cdm_catcher_edits, cdm_items_info)
+    edits_with_changes_count = count_changes(deltas)
+
+    print(f"catcherdiff found {edits_with_changes_count} out of {len(deltas)} total edit actions would change at least one field.")
+
+    report = {
+        'cdm_repo_url': cdm_repo_url.rstrip('/'),
+        'cdm_collection_alias': cdm_collection_alias,
+        'cdm_fields_info': cdm_fields_info,
+        'vocabs_index': vocabs_index,
+        'vocabs': cdm_field_vocabs,
+        'catcher_json_file': Path(catcher_json_file_path).name,
+        'report_file': report_file_path,
+        'report_datetime': datetime.now().isoformat(),
+        'edits_with_changes_count': edits_with_changes_count,
+        'deltas': deltas,
+        'cdm_nick_to_name': {
+            field_info['nick']: field_info['name'] for field_info in cdm_fields_info
+        },
+    }
+
+    report_html = report_to_html(report)
+    with open(report_file_path, mode='w', encoding='utf-8') as fp:
+        fp.write(report_html)
+
+
+def main() -> int:
     parser = argparse.ArgumentParser(
         description=""
     )
@@ -133,62 +194,16 @@ def main():
     )
     args = parser.parse_args()
 
-    with open(args.catcher_json_file, mode='r', encoding="utf-8") as fp:
-        cdm_catcher_edits = json.load(fp)
+    catcherdiff(
+        cdm_repo_url=args.cdm_repo_url,
+        cdm_collection_alias=args.cdm_collection_alias,
+        catcher_json_file=args.catcher_json_file,
+        report_file=args.report_file,
+        check_vocabs=args.check_vocabs,
+    )
 
-    with Session() as session:
-        print("Requesting CONTENTdm field info...")
-        cdm_fields_info = get_collection_field_info(
-            repo_url=args.cdm_repo_url,
-            collection_alias=args.cdm_collection_alias,
-            session=session
-        )
-        cdm_items_info = get_cdm_items_info(
-            cdm_repo_url=args.cdm_repo_url,
-            cdm_collection_alias=args.cdm_collection_alias,
-            cdm_catcher_edits=cdm_catcher_edits,
-            session=session
-        )
-        vocabs_index = build_vocabs_index(cdm_fields_info)
-        if args.check_vocabs:
-            cdm_field_vocabs = get_vocabs(
-                cdm_repo_url=args.cdm_repo_url,
-                cdm_collection_alias=args.cdm_collection_alias,
-                vocabs_index=vocabs_index,
-                session=session
-            )
-        else:
-            cdm_field_vocabs = None
-
-    try:
-        deltas = collate_deltas(cdm_catcher_edits, cdm_items_info)
-    except KeyError as err:
-        print(f"Error: field nick not found in field info: {err}")
-        sys.exit(1)
-
-    edits_with_changes_count = count_changes(deltas)
-    print(f"catcherdiff found {edits_with_changes_count} out of {len(deltas)} total edit actions would change at least one field.")
-
-    report = {
-        'cdm_repo_url': args.cdm_repo_url.rstrip('/'),
-        'cdm_collection_alias': args.cdm_collection_alias,
-        'cdm_fields_info': cdm_fields_info,
-        'vocabs_index': vocabs_index,
-        'vocabs': cdm_field_vocabs,
-        'catcher_json_file': Path(args.catcher_json_file).name,
-        'report_file': args.report_file,
-        'report_datetime': datetime.now().isoformat(),
-        'edits_with_changes_count': edits_with_changes_count,
-        'deltas': deltas,
-        'cdm_nick_to_name': {
-            field_info['nick']: field_info['name'] for field_info in cdm_fields_info
-        },
-    }
-
-    report_html = report_to_html(report)
-    with open(args.report_file, mode='w', encoding='utf-8') as fp:
-        fp.write(report_html)
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())

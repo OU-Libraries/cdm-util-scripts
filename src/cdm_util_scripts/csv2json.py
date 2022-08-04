@@ -3,38 +3,39 @@ import json
 import argparse
 
 
-dialects = {
-    'csv': 'excel',
-    'tsv': 'excel-tab',
-    'unix': 'unix'
-}
+def csv2json(input_csv_path: str, output_json_path: str, input_csv_dialect: str) -> None:
+    with open(input_csv_path, mode='r', encoding="utf-8") as fp:
+        reader = csv.DictReader(fp, dialect=input_csv_dialect)
+        rows = [row for row in reader]
+
+    with open(output_json_path, mode='w', encoding="utf-8") as fp:
+        json.dump(rows, fp, indent=2)
 
 
 def main():
     parser = argparse.ArgumentParser(description="Transpose CSV or TSV files into lists of JSON objects")
-    parser.add_argument('input_path',
-                        metavar='input_path',
+    parser.add_argument('input_csv_path',
                         type=str,
                         help="Path to delimited file")
-    parser.add_argument('output_path',
-                        metavar='output_path',
+    parser.add_argument('output_json_path',
                         type=str,
                         help="Path to output JSON file")
-    parser.add_argument('--format',
+    parser.add_argument('--dialect',
                         action='store',
-                        default='csv',
-                        choices=list(dialects.keys()),
+                        default='excel',
+                        choices=csv.list_dialects(),
                         type=str,
-                        help=f"Specify delimited file format, default csv")
+                        help=f"Specify delimited file format")
     args = parser.parse_args()
 
-    with open(args.input_path, mode='r', encoding="utf-8") as fp:
-        reader = csv.DictReader(fp, dialect=dialects[args.format])
-        rows = [row for row in reader]
+    csv2json(
+        input_csv_path=args.input_csv_path,
+        output_json_path=args.output_json_path,
+        input_csv_dialect=args.dialect,
+    )
 
-    with open(args.output_path, mode='w', encoding="utf-8") as fp:
-        json.dump(rows, fp, indent=2)
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())
