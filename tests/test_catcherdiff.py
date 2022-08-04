@@ -1,6 +1,8 @@
 import pytest
 import requests
 
+import json
+
 from cdm_util_scripts import catcherdiff
 from cdm_util_scripts import cdm_api
 
@@ -101,3 +103,24 @@ def test_report_to_html(collection_field_info):
             }
         },
     })
+
+
+@pytest.mark.vcr
+def test_catcherdiff(tmpdir):
+    catcher_edits = [
+        {"dmrecord": "71", "format": "PDF"}
+    ]
+    catcher_json_file_path = tmpdir / "catcher-edits.json"
+    report_file_path = tmpdir / "report.html"
+    with open(catcher_json_file_path, mode="w", encoding="utf-8") as fp:
+        json.dump(catcher_edits, fp)
+
+    catcherdiff.catcherdiff(
+        cdm_repo_url="https://cdmdemo.contentdm.oclc.org/",
+        cdm_collection_alias="oclcsample",
+        catcher_json_file_path=catcher_json_file_path,
+        report_file_path=report_file_path,
+        check_vocabs=True,
+    )
+
+    assert report_file_path.exists()

@@ -1,6 +1,8 @@
 import pytest
 import requests
 
+import json
+import csv
 from io import StringIO
 
 from cdm_util_scripts import csv2catcher
@@ -366,3 +368,49 @@ def test_reconcile_cdm_collection(cdm_collection_rows,
         dmrecord = right_answers[cdm_objects[0].identifier]
         assert rec_objects[0].pointer == dmrecord
         assert rec_objects[0].fields == cdm_objects[0].fields
+
+
+@pytest.mark.vcr
+def test_csv2catcher(tmpdir):
+    reconciliation_config = {
+        "repository-url": "https://cdmdemo.contentdm.oclc.org/",
+        "collection-alias": "oclcsample",
+        "identifier-nick": "title",
+        "match-mode": "page",
+        "page-position-column-name": "Page Position",
+    }
+    config_path = tmpdir / "reconciliation_config.json"
+    with open(config_path, mode="w", encoding="utf-8") as fp:
+        json.dump(reconciliation_config, fp)
+
+    column_mapping_csv = [
+        {"name": "Subject", "nick": "subjec"},
+        {"name": "Title", "nick": "title"},
+    ]
+    mapping_csv_path = tmpdir / "column_mapping.csv"
+    with open(mapping_csv_path, mode="w", encoding="utf-8") as fp:
+        writer = csv.DictWriter(fp, fieldnames=["name", "nick"])
+        writer.writeheader()
+        writer.writerows(column_mapping_csv)
+
+    field_data = [
+        {"Page Position": "3", "Title": "Abridged Monograph", "Subject": "Suspension bridges"}
+    ]
+    field_data_path = tmpdir / "field-data.csv"
+    with open(field_data_path, mode="w", encoding="utf-8") as fp:
+        writer = csv.DictWriter(fp, fieldnames=list(field_data[0]))
+        writer.writeheader()
+        writer.writerows(field_data)
+
+    output_file = tmpdir / "output.json"
+
+    csv2catcher.csv2catcher(
+        reconciliation_config_path=config_path,
+        column_mapping_csv_path=mapping_csv_path,
+        field_data_csv_path=field_data_path,
+        output_file_path=output_file,
+    )
+
+    assert json.load(output_file) == [
+        {"dmrecord": "98", "subjec": "Suspension bridges"}
+    ]
