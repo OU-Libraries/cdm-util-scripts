@@ -68,14 +68,19 @@ def test_get_manifests_catcher_edits():
 
 
 @pytest.mark.vcr
-def test_main(tmp_path):
+def test_ftptr2catcher(tmp_path):
     manifests_listing_path = tmp_path / "manifests.txt"
     manifests_listing_path.write_text(
         SPECIMEN_MANIFEST_URL + "\n", encoding="utf-8"
     )
     output_path = tmp_path / "output.json"
     transcript_nick = "transc"
-    ftptr2catcher.main([str(manifests_listing_path), transcript_nick, str(output_path)])
+    ftptr2catcher.ftptr2catcher(
+        manifests_listing_path=manifests_listing_path,
+        transcript_nick=transcript_nick,
+        output_file_path=output_path,
+        transcript_type="Verbatim Plaintext",
+    )
     with open(output_path, mode="r", encoding="utf-8") as fp:
         output_json = json.load(fp)
     for edit in output_json:

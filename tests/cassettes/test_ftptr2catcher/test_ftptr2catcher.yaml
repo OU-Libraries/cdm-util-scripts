@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.28.1
     method: GET
     uri: https://fromthepage.com/iiif/25013044/manifest
   response:
@@ -372,7 +372,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 04 Aug 2022 16:57:37 GMT
+      - Fri, 05 Aug 2022 15:53:52 GMT
       ETag:
       - W/"fea5665b6b48a61676a595ceaa14978a"
       Keep-Alive:
@@ -380,11 +380,11 @@ interactions:
       Server:
       - Apache/2.4.18 (Ubuntu)
       Set-Cookie:
-      - ahoy_visitor=3c000463-d9ab-4b00-a09f-ca8be1b1d4eb; path=/; expires=Sun, 04
-        Aug 2024 16:57:37 GMT; secure
-      - ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; path=/; expires=Thu, 04 Aug
-        2022 20:57:37 GMT; secure
-      - _fromthepage_session=3hjp5L36f5%2FwUDRBd%2FknH1zFp6iCVhRBcSUrQpTgTcqk%2B2svt53Mg6MRSJ%2BloR9TJ9nQ9YQfa7tr29Q2r84mFbFLMkQMoTFI6Ha2AhkK9WpE%2BMHHOq2le%2BYIdo95IG6AtczbTrxicOE%2FSgIQtVH7LW6ZuT880dGnwUwyidJv4BeLnHqEFH6YAA7s9JHNRwJjQDlb195E0DAFQS4cKMMgK1z7FChT5yq8CqJ44Kb%2BNk0IF42cAqolCsjk31ExQ5p2Q6W2cw%3D%3D--%2F3rNlkFtW3KeSFlU--OftandgxKlyjBgq3DvGhtg%3D%3D;
+      - ahoy_visitor=4fdf53c4-79af-42dc-99ea-210fd501b723; path=/; expires=Mon, 05
+        Aug 2024 15:53:52 GMT; secure
+      - ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; path=/; expires=Fri, 05 Aug
+        2022 19:53:52 GMT; secure
+      - _fromthepage_session=%2FFb108Op4cLacawY0cu%2BJuAgjn0LLp8FhVkf5U5gdHsGmHnROJZ%2BBYGnZRiilYkUJH2iktspu10e2Dr2NPlGwZmcab4Ce47hIc2e4Jo2pRWwVTHizeBXydrlC%2FMSMbEA0FSikqqugXxpZmJs8y52peDrb09%2BUqqSbHeJwuAGPmQBncN4%2FX4%2BajRz8jIIfbGYG%2Fr11hSwZfV082%2FIZyF3Jl0BKixSresUuumatDlWoOo0WQBbH91vbkY9aXDYz18GSf%2F%2BlA%3D%3D--xt9xsqgW9YJsKIUj--hBZKCDUzIF4c%2FqXnvUzM8Q%3D%3D;
         path=/; secure; HttpOnly
       Status:
       - 200 OK
@@ -397,9 +397,9 @@ interactions:
       X-Powered-By:
       - Phusion Passenger 5.3.7
       X-Request-Id:
-      - 6de6c03d-cc3d-4c6c-8282-869cf7454390
+      - 69ecea2f-dd47-4e90-8605-5da8eafe0bb1
       X-Runtime:
-      - '0.142827'
+      - '0.246702'
     status:
       code: 200
       message: OK
@@ -409,14 +409,14 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       Cookie:
-      - _fromthepage_session=3hjp5L36f5%2FwUDRBd%2FknH1zFp6iCVhRBcSUrQpTgTcqk%2B2svt53Mg6MRSJ%2BloR9TJ9nQ9YQfa7tr29Q2r84mFbFLMkQMoTFI6Ha2AhkK9WpE%2BMHHOq2le%2BYIdo95IG6AtczbTrxicOE%2FSgIQtVH7LW6ZuT880dGnwUwyidJv4BeLnHqEFH6YAA7s9JHNRwJjQDlb195E0DAFQS4cKMMgK1z7FChT5yq8CqJ44Kb%2BNk0IF42cAqolCsjk31ExQ5p2Q6W2cw%3D%3D--%2F3rNlkFtW3KeSFlU--OftandgxKlyjBgq3DvGhtg%3D%3D;
-        ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; ahoy_visitor=3c000463-d9ab-4b00-a09f-ca8be1b1d4eb
+      - _fromthepage_session=%2FFb108Op4cLacawY0cu%2BJuAgjn0LLp8FhVkf5U5gdHsGmHnROJZ%2BBYGnZRiilYkUJH2iktspu10e2Dr2NPlGwZmcab4Ce47hIc2e4Jo2pRWwVTHizeBXydrlC%2FMSMbEA0FSikqqugXxpZmJs8y52peDrb09%2BUqqSbHeJwuAGPmQBncN4%2FX4%2BajRz8jIIfbGYG%2Fr11hSwZfV082%2FIZyF3Jl0BKixSresUuumatDlWoOo0WQBbH91vbkY9aXDYz18GSf%2F%2BlA%3D%3D--xt9xsqgW9YJsKIUj--hBZKCDUzIF4c%2FqXnvUzM8Q%3D%3D;
+        ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; ahoy_visitor=4fdf53c4-79af-42dc-99ea-210fd501b723
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.28.1
     method: GET
     uri: https://fromthepage.com/iiif/25013044/export/25204890/plaintext/verbatim
   response:
@@ -450,7 +450,7 @@ interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Date:
-      - Thu, 04 Aug 2022 16:57:37 GMT
+      - Fri, 05 Aug 2022 15:53:53 GMT
       ETag:
       - W/"018f52d2e4251d8ffdfcb4770a3dea17"
       Keep-Alive:
@@ -458,9 +458,9 @@ interactions:
       Server:
       - Apache/2.4.18 (Ubuntu)
       Set-Cookie:
-      - ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; path=/; expires=Thu, 04 Aug
-        2022 20:57:37 GMT; secure
-      - _fromthepage_session=A0R0mn8%2BbLguqTwL%2ByVQxXUwzrLEUO%2FBOpgbSvQ0r4xJsvGy%2FIhxBLu1i9m%2FA0NEAbRKgKUW3mHckiXoBGXpV3Bn6JF0SpiwH0VnghaEcJmieOkmSyUUuLFmlIWvmJNKySpAVvrkfaGuIjjClU5WRr3Agr%2FygyK8siFBIuK3snf3IudvgxdmLBAZ%2FrPAHUAllJxu5jsgMQoOmuEfhTz68M5wi2UbMjV5NIk2vwjNfMSsoZhfRK5GtsI0T9w0Vcm5svBFELIem2uSvERFVbn0phrl5pSPubR%2F%2B5JefMfiHEifcgbIs7%2B9iQ%3D%3D--lEbTjk6I32p6Avxu--nRcampfFzhHg1UyfY9fJcQ%3D%3D;
+      - ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; path=/; expires=Fri, 05 Aug
+        2022 19:53:53 GMT; secure
+      - _fromthepage_session=nEQFJGq6qXuwor%2FH5rJmZ6GZVOkgKMeXyEyd6rxZbnyCE5UT%2BdnBRzbF%2FhqwIlBLY0Zteo1xk1kVHtSb0mTzZfJjRyxJDR%2FjtbB6lcgBIjcOQDJ7viTBFkgW1ADv0J9XcmLgOepFWlGxYXWbFFOC2AFnzh774A0M3ygAy2omBskYEkkmyhoiLzA9OYXZ0oS36u2Mm0L5crBPGt%2FrqmIAFWrkjNvBcYvHe8Vs6KBj5sZ5nQ8F2Mxs3lbmSV%2BHu%2BVrynR05H2%2Fqa8W2KdfBnz6zET6qxbmNOd%2BXSfsxH9do1WoZlE%2BxGO0YA%3D%3D--bysJS7CxPHDGpvcr--Qe0p2HgBf5saQcg4A4GOlA%3D%3D;
         path=/; secure; HttpOnly
       Status:
       - 200 OK
@@ -471,9 +471,9 @@ interactions:
       X-Powered-By:
       - Phusion Passenger 5.3.7
       X-Request-Id:
-      - 80755e08-f7f6-40c1-adef-2c69f0086dab
+      - 1304e9e2-40c4-4588-93f2-184e483d1ce8
       X-Runtime:
-      - '0.034504'
+      - '0.035770'
     status:
       code: 200
       message: OK
@@ -483,14 +483,14 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       Cookie:
-      - _fromthepage_session=A0R0mn8%2BbLguqTwL%2ByVQxXUwzrLEUO%2FBOpgbSvQ0r4xJsvGy%2FIhxBLu1i9m%2FA0NEAbRKgKUW3mHckiXoBGXpV3Bn6JF0SpiwH0VnghaEcJmieOkmSyUUuLFmlIWvmJNKySpAVvrkfaGuIjjClU5WRr3Agr%2FygyK8siFBIuK3snf3IudvgxdmLBAZ%2FrPAHUAllJxu5jsgMQoOmuEfhTz68M5wi2UbMjV5NIk2vwjNfMSsoZhfRK5GtsI0T9w0Vcm5svBFELIem2uSvERFVbn0phrl5pSPubR%2F%2B5JefMfiHEifcgbIs7%2B9iQ%3D%3D--lEbTjk6I32p6Avxu--nRcampfFzhHg1UyfY9fJcQ%3D%3D;
-        ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; ahoy_visitor=3c000463-d9ab-4b00-a09f-ca8be1b1d4eb
+      - _fromthepage_session=nEQFJGq6qXuwor%2FH5rJmZ6GZVOkgKMeXyEyd6rxZbnyCE5UT%2BdnBRzbF%2FhqwIlBLY0Zteo1xk1kVHtSb0mTzZfJjRyxJDR%2FjtbB6lcgBIjcOQDJ7viTBFkgW1ADv0J9XcmLgOepFWlGxYXWbFFOC2AFnzh774A0M3ygAy2omBskYEkkmyhoiLzA9OYXZ0oS36u2Mm0L5crBPGt%2FrqmIAFWrkjNvBcYvHe8Vs6KBj5sZ5nQ8F2Mxs3lbmSV%2BHu%2BVrynR05H2%2Fqa8W2KdfBnz6zET6qxbmNOd%2BXSfsxH9do1WoZlE%2BxGO0YA%3D%3D--bysJS7CxPHDGpvcr--Qe0p2HgBf5saQcg4A4GOlA%3D%3D;
+        ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; ahoy_visitor=4fdf53c4-79af-42dc-99ea-210fd501b723
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.28.1
     method: GET
     uri: https://fromthepage.com/iiif/25013044/export/25204891/plaintext/verbatim
   response:
@@ -538,7 +538,7 @@ interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Date:
-      - Thu, 04 Aug 2022 16:57:37 GMT
+      - Fri, 05 Aug 2022 15:53:53 GMT
       ETag:
       - W/"d18993ac100593f3881539471368c549-gzip"
       Keep-Alive:
@@ -546,9 +546,9 @@ interactions:
       Server:
       - Apache/2.4.18 (Ubuntu)
       Set-Cookie:
-      - ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; path=/; expires=Thu, 04 Aug
-        2022 20:57:37 GMT; secure
-      - _fromthepage_session=rpkGJKvPpdaR3m%2FNInrPuD6PpqvqoCL%2FX52Jhc6iCX3wTgXIEb%2B0PJOe9k1qSQUlZsKk6eSevoDJykAl5lcQg2tVpwEuOFbTRGPiOaqhi4CKSuANiBWD5GzjgaHXWAWpxKw0P6lGnKgNZvbYb1%2B8%2B%2Bh%2FT0lo%2FRKRBTYW8j7FYhKBjYYvFpSqLm1H8UZi%2F3X3KZL9der9NHRW3qsNsGGTVRs3n2QQvJmvt2%2BJ8hba8We4t9VfB1GKJyjDYsK4RonYTW%2BLrhjkWq6IvInHOPFdDUmTt4OUE0XXA%2FxLFNtpeWAz9X3SxPPPEg%3D%3D--E5DxSB%2BDShTSpJ5X--60SWFxgZBs3G2xehAUzNjQ%3D%3D;
+      - ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; path=/; expires=Fri, 05 Aug
+        2022 19:53:53 GMT; secure
+      - _fromthepage_session=3I%2FrpJ%2FBEA52gNFaC9sd4Tcf9EaCbfrZe45M0zXoCuTf8R63Jb4XIZuzKTdVTw72EYtrz6IbIcLLI2gEz5tVv2cjNnZqRFcSpUdI6YmEUv%2B5a8QBgGHt4%2BraTIwdaxt2LVX7hmS35lprksdghes9XkdM7IpfL6S9E3xsPfrEszfvYpbzIBEAfiylkj2oGHry1MxXVYaM92uEUgRLXa6JYhZ0cWuK8261dTzpgA%2FgWcJ8lUkL0PQ5S17IBnOFLIlb9XIo%2BTWlyIXdHX%2B%2F7mJsS25NRefspHhy5pTlxqJNqmiM9rLKYiEoKA%3D%3D--swhxM9FfNLoLBiFd--ovnBsrqxshGqOYXD8Pf56A%3D%3D;
         path=/; secure; HttpOnly
       Status:
       - 200 OK
@@ -561,9 +561,9 @@ interactions:
       X-Powered-By:
       - Phusion Passenger 5.3.7
       X-Request-Id:
-      - 0f3030f1-39dd-4079-9659-cb79656a0818
+      - 6369dc91-3ddb-451c-aec5-88b524cd7505
       X-Runtime:
-      - '0.037755'
+      - '0.030608'
     status:
       code: 200
       message: OK
@@ -573,14 +573,14 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       Cookie:
-      - _fromthepage_session=rpkGJKvPpdaR3m%2FNInrPuD6PpqvqoCL%2FX52Jhc6iCX3wTgXIEb%2B0PJOe9k1qSQUlZsKk6eSevoDJykAl5lcQg2tVpwEuOFbTRGPiOaqhi4CKSuANiBWD5GzjgaHXWAWpxKw0P6lGnKgNZvbYb1%2B8%2B%2Bh%2FT0lo%2FRKRBTYW8j7FYhKBjYYvFpSqLm1H8UZi%2F3X3KZL9der9NHRW3qsNsGGTVRs3n2QQvJmvt2%2BJ8hba8We4t9VfB1GKJyjDYsK4RonYTW%2BLrhjkWq6IvInHOPFdDUmTt4OUE0XXA%2FxLFNtpeWAz9X3SxPPPEg%3D%3D--E5DxSB%2BDShTSpJ5X--60SWFxgZBs3G2xehAUzNjQ%3D%3D;
-        ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; ahoy_visitor=3c000463-d9ab-4b00-a09f-ca8be1b1d4eb
+      - _fromthepage_session=3I%2FrpJ%2FBEA52gNFaC9sd4Tcf9EaCbfrZe45M0zXoCuTf8R63Jb4XIZuzKTdVTw72EYtrz6IbIcLLI2gEz5tVv2cjNnZqRFcSpUdI6YmEUv%2B5a8QBgGHt4%2BraTIwdaxt2LVX7hmS35lprksdghes9XkdM7IpfL6S9E3xsPfrEszfvYpbzIBEAfiylkj2oGHry1MxXVYaM92uEUgRLXa6JYhZ0cWuK8261dTzpgA%2FgWcJ8lUkL0PQ5S17IBnOFLIlb9XIo%2BTWlyIXdHX%2B%2F7mJsS25NRefspHhy5pTlxqJNqmiM9rLKYiEoKA%3D%3D--swhxM9FfNLoLBiFd--ovnBsrqxshGqOYXD8Pf56A%3D%3D;
+        ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; ahoy_visitor=4fdf53c4-79af-42dc-99ea-210fd501b723
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.28.1
     method: GET
     uri: https://fromthepage.com/iiif/25013044/export/25204892/plaintext/verbatim
   response:
@@ -619,7 +619,7 @@ interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Date:
-      - Thu, 04 Aug 2022 16:57:37 GMT
+      - Fri, 05 Aug 2022 15:53:53 GMT
       ETag:
       - W/"fd759f32f0cde244b46ae4df0a4ed03e-gzip"
       Keep-Alive:
@@ -627,9 +627,9 @@ interactions:
       Server:
       - Apache/2.4.18 (Ubuntu)
       Set-Cookie:
-      - ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; path=/; expires=Thu, 04 Aug
-        2022 20:57:37 GMT; secure
-      - _fromthepage_session=NVJVrHywFEAIPZkd5ewDc1R1aFoFgbvCGBg3FexpIZvU5W96iT9uonS0C5f%2BMEiOiWTfVLMaeqYcn8vqv9f3azfJEQ%2BcnFdkAXP%2ByLdaIwUpZ0%2FKbgSkqQPhDXRNsLiu3ABtOoON4DzsllERYhWWvfjfctKtg5jNJ%2B%2BDYhwG40EcRIQgl%2BbrBulnxUltZeiKgxwhj2rBlaVBkBWy%2F1Sq8Ln7UI3xhJAnIwjWsoe%2BDjdWa%2BAxazFMRNG%2FasZYbSQdRGEFZH07sJYRDjjoktK5H%2FpDDHGhVjmLse9eWsuSV7MiVaLLXNlZGg%3D%3D--VrEB1QEkHb6AOjIZ--Lcv3ltH4ccyX5QzBdP%2FyQQ%3D%3D;
+      - ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; path=/; expires=Fri, 05 Aug
+        2022 19:53:53 GMT; secure
+      - _fromthepage_session=F%2BQ5lvSTr2FSjerZ3LbNhLYDZPIYhLh8kAzxqrSeLKRE7B3%2B6z6EdSSqFAHtXqwAqwEhuCpCAfmi6AdAsOcKj8mXWB9qaa%2BkmgEMxD%2BALBA2%2FhWHuSug4yJPM8x6b%2FWtb1JvlEkgOLAkPus6samzKqL1fus6H%2Bjsv10HPkruA8CPonzzqHcrGR8ocyf4LE12xxnt%2FeYrNybwBrpNdvftXwLLP4oZOvELZsffpAK91gVyf5awUNw95fGJUklIkWnum0WDvbCV17L5Zq%2FNCvFoQrXTLToSU%2BCLqRZBQGlwE4euqZ3NtxntMw%3D%3D--nLJeM0wUSFMuY%2F1%2F--JgozLhdX1V5FWJnbkTyxZg%3D%3D;
         path=/; secure; HttpOnly
       Status:
       - 200 OK
@@ -642,9 +642,9 @@ interactions:
       X-Powered-By:
       - Phusion Passenger 5.3.7
       X-Request-Id:
-      - 90c5be57-739b-445b-af70-ed8693c31356
+      - 91412065-5720-4bdf-b7cf-64d16353685c
       X-Runtime:
-      - '0.029473'
+      - '0.025966'
     status:
       code: 200
       message: OK
@@ -654,14 +654,14 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       Cookie:
-      - _fromthepage_session=NVJVrHywFEAIPZkd5ewDc1R1aFoFgbvCGBg3FexpIZvU5W96iT9uonS0C5f%2BMEiOiWTfVLMaeqYcn8vqv9f3azfJEQ%2BcnFdkAXP%2ByLdaIwUpZ0%2FKbgSkqQPhDXRNsLiu3ABtOoON4DzsllERYhWWvfjfctKtg5jNJ%2B%2BDYhwG40EcRIQgl%2BbrBulnxUltZeiKgxwhj2rBlaVBkBWy%2F1Sq8Ln7UI3xhJAnIwjWsoe%2BDjdWa%2BAxazFMRNG%2FasZYbSQdRGEFZH07sJYRDjjoktK5H%2FpDDHGhVjmLse9eWsuSV7MiVaLLXNlZGg%3D%3D--VrEB1QEkHb6AOjIZ--Lcv3ltH4ccyX5QzBdP%2FyQQ%3D%3D;
-        ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; ahoy_visitor=3c000463-d9ab-4b00-a09f-ca8be1b1d4eb
+      - _fromthepage_session=F%2BQ5lvSTr2FSjerZ3LbNhLYDZPIYhLh8kAzxqrSeLKRE7B3%2B6z6EdSSqFAHtXqwAqwEhuCpCAfmi6AdAsOcKj8mXWB9qaa%2BkmgEMxD%2BALBA2%2FhWHuSug4yJPM8x6b%2FWtb1JvlEkgOLAkPus6samzKqL1fus6H%2Bjsv10HPkruA8CPonzzqHcrGR8ocyf4LE12xxnt%2FeYrNybwBrpNdvftXwLLP4oZOvELZsffpAK91gVyf5awUNw95fGJUklIkWnum0WDvbCV17L5Zq%2FNCvFoQrXTLToSU%2BCLqRZBQGlwE4euqZ3NtxntMw%3D%3D--nLJeM0wUSFMuY%2F1%2F--JgozLhdX1V5FWJnbkTyxZg%3D%3D;
+        ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; ahoy_visitor=4fdf53c4-79af-42dc-99ea-210fd501b723
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.28.1
     method: GET
     uri: https://fromthepage.com/iiif/25013044/export/25204893/plaintext/verbatim
   response:
@@ -710,7 +710,7 @@ interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Date:
-      - Thu, 04 Aug 2022 16:57:37 GMT
+      - Fri, 05 Aug 2022 15:53:53 GMT
       ETag:
       - W/"8ef54a14f1e50aba36b9414677dcf673-gzip"
       Keep-Alive:
@@ -718,9 +718,9 @@ interactions:
       Server:
       - Apache/2.4.18 (Ubuntu)
       Set-Cookie:
-      - ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; path=/; expires=Thu, 04 Aug
-        2022 20:57:37 GMT; secure
-      - _fromthepage_session=PLnlKk2YvfSdL627rPTvXBoesEVY0Kv6Z0%2FOZ3AOViax3sj0YZ0duGGPKFfNWENJuKqMdXsUSnTCGFIFqR4mpPsrEbu%2BUHUGb7qBTkNK%2Ba66AtoW5NqpTK806Knft3GqkslAbt4fVU6nr0LmlsVnsp5XtWCM7JgXad4yTUvzjyBBdEZURopsuNdixXG%2FOq7HdXjo5YXgkUoTOd1jXbci8cnR78vHPCUSUc3ke4d%2BG8R9IsDZhZNTBjrR7gz0fgpLkR7NhnGHsaIBbrSlrws%2FHJUCZ5ZyIcJ0IUkRV%2BpDNUDu055mpBNrRg%3D%3D--jwjWKdtO%2F9Ngcqv8--Kflg6R0l6KN7Wdn1A1zsKA%3D%3D;
+      - ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; path=/; expires=Fri, 05 Aug
+        2022 19:53:53 GMT; secure
+      - _fromthepage_session=YDz0YLGPSF8olZ6msPi5YBldS0ukM7IE%2BJZbgdzUOoZ%2BufoTkpq%2FoX%2FTD3v2dQhokQBJQTSa0jEwU74HUGpF%2BsRjnVhFjHMXQ%2FUphbo%2Bn5vFxnp2O51lZTCmGeiVAwNBPHW8Xe4%2BDhzCGhQQvsLK5SAQs7paJEiUGnjoOjFpqBr97L5py53TfcQdUYIldH4YCT9GSybuw6zSsH3zt0L%2BrGpmXyIIwwtjyk9HiA25gvaU5Y0GVmwM432pOLpMhiG8C%2BL2ZG%2BKp0lNRkoDMLKNmX3kh2KQvLhMdnG6gU4zQXwDrauDSPB%2FKA%3D%3D--5jSBIfCVA5v5dd7w--osN77U69K5suY2DLM%2Bg44A%3D%3D;
         path=/; secure; HttpOnly
       Status:
       - 200 OK
@@ -733,9 +733,9 @@ interactions:
       X-Powered-By:
       - Phusion Passenger 5.3.7
       X-Request-Id:
-      - 23b2b582-5f06-4e8e-a8b9-85bda0e8a944
+      - a46469ac-19fb-4eab-b1dc-072aff4e1bde
       X-Runtime:
-      - '0.033917'
+      - '0.027215'
     status:
       code: 200
       message: OK
@@ -745,14 +745,14 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       Cookie:
-      - _fromthepage_session=PLnlKk2YvfSdL627rPTvXBoesEVY0Kv6Z0%2FOZ3AOViax3sj0YZ0duGGPKFfNWENJuKqMdXsUSnTCGFIFqR4mpPsrEbu%2BUHUGb7qBTkNK%2Ba66AtoW5NqpTK806Knft3GqkslAbt4fVU6nr0LmlsVnsp5XtWCM7JgXad4yTUvzjyBBdEZURopsuNdixXG%2FOq7HdXjo5YXgkUoTOd1jXbci8cnR78vHPCUSUc3ke4d%2BG8R9IsDZhZNTBjrR7gz0fgpLkR7NhnGHsaIBbrSlrws%2FHJUCZ5ZyIcJ0IUkRV%2BpDNUDu055mpBNrRg%3D%3D--jwjWKdtO%2F9Ngcqv8--Kflg6R0l6KN7Wdn1A1zsKA%3D%3D;
-        ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; ahoy_visitor=3c000463-d9ab-4b00-a09f-ca8be1b1d4eb
+      - _fromthepage_session=YDz0YLGPSF8olZ6msPi5YBldS0ukM7IE%2BJZbgdzUOoZ%2BufoTkpq%2FoX%2FTD3v2dQhokQBJQTSa0jEwU74HUGpF%2BsRjnVhFjHMXQ%2FUphbo%2Bn5vFxnp2O51lZTCmGeiVAwNBPHW8Xe4%2BDhzCGhQQvsLK5SAQs7paJEiUGnjoOjFpqBr97L5py53TfcQdUYIldH4YCT9GSybuw6zSsH3zt0L%2BrGpmXyIIwwtjyk9HiA25gvaU5Y0GVmwM432pOLpMhiG8C%2BL2ZG%2BKp0lNRkoDMLKNmX3kh2KQvLhMdnG6gU4zQXwDrauDSPB%2FKA%3D%3D--5jSBIfCVA5v5dd7w--osN77U69K5suY2DLM%2Bg44A%3D%3D;
+        ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; ahoy_visitor=4fdf53c4-79af-42dc-99ea-210fd501b723
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.28.1
     method: GET
     uri: https://fromthepage.com/iiif/25013044/export/25204894/plaintext/verbatim
   response:
@@ -785,7 +785,7 @@ interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Date:
-      - Thu, 04 Aug 2022 16:57:38 GMT
+      - Fri, 05 Aug 2022 15:53:53 GMT
       ETag:
       - W/"38b09a693fb53bf7135bb906fca35093-gzip"
       Keep-Alive:
@@ -793,9 +793,9 @@ interactions:
       Server:
       - Apache/2.4.18 (Ubuntu)
       Set-Cookie:
-      - ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; path=/; expires=Thu, 04 Aug
-        2022 20:57:38 GMT; secure
-      - _fromthepage_session=ip5mzCKwdAfwhya2vAuKy08Bt9i5eWWHgp0UtTJnpwLxX12q1g9hJ6VYX0%2FJl7W3%2FIO8EGMI%2BNAw5QM49A9IjB51H3NekpwXecyZdYZ4eTP8jVR3IlH9qymr8829mtwk5L5%2FfvuXkn1FePBm%2BAoA394Nel8mBlXcEz3CIl28vz173xMboCVjrlgIvAvATCnN1Y%2BXlGGhKSE4PEBiqGwYDvkLZqn2OWzRCCM4PwDmsgLvlkZaKl15pJXH%2BL%2Fky73qGGpVzlKJGeCLVF%2B%2F3AWMN6xRQwWrIPwtEqZcGNOmp%2BedkOnuCA4vlg%3D%3D--OTlS%2FwFzXvgc8xYT--k790qR9IsZPHtaydIWr4lg%3D%3D;
+      - ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; path=/; expires=Fri, 05 Aug
+        2022 19:53:53 GMT; secure
+      - _fromthepage_session=jis4ikFG%2Bskut3PTfpTCbqDEpcqAQ3TkJvfEf%2BCEenxVclmmwzadcMOKNPEB80yRHiph2rRPaUGallJ55qD%2Fl%2FAwENRztj70CnyM3E6PGtccf0x3aQKLf1EdtlLqKdcvfRbreTT3zhhYzX1EgaWpLWGAU7OA20akArmhBfTrYh931f15o3hQ9CoAoJbOvUIZ3rVXEsWDilckAhRmG9G6xvZFv%2FmknxFpWzXiaa3fVCnR0Cvue5DUVGBcaw5Laj%2FA68H0ljuWEr%2BFw0IF2vkkKwtSjtMfyhiZgIEO4urzZbS2iR2i%2F0bRbw%3D%3D--Wwl3rs00WVeUz%2FVa--uZ9hKSmDTtYxJBxnIgjoug%3D%3D;
         path=/; secure; HttpOnly
       Status:
       - 200 OK
@@ -808,9 +808,9 @@ interactions:
       X-Powered-By:
       - Phusion Passenger 5.3.7
       X-Request-Id:
-      - c8ae00ee-0d25-4a74-ae52-af64e2a61e20
+      - 2962b8e0-6122-438e-9270-a34dc02142a7
       X-Runtime:
-      - '0.029775'
+      - '0.027658'
     status:
       code: 200
       message: OK
@@ -820,14 +820,14 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       Cookie:
-      - _fromthepage_session=ip5mzCKwdAfwhya2vAuKy08Bt9i5eWWHgp0UtTJnpwLxX12q1g9hJ6VYX0%2FJl7W3%2FIO8EGMI%2BNAw5QM49A9IjB51H3NekpwXecyZdYZ4eTP8jVR3IlH9qymr8829mtwk5L5%2FfvuXkn1FePBm%2BAoA394Nel8mBlXcEz3CIl28vz173xMboCVjrlgIvAvATCnN1Y%2BXlGGhKSE4PEBiqGwYDvkLZqn2OWzRCCM4PwDmsgLvlkZaKl15pJXH%2BL%2Fky73qGGpVzlKJGeCLVF%2B%2F3AWMN6xRQwWrIPwtEqZcGNOmp%2BedkOnuCA4vlg%3D%3D--OTlS%2FwFzXvgc8xYT--k790qR9IsZPHtaydIWr4lg%3D%3D;
-        ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; ahoy_visitor=3c000463-d9ab-4b00-a09f-ca8be1b1d4eb
+      - _fromthepage_session=jis4ikFG%2Bskut3PTfpTCbqDEpcqAQ3TkJvfEf%2BCEenxVclmmwzadcMOKNPEB80yRHiph2rRPaUGallJ55qD%2Fl%2FAwENRztj70CnyM3E6PGtccf0x3aQKLf1EdtlLqKdcvfRbreTT3zhhYzX1EgaWpLWGAU7OA20akArmhBfTrYh931f15o3hQ9CoAoJbOvUIZ3rVXEsWDilckAhRmG9G6xvZFv%2FmknxFpWzXiaa3fVCnR0Cvue5DUVGBcaw5Laj%2FA68H0ljuWEr%2BFw0IF2vkkKwtSjtMfyhiZgIEO4urzZbS2iR2i%2F0bRbw%3D%3D--Wwl3rs00WVeUz%2FVa--uZ9hKSmDTtYxJBxnIgjoug%3D%3D;
+        ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; ahoy_visitor=4fdf53c4-79af-42dc-99ea-210fd501b723
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.28.1
     method: GET
     uri: https://fromthepage.com/iiif/25013044/export/25204895/plaintext/verbatim
   response:
@@ -873,7 +873,7 @@ interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Date:
-      - Thu, 04 Aug 2022 16:57:38 GMT
+      - Fri, 05 Aug 2022 15:53:53 GMT
       ETag:
       - W/"7fb84926e8708cb5c8acaa0718cfb10c-gzip"
       Keep-Alive:
@@ -881,9 +881,9 @@ interactions:
       Server:
       - Apache/2.4.18 (Ubuntu)
       Set-Cookie:
-      - ahoy_visit=9fe10d70-98a8-43bb-adb0-3cd4ebd6fee7; path=/; expires=Thu, 04 Aug
-        2022 20:57:38 GMT; secure
-      - _fromthepage_session=YK7lhxYS8EvnwoqmSJ15hQHgiEXIWiqY52BkDp4r6aeS2wmB3nfYAZOetvS4pbtci%2B6r3JKgmuUczMBiYtriUprHJHKLNfdtPMobjHmkElmppJtIqoxnWWUct%2BBD1eWg0dzdyI%2BUqYmu3jKmkuTCNe720Sw%2Bf2vWNN3slO856vfLIkwB2avNwbx9QW35mlBojNnXiX7lnvvZ704hXWU7lJRisFJYZrZy3ULDR5nOlCuJ26iY%2BF7Vkybf%2BMm079flw7Wqayz9dr%2B9vEk6PBnjFA0s1qYsIjKGA8ljJgpNu8kQHxuquE5DNA%3D%3D--0iCoYTU85O9f3RbF--IQpyzGckF%2BJrWwX%2FaayxNA%3D%3D;
+      - ahoy_visit=fc8c466f-a4d3-4721-9675-902c2bd40942; path=/; expires=Fri, 05 Aug
+        2022 19:53:53 GMT; secure
+      - _fromthepage_session=csTfNpuc%2F65RgO3mazhb34sRp%2BGgFPX2rJlsVTKpp25Pq70NlYJzVN%2FvdtX25rRfTamD3HsKJUGpakra82PWSgRuJ4mNIzzLoXLpVXMKnZ0bUI8Z%2BexNKZmamMaXvmNpRBVZS43lEMxf%2FpMwmAJwI1bnUZnfs0T29c8pCZQZHf5yWapcGiF%2BtVpXt2w2V8vk3U1LhndHIEna3H%2FPOwLCNINRhon6UWMG61pr5S2QYcYnW7RHG2m5lxj3LGmnnZe1fDLAvs1BGeZtQxgs0xQRYnngzK%2FvRnYfEHTZCiFzQwzEYRpvn7c%2FIA%3D%3D--owqe8vvuTzP9rp%2FI--JEIgOJFlPZhfmDr8PEG5DQ%3D%3D;
         path=/; secure; HttpOnly
       Status:
       - 200 OK
@@ -896,9 +896,9 @@ interactions:
       X-Powered-By:
       - Phusion Passenger 5.3.7
       X-Request-Id:
-      - 5288dfab-96e8-493e-b15a-9f4cbcf7479f
+      - d222442c-b30b-4ed1-b228-087f01764c80
       X-Runtime:
-      - '0.029102'
+      - '0.026077'
     status:
       code: 200
       message: OK

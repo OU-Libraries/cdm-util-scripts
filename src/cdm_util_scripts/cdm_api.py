@@ -3,7 +3,7 @@ from requests import Session
 import csv
 import collections
 
-from typing import Dict, List
+from typing import Dict, List, Union, Tuple
 
 
 class DmError(Exception):
@@ -64,7 +64,42 @@ def get_cdm_page_pointers(repo_url: str, alias: str, dmrecord: str, session: Ses
     repo_url = repo_url.rstrip('/')
     url = f"{repo_url}/digital/bl/dmwebservices/index.php?q=dmGetCompoundObjectInfo/{alias}/{dmrecord}/json"
     cpd_object_info = get_dm(url, session)
-    return [page['pageptr'] for page in cpd_object_info['page']]
+    if cpd_object_info["type"] == "Monograph":
+        _, page_pointers = _destructure_nodes(cpd_object_info["node"])
+    else:
+        page_pointers = [page['pageptr'] for page in cpd_object_info['page']]
+    return page_pointers
+
+
+def _destructure_nodes(
+    node: Union[dict, list]
+) -> Tuple[List[Tuple[int, str]], List[str]]:
+    pages_index = []
+    page_pointers = []
+
+    def walk_nodes(node: Union[dict, list], depth: int = 0,) -> None:
+        if "page" not in node:
+            node_pages = []
+        elif isinstance(node["page"], dict):
+            node_pages = [node["page"]]
+        else:
+            node_pages = node["page"]
+
+        for page in node_pages:
+            page_pointers.append(page["pageptr"])
+            pages_index.append(
+                (depth, node["nodetitle"] if node["nodetitle"] != {} else "")
+            )
+
+        if "node" in node:
+            next_nodes = (
+                [node["node"]] if isinstance(node["node"], dict) else node["node"]
+            )
+            for n in next_nodes:
+                walk_nodes(n, depth + 1)
+
+    walk_nodes(node)
+    return pages_index, page_pointers
 
 
 def read_csv_field_mapping(filename: str) -> Dict[str, List[str]]:
