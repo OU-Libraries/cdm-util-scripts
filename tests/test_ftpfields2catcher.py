@@ -1,6 +1,9 @@
 import pytest
 import requests
 
+import csv
+import json
+
 from cdm_util_scripts import ftpfields2catcher
 from cdm_util_scripts import ftp_api
 
@@ -135,3 +138,34 @@ def test_map_ftp_work_as_cdm_pages(ftp_work, dmrecords):
             'dmrecord': dmrecord,
             **ftpfields2catcher.apply_field_mapping(page.fields, field_mapping)
         }
+
+
+@pytest.mark.vcr
+def test_ftpfields2catcher(tmpdir):
+    match_mode = ftpfields2catcher.MatchModes.by_object
+    slug = "ohiouniversitylibraries"
+    collection_name = "Dance Posters Metadata"
+    field_mapping_csv_path = tmpdir / "field-mapping.csv"
+    field_mapping_csv_rows = [
+        {"name": "Title", "nick": "title"},
+    ]
+    with open(field_mapping_csv_path, mode="w", encoding="utf-8") as fp:
+        writer = csv.DictWriter(fp, fieldnames=["name", "nick"])
+        writer.writeheader()
+        writer.writerows(field_mapping_csv_rows)
+    output_file_path = tmpdir / "output.json"
+
+    ftpfields2catcher.ftpfields2catcher(
+        match_mode=match_mode,
+        slug=slug,
+        collection_name=collection_name,
+        field_mapping_csv_path=field_mapping_csv_path,
+        output_file_path=output_file_path,
+    )
+
+    with open(output_file_path, mode="r", encoding="utf-8") as fp:
+        result = json.load(fp)
+
+    for edit in result:
+        assert edit["dmrecord"].isdigit()
+        assert "title" in edit
