@@ -1,5 +1,6 @@
 import json
 import argparse
+from pathlib import Path
 from datetime import datetime
 from collections import Counter, defaultdict
 from typing import List, Dict, Any, Tuple
@@ -97,7 +98,9 @@ def scanftpfields(
         collection_name: str,
         report_format: str,
         rendering_label: str,
+        report_parent: str,
 ) -> None:
+    report_parent = Path(report_parent)
     with Session() as session:
         ftp_collection = ftp_api.get_and_load_ftp_collection(
             slug=slug,
@@ -122,7 +125,7 @@ def scanftpfields(
     date_str = report_date.strftime('%Y-%m-%d_%H-%M-%S')
     filename = f"field-label-report_{ftp_collection.alias}_{date_str}.{report_format}"
     print(f"Writing report as {filename!r}")
-    with open(filename, mode='w', encoding='utf-8') as fp:
+    with open(report_parent / filename, mode='w', encoding='utf-8') as fp:
         fp.write(report_str)
 
 
@@ -159,6 +162,7 @@ def main():
         collection_name=args.collection_name,
         report_format=args.output,
         rendering_label=args.label,
+        report_parent=".",
     )
 
     return 0

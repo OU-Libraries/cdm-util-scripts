@@ -41,3 +41,17 @@ def test_report_to_html(ftp_collection):
     report['export_label_used'] = '?'
     report['report_date'] = datetime.now().isoformat()
     assert scanftpfields.report_to_html(report)
+
+
+@pytest.mark.default_cassette("ftp_collection.yaml")
+@pytest.mark.vcr
+def test_scanftpfields(tmp_path):
+    report_format = "html"
+    scanftpfields.scanftpfields(
+        slug="ohiouniversitylibraries",
+        collection_name="Dance Posters Metadata",
+        report_format=report_format,
+        rendering_label="XHTML Export",
+        report_parent=tmp_path,
+    )
+    assert tmp_path.glob(f"field-label-report*.{report_format}")
