@@ -1,7 +1,7 @@
 import argparse
 import csv
 
-from typing import Optional, Iterable
+from typing import Optional, Sequence
 
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts import catcherdiff
@@ -14,7 +14,7 @@ from cdm_util_scripts import scanftpfields
 from cdm_util_scripts import scanftpvocabs
 
 
-def main(test_args: Optional[Iterable[str]] = None) -> int:
+def main(test_args: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="cdm-util-scripts")
     subparsers = parser.add_subparsers()
 
@@ -33,7 +33,7 @@ def main(test_args: Optional[Iterable[str]] = None) -> int:
     catcherdiff_subparser.add_argument(
         "--check-vocabs",
         action="store_const",
-        const=False,
+        const=True,
         help="Check controlled vocabulary terms",
     )
     catcherdiff_subparser.set_defaults(func=catcherdiff.catcherdiff)
@@ -190,7 +190,7 @@ def main(test_args: Optional[Iterable[str]] = None) -> int:
 
     args = parser.parse_args(test_args)
 
-    args.func(**{key: value for key, value in vars(args) if key != "func"})
+    args.func(**{key: value for key, value in vars(args).items() if key != "func"})
 
     return 0
 
