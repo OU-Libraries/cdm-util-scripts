@@ -2,7 +2,6 @@ from requests import Session
 import jinja2
 
 import json
-import argparse
 from datetime import datetime
 from pathlib import Path
 
@@ -160,50 +159,3 @@ def catcherdiff(
     report_html = report_to_html(report)
     with open(report_file_path, mode='w', encoding='utf-8') as fp:
         fp.write(report_html)
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(
-        description=""
-    )
-    parser.add_argument(
-        'cdm_repo_url',
-        type=str,
-        help="CONTENTdm repository URL"
-    )
-    parser.add_argument(
-        'cdm_collection_alias',
-        type=str,
-        help="CONTENTdm collection alias"
-    )
-    parser.add_argument(
-        'catcher_json_file',
-        type=str,
-        help="cdm-catcher JSON file"
-    )
-    parser.add_argument(
-        'report_file',
-        type=str,
-        help="Diff output file name"
-    )
-    parser.add_argument(
-        '--check_vocabs',
-        action='store_const',
-        const=True,
-        help="Check controlled vocabulary terms"
-    )
-    args = parser.parse_args()
-
-    catcherdiff(
-        cdm_repo_url=args.cdm_repo_url,
-        cdm_collection_alias=args.cdm_collection_alias,
-        catcher_json_file=args.catcher_json_file,
-        report_file=args.report_file,
-        check_vocabs=args.check_vocabs,
-    )
-
-    return 0
-
-
-if __name__ == '__main__':
-    raise SystemExit(main())

@@ -2,8 +2,6 @@ import requests
 
 import json
 import csv
-import argparse
-import sys
 from dataclasses import dataclass
 from collections import defaultdict
 from itertools import count
@@ -342,34 +340,3 @@ def csv2catcher(
 
     with open(output_file_path, mode='w', encoding="utf-8") as fp:
         json.dump(serialize_cdm_objects(catcher_data), fp, indent=2)
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Transform and reconcile CSVs into cdm-catcher JSON",
-                                     fromfile_prefix_chars='@')
-    parser.add_argument('reconciliation_config',
-                        type=str,
-                        help="Path to a collection reconciliation JSON configuration file")
-    parser.add_argument('column_mapping_csv',
-                        type=str,
-                        help="Path to CSV with columns 'name' and 'nick' mapping column names to CONTENTdm field nicknames")
-    parser.add_argument('field_data_csv',
-                        type=str,
-                        help="Path to field data CSV")
-    parser.add_argument('output_file',
-                        type=str,
-                        help="Path to output cdm-catcher JSON")
-    args = parser.parse_args()
-
-    csv2catcher(
-        reconciliation_config_path=args.reconciliation_config,
-        column_mapping_csv_path=args.column_mapping_csv,
-        field_data_csv_path=args.field_data_csv,
-        output_file_path=args.output_file,
-    )
-
-    return 0
-
-
-if __name__ == '__main__':
-    raise SystemExit(main())

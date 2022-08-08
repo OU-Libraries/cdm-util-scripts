@@ -46,12 +46,10 @@ def test_report_to_html(ftp_collection):
 @pytest.mark.default_cassette("ftp_collection.yaml")
 @pytest.mark.vcr
 def test_scanftpfields(tmp_path):
-    report_format = "html"
     scanftpfields.scanftpfields(
-        slug="ohiouniversitylibraries",
-        collection_name="Dance Posters Metadata",
-        report_format=report_format,
+        ftp_slug="ohiouniversitylibraries",
+        ftp_project_name="Dance Posters Metadata",
         rendering_label="XHTML Export",
-        report_parent=tmp_path,
+        report_parent_path=tmp_path,
     )
-    assert tmp_path.glob(f"field-label-report*.{report_format}")
+    assert tmp_path.glob("field-label-report*.html")

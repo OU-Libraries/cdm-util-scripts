@@ -143,8 +143,8 @@ def test_map_ftp_work_as_cdm_pages(ftp_work, dmrecords):
 @pytest.mark.vcr
 def test_ftpfields2catcher(tmpdir):
     match_mode = ftpfields2catcher.MatchModes.by_object
-    slug = "ohiouniversitylibraries"
-    collection_name = "Dance Posters Metadata"
+    ftp_slug = "ohiouniversitylibraries"
+    ftp_project_name = "Dance Posters Metadata"
     field_mapping_csv_path = tmpdir / "field-mapping.csv"
     field_mapping_csv_rows = [
         {"name": "Title", "nick": "title"},
@@ -157,8 +157,8 @@ def test_ftpfields2catcher(tmpdir):
 
     ftpfields2catcher.ftpfields2catcher(
         match_mode=match_mode,
-        slug=slug,
-        collection_name=collection_name,
+        ftp_slug=ftp_slug,
+        ftp_project_name=ftp_project_name,
         field_mapping_csv_path=field_mapping_csv_path,
         output_file_path=output_file_path,
     )

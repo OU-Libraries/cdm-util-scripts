@@ -1,12 +1,11 @@
-import json
-import argparse
+import jinja2
+from requests import Session
+
 from pathlib import Path
 from datetime import datetime
 from collections import Counter, defaultdict
-from typing import List, Dict, Any, Tuple
 
-import jinja2
-from requests import Session
+from typing import List, Dict, Any, Tuple
 
 from cdm_util_scripts import ftp_api
 
@@ -94,17 +93,16 @@ def report_to_html(report: dict) -> str:
 
 
 def scanftpfields(
-        slug: str,
-        collection_name: str,
-        report_format: str,
+        ftp_slug: str,
+        ftp_project_name: str,
         rendering_label: str,
-        report_parent: str,
+        report_parent_path: str,
 ) -> None:
-    report_parent = Path(report_parent)
+    report_parent = Path(report_parent_path)
     with Session() as session:
         ftp_collection = ftp_api.get_and_load_ftp_collection(
-            slug=slug,
-            collection_name=collection_name,
+            slug=ftp_slug,
+            collection_name=ftp_project_name,
             rendering_label=rendering_label,
             session=session
         )
@@ -115,58 +113,9 @@ def scanftpfields(
     report['export_label_used'] = rendering_label
     report['report_date'] = report_date.isoformat()
 
-    if report_format == 'json':
-        report_str = json.dumps(report, indent=2)
-    elif report_format == 'html':
-        report_str = report_to_html(report)
-    else:
-        raise ValueError(f"invalid output type {report_format!r}")
-
+    report_str = report_to_html(report)
     date_str = report_date.strftime('%Y-%m-%d_%H-%M-%S')
-    filename = f"field-label-report_{ftp_collection.alias}_{date_str}.{report_format}"
+    filename = f"field-label-report_{ftp_collection.alias}_{date_str}.html"
     print(f"Writing report as {filename!r}")
     with open(report_parent / filename, mode='w', encoding='utf-8') as fp:
         fp.write(report_str)
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Scan and report on a FromThePage collection's field-based transcription labels")
-    parser.add_argument(
-        'slug',
-        type=str,
-        help="FromThePage user slug"
-    )
-    parser.add_argument(
-        'collection_name',
-        type=str,
-        help="Exact FromThePage project name"
-    )
-    parser.add_argument(
-        '--output',
-        choices=['html', 'json'],
-        default='html',
-        type=str,
-        help="Specify report format"
-    )
-    parser.add_argument(
-        '--label',
-        choices=list(ftp_api.RENDERING_EXTRACTORS),
-        default='XHTML Export',
-        type=str,
-        help="Choose the export to use for parsing fields"
-    )
-    args = parser.parse_args()
-
-    scanftpfields(
-        slug=args.slug,
-        collection_name=args.collection_name,
-        report_format=args.output,
-        rendering_label=args.label,
-        report_parent=".",
-    )
-
-    return 0
-
-
-if __name__ == '__main__':
-    raise SystemExit(main())

@@ -1,5 +1,3 @@
-import argparse
-import sys
 import json
 
 from requests import Session
@@ -161,8 +159,8 @@ class MatchModes:
 
 def ftpfields2catcher(
         match_mode: str,
-        slug: str,
-        collection_name: str,
+        ftp_slug: str,
+        ftp_project_name: str,
         field_mapping_csv_path: str,
         output_file_path: str,
 ) -> None:
@@ -170,8 +168,8 @@ def ftpfields2catcher(
 
     with Session() as session:
         ftp_collection = ftp_api.get_and_load_ftp_collection(
-            slug=slug,
-            collection_name=collection_name,
+            slug=ftp_slug,
+            collection_name=ftp_project_name,
             rendering_label='XHTML Export',
             session=session
         )
@@ -195,51 +193,3 @@ def ftpfields2catcher(
 
     with open(output_file_path, mode='w', encoding='utf-8') as fp:
         json.dump(catcher_data, fp, indent=2)
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Get FromThePage metadata and map it into cdm-catcher JSON",
-        fromfile_prefix_chars='@'
-    )
-    parser.add_argument(
-        'match_mode',
-        type=str,
-        choices=[MatchModes.by_object, MatchModes.by_page],
-        help="Mode for matching FromThePage metadata to CONTENTdm objects"
-    )
-    parser.add_argument(
-        'slug',
-        type=str,
-        help="FromThePage user slug"
-    )
-    parser.add_argument(
-        'collection_name',
-        type=str,
-        help="CONTENTdm collection name used by FromThePage"
-    )
-    parser.add_argument(
-        'field_mapping_csv',
-        type=str,
-        help="CSV file of FromThePage field labels mapped to CONTENTdm nicknames"
-    )
-    parser.add_argument(
-        'output_file',
-        type=str,
-        help="File name for cdm-catcher JSON output"
-    )
-    args = parser.parse_args()
-
-    ftpfields2catcher(
-        match_mode=args.match_mode,
-        slug=args.slug,
-        collection_name=args.collection_name,
-        field_mapping_csv_path=args.field_mapping_csv,
-        output_file_path=args.output_file,
-    )
-
-    return 0
-
-
-if __name__ == '__main__':
-    raise SystemExit(main())
