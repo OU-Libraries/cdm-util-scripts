@@ -1,0 +1,535 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56198/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/56198/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"\\\"Nothing else like it in the world\\\"
+        Nikolais Dance Theatre poster\",\n  \"metadata\": [\n    {\n      \"label\":
+        \"dc:source\",\n      \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/237/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Laura Smith, Photo Archivist at https://www.ohio.edu/library/about/staff/smithle\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu/record=b5961003~S7\"\n
+        \   },\n    {\n      \"label\": \"Collection finding aid\",\n      \"value\":
+        \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/nikolais-louis\"\n
+        \   },\n    {\n      \"label\": \"Collection\",\n      \"value\": \"Alwin
+        Nikolais and Murray Louis Papers. MSS181\"\n    },\n    {\n      \"label\":
+        \"Dance Company\",\n      \"value\": \"Nikolais Dance Theatre\"\n    },\n
+        \   {\n      \"label\": \"Description\",\n      \"value\": \"14\\\" x 28.75
+        \\\" color poster. Dance collection, series 7: press and promotion, sub series
+        7.2: posters. Poster with image of colorful dancer advertising Nikolais Dance
+        Theatre. Poster reads: \\\"Nikolais Dance Theatre\\\"; \\\"Nothing else like
+        it in the world\\\"\"\n    },\n    {\n      \"label\": \"Format\",\n      \"value\":
+        \"JP2\"\n    },\n    {\n      \"label\": \"How to access this collection at
+        the library\",\n      \"value\": \"See https://www.ohio.edu/library/collections/archives-special-collections\"\n
+        \   },\n    {\n      \"label\": \"Identifier\",\n      \"value\": \"s7-2_b01_03_nikolais_nothing_else_like_it_in_the_world\"\n
+        \   },\n    {\n      \"label\": \"Original format-AAT\",\n      \"value\":
+        \"Posters\"\n    },\n    {\n      \"label\": \"Policy\",\n      \"value\":
+        \"See Ohio University Libraries' Digital Archival Collections Materials Selection
+        and Rights policy at  https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries. Mahn Center for Archives and Special Collections\"\n    },\n    {\n
+        \     \"label\": \"Series\",\n      \"value\": \"7. Press and Promotion\"\n
+        \   },\n    {\n      \"label\": \"Sub series\",\n      \"value\": \"7.2 Posters\"\n
+        \   },\n    {\n      \"label\": \"Title of work\",\n      \"value\": \"\\\"Nothing
+        else like it in the world\\\" Nikolais Dance Theatre poster\"\n    },\n    {\n
+        \     \"label\": \"Type\",\n      \"value\": \"Still Image\"\n    },\n    {\n
+        \     \"label\": \"Repository\",\n      \"value\": \"Ohio University Libraries
+        - Digital Archival Collections\"\n    },\n    {\n      \"label\": \"Source\",\n
+        \     \"value\": \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll16/id/237\\\">\\\"Nothing
+        else like it in the world\\\" Nikolais Dance Theatre poster</a></span>\"\n
+        \   },\n    {\n      \"label\": \"Title\",\n      \"value\": \"\\\"Nothing
+        else like it in the world\\\" Nikolais Dance Theatre poster\"\n    },\n    {\n
+        \     \"label\": \"Created On\",\n      \"value\": \"2021-03-03 21:42:46 UTC\"\n
+        \   },\n    {\n      \"label\": \"In Scope\",\n      \"value\": \"true\"\n
+        \   }\n  ],\n  \"description\": \"This is an annotated version of the original
+        manifest produced by FromThePage\",\n  \"within\": {\n    \"@type\": \"sc:Collection\",\n
+        \   \"label\": \"Dance Posters Metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read \\\"Nothing else like it in the world\\\" Nikolais Dance Theatre poster\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/nothing-else-like-it-in-the-world-nikolais-dance-theatre-poster\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for \\\"Nothing else like it in the world\\\" Nikolais Dance Theatre
+        poster\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/nothing-else-like-it-in-the-world-nikolais-dance-theatre-poster/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56198/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56198/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56198/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56198/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 100.0,\n      \"pctOcrCorrected\":
+        0.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0,\n      \"metadataStatus\": \"undescribed\"\n    }\n  ],\n  \"sequences\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56198/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/56198/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56198/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56198/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:237/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"\\\"Nothing else
+        like it in the world\\\" Nikolais Dance Theatre poster\",\n          \"width\":
+        8818,\n          \"height\": 17832,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:237\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:237/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 8818,\n                \"height\":
+        17832,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:237\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:237/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1808940\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1808940\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/dance-posters-metadata/nothing-else-like-it-in-the-world-nikolais-dance-theatre-poster/annotation/1808940/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56198/export/1808940/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56198/export/1808940/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56198/export/1808940/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/56198/structured/1808940\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/56198/1808940/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1808940/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56198/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56198/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 10 Aug 2022 22:31:49 GMT
+      ETag:
+      - W/"b95c64c6b56c176bd97e5d3a699aac42"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visitor=cbad37ea-04e2-428c-88d5-7b733092a820; path=/; expires=Sat, 10
+        Aug 2024 22:31:49 GMT; secure
+      - ahoy_visit=b2bdc771-5e40-47c6-84b7-6713326a3a72; path=/; expires=Thu, 11 Aug
+        2022 02:31:49 GMT; secure
+      - _fromthepage_session=cyxRMEevC1b2wk7nGJ9Engd4b5i%2BPDjXfubO2VtfqMpiqTiEWYTtTeQFzEO9VbJ8YjDTUc%2BHjrcWdz7CUXHKqqrzcCXlu8%2BuIOIqXIgt4FXwW82I%2FAShKqiWLpNHhZn%2FNn%2FX0k0Ds%2BAZU%2FyvhrMhRxYDj%2FNHg1ilvxEbQlufeFYrL9Aqlzh8fcgrRNrVRhVfrSL%2F6CG1jAKrKcOpQjCuFws%2BB55kKtB68PlbcJhtlNmnt4HQLBFNHiwp4AJf4I3G--no9aC%2F20tKY7oFyx--CN911SzcQjR6mTWhBw4nYw%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 21e94b5d-c89b-4362-a5f0-484b058c33dc
+      X-Runtime:
+      - '0.146778'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56198/export/plaintext/verbatim
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3VUTW/bMAy9+1fwNMSA42LDhg25Fe0uQ1cUW4uhR0VmbC4yZVBqU+/Xj3K+FDTx
+        LdIT3yPfYx4pOlzAvY8dcQvoAoKjNQJFIIbYIWy8uAYGHyJKBfe09s5QgFvDFuGxQxMFi+IxFYKV
+        l97EBczY9Ah+BQPKdJawtII1+w2DF9jfd1o2EXtpDdM/E8lzeSCbvSK/YMI7b6c7mFmKYwUhmjhd
+        WP/CUcayrI6kzURnfT8YHsGzGxN3LqlOTzPuGrQj9nErMBOQ628SpRhuMZGNaKQsihvRAWixmZFI
+        IZYL+GOEUeZ3JgQUuA7BW9KX4T02qdLBoyyyu6Hz0bdiBj2fqrlG6Sv4ad4uoc7WsZ0XzArtjavg
+        2m2ILyLzYrf5IBcXvT+BvX8fp4yd/MpBdzrRF9NqCr9z6yh0CamTtkkfNjB71q9U4C9quxg0ltuU
+        aRoWcOOHUdI5PHGD6llPjI3GUX0KVmiJ++hCxDdNJu96KLYhibseOFuA4rgAxWEBigchTnJ0K57q
+        3/V1cYuBWiWD5XjRc7XNi6jXmirdnfpHDVfwcPAuPVVfDx7f1891kQqr8mHb4MfP8AafvtVfvyiz
+        7XTKTj3btbSh2AH1OrwUbLedzyD+L9okVddl6lKDbJpXTKFLPaaezlt5Sn7c5oZ65KBHoUzRGwNZ
+        46DJoB924Pl8EljB0hm7BsMNbDqKWEGfFvXoBkZblyd9zKxXAMe87ny+FMKVLvD2cImpveSx4qbG
+        ZUyr3ExeqHuoQqOqzPs9/79Q5v9N+33WAej3H6FPdywVBQAA
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '606'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Wed, 10 Aug 2022 22:36:02 GMT
+      ETag:
+      - W/"f740f66d4747b92b67ad4359f30079ae-gzip"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visitor=d7ed41ae-c643-4c1f-a03d-efd2f652651f; path=/; expires=Sat, 10
+        Aug 2024 22:36:02 GMT; secure
+      - ahoy_visit=c98d7f96-4690-49d0-9f9e-3c0b96442229; path=/; expires=Thu, 11 Aug
+        2022 02:36:02 GMT; secure
+      - _fromthepage_session=5ncRZU5szWwnehlX3tfYnws4i0UO3Umj2Kcto0%2BMYYsQFsKSCI2yzvdDn%2BCXN5DgBc1iO73DaMS25duvGgyN4ZCQgXoLTDBmOqi7OCb0NdiL3wEnd4OmayzmY3i1Uf7h3I%2F%2BZIdZGibbhpKkkO18MAOEhUDMsvDQ3DhtBM7deL%2FAWW6b0F3I%2B3bUeuSypd0B34poZHf3ArFNp1KSom%2F3QOWCpSwxzQVatO0F7AsBmz5JZEq%2Ba21UoJz7TynQ%2Bfj6AbZyebLorZguIDB5KAGR%2FfuZNO1UMV1y--3q8xyBOm%2FfiLf5mZ--kQQFGLMJHtWkQ3frxt8y%2BQ%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - f6f8894c-0294-4b9c-8617-9d2a414f6532
+      X-Runtime:
+      - '0.030781'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56198/export/html
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '5581'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Wed, 10 Aug 2022 22:41:10 GMT
+      ETag:
+      - W/"ceb9fafdbb9b67bc69b46fb83e0be6bd-gzip"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visitor=75e8cd22-1c91-411b-86a3-c3b42326d23b; path=/; expires=Sat, 10
+        Aug 2024 22:41:10 GMT; secure
+      - ahoy_visit=01bf92b4-4a65-42eb-bac8-297f34a14324; path=/; expires=Thu, 11 Aug
+        2022 02:41:10 GMT; secure
+      - _fromthepage_session=vIecfwhCxTxcfvLevul%2FFJb0LDhnfNhf%2B4MaAGgLzWFxGqWkkoGrRDaRAE2Df8s7hEKb0TTLR0HdM9neMc%2FILmUDmfdfWhBdOkVR9YUXH8R3MSFxCSP3W%2FOeok7okX1itYvPCLD3Q3KdYD4%2BEr2l8vFhG7XkTHzUhubrNDN6G7PRyRAk1SjW8F7HFyR8UCVNQYKXMfwXiFX2jCztWsTnoc4M5xCkYAZc2qcJVvaTGXzj%2BXVp4xSC59gsOhc4Qt1tquDfNw%3D%3D--tXnFhSi5973sJfrT--Bbh%2FKaI%2BBcHWRgkiZJSkqw%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 29835376-fa7d-48f3-a10a-160fa67a80f4
+      X-Runtime:
+      - '0.119641'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=vIecfwhCxTxcfvLevul%2FFJb0LDhnfNhf%2B4MaAGgLzWFxGqWkkoGrRDaRAE2Df8s7hEKb0TTLR0HdM9neMc%2FILmUDmfdfWhBdOkVR9YUXH8R3MSFxCSP3W%2FOeok7okX1itYvPCLD3Q3KdYD4%2BEr2l8vFhG7XkTHzUhubrNDN6G7PRyRAk1SjW8F7HFyR8UCVNQYKXMfwXiFX2jCztWsTnoc4M5xCkYAZc2qcJVvaTGXzj%2BXVp4xSC59gsOhc4Qt1tquDfNw%3D%3D--tXnFhSi5973sJfrT--Bbh%2FKaI%2BBcHWRgkiZJSkqw%3D%3D;
+        ahoy_visit=01bf92b4-4a65-42eb-bac8-297f34a14324; ahoy_visitor=75e8cd22-1c91-411b-86a3-c3b42326d23b
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56198/export/tei
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '1981'
+      Content-Type:
+      - application/xml; charset=utf-8
+      Date:
+      - Wed, 10 Aug 2022 22:41:10 GMT
+      ETag:
+      - W/"6ca5e1e2f5ef7f36feeb147065b33390-gzip"
+      Keep-Alive:
+      - timeout=5, max=99
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=01bf92b4-4a65-42eb-bac8-297f34a14324; path=/; expires=Thu, 11 Aug
+        2022 02:41:10 GMT; secure
+      - _fromthepage_session=F6TpAJp3mygYILuOV99E9JicC6AXz8fx8g1%2B8VZSDDFe2s%2F%2FY16sdcBcamRuJ50WpJ5uw5PqbIRIpZCEv10lSUbf5LSnY%2FVY%2BQ4OtjkLgvTwP%2B62IsTyTrqzQ56eV8ESkNqpf40wn1RWyELtf%2Fma8M%2B1gf2iWILirJeFNy7DHwK4rLnxHW1%2FmWX3w9Eh59anQvMxmPLJQqYOZ9oRhoKTjJo%2FXRg%2B1TSWYzBBJIV5I%2BFquRJAbG%2FN9W8IicR3GdKMbUdeZA%3D%3D--n0j4wECj7gkFq5p2--x9h9t697%2Bj%2F2Pq5ZC9%2FsDA%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - c3b21300-cff8-44df-b4cf-c952a91cfa6f
+      X-Runtime:
+      - '0.691108'
+    status:
+      code: 200
+      message: OK
+version: 1
