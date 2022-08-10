@@ -1,9 +1,10 @@
+from requests import Session
+
 import re
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
-from typing import Optional, List, Dict, Any, Union
 
-from requests import Session
+from typing import Optional, List, Dict, Any, Union
 
 
 @dataclass
@@ -77,6 +78,24 @@ def get_collection_structured_data_configuration(manifest_url: str, level: str, 
     response = session.get(f"https://fromthepage.com/iiif/{collection_id}/structured/config/{level}")
     response.raise_for_status()
     return response.json()
+
+
+def get_project_structured_data_page_config(manifest_url: str, session: Session) -> Optional[Dict[str, Any]]:
+    configuration = get_collection_structured_data_configuration(
+        manifest_url=manifest_url,
+        level="page",
+        session=session,
+    )
+    return configuration if configuration["config"] else None
+
+
+def get_project_structured_data_work_config(manifest_url: str, session: Session) -> Optional[Dict[str, Any]]:
+    configuration = get_collection_structured_data_configuration(
+        manifest_url=manifest_url,
+        level="work",
+        session=session,
+    )
+    return configuration if configuration["config"] else None
 
 
 def get_ftp_collection(manifest_url: str, session: Session) -> FTPCollection:
