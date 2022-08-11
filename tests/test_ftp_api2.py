@@ -129,3 +129,11 @@ def test_FtpPage_request_transcript(ftp_work):
     with requests.Session() as session:
         transcript = ftp_work.pages[0].request_transcript(label="Verbatim Plaintext", session=session)
     assert transcript.startswith("Title: ")
+
+
+@pytest.mark.parametrize("url,base_url,alias,dmrecord", [
+    ("https://cdm15808.contentdm.oclc.org/iiif/mss:188/canvas/c1", "https://cdm15808.contentdm.oclc.org", "mss", "188"),
+    ("https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll19/1959/canvas/c0", "https://cdm15808.contentdm.oclc.org", "p15808coll19", "1959"),
+])
+def test_parse_ftp_canvas_id(url, base_url, alias, dmrecord):
+    assert ftp_api.parse_ftp_canvas_id(url) == (base_url, alias, dmrecord)

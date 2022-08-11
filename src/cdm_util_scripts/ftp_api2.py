@@ -2,6 +2,7 @@ import requests
 import tqdm
 
 import re
+from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 
@@ -343,16 +344,16 @@ def parse_ftp_collection_url(url: str) -> Tuple[str, str]:
 def parse_cdm_iiif_manifest_url(url: str) -> Tuple[str, str, str]:
     # New route: .../iiif/2/p15808coll19:872/manifest.json
     # Old route: .../iiif/info/p15808coll19/3001/manifest.json
-    cdm_instance_base_url = url.partition("/iiif/")[0]
+    cdm_instance_base_url = "://".join(urlparse(url)[:2])
     match = re.search(r"/([^/:]*)[/:](\d*)/manifest.json", url)
     if match is None:
         raise ValueError(repr(url))
     return (cdm_instance_base_url, *match.groups())
 
 
-def parse_ftp_canvas_id(id_: str) -> Tuple[str, str]:
-    cdm_instance_base_url = id_.partition("/iiif/")[0]
-    match = re.search(r"/iiif/([^:]*):(\d*)/canvas/c\d+", id_)
+def parse_ftp_canvas_id(id_: str) -> Tuple[str, str, str]:
+    cdm_instance_base_url = "://".join(urlparse(id_)[:2])
+    match = re.search(r"/([^/:]*)[/:](\d*)/canvas/c\d+", id_)
     if match is None:
         raise ValueError(repr(id_))
     return (cdm_instance_base_url, *match.groups())
