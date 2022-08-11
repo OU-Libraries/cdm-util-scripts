@@ -532,4 +532,82 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56198/export/1808940/plaintext/verbatim
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3VUTW/bMAy9+1fwNMSA42LDhg25Fe0uQ1cUW4uhR0VmbC4yZVBqU+/Xj3K+FDTx
+        LdIT3yPfYx4pOlzAvY8dcQvoAoKjNQJFIIbYIWy8uAYGHyJKBfe09s5QgFvDFuGxQxMFi+IxFYKV
+        l97EBczY9Ah+BQPKdJawtII1+w2DF9jfd1o2EXtpDdM/E8lzeSCbvSK/YMI7b6c7mFmKYwUhmjhd
+        WP/CUcayrI6kzURnfT8YHsGzGxN3LqlOTzPuGrQj9nErMBOQ628SpRhuMZGNaKQsihvRAWixmZFI
+        IZYL+GOEUeZ3JgQUuA7BW9KX4T02qdLBoyyyu6Hz0bdiBj2fqrlG6Sv4ad4uoc7WsZ0XzArtjavg
+        2m2ILyLzYrf5IBcXvT+BvX8fp4yd/MpBdzrRF9NqCr9z6yh0CamTtkkfNjB71q9U4C9quxg0ltuU
+        aRoWcOOHUdI5PHGD6llPjI3GUX0KVmiJ++hCxDdNJu96KLYhibseOFuA4rgAxWEBigchTnJ0K57q
+        3/V1cYuBWiWD5XjRc7XNi6jXmirdnfpHDVfwcPAuPVVfDx7f1891kQqr8mHb4MfP8AafvtVfvyiz
+        7XTKTj3btbSh2AH1OrwUbLedzyD+L9okVddl6lKDbJpXTKFLPaaezlt5Sn7c5oZ65KBHoUzRGwNZ
+        46DJoB924Pl8EljB0hm7BsMNbDqKWEGfFvXoBkZblyd9zKxXAMe87ny+FMKVLvD2cImpveSx4qbG
+        ZUyr3ExeqHuoQqOqzPs9/79Q5v9N+33WAej3H6FPdywVBQAA
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '606'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Thu, 11 Aug 2022 17:25:11 GMT
+      ETag:
+      - W/"f740f66d4747b92b67ad4359f30079ae-gzip"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visitor=975dabc6-cb9f-4245-bed3-d1e2bdc0a5c4; path=/; expires=Sun, 11
+        Aug 2024 17:25:11 GMT; secure
+      - ahoy_visit=94ad556f-e788-4ff2-bb02-2f0d6b2d4a9d; path=/; expires=Thu, 11 Aug
+        2022 21:25:11 GMT; secure
+      - _fromthepage_session=OufLFhK8XE15c9S561xZ1eLE2F261R6VkG8Lasn%2B%2FVjnklOUobVoD6FInKy3%2FLzmUS22VKr6JbXyXXvpT%2F4%2BKOPX56WWTLl7Tpm9HoClIFqph67PHJF0W2K8FgNHV9VJl31cwr0JPnDWMp67I5TLn8NykI1AmNVf4qG%2F2T3s20d%2BtFHQVrgxluAOE2LzH55Z4AKD9FXBFXpgsq7eWHk8zmAfpM92ulswWzLx%2Foat41pxTYinBAqnBCtLjzadzxN6ZNFmiwyFe31gPV2RI4Pmm%2FAYrdvCSlsGFDMnyY4lEeU%3D--1QjECZVKCPf3efOc--vl8aFRNe3OSX9YnCHN6iug%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 77c193db-7e9e-4c2c-9600-9d6b99f84f96
+      X-Runtime:
+      - '0.035647'
+    status:
+      code: 200
+      message: OK
 version: 1

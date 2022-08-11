@@ -106,3 +106,11 @@ def test_FTPManifest_request_structured_data():
         assert field_data.label
         assert isinstance(field_data.value, (list, str))
         assert field_data.config.startswith("http")
+
+
+@pytest.mark.default_cassette("ftp_manifest.yaml")
+@pytest.mark.vcr
+def test_FTPPage_request_transcript(ftp_manifest):
+    with requests.Session() as session:
+        transcript = ftp_manifest.pages[0].request_transcript(label="Verbatim Plaintext", session=session)
+    assert transcript.startswith("Title: ")
