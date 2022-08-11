@@ -208,15 +208,27 @@ class FTPPage:
         )
 
     def request_transcript(self, label: str, session: requests.Session) -> str:
-        response = session.get(self.get_rendering(attr="label", value=label).url)
+        response = session.get(self._get_rendering(attr="label", value=label).url)
         response.raise_for_status()
         return response.text
 
-    def get_rendering(self, attr: str, value: str) -> FTPRendering:
+    def _get_rendering(self, attr: str, value: str) -> FTPRendering:
         for rendering in self.renderings:
             if getattr(rendering, attr) == value:
                 return rendering
         raise KeyError(repr(value))
+
+    def request_structured_data(self, session: requests.Session) -> "FTPStructuredData":
+        for rendering in self.renderings:
+            if rendering.context and rendering.context.endswith(
+                "/jsonld/structured/1/context.json"
+            ):
+                break
+        else:
+            raise KeyError("couldn't find structured data rendering")
+        response = session.get(rendering.url)
+        response.raise_for_status()
+        return FTPStructuredData.from_json(response.json())
 
 
 @dataclass
