@@ -45,7 +45,7 @@ def ftpmdc2catcher(
     with requests.Session() as session:
         print("Requesting project information...")
         ftp_project = ftp_api.request_ftp_project(
-            base_url="https://fromthepage.com",
+            base_url=ftp_api.FTP_HOSTED_BASE_URL,
             slug=ftp_slug,
             project_label=ftp_project_name,
             session=session

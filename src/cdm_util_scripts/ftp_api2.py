@@ -8,6 +8,9 @@ from dataclasses import dataclass, field
 from typing import List, Dict, Any, Tuple, Optional, NamedTuple, Union
 
 
+FTP_HOSTED_BASE_URL = "https://fromthepage.com"
+
+
 @dataclass
 class FtpInstance:
     base_url: str
