@@ -229,10 +229,12 @@ class FtpWork:
             if rendering.context and rendering.context.endswith(
                 "/jsonld/structured/1/context.json"
             ):
+                url = rendering.url
                 break
         else:
-            raise KeyError("couldn't find structured data rendering")
-        response = session.get(rendering.url)
+            # raise KeyError("couldn't find structured data rendering")
+            url = self.url.rpartition("/")[0] + "/structured"
+        response = session.get(url)
         response.raise_for_status()
         return FtpStructuredData.from_json(response.json())
 
