@@ -53,6 +53,7 @@ def test_FTPCollection_requests_manifests():
         assert manifest.metadata
         assert manifest.renderings
         assert manifest.pages
+        assert manifest.cdm_instance_base_url
         assert manifest.cdm_collection_alias
         assert manifest.cdm_object_dmrecord
 
@@ -69,6 +70,7 @@ def test_FTPManifest_request():
         assert page.id_
         assert page.label
         assert page.renderings
+        assert page.cdm_instance_base_url
         assert page.cdm_collection_alias
         assert page.cdm_page_dmrecord
 

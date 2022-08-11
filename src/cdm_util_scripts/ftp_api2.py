@@ -82,6 +82,7 @@ class FTPManifest:
     metadata: Dict[str, str] = field(default_factory=dict)
     renderings: List["FTPRendering"] = field(default_factory=list)
     pages: List["FTPPage"] = field(default_factory=list)
+    cdm_instance_base_url: Optional[str] = None
     cdm_collection_alias: Optional[str] = None
     cdm_object_dmrecord: Optional[str] = None
 
@@ -104,6 +105,7 @@ class FTPManifest:
         self.metadata = {}
         self.renderings = []
         self.pages = []
+        self.cdm_instance_base_url = None
         self.cdm_collection_alias = None
         self.cdm_object_dmrecord = None
 
@@ -129,6 +131,7 @@ class FTPManifest:
         if "dc:source" in self.metadata:
             cdm_iiif_manifest_url = self.metadata["dc:source"]
             (
+                self.cdm_instance_base_url,
                 self.cdm_collection_alias,
                 self.cdm_object_dmrecord,
             ) = parse_cdm_iiif_manifest_url(cdm_iiif_manifest_url)
@@ -192,17 +195,19 @@ class FTPPage:
     id_: str
     label: str
     renderings: List[FTPRendering] = field(default_factory=list)
+    cdm_instance_base_url: Optional[str] = None
     cdm_collection_alias: Optional[str] = None
     cdm_page_dmrecord: Optional[str] = None
 
     @classmethod
     def from_json(cls, json: Dict[str, Any]) -> "FTPPage":
         id_ = json["@id"]
-        cdm_collection_alias, cdm_page_dmrecord = parse_ftp_canvas_id(id_)
+        cdm_instance_base_url, cdm_collection_alias, cdm_page_dmrecord = parse_ftp_canvas_id(id_)
         return cls(
             id_=id_,
             label=json["label"],
             renderings=[FTPRendering.from_json(seeAlso) for seeAlso in json["seeAlso"]],
+            cdm_instance_base_url=cdm_instance_base_url,
             cdm_collection_alias=cdm_collection_alias,
             cdm_page_dmrecord=cdm_page_dmrecord,
         )
@@ -250,20 +255,22 @@ class FTPStructuredDataField(NamedTuple):
     config: str
 
 
-def parse_cdm_iiif_manifest_url(url: str) -> Tuple[str, str]:
+def parse_cdm_iiif_manifest_url(url: str) -> Tuple[str, str, str]:
     # New route: .../iiif/2/p15808coll19:872/manifest.json
     # Old route: .../iiif/info/p15808coll19/3001/manifest.json
+    cdm_instance_base_url = url.partition("/iiif/")[0]
     match = re.search(r"/([^/:]*)[/:](\d*)/manifest.json", url)
     if match is None:
         raise ValueError(repr(url))
-    return match.groups()
+    return (cdm_instance_base_url, *match.groups())
 
 
 def parse_ftp_canvas_id(id_: str) -> Tuple[str, str]:
+    cdm_instance_base_url = id_.partition("/iiif/")[0]
     match = re.search(r"/iiif/([^:]*):(\d*)/canvas/c\d+", id_)
     if match is None:
         raise ValueError(repr(id_))
-    return match.groups()
+    return (cdm_instance_base_url, *match.groups())
 
 
 def request_ftp_collection(
