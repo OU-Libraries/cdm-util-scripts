@@ -9,88 +9,155 @@ from typing import List, Dict, Any, Tuple, Optional, NamedTuple, Union
 
 
 @dataclass
-class FTPInstance:
+class FtpInstance:
     base_url: str
 
     def __post_init__(self) -> None:
         self.base_url = self.base_url.rstrip("/")
 
-    def request_collections(
+    def request_projects(
         self, slug: str, session: requests.Session
-    ) -> "FTPCollectionOfCollections":
+    ) -> "FtpProjectCollection":
         response = session.get(f"{self.base_url}/iiif/collections/{slug}")
         response.raise_for_status()
-        collections = FTPCollectionOfCollections.from_json(response.json())
-        return collections
+        projects = FtpProjectCollection.from_json(response.json())
+        return projects
 
 
 @dataclass
-class FTPCollectionOfCollections:
+class FtpProjectCollection:
     url: str
-    collections: Dict[str, str] = field(default_factory=dict)
+    projects: Dict[str, str] = field(default_factory=dict)
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FTPCollectionOfCollections":
+    def from_json(cls, json: Dict[str, Any]) -> "FtpProjectCollection":
         return cls(
             url=json["@id"],
-            collections={
+            projects={
                 collection["label"]: collection["@id"]
                 for collection in json["collections"]
             },
         )
 
-    def request_collection(
+    def request_project(
         self, label: str, session: requests.Session
-    ) -> "FTPCollection":
-        response = session.get(self.collections[label])
+    ) -> "FtpProject":
+        response = session.get(self.projects[label])
         response.raise_for_status()
-        return FTPCollection.from_json(response.json())
+        return FtpProject.from_json(response.json())
 
 
 @dataclass
-class FTPCollection:
+class FtpProject:
     url: str
     label: str
-    manifests: List["FTPManifest"] = field(default_factory=list)
-    collection_id: str = field(init=False)
+    works: List["FtpWork"] = field(default_factory=list)
+    base_url: str = field(init=False)
+    project_id: str = field(init=False)
 
     def __post_init__(self):
-        self.collection_id = self.url.rpartition("/")[2]
+        self.base_url, self.project_id = parse_ftp_collection_url(self.url)
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FTPCollection":
+    def from_json(cls, json: Dict[str, Any]) -> "FtpProject":
         return cls(
             url=json["@id"],
             label=json["label"],
-            manifests=[
-                FTPManifest.from_json(manifest) for manifest in json["manifests"]
+            works=[
+                FtpWork.from_json(manifest) for manifest in json["manifests"]
             ],
         )
 
-    def request_manifests(
+    def request_works(
         self, session: requests.Session, show_progress: bool = True
     ) -> None:
-        manifests = tqdm.tqdm(self.manifests) if show_progress else self.manifests
-        for manifest in manifests:
-            manifest.request(session=session)
+        works = tqdm.tqdm(self.works) if show_progress else self.works
+        for work in works:
+            work.request(session=session)
+
+    def request_work_structured_data_config(
+        self, session: requests.Session
+    ) -> "FtpStructuredDataConfig":
+        return _request_structured_data_configuration(
+            base_url=self.base_url,
+            project_id=self.project_id,
+            level="work",
+            session=session,
+        )
+
+    def request_page_structured_data_config(
+        self, session: requests.Session
+    ) -> "FtpStructuredDataConfig":
+        return _request_structured_data_configuration(
+            base_url=self.base_url,
+            project_id=self.project_id,
+            level="page",
+            session=session,
+        )
+
+
+def _request_structured_data_configuration(
+    base_url: str, project_id: str, level: str, session: requests.Session
+) -> "FtpStructuredDataConfig":
+    response = session.get(f"{base_url}/iiif/{project_id}/structured/config/{level}")
+    response.raise_for_status()
+    return FtpStructuredDataConfig.from_json(response.json())
 
 
 @dataclass
-class FTPManifest:
+class FtpStructuredDataConfig:
+    url: str
+    label: str
+    fields: List["FtpStructuredDataFieldConfig"] = field(default_factory=list)
+
+    @classmethod
+    def from_json(cls, json: Dict[str, Any]) -> "FtpStructuredDataConfig":
+        return cls(
+            url=json["@id"],
+            label=json["label"],
+            fields=[
+                FtpStructuredDataFieldConfig.from_json(field_config)
+                for field_config in json["config"]
+            ],
+        )
+
+
+class FtpStructuredDataFieldConfig(NamedTuple):
+    label: str
+    input_type: str
+    position: int
+    line: int
+    url: str
+    options: List[str]
+
+    @classmethod
+    def from_json(cls, json: Dict[str, Any]) -> "FtpStructuredDataFieldConfig":
+        return cls(
+            url=json["@id"],
+            label=json["label"],
+            input_type=json["input_type"],
+            position=int(json["position"]),
+            line=int(json["line"]),
+            options=json.get("options", []),
+        )
+
+
+@dataclass
+class FtpWork:
     url: str
     label: str
     metadata: Dict[str, str] = field(default_factory=dict)
-    renderings: List["FTPRendering"] = field(default_factory=list)
-    pages: List["FTPPage"] = field(default_factory=list)
+    renderings: List["FtpRendering"] = field(default_factory=list)
+    pages: List["FtpPage"] = field(default_factory=list)
     cdm_instance_base_url: Optional[str] = None
     cdm_collection_alias: Optional[str] = None
     cdm_object_dmrecord: Optional[str] = None
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FTPManifest":
-        manifest = cls(url=json["@id"], label=json["label"])
-        manifest._load(json)
-        return manifest
+    def from_json(cls, json: Dict[str, Any]) -> "FtpWork":
+        work = cls(url=json["@id"], label=json["label"])
+        work._load(json)
+        return work
 
     def request(self, session: requests.Session) -> None:
         response = session.get(self.url)
@@ -117,16 +184,14 @@ class FTPManifest:
         seeAlsos = json.get("seeAlso")
         if seeAlsos is not None:
             for seeAlso in seeAlsos:
-                self.renderings.append(FTPRendering.from_json(seeAlso))
+                self.renderings.append(FtpRendering.from_json(seeAlso))
 
         sequences = json.get("sequences")
         if sequences is not None:
             sequence = sequences[0]
             for rendering in sequence["rendering"]:
-                self.renderings.append(FTPRendering.from_json(rendering))
-            self.pages = [
-                FTPPage.from_json(canvas) for canvas in sequence["canvases"]
-            ]
+                self.renderings.append(FtpRendering.from_json(rendering))
+            self.pages = [FtpPage.from_json(canvas) for canvas in sequence["canvases"]]
 
         if "dc:source" in self.metadata:
             cdm_iiif_manifest_url = self.metadata["dc:source"]
@@ -136,7 +201,7 @@ class FTPManifest:
                 self.cdm_object_dmrecord,
             ) = parse_cdm_iiif_manifest_url(cdm_iiif_manifest_url)
 
-    def _get_rendering(self, attr: str, value: str) -> "FTPRendering":
+    def _get_rendering(self, attr: str, value: str) -> "FtpRendering":
         for rendering in self.renderings:
             if getattr(rendering, attr) == value:
                 return rendering
@@ -159,7 +224,7 @@ class FTPManifest:
         tei = self.request_rendering(label="TEI Export", session=session)
         return extract_fields_from_tei(tei)
 
-    def request_structured_data(self, session: requests.Session) -> "FTPStructuredData":
+    def request_structured_data(self, session: requests.Session) -> "FtpStructuredData":
         for rendering in self.renderings:
             if rendering.context and rendering.context.endswith(
                 "/jsonld/structured/1/context.json"
@@ -169,10 +234,10 @@ class FTPManifest:
             raise KeyError("couldn't find structured data rendering")
         response = session.get(rendering.url)
         response.raise_for_status()
-        return FTPStructuredData.from_json(response.json())
+        return FtpStructuredData.from_json(response.json())
 
 
-class FTPRendering(NamedTuple):
+class FtpRendering(NamedTuple):
     url: str
     label: str
     profile: str
@@ -180,7 +245,7 @@ class FTPRendering(NamedTuple):
     context: Optional[str] = None
 
     @classmethod
-    def from_json(cls, json: Dict[str, str]) -> "FTPRendering":
+    def from_json(cls, json: Dict[str, str]) -> "FtpRendering":
         return cls(
             url=json["@id"],
             label=json["label"],
@@ -191,22 +256,26 @@ class FTPRendering(NamedTuple):
 
 
 @dataclass
-class FTPPage:
+class FtpPage:
     id_: str
     label: str
-    renderings: List[FTPRendering] = field(default_factory=list)
+    renderings: List[FtpRendering] = field(default_factory=list)
     cdm_instance_base_url: Optional[str] = None
     cdm_collection_alias: Optional[str] = None
     cdm_page_dmrecord: Optional[str] = None
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FTPPage":
+    def from_json(cls, json: Dict[str, Any]) -> "FtpPage":
         id_ = json["@id"]
-        cdm_instance_base_url, cdm_collection_alias, cdm_page_dmrecord = parse_ftp_canvas_id(id_)
+        (
+            cdm_instance_base_url,
+            cdm_collection_alias,
+            cdm_page_dmrecord,
+        ) = parse_ftp_canvas_id(id_)
         return cls(
             id_=id_,
             label=json["label"],
-            renderings=[FTPRendering.from_json(seeAlso) for seeAlso in json["seeAlso"]],
+            renderings=[FtpRendering.from_json(seeAlso) for seeAlso in json["seeAlso"]],
             cdm_instance_base_url=cdm_instance_base_url,
             cdm_collection_alias=cdm_collection_alias,
             cdm_page_dmrecord=cdm_page_dmrecord,
@@ -217,13 +286,13 @@ class FTPPage:
         response.raise_for_status()
         return response.text
 
-    def _get_rendering(self, attr: str, value: str) -> FTPRendering:
+    def _get_rendering(self, attr: str, value: str) -> FtpRendering:
         for rendering in self.renderings:
             if getattr(rendering, attr) == value:
                 return rendering
         raise KeyError(repr(value))
 
-    def request_structured_data(self, session: requests.Session) -> "FTPStructuredData":
+    def request_structured_data(self, session: requests.Session) -> "FtpStructuredData":
         for rendering in self.renderings:
             if rendering.context and rendering.context.endswith(
                 "/jsonld/structured/1/context.json"
@@ -233,26 +302,31 @@ class FTPPage:
             raise KeyError("couldn't find structured data rendering")
         response = session.get(rendering.url)
         response.raise_for_status()
-        return FTPStructuredData.from_json(response.json())
+        return FtpStructuredData.from_json(response.json())
 
 
 @dataclass
-class FTPStructuredData:
+class FtpStructuredData:
     contributors: List[Dict[str, str]]
-    data: List["FTPStructuredDataField"] = field(default_factory=list)
+    data: List["FtpStructuredDataField"] = field(default_factory=list)
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FTPStructuredData":
+    def from_json(cls, json: Dict[str, Any]) -> "FtpStructuredData":
         return cls(
             contributors=json["contributors"],
-            data=[FTPStructuredDataField(**field_data) for field_data in json["data"]],
+            data=[FtpStructuredDataField(**field_data) for field_data in json["data"]],
         )
 
 
-class FTPStructuredDataField(NamedTuple):
+class FtpStructuredDataField(NamedTuple):
     label: str
     value: Union[str, List[str]]
     config: str
+
+
+def parse_ftp_collection_url(url: str) -> Tuple[str, str]:
+    base_url, _, collection_id = url.partition("/iiif/collection/")
+    return base_url, collection_id
 
 
 def parse_cdm_iiif_manifest_url(url: str) -> Tuple[str, str, str]:
@@ -273,29 +347,29 @@ def parse_ftp_canvas_id(id_: str) -> Tuple[str, str]:
     return (cdm_instance_base_url, *match.groups())
 
 
-def request_ftp_collection(
-    base_url: str, slug: str, collection_label: str, session: requests.Session
-) -> FTPCollection:
-    instance = FTPInstance(base_url=base_url)
-    collections = instance.request_collections(slug=slug, session=session)
-    return collections.request_collection(label=collection_label, session=session)
+def request_ftp_project(
+    base_url: str, slug: str, project_label: str, session: requests.Session
+) -> FtpProject:
+    instance = FtpInstance(base_url=base_url)
+    projects = instance.request_projects(slug=slug, session=session)
+    return projects.request_project(label=project_label, session=session)
 
 
-def request_ftp_collection_and_manifests(
+def request_ftp_project_and_works(
     base_url: str,
     slug: str,
-    collection_label: str,
+    project_label: str,
     session: requests.Session,
     show_progress: bool = True,
-) -> FTPCollection:
-    collection = request_ftp_collection(
+) -> FtpProject:
+    project = request_ftp_project(
         base_url=base_url,
         slug=slug,
-        collection_label=collection_label,
+        project_label=project_label,
         session=session,
     )
-    collection.request_manifests(session=session, show_progress=show_progress)
-    return collection
+    project.request_works(session=session, show_progress=show_progress)
+    return project
 
 
 def extract_fields_from_tei(tei: str) -> List[Optional[Dict[str, str]]]:
