@@ -148,7 +148,7 @@ class FtpStructuredDataFieldConfig(NamedTuple):
 @dataclass
 class FtpWork:
     url: str
-    label: str
+    label: Optional[str] = None
     metadata: Dict[str, str] = field(default_factory=dict)
     renderings: List["FtpRendering"] = field(default_factory=list)
     pages: List["FtpPage"] = field(default_factory=list)
@@ -160,6 +160,12 @@ class FtpWork:
     def from_json(cls, json: Dict[str, Any]) -> "FtpWork":
         work = cls(url=json["@id"], label=json["label"])
         work._load(json)
+        return work
+
+    @classmethod
+    def from_url(cls, url: str, session: requests.Session) -> "FtpWork":
+        work = cls(url=url)
+        work.request(session=session)
         return work
 
     def request(self, session: requests.Session) -> None:
