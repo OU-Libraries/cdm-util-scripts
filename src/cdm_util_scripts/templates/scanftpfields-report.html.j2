@@ -1,112 +1,115 @@
 {% extends 'base.html.j2' %}
 {% block headtitle %}{{project_label }} scanftpfields report{% endblock %}
 {% block style %}
-         .field-info-table td ul {
-             margin: 0.3em 0 0.3em 0;
-         }
+    .field-info-table td ul {
+    margin: 0.3em 0 0.3em 0;
+    }
 
-         .field-label {
-             font-family: monospace;
-         }
+    .field-label {
+    font-family: monospace;
+    }
 
-         .field-set {
-             margin-left: 1em;
-             padding-left: 1em;
-             border-left: thin solid;
-         }
+    .field-set {
+    margin-left: 1em;
+    padding-left: 1em;
+    border-left: thin solid;
+    }
 
-         .undercount {
-             background-color: #ffe7bc;
-         }
+    .undercount {
+    background-color: #ffe7bc;
+    }
 
-         .page-list {}
+    .page-list {}
 {% endblock %}
 {% block doctitle %}FromThePage field scan report for project {{ project_label }}{% endblock %}
 {% block content %}
-            <table class="report-metadata-table">
-                <tbody>
-                    <tr><td>Report date</td><td>{{ report_date }}</td></tr>
-                    <tr><td>FromThePage user slug</td><td>{{ slug }}</td></tr>
-                    <tr><td>FromThePage project alias</td><td>{{ project_id }}</td></tr>
-                    <tr><td>FromThePage project label</td><td>{{ project_label }}</td></tr>
-                    <tr><td>FromThePage project manifest</td><td><a href="{{ project_manifest_url }}">{{ project_manifest_url }}</a></td></tr>
-                </tbody>
-            </table>
+    <table class="report-metadata-table">
+        <tbody>
+            <tr><td>Report date</td><td>{{ report_date }}</td></tr>
+            <tr><td>FromThePage user slug</td><td>{{ slug }}</td></tr>
+            <tr><td>FromThePage project alias</td><td>{{ project_id }}</td></tr>
+            <tr><td>FromThePage project label</td><td>{{ project_label }}</td></tr>
+            <tr><td>FromThePage project manifest</td><td><a href="{{ project_manifest_url }}">{{ project_manifest_url }}</a></td></tr>
+        </tbody>
+    </table>
 
-            <h2>Field label frequencies</h2>
+    <h2>Field label frequencies</h2>
 
-            <p>
-                Works: {{ works_count }}<br/>
-                Filled pages: {{ filled_pages_count }}<br/>
-            </p>
+    <p>
+        Works: {{ works_count }}<br/>
+        Filled pages: {{ filled_pages_count }}<br/>
+        Unfilled pages:  {{ blank_pages|length }}<br/>
+    </p>
 
+    <table class="field-info-table">
+        <thead>
+            <tr>
+                <th>Frequency</th>
+                <th>Field label</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for label, count in field_label_frequencies.items() %}
+                <tr>
+                    <td>
+                        {%- if count < filled_pages_count|int -%}
+                            <span class="undercount">{{ count }}</span>
+                        {%- else -%}
+                            <span>{{ count }}</span>
+                        {%- endif -%}
+                    </td>
+                    <td><span class="field-label">{{ label }}</span></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Field sets</h2>
+    <p>There are {{ pages_by_schema|length }} field sets used in this collection.</p>
+    {% for schema, pages_and_works in pages_by_schema.items() %}
+        <h3>{{ pages_and_works|length }} pages</h3>
+        <div class="field-set">
+            <h4>Field set</h4>
+            <ul>
+                {%- for field, count in field_label_frequencies.items() if field in schema -%}
+                    {%- if count < filled_pages_count|int %}
+                        <li><span class="field-label undercount">{{ field }}</span></li>
+                    {%- else -%}
+                        <li><span class="field-label">{{ field }}</span></li>
+                    {%- endif -%}
+                {%- endfor %}
+            </ul>
+            <h4>Omitted fields</h4>
+            {% if field_label_frequencies | reject("in", schema) | first %}
+                <ul>
+                    {%- for field in field_label_frequencies -%}
+                        {%- if field not in schema %}
+                            <li><span class="field-label undercount">{{ field }}</span></li>
+                        {%- endif -%}
+                    {%- endfor %}
+                </ul>
+            {% else %}
+                <p>None</p>
+            {% endif %}
+            <h4>Pages using this set</h4>
             <table class="field-info-table">
                 <thead>
                     <tr>
-                        <th>Frequency</th>
-                        <th>Field label</th>
+                        <th>Edit Page</th>
+                        <th>Page</th>
+                        <th>Work</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for label, count in field_label_frequencies.items() %}
+                    {% for page, work in pages_and_works -%}
                         <tr>
-                            <td>
-                                {%- if count < filled_pages_count|int -%}
-                                    <span class="undercount">{{ count }}</span>
-                                {%- else -%}
-                                    <span>{{ count }}</span>
-                                {%- endif -%}
-                            </td>
-                            <td><span class="field-label">{{ label }}</span></td>
+                            <td><a href="{{ page.transcribe_url }}">✍</a></td>
+                            <td><a href="{{ page.read_url }}">{{ page.label }}</a></td>
+                            <td><a href="{{ work.read_url }}">{{ work.label }}</a></td>
                         </tr>
-                    {% endfor %}
+                    {%- endfor %}
                 </tbody>
             </table>
-
-            <h2>Field sets</h2>
-            <p>There are {{ pages_by_schema|length }} field sets used in this collection.</p>
-            {% for schema, pages_and_works in pages_by_schema.items() %}
-                <h3>{{ pages_and_works|length }} pages</h3>
-                <div class="field-set">
-                    <h4>Field set</h4>
-                    <ul>
-                        {%- for field, count in field_label_frequencies.items() if field in schema -%}
-                            {%- if count < filled_pages_count|int %}
-                                <li><span class="field-label undercount">{{ field }}</span></li>
-                            {%- else -%}
-                                <li><span class="field-label">{{ field }}</span></li>
-                            {%- endif -%}
-                        {%- endfor %}
-                    </ul>
-                    <h4>Omitted fields</h4>
-                    <ul>
-                        {%- for field in field_label_frequencies -%}
-                            {%- if field not in schema %}
-                                <li><span class="field-label undercount">{{ field }}</span></li>
-                            {%- endif -%}
-                        {%- endfor %}
-                    </ul>
-                    <h4>Pages using this set</h4>
-                    <table class="field-info-table">
-                        <thead>
-                            <tr>
-                                <th>Edit Page</th>
-                                <th>Page</th>
-                                <th>Work</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for page, work in pages_and_works -%}
-                                <tr>
-                                    <td><a href="{{ page.transcribe_url }}">✍</a></td>
-                                    <td><a href="{{ page.read_url }}">{{ page.label }}</a></td>
-                                    <td><a href="{{ work.read_url }}">{{ work.label }}</a></td>
-                                </tr>
-                            {%- endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            {%- endfor %}
-            <h2>Works without any filled pages</h2>
-            <p>There are {{ blank_pages|length }} pages without any filled fields in this collection.</p>
+        </div>
+    {%- endfor %}
 {% endblock %}
