@@ -98,10 +98,10 @@ def test_FtpWork_request_rendering(ftp_work):
 
 @pytest.mark.default_cassette("ftp_manifest.yaml")
 @pytest.mark.vcr
-def test_FtpWork_request_xhtml_tei_transcript_fields(ftp_work):
+def test_FtpWork_request_transcript_fields(ftp_work):
     with requests.Session() as session:
-        xhtml_fields = ftp_work.request_xhtml_transcript_fields(session=session)
-        tei_fields = ftp_work.request_tei_transcript_fields(session=session)
+        xhtml_fields = ftp_work.request_transcript_fields(session=session, label="XHTML Export")
+        tei_fields = ftp_work.request_transcript_fields(session=session, label="TEI Export")
     assert xhtml_fields == tei_fields
     assert len(xhtml_fields) == 1
     xhtml_page = xhtml_fields[0]
@@ -134,6 +134,7 @@ def test_FtpPage_request_transcript(ftp_work):
 @pytest.mark.parametrize("url,base_url,alias,dmrecord", [
     ("https://cdm15808.contentdm.oclc.org/iiif/mss:188/canvas/c1", "https://cdm15808.contentdm.oclc.org", "mss", "188"),
     ("https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll19/1959/canvas/c0", "https://cdm15808.contentdm.oclc.org", "p15808coll19", "1959"),
+    ("https://fromthepage.com/iiif/46450/canvas/1503033", None, None, None),
 ])
 def test_parse_ftp_canvas_id(url, base_url, alias, dmrecord):
     assert ftp_api.parse_ftp_canvas_id(url) == (base_url, alias, dmrecord)

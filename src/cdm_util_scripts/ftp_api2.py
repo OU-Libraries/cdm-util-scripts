@@ -12,6 +12,9 @@ from typing import List, Dict, Any, Tuple, Optional, NamedTuple, Union
 FTP_HOSTED_BASE_URL = "https://fromthepage.com"
 
 
+FtpFieldBasedTranscription = List[Optional[Dict[str, str]]]
+
+
 @dataclass
 class FtpInstance:
     base_url: str
@@ -151,6 +154,8 @@ class FtpWork:
     url: str
     label: Optional[str] = None
     metadata: Dict[str, str] = field(default_factory=dict)
+    read_url: Optional[str] = None
+    contents_url: Optional[str] = None
     renderings: List["FtpRendering"] = field(default_factory=list)
     pages: List["FtpPage"] = field(default_factory=list)
     cdm_instance_base_url: Optional[str] = None
@@ -179,6 +184,8 @@ class FtpWork:
         # Update everything based on the new data
         self.url = json["@id"]
         self.label = json["label"]
+        self.read_url = None
+        self.contents_url = None
         self.metadata = {}
         self.renderings = []
         self.pages = []
@@ -189,6 +196,11 @@ class FtpWork:
         metadata = json.get("metadata")
         if metadata is not None:
             self.metadata = {pair["label"]: pair["value"] for pair in metadata}
+
+        related = json.get("related")
+        if related is not None :
+            self.read_url = related[0]["@id"]
+            self.contents_url = related[1]["@id"]
 
         # TODO: conflating seeAlso and renderings duplicates Verbatim Plaintext: problem or not?
         seeAlsos = json.get("seeAlso")
@@ -222,17 +234,14 @@ class FtpWork:
         response.raise_for_status()
         return response.text
 
-    def request_xhtml_transcript_fields(
-        self, session: requests.Session
-    ) -> List[Optional[Dict[str, str]]]:
-        xhtml = self.request_rendering(label="XHTML Export", session=session)
-        return extract_fields_from_xhtml(xhtml)
-
-    def request_tei_transcript_fields(
-        self, session: requests.Session
-    ) -> List[Optional[Dict[str, str]]]:
-        tei = self.request_rendering(label="TEI Export", session=session)
-        return extract_fields_from_tei(tei)
+    def request_transcript_fields(
+            self, session: requests.Session, label: str = "XHTML Export", empty_is_none: bool = True
+    ) -> FtpFieldBasedTranscription:
+        raw_rendering = self.request_rendering(label=label, session=session)
+        field_based_transcription = RENDERING_EXTRACTORS[label](raw_rendering)
+        if empty_is_none:
+            return [fields if fields and any(fields.values()) else None for fields in field_based_transcription]
+        return field_based_transcription
 
     def request_structured_data(self, session: requests.Session) -> "FtpStructuredData":
         for rendering in self.renderings:
@@ -270,7 +279,9 @@ class FtpRendering(NamedTuple):
 @dataclass
 class FtpPage:
     id_: str
-    label: str
+    label: Optional[str] = None
+    read_url: Optional[str] = None
+    transcribe_url: Optional[str] = None
     renderings: List[FtpRendering] = field(default_factory=list)
     cdm_instance_base_url: Optional[str] = None
     cdm_collection_alias: Optional[str] = None
@@ -287,6 +298,8 @@ class FtpPage:
         return cls(
             id_=id_,
             label=json["label"],
+            read_url=json["related"][0]["@id"],
+            transcribe_url=json["related"][1]["@id"],
             renderings=[FtpRendering.from_json(seeAlso) for seeAlso in json["seeAlso"]],
             cdm_instance_base_url=cdm_instance_base_url,
             cdm_collection_alias=cdm_collection_alias,
@@ -351,12 +364,11 @@ def parse_cdm_iiif_manifest_url(url: str) -> Tuple[str, str, str]:
     return (cdm_instance_base_url, *match.groups())
 
 
-def parse_ftp_canvas_id(id_: str) -> Tuple[str, str, str]:
-    cdm_instance_base_url = "://".join(urlparse(id_)[:2])
-    match = re.search(r"/([^/:]*)[/:](\d*)/canvas/c\d+", id_)
-    if match is None:
-        raise ValueError(repr(id_))
-    return (cdm_instance_base_url, *match.groups())
+def parse_ftp_canvas_id(id_: str) -> Tuple[Optional[str], Optional[str], Optional[str]]:
+    match = re.match(r"(https?://[^/]*)/.*/([^/:]*)[/:](\d*)/canvas/c\d+", id_)
+    if match:
+        return match.groups()
+    return (None, None, None)
 
 
 def request_ftp_project(
@@ -384,7 +396,7 @@ def request_ftp_project_and_works(
     return project
 
 
-def extract_fields_from_tei(tei: str) -> List[Optional[Dict[str, str]]]:
+def extract_fields_from_tei(tei: str) -> FtpFieldBasedTranscription:
     NS = {"ns": "http://www.tei-c.org/ns/1.0"}
     tei_root = ET.fromstring(tei)
     tei_pages = tei_root.findall("./ns:text/ns:body/ns:div", namespaces=NS)
@@ -396,7 +408,7 @@ def extract_fields_from_tei(tei: str) -> List[Optional[Dict[str, str]]]:
     return pages
 
 
-def extract_fields_from_xhtml(xhtml: str) -> List[Optional[Dict[str, str]]]:
+def extract_fields_from_xhtml(xhtml: str) -> FtpFieldBasedTranscription:
     NS = {"ns": "http://www.w3.org/1999/xhtml"}
     # The FromThePage XHTML Export isn't valid XHTML because of the JS blob on line 6
     html_no_scripts = re.sub(r"<script>?.*</script>", "", xhtml).strip()

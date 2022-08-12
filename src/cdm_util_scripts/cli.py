@@ -154,13 +154,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "ftp_project_name", help="FromThePage project name"
     )
     scanftpfields_subparser.add_argument(
-        "--rendering-label",
-        choices=list(ftp_api.RENDERING_EXTRACTORS),
-        default="XHTML Export",
-        help="Choose the export to use for parsing fields",
-    )
-    scanftpfields_subparser.add_argument(
-        "--report-parent",
+        "--report-parent-path",
         default=".",
         help="Directory to put report in",
     )
