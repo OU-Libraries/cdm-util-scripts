@@ -5,7 +5,6 @@ from datetime import datetime
 from collections import defaultdict
 
 from cdm_util_scripts import catcherdiff
-from cdm_util_scripts import ftpfields2catcher
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
 
@@ -35,7 +34,7 @@ def scan_vocabs(
         for ftp_page in ftp_work.pages:
             if not ftp_page.fields:
                 continue
-            item_info = ftpfields2catcher.apply_field_mapping(
+            item_info = cdm_api.apply_field_mapping(
                 ftp_fields=ftp_page.fields,
                 field_mapping=field_mapping,
             )

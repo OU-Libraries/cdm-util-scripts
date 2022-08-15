@@ -8,25 +8,6 @@ from cdm_util_scripts import ftp_api
 from typing import Optional, List, Iterable, Dict, Sequence, Callable, Tuple
 
 
-def apply_field_mapping(ftp_fields: Dict[str, str], field_mapping: Dict[str, Sequence[str]]) -> Dict[str, str]:
-    accumulator = dict()
-    for label, nicks in field_mapping.items():
-        ftp_field = ftp_fields[label]
-        for nick in nicks:
-            if nick in accumulator:
-                if ftp_field:
-                    if accumulator[nick]:
-                        accumulator[nick] = '; '.join([
-                            accumulator[nick],
-                            ftp_field
-                        ])
-                    else:
-                        accumulator[nick] = ftp_field
-            else:
-                accumulator[nick] = ftp_field
-    return accumulator
-
-
 def map_ftp_work_as_cdm_object(
         ftp_work: ftp_api.FTPWork,
         field_mapping: Dict[str, Sequence[str]],
@@ -37,7 +18,7 @@ def map_ftp_work_as_cdm_object(
         return None
     return {
         'dmrecord': ftp_work.dmrecord,
-        **apply_field_mapping(object_page.fields,
+        **cdm_api.apply_field_mapping(object_page.fields,
                               field_mapping)
     }
 
@@ -121,7 +102,7 @@ def map_ftp_work_as_cdm_pages(
         if page.fields:
             page_data.append({
                 'dmrecord': page.dmrecord,
-                **apply_field_mapping(ftp_fields=page.fields,
+                **cdm_api.apply_field_mapping(ftp_fields=page.fields,
                                       field_mapping=field_mapping)
             })
     return page_data

@@ -5,27 +5,8 @@ import csv
 import json
 
 from cdm_util_scripts import ftpfields2catcher
+from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
-
-
-@pytest.mark.parametrize('field_mapping, result', [
-    ({'label': ['nick']}, {'nick': 'value'}),
-    ({'label': ['nick1', 'nick2']}, {'nick1': 'value', 'nick2': 'value'}),
-    ({'blank': ['nick'], 'label': ['nick']}, {'nick': 'value'}),
-    ({'label': ['nick'], 'blank': ['nick']}, {'nick': 'value'}),
-    ({'blank': ['nick', 'nick']}, {'nick': ''}),
-    ({'label': ['nick', 'nick']}, {'nick': 'value; value'}),
-    ({'label': ['nick'], 'label2': ['nick']}, {'nick': 'value; value2'}),
-    ({'label2': ['nick'], 'label': ['nick']}, {'nick': 'value2; value'}),
-])
-def test_apply_mapping(field_mapping, result):
-    ftp_fields = {
-        'label': 'value',
-        'label2': 'value2',
-        'blank': ''
-    }
-    mapped = ftpfields2catcher.apply_field_mapping(ftp_fields, field_mapping)
-    assert mapped == result
 
 
 @pytest.mark.parametrize('pages, check_index', [
@@ -136,7 +117,7 @@ def test_map_ftp_work_as_cdm_pages(ftp_work, dmrecords):
     for dmrecord, page, page_data in zip(dmrecords, ftp_work.pages, pages_data):
         assert page_data == {
             'dmrecord': dmrecord,
-            **ftpfields2catcher.apply_field_mapping(page.fields, field_mapping)
+            **cdm_api.apply_field_mapping(page.fields, field_mapping)
         }
 
 

@@ -3,7 +3,7 @@ from requests import Session
 import csv
 import collections
 
-from typing import Dict, List, Union, Tuple
+from typing import Dict, List, Union, Tuple, Sequence
 
 
 class DmError(Exception):
@@ -111,3 +111,64 @@ def read_csv_field_mapping(filename: str) -> Dict[str, List[str]]:
         for row in reader:
             field_mapping[row['name']].append(row['nick'].strip())
     return dict(field_mapping)
+
+
+def apply_field_mapping(ftp_fields: Dict[str, str], field_mapping: Dict[str, Sequence[str]]) -> Dict[str, str]:
+    accumulator: Dict[str, str] = dict()
+    for label, nicks in field_mapping.items():
+        ftp_field = ftp_fields[label]
+        for nick in nicks:
+            if nick in accumulator:
+                if ftp_field:
+                    if accumulator[nick]:
+                        accumulator[nick] = '; '.join([
+                            accumulator[nick],
+                            ftp_field
+                        ])
+                    else:
+                        accumulator[nick] = ftp_field
+            else:
+                accumulator[nick] = ftp_field
+    return accumulator
+
+
+def build_vocabs_index(cdm_fields_info: List[Dict[str, Union[str, int]]]) -> Dict[str, Dict[str, str]]:
+    vocabs_index = dict()
+    for field_info in cdm_fields_info:
+        if field_info['vocab']:
+            nick = field_info['nick']
+            vocdb = field_info['vocdb']
+            vocabs_index[nick] = {
+                'type': 'vocdb' if vocdb else 'vocab',
+                'name': vocdb if vocdb else nick,
+            }
+    return vocabs_index
+
+
+def get_vocabs(
+        cdm_repo_url: str,
+        cdm_collection_alias: str,
+        vocabs_index: Dict[str, Dict[str, str]],
+        session: Session,
+        verbose: bool = True
+) -> Dict[str, Dict[str, List[str]]]:
+    vocses = {
+        'vocab': dict(),
+        'vocdb': dict(),
+    }
+    for nick, index in vocabs_index.items():
+        vocs = vocses[index['type']]
+        if index['name'] in vocs:
+            continue
+        if verbose:
+            print(f"Requesting {index['type']} for {nick!r}... ", end='')
+        vocab = get_cdm_collection_field_vocab(
+            cdm_repo_url=cdm_repo_url,
+            cdm_collection_alias=cdm_collection_alias,
+            cdm_field_nick=nick,
+            session=session
+        )
+        if verbose:
+            print(f"found {len(vocab)} terms.")
+        vocs[index['name']] = vocab
+    return vocses
