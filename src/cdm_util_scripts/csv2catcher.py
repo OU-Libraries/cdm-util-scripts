@@ -7,7 +7,7 @@ from collections import defaultdict
 from itertools import count
 from enum import Enum
 
-from cdm_util_scripts.cdm_api import get_cdm_page_pointers
+from cdm_util_scripts import cdm_api
 
 from typing import List, Optional, Dict, Sequence, Iterator, TextIO
 
@@ -118,9 +118,9 @@ def request_collection_page_pointers(
                 print(f"Requesting page pointers: {n}/{total_cpd} {(n / total_cpd) * 100:2.0f}%",
                       end='\r',
                       flush=True)
-            cdm_object.page_pointers = get_cdm_page_pointers(
-                repo_url=repo_url,
-                alias=alias,
+            cdm_object.page_pointers = cdm_api.request_page_pointers(
+                instance_url=repo_url,
+                collection_alias=alias,
                 dmrecord=cdm_object.pointer,
                 session=session
             )
