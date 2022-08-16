@@ -76,10 +76,9 @@ class CdmFieldInfo(NamedTuple):
 def request_field_infos(
     instance_url: str, collection_alias: str, session: Session
 ) -> List[CdmFieldInfo]:
-    instance_url = instance_url.rstrip("/")
     url = "/".join(
         [
-            instance_url,
+            instance_url.rstrip("/"),
             "digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldInfo",
             collection_alias,
             "json",
@@ -94,8 +93,15 @@ CdmItemInfo = Dict[str, str]
 def request_item_info(
     instance_url: str, collection_alias: str, dmrecord: str, session: Session
 ) -> CdmItemInfo:
-    instance_url = instance_url.rstrip("/")
-    url = f"{instance_url}/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/{collection_alias}/{dmrecord}/json"
+    url = "/".join(
+        [
+            instance_url.rstrip("/"),
+            "digital/bl/dmwebservices/index.php?q=dmGetItemInfo",
+            collection_alias,
+            dmrecord,
+            "json",
+        ]
+    )
     item_info = request_dm(url=url, session=session)
     return {nick: value or "" for nick, value in item_info.items()}
 
@@ -106,16 +112,30 @@ CdmFieldVocab = List[str]
 def request_field_vocab(
     instance_url: str, collection_alias: str, field_nick: str, session: Session
 ) -> CdmFieldVocab:
-    instance_url = instance_url.rstrip("/")
-    url = f"{instance_url}/digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary/{collection_alias}/{field_nick}/0/1/json"
+    url = "/".join(
+        [
+            instance_url.rstrip("/"),
+            "digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary",
+            collection_alias,
+            field_nick,
+            "0/1/json",
+        ]
+    )
     return request_dm(url=url, session=session)
 
 
 def request_page_pointers(
     instance_url: str, collection_alias: str, dmrecord: str, session: Session
 ) -> List[str]:
-    instance_url = instance_url.rstrip("/")
-    url = f"{instance_url}/digital/bl/dmwebservices/index.php?q=dmGetCompoundObjectInfo/{collection_alias}/{dmrecord}/json"
+    url = "/".join(
+        [
+            instance_url.rstrip("/"),
+            "digital/bl/dmwebservices/index.php?q=dmGetCompoundObjectInfo",
+            collection_alias,
+            dmrecord,
+            "json",
+        ]
+    )
     cpd_object_info = request_dm(url=url, session=session)
     if cpd_object_info["type"] == "Monograph":
         _, page_pointers = _destructure_nodes(cpd_object_info["node"])
