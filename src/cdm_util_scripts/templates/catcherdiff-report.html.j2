@@ -80,15 +80,15 @@
             <table class="field-info-table">
                 <thead>
                     <tr>
-                        {%- for key in cdm_fields_info[0].keys() %}
+                        {%- for key in cdm_field_infos[0]._fields %}
                             <th>{{ key }}</th>
                         {%- endfor %}
                     </tr>
                 </thead>
                 <tbody>
-                    {%- for field_info in cdm_fields_info if field_info['admin'] == 0 %}
+                    {%- for field_info in cdm_field_infos if field_info.admin == 0 %}
                         <tr>
-                            {%- for value in field_info.values() %}
+                            {%- for value in field_info %}
                                 <td>{{ value }}</td>
                             {%- endfor %}
                         </tr>
@@ -114,7 +114,7 @@
                     <tbody>
                         {% for nick, value in edit.items() if nick != 'dmrecord' %}
                             <tr>
-                                <td class="controlled-col">{% if nick in vocabs_index %}🔒{% endif %}</th>
+                                <td class="controlled-col">{% if nick in vocabs_by_nick %}🔒{% endif %}</th>
                                 <td class="nick-col"><p><span class="cdm-label">{{ cdm_nick_to_name[nick] }}</span><br/>&lt;<span class="cdm-nick">{{ nick }}</span>&gt;</p></td>
                                 <td class="value-col"><p><span class="value">{{ showwhitespace(cdm_info[nick]) }}</span></p></td>
                                 <td class="change-col">
@@ -132,10 +132,10 @@
                                 </td>
                                 <td class="value-col">
                                     <p><span class="value">{{ showwhitespace(value) }}</span></p>
-                                    {%- if nick in vocabs_index and vocabs is not none %}
+                                    {%- if nick in vocabs_by_nick and vocabs_by_nick[nick] is not none %}
                                         <ul class="terms-list">
-                                            {%- for term in value.split('; ') if term %}
-                                                {%- if term in vocabs[vocabs_index[nick]['type']][vocabs_index[nick]['name']] %}
+                                            {%- for term in value.split(';')|trim if term %}
+                                                {%- if term in vocabs_by_nick[nick] %}
                                                     <li class="controlled-term"><span class="value">{{ term }}</span></li>
                                                 {%- else %}
                                                     <li class="uncontrolled-term"><span class="value">{{ term }}</span></li>

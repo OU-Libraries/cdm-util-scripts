@@ -22,9 +22,9 @@ def get_cdm_items_info(
         if verbose:
             print(f"Requesting CONTENTdm item info {n}/{len(cdm_catcher_edits)}...", end='\r')
         cdm_items_info.append(
-            cdm_api.get_cdm_item_info(
-                cdm_repo_url=cdm_repo_url,
-                cdm_collection_alias=cdm_collection_alias,
+            cdm_api.request_item_info(
+                instance_url=cdm_repo_url,
+                collection_alias=cdm_collection_alias,
                 dmrecord=edit['dmrecord'],
                 session=session
             )
@@ -71,8 +71,8 @@ def catcherdiff(
 
     with Session() as session:
         print("Requesting CONTENTdm field info...")
-        cdm_fields_info = cdm_api.get_collection_field_info(
-            repo_url=cdm_repo_url,
+        cdm_field_infos = cdm_api.request_field_infos(
+            instance_url=cdm_repo_url,
             collection_alias=cdm_collection_alias,
             session=session
         )
@@ -82,16 +82,15 @@ def catcherdiff(
             cdm_catcher_edits=cdm_catcher_edits,
             session=session
         )
-        vocabs_index = cdm_api.build_vocabs_index(cdm_fields_info)
         if check_vocabs:
-            cdm_field_vocabs = cdm_api.get_vocabs(
-                cdm_repo_url=cdm_repo_url,
-                cdm_collection_alias=cdm_collection_alias,
-                vocabs_index=vocabs_index,
-                session=session
+            cdm_vocabs = cdm_api.request_vocabs(
+                instance_url=cdm_repo_url,
+                collection_alias=cdm_collection_alias,
+                field_infos=cdm_field_infos,
+                session=session,
             )
         else:
-            cdm_field_vocabs = None
+            cdm_vocabs = None
 
     deltas = collate_deltas(cdm_catcher_edits, cdm_items_info)
     edits_with_changes_count = count_changes(deltas)
@@ -101,16 +100,18 @@ def catcherdiff(
     report = {
         'cdm_repo_url': cdm_repo_url.rstrip('/'),
         'cdm_collection_alias': cdm_collection_alias,
-        'cdm_fields_info': cdm_fields_info,
-        'vocabs_index': vocabs_index,
-        'vocabs': cdm_field_vocabs,
+        'cdm_field_infos': cdm_field_infos,
+        'vocabs_by_nick': {
+            field_info.nick: cdm_vocabs[field_info.get_vocab_info()] if cdm_vocabs else None
+            for field_info in cdm_field_infos if field_info.vocab
+        },
         'catcher_json_file': Path(catcher_json_file_path).name,
         'report_file': report_file_path,
         'report_datetime': datetime.now().isoformat(),
         'edits_with_changes_count': edits_with_changes_count,
         'deltas': deltas,
         'cdm_nick_to_name': {
-            field_info['nick']: field_info['name'] for field_info in cdm_fields_info
+            field_info.nick: field_info.name for field_info in cdm_field_infos
         },
     }
 

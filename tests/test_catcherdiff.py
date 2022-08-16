@@ -41,16 +41,15 @@ def test_report_to_html():
     repo_url = 'https://cdmdemo.contentdm.oclc.org'
     collection_alias = 'oclcsample'
     with requests.Session() as session:
-        collection_field_info = cdm_api.get_collection_field_info(
-            repo_url=repo_url,
+        field_infos = cdm_api.request_field_infos(
+            instance_url=repo_url,
             collection_alias=collection_alias,
             session=session,
         )
     report_base = {
         'cdm_repo_url': repo_url,
         'cdm_collection_alias': collection_alias,
-        'cdm_fields_info': collection_field_info,
-        'vocabs_index': cdm_api.build_vocabs_index(collection_field_info),
+        'cdm_field_infos': field_infos,
         'catcher_json_file': 'catcher-edits.json',
         'report_file': 'catcherdiff-report.html',
         'report_datetime': '2021-01-01T00:00:00.000000',
@@ -61,23 +60,18 @@ def test_report_to_html():
             )
         ],
         'cdm_nick_to_name': {
-            field_info['nick']: field_info['name'] for field_info in collection_field_info
+            field_info.nick: field_info.name for field_info in field_infos
         },
     }
 
     assert catcherdiff.report_to_html({
         **report_base,
-        'vocabs': None,
+        'vocabs_by_nick': {"subjec": None},
     })
 
     assert catcherdiff.report_to_html({
         **report_base,
-        'vocabs': {
-            'vocab': {},
-            'vocdb': {
-                'LCTGM': ['value1']
-            }
-        },
+        'values_by_nick': {'subjec': ['value1']},
     })
 
 
