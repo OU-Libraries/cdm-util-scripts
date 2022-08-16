@@ -29,7 +29,11 @@ def print_as_json(dm_result: Sequence[Dict[str, str]]) -> None:
     print(json.dumps(dm_result, indent=2))
 
 
-OUTPUT_FORMATS = {"json": print_as_json, "csv": print_as_csv, "records": print_as_records}
+OUTPUT_FORMATS = {
+    "json": print_as_json,
+    "csv": print_as_csv,
+    "records": print_as_records,
+}
 
 
 def main() -> int:
@@ -59,15 +63,21 @@ def main() -> int:
 
     with requests.Session() as session:
         if args.alias:
-            dm_result = cdm_api.get_collection_field_info(
-                repo_url=args.repository_url,
-                collection_alias=args.alias,
-                session=session,
-            )
+            dm_result = [
+                field_info._asdict()
+                for field_info in cdm_api.request_field_infos(
+                    instance_url=args.repository_url,
+                    collection_alias=args.alias,
+                    session=session,
+                )
+            ]
         else:
-            dm_result = cdm_api.get_collection_list(
-                repo_url=args.repository_url, session=session
-            )
+            dm_result = [
+                collection_info._asdict()
+                for collection_info in cdm_api.request_collection_list(
+                    instance_url=args.repository_url, session=session
+                )
+            ]
 
     if args.columns:
         columns = args.columns.split(",")

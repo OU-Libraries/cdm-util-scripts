@@ -2,8 +2,7 @@ import requests
 
 import argparse
 
-from cdm_util_scripts.printcdminfo import print_as_records
-from cdm_util_scripts.ftp_api import get_slug_collections
+from cdm_util_scripts import ftp_api2 as ftp_api
 
 
 def main() -> int:
@@ -14,9 +13,12 @@ def main() -> int:
     args = parser.parse_args()
 
     with requests.Session() as session:
-        collections = get_slug_collections(slug=args.slug, session=session)
+        ftp_instance = ftp_api.FtpInstance(base_url=ftp_api.FTP_HOSTED_BASE_URL)
+        ftp_projects = ftp_instance.request_projects(slug=args.slug, session=session)
 
-    print_as_records(collections["collections"])
+    for label, url in ftp_projects.projects.items():
+        print(repr(label))
+        print(url)
 
     return 0
 
