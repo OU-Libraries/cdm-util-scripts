@@ -195,11 +195,11 @@ def apply_field_mapping(
 def request_vocabs(
     instance_url: str,
     collection_alias: str,
-    fields_info: List[CdmFieldInfo],
+    field_infos: List[CdmFieldInfo],
     session: Session,
 ) -> Dict[CdmVocabInfo, List[str]]:
     vocabs = dict()
-    for field_info in fields_info:
+    for field_info in field_infos:
         vocab_info = field_info.get_vocab_info()
         if vocab_info is None or vocab_info in vocabs:
             continue
