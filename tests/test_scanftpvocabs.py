@@ -3,58 +3,97 @@ import pytest
 from datetime import datetime
 
 from cdm_util_scripts import scanftpvocabs
-from cdm_util_scripts import ftp_api
+from cdm_util_scripts import ftp_api2 as ftp_api
+from cdm_util_scripts import cdm_api
 
 
 def test_scan_vocabs():
-    ftp_collection = ftp_api.FTPCollection(
-        works=[ftp_api.FTPWork(pages=[ftp_api.FTPPage(fields={
-            'FtP vocab label': 'controlled-term; uncontrolled-term',
-            'FtP TGM label': 'Paddleboats; NotInTGM',
-        })])]
+    cdm_field_mapping = {
+        "FtP TGM label": ["subjec"],
+        "FtP vocab label": ["subjed"],
+    }
+    cdm_field_infos = [
+        cdm_api.CdmFieldInfo(
+            name="Subject-LCTGM",
+            nick="subjec",
+            type="TEXT",
+            size=0,
+            find="a5",
+            req=0,
+            search=1,
+            hide=0,
+            vocdb="LCTGM",
+            vocab=1,
+            dc="subjec",
+            admin=0,
+            readonly=0,
+        ),
+        cdm_api.CdmFieldInfo(
+            name="Subject-custom",
+            nick="subjed",
+            type="TEXT",
+            size=0,
+            find="a6",
+            req=0,
+            search=1,
+            hide=0,
+            vocdb="",
+            vocab=1,
+            dc="subjec",
+            admin=0,
+            readonly=0,
+        ),
+    ]
+    cdm_vocabs = {
+        cdm_api.CdmVocabInfo(cdm_api.CdmVocabType.builtin, "LCTGM"): frozenset(
+            ["Paddleboats"]
+        ),
+        cdm_api.CdmVocabInfo(cdm_api.CdmVocabType.custom, "subjed"): frozenset(
+            ["controlled-term"]
+        ),
+    }
+    ftp_project = ftp_api.FtpProject(
+        url="test-url",
+        label="Test label",
+        works=[ftp_api.FtpWork(url="test-url", pages=[ftp_api.FtpPage(id_="test-id")])],
     )
-    field_mapping = {
-        'FtP vocab label': ['nickv'],
-        'FtP TGM label': ['nickdb']
-    }
-    vocabs_index = {
-        'nickv': {'type': 'vocab', 'name': 'nickv'},
-        'nickdb': {'type': 'vocdb', 'name': 'LCTGM'},
-        'unmapped': {'type': 'vocab', 'name': 'unmapped'},
-    }
-    vocabs = {
-        'vocab': {'nickv': ['controlled-term'], 'unmapped': ['controlled-term']},
-        'vocdb': {'LCTGM': ['Paddleboats']},
-    }
-    field_scans, unmapped_controlled_fields = scanftpvocabs.scan_vocabs(
-        ftp_collection=ftp_collection,
-        field_mapping=field_mapping,
-        vocabs_index=vocabs_index,
-        vocabs=vocabs
+    ftp_transcriptions = [
+        [
+            {
+                "FtP TGM label": "Paddleboats; NotInTGM",
+                "FtP vocab label": "controlled-term; uncontrolled-term",
+            }
+        ],
+    ]
+    uncontrolled_terms_by_field_nick, _, _, _ = scanftpvocabs.scan_vocabs(
+        cdm_field_mapping=cdm_field_mapping,
+        cdm_field_infos=cdm_field_infos,
+        cdm_vocabs=cdm_vocabs,
+        ftp_project=ftp_project,
+        ftp_transcriptions=ftp_transcriptions,
     )
-    assert 'uncontrolled-term' in field_scans['nickv']
-    assert 'NotInTGM' in field_scans['nickdb']
-    assert 'unmapped' in unmapped_controlled_fields
+    assert uncontrolled_terms_by_field_nick == {
+        "subjec": {"NotInTGM": [ftp_project.works[0].pages[0]]},
+        "subjed": {"uncontrolled-term": [ftp_project.works[0].pages[0]]},
+    }
 
 
-def test_report_to_html():
-    report = scanftpvocabs.report_to_html({
-        'ftp_slug': 'slug',
-        'ftp_project_name': 'project name',
-        'cdm_repo_url': 'repo url',
-        'cdm_collection_alias': 'collection alias',
-        'field_mapping_csv': 'field_mapping_csv.csv',
-        'output': 'html',
-        'label': 'XHTML Export',
-        'report_date': datetime.now().isoformat(),
-        'cdm_fields_info': [{'name': 'Name', 'nick': 'nick', 'vocab': 1}],
-        'field_mapping': {
-            'FtP vocab label': ['nickv'],
-            'FtP TGM label': ['nickdb']
-        },
-        'field_scans': {'nick': {'uncontrolled-term': [ftp_api.FTPPage(display_url='', label='', transcription_url='')]}},
-        'vocabs_index': {'nick': {'type': 'vocab', 'name': 'nick'}},
-        'vocabs': {'vocab': {'nick': ['controlled_term']}, 'vocdb': {}},
-        'cdm_nick_to_name': {'nick': 'Name'},
-    })
-    assert report
+@pytest.mark.vcr
+def test_scanftpvocabs(tmp_path):
+    ftp_slug = "ohiouniversitylibraries"
+    ftp_project_name = "Dance Posters Metadata"
+    cdm_repo_url = "https://media.library.ohio.edu/"
+    cdm_collection_alias = "p15808coll16"
+    field_mapping_csv_path = tmp_path / "field-mapping.csv"
+    field_mapping_csv_path.write_text(data="""name,nick
+Creator (choreographer),creata
+""", encoding="utf-8")
+    scanftpvocabs.scanftpvocabs(
+        ftp_slug=ftp_slug,
+        ftp_project_name=ftp_project_name,
+        cdm_repo_url=cdm_repo_url,
+        cdm_collection_alias=cdm_collection_alias,
+        field_mapping_csv_path=field_mapping_csv_path,
+        report_parent_path=tmp_path,
+    )
+    assert tmp_path.glob("vocab-report*.html")

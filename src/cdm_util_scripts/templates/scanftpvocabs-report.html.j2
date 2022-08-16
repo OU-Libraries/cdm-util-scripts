@@ -36,7 +36,6 @@
                     <tr><td>Report datetime</td><td>{{ report_date }}</td></tr>
                     <tr><td>FromThePage user slug</td><td>{{ ftp_slug }}</td></tr>
                     <tr><td>FromThePage project name</td><td>{{ ftp_project_name }}</td></tr>
-                    <tr><td>Export used</td><td>{{ label }}</td></tr>
                     <tr><td>CONTENTdm repository URL</td><td>{{ cdm_repo_url }}</td></tr>
                     <tr><td>CONTENTdm collection alias</td><td>{{ cdm_collection_alias }}</td></tr>
                 </tbody>
@@ -60,18 +59,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%- for field_info in cdm_fields_info if field_info['admin'] == 0 %}
+                    {%- for field_info in cdm_field_infos if field_info.admin == 0 %}
                         <tr>
-                            <td><span class="cdm-label">{{ field_info['name'] }}</span></td>
-                            <td><span class="cdm-nick">{{ field_info['nick'] }}</span></td>
-                            <td>{{ field_info['type'] }}</td>
-                            <td>{{ field_info['size'] }}</td>
-                            <td>{{ field_info['req'] }}</td>
-                            <td>{{ field_info['search'] }}</td>
-                            <td>{{ field_info['hide'] }}</td>
-                            <td>{{ field_info['vocdb'] }}</td>
-                            <td>{{ field_info['vocab'] }}</td>
-                            <td>{{ field_info['dc'] }}</td>
+                            <td><span class="cdm-label">{{ field_info.name }}</span></td>
+                            <td><span class="cdm-nick">{{ field_info.nick }}</span></td>
+                            <td>{{ field_info.type }}</td>
+                            <td>{{ field_info.size }}</td>
+                            <td>{{ field_info.req }}</td>
+                            <td>{{ field_info.search }}</td>
+                            <td>{{ field_info.hide }}</td>
+                            <td>{{ field_info.vocdb }}</td>
+                            <td>{{ field_info.vocab }}</td>
+                            <td>{{ field_info.dc }}</td>
                         </tr>
                     {%- endfor %}
                 </tbody>
@@ -89,7 +88,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%- for label, nicks in field_mapping.items() %}
+                    {%- for label, nicks in cdm_field_mapping.items() %}
                         <tr>
                             <td><span class="ftp-label">{{ label }}</span></td>
                             <td>{% for nick in nicks %} {{ cdmnickandname(nick) }}<br/> {% endfor %}</td>
@@ -101,8 +100,8 @@
             <h3>Unmapped controlled CONTENTdm fields</h3>
 
             <ul>
-                {%- for field in unmapped_controlled_fields %}
-                    <li>{{ cdmnickandname(field) }}</li>
+                {%- for field_info in unmapped_controlled_cdm_field_infos %}
+                    <li>{{ cdmnickandname(field_info.nick) }}</li>
                 {%- endfor %}
             </ul>
 
@@ -118,12 +117,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%- for nick, index in vocabs_index.items() %}
+                    {%- for field_info in controlled_cdm_field_infos %}
                         <tr>
-                            <td>{{ cdmnickandname(nick) }}</td>
-                            <td>{%- if index['type'] == 'vocab' %}{{ index['name'] }}{%- endif %}</td>
-                            <td>{%- if index['type'] == 'vocdb' %}{{ index['name'] }}{%- endif %}</td>
-                            <td>{{ vocabs[index['type']][index['name']]|length }}</td>
+                            <td>{{ cdmnickandname(field_info.nick) }}</td>
+                            <td>{% if not field_info.vocdb %}{{ field_info.nick }}{% endif %}</td>
+                            <td>{% if field_info.vocdb %}{{ field_info.vocdb }}{% endif %}</td>
+                            <td>{{ cdm_vocabs[field_info.vocab_info]|length }}</td>
                         </tr>
                     {%- endfor %}
                 </tbody>
@@ -131,16 +130,16 @@
 
             <h2>Uncontrolled terms</h2>
 
-            {%- for nick in vocabs_index.keys() if nick in field_scans %}
-                <h3 class="sticky-title">Mapped to CONTENTdm field {{ cdmnickandname(nick) }}</h3>
+            {%- for field_info in mapped_controlled_cdm_field_infos %}
+                <h3 class="sticky-title">Mapped to CONTENTdm field {{ cdmnickandname(field_info.nick) }}</h3>
                 <table>
                     <tbody>
-                        <tr><td>CONTENTdm field name</td><td><span class="cdm-label">{{ cdm_nick_to_name[nick] }}</span></td></tr>
-                        <tr><td>CONTENTdm field nick</td><td><span class="cdm-nick">{{ nick }}</span></td></tr>
+                        <tr><td>CONTENTdm field name</td><td><span class="cdm-label">{{ field_info.name }}</span></td></tr>
+                        <tr><td>CONTENTdm field nick</td><td><span class="cdm-nick">{{ field_info.nick }}</span></td></tr>
                         <tr>
                             <td>Taking terms from FromThePage labels</td>
                             <td>
-                                {%- for label, nicks in field_mapping.items() if nick in nicks %}
+                                {%- for label, nicks in cdm_field_mapping.items() if field_info.nick in nicks %}
                                     <span class="ftp-label">{{ label }}</span><br/>
                                 {%- endfor %}
                             </td>
@@ -148,24 +147,24 @@
                     </tbody>
                 </table>
 
-                {%- if not field_scans[nick] %}
+                {%- if not uncontrolled_terms_by_field_nick[nick] %}
                     <p><em>All terms controlled.</em></p>
                 {%- else %}
                     <div class="terms-as-text">
-                        <label for="{{ nick }}">Uncontrolled terms as text:</label>
-                        <textarea name="{{ nick }}" rows="10" cols="60" wrap="off">
-                            {%- for term in field_scans[nick].keys() %}
+                        <label for="{{ field_info.nick }}">Uncontrolled terms as text:</label>
+                        <textarea name="{{ field_info.nick }}" rows="10" cols="60" wrap="off">
+                            {%- for term in uncontrolled_terms_by_field_nick[nick] %}
 {{ term }}
                             {%- endfor -%}
                         </textarea>
                     </div>
                     <dl>
-                        {%- for term, pages in field_scans[nick].items() %}
+                        {%- for term, ftp_pages in uncontrolled_terms_by_field_nick[nick].items() %}
                             <dt><span class="uncontrolled-term">{{ term }}</span></dt>
                             <dd>
                                 <ul class="use-list">
-                                    {%- for page in pages %}
-                                        <li>is used in <a href="{{ page.display_url }}">{{ page.label }}</a> <a href="{{ page.transcription_url }}">✍</a></li>
+                                    {%- for ftp_page in ftp_pages %}
+                                        <li>is used in <a href="{{ page.read_url }}">{{ page.label }}</a> <a href="{{ page.transcribe_url }}">✍</a></li>
                                     {%-  endfor %}
                                 </ul>
                             </dd>
