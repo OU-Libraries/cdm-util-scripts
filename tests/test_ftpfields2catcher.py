@@ -6,119 +6,154 @@ import json
 
 from cdm_util_scripts import ftpfields2catcher
 from cdm_util_scripts import cdm_api
-from cdm_util_scripts import ftp_api
+from cdm_util_scripts import ftp_api2 as ftp_api
 
 
-@pytest.mark.parametrize('pages, check_index', [
-    ([
-        ftp_api.FTPPage(fields={'Label0': '', 'Label1': ''}),
-        ftp_api.FTPPage(fields={'Label0': '', 'Label1': 'value1'}),
-        ftp_api.FTPPage(fields={'Label0': '', 'Label1': ''}),
+@pytest.mark.parametrize(
+    "pages, check_index",
+    [
+        (
+            [
+                {"Label0": "", "Label1": ""},
+                {"Label0": "", "Label1": "value1"},
+                {"Label0": "", "Label1": ""},
+            ],
+            1,
+        ),
+        (
+            [
+                None,
+                None,
+                {"Label0": "value0", "Label1": ""},
+            ],
+            2,
+        ),
     ],
-     1),
-    ([
-        ftp_api.FTPPage(fields=None),
-        ftp_api.FTPPage(fields=None),
-        ftp_api.FTPPage(fields={'Label0': 'value0', 'Label1': ''}),
-    ],
-     2),
-])
+)
 def test_PagePickers_first_filled_page(pages, check_index):
     assert ftpfields2catcher.PagePickers.first_filled_page(pages) is pages[check_index]
 
 
-@pytest.mark.parametrize('pages', [
+@pytest.mark.parametrize(
+    "pages",
     [
-        ftp_api.FTPPage(fields=None),
-        ftp_api.FTPPage(fields=None),
-        ftp_api.FTPPage(fields=None),
+        [
+            None,
+            None,
+            None,
+        ],
+        [],
+        [
+            {"Label0": "", "Label1": ""},
+            {"Label0": "", "Label1": ""},
+            {"Label0": "", "Label1": ""},
+        ],
     ],
-    [],
-    [
-        ftp_api.FTPPage(fields={'Label0': '', 'Label1': ''}),
-        ftp_api.FTPPage(fields={'Label0': '', 'Label1': ''}),
-        ftp_api.FTPPage(fields={'Label0': '', 'Label1': ''}),
-    ],
-])
+)
 def test_PagePickers_first_filled_page_is_none(pages):
     assert ftpfields2catcher.PagePickers.first_filled_page(pages) is None
 
 
-@pytest.mark.parametrize('ftp_work, page_picker, result', [
-    (ftp_api.FTPWork(dmrecord='1', pages=[ftp_api.FTPPage(fields={'Label': 'value'})]),
-     ftpfields2catcher.PagePickers.first_page,
-     {'dmrecord': '1', 'nick': 'value'})
-])
-def test_map_ftp_work_as_cdm_object(ftp_work, page_picker, result):
-    field_mapping = {
-        'Label': ['nick']
-    }
+@pytest.mark.parametrize(
+    "ftp_work, field_transcription, page_picker, result",
+    [
+        (
+            ftp_api.FtpWork(
+                url="test-url",
+                cdm_object_dmrecord="1",
+                pages=[ftp_api.FtpPage(id_="test-id")],
+            ),
+            [{"Label": "value"}],
+            ftpfields2catcher.PagePickers.first_page,
+            {"dmrecord": "1", "nick": "value"},
+        )
+    ],
+)
+def test_map_ftp_work_as_cdm_object(ftp_work, field_transcription, page_picker, result):
+    field_mapping = {"Label": ["nick"]}
     page = ftpfields2catcher.map_ftp_work_as_cdm_object(
         ftp_work=ftp_work,
+        field_transcription=field_transcription,
         field_mapping=field_mapping,
-        page_picker=page_picker
+        page_picker=page_picker,
     )
     assert page == result
 
 
-@pytest.mark.vcr
-def test_get_ftp_work_cdm_item_info():
-    ftp_work = ftp_api.FTPWork(
-        cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
-        cdm_collection_alias='oclcsample',
-        dmrecord='102'
-    )
-    item_info = ftpfields2catcher.get_ftp_work_cdm_item_info(ftp_work, session=requests)
-    assert item_info['dmrecord'] == ftp_work.dmrecord
-    assert item_info['find']
-
-
 @pytest.mark.default_cassette("test_map_ftp_work_as_cdm_pages.yaml")
 @pytest.mark.vcr
-@pytest.mark.parametrize('ftp_work, dmrecords', [
-    # Compound Object
-    (
-        ftp_api.FTPWork(
-            cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
-            cdm_collection_alias='oclcsample',
-            dmrecord='12',
-            pages=[
-                ftp_api.FTPPage(fields={'Label': 'value1'}),
-                ftp_api.FTPPage(fields={'Label': 'value2'}),
-            ]
+@pytest.mark.parametrize(
+    "ftp_work, field_transcription, dmrecords",
+    [
+        # Compound Object
+        (
+            ftp_api.FtpWork(
+                url="test-url",
+                cdm_instance_base_url="https://cdmdemo.contentdm.oclc.org",
+                cdm_collection_alias="oclcsample",
+                cdm_object_dmrecord="12",
+                pages=[
+                    ftp_api.FtpPage(id_="test-id"),
+                    ftp_api.FtpPage(id_="test-id"),
+                ],
+            ),
+            [
+                {"Label": "value1"},
+                {"Label": "value2"},
+            ],
+            ["10", "11"],
         ),
-        ['10', '11']
-    ),
-
-    # Single Item
-    (
-        ftp_api.FTPWork(
-            cdm_repo_url='https://cdmdemo.contentdm.oclc.org',
-            cdm_collection_alias='oclcsample',
-            dmrecord='64',
-            pages=[
-                ftp_api.FTPPage(fields={'Label': 'value1'}),
-            ]
+        # Single Item
+        (
+            ftp_api.FtpWork(
+                url="test-url",
+                cdm_instance_base_url="https://cdmdemo.contentdm.oclc.org",
+                cdm_collection_alias="oclcsample",
+                cdm_object_dmrecord="64",
+                pages=[
+                    ftp_api.FtpPage(id_="test-id"),
+                ],
+            ),
+            [
+                {"Label": "value1"},
+            ],
+            ["64"],
         ),
-        ['64']
-    )
-])
-def test_map_ftp_work_as_cdm_pages(ftp_work, dmrecords):
-    field_mapping = {
-        'Label': ['nick']
-    }
+    ],
+)
+def test_map_ftp_work_as_cdm_pages(ftp_work, field_transcription, dmrecords):
+    field_mapping = {"Label": ["nick"]}
 
     pages_data = ftpfields2catcher.map_ftp_work_as_cdm_pages(
         ftp_work=ftp_work,
+        field_transcription=field_transcription,
         field_mapping=field_mapping,
         session=requests,
     )
 
-    for dmrecord, page, page_data in zip(dmrecords, ftp_work.pages, pages_data):
+    for dmrecord, page, fields, page_data in zip(
+        dmrecords, ftp_work.pages, field_transcription, pages_data
+    ):
         assert page_data == {
-            'dmrecord': dmrecord,
-            **cdm_api.apply_field_mapping(page.fields, field_mapping)
+            "dmrecord": dmrecord,
+            **cdm_api.apply_field_mapping(fields=fields, field_mapping=field_mapping),
         }
+
+
+@pytest.mark.vcr
+def test_get_ftp_work_cdm_item_info():
+    ftp_work = ftp_api.FtpWork(
+        url="test-url",
+        cdm_instance_base_url="https://cdmdemo.contentdm.oclc.org",
+        cdm_collection_alias="oclcsample",
+        cdm_object_dmrecord="102",
+    )
+    with requests.Session() as session:
+        item_info = ftpfields2catcher.get_ftp_work_cdm_item_info(
+            ftp_work, session=session
+        )
+    assert item_info["dmrecord"] == ftp_work.cdm_object_dmrecord
+    assert item_info["find"]
 
 
 @pytest.mark.vcr
