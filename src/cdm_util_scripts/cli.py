@@ -23,7 +23,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "catcherdiff",
         help="Generate a HTML report on what CONTENTdm field values will change if a cdm-catcher JSON edit is implemented",
     )
-    catcherdiff_subparser.add_argument("cdm_repo_url", help="CONTENTdm instance URL")
+    catcherdiff_subparser.add_argument("cdm_instance_url", help="CONTENTdm instance URL")
     catcherdiff_subparser.add_argument(
         "cdm_collection_alias", help="CONTENTdm collection alias"
     )

@@ -47,7 +47,7 @@ def test_report_to_html():
             session=session,
         )
     report_base = {
-        'cdm_repo_url': repo_url,
+        'cdm_instance_url': repo_url,
         'cdm_collection_alias': collection_alias,
         'cdm_field_infos': field_infos,
         'catcher_json_file': 'catcher-edits.json',
@@ -86,7 +86,7 @@ def test_catcherdiff(tmpdir):
         json.dump(catcher_edits, fp)
 
     catcherdiff.catcherdiff(
-        cdm_repo_url="https://cdmdemo.contentdm.oclc.org/",
+        cdm_instance_url="https://cdmdemo.contentdm.oclc.org/",
         cdm_collection_alias="oclcsample",
         catcher_json_file_path=catcher_json_file_path,
         report_file_path=report_file_path,

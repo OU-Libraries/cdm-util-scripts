@@ -60,7 +60,7 @@ def report_to_html(report: Dict[str, Any]) -> str:
 
 
 def catcherdiff(
-        cdm_repo_url: str,
+        cdm_instance_url: str,
         cdm_collection_alias: str,
         catcher_json_file_path: str,
         report_file_path: str,
@@ -72,19 +72,19 @@ def catcherdiff(
     with Session() as session:
         print("Requesting CONTENTdm field info...")
         cdm_field_infos = cdm_api.request_field_infos(
-            instance_url=cdm_repo_url,
+            instance_url=cdm_instance_url,
             collection_alias=cdm_collection_alias,
             session=session
         )
         cdm_items_info = get_cdm_items_info(
-            cdm_repo_url=cdm_repo_url,
+            cdm_repo_url=cdm_instance_url,
             cdm_collection_alias=cdm_collection_alias,
             cdm_catcher_edits=cdm_catcher_edits,
             session=session
         )
         if check_vocabs:
             cdm_vocabs = cdm_api.request_vocabs(
-                instance_url=cdm_repo_url,
+                instance_url=cdm_instance_url,
                 collection_alias=cdm_collection_alias,
                 field_infos=cdm_field_infos,
                 session=session,
@@ -98,7 +98,7 @@ def catcherdiff(
     print(f"catcherdiff found {edits_with_changes_count} out of {len(deltas)} total edit actions would change at least one field.")
 
     report = {
-        'cdm_repo_url': cdm_repo_url.rstrip('/'),
+        'cdm_repo_url': cdm_instance_url.rstrip('/'),
         'cdm_collection_alias': cdm_collection_alias,
         'cdm_field_infos': cdm_field_infos,
         'vocabs_by_nick': {
