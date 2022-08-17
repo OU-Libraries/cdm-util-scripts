@@ -9,7 +9,7 @@ import collections
 import typing
 from typing import List, Dict, Any, Tuple, Iterable, Iterator, Optional, FrozenSet
 
-from cdm_util_scripts import ftp_api2 as ftp_api
+from cdm_util_scripts import ftp_api
 
 
 def scanftpfields(

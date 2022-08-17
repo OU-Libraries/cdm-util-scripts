@@ -5,7 +5,7 @@ import json
 
 from typing import List, Dict
 
-from cdm_util_scripts import ftp_api2 as ftp_api
+from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
 
 

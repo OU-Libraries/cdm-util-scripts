@@ -3,7 +3,7 @@ import pytest
 from datetime import datetime
 
 from cdm_util_scripts import scanftpvocabs
-from cdm_util_scripts import ftp_api2 as ftp_api
+from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
 
 

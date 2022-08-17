@@ -4,7 +4,7 @@ import tqdm
 import json
 
 from cdm_util_scripts import cdm_api
-from cdm_util_scripts import ftp_api2 as ftp_api
+from cdm_util_scripts import ftp_api
 
 from typing import Optional, List, Iterable, Dict, Callable, Tuple
 

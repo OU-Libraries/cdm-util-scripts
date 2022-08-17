@@ -1,185 +1,140 @@
 import pytest
 import requests
 
-import re
-
 from cdm_util_scripts import ftp_api
 
 
-SPECIMEN_MANIFEST_URL = "https://fromthepage.com/iiif/46453/manifest"
+SPECIMEN_FTP_MANIFEST_URL = "https://fromthepage.com/iiif/56198/manifest"
 
 
 @pytest.fixture
-def ftp_manifest():
-    return ftp_api.get_ftp_manifest(url=SPECIMEN_MANIFEST_URL, session=requests)
+def ftp_work():
+    with requests.Session() as session:
+        response = session.get(SPECIMEN_FTP_MANIFEST_URL)
+    response.raise_for_status()
+    return ftp_api.FtpWork.from_json(response.json())
+
+
+@pytest.mark.default_cassette("dance_posters_metadata.yaml")
+@pytest.mark.vcr
+def test_FtpInstance_request_projects():
+    instance = ftp_api.FtpInstance(base_url="https://fromthepage.com/")
+    with requests.Session() as session:
+        projects = instance.request_projects(slug="ohiouniversitylibraries", session=session)
+    for label, url in projects.projects.items():
+        assert label
+        assert url.startswith("http")
+
+
+@pytest.mark.default_cassette("dance_posters_metadata.yaml")
+@pytest.mark.vcr
+def test_FtpProjectCollection_request_project():
+    instance = ftp_api.FtpInstance(base_url="https://fromthepage.com/")
+    with requests.Session() as session:
+        projects = instance.request_projects(slug="ohiouniversitylibraries", session=session)
+        project = projects.request_project(label="Dance Posters Metadata", session=session)
+    assert project.project_id == "dance-posters-metadata"
+    for work in project.works:
+        assert work.url
+        assert work.label
+        assert work.cdm_collection_alias == "p15808coll16"
+        assert work.cdm_object_dmrecord.isdigit()
+
+
+@pytest.mark.default_cassette("dance_posters_metadata.yaml")
+@pytest.mark.vcr
+def test_FtpProject_requests_works():
+    instance = ftp_api.FtpInstance(base_url="https://fromthepage.com/")
+    with requests.Session() as session:
+        projects = instance.request_projects(slug="ohiouniversitylibraries", session=session)
+        project = projects.request_project(label="Dance Posters Metadata", session=session)
+        project.request_works(session=session)
+    for work in project.works:
+        assert work.metadata
+        assert work.renderings
+        assert work.pages
+        assert work.cdm_instance_base_url
+        assert work.cdm_collection_alias
+        assert work.cdm_object_dmrecord
 
 
 @pytest.mark.vcr
-def test_get_ftp_manifest():
-    assert ftp_api.get_ftp_manifest(url=SPECIMEN_MANIFEST_URL, session=requests)
-
-
-@pytest.mark.vcr
-def test_get_ftp_transcript():
-    assert ftp_api.get_ftp_transcript(
-        url='https://fromthepage.com/iiif/46453/export/1503071/plaintext/verbatim',
-        session=requests,
-    ).startswith("Title: Box 023")
+def test_FtpProject_request_structured_data_configs():
+    project = ftp_api.FtpProject(
+        url="https://fromthepage.com/iiif/collection/dance-posters-metadata",
+        label="Dance Posters Metadata",
+    )
+    with requests.Session() as session:
+        work_config = project.request_work_structured_data_config(session=session)
+        page_config = project.request_page_structured_data_config(session=session)
+    assert work_config
+    assert page_config
 
 
 @pytest.mark.default_cassette("ftp_manifest.yaml")
 @pytest.mark.vcr
-def test_get_ftp_manifest_transcript_urls(ftp_manifest):
-    assert ftp_api.get_ftp_manifest_transcript_urls(
-        ftp_manifest,
-        label='Verbatim Plaintext'
-    )
+def test_FtpWork_request():
+    work = ftp_api.FtpWork(url=SPECIMEN_FTP_MANIFEST_URL, label="Test label")
+    with requests.Session() as session:
+        work.request(session=session)
+    assert work.label == work.metadata["Title"]
+    assert {rendering.label for rendering in work.renderings} == {"Verbatim Plaintext", "Emended Plaintext", "Searchable Plaintext", "XHTML Export", "TEI Export"}
+    for page in work.pages:
+        assert page.id_
+        assert page.label
+        assert page.renderings
+        assert page.cdm_instance_base_url
+        assert page.cdm_collection_alias
+        assert page.cdm_page_dmrecord
+
+
+@pytest.mark.default_cassette("ftp_manifest.yaml")
+@pytest.mark.vcr
+def test_FtpWork_request_rendering(ftp_work):
+    with requests.Session() as session:
+        plaintext = ftp_work.request_rendering(label="Verbatim Plaintext", session=session)
+    assert plaintext.startswith("Title: ")
+
+
+@pytest.mark.default_cassette("ftp_manifest.yaml")
+@pytest.mark.vcr
+def test_FtpWork_request_transcript_fields(ftp_work):
+    with requests.Session() as session:
+        xhtml_fields = ftp_work.request_transcript_fields(session=session, label="XHTML Export")
+        tei_fields = ftp_work.request_transcript_fields(session=session, label="TEI Export")
+    assert xhtml_fields == tei_fields
+    assert len(xhtml_fields) == 1
+    xhtml_page = xhtml_fields[0]
+    assert xhtml_page["Title"] == "Nothing else like it in the world poster, Nikolais Dance Theatre"
+    assert xhtml_page["Creator (artist)"] == "Warner-Lasser Associates"
+    assert xhtml_page["Creator (artist) if other"] == ""
 
 
 @pytest.mark.vcr
-def test_get_collection_manifest_url():
-    url = ftp_api.get_collection_manifest_url(
-        slug='ohiouniversitylibraries',
-        collection_name='Dance Posters Metadata',
-        session=requests
-    )
-    assert url
-
-    with pytest.raises(KeyError):
-        ftp_api.get_collection_manifest_url(
-            slug='ohiouniversitylibraries',
-            collection_name='Does Not Exist',
-            session=requests,
-        )
+def test_FtpWork_request_structured_data():
+    with requests.Session() as session:
+        work = ftp_api.FtpWork(url="https://fromthepage.com/iiif/32024760/manifest", label="Test label")
+        work.request(session=session)
+        structured_data = work.request_structured_data(session=session)
+    assert structured_data.contributors
+    for field_data in structured_data.data:
+        assert field_data.label
+        assert isinstance(field_data.value, (list, str))
+        assert field_data.config.startswith("http")
 
 
+@pytest.mark.default_cassette("ftp_manifest.yaml")
 @pytest.mark.vcr
-def test_get_ftp_collection():
-    ftp_collection = ftp_api.get_ftp_collection(
-        manifest_url='https://fromthepage.com/iiif/collection/dance-posters-metadata',
-        session=requests,
-    )
-    assert ftp_collection.manifest_url
-    assert ftp_collection.alias == 'dance-posters-metadata'
-    assert ftp_collection.label
-    for ftp_work in ftp_collection.works:
-        assert ftp_work.dmrecord.isdigit()
-        assert ftp_work.cdm_collection_alias
-        assert ftp_work.cdm_repo_url
-        assert ftp_work.cdm_source_url
-        assert ftp_work.ftp_work_label
-        assert ftp_work.ftp_manifest_url
-
-    ftp_collection = ftp_api.get_ftp_collection(
-        manifest_url='https://fromthepage.com/iiif/collection/ryan-metadata',
-        session=requests
-    )
-    assert ftp_collection.manifest_url
-    assert ftp_collection.alias == 'ryan-metadata'
-    assert ftp_collection.label
-    for ftp_work in ftp_collection.works:
-        assert ftp_work.ftp_work_label
-        assert ftp_work.ftp_manifest_url
+def test_FtpPage_request_transcript(ftp_work):
+    with requests.Session() as session:
+        transcript = ftp_work.pages[0].request_transcript(label="Verbatim Plaintext", session=session)
+    assert transcript.startswith("Title: ")
 
 
-@pytest.mark.default_cassette("test_get_rendering.yaml")
-@pytest.mark.vcr
-@pytest.mark.parametrize('label, match_pattern', [
-    ('TEI Export', r'<TEI xmlns="http://www\.tei-c\.org/ns/1.0"'),
-    ('XHTML Export', r'<html xmlns="http://www\.w3\.org/1999/xhtml"')
+@pytest.mark.parametrize("url,base_url,alias,dmrecord", [
+    ("https://cdm15808.contentdm.oclc.org/iiif/mss:188/canvas/c1", "https://cdm15808.contentdm.oclc.org", "mss", "188"),
+    ("https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll19/1959/canvas/c0", "https://cdm15808.contentdm.oclc.org", "p15808coll19", "1959"),
+    ("https://fromthepage.com/iiif/46450/canvas/1503033", None, None, None),
 ])
-def test_get_rendering(label, match_pattern):
-    response = requests.get(SPECIMEN_MANIFEST_URL)
-    ftp_manifest = response.json()
-    rendering_text = ftp_api.get_rendering(
-        ftp_manifest=ftp_manifest,
-        label=label,
-        session=requests
-    )
-    assert re.search(match_pattern, rendering_text) is not None
-
-
-@pytest.mark.vcr
-def test_get_rendering_raises():
-    response = requests.get(SPECIMEN_MANIFEST_URL)
-    ftp_manifest = response.json()
-    with pytest.raises(KeyError):
-        ftp_api.get_rendering(
-            ftp_manifest=ftp_manifest,
-            label='Does Not Exist',
-            session=None
-        )
-
-
-extraction_test_values = [
-    # https://fromthepage.com/iiif/56198/manifest
-    (
-        "https://fromthepage.com/iiif/56198/export/tei",
-        "https://fromthepage.com/iiif/56198/export/html",
-        [
-            {
-                "Title": "Nothing else like it in the world poster, Nikolais Dance Theatre",
-                "Creator (artist)": "Warner-Lasser Associates",
-                "Creator (artist) if other": "",
-                "Transcribed poster text": """
-nikolais
-dance theatre
-nothing else 
-like it in
-the world
-Printed in U.S.A
-Designed by Warner-Lasser Associates, Morristown, N.J. / Photograph by MaxWaldman, N.Y.
-                """.strip(),
-            }
-        ]
-    ),
-
-    # https://fromthepage.com/iiif/46453/manifest
-    (
-        "https://fromthepage.com/iiif/46453/export/tei",
-        "https://fromthepage.com/iiif/46453/export/html",
-        [
-            {
-                'Title': 'Box 023, folder 41: Background notes, 1st Parachute Battalion',
-                'Respondent unit (examples include battalions, brigades, regiments, and squadrons)': '1st Parachute Battalion',
-            },
-            {
-                'Respondent name (last, first middle)': '',
-                'Respondent nationality': '',
-            }
-        ]
-    ),
-]
-
-@pytest.mark.default_cassette("test_extract_fields_from_tei.yaml")
-@pytest.mark.vcr
-@pytest.mark.parametrize('tei_url, html_url, check_pages', extraction_test_values)
-def test_extract_fields_from_tei(tei_url, html_url, check_pages):
-    response = requests.get(tei_url)
-    pages = ftp_api.extract_fields_from_tei(tei=response.text)
-    for page, check_page in zip(pages, check_pages):
-        for key, value in check_page.items():
-            assert page[key] == value
-
-
-@pytest.mark.default_cassette("test_extract_fields_from_html.yaml")
-@pytest.mark.vcr
-@pytest.mark.parametrize('tei_url, html_url, check_pages', extraction_test_values)
-def test_extract_fields_from_html(tei_url, html_url, check_pages):
-    response = requests.get(html_url)
-    pages = ftp_api.extract_fields_from_html(html=response.text)
-    for page, check_page in zip(pages, check_pages):
-        for key, value in check_page.items():
-            assert page[key] == value
-
-
-@pytest.mark.default_cassette("test_load_ftp_manifest_data.yaml")
-@pytest.mark.vcr
-@pytest.mark.parametrize('rendering_label', ftp_api.RENDERING_EXTRACTORS.keys())
-def test_load_ftp_manifest_data(rendering_label):
-    ftp_work = ftp_api.FTPWork(
-        ftp_manifest_url='https://fromthepage.com/iiif/47397/manifest'
-    )
-    ftp_api.load_ftp_manifest_data(ftp_work, rendering_label, session=requests)
-    assert all(isinstance(page, ftp_api.FTPPage) for page in ftp_work.pages)
-    assert ftp_work.ftp_work_url
+def test_parse_ftp_canvas_id(url, base_url, alias, dmrecord):
+    assert ftp_api.parse_ftp_canvas_id(url) == (base_url, alias, dmrecord)

@@ -3,7 +3,7 @@ import tqdm
 
 import json
 
-from cdm_util_scripts import ftp_api2 as ftp_api
+from cdm_util_scripts import ftp_api
 
 
 def ftptr2catcher(

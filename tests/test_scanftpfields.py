@@ -1,7 +1,7 @@
 import pytest
 
 from cdm_util_scripts import scanftpfields
-from cdm_util_scripts import ftp_api2 as ftp_api
+from cdm_util_scripts import ftp_api
 
 
 @pytest.fixture

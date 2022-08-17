@@ -6,7 +6,7 @@ import json
 
 from cdm_util_scripts import ftpfields2catcher
 from cdm_util_scripts import cdm_api
-from cdm_util_scripts import ftp_api2 as ftp_api
+from cdm_util_scripts import ftp_api
 
 
 @pytest.mark.parametrize(
