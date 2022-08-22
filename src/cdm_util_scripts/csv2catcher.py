@@ -9,7 +9,7 @@ from enum import Enum
 
 from cdm_util_scripts import cdm_api
 
-from typing import List, Optional, Dict, Sequence, Iterator, TextIO
+from typing import List, Optional, Dict, Sequence, Iterator, TextIO, Iterable, Union
 
 
 @dataclass
@@ -45,8 +45,8 @@ class MatchMode(Enum):
     OBJECT = 'object'
 
 
-def csv_dict_reader_with_join(fp: TextIO, seperator: str = '; ') -> Iterator[Dict[str, str]]:
-    reader = csv.reader(fp)
+def csv_dict_reader_with_join(fp: TextIO, dialect: Union[str, csv.Dialect], join_with: str = '; ') -> Iterator[Dict[str, str]]:
+    reader = csv.reader(fp, dialect=dialect)
     try:
         header = [column_name.strip() for column_name in next(reader)]
     except StopIteration:
@@ -60,7 +60,7 @@ def csv_dict_reader_with_join(fp: TextIO, seperator: str = '; ') -> Iterator[Dic
             if column_name in row:
                 if cell:
                     if row[column_name]:
-                        row[column_name] = seperator.join([row[column_name], cell])
+                        row[column_name] = join_with.join([row[column_name], cell])
                     else:
                         row[column_name] = cell
             else:
@@ -154,7 +154,7 @@ def cdm_object_from_row(
 
 
 def build_cdm_collection_from_rows(
-        rows: Sequence[Dict[str, str]],
+        rows: Iterable[Dict[str, str]],
         column_mapping: Dict[str, List[str]],
         identifier_nick: Optional[str],
         page_position_column_name: Optional[str]
@@ -308,8 +308,8 @@ def csv2catcher(
         raise ValueError(f"{reconciliation_config_path!r}: match-mode page requires page-position-column-name")
 
     # Read column_mapping_csv
-    with open(column_mapping_csv_path, mode='r', encoding="utf-8") as fp:
-        reader = csv.DictReader(fp)
+    with open(column_mapping_csv_path, mode='r', encoding="utf-8", newline="") as fp:
+        reader = csv.DictReader(fp, dialect=cdm_api.sniff_csv_dialect(fp))
         if reader.fieldnames != ['name', 'nick']:
             raise ValueError(f"{column_mapping_csv_path!r}: column mapping CSV must have 'name' and 'nick' column titles in that order")
         column_mapping = defaultdict(list)
@@ -318,9 +318,9 @@ def csv2catcher(
         column_mapping = dict(column_mapping)
 
     # Read field_data_csv
-    with open(field_data_csv_path, mode='r', encoding="utf-8") as fp:
+    with open(field_data_csv_path, mode='r', encoding="utf-8", newline="") as fp:
         cdm_collection_from_rows = build_cdm_collection_from_rows(
-            rows=csv_dict_reader_with_join(fp),
+            rows=csv_dict_reader_with_join(fp, dialect=cdm_api.sniff_csv_dialect(fp)),
             column_mapping=column_mapping,
             identifier_nick=identifier_nick,
             page_position_column_name=page_position_column_name

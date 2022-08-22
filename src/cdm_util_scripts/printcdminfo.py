@@ -20,7 +20,7 @@ def print_as_records(dm_result: Sequence[Dict[str, str]]) -> None:
 
 
 def print_as_csv(dm_result: Sequence[Dict[str, str]]) -> None:
-    writer = csv.DictWriter(sys.stdout, fieldnames=dm_result[0].keys())
+    writer = csv.DictWriter(sys.stdout, fieldnames=list(dm_result[0]))
     writer.writeheader()
     writer.writerows(dm_result)
 
@@ -49,7 +49,7 @@ def main() -> int:
         "--output",
         type=str,
         action="store",
-        choices=list(OUTPUT_FORMATS.keys()),
+        choices=list(OUTPUT_FORMATS),
         default="records",
         help="Output format",
     )

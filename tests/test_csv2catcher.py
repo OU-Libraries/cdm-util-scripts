@@ -11,7 +11,7 @@ from cdm_util_scripts import csv2catcher
 @pytest.fixture
 def cdm_collection_rows():
     with open('tests/inputs/fromthepage-tables-export_ryan-test-rows.csv') as fp:
-        rows = [row for row in csv2catcher.csv_dict_reader_with_join(fp)]
+        rows = [row for row in csv2catcher.csv_dict_reader_with_join(fp, dialect="unix")]
     return rows
 
 
@@ -102,7 +102,7 @@ def test_CdmObject___add__():
      {'h1': 'c1', 'h2': 'c2', 'h3': 'c3'}),
 ])
 def test_csv_dict_reader_with_join(csv, expected_row):
-    reader = csv2catcher.csv_dict_reader_with_join(StringIO(csv), seperator='; ')
+    reader = csv2catcher.csv_dict_reader_with_join(StringIO(csv), dialect="unix", join_with='; ')
     row = next(reader)
     assert row == expected_row
 
@@ -111,7 +111,7 @@ def test_csv_dict_reader_with_join_raises():
     test_csv_mismatch = ("h1,h2,h3\n"
                          "c1,c2,c3,c4\n")
     with pytest.raises(ValueError):
-        reader = csv2catcher.csv_dict_reader_with_join(StringIO(test_csv_mismatch))
+        reader = csv2catcher.csv_dict_reader_with_join(StringIO(test_csv_mismatch), dialect="unix")
         for row in reader:
             pass
 
@@ -389,7 +389,7 @@ def test_csv2catcher(tmpdir):
     ]
     mapping_csv_path = tmpdir / "column_mapping.csv"
     with open(mapping_csv_path, mode="w", encoding="utf-8") as fp:
-        writer = csv.DictWriter(fp, fieldnames=["name", "nick"])
+        writer = csv.DictWriter(fp, fieldnames=["name", "nick"], dialect="unix")
         writer.writeheader()
         writer.writerows(column_mapping_csv)
 
@@ -398,7 +398,7 @@ def test_csv2catcher(tmpdir):
     ]
     field_data_path = tmpdir / "field-data.csv"
     with open(field_data_path, mode="w", encoding="utf-8") as fp:
-        writer = csv.DictWriter(fp, fieldnames=list(field_data[0]))
+        writer = csv.DictWriter(fp, fieldnames=list(field_data[0]), dialect="unix")
         writer.writeheader()
         writer.writerows(field_data)
 

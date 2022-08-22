@@ -4,7 +4,7 @@ import csv
 import collections
 import enum
 
-from typing import Dict, List, Union, Tuple, NamedTuple, Optional, Any
+from typing import Dict, List, Union, Tuple, NamedTuple, Optional, Any, TextIO
 
 
 class DmError(Exception):
@@ -182,8 +182,8 @@ CdmFieldMapping = Dict[str, List[str]]
 
 
 def read_csv_field_mapping(filename: str) -> CdmFieldMapping:
-    with open(filename, mode="r", encoding="utf-8") as fp:
-        reader = csv.DictReader(fp)
+    with open(filename, mode="r", encoding="utf-8", newline="") as fp:
+        reader = csv.DictReader(fp, dialect=sniff_csv_dialect(fp))
         if reader.fieldnames != ["name", "nick"]:
             raise ValueError(
                 "column mapping CSV must have 'name' and 'nick' column titles in that order"
@@ -210,6 +210,12 @@ def apply_field_mapping(
             else:
                 accumulator[nick] = field
     return accumulator
+
+
+def sniff_csv_dialect(fp: TextIO) -> csv.Dialect:
+    dialect = csv.Sniffer().sniff(fp.read(1024))
+    fp.seek(0)
+    return dialect
 
 
 def request_vocabs(

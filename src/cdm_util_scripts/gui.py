@@ -60,6 +60,11 @@ csv2catcher_layout = [
     [sg.Text("CONTENTdm collection alias")],
     [sg.Combo([], key=(csv2catcher, "cdm_collection_alias"), size=55)],
     [sg.Button("Request collection field nicks", key=(csv2catcher, "-LOAD NICKS-"))],
+    [sg.Text("Columns to CONTENTdm field nicks mapping CSV")],
+    [
+        sg.Input(key=(csv2catcher, "column_mapping_csv_path")),
+        sg.FileBrowse(),
+    ],
     [sg.Text("CONTENTdm identifier field nick")],
     [sg.Combo([], key=(csv2catcher, "identifier_nick"), size=55)],
     [
@@ -75,7 +80,10 @@ csv2catcher_layout = [
         ),
     ],
     [sg.Text("Field data CSV path")],
-    [sg.Input(key=(csv2catcher, "field_data_csv_path")), sg.FileBrowse()],
+    [
+        sg.Input(key=(csv2catcher, "field_data_csv_path")),
+        sg.FileBrowse(),
+    ],
     [sg.Button("Load column names", key=(csv2catcher, "-LOAD COLUMNS-"))],
     [sg.Text("Page position column name")],
     [sg.Combo([], key=(csv2catcher, "page_position_column_name"), size=55)],
@@ -171,15 +179,6 @@ csv2json_layout = [
     ],
     [sg.Text("Path to input CSV file")],
     [sg.Input(key=(csv2json, "input_csv_path")), sg.FileBrowse()],
-    [sg.Text("Input CSV dialect")],
-    [
-        sg.Combo(
-            sorted(csv.list_dialects()),
-            default_value="unix",
-            key=(csv2json, "dialect"),
-            readonly=True,
-        )
-    ],
     [sg.Text("Path to output JSON file")],
     [sg.Input(key=(csv2json, "output_json_path")), sg.FileSaveAs()],
     [sg.Button("Run", key=(csv2json, "-RUN-"))],
@@ -347,9 +346,12 @@ while True:
         elif event_value == "-LOAD COLUMNS-":
             print("Loading CSV column names... ", end="")
             with open(
-                tab_values["field_data_csv_path"], mode="r", encoding="utf-8"
+                tab_values["field_data_csv_path"],
+                mode="r",
+                encoding="utf-8",
+                newline="",
             ) as fp:
-                reader = csv.DictReader(fp)
+                reader = csv.DictReader(fp, dialect=cdm_api.sniff_csv_dialect(fp))
                 fieldnames = reader.fieldnames
             window[(event_function, "page_position_column_name")].update(
                 values=fieldnames
@@ -369,7 +371,9 @@ while True:
             print("Done")
 
         elif event_value == "-RUN-":
-            missing_values_keys = [key for key, value in tab_values.items() if value == ""]
+            missing_values_keys = [
+                key for key, value in tab_values.items() if value == ""
+            ]
             if missing_values_keys:
                 sg.popup("Missing required input values")
                 continue

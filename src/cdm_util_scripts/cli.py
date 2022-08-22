@@ -30,7 +30,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     catcherdiff_subparser.add_argument(
         "catcher_json_file_path", help="Path to cdm-catcher JSON file"
     )
-    catcherdiff_subparser.add_argument("report_file_path", help="Diff output file path")
+    catcherdiff_subparser.add_argument("report_file_path", help="Report output file path")
     catcherdiff_subparser.add_argument(
         "--check-vocabs",
         action="store_const",
@@ -67,13 +67,6 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     )
     csv2json_subparser.add_argument("input_csv_path", help="Path to delimited file")
     csv2json_subparser.add_argument("output_json_path", help="Path to output JSON file")
-    csv2json_subparser.add_argument(
-        "--dialect",
-        action="store",
-        default="excel",
-        choices=csv.list_dialects(),
-        help="Input CSV delimited file format",
-    )
     csv2json_subparser.set_defaults(func=csv2json.csv2json)
 
     # ftpfields2catcher
