@@ -61,7 +61,7 @@ csv2catcher_layout = [
     [sg.Combo([], key=(csv2catcher, "cdm_collection_alias"), size=55)],
     [sg.Button("Request collection field nicks", key=(csv2catcher, "-LOAD NICKS-"))],
     [sg.Text("CONTENTdm identifier field nick")],
-    [sg.InputText(key=(csv2catcher, "identifier_nick"))],
+    [sg.Combo([], key=(csv2catcher, "identifier_nick"), size=55)],
     [
         sg.Radio(
             "Match rows to pages",
@@ -280,15 +280,15 @@ layout = [
             ]
         )
     ],
-    [sg.Quit()],
+    [sg.Text("Command Log")],
+    [sg.Output(size=(80, 10), key="-OUTPUT-")],
+    [sg.Push(), sg.Quit()],
 ]
 
-window = sg.Window("cdm-util-scripts", layout)
+window = sg.Window("cdm-util-scripts", layout, location=(25, 50))
 
 while True:
     event, values = window.read()
-
-    pprint({"event": event, "values": values})
 
     if event == sg.WIN_CLOSED or event == "Quit":
         break
@@ -307,7 +307,17 @@ while True:
                     else:
                         tab_values[tab_key] = values_value
 
+        if "cdm_collection_alias" in tab_values:
+            tab_values["cdm_collection_alias"] = tab_values[
+                "cdm_collection_alias"
+            ].partition("=")[0]
+        if "identifier_nick" in tab_values:
+            tab_values["identifier_nick"] = tab_values["identifier_nick"].partition(
+                "="
+            )[0]
+
         if event_value == "-LOAD ALIASES-":
+            print("Requesting CONTENTdm collection aliases... ", end="")
             with requests.Session() as session:
                 cdm_collection_list = cdm_api.request_collection_list(
                     instance_url=tab_values["cdm_instance_url"],
@@ -319,18 +329,23 @@ while True:
                     for info in cdm_collection_list
                 ]
             )
+            print("Done")
 
         elif event_value == "-LOAD NICKS-":
+            print("Requesting CONTENTdm field nicks... ", end="")
             with requests.Session() as session:
                 cdm_field_infos = cdm_api.request_field_infos(
                     instance_url=tab_values["cdm_instance_url"],
+                    collection_alias=tab_values["cdm_collection_alias"],
                     session=session,
                 )
-            window[(event_function, "identifier-nick")].update(
+            window[(event_function, "identifier_nick")].update(
                 values=[f"{info.nick}={info.name}" for info in cdm_field_infos]
             )
+            print("Done")
 
         elif event_value == "-LOAD COLUMNS-":
+            print("Loading CSV column names... ", end="")
             with open(
                 tab_values["field_data_csv_path"], mode="r", encoding="utf-8"
             ) as fp:
@@ -339,8 +354,10 @@ while True:
             window[(event_function, "page_position_column_name")].update(
                 values=fieldnames
             )
+            print("Done")
 
         elif event_value == "-LOAD FTP PROJECTS-":
+            print("Requesting FromThePage project names... ", end="")
             with requests.Session() as session:
                 ftp_instance = ftp_api.FtpInstance(base_url=ftp_api.FTP_HOSTED_BASE_URL)
                 ftp_project_collection = ftp_instance.request_projects(
@@ -349,21 +366,16 @@ while True:
             window[(event_function, "ftp_project_name")].update(
                 values=list(ftp_project_collection.projects)
             )
+            print("Done")
 
         elif event_value == "-RUN-":
-            if "cdm_collection_alias" in tab_values:
-                tab_values["cdm_collection_alias"] = tab_values[
-                    "cdm_collection_alias"
-                ].partition("=")[0]
-            if "identifier-nick" in tab_values:
-                tab_values["identifier-nick"] = tab_values["identifier-nick"].partition(
-                    "="
-                )[0]
-            print(f"{event_function.__name__}(**{tab_values!r})")
+            missing_values_keys = [key for key, value in tab_values.items() if value == ""]
+            if missing_values_keys:
+                sg.popup("Missing required input values")
+                continue
+            print(f"Running {event_function.__name__}(**{tab_values!r})")
 
         else:
             print("Unhandled event")
-
-        pprint(tab_values)
 
 window.close()
