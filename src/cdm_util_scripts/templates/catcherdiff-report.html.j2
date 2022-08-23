@@ -61,6 +61,9 @@
              content: "☒ ";
              color: red;
          }
+         .dc-identifier {
+             font-family: monospace;
+         }
 {% endblock %}
 {% block doctitle %}<span class="filename">{{ catcher_json_file }}</span> catcherdiff report{% endblock %}
 {% block content %}
@@ -101,6 +104,8 @@
             {% for edit, cdm_info in deltas %}
                 <h3>dmrecord {{ edit['dmrecord'] }}</h3>
                 <p><a href="{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}">{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}</a></p>
+                {% if title_nick is not none %}<p><b>dc:title</b> &quot;{{ cdm_info[title_nick] }}&quot;</p>{% endif %}
+                {% if identifier_nick is not none %}<p><b>dc:identifier</b> &quot;<span class="dc-identifier">{{ cdm_info[identifier_nick] }}</span>&quot;</p>{% endif %}
                 <table class="delta-table">
                     <thead>
                         <tr>
@@ -114,7 +119,7 @@
                     <tbody>
                         {% for nick, value in edit.items() if nick != 'dmrecord' %}
                             <tr>
-                                <td class="controlled-col">{% if nick in vocabs_by_nick %}🔒{% endif %}</th>
+                                <td class="controlled-col">{% if nick in vocabs_by_nick %}<span title="This field has a controlled vocabulary">🔒</span>{% endif %}</th>
                                 <td class="nick-col"><p><span class="cdm-label">{{ cdm_nick_to_name[nick] }}</span><br/>&lt;<span class="cdm-nick">{{ nick }}</span>&gt;</p></td>
                                 <td class="value-col"><p><span class="value">{{ showwhitespace(cdm_info[nick]) }}</span></p></td>
                                 <td class="change-col">
@@ -134,7 +139,7 @@
                                     <p><span class="value">{{ showwhitespace(value) }}</span></p>
                                     {%- if nick in vocabs_by_nick and vocabs_by_nick[nick] is not none %}
                                         <ul class="terms-list">
-                                            {%- for term in value.split(';')|trim if term %}
+                                            {%- for term in value.split('; ') if term %}
                                                 {%- if term in vocabs_by_nick[nick] %}
                                                     <li class="controlled-term"><span class="value">{{ term }}</span></li>
                                                 {%- else %}

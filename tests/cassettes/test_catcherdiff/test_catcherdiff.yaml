@@ -909,4 +909,66 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://cdmdemo.contentdm.oclc.org/digital/bl/dmwebservices/index.php?q=dmGetDublinCoreFieldInfo/json
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA42WzY6bMBCAXwVxXl6gt+w21UbKqtEuWlWqejBmksyuwdQ2UaOq717b5McYGDgl
+        HvzNeH7tn3/TmlWQfklzNALSh7RG/mmX5rI058Z/Xf/I038Pt91vbfEB3Nz3ay+YBr6C5gobg7K+
+        Q6UXTkNPCpiR6g5wL5gGdm0hUB8hQBovImzI2igsWmtHB4a8lHCHmSBYZbea2Js78T2w3Wpi7zep
+        KhaEdX9dT+zflFAb3GPoMXoZkTvZKh6cSF/XE/u3rD607BAQwkumiVcQrJ9p5SVUFk6geja4lxA2
+        8HA0QcbUdT2xf9WWCHXoN/MSguBctUwkL2COsgw4L5/ndqBQlsjRnCO4WABLgTzmiP7a1NrYDS7q
+        I0dG/5XoG2WjXbNeeBovI8raTYhsJQyo2ub2FA8PIkLBMMhyVghIvu8T14i2cIOUduNhoZ5VYV1k
+        4UjqcCLWrokzP2MgiJVrZsqmg96ZwAiZs7M6MRTO1z5GjUyHbbRu49OVM8yLrTo7EiKK6PDugJxD
+        M4jEfi58sjn71ovBwwxob5AKzQA7zs3GbP3HlUk8IomMXbgXKLGtYo5I2322Zo9oLxF5UKw5Ik+e
+        0ETjrRu5CyaizWfyDkrbv7bm4/m4RMEzu2mIccKX0P4rNIJxKJPHc6yBqMabhguuY5aoyr713y2q
+        UetEhQbWPT6wTtRpaH3HlBkJPFGsvcA7PGaJiu37vQflLqAxz4mbMfD8omDg+8eyE3R9MOL950Lv
+        JxWIBQrseHcdp5Ncxng1d8v72aRtDEfv/NlHQrZFDrWGGKT6pQO7n+RZijJ8YXU40SzX50z21ri2
+        FvGzhjjyDc2haqQastTj4fLG8bOu/3LuHjvUq+XKrsuW+5QlWziBiFUMzP/6D3TbNeNEDAAA
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '681'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 23 Aug 2022 17:54:54 GMT
+      Expires:
+      - Tue, 23 Aug 2022 17:54:54 GMT
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-OCLC-IIIF-Provider:
+      - cantaloupe
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1
