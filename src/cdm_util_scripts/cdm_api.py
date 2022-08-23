@@ -76,7 +76,7 @@ class CdmFieldInfo(NamedTuple):
 def request_field_infos(
     instance_url: str, collection_alias: str, session: Session
 ) -> List[CdmFieldInfo]:
-    url = "/".join(
+    infos_url = "/".join(
         [
             instance_url.rstrip("/"),
             "digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldInfo",
@@ -84,7 +84,23 @@ def request_field_infos(
             "json",
         ]
     )
-    return [CdmFieldInfo(**info) for info in request_dm(url=url, session=session)]
+    raw_infos = request_dm(url=infos_url, session=session)
+    dc_mappings_url = "/".join(
+        [
+            instance_url.rstrip("/"),
+            "digital/bl/dmwebservices/index.php?q=dmGetDublinCoreFieldInfo/json",
+        ]
+    )
+    raw_dc_mappings = request_dm(url=dc_mappings_url, session=session)
+    dc_nicks_to_names = {dc_info["nick"]: dc_info["name"] for dc_info in raw_dc_mappings}
+    infos = []
+    for info in raw_infos:
+        if info["dc"] in {"BLANK", False, None, ""}:
+            dc_name = None
+        else:
+            dc_name = dc_nicks_to_names[info["dc"]]
+        infos.append(CdmFieldInfo(**{**info, "dc": dc_name}))
+    return infos
 
 
 CdmItemInfo = Dict[str, str]

@@ -32,7 +32,7 @@ def test_request_collection_list():
                 hide=0,
                 vocdb="LCTGM",
                 vocab=1,
-                dc="subjec",
+                dc="Subject",
                 admin=0,
                 readonly=0,
             ),
@@ -50,7 +50,7 @@ def test_request_collection_list():
                 hide=0,
                 vocdb="",
                 vocab=1,
-                dc="subjec",
+                dc="Subject",
                 admin=0,
                 readonly=0,
             ),
@@ -68,7 +68,7 @@ def test_request_collection_list():
                 hide=0,
                 vocdb="",
                 vocab=0,
-                dc="title",
+                dc="Title",
                 admin=0,
                 readonly=0,
             ),
@@ -93,6 +93,7 @@ def test_request_field_infos():
         assert isinstance(field_info, cdm_api.CdmFieldInfo)
         assert field_info.name
         assert field_info.nick
+        assert True if field_info.dc is None else field_info.dc.istitle()
 
 
 @pytest.mark.vcr
