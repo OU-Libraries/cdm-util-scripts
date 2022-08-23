@@ -1,7 +1,7 @@
 import csv
 import json
 
-from cdm_api import sniff_csv_dialect
+from cdm_util_scripts.cdm_api import sniff_csv_dialect
 
 
 def csv2json(input_csv_path: str, output_json_path: str) -> None:
