@@ -2,7 +2,6 @@ import PySimpleGUI as sg
 import requests
 
 import csv
-from pprint import pprint
 
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
@@ -60,13 +59,13 @@ csv2catcher_layout = [
     [sg.Text("CONTENTdm collection alias")],
     [sg.Combo([], key=(csv2catcher, "cdm_collection_alias"), size=55)],
     [sg.Button("Request collection field nicks", key=(csv2catcher, "-LOAD NICKS-"))],
+    [sg.Text("CONTENTdm identifier field nick")],
+    [sg.Combo([], key=(csv2catcher, "identifier_nick"), size=55)],
     [sg.Text("Columns to CONTENTdm field nicks mapping CSV")],
     [
         sg.Input(key=(csv2catcher, "column_mapping_csv_path")),
         sg.FileBrowse(),
     ],
-    [sg.Text("CONTENTdm identifier field nick")],
-    [sg.Combo([], key=(csv2catcher, "identifier_nick"), size=55)],
     [
         sg.Radio(
             "Match rows to pages",
@@ -280,11 +279,38 @@ layout = [
         )
     ],
     [sg.Text("Command Log")],
-    [sg.Output(size=(80, 10), key="-OUTPUT-")],
+    # [sg.Output(size=(80, 10), key="-OUTPUT-")],
     [sg.Push(), sg.Quit()],
 ]
 
 window = sg.Window("cdm-util-scripts", layout, location=(25, 50))
+
+
+def get_tab_values(event_function, values):
+    tab_values = dict()
+    for values_key, values_value in values.items():
+        if isinstance(values_key, tuple):
+            tab_function, tab_key, *tab_rest = values_key
+            if tab_function is event_function:
+
+                # Handle radio buttons, which have a 3rd tuple value
+                if tab_rest and isinstance(values_value, bool):
+                    if values_value is True:
+                        tab_value = tab_rest[0]
+                else:
+                    tab_value = values_value
+
+                # Handle alias=fieldname values
+                if tab_key in {"cdm_collection_alias", "identifier_nick"}:
+                    tab_value = tab_value.partition("=")[0]
+
+                if isinstance(tab_value, str):
+                    tab_value = tab_value.strip()
+
+                tab_values[tab_key] = tab_value
+
+    return tab_values
+
 
 while True:
     event, values = window.read()
@@ -294,26 +320,8 @@ while True:
 
     if isinstance(event, tuple):
         event_function, event_value, *event_rest = event
-        tab_values = dict()
-        for values_key, values_value in values.items():
-            if isinstance(values_key, tuple):
-                tab_function, tab_key, *tab_rest = values_key
-                if tab_function is event_function:
-                    # Handle radio buttons
-                    if tab_rest and isinstance(values_value, bool):
-                        if values_value is True:
-                            tab_values[tab_key] = tab_rest[0]
-                    else:
-                        tab_values[tab_key] = values_value
 
-        if "cdm_collection_alias" in tab_values:
-            tab_values["cdm_collection_alias"] = tab_values[
-                "cdm_collection_alias"
-            ].partition("=")[0]
-        if "identifier_nick" in tab_values:
-            tab_values["identifier_nick"] = tab_values["identifier_nick"].partition(
-                "="
-            )[0]
+        tab_values = get_tab_values(event_function, values)
 
         if event_value == "-LOAD ALIASES-":
             print("Requesting CONTENTdm collection aliases... ", end="")
@@ -377,9 +385,12 @@ while True:
             if missing_values_keys:
                 sg.popup("Missing required input values")
                 continue
-            print(f"Running {event_function.__name__}(**{tab_values!r})")
-
+            print(f"Running {event_function.__name__}:")
+            for key, value in tab_values.items():
+                print(f"  {key!r}={value!r}")
+            event_function(**tab_values)
+            print("Done")
         else:
-            print("Unhandled event")
+            raise KeyError(repr(event_value))
 
 window.close()
