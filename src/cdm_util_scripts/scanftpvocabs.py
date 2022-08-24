@@ -14,10 +14,10 @@ from typing import Dict, List, FrozenSet, Tuple
 def scanftpvocabs(
     ftp_slug: str,
     ftp_project_name: str,
-    cdm_repo_url: str,
+    cdm_instance_url: str,
     cdm_collection_alias: str,
     field_mapping_csv_path: str,
-    report_parent_path: str,
+    report_path: str,
 ) -> None:
     cdm_field_mapping = cdm_api.read_csv_field_mapping(field_mapping_csv_path)
 
@@ -37,14 +37,14 @@ def scanftpvocabs(
             )
         print("Requesting CONTENTdm collection data...")
         cdm_field_infos = cdm_api.request_field_infos(
-            instance_url=cdm_repo_url,
+            instance_url=cdm_instance_url,
             collection_alias=cdm_collection_alias,
             session=session,
         )
         cdm_vocabs = {
             vocab_info: frozenset(vocab)
             for vocab_info, vocab in cdm_api.request_vocabs(
-                instance_url=cdm_repo_url,
+                instance_url=cdm_instance_url,
                 collection_alias=cdm_collection_alias,
                 field_infos=cdm_field_infos,
                 session=session,
@@ -65,13 +65,12 @@ def scanftpvocabs(
     )
 
     print("Compiling report...")
-    report_datetime = datetime.now()
     report = {
         "ftp_slug": ftp_slug,
         "ftp_project_name": ftp_project_name,
-        "cdm_repo_url": cdm_repo_url,
+        "cdm_instance_url": cdm_instance_url,
         "cdm_collection_alias": cdm_collection_alias,
-        "report_datetime": report_datetime.isoformat(),
+        "report_datetime": datetime.now().isoformat(),
         "cdm_field_infos": cdm_field_infos,
         "cdm_field_mapping": cdm_field_mapping,
         "controlled_cdm_field_infos": controlled_cdm_field_infos,
@@ -89,10 +88,7 @@ def scanftpvocabs(
             },
         }
     )
-    date_str = report_datetime.strftime("%Y-%m-%d_%H-%M-%S")
-    filename = f"vocab-report_{ftp_project.project_id}_{date_str}.html"
-    print(f"Writing report as {filename!r}")
-    with open(Path(report_parent_path) / filename, mode="w", encoding="utf-8") as fp:
+    with open(report_path, mode="w", encoding="utf-8") as fp:
         fp.write(report_str)
 
 

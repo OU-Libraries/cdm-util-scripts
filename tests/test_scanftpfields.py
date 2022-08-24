@@ -60,9 +60,10 @@ def test_collate_ftp_fields_by_schema(field_transcriptions):
 
 @pytest.mark.vcr
 def test_scanftpfields(tmp_path):
+    report_path = tmp_path / "report.html"
     scanftpfields.scanftpfields(
         ftp_slug="ohiouniversitylibraries",
         ftp_project_name="Dance Posters Metadata",
-        report_parent_path=tmp_path,
+        report_path=report_path,
     )
-    assert tmp_path.glob("field-label-report*.html")
+    assert tmp_path.exists()

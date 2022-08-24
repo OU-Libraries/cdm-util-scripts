@@ -2,7 +2,6 @@ import jinja2
 from requests import Session
 import tqdm
 
-from pathlib import Path
 from datetime import datetime
 import collections
 
@@ -15,9 +14,8 @@ from cdm_util_scripts import ftp_api
 def scanftpfields(
     ftp_slug: str,
     ftp_project_name: str,
-    report_parent_path: str,
+    report_path: str,
 ) -> None:
-    report_parent = Path(report_parent_path)
     with Session() as session:
         print("Requesting project data...")
         ftp_project = ftp_api.request_ftp_project_and_works(
@@ -34,13 +32,12 @@ def scanftpfields(
             )
 
     print("Compiling report...")
-    report_date = datetime.now()
     pages_by_schema = collate_ftp_pages_by_schema(
         zip(ftp_project.works, field_transcriptions)
     )
     blank_pages = pages_by_schema.pop(None, [])
     report = {
-        "report_date": report_date.isoformat(),
+        "report_datetime": datetime.now().isoformat(),
         "slug": ftp_slug,
         "project_id": ftp_project.project_id,
         "project_label": ftp_project.label,
@@ -55,10 +52,7 @@ def scanftpfields(
     }
 
     report_str = report_to_html(report)
-    date_str = report_date.strftime("%Y-%m-%d_%H-%M-%S")
-    filename = f"field-label-report_{ftp_project.project_id}_{date_str}.html"
-    print(f"Writing report as {filename!r}")
-    with open(report_parent / filename, mode="w", encoding="utf-8") as fp:
+    with open(report_path, mode="w", encoding="utf-8") as fp:
         fp.write(report_str)
 
 

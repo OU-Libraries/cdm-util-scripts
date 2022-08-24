@@ -234,7 +234,7 @@ scanftpvocabs_layout = [
     [sg.Text("FromThePage field labels to CONTENTdm field nicks CSV mapping path")],
     [sg.Input(key=(scanftpvocabs, "field_mapping_csv_path")), sg.FileBrowse()],
     [sg.Text("HTML report output file path")],
-    [sg.Input(key=(scanftpvocabs, "report_file_path")), sg.FileSaveAs()],
+    [sg.Input(key=(scanftpvocabs, "report_path")), sg.FileSaveAs()],
     [sg.Button("Run", key=(scanftpvocabs, "-RUN-"))],
 ]
 
@@ -257,7 +257,7 @@ scanftpfields_layout = [
     [sg.Text("FromThePage project name")],
     [sg.Combo([], key=(scanftpfields, "ftp_project_name"), size=55)],
     [sg.Text("HTML report output file path")],
-    [sg.Input(key=(scanftpfields, "report_file_path")), sg.FileSaveAs()],
+    [sg.Input(key=(scanftpfields, "report_path")), sg.FileSaveAs()],
     [sg.Button("Run", key=(scanftpfields, "-RUN-"))],
 ]
 
@@ -387,7 +387,7 @@ while True:
                 continue
             print(f"Running {event_function.__name__}:")
             for key, value in tab_values.items():
-                print(f"  {key!r}={value!r}")
+                print(f"  {key}={value!r}")
             event_function(**tab_values)
             print("Done")
         else:

@@ -147,9 +147,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "ftp_project_name", help="FromThePage project name"
     )
     scanftpfields_subparser.add_argument(
-        "--report-parent-path",
-        default=".",
-        help="Directory to put report in",
+        "report_path", help="Report file path"
     )
     scanftpfields_subparser.set_defaults(func=scanftpfields.scanftpfields)
 
@@ -163,7 +161,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "ftp_project_name", help="FromThePage project name"
     )
     scanftpvocabs_subparser.add_argument(
-        "cdm_repo_url", help="CONTENTdm repository URL"
+        "cdm_instance_url", help="CONTENTdm repository URL"
     )
     scanftpvocabs_subparser.add_argument(
         "cdm_collection_alias", help="CONTENTdm collection alias"
@@ -172,16 +170,14 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "field_mapping_csv_path",
         help="CSV file of FromThePage field labels mapped to CONTENTdm nicknames",
     )
+    scanftpfields_subparser.add_argument(
+        "report_path", help="Report file path"
+    )
     scanftpvocabs_subparser.add_argument(
         "--label",
         choices=list(ftp_api.RENDERING_EXTRACTORS),
         default="XHTML Export",
         help="Choose the export to use for parsing fields",
-    )
-    scanftpvocabs_subparser.add_argument(
-        "--report-parent",
-        default=".",
-        help="Directory to put report in",
     )
     scanftpvocabs_subparser.set_defaults(func=scanftpvocabs.scanftpvocabs)
 
