@@ -64,6 +64,10 @@
          .dc-identifier {
              font-family: monospace;
          }
+         .metadata-table {
+             text-align: left;
+             vertical-align: top;p
+         }
 {% endblock %}
 {% block doctitle %}<span class="filename">{{ catcher_json_file }}</span> catcherdiff report{% endblock %}
 {% block content %}
@@ -103,9 +107,24 @@
 
             {% for edit, cdm_info in deltas %}
                 <h3>dmrecord {{ edit['dmrecord'] }}</h3>
-                <p><a href="{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}">{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}</a></p>
-                {% if title_nick is not none %}<p><b>dc:title</b> &quot;{{ cdm_info[title_nick] }}&quot;</p>{% endif %}
-                {% if identifier_nick is not none %}<p><b>dc:identifier</b> &quot;<span class="dc-identifier">{{ cdm_info[identifier_nick] }}</span>&quot;</p>{% endif %}
+                <table class="metadata-table">
+                    <tr>
+                        <th>URL</th>
+                        <td><a href="{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}">{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}</a></td>
+                    </tr>
+                    {% if title_nick is not none -%}
+                        <tr>
+                            <th>dc:title</th>
+                            <td>{{ cdm_info[title_nick] }}</td>
+                        </tr>
+                    {%- endif %}
+                    {% if identifier_nick is not none -%}
+                        <tr>
+                            <th>dc:identifier</th>
+                            <td class="dc-identifier">{{ cdm_info[identifier_nick] }}</td>
+                        </tr>
+                    {%- endif %}
+                </table>
                 <table class="delta-table">
                     <thead>
                         <tr>
