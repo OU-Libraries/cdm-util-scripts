@@ -29,8 +29,10 @@ catcherdiff_layout = [
         )
     ],
     [sg.Text("CONTENTdm instance URL")],
-    [sg.InputText(key=(catcherdiff, "cdm_instance_url"))],
-    [sg.Button("Request collection aliases", key=(catcherdiff, "-LOAD ALIASES-"))],
+    [
+        sg.InputText(key=(catcherdiff, "cdm_instance_url")),
+        sg.Button("Request collection aliases", key=(catcherdiff, "-LOAD ALIASES-")),
+    ],
     [sg.Text("CONTENTdm collection alias")],
     [sg.Combo([], key=(catcherdiff, "cdm_collection_alias"), size=55)],
     [sg.Text("Catcher edits JSON file path")],
@@ -54,11 +56,15 @@ csv2catcher_layout = [
         )
     ],
     [sg.Text("CONTENTdm instance URL")],
-    [sg.InputText(key=(csv2catcher, "cdm_instance_url"))],
-    [sg.Button("Request collection aliases", key=(csv2catcher, "-LOAD ALIASES-"))],
+    [
+        sg.InputText(key=(csv2catcher, "cdm_instance_url")),
+        sg.Button("Request collection aliases", key=(csv2catcher, "-LOAD ALIASES-")),
+    ],
     [sg.Text("CONTENTdm collection alias")],
-    [sg.Combo([], key=(csv2catcher, "cdm_collection_alias"), size=55)],
-    [sg.Button("Request collection field nicks", key=(csv2catcher, "-LOAD NICKS-"))],
+    [
+        sg.Combo([], key=(csv2catcher, "cdm_collection_alias"), size=55),
+        sg.Button("Request collection field nicks", key=(csv2catcher, "-LOAD NICKS-")),
+    ],
     [sg.Text("CONTENTdm identifier field nick")],
     [sg.Combo([], key=(csv2catcher, "identifier_nick"), size=55)],
     [sg.Text("Columns to CONTENTdm field nicks mapping CSV")],
@@ -82,8 +88,8 @@ csv2catcher_layout = [
     [
         sg.Input(key=(csv2catcher, "field_data_csv_path")),
         sg.FileBrowse(),
+        sg.Button("Load column names", key=(csv2catcher, "-LOAD COLUMNS-")),
     ],
-    [sg.Button("Load column names", key=(csv2catcher, "-LOAD COLUMNS-"))],
     [sg.Text("Page position column name")],
     [sg.Combo([], key=(csv2catcher, "page_position_column_name"), size=55)],
     [sg.Text("Catcher JSON output file path")],
@@ -117,11 +123,11 @@ ftpfields2catcher_layout = [
         ),
     ],
     [sg.Text("FromThePage user slug")],
-    [sg.InputText(key=(ftpfields2catcher, "ftp_slug"))],
     [
+        sg.InputText(key=(ftpfields2catcher, "ftp_slug")),
         sg.Button(
             "Request project names", key=(ftpfields2catcher, "-LOAD FTP PROJECTS-")
-        )
+        ),
     ],
     [sg.Text("FromThePage project name")],
     [sg.Combo([], key=(ftpfields2catcher, "ftp_project_name"), size=55)],
@@ -197,8 +203,10 @@ ftpmdc2catcher_layout = [
         )
     ],
     [sg.Text("FromThePage user slug")],
-    [sg.InputText(key=(ftpmdc2catcher, "ftp_slug"))],
-    [sg.Button("Request project names", key=(ftpmdc2catcher, "-LOAD FTP PROJECTS-"))],
+    [
+        sg.InputText(key=(ftpmdc2catcher, "ftp_slug")),
+        sg.Button("Request project names", key=(ftpmdc2catcher, "-LOAD FTP PROJECTS-")),
+    ],
     [sg.Text("FromThePage project name")],
     [sg.Combo([], key=(ftpmdc2catcher, "ftp_project_name"), size=55)],
     [sg.Text("FromThePage field labels to CONTENTdm field nicks CSV mapping path")],
@@ -222,13 +230,17 @@ scanftpvocabs_layout = [
         )
     ],
     [sg.Text("FromThePage user slug")],
-    [sg.InputText(key=(scanftpvocabs, "ftp_slug"))],
-    [sg.Button("Request project names", key=(scanftpvocabs, "-LOAD FTP PROJECTS-"))],
+    [
+        sg.InputText(key=(scanftpvocabs, "ftp_slug")),
+        sg.Button("Request project names", key=(scanftpvocabs, "-LOAD FTP PROJECTS-")),
+    ],
     [sg.Text("FromThePage project name")],
     [sg.Combo([], key=(scanftpvocabs, "ftp_project_name"), size=55)],
     [sg.Text("CONTENTdm instance URL")],
-    [sg.InputText(key=(scanftpvocabs, "cdm_instance_url"))],
-    [sg.Button("Request collection aliases", key=(scanftpvocabs, "-LOAD ALIASES-"))],
+    [
+        sg.InputText(key=(scanftpvocabs, "cdm_instance_url")),
+        sg.Button("Request collection aliases", key=(scanftpvocabs, "-LOAD ALIASES-")),
+    ],
     [sg.Text("CONTENTdm collection alias")],
     [sg.Combo([], key=(scanftpvocabs, "cdm_collection_alias"), size=55)],
     [sg.Text("FromThePage field labels to CONTENTdm field nicks CSV mapping path")],
@@ -252,8 +264,10 @@ scanftpfields_layout = [
         )
     ],
     [sg.Text("FromThePage user slug")],
-    [sg.InputText(key=(scanftpfields, "ftp_slug"))],
-    [sg.Button("Request project names", key=(scanftpfields, "-LOAD FTP PROJECTS-"))],
+    [
+        sg.InputText(key=(scanftpfields, "ftp_slug")),
+        sg.Button("Request project names", key=(scanftpfields, "-LOAD FTP PROJECTS-")),
+    ],
     [sg.Text("FromThePage project name")],
     [sg.Combo([], key=(scanftpfields, "ftp_project_name"), size=55)],
     [sg.Text("HTML report output file path")],
