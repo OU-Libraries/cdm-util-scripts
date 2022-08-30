@@ -87,7 +87,7 @@ def test_request_field_infos():
         field_infos = cdm_api.request_field_infos(
             instance_url="https://cdmdemo.contentdm.oclc.org",
             collection_alias="oclcsample",
-            session=session
+            session=session,
         )
     for field_info in field_infos:
         assert isinstance(field_info, cdm_api.CdmFieldInfo)
@@ -148,6 +148,22 @@ def test_request_page_pointers():
         )
     assert pointers
     assert monograph_pointers
+
+
+@pytest.mark.vcr
+def test_request_collection_object_records():
+    field_nicks = ["identi"]
+    with requests.Session() as session:
+        cdm_records = cdm_api.request_collection_object_records(
+            instance_url="https://media.library.ohio.edu",
+            collection_alias="p15808coll15",
+            field_nicks=field_nicks,
+            session=session,
+        )
+    assert cdm_records
+    for record in cdm_records:
+        for nick in field_nicks:
+            assert nick in record.fields
 
 
 @pytest.mark.parametrize(

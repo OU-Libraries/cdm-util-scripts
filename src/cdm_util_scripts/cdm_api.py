@@ -4,7 +4,7 @@ import csv
 import collections
 import enum
 
-from typing import Dict, List, Union, Tuple, NamedTuple, Optional, Any, TextIO
+from typing import Dict, List, Union, Tuple, NamedTuple, Optional, Any, TextIO, Iterable
 
 
 class DmError(Exception):
@@ -92,7 +92,9 @@ def request_field_infos(
         ]
     )
     raw_dc_mappings = request_dm(url=dc_mappings_url, session=session)
-    dc_nicks_to_names = {dc_info["nick"]: dc_info["name"] for dc_info in raw_dc_mappings}
+    dc_nicks_to_names = {
+        dc_info["nick"]: dc_info["name"] for dc_info in raw_dc_mappings
+    }
     infos = []
     for info in raw_infos:
         if info["dc"] in {"BLANK", False, None, ""}:
@@ -192,6 +194,68 @@ def _destructure_nodes(
 
     walk_nodes(node)
     return pages_index, page_pointers
+
+
+class CdmObjectRecord:
+    collection: str
+    pointer: int
+    filetype: str
+    parentobject: int
+    find: str
+    fields: Dict[str, Any]
+
+    def __init__(
+        self,
+        *,
+        collection: str,
+        pointer: int,
+        filetype: str,
+        parentobject: int,
+        find: str,
+        **kwargs,
+    ) -> None:
+        self.collection = collection
+        self.pointer = pointer
+        self.filetype = filetype
+        self.parentobject = parentobject
+        self.find = find
+        self.fields = kwargs
+
+    def is_compound(self) -> bool:
+        return self.find.endswith(".cpd")
+
+
+def request_collection_object_records(
+    instance_url: str,
+    collection_alias: str,
+    field_nicks: Iterable[str],
+    session: Session,
+) -> List[CdmObjectRecord]:
+    cdm_records: List[CdmObjectRecord] = []
+    total = 1
+    start = 1
+    maxrecs = 1024
+    while len(cdm_records) < total:
+        result = request_dm(
+            url="/".join(
+                [
+                    instance_url.rstrip("/"),
+                    "digital/bl/dmwebservices/index.php?q=dmQuery",
+                    collection_alias,
+                    "CISOSEARCHALL",
+                    "!".join(field_nicks),
+                    "pointer",
+                    str(maxrecs),
+                    str(start),
+                    "1/0/0/0/0/1/json",
+                ]
+            ),
+            session=session,
+        )
+        total = int(result["pager"]["total"])
+        start += maxrecs
+        cdm_records.extend(CdmObjectRecord(**record) for record in result["records"])
+    return cdm_records
 
 
 CdmFieldMapping = Dict[str, List[str]]
