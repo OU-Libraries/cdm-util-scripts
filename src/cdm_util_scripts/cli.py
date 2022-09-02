@@ -1,8 +1,14 @@
 import argparse
+import requests
 
-from typing import Optional, Sequence
+import json
+import csv
+import sys
+
+from typing import Optional, Sequence, Dict
 
 from cdm_util_scripts import ftp_api
+from cdm_util_scripts import cdm_api
 from cdm_util_scripts import catcherdiff
 from cdm_util_scripts import csv2catcher
 from cdm_util_scripts import csv2json
@@ -188,10 +194,111 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     )
     gui_subparser.set_defaults(func=gui.gui)
 
+    # ftpinfo
+    ftpinfo_subparser = subparsers.add_parser(
+        "ftpinfo", description="Print FromThePage project information"
+    )
+    ftpinfo_subparser.add_argument("slug", help="FromThePage user slug")
+    ftpinfo_subparser.set_defaults(func=ftpinfo)
+
+    # cdminfo
+    cdminfo_subparser = subparsers.add_parser(
+        "cdminfo",
+        description="Print CONTENTdm collection information",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    cdminfo_subparser.add_argument("instance_url", help="CONTENTdm repository URL")
+    cdminfo_subparser.add_argument(
+        "-a", "--alias", action="store", help="CONTENTdm collection alias"
+    )
+    cdminfo_subparser.add_argument(
+        "--output",
+        action="store",
+        choices=list(OUTPUT_FORMATS),
+        default="records",
+        help="Output format",
+    )
+    cdminfo_subparser.add_argument(
+        "-c",
+        "--columns",
+        action="store",
+        help="Specify columns to print in a comma separated string, as --columns name,nick",
+    )
+    cdminfo_subparser.set_defaults(func=cdminfo)
+
     args = parser.parse_args(test_args)
     args.func(**{key: value for key, value in vars(args).items() if key != "func"})
 
     return 0
+
+
+def ftpinfo(slug: str) -> None:
+    with requests.Session() as session:
+        ftp_instance = ftp_api.FtpInstance(base_url=ftp_api.FTP_HOSTED_BASE_URL)
+        ftp_projects = ftp_instance.request_projects(slug=slug, session=session)
+
+    for label, url in ftp_projects.projects.items():
+        print(label)
+        print(url)
+
+
+def cdminfo(
+    instance_url: str,
+    alias: Optional[str],
+    columns: Optional[str],
+    output: str,
+) -> None:
+    with requests.Session() as session:
+        if alias is not None:
+            dm_result = [
+                field_info._asdict()
+                for field_info in cdm_api.request_field_infos(
+                    instance_url=instance_url,
+                    collection_alias=alias,
+                    session=session,
+                )
+            ]
+        else:
+            dm_result = [
+                collection_info._asdict()
+                for collection_info in cdm_api.request_collection_list(
+                    instance_url=instance_url, session=session
+                )
+            ]
+
+    if columns is not None:
+        column_names = columns.split(",")
+        dm_result = [
+            {column: entry[column] for column in column_names} for entry in dm_result
+        ]
+
+    OUTPUT_FORMATS[output](dm_result)
+
+
+def print_as_records(dm_result: Sequence[Dict[str, str]]) -> None:
+    max_key_len = max(len(key) for key in dm_result[0])
+    for record in dm_result:
+        for key, value in record.items():
+            print(f"{key.rjust(max_key_len)} : {value!r}")
+        if record is not dm_result[-1]:
+            print(end="\n")
+
+
+def print_as_csv(dm_result: Sequence[Dict[str, str]]) -> None:
+    writer = csv.DictWriter(sys.stdout, fieldnames=list(dm_result[0]))
+    writer.writeheader()
+    writer.writerows(dm_result)
+
+
+def print_as_json(dm_result: Sequence[Dict[str, str]]) -> None:
+    print(json.dumps(dm_result, indent=2))
+
+
+OUTPUT_FORMATS = {
+    "json": print_as_json,
+    "csv": print_as_csv,
+    "records": print_as_records,
+}
 
 
 if __name__ == "__main__":
