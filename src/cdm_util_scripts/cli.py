@@ -1,5 +1,4 @@
 import argparse
-import csv
 
 from typing import Optional, Sequence
 
@@ -12,6 +11,7 @@ from cdm_util_scripts import ftptr2catcher
 from cdm_util_scripts import ftpmdc2catcher
 from cdm_util_scripts import scanftpfields
 from cdm_util_scripts import scanftpvocabs
+from cdm_util_scripts import gui
 
 
 def main(test_args: Optional[Sequence[str]] = None) -> int:
@@ -23,14 +23,18 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "catcherdiff",
         help="Generate a HTML report on what CONTENTdm field values will change if a cdm-catcher JSON edit is implemented",
     )
-    catcherdiff_subparser.add_argument("cdm_instance_url", help="CONTENTdm instance URL")
+    catcherdiff_subparser.add_argument(
+        "cdm_instance_url", help="CONTENTdm instance URL"
+    )
     catcherdiff_subparser.add_argument(
         "cdm_collection_alias", help="CONTENTdm collection alias"
     )
     catcherdiff_subparser.add_argument(
         "catcher_json_file_path", help="Path to cdm-catcher JSON file"
     )
-    catcherdiff_subparser.add_argument("report_file_path", help="Report output file path")
+    catcherdiff_subparser.add_argument(
+        "report_file_path", help="Report output file path"
+    )
     catcherdiff_subparser.add_argument(
         "--check-vocabs",
         action="store_const",
@@ -146,9 +150,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     scanftpfields_subparser.add_argument(
         "ftp_project_name", help="FromThePage project name"
     )
-    scanftpfields_subparser.add_argument(
-        "report_path", help="Report file path"
-    )
+    scanftpfields_subparser.add_argument("report_path", help="Report file path")
     scanftpfields_subparser.set_defaults(func=scanftpfields.scanftpfields)
 
     # scanftpvocabs
@@ -170,9 +172,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "field_mapping_csv_path",
         help="CSV file of FromThePage field labels mapped to CONTENTdm nicknames",
     )
-    scanftpfields_subparser.add_argument(
-        "report_path", help="Report file path"
-    )
+    scanftpfields_subparser.add_argument("report_path", help="Report file path")
     scanftpvocabs_subparser.add_argument(
         "--label",
         choices=list(ftp_api.RENDERING_EXTRACTORS),
@@ -180,6 +180,13 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         help="Choose the export to use for parsing fields",
     )
     scanftpvocabs_subparser.set_defaults(func=scanftpvocabs.scanftpvocabs)
+
+    # GUI
+    gui_subparser = subparsers.add_parser(
+        "gui",
+        help="Launch a GUI version of this utility",
+    )
+    gui_subparser.set_defaults(func=gui.gui)
 
     args = parser.parse_args(test_args)
     args.func(**{key: value for key, value in vars(args).items() if key != "func"})
