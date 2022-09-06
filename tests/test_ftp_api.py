@@ -18,18 +18,18 @@ def ftp_work():
 @pytest.mark.default_cassette("dance_posters_metadata.yaml")
 @pytest.mark.vcr
 def test_FtpInstance_request_projects():
-    instance = ftp_api.FtpInstance(base_url="https://fromthepage.com/")
+    instance = ftp_api.FtpInstance(url="https://fromthepage.com/")
     with requests.Session() as session:
         projects = instance.request_projects(slug="ohiouniversitylibraries", session=session)
-    for label, url in projects.projects.items():
-        assert label
-        assert url.startswith("http")
+    for project in projects.projects:
+        assert project.label
+        assert project.url.startswith("http")
 
 
 @pytest.mark.default_cassette("dance_posters_metadata.yaml")
 @pytest.mark.vcr
 def test_FtpProjectCollection_request_project():
-    instance = ftp_api.FtpInstance(base_url="https://fromthepage.com/")
+    instance = ftp_api.FtpInstance(url="https://fromthepage.com/")
     with requests.Session() as session:
         projects = instance.request_projects(slug="ohiouniversitylibraries", session=session)
         project = projects.request_project(label="Dance Posters Metadata", session=session)
@@ -44,7 +44,7 @@ def test_FtpProjectCollection_request_project():
 @pytest.mark.default_cassette("dance_posters_metadata.yaml")
 @pytest.mark.vcr
 def test_FtpProject_requests_works():
-    instance = ftp_api.FtpInstance(base_url="https://fromthepage.com/")
+    instance = ftp_api.FtpInstance(url="https://fromthepage.com/")
     with requests.Session() as session:
         projects = instance.request_projects(slug="ohiouniversitylibraries", session=session)
         project = projects.request_project(label="Dance Posters Metadata", session=session)
@@ -53,7 +53,7 @@ def test_FtpProject_requests_works():
         assert work.metadata
         assert work.renderings
         assert work.pages
-        assert work.cdm_instance_base_url
+        assert work.cdm_instance_url
         assert work.cdm_collection_alias
         assert work.cdm_object_dmrecord
 
@@ -83,7 +83,7 @@ def test_FtpWork_request():
         assert page.id_
         assert page.label
         assert page.renderings
-        assert page.cdm_instance_base_url
+        assert page.cdm_instance_url
         assert page.cdm_collection_alias
         assert page.cdm_page_dmrecord
 
@@ -131,10 +131,10 @@ def test_FtpPage_request_transcript(ftp_work):
     assert transcript.startswith("Title: ")
 
 
-@pytest.mark.parametrize("url,base_url,alias,dmrecord", [
+@pytest.mark.parametrize("url,instance_url,alias,dmrecord", [
     ("https://cdm15808.contentdm.oclc.org/iiif/mss:188/canvas/c1", "https://cdm15808.contentdm.oclc.org", "mss", "188"),
     ("https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll19/1959/canvas/c0", "https://cdm15808.contentdm.oclc.org", "p15808coll19", "1959"),
     ("https://fromthepage.com/iiif/46450/canvas/1503033", None, None, None),
 ])
-def test_parse_ftp_canvas_id(url, base_url, alias, dmrecord):
-    assert ftp_api.parse_ftp_canvas_id(url) == (base_url, alias, dmrecord)
+def test_parse_ftp_canvas_id(url, instance_url, alias, dmrecord):
+    assert ftp_api.parse_ftp_canvas_id(url) == (instance_url, alias, dmrecord)

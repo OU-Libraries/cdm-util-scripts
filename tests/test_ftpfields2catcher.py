@@ -89,7 +89,7 @@ def test_map_ftp_work_as_cdm_object(ftp_work, field_transcription, page_picker, 
         (
             ftp_api.FtpWork(
                 url="test-url",
-                cdm_instance_base_url="https://cdmdemo.contentdm.oclc.org",
+                cdm_instance_url="https://cdmdemo.contentdm.oclc.org",
                 cdm_collection_alias="oclcsample",
                 cdm_object_dmrecord="12",
                 pages=[
@@ -107,7 +107,7 @@ def test_map_ftp_work_as_cdm_object(ftp_work, field_transcription, page_picker, 
         (
             ftp_api.FtpWork(
                 url="test-url",
-                cdm_instance_base_url="https://cdmdemo.contentdm.oclc.org",
+                cdm_instance_url="https://cdmdemo.contentdm.oclc.org",
                 cdm_collection_alias="oclcsample",
                 cdm_object_dmrecord="64",
                 pages=[
@@ -144,7 +144,7 @@ def test_map_ftp_work_as_cdm_pages(ftp_work, field_transcription, dmrecords):
 def test_get_ftp_work_cdm_item_info():
     ftp_work = ftp_api.FtpWork(
         url="test-url",
-        cdm_instance_base_url="https://cdmdemo.contentdm.oclc.org",
+        cdm_instance_url="https://cdmdemo.contentdm.oclc.org",
         cdm_collection_alias="oclcsample",
         cdm_object_dmrecord="102",
     )

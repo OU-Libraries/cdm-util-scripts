@@ -274,6 +274,15 @@ def read_csv_field_mapping(filename: str) -> CdmFieldMapping:
     return dict(field_mapping)
 
 
+def write_csv_field_mapping(filename: str, field_mapping: CdmFieldMapping) -> None:
+    with open(filename, mode="w", encoding="utf-8") as fp:
+        writer = csv.DictWriter(fp, fieldnames=["name", "nick"])
+        writer.writeheader()
+        for name, nicks in field_mapping.items():
+            for nick in nicks:
+                writer.writerow({"name": name, "nick": nick})
+
+
 def apply_field_mapping(
     fields: Dict[str, str], field_mapping: CdmFieldMapping
 ) -> Dict[str, str]:

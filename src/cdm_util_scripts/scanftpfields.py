@@ -19,7 +19,7 @@ def scanftpfields(
     with Session() as session:
         print("Requesting project data...")
         ftp_project = ftp_api.request_ftp_project_and_works(
-            base_url=ftp_api.FTP_HOSTED_BASE_URL,
+            instance_url=ftp_api.FTP_HOSTED_URL,
             slug=ftp_slug,
             project_label=ftp_project_name,
             session=session,

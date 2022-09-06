@@ -318,7 +318,7 @@ def gui() -> None:
                 print("Requesting FromThePage project names... ", end="")
                 with requests.Session() as session:
                     ftp_instance = ftp_api.FtpInstance(
-                        base_url=ftp_api.FTP_HOSTED_BASE_URL
+                        url=ftp_api.FTP_HOSTED_URL
                     )
                     ftp_project_collection = ftp_instance.request_projects(
                         slug=tab_values["ftp_slug"], session=session

@@ -1,0 +1,2278 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/collections/ohiouniversitylibraries
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/collections/ohiouniversitylibraries\",\n
+        \ \"@type\": \"sc:Collection\",\n  \"label\": \"IIIF resources avaliable on
+        the FromThePage installation at fromthepage.com for Ohio University Libraries.\",\n
+        \ \"collections\": [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/ohio-university-board-of-trustees-minutes\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"Board of Trustees
+        minutes, Ohio University\"\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/cornelius-ryan-collection-of-world-war-ii-papers\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"Cornelius Ryan Collection
+        of World War II Papers\"\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/william-e-peters-papers\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"William E. Peters
+        Papers\"\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/farfel-research-notebooks\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"Farfel Research Notebooks\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/los-amigos-records-1947-1952\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"Los Amigos records,
+        1947-1952\"\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/ryan-metadata\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"Ryan collection metadata\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/d-day-accounts\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"World War II D-Day
+        Accounts from the Cornelius Ryan Collection\"\n    },\n    {\n      \"@id\":
+        \"https://fromthepage.com/iiif/collection/dance-posters-metadata\",\n      \"@type\":
+        \"sc:Collection\",\n      \"label\": \"Dance Posters Metadata\"\n    },\n
+        \   {\n      \"@id\": \"https://fromthepage.com/iiif/collection/don-swaim-collection\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"Don Swaim Collection\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-transcription\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"Dance Posters Transcription\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/manuscripts-general\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"Manuscripts - General\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/ohio-university-scrapbooks\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"Ohio University Scrapbooks\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/walter-alexander-s-herbarium-and-plant-analysis-notebook\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"Walter Alexander's
+        Herbarium and plant analysis notebook\"\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/university-archives-posters-collection\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"University Archives
+        Posters & Ephemera\"\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/collection/iiif-hosting\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"IIIF Hosting\"\n    },\n
+        \   {\n      \"@id\": \"https://fromthepage.com/iiif/collection/farfel-leaves-metadata-a10a2751-a85e-4dbd-84c6-eb559ef9d564\",\n
+        \     \"@type\": \"sc:Collection\",\n      \"label\": \"Farfel Leaves Metadata\"\n
+        \   }\n  ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:55 GMT
+      ETag:
+      - W/"baef02276ee1985cc1d6d064ef29fcb3"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd; path=/; expires=Fri, 06
+        Sep 2024 21:38:55 GMT; secure
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:55 GMT; secure
+      - _fromthepage_session=bT2g%2Fb8Ur9n2j4%2BaXEkD%2BlY7uptEO2QZn%2FHiuJc6fYbusmhCARnWVVMmluyc4FmzyLXsPJkieIouK0lGDwNT%2BMnMBBKT6AZAp2jJogT7kc8eVaiP5wWs4O6sMYspEQk9Mgxjr00%2BbhstgIG5ATS8r3s3PjCk24gT5Uasdbf1s%2FEwcmTOpUPqGZV6nwy1IY2NSAymMHHnO2v7kbK6KFIaXvl9Ku3pqierzUO%2FAU8vUGoV8mW7ZlfFFdaSYYxzcChspWIu80jyq%2FjEkeG%2BNRzwuywhICErbCYMxOa2Tg%3D%3D--k7J73Ez2RgLdiJQD--pSTgW8xJpu8fSC02EbhEcQ%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 1310711a-fc2a-4ede-b865-007d0b225727
+      X-Runtime:
+      - '0.076136'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=bT2g%2Fb8Ur9n2j4%2BaXEkD%2BlY7uptEO2QZn%2FHiuJc6fYbusmhCARnWVVMmluyc4FmzyLXsPJkieIouK0lGDwNT%2BMnMBBKT6AZAp2jJogT7kc8eVaiP5wWs4O6sMYspEQk9Mgxjr00%2BbhstgIG5ATS8r3s3PjCk24gT5Uasdbf1s%2FEwcmTOpUPqGZV6nwy1IY2NSAymMHHnO2v7kbK6KFIaXvl9Ku3pqierzUO%2FAU8vUGoV8mW7ZlfFFdaSYYxzcChspWIu80jyq%2FjEkeG%2BNRzwuywhICErbCYMxOa2Tg%3D%3D--k7J73Ez2RgLdiJQD--pSTgW8xJpu8fSC02EbhEcQ%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/collection/dance-posters-metadata
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\",\n
+        \ \"@type\": \"sc:Collection\",\n  \"label\": \"Dance Posters Metadata\",\n
+        \ \"manifests\": [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56198/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"\\\"Nothing else like
+        it in the world\\\" Nikolais Dance Theatre poster\",\n      \"metadata\":
+        [\n        {\n          \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/237/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56198/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56195/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Brooklyn Academy of
+        Music, Murray Louis and Alwin Nikolais Dance\",\n      \"metadata\": [\n        {\n
+        \         \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/236/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56195/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56194/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Charleroi Danses poster,
+        Palais des Beaux-Arts, Charleroi, January 20, 1994\",\n      \"metadata\":
+        [\n        {\n          \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/240/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56194/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56196/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Legend of the Winds
+        poster, Henry Street Playhouse, December 22-30, 1954\",\n      \"metadata\":
+        [\n        {\n          \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/239/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56196/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56199/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Maison de la Culture
+        de Rennes poster, December 9, 1983\",\n      \"metadata\": [\n        {\n
+        \         \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/238/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56199/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56200/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Mulhouse, France, Nikolais
+        Dance Theatre poster, 1976\",\n      \"metadata\": [\n        {\n          \"label\":
+        \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/235/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56200/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56197/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Murray Louis and Nikolais
+        Dance poster, Greece, July 19, 1999\",\n      \"metadata\": [\n        {\n
+        \         \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/233/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56197/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56202/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"Nikolais Dance Theatre
+        (featuring the Ririe-Woodbury Dance Co.) poster, November 28-29, 2006\",\n
+        \     \"metadata\": [\n        {\n          \"label\": \"dc:source\",\n          \"value\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/242/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56202/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56201/manifest\",\n
+        \     \"@type\": \"sc:Manifest\",\n      \"label\": \"\u201CTotal Theater\\\"
+        production poster, Alwin Nikolais Dance Company poster\",\n      \"metadata\":
+        [\n        {\n          \"label\": \"dc:source\",\n          \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/241/manifest.json\"\n
+        \       }\n      ],\n      \"service\": {\n        \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \       \"@id\": \"https://fromthepage.com/iiif/56201/status\",\n        \"label\":
+        \"Work Status\",\n        \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \       \"pctComplete\": 100.0,\n        \"pctTranscribed\": 100.0,\n        \"pctOcrCorrected\":
+        0.0,\n        \"pctIndexed\": 0,\n        \"pctMarkedBlank\": 0,\n        \"pctNeedsReview\":
+        0,\n        \"pctTranslationComplete\": 0,\n        \"pctTranslated\": 0,\n
+        \       \"pctTranslationNeedsReview\": 0,\n        \"pctTranslationIndexed\":
+        0,\n        \"pctTranslationMarkedBlank\": 0,\n        \"metadataStatus\":
+        \"undescribed\"\n      }\n    }\n  ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:55 GMT
+      ETag:
+      - W/"3e05c40cfda111d55b92a9d4b5604fd0"
+      Keep-Alive:
+      - timeout=5, max=99
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:55 GMT; secure
+      - _fromthepage_session=REgxOKapSptg12ZuKzpOJXGHwt9uXR%2BPCrYN5qqb%2BSkAIRyaOuyzWc2c%2FdIS3SL5kb4GFApcQ1mc82BCUQOcw%2FR%2Ffra%2BPEf8UNUEqcvCRnE2Qe9foP1iTxGK6dCekPysEG4eXhoG6kWpOtDOAfYrJ3na3UsmsU4Z%2Bc6ClXLKCmMmThgn5LHGqSJi%2FozcWW8Kx8QZY%2FJpkRRYalzM%2BDlcZf1zFZuF9nTOAJPedoc9f3nPBxy6qcNWeM7B9m%2F8URv8LLPZiC%2BSMXJDMT4RBPP40gsEsXWdyyyg--mMDu%2B25TAxpxr5Pg--IDH1gZGyMDmJ5nbCwbfVqw%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - ba8e98b1-9b26-4cbd-8207-e93d1e1b0c21
+      X-Runtime:
+      - '0.121063'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=REgxOKapSptg12ZuKzpOJXGHwt9uXR%2BPCrYN5qqb%2BSkAIRyaOuyzWc2c%2FdIS3SL5kb4GFApcQ1mc82BCUQOcw%2FR%2Ffra%2BPEf8UNUEqcvCRnE2Qe9foP1iTxGK6dCekPysEG4eXhoG6kWpOtDOAfYrJ3na3UsmsU4Z%2Bc6ClXLKCmMmThgn5LHGqSJi%2FozcWW8Kx8QZY%2FJpkRRYalzM%2BDlcZf1zFZuF9nTOAJPedoc9f3nPBxy6qcNWeM7B9m%2F8URv8LLPZiC%2BSMXJDMT4RBPP40gsEsXWdyyyg--mMDu%2B25TAxpxr5Pg--IDH1gZGyMDmJ5nbCwbfVqw%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56198/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/56198/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"\\\"Nothing else like it in the world\\\"
+        Nikolais Dance Theatre poster\",\n  \"metadata\": [\n    {\n      \"label\":
+        \"dc:source\",\n      \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/237/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Laura Smith, Photo Archivist at https://www.ohio.edu/library/about/staff/smithle\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu/record=b5961003~S7\"\n
+        \   },\n    {\n      \"label\": \"Collection finding aid\",\n      \"value\":
+        \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/nikolais-louis\"\n
+        \   },\n    {\n      \"label\": \"Collection\",\n      \"value\": \"Alwin
+        Nikolais and Murray Louis Papers. MSS181\"\n    },\n    {\n      \"label\":
+        \"Dance Company\",\n      \"value\": \"Nikolais Dance Theatre\"\n    },\n
+        \   {\n      \"label\": \"Description\",\n      \"value\": \"14\\\" x 28.75
+        \\\" color poster. Dance collection, series 7: press and promotion, sub series
+        7.2: posters. Poster with image of colorful dancer advertising Nikolais Dance
+        Theatre. Poster reads: \\\"Nikolais Dance Theatre\\\"; \\\"Nothing else like
+        it in the world\\\"\"\n    },\n    {\n      \"label\": \"Format\",\n      \"value\":
+        \"JP2\"\n    },\n    {\n      \"label\": \"How to access this collection at
+        the library\",\n      \"value\": \"See https://www.ohio.edu/library/collections/archives-special-collections\"\n
+        \   },\n    {\n      \"label\": \"Identifier\",\n      \"value\": \"s7-2_b01_03_nikolais_nothing_else_like_it_in_the_world\"\n
+        \   },\n    {\n      \"label\": \"Original format-AAT\",\n      \"value\":
+        \"Posters\"\n    },\n    {\n      \"label\": \"Policy\",\n      \"value\":
+        \"See Ohio University Libraries' Digital Archival Collections Materials Selection
+        and Rights policy at  https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries. Mahn Center for Archives and Special Collections\"\n    },\n    {\n
+        \     \"label\": \"Series\",\n      \"value\": \"7. Press and Promotion\"\n
+        \   },\n    {\n      \"label\": \"Sub series\",\n      \"value\": \"7.2 Posters\"\n
+        \   },\n    {\n      \"label\": \"Title of work\",\n      \"value\": \"\\\"Nothing
+        else like it in the world\\\" Nikolais Dance Theatre poster\"\n    },\n    {\n
+        \     \"label\": \"Type\",\n      \"value\": \"Still Image\"\n    },\n    {\n
+        \     \"label\": \"Repository\",\n      \"value\": \"Ohio University Libraries
+        - Digital Archival Collections\"\n    },\n    {\n      \"label\": \"Source\",\n
+        \     \"value\": \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll16/id/237\\\">\\\"Nothing
+        else like it in the world\\\" Nikolais Dance Theatre poster</a></span>\"\n
+        \   },\n    {\n      \"label\": \"Title\",\n      \"value\": \"\\\"Nothing
+        else like it in the world\\\" Nikolais Dance Theatre poster\"\n    },\n    {\n
+        \     \"label\": \"Created On\",\n      \"value\": \"2021-03-03 21:42:46 UTC\"\n
+        \   },\n    {\n      \"label\": \"In Scope\",\n      \"value\": \"true\"\n
+        \   }\n  ],\n  \"description\": \"This is an annotated version of the original
+        manifest produced by FromThePage\",\n  \"within\": {\n    \"@type\": \"sc:Collection\",\n
+        \   \"label\": \"Dance Posters Metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read \\\"Nothing else like it in the world\\\" Nikolais Dance Theatre poster\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/nothing-else-like-it-in-the-world-nikolais-dance-theatre-poster\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for \\\"Nothing else like it in the world\\\" Nikolais Dance Theatre
+        poster\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/nothing-else-like-it-in-the-world-nikolais-dance-theatre-poster/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56198/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56198/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56198/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56198/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 100.0,\n      \"pctOcrCorrected\":
+        0.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0,\n      \"metadataStatus\": \"undescribed\"\n    }\n  ],\n  \"sequences\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56198/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/56198/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56198/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56198/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:237/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"\\\"Nothing else
+        like it in the world\\\" Nikolais Dance Theatre poster\",\n          \"width\":
+        8818,\n          \"height\": 17832,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:237\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:237/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 8818,\n                \"height\":
+        17832,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:237\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:237/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1808940\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1808940\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/dance-posters-metadata/nothing-else-like-it-in-the-world-nikolais-dance-theatre-poster/annotation/1808940/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56198/export/1808940/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56198/export/1808940/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56198/export/1808940/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/56198/structured/1808940\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/56198/1808940/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1808940/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56198/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56198/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:55 GMT
+      ETag:
+      - W/"b95c64c6b56c176bd97e5d3a699aac42"
+      Keep-Alive:
+      - timeout=5, max=98
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:55 GMT; secure
+      - _fromthepage_session=Dmedg5TMKyZ6XTKFQB5b%2B%2BBfQmpjhEDwznguV5zk4ScSOHwtsi6NVkLY%2FXY31PK6mVncRkQG741kP0Zwx0nUUaC5Be0O4BYYuvkarzycGStpKR68RvgfzLvunA2JpqVD%2BM%2BnBhbWPdNOV67RkDtpbUY4d8wQENWO62dLcgrtDBzlowQcwJKB9s19sB0CilKlrJA6SwNCxRPd3BHbOCDHi%2BISS6VwpxaGeqxWXIoNHdnxPbtT4%2BG0ZmsHryjh5OSv--cL5%2B3XJ1wVNAN2b%2F--4agqJrVTclUJOhQDdqzpiA%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 398d3217-8944-4382-8400-8b3e6ebab071
+      X-Runtime:
+      - '0.129619'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=Dmedg5TMKyZ6XTKFQB5b%2B%2BBfQmpjhEDwznguV5zk4ScSOHwtsi6NVkLY%2FXY31PK6mVncRkQG741kP0Zwx0nUUaC5Be0O4BYYuvkarzycGStpKR68RvgfzLvunA2JpqVD%2BM%2BnBhbWPdNOV67RkDtpbUY4d8wQENWO62dLcgrtDBzlowQcwJKB9s19sB0CilKlrJA6SwNCxRPd3BHbOCDHi%2BISS6VwpxaGeqxWXIoNHdnxPbtT4%2BG0ZmsHryjh5OSv--cL5%2B3XJ1wVNAN2b%2F--4agqJrVTclUJOhQDdqzpiA%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56195/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/56195/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"Brooklyn Academy of Music, Murray Louis and
+        Alwin Nikolais Dance\",\n  \"metadata\": [\n    {\n      \"label\": \"dc:source\",\n
+        \     \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/236/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Laura Smith, Photo Archivist at https://www.ohio.edu/library/about/staff/smithle\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu/record=b5961003~S7\"\n
+        \   },\n    {\n      \"label\": \"Collection finding aid\",\n      \"value\":
+        \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/nikolais-louis\"\n
+        \   },\n    {\n      \"label\": \"Collection\",\n      \"value\": \"Alwin
+        Nikolais and Murray Louis Papers. MSS181\"\n    },\n    {\n      \"label\":
+        \"Dance Company\",\n      \"value\": \"Nikolais and Murray Louis Dance Company\"\n
+        \   },\n    {\n      \"label\": \"Description\",\n      \"value\": \"22.5\\\"
+        x 24.75\\\" black and white poster. Dance collection, series 7: press and
+        promotion, sub series 7.2: posters. Poster with image of Murray Louis, Alwin
+        Nikolais and company members advertising a performance, January 18-30, 1972.
+        Poster reads: \\\"Murray Louis - Alwin Nikolais Dance Companies\\\"; \\\"First
+        time both companies on the same bill\\\"; \\\"January 18-30, 1970, Brooklyn
+        Academy of Music\\\"; venue and ticket information\"\n    },\n    {\n      \"label\":
+        \"Format\",\n      \"value\": \"JP2\"\n    },\n    {\n      \"label\": \"How
+        to access this collection at the library\",\n      \"value\": \"See https://www.ohio.edu/library/collections/archives-special-collections\"\n
+        \   },\n    {\n      \"label\": \"Identifier\",\n      \"value\": \"s7-2_b01_06_nik-lou_brooklyn_academy_jan18-30_1972\"\n
+        \   },\n    {\n      \"label\": \"Original format-AAT\",\n      \"value\":
+        \"Posters\"\n    },\n    {\n      \"label\": \"Policy\",\n      \"value\":
+        \"See Ohio University Libraries' Digital Archival Collections Materials Selection
+        and Rights policy at  https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries. Mahn Center for Archives and Special Collections\"\n    },\n    {\n
+        \     \"label\": \"Series\",\n      \"value\": \"7. Press and Promotion\"\n
+        \   },\n    {\n      \"label\": \"Sub series\",\n      \"value\": \"7.2 Posters\"\n
+        \   },\n    {\n      \"label\": \"Title of work\",\n      \"value\": \"Brooklyn
+        Academy of Music, Murray Louis and Alwin Nikolais Dance\"\n    },\n    {\n
+        \     \"label\": \"Type\",\n      \"value\": \"Still Image\"\n    },\n    {\n
+        \     \"label\": \"Repository\",\n      \"value\": \"Ohio University Libraries
+        - Digital Archival Collections\"\n    },\n    {\n      \"label\": \"Source\",\n
+        \     \"value\": \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll16/id/236\\\">Brooklyn
+        Academy of Music, Murray Louis and Alwin Nikolais Dance</a></span>\"\n    },\n
+        \   {\n      \"label\": \"Title\",\n      \"value\": \"Brooklyn Academy of
+        Music, Murray Louis and Alwin Nikolais Dance\"\n    },\n    {\n      \"label\":
+        \"Created On\",\n      \"value\": \"2021-03-03 21:42:40 UTC\"\n    },\n    {\n
+        \     \"label\": \"In Scope\",\n      \"value\": \"true\"\n    }\n  ],\n  \"description\":
+        \"This is an annotated version of the original manifest produced by FromThePage\",\n
+        \ \"within\": {\n    \"@type\": \"sc:Collection\",\n    \"label\": \"Dance
+        Posters Metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read Brooklyn Academy of Music, Murray Louis and Alwin Nikolais Dance\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/brooklyn-academy-of-music-murray-louis-and-alwin-nikolais-dance\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for Brooklyn Academy of Music, Murray Louis and Alwin Nikolais
+        Dance\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/brooklyn-academy-of-music-murray-louis-and-alwin-nikolais-dance/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56195/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56195/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56195/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56195/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 100.0,\n      \"pctOcrCorrected\":
+        0.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0,\n      \"metadataStatus\": \"undescribed\"\n    }\n  ],\n  \"sequences\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56195/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/56195/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56195/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56195/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:236/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Brooklyn Academy
+        of Music, Murray Louis and Alwin Nikolais Dance\",\n          \"width\": 8355,\n
+        \         \"height\": 7530,\n          \"images\": [\n            {\n              \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:236\",\n              \"@type\":
+        \"oa:Annotation\",\n              \"motivation\": \"sc:painting\",\n              \"resource\":
+        {\n                \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:236/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 8355,\n                \"height\":
+        7530,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:236\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:236/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1808936\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1808936\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/dance-posters-metadata/brooklyn-academy-of-music-murray-louis-and-alwin-nikolais-dance/annotation/1808936/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56195/export/1808936/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56195/export/1808936/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56195/export/1808936/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/56195/structured/1808936\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/56195/1808936/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1808936/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56195/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56195/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:55 GMT
+      ETag:
+      - W/"00bdce6858c8572fa20784152a7db2fc"
+      Keep-Alive:
+      - timeout=5, max=97
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:55 GMT; secure
+      - _fromthepage_session=YqXnArz7178rnP81x%2Fvr7QrekVULP5iRjHIDszWCOMM8oqPduy0fkTi4RRNUl1Vuy6vVuwz%2FIjneWVxfIowMiDfHQeanAWvSba7f9gJB2SpcODVzeMtFnO283xF57qwztCC4I%2FwwW1hQk%2FyC2MJpHRIaLP9EOePDRtL%2FHJC%2BHRM11bl2gd%2BWioW318VQHSGRf8l89ChxBbXpR79g%2Fd3iYijqOzeAql42s9oggUz3ujHajQucnK5eyZsTm4DwZ9At--tXp8g%2Ba41Y5YFn%2Bf--WyAt0sJQ3%2BmpJazGS0e8Hw%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 61bcf204-9611-484a-ab18-c55ea12d79fe
+      X-Runtime:
+      - '0.139473'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=YqXnArz7178rnP81x%2Fvr7QrekVULP5iRjHIDszWCOMM8oqPduy0fkTi4RRNUl1Vuy6vVuwz%2FIjneWVxfIowMiDfHQeanAWvSba7f9gJB2SpcODVzeMtFnO283xF57qwztCC4I%2FwwW1hQk%2FyC2MJpHRIaLP9EOePDRtL%2FHJC%2BHRM11bl2gd%2BWioW318VQHSGRf8l89ChxBbXpR79g%2Fd3iYijqOzeAql42s9oggUz3ujHajQucnK5eyZsTm4DwZ9At--tXp8g%2Ba41Y5YFn%2Bf--WyAt0sJQ3%2BmpJazGS0e8Hw%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56194/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/56194/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"Charleroi Danses poster, Palais des Beaux-Arts,
+        Charleroi, January 20, 1994\",\n  \"metadata\": [\n    {\n      \"label\":
+        \"dc:source\",\n      \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/240/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Laura Smith, Photo Archivist at https://www.ohio.edu/library/about/staff/smithle\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu/record=b5961003~S7\"\n
+        \   },\n    {\n      \"label\": \"Collection finding aid\",\n      \"value\":
+        \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/nikolais-louis\"\n
+        \   },\n    {\n      \"label\": \"Collection\",\n      \"value\": \"Alwin
+        Nikolais and Murray Louis Papers. MSS181\"\n    },\n    {\n      \"label\":
+        \"Dance Company\",\n      \"value\": \"Nikolais and Murray Louis Dance Company\"\n
+        \   },\n    {\n      \"label\": \"Description\",\n      \"value\": \"46.5\\\"
+        x 69\\\" color poster. Dance collection, series 7: press and promotion, sub
+        series 7.2: posters. Poster with image of dancers advertising Alwin Nikolais
+        and Murray Louis Dance Company performance. Poster reads: \\\"Charleroi /
+        Danses\\\"; \\\"Alwin Nikolais\\\"; \\\"Palais des Beaux-Arts, Charleroi\\\";
+        dates and other information.\"\n    },\n    {\n      \"label\": \"Format\",\n
+        \     \"value\": \"JP2\"\n    },\n    {\n      \"label\": \"How to access
+        this collection at the library\",\n      \"value\": \"See https://www.ohio.edu/library/collections/archives-special-collections\"\n
+        \   },\n    {\n      \"label\": \"Identifier\",\n      \"value\": \"s7-2_b00_03_nik-lou_charleroi_danses_jan20_1994\"\n
+        \   },\n    {\n      \"label\": \"Original format-AAT\",\n      \"value\":
+        \"Posters\"\n    },\n    {\n      \"label\": \"Policy\",\n      \"value\":
+        \"See Ohio University Libraries' Digital Archival Collections Materials Selection
+        and Rights policy at  https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries. Mahn Center for Archives and Special Collections\"\n    },\n    {\n
+        \     \"label\": \"Series\",\n      \"value\": \"7. Press and Promotion\"\n
+        \   },\n    {\n      \"label\": \"Sub series\",\n      \"value\": \"7.2 Posters\"\n
+        \   },\n    {\n      \"label\": \"Title of work\",\n      \"value\": \"Charleroi
+        Danses poster, Palais des Beaux-Arts, Charleroi, January 20, 1994\"\n    },\n
+        \   {\n      \"label\": \"Type\",\n      \"value\": \"Still Image\"\n    },\n
+        \   {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries - Digital Archival Collections\"\n    },\n    {\n      \"label\":
+        \"Source\",\n      \"value\": \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll16/id/240\\\">Charleroi
+        Danses poster, Palais des Beaux-Arts, Charleroi, January 20, 1994</a></span>\"\n
+        \   },\n    {\n      \"label\": \"Title\",\n      \"value\": \"Charleroi Danses
+        poster, Palais des Beaux-Arts, Charleroi, January 20, 1994\"\n    },\n    {\n
+        \     \"label\": \"Created On\",\n      \"value\": \"2021-03-03 21:42:38 UTC\"\n
+        \   },\n    {\n      \"label\": \"In Scope\",\n      \"value\": \"true\"\n
+        \   }\n  ],\n  \"description\": \"This is an annotated version of the original
+        manifest produced by FromThePage\",\n  \"within\": {\n    \"@type\": \"sc:Collection\",\n
+        \   \"label\": \"Dance Posters Metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read Charleroi Danses poster, Palais des Beaux-Arts, Charleroi, January
+        20, 1994\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/charleroi-danses-poster-palais-des-beaux-arts-charleroi-january-20-1994\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for Charleroi Danses poster, Palais des Beaux-Arts, Charleroi,
+        January 20, 1994\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/charleroi-danses-poster-palais-des-beaux-arts-charleroi-january-20-1994/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56194/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56194/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56194/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56194/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 100.0,\n      \"pctOcrCorrected\":
+        0.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0,\n      \"metadataStatus\": \"undescribed\"\n    }\n  ],\n  \"sequences\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56194/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/56194/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56194/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56194/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:240/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Charleroi Danses
+        poster, Palais des Beaux-Arts, Charleroi, January 20, 1994\",\n          \"width\":
+        9898,\n          \"height\": 14693,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:240\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:240/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 9898,\n                \"height\":
+        14693,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:240\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:240/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1808935\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1808935\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/dance-posters-metadata/charleroi-danses-poster-palais-des-beaux-arts-charleroi-january-20-1994/annotation/1808935/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56194/export/1808935/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56194/export/1808935/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56194/export/1808935/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/56194/structured/1808935\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/56194/1808935/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1808935/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56194/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56194/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:55 GMT
+      ETag:
+      - W/"18dfc4703e5dcb3e157489f913dc255e"
+      Keep-Alive:
+      - timeout=5, max=96
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:55 GMT; secure
+      - _fromthepage_session=EEeQVL%2B6aizjQlL6%2BjZfIhT5qeTreuFZaGsdV76%2BBkedqhRNwyn4ap3cotp6JJccEezQZh3xdyUxx9rOWAdfPrwl2vH2VWUtDgjti%2BvQVaBW8HaRMAuwUBBcqyuAnxG18cQWh%2FCCESugQmK%2FiYpWgNpPG6baqTvpUG%2BADzkNKXCc40hOQy8T10q347XeaJxxeSNKRKLcqPcth1447rsMg9P1PIJz4XeuVPnPZdE0%2FF8xKpZwPPyvBsIwBgGxQRZF--Kjf7%2BSaUnP2FWtMw--r%2BvG%2Fag1N42FoVWrEuzqvg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - b4975384-5946-4b8a-ae64-84a175bab2b3
+      X-Runtime:
+      - '0.133491'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=EEeQVL%2B6aizjQlL6%2BjZfIhT5qeTreuFZaGsdV76%2BBkedqhRNwyn4ap3cotp6JJccEezQZh3xdyUxx9rOWAdfPrwl2vH2VWUtDgjti%2BvQVaBW8HaRMAuwUBBcqyuAnxG18cQWh%2FCCESugQmK%2FiYpWgNpPG6baqTvpUG%2BADzkNKXCc40hOQy8T10q347XeaJxxeSNKRKLcqPcth1447rsMg9P1PIJz4XeuVPnPZdE0%2FF8xKpZwPPyvBsIwBgGxQRZF--Kjf7%2BSaUnP2FWtMw--r%2BvG%2Fag1N42FoVWrEuzqvg%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56196/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/56196/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"Legend of the Winds poster, Henry Street
+        Playhouse, December 22-30, 1954\",\n  \"metadata\": [\n    {\n      \"label\":
+        \"dc:source\",\n      \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/239/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Laura Smith, Photo Archivist at https://www.ohio.edu/library/about/staff/smithle\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu/record=b5961003~S7\"\n
+        \   },\n    {\n      \"label\": \"Collection finding aid\",\n      \"value\":
+        \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/nikolais-louis\"\n
+        \   },\n    {\n      \"label\": \"Collection\",\n      \"value\": \"Alwin
+        Nikolais and Murray Louis Papers. MSS181\"\n    },\n    {\n      \"label\":
+        \"Dance Company\",\n      \"value\": \"Henry Street Playhouse Dance Company\"\n
+        \   },\n    {\n      \"label\": \"Description\",\n      \"value\": \"17.5\\\"
+        x 24 \\\" color poster, sleeved in mylar. Dance collection, series 7: press
+        and promotion, sub series 7.2: posters. Poster with image of two penguins
+        with colored lettering advertising Playhouse Dance Company performance, 1954.
+        Poster reads: \\\"Playhouse Dance Company Presents Legend of the Winds, a
+        new dance play for children and adults... Directed by Alwin Nikolais, Assisted
+        by Ruth Grauert\\\"; casting, dates and other information.\"\n    },\n    {\n
+        \     \"label\": \"Format\",\n      \"value\": \"JP2\"\n    },\n    {\n      \"label\":
+        \"How to access this collection at the library\",\n      \"value\": \"See
+        https://www.ohio.edu/library/collections/archives-special-collections\"\n
+        \   },\n    {\n      \"label\": \"Identifier\",\n      \"value\": \"s7-2_b01_04_nikolais_legend_of_the_winds_dec22-30_1954\"\n
+        \   },\n    {\n      \"label\": \"Original format-AAT\",\n      \"value\":
+        \"Posters\"\n    },\n    {\n      \"label\": \"Policy\",\n      \"value\":
+        \"See Ohio University Libraries' Digital Archival Collections Materials Selection
+        and Rights policy at  https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries. Mahn Center for Archives and Special Collections\"\n    },\n    {\n
+        \     \"label\": \"Series\",\n      \"value\": \"7. Press and Promotion\"\n
+        \   },\n    {\n      \"label\": \"Sub series\",\n      \"value\": \"7.2 Posters\"\n
+        \   },\n    {\n      \"label\": \"Title of work\",\n      \"value\": \"Legend
+        of the Winds poster, Henry Street Playhouse, December 22-30, 1954\"\n    },\n
+        \   {\n      \"label\": \"Type\",\n      \"value\": \"Still Image\"\n    },\n
+        \   {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries - Digital Archival Collections\"\n    },\n    {\n      \"label\":
+        \"Source\",\n      \"value\": \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll16/id/239\\\">Legend
+        of the Winds poster, Henry Street Playhouse, December 22-30, 1954</a></span>\"\n
+        \   },\n    {\n      \"label\": \"Title\",\n      \"value\": \"Legend of the
+        Winds poster, Henry Street Playhouse, December 22-30, 1954\"\n    },\n    {\n
+        \     \"label\": \"Created On\",\n      \"value\": \"2021-03-03 21:42:41 UTC\"\n
+        \   },\n    {\n      \"label\": \"In Scope\",\n      \"value\": \"true\"\n
+        \   }\n  ],\n  \"description\": \"This is an annotated version of the original
+        manifest produced by FromThePage\",\n  \"within\": {\n    \"@type\": \"sc:Collection\",\n
+        \   \"label\": \"Dance Posters Metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read Legend of the Winds poster, Henry Street Playhouse, December 22-30,
+        1954\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/legend-of-the-winds-poster-henry-street-playhouse-december-22-30-1954\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for Legend of the Winds poster, Henry Street Playhouse, December
+        22-30, 1954\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/legend-of-the-winds-poster-henry-street-playhouse-december-22-30-1954/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56196/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56196/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56196/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56196/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 100.0,\n      \"pctOcrCorrected\":
+        0.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0,\n      \"metadataStatus\": \"undescribed\"\n    }\n  ],\n  \"sequences\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56196/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/56196/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56196/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56196/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:239/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Legend of the
+        Winds poster, Henry Street Playhouse, December 22-30, 1954\",\n          \"width\":
+        10946,\n          \"height\": 12492,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:239\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:239/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 10946,\n                \"height\":
+        12492,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:239\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:239/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1808937\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1808937\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/dance-posters-metadata/legend-of-the-winds-poster-henry-street-playhouse-december-22-30-1954/annotation/1808937/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56196/export/1808937/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56196/export/1808937/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56196/export/1808937/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/56196/structured/1808937\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/56196/1808937/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1808937/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56196/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56196/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:56 GMT
+      ETag:
+      - W/"791c942ed44e5d67e6089f55f2a551b6"
+      Keep-Alive:
+      - timeout=5, max=95
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:56 GMT; secure
+      - _fromthepage_session=vI%2Fj5JmBgHx8BtbWe0N2x2rBaH29%2F95%2FcLmbP%2FSAb6xrm0mg8xUcb2i3%2B5eKm3VLB79Z3ioC1vWGs7aDGxLpWA1bJ7YiIu%2FgBLjwoE8vh%2BfoVwc1LnKbnTom%2BLEHXv6I6NV53F7AVPNxXZVj7VAXRMpJoFGJmt3tWkWXO1xMdmpTU%2BW3ZpKfhpslWv%2Fqyt2IxNiBTVQjPTH18EZLR3nIJet%2Bg39O7S4MS6HFi86a3tf2XRypAMcQvv1NyuRWHTcU--95JCBcYfC4CxV16q--Y1UavGvZ4Hessj7dyX6qSA%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - a4f3fd49-2087-40c5-8ac7-0f7d679bbfe9
+      X-Runtime:
+      - '0.139161'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=vI%2Fj5JmBgHx8BtbWe0N2x2rBaH29%2F95%2FcLmbP%2FSAb6xrm0mg8xUcb2i3%2B5eKm3VLB79Z3ioC1vWGs7aDGxLpWA1bJ7YiIu%2FgBLjwoE8vh%2BfoVwc1LnKbnTom%2BLEHXv6I6NV53F7AVPNxXZVj7VAXRMpJoFGJmt3tWkWXO1xMdmpTU%2BW3ZpKfhpslWv%2Fqyt2IxNiBTVQjPTH18EZLR3nIJet%2Bg39O7S4MS6HFi86a3tf2XRypAMcQvv1NyuRWHTcU--95JCBcYfC4CxV16q--Y1UavGvZ4Hessj7dyX6qSA%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56199/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/56199/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"Maison de la Culture de Rennes poster, December
+        9, 1983\",\n  \"metadata\": [\n    {\n      \"label\": \"dc:source\",\n      \"value\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/238/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Laura Smith, Photo Archivist at https://www.ohio.edu/library/about/staff/smithle\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu/record=b5961003~S7\"\n
+        \   },\n    {\n      \"label\": \"Collection finding aid\",\n      \"value\":
+        \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/nikolais-louis\"\n
+        \   },\n    {\n      \"label\": \"Collection\",\n      \"value\": \"Alwin
+        Nikolais and Murray Louis Papers. MSS181\"\n    },\n    {\n      \"label\":
+        \"Dance Company\",\n      \"value\": \"Nikolais Dance Theatre\"\n    },\n
+        \   {\n      \"label\": \"Description\",\n      \"value\": \"11.75\\\" x 26.5\\\"
+        color poster. Dance collection, series 7: press and promotion, sub series
+        7.2: posters. Poster with graphic image of dancer advertising Alvin Nikolais
+        Company performance, December 9, 1983. Poster reads: \\\"Alvin Nikolais Company\\\";
+        \\\"Maison de la Culture de Rennes\\\"; dates and other information.\"\n    },\n
+        \   {\n      \"label\": \"Format\",\n      \"value\": \"JP2\"\n    },\n    {\n
+        \     \"label\": \"How to access this collection at the library\",\n      \"value\":
+        \"See https://www.ohio.edu/library/collections/archives-special-collections\"\n
+        \   },\n    {\n      \"label\": \"Identifier\",\n      \"value\": \"s7-2_b01_02_nikolais_maison_culture_rennes_dec9_1983\"\n
+        \   },\n    {\n      \"label\": \"Original format-AAT\",\n      \"value\":
+        \"Posters\"\n    },\n    {\n      \"label\": \"Policy\",\n      \"value\":
+        \"See Ohio University Libraries' Digital Archival Collections Materials Selection
+        and Rights policy at  https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries. Mahn Center for Archives and Special Collections\"\n    },\n    {\n
+        \     \"label\": \"Series\",\n      \"value\": \"7. Press and Promotion\"\n
+        \   },\n    {\n      \"label\": \"Sub series\",\n      \"value\": \"7.2 Posters\"\n
+        \   },\n    {\n      \"label\": \"Title of work\",\n      \"value\": \"Maison
+        de la Culture de Rennes poster, December 9, 1983\"\n    },\n    {\n      \"label\":
+        \"Type\",\n      \"value\": \"Still Image\"\n    },\n    {\n      \"label\":
+        \"Repository\",\n      \"value\": \"Ohio University Libraries - Digital Archival
+        Collections\"\n    },\n    {\n      \"label\": \"Source\",\n      \"value\":
+        \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll16/id/238\\\">Maison
+        de la Culture de Rennes poster, December 9, 1983</a></span>\"\n    },\n    {\n
+        \     \"label\": \"Title\",\n      \"value\": \"Maison de la Culture de Rennes
+        poster, December 9, 1983\"\n    },\n    {\n      \"label\": \"Created On\",\n
+        \     \"value\": \"2021-03-03 21:42:48 UTC\"\n    },\n    {\n      \"label\":
+        \"In Scope\",\n      \"value\": \"true\"\n    }\n  ],\n  \"description\":
+        \"This is an annotated version of the original manifest produced by FromThePage\",\n
+        \ \"within\": {\n    \"@type\": \"sc:Collection\",\n    \"label\": \"Dance
+        Posters Metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read Maison de la Culture de Rennes poster, December 9, 1983\",\n      \"@id\":
+        \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/maison-de-la-culture-de-rennes-poster-december-9-1983\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for Maison de la Culture de Rennes poster, December 9, 1983\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/maison-de-la-culture-de-rennes-poster-december-9-1983/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56199/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56199/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56199/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56199/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 100.0,\n      \"pctOcrCorrected\":
+        0.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0,\n      \"metadataStatus\": \"undescribed\"\n    }\n  ],\n  \"sequences\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56199/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/56199/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56199/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56199/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:238/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Maison de la Culture
+        de Rennes poster, December 9, 1983\",\n          \"width\": 7432,\n          \"height\":
+        16417,\n          \"images\": [\n            {\n              \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:238\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:238/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 7432,\n                \"height\":
+        16417,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:238\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:238/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1808941\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1808941\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/dance-posters-metadata/maison-de-la-culture-de-rennes-poster-december-9-1983/annotation/1808941/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56199/export/1808941/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56199/export/1808941/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56199/export/1808941/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/56199/structured/1808941\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/56199/1808941/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1808941/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56199/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56199/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:56 GMT
+      ETag:
+      - W/"a217b15ac39aebc49d7ba09220f0a1a9"
+      Keep-Alive:
+      - timeout=5, max=94
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:56 GMT; secure
+      - _fromthepage_session=g50BMO7MTZPKRPa3E8pbeqTryg%2Bz3MMlAO7epl%2FcyDcJ%2BFHkxZ2Xv6tZfZ%2FYeSNxbQGip8Of%2Fm6o0MwcqHF0mC4jk%2F3CBi93esoSlHZNnUjYHSpAX2ljpY7qcNn%2FRIEZIzAR8gFgyzzm0DYFvZiF3JYHwcwmuHgKwQKq1TvC2ZLy5wIdSFm775cYw%2BfWd4BkjfyjEb1ESlTq7OnVLDwfpXp30rXI3XyQW1m%2BjJ%2FlvxEXdByWPQ68nwHUlTTRL5yc--D%2BDGEUwWrw%2BOjlyN--azAafLl0KcNjr%2BvwGcYdMQ%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 460bf6b9-0223-4cc7-8586-1702879f1bf7
+      X-Runtime:
+      - '0.136746'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=g50BMO7MTZPKRPa3E8pbeqTryg%2Bz3MMlAO7epl%2FcyDcJ%2BFHkxZ2Xv6tZfZ%2FYeSNxbQGip8Of%2Fm6o0MwcqHF0mC4jk%2F3CBi93esoSlHZNnUjYHSpAX2ljpY7qcNn%2FRIEZIzAR8gFgyzzm0DYFvZiF3JYHwcwmuHgKwQKq1TvC2ZLy5wIdSFm775cYw%2BfWd4BkjfyjEb1ESlTq7OnVLDwfpXp30rXI3XyQW1m%2BjJ%2FlvxEXdByWPQ68nwHUlTTRL5yc--D%2BDGEUwWrw%2BOjlyN--azAafLl0KcNjr%2BvwGcYdMQ%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56200/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/56200/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"Mulhouse, France, Nikolais Dance Theatre
+        poster, 1976\",\n  \"metadata\": [\n    {\n      \"label\": \"dc:source\",\n
+        \     \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/235/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Laura Smith, Photo Archivist at https://www.ohio.edu/library/about/staff/smithle\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu/record=b5961003~S7\"\n
+        \   },\n    {\n      \"label\": \"Collection finding aid\",\n      \"value\":
+        \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/nikolais-louis\"\n
+        \   },\n    {\n      \"label\": \"Collection\",\n      \"value\": \"Alwin
+        Nikolais and Murray Louis Papers. MSS181\"\n    },\n    {\n      \"label\":
+        \"Dance Company\",\n      \"value\": \"Nikolais Dance Theatre\"\n    },\n
+        \   {\n      \"label\": \"Description\",\n      \"value\": \"11.75\\\" x 23.75\\\"
+        color poster. Dance collection, series 7: press and promotion, sub series
+        7.2: posters. Poster with dancer and graphic overlay advertising Nikolais
+        Dance Theatre, 1976. Poster reads: \\\"Nikolais Dance Theatre\\\"; \\\"Samedi
+        12 Juin a 21 h, Rallye Drouot - Mulhouse, location: AMC 7 Rue Alfred Engel\\\";
+        \\\"Imprimerie LIEHR - Illzach\\\"\"\n    },\n    {\n      \"label\": \"Format\",\n
+        \     \"value\": \"JP2\"\n    },\n    {\n      \"label\": \"How to access
+        this collection at the library\",\n      \"value\": \"See https://www.ohio.edu/library/collections/archives-special-collections\"\n
+        \   },\n    {\n      \"label\": \"Identifier\",\n      \"value\": \"s7-2_b00_01_nikolais_rallye_drouot_mulhouse_jun12_1976\"\n
+        \   },\n    {\n      \"label\": \"Original format-AAT\",\n      \"value\":
+        \"Posters\"\n    },\n    {\n      \"label\": \"Policy\",\n      \"value\":
+        \"See Ohio University Libraries' Digital Archival Collections Materials Selection
+        and Rights policy at  https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries. Mahn Center for Archives and Special Collections\"\n    },\n    {\n
+        \     \"label\": \"Series\",\n      \"value\": \"7. Press and Promotion\"\n
+        \   },\n    {\n      \"label\": \"Sub series\",\n      \"value\": \"7.2 Posters\"\n
+        \   },\n    {\n      \"label\": \"Title of work\",\n      \"value\": \"Mulhouse,
+        France, Nikolais Dance Theatre poster, 1976\"\n    },\n    {\n      \"label\":
+        \"Type\",\n      \"value\": \"Still Image\"\n    },\n    {\n      \"label\":
+        \"Repository\",\n      \"value\": \"Ohio University Libraries - Digital Archival
+        Collections\"\n    },\n    {\n      \"label\": \"Source\",\n      \"value\":
+        \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll16/id/235\\\">Mulhouse,
+        France, Nikolais Dance Theatre poster, 1976</a></span>\"\n    },\n    {\n
+        \     \"label\": \"Title\",\n      \"value\": \"Mulhouse, France, Nikolais
+        Dance Theatre poster, 1976\"\n    },\n    {\n      \"label\": \"Created On\",\n
+        \     \"value\": \"2021-03-03 21:42:51 UTC\"\n    },\n    {\n      \"label\":
+        \"In Scope\",\n      \"value\": \"true\"\n    }\n  ],\n  \"description\":
+        \"This is an annotated version of the original manifest produced by FromThePage\",\n
+        \ \"within\": {\n    \"@type\": \"sc:Collection\",\n    \"label\": \"Dance
+        Posters Metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read Mulhouse, France, Nikolais Dance Theatre poster, 1976\",\n      \"@id\":
+        \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/mulhouse-france-nikolais-dance-theatre-poster-1976\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for Mulhouse, France, Nikolais Dance Theatre poster, 1976\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/mulhouse-france-nikolais-dance-theatre-poster-1976/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56200/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56200/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56200/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56200/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 100.0,\n      \"pctOcrCorrected\":
+        0.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0,\n      \"metadataStatus\": \"undescribed\"\n    }\n  ],\n  \"sequences\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56200/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/56200/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56200/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56200/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:235/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Mulhouse, France,
+        Nikolais Dance Theatre poster, 1976\",\n          \"width\": 7451,\n          \"height\":
+        14692,\n          \"images\": [\n            {\n              \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:235\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:235/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 7451,\n                \"height\":
+        14692,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:235\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:235/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1808942\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1808942\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/dance-posters-metadata/mulhouse-france-nikolais-dance-theatre-poster-1976/annotation/1808942/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56200/export/1808942/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56200/export/1808942/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56200/export/1808942/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/56200/structured/1808942\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/56200/1808942/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1808942/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56200/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56200/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:56 GMT
+      ETag:
+      - W/"487c8d3d994f926439b85d48279d22d0"
+      Keep-Alive:
+      - timeout=5, max=93
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:56 GMT; secure
+      - _fromthepage_session=AWvDwE56511h2ejfztn%2FZJceQL4k7knhHkrIt7nvzd6qCuD7OlLJbjkx3I0kfw0pn8wSeXRYUJWOPyiPC%2FA2nuGpAyd%2BsflYMiwWZRitlt5Co1VDS1AQrVy73mB8VVU7S%2BNtyc034jhsgfexzkRYQuiUjqgDRn3TnI2j%2FzWoOKzbPtD73L%2BfARylhFVYaF9Cmu6B3fMzwnTlAWD4Czfi%2FnHcL2xHwbsDAy%2B0dojOkgScQdcC1fjdcX3ao3Vi76Ff--zZYKSaA09yrUYOX9--L9qhpnuPGt2HSz0UnTKKOA%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - b12ed622-95ff-46e9-be83-96cf021de4e0
+      X-Runtime:
+      - '0.135955'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=AWvDwE56511h2ejfztn%2FZJceQL4k7knhHkrIt7nvzd6qCuD7OlLJbjkx3I0kfw0pn8wSeXRYUJWOPyiPC%2FA2nuGpAyd%2BsflYMiwWZRitlt5Co1VDS1AQrVy73mB8VVU7S%2BNtyc034jhsgfexzkRYQuiUjqgDRn3TnI2j%2FzWoOKzbPtD73L%2BfARylhFVYaF9Cmu6B3fMzwnTlAWD4Czfi%2FnHcL2xHwbsDAy%2B0dojOkgScQdcC1fjdcX3ao3Vi76Ff--zZYKSaA09yrUYOX9--L9qhpnuPGt2HSz0UnTKKOA%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56197/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/56197/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"Murray Louis and Nikolais Dance poster, Greece,
+        July 19, 1999\",\n  \"metadata\": [\n    {\n      \"label\": \"dc:source\",\n
+        \     \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/233/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Laura Smith, Photo Archivist at https://www.ohio.edu/library/about/staff/smithle\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu/record=b5961003~S7\"\n
+        \   },\n    {\n      \"label\": \"Collection finding aid\",\n      \"value\":
+        \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/nikolais-louis\"\n
+        \   },\n    {\n      \"label\": \"Collection\",\n      \"value\": \"Alwin
+        Nikolais and Murray Louis Papers. MSS181\"\n    },\n    {\n      \"label\":
+        \"Dance Company\",\n      \"value\": \"Nikolais and Murray Louis Dance Company\"\n
+        \   },\n    {\n      \"label\": \"Description\",\n      \"value\": \"18\\\"
+        x 24.75\\\" color poster. Dance collection, series 7: press and promotion,
+        sub series 7.2: posters. Poster with image of colorful dancers advertising
+        Alwin Nikolais and Murray Louis Dance Company performance, July 19, 1999.
+        Poster reads: \\\"Murray Louis and Nikolais Dance\\\"; dates and other information
+        in Greek.\"\n    },\n    {\n      \"label\": \"Format\",\n      \"value\":
+        \"JP2\"\n    },\n    {\n      \"label\": \"How to access this collection at
+        the library\",\n      \"value\": \"See https://www.ohio.edu/library/collections/archives-special-collections\"\n
+        \   },\n    {\n      \"label\": \"Identifier\",\n      \"value\": \"s7-2_b01_05_nik-lou_greece_7-19_1999\"\n
+        \   },\n    {\n      \"label\": \"Original format-AAT\",\n      \"value\":
+        \"Posters\"\n    },\n    {\n      \"label\": \"Policy\",\n      \"value\":
+        \"See Ohio University Libraries' Digital Archival Collections Materials Selection
+        and Rights policy at  https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries. Mahn Center for Archives and Special Collections\"\n    },\n    {\n
+        \     \"label\": \"Series\",\n      \"value\": \"7. Press and Promotion\"\n
+        \   },\n    {\n      \"label\": \"Sub series\",\n      \"value\": \"7.2 Posters\"\n
+        \   },\n    {\n      \"label\": \"Title of work\",\n      \"value\": \"Murray
+        Louis and Nikolais Dance poster, Greece, July 19, 1999\"\n    },\n    {\n
+        \     \"label\": \"Type\",\n      \"value\": \"Still Image\"\n    },\n    {\n
+        \     \"label\": \"Repository\",\n      \"value\": \"Ohio University Libraries
+        - Digital Archival Collections\"\n    },\n    {\n      \"label\": \"Source\",\n
+        \     \"value\": \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll16/id/233\\\">Murray
+        Louis and Nikolais Dance poster, Greece, July 19, 1999</a></span>\"\n    },\n
+        \   {\n      \"label\": \"Title\",\n      \"value\": \"Murray Louis and Nikolais
+        Dance poster, Greece, July 19, 1999\"\n    },\n    {\n      \"label\": \"Created
+        On\",\n      \"value\": \"2021-03-03 21:42:44 UTC\"\n    },\n    {\n      \"label\":
+        \"In Scope\",\n      \"value\": \"true\"\n    }\n  ],\n  \"description\":
+        \"This is an annotated version of the original manifest produced by FromThePage\",\n
+        \ \"within\": {\n    \"@type\": \"sc:Collection\",\n    \"label\": \"Dance
+        Posters Metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read Murray Louis and Nikolais Dance poster, Greece, July 19, 1999\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/murray-louis-and-nikolais-dance-poster-greece-july-19-1999\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for Murray Louis and Nikolais Dance poster, Greece, July 19, 1999\",\n
+        \     \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/murray-louis-and-nikolais-dance-poster-greece-july-19-1999/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56197/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56197/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56197/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56197/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 100.0,\n      \"pctOcrCorrected\":
+        0.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0,\n      \"metadataStatus\": \"undescribed\"\n    }\n  ],\n  \"sequences\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56197/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/56197/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56197/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56197/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:233/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Murray Louis and
+        Nikolais Dance poster, Greece, July 19, 1999\",\n          \"width\": 11387,\n
+        \         \"height\": 15453,\n          \"images\": [\n            {\n              \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:233\",\n              \"@type\":
+        \"oa:Annotation\",\n              \"motivation\": \"sc:painting\",\n              \"resource\":
+        {\n                \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:233/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 11387,\n                \"height\":
+        15453,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:233\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:233/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1808938\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1808938\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/dance-posters-metadata/murray-louis-and-nikolais-dance-poster-greece-july-19-1999/annotation/1808938/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56197/export/1808938/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56197/export/1808938/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56197/export/1808938/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/56197/structured/1808938\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/56197/1808938/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1808938/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56197/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56197/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:56 GMT
+      ETag:
+      - W/"20197734615e5ace4a7037b9f96968e9"
+      Keep-Alive:
+      - timeout=5, max=92
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:56 GMT; secure
+      - _fromthepage_session=ledW1FZyY5V2zPG8fG72DaAeEYiyz20MAj%2BLGwIXiSL3sRxgyqSAn9TsKVpk%2Bpu2y6G6Z45moRimi0sK%2B3vQHhyYP0rhfoROKcZLku2x%2B02HDIMROnYEmMiZGKvWbqqqKRDQusDY5RNI9eThcWYC2J7PQOn5bD3mRXuz1uz2htWSkT5oegapIi%2B6WT1ykxzFe2Z5NcU26PJLRn8b%2FBekH0llRFuo5RpdgyrIwWgXkDSUWCYSsXiCHeYTxe7jno%2Bb--5sBVRyu1L5tEgDC8--1Xa7wsJL3vnHq3Ise5%2FmNg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - f1172252-2a01-43bf-a11e-de42fddee60b
+      X-Runtime:
+      - '0.121881'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=ledW1FZyY5V2zPG8fG72DaAeEYiyz20MAj%2BLGwIXiSL3sRxgyqSAn9TsKVpk%2Bpu2y6G6Z45moRimi0sK%2B3vQHhyYP0rhfoROKcZLku2x%2B02HDIMROnYEmMiZGKvWbqqqKRDQusDY5RNI9eThcWYC2J7PQOn5bD3mRXuz1uz2htWSkT5oegapIi%2B6WT1ykxzFe2Z5NcU26PJLRn8b%2FBekH0llRFuo5RpdgyrIwWgXkDSUWCYSsXiCHeYTxe7jno%2Bb--5sBVRyu1L5tEgDC8--1Xa7wsJL3vnHq3Ise5%2FmNg%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56202/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/56202/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"Nikolais Dance Theatre (featuring the Ririe-Woodbury
+        Dance Co.) poster, November 28-29, 2006\",\n  \"metadata\": [\n    {\n      \"label\":
+        \"dc:source\",\n      \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/242/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Laura Smith, Photo Archivist at https://www.ohio.edu/library/about/staff/smithle\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu/record=b5961003~S7\"\n
+        \   },\n    {\n      \"label\": \"Collection finding aid\",\n      \"value\":
+        \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/nikolais-louis\"\n
+        \   },\n    {\n      \"label\": \"Collection\",\n      \"value\": \"Alwin
+        Nikolais and Murray Louis Papers. MSS181\"\n    },\n    {\n      \"label\":
+        \"Dance Company\",\n      \"value\": \"Nikolais and Murray Louis Dance Company\"\n
+        \   },\n    {\n      \"label\": \"Description\",\n      \"value\": \"12.5\\\"
+        x 26.5\\\" color poster. Dance collection, series 7: press and promotion,
+        sub series 7.2: posters. Poster with large image of a dancer emerging from
+        a void in front of a colorful background above with a strip of four smaller
+        images of dancers in costume below it, advertising Alwin Nikolais and Murray
+        Louis Dance Company, 2006. Poster reads: \\\"Teatro Duse\\\"; \\\"Nikolais
+        Dance Theatre\\\"; \\\"presentato dalla Ririe-Woodbury Dance Company\\\";
+        \\\"Direttori Artistici Murray Lewis & Alberto del Saz\\\";\\\"Fondatore Alwin
+        Nikolais\\\"; \\\"Tournee italiana organizzata de ATER Associazione Teatrale
+        Emilia Romagna\\\";\\\"con il sostegno di ARCUS\\\"; additional information.\"\n
+        \   },\n    {\n      \"label\": \"Format\",\n      \"value\": \"JP2\"\n    },\n
+        \   {\n      \"label\": \"How to access this collection at the library\",\n
+        \     \"value\": \"See https://www.ohio.edu/library/collections/archives-special-collections\"\n
+        \   },\n    {\n      \"label\": \"Identifier\",\n      \"value\": \"s7-2_b01_01_nik-lou_teatro_duse_ririe_nov28-29_2006\"\n
+        \   },\n    {\n      \"label\": \"Original format-AAT\",\n      \"value\":
+        \"Posters\"\n    },\n    {\n      \"label\": \"Policy\",\n      \"value\":
+        \"See Ohio University Libraries' Digital Archival Collections Materials Selection
+        and Rights policy at  https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries. Mahn Center for Archives and Special Collections\"\n    },\n    {\n
+        \     \"label\": \"Series\",\n      \"value\": \"7. Press and Promotion\"\n
+        \   },\n    {\n      \"label\": \"Sub series\",\n      \"value\": \"7.2 Posters\"\n
+        \   },\n    {\n      \"label\": \"Title of work\",\n      \"value\": \"Nikolais
+        Dance Theatre (featuring the Ririe-Woodbury Dance Co.) poster, November 28-29,
+        2006\"\n    },\n    {\n      \"label\": \"Type\",\n      \"value\": \"Still
+        Image\"\n    },\n    {\n      \"label\": \"Repository\",\n      \"value\":
+        \"Ohio University Libraries - Digital Archival Collections\"\n    },\n    {\n
+        \     \"label\": \"Source\",\n      \"value\": \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll16/id/242\\\">Nikolais
+        Dance Theatre (featuring the Ririe-Woodbury Dance Co.) poster, November 28-29,
+        2006</a></span>\"\n    },\n    {\n      \"label\": \"Title\",\n      \"value\":
+        \"Nikolais Dance Theatre (featuring the Ririe-Woodbury Dance Co.) poster,
+        November 28-29, 2006\"\n    },\n    {\n      \"label\": \"Created On\",\n
+        \     \"value\": \"2021-03-03 21:42:56 UTC\"\n    },\n    {\n      \"label\":
+        \"In Scope\",\n      \"value\": \"true\"\n    }\n  ],\n  \"description\":
+        \"This is an annotated version of the original manifest produced by FromThePage\",\n
+        \ \"within\": {\n    \"@type\": \"sc:Collection\",\n    \"label\": \"Dance
+        Posters Metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read Nikolais Dance Theatre (featuring the Ririe-Woodbury Dance Co.) poster,
+        November 28-29, 2006\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/nikolais-dance-theatre-featuring-the-ririe-woodbury-dance-co-poster-november-28-29-2006\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for Nikolais Dance Theatre (featuring the Ririe-Woodbury Dance
+        Co.) poster, November 28-29, 2006\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/nikolais-dance-theatre-featuring-the-ririe-woodbury-dance-co-poster-november-28-29-2006/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56202/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56202/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56202/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56202/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 100.0,\n      \"pctOcrCorrected\":
+        0.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0,\n      \"metadataStatus\": \"undescribed\"\n    }\n  ],\n  \"sequences\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56202/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/56202/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56202/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56202/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:242/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"Nikolais Dance
+        Theatre (featuring the Ririe-Woodbury Dance Co.) poster, November 28-29, 2006\",\n
+        \         \"width\": 4156,\n          \"height\": 8544,\n          \"images\":
+        [\n            {\n              \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:242\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:242/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 4156,\n                \"height\":
+        8544,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:242\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:242/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1808944\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1808944\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/dance-posters-metadata/nikolais-dance-theatre-featuring-the-ririe-woodbury-dance-co-poster-november-28-29-2006/annotation/1808944/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56202/export/1808944/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56202/export/1808944/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56202/export/1808944/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/56202/structured/1808944\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/56202/1808944/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1808944/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56202/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56202/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:56 GMT
+      ETag:
+      - W/"0e07a5ece660366b15d0a170b849275d"
+      Keep-Alive:
+      - timeout=5, max=91
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:56 GMT; secure
+      - _fromthepage_session=c0G1sZ9C8IvWopKkcNH7aOe%2FC8OGoCSu8rVMPrvJZgXTJU4Cj5xNJOeVK18aad5swPhwadR5xTlnAuMaQCqQydM6vekHQ7wuIQLxMpvS4ZKylRCyj0KTBFKu7fKW385FV7JGPho1g2sLnnFk4G3WbbyRiHY4rlqYP8jbMog24dE4uVPSCRzhPOHjV5SEZEQ0E8gbh5utM6QVwd5aFwYBgAqQd0LB9W24eL9r55Kmc5M0crtt6F%2FxvJFMSSg73b6o--fgHyTbvY8Q7adjL5--E9vA9VnNuWBhXoyuJybzYg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - c0f42b09-2308-4f64-ad40-aeac49822f87
+      X-Runtime:
+      - '0.129733'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=c0G1sZ9C8IvWopKkcNH7aOe%2FC8OGoCSu8rVMPrvJZgXTJU4Cj5xNJOeVK18aad5swPhwadR5xTlnAuMaQCqQydM6vekHQ7wuIQLxMpvS4ZKylRCyj0KTBFKu7fKW385FV7JGPho1g2sLnnFk4G3WbbyRiHY4rlqYP8jbMog24dE4uVPSCRzhPOHjV5SEZEQ0E8gbh5utM6QVwd5aFwYBgAqQd0LB9W24eL9r55Kmc5M0crtt6F%2FxvJFMSSg73b6o--fgHyTbvY8Q7adjL5--E9vA9VnNuWBhXoyuJybzYg%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56201/manifest
+  response:
+    body:
+      string: "{\n  \"@context\": \"http://iiif.io/api/presentation/2/context.json\",\n
+        \ \"@id\": \"https://fromthepage.com/iiif/56201/manifest\",\n  \"@type\":
+        \"sc:Manifest\",\n  \"label\": \"\u201CTotal Theater\\\" production poster,
+        Alwin Nikolais Dance Company poster\",\n  \"metadata\": [\n    {\n      \"label\":
+        \"dc:source\",\n      \"value\": \"https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll16/241/manifest.json\"\n
+        \   },\n    {\n      \"label\": \"Collection contact\",\n      \"value\":
+        \"Laura Smith, Photo Archivist at https://www.ohio.edu/library/about/staff/smithle\"\n
+        \   },\n    {\n      \"label\": \"Catalog record\",\n      \"value\": \"http://alice.library.ohio.edu/record=b5961003~S7\"\n
+        \   },\n    {\n      \"label\": \"Collection finding aid\",\n      \"value\":
+        \"https://www.ohio.edu/library/collections/archives-special-collections/manuscripts/nikolais-louis\"\n
+        \   },\n    {\n      \"label\": \"Collection\",\n      \"value\": \"Alwin
+        Nikolais and Murray Louis Papers. MSS181\"\n    },\n    {\n      \"label\":
+        \"Dance Company\",\n      \"value\": \"Nikolais Dance Theatre\"\n    },\n
+        \   {\n      \"label\": \"Description\",\n      \"value\": \"14\\\" x 22\\\"
+        black and white poster. Dance collection, series 7: press and promotion, sub
+        series 7.2: posters. Poster with graphic text advertising Alwin Nikolais Dance
+        Company. Poster reads: \\\"Alwin Nikolais Dance Co.... in a 'Total Theater'
+        production\u201D; \\\"New York Times: '...one of the most important men ever
+        to hit theater dance.'\\\"\"\n    },\n    {\n      \"label\": \"Format\",\n
+        \     \"value\": \"JP2\"\n    },\n    {\n      \"label\": \"How to access
+        this collection at the library\",\n      \"value\": \"See https://www.ohio.edu/library/collections/archives-special-collections\"\n
+        \   },\n    {\n      \"label\": \"Identifier\",\n      \"value\": \"s7-2_b00_02_nikolais_total_theater_production_nodate\"\n
+        \   },\n    {\n      \"label\": \"Original format-AAT\",\n      \"value\":
+        \"Posters\"\n    },\n    {\n      \"label\": \"Policy\",\n      \"value\":
+        \"See Ohio University Libraries' Digital Archival Collections Materials Selection
+        and Rights policy at  https://www.ohio.edu/library/about/policies-guidelines/digital-collections\"\n
+        \   },\n    {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries. Mahn Center for Archives and Special Collections\"\n    },\n    {\n
+        \     \"label\": \"Series\",\n      \"value\": \"7. Press and Promotion\"\n
+        \   },\n    {\n      \"label\": \"Sub series\",\n      \"value\": \"7.2 Posters\"\n
+        \   },\n    {\n      \"label\": \"Title of work\",\n      \"value\": \"\u201CTotal
+        Theater\\\" production poster, Alwin Nikolais Dance Company poster\"\n    },\n
+        \   {\n      \"label\": \"Type\",\n      \"value\": \"Still Image\"\n    },\n
+        \   {\n      \"label\": \"Repository\",\n      \"value\": \"Ohio University
+        Libraries - Digital Archival Collections\"\n    },\n    {\n      \"label\":
+        \"Source\",\n      \"value\": \"<span>From: <a href=\\\"https://media.library.ohio.edu/digital/collection/p15808coll16/id/241\\\">\u201CTotal
+        Theater\\\" production poster, Alwin Nikolais Dance Company poster</a></span>\"\n
+        \   },\n    {\n      \"label\": \"Title\",\n      \"value\": \"\u201CTotal
+        Theater\\\" production poster, Alwin Nikolais Dance Company poster\"\n    },\n
+        \   {\n      \"label\": \"Created On\",\n      \"value\": \"2021-03-03 21:42:53
+        UTC\"\n    },\n    {\n      \"label\": \"In Scope\",\n      \"value\": \"true\"\n
+        \   }\n  ],\n  \"description\": \"This is an annotated version of the original
+        manifest produced by FromThePage\",\n  \"within\": {\n    \"@type\": \"sc:Collection\",\n
+        \   \"label\": \"Dance Posters Metadata\",\n    \"@id\": \"https://fromthepage.com/iiif/collection/dance-posters-metadata\"\n
+        \ },\n  \"related\": [\n    {\n      \"format\": \"text/html\",\n      \"label\":
+        \"Read \u201CTotal Theater\\\" production poster, Alwin Nikolais Dance Company
+        poster\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/total-theater-production-poster-alwin-nikolais-dance-company-poster\"\n
+        \   },\n    {\n      \"format\": \"text/html\",\n      \"label\": \"Table
+        of Contents for \u201CTotal Theater\\\" production poster, Alwin Nikolais
+        Dance Company poster\",\n      \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/total-theater-production-poster-alwin-nikolais-dance-company-poster/contents\"\n
+        \   }\n  ],\n  \"seeAlso\": [\n    {\n      \"label\": \"Verbatim Plaintext\",\n
+        \     \"format\": \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-1\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56201/export/plaintext/verbatim\"\n
+        \   },\n    {\n      \"label\": \"Emended Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56201/export/plaintext/emended\"\n
+        \   },\n    {\n      \"label\": \"Searchable Plaintext\",\n      \"format\":
+        \"text/plain\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56201/export/plaintext/searchable\"\n
+        \   }\n  ],\n  \"service\": [\n    {\n      \"@context\": \"http://www.fromthepage.org/jsonld/1/context.json\",\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56201/status\",\n      \"label\":
+        \"Work Status\",\n      \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\n
+        \     \"pctComplete\": 100.0,\n      \"pctTranscribed\": 100.0,\n      \"pctOcrCorrected\":
+        0.0,\n      \"pctIndexed\": 0,\n      \"pctMarkedBlank\": 0,\n      \"pctNeedsReview\":
+        0,\n      \"pctTranslationComplete\": 0,\n      \"pctTranslated\": 0,\n      \"pctTranslationNeedsReview\":
+        0,\n      \"pctTranslationIndexed\": 0,\n      \"pctTranslationMarkedBlank\":
+        0,\n      \"metadataStatus\": \"undescribed\"\n    }\n  ],\n  \"sequences\":
+        [\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56201/sequence/default\",\n
+        \     \"@type\": \"sc:Sequence\",\n      \"label\": \"Pages\",\n      \"rendering\":
+        [\n        {\n          \"label\": \"Verbatim Plaintext\",\n          \"format\":
+        \"text/plain\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext\",\n
+        \         \"@id\": \"https://fromthepage.com/ohiouniversitylibraries/dance-posters-metadata/56201/export/plaintext/verbatim\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56201/export/html\",\n
+        \         \"label\": \"XHTML Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#xhtml\"\n
+        \       },\n        {\n          \"@id\": \"https://fromthepage.com/iiif/56201/export/tei\",\n
+        \         \"label\": \"TEI Export\",\n          \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#tei-xml\"\n
+        \       }\n      ],\n      \"canvases\": [\n        {\n          \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:241/canvas/c0\",\n
+        \         \"@type\": \"sc:Canvas\",\n          \"label\": \"\u201CTotal Theater\\\"
+        production poster, Alwin Nikolais Dance Company poster\",\n          \"width\":
+        8696,\n          \"height\": 13689,\n          \"images\": [\n            {\n
+        \             \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:241\",\n
+        \             \"@type\": \"oa:Annotation\",\n              \"motivation\":
+        \"sc:painting\",\n              \"resource\": {\n                \"@id\":
+        \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:241/full/full/0/default.jpg\",\n
+        \               \"@type\": \"dctypes:Image\",\n                \"format\":
+        \"image/jpeg\",\n                \"width\": 8696,\n                \"height\":
+        13689,\n                \"service\": {\n                  \"@context\": \"http://iiif.io/api/image/2/context.json\",\n
+        \                 \"@id\": \"https://cdm15808.contentdm.oclc.org/iiif/2/p15808coll16:241\",\n
+        \                 \"profile\": \"https://iiif.io/api/image/1.1/compliance/#level2\"\n
+        \               }\n              },\n              \"on\": \"https://cdm15808.contentdm.oclc.org/iiif/p15808coll16:241/canvas/c0\"\n
+        \           }\n          ],\n          \"related\": [\n            {\n              \"label\":
+        \"Read this page\",\n              \"format\": \"text/html\",\n              \"@id\":
+        \"https://fromthepage.com/display/display_page?page_id=1808943\"\n            },\n
+        \           {\n              \"label\": \"Transcribe this page\",\n              \"format\":
+        \"text/html\",\n              \"@id\": \"https://fromthepage.com/transcribe/display_page?page_id=1808943\"\n
+        \           }\n          ],\n          \"seeAlso\": [\n            {\n              \"label\":
+        \"HTML Transcription\",\n              \"format\": \"text/html\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#html-transcription\",\n
+        \             \"@id\": \"https://fromthepage.com/wilsone5/dance-posters-metadata/total-theater-production-poster-alwin-nikolais-dance-company-poster/annotation/1808943/html/transcription\"\n
+        \           },\n            {\n              \"label\": \"Searchable Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#plaintext-for-full-text-search-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56201/export/1808943/plaintext/searchable\"\n
+        \           },\n            {\n              \"label\": \"Verbatim Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#verbatim-plaintext-2\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56201/export/1808943/plaintext/verbatim\"\n
+        \           },\n            {\n              \"label\": \"Emended Plaintext\",\n
+        \             \"format\": \"text/plain\",\n              \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#emended-plaintext-1\",\n
+        \             \"@id\": \"https://fromthepage.com/iiif/56201/export/1808943/plaintext/emended\"\n
+        \           },\n            {\n              \"@id\": \"https://fromthepage.com/iiif/56201/structured/1808943\",\n
+        \             \"label\": \"Structured data (field-based or spreadsheet transcriptions)
+        for canvas\",\n              \"format\": \"application/ld+json\",\n              \"@context\":
+        \"http://www.fromthepage.org/jsonld/structured/1/context.json\",\n              \"profile\":
+        \"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions\"\n
+        \           }\n          ],\n          \"service\": {\n            \"@context\":
+        \"http://www.fromthepage.org/jsonld/1/context.json\",\n            \"@id\":
+        \"https://fromthepage.com/iiif/56201/1808943/status\",\n            \"label\":
+        \"Page Status\",\n            \"profile\": \"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\n
+        \           \"pageStatus\": [\n              \"hasTranscript\"\n            ]\n
+        \         },\n          \"otherContent\": [\n            {\n              \"@id\":
+        \"https://fromthepage.com/iiif/1808943/list/transcription\",\n              \"@type\":
+        \"sc:AnnotationList\",\n              \"label\": \"Transcription\"\n            }\n
+        \         ]\n        }\n      ]\n    }\n  ],\n  \"otherContent\": [\n    {\n
+        \     \"@id\": \"https://fromthepage.com/iiif/56201/layer/transcription\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"transcription layer\"\n
+        \   },\n    {\n      \"@id\": \"https://fromthepage.com/iiif/56201/layer/notes\",\n
+        \     \"@type\": \"sc:Layer\",\n      \"label\": \"notes layer\"\n    }\n
+        \ ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:56 GMT
+      ETag:
+      - W/"0aef31d3391c7dd019fd3e6f9421a5a9"
+      Keep-Alive:
+      - timeout=5, max=90
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:56 GMT; secure
+      - _fromthepage_session=boNmj2kVHBrbE4sj8fCyILnuisAW2EzN%2BaeJhMQ%2FKIqJImQhmIsSzNe1XiAcAs5uubAuIYQCSFstZQzDbZh9tdRp%2BEjDB9v4Af07QOLI0bonIrQnTvHdGKAlE%2BRTiMJwCvxDtuxcE2G3BvZnfpuCBefxnr%2BAnrAs0PvAk2IeVI5QtvFzHuNlW1C8jDKrFDDDMPm%2FcJcZah4w322MUB39cDunqEoG2Z6i229WxcUg%2FcpVanGoCjOQLbcKW%2F%2FGpLtm--zb0B%2Fr0f0IDlZzuw--iSM%2F%2FnNPrNsR8L8eFYvkQg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 04732fe1-9132-4188-a4b6-f9c5953c6a87
+      X-Runtime:
+      - '0.120704'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=boNmj2kVHBrbE4sj8fCyILnuisAW2EzN%2BaeJhMQ%2FKIqJImQhmIsSzNe1XiAcAs5uubAuIYQCSFstZQzDbZh9tdRp%2BEjDB9v4Af07QOLI0bonIrQnTvHdGKAlE%2BRTiMJwCvxDtuxcE2G3BvZnfpuCBefxnr%2BAnrAs0PvAk2IeVI5QtvFzHuNlW1C8jDKrFDDDMPm%2FcJcZah4w322MUB39cDunqEoG2Z6i229WxcUg%2FcpVanGoCjOQLbcKW%2F%2FGpLtm--zb0B%2Fr0f0IDlZzuw--iSM%2F%2FnNPrNsR8L8eFYvkQg%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/dance-posters-metadata/structured/config/page
+  response:
+    body:
+      string: "{\"@id\":\"https://fromthepage.com/iiif/1073/structured/config/page\",\"label\":\"Transcription
+        field configuration for Dance Posters Metadata\",\"config\":[{\"label\":\"Title\",\"input_type\":\"textarea\",\"position\":1,\"line\":1,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2593\"},{\"label\":\"Title
+        format: (name of performance if known or name of hosting organization) poster,
+        (venue or location (city, state or country)), (name of dance company only
+        if name of perf. or hosting org. is not known) poster, (performance date range),
+        (year)\",\"input_type\":\"description\",\"position\":2,\"line\":1,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2594\"},{\"label\":\"Creator
+        (artist)\",\"input_type\":\"select\",\"position\":3,\"line\":2,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2595\",\"options\":[\"\",\"Achepohl,
+        Keith\",\"Benoit\",\"Brooks, Bob\",\"Constant, George\",\"Delorme, Chr.\",\"Francis,
+        Jon\",\"Graphisme Helianthe Paris\",\"Helianthe\",\"l'atelier d'impression\",\"Lacoutte,
+        Jean Louis\",\"Lieberman\",\"Lieberman, Jerry\",\"Louis, Murray\",\"M+B Schell\",\"Margotton,
+        Alain\",\"Milano, Donati\",\"Nikolais, Alwin\",\"Pointeau\",\"Thomas, Dick\",\"Warner-Lasser
+        Associates\"]},{\"label\":\"Creator (artist) if other\",\"input_type\":\"text\",\"position\":4,\"line\":2,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2596\"},{\"label\":\"Creator
+        (photographer)\",\"input_type\":\"select\",\"position\":5,\"line\":3,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2597\",\"options\":[\"\",\"Berk,
+        Otto M.\",\"Berlin, David S.\",\"Bouchard, Thomas\",\"Caravaglia, Tom\",\"Cowan,
+        Frank\",\"Goodwin, Frances\",\"Greene, Bob\",\"Harris, Brownie, 1949-\",\"Koletzke,
+        Peter\",\"Leber, Alexander\",\"Markatos\",\"Mognaz, Guy\",\"Mognez, Guy\",\"Nikolais,
+        Alwin\",\"Oleaga, Milton\",\"Peter Koletzke\",\"Petitjean, Pierre, 1947-\",\"Powell\",\"Roth,
+        Kelly\",\"Schiff-Faludi, Susan\",\"Sosenko, Robert\",\"Takeno, Kanji\",\"Three
+        Lions\",\"Vartoogian, Jack\",\"Waldman, Max\",\"Wang\",\"Weinstock\",\"Winber,
+        Steve\"]},{\"label\":\"Creator (photographer) if other\",\"input_type\":\"text\",\"position\":6,\"line\":3,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2598\"},{\"label\":\"Creator
+        (choreographer)\",\"input_type\":\"select\",\"position\":7,\"line\":4,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2599\",\"options\":[\"\",\"Bailin,
+        Gladys\",\"Blossom, Beverly\",\"Dantzig, Rudi van\",\"Frank, Bill\",\"Lamhut,
+        Phyllis\",\"Limon, Jose\",\"Louis, Murray\",\"Martindale, Coral\",\"Nikolais,
+        Alwin\",\"Senghor, Maurice Sonar\",\"Tokunaga, Yasuko\",\"Vislocky, Dorothy\"]},{\"label\":\"Creator
+        (choreographer) if other\",\"input_type\":\"text\",\"position\":8,\"line\":4,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2600\"},{\"label\":\"Dance
+        company\",\"input_type\":\"select\",\"position\":9,\"line\":5,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2601\",\"options\":[\"\",\"Boston
+        Conservatory Dance Theater\",\"Henry Street Playhouse Dance Company\",\"Kongelige
+        Teater (Denmark)\",\"Murray Louis Dance Company\",\"Nationale Ballet (Netherlands)\",\"Nikolais
+        and Murray Louis Dance Company\",\"Nikolais Dance Theatre\",\"Ririe-Woodbury
+        Dance Company\",\"The Boston Conservatory Dance Theater\",\"Young Peoples
+        Theatre Company\"]},{\"label\":\"Dance company if other\",\"input_type\":\"text\",\"position\":10,\"line\":5,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2602\"},{\"label\":\"Dance
+        title\",\"input_type\":\"select\",\"position\":11,\"line\":6,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2603\",\"options\":[\"\",\"About
+        a dark house (Choreographic work : Dantzig)\",\"Aladdin (Choreographic work
+        : Louis)\",\"Allegory (Choreographic work : Nikolais)\",\"Antechamber (Choreographic
+        work : Louis)\",\"Ap\xE9ritif (Choreographic work : Louis)\",\"Aqueouscope
+        (Choreographic work : Nikolais)\",\"Arporisms (Choreographic work : Nikolais)\",\"Asides
+        (Choreographic work : Louis)\",\"Aurora (Choreographic work : Nikolais)\",\"Aviary
+        (Choreographic work : Nikolais)\",\"Bach II (Choreographic work : Louis)\",\"Bach
+        suite (Choreographic work : Louis)\",\"Belonging to the moon (Choreographic
+        work : Louis)\",\"Bewitched (Choreographic work : Nikolais)\",\"Black traveler
+        (Choreographic work : Schmidt)\",\"Blank on blank (Choreographic work : Nikolais)\",\"Blue
+        streak (Choreographic work : Louis)\",\"Broken mirror (Choreographic work
+        : Louis)\",\"Calligraph for martyrs (Choreographic work : Louis)\",\"Canarsie
+        Venus (Choreographic work : Louis)\",\"Castings (Choreographic work : Nikolais)\",\"Catalogue
+        (Choreographic work : Louis)\",\"Ceremony (Choreographic work : Louis)\",\"Charade
+        (Choreographic work : Louis)\",\"Choros I (Choreographic work : Louis)\",\"Circus
+        dance (Choreographic work : Charmoli)\",\"City (Choreographic work : Louis)\",\"Cleopatra
+        (Choreographic work : Louis)\",\"Concerto (Choreographic work : Louis)\",\"Contact
+        (Choreographic work : Nikolais)\",\"Continuum (Choreographic work : Louis,
+        M)\",\"Corrida (Choreographic work : Louis)\",\"Count down (Choreographic
+        work : Nikolais)\",\"Cross-fade (Choreographic work : Nikolais)\",\"Crucible
+        (Choreographic work : Nikolais)\",\"Da la terre de pug (Choreographic work
+        : Louis)\",\"Dance in silver and blue (Choreographic work : Louis)\",\"Decorating
+        the Xmas tree (Choreographic work : Nikolais)\",\"De\u0301ja\u0300 vu (Choreographic
+        work : Louis)\",\"Disenchantment of Pierrot (Choreographic work : Louis)\",\"Disguise
+        (Choreographic work : Louis)\",\"Echo (Choreographic work : Nikolais)\",\"Entre-acte
+        (Choreographic work : Louis)\",\"Extrados (Choreographic work : Nikolais)\",\"Fable
+        of the donkey (Choreographic work : Nikolais)\",\"Facets (Choreographic work
+        : Louis)\",\"Faun (Choreographic work : Schayk)\",\"Figura (Choreographic
+        work : Louis)\",\"Fine line (Choreographic work : Louis)\",\"Five haikus (Choreographic
+        work : Louis)\",\"Foreplay (Choreographic work : Nikolais)\",\"Four Brubeck
+        pieces (Choreographic work : Louis)\",\"Four last songs (Choreographic work
+        : Dantzig)\",\"Frail demons (Choreographic work : Louis)\",\"Fusion (Choreographic
+        work : Nikolais)\",\"Galaxy (Choreographic work : Nikolais)\",\"Gallery (Choreographic
+        work : Nikolais)\",\"Geometrics (Choreographic work : Louis)\",\"Glances (Choreographic
+        work : Louis)\",\"Go 6 (Choreographic work : Louis)\",\"Go seven (Choreographic
+        work : Louis)\",\"Gothic tale (Choreographic work : Louis)\",\"Graph (Choreographic
+        work : Nikolais)\",\"Grotto (Choreographic work : Nikolais)\",\"Guignol (Choreographic
+        work : Nikolais)\",\"Harmonica suite (Choreographic work : Louis)\",\"Hollow
+        lady (Choreographic work : Nikolais)\",\"Hoopla (Choreographic work : Louis,
+        M)\",\"Illume (Choreographic work : Louis)\",\"Imago (Choreographic work :
+        Nikolais)\",\"Index (to necessary neuroses...) (Choreographic work : Louis)\",\"Interims
+        (Choreographic work : Louis)\",\"Intersection (Choreographic work : Louis)\",\"Isle
+        (Choreographic work : Louis)\",\"Journal (Choreographic work : Louis)\",\"Junk
+        dances (Choreographic work : Louis)\",\"Kaleidoscope (Choreographic work :
+        Nikolais)\",\"Kyldex I (Choreographic work : Nikolais)\",\"Landscapes (Choreographic
+        work : Louis)\",\"Legend of the winds (Choreographic work : Nikolais)\",\"Lobster
+        quadrille (Choreographic work : Nikolais)\",\"Masks, props and mobiles (Choreographic
+        work : Nikolais)\",\"Mechanical organ (Choreographic work : Nikolais)\",\"Mechanical
+        organ I (Choreographic work : Nikolais)\",\"Mechanical organ II (Choreographic
+        work : Nikolais)\",\"Mirrors (Choreographic work : Nikolais)\",\"Moments (Choreographic
+        work : Louis)\",\"Moor's pavane (Choreographic work : Limo\u0301n)\",\"Nimbus
+        (Choreographic work : Nikolais)\",\"Noumenon (Choreographic work : Nikolais)\",\"Noumenon
+        mobilus (Choreographic work : Nikolais)\",\"November dances (Choreographic
+        work : Louis)\",\"Odyssey (Choreographic work : Louis)\",\"Passerelle (Choreographic
+        work : Nikolais)\",\"Pavanne (Choreographic work : Nikolais)\",\"Personnae
+        (Choreographic work : Louis, M)\",\"Persons and structures (Choreographic
+        work : Nikolais)\",\"Pindaric (Choreographic work : Schmidt)\",\"Pond (Choreographic
+        work : Nikolais)\",\"Porcelain dialogues (Choreographic work : Louis)\",\"Prism
+        (Choreographic work : Nikolais)\",\"Proximities (Choreographic work : Louis)\",\"Reflections
+        (Choreographic work : Louis)\",\"Revels (Choreographic work : Louis)\",\"Runic
+        canto (Choreographic work : Nikolais)\",\"Saint George and the dragon (Choreographic
+        work : Nikolais)\",\"Sanctum (Choreographic work : Nikolais)\",\"Scenario
+        (Choreographic work : Nikolais)\",\"Scheherazade, a dream (Choreographic work
+        : Louis)\",\"Schema (Choreographic work : Nikolais)\",\"Schubert (Choreographic
+        work : Louis)\",\"Scrolls (Choreographic work : Nikolais)\",\"Shepherdess
+        and the chimneysweep (Choreographic work : Nikolais)\",\"Signal (Choreographic
+        work : Louis)\",\"Somniloquy (Choreographic work : Nikolais)\",\"Station (Choreographic
+        work : Louis)\",\"Stratus (Choreographic work : Nikolais)\",\"Stravinsky montage
+        (Choreographic work : Louis)\",\"Structures (Choreographic work : Nikolais)\",\"Study
+        of the human figure (Choreographic work : Nikolais)\",\"Styx (Choreographic
+        work : Nikolais)\",\"Suite for divers performers (Choreographic work : Louis)\",\"Temple
+        (Choreographic work : Nikolais)\",\"Tensile involvement (Choreographic work
+        : Nikolais)\",\"Tent (Choreographic work : Nikolais)\",\"Three column line
+        (Choreographic work : Nikolais)\",\"Totem (Choreographic work : Nikolais)\",\"Transcendencies
+        (Choreographic work : Louis)\",\"Triad (Choreographic work : Nikolais)\",\"Tribe
+        (Choreographic work : Nikolais)\",\"Triptych (Choreographic work : Nikolais)\",\"Vaudeville
+        of the elements  (Choreographic work : Nikolais)\",\"Vaudeville of the elements
+        (Choreographic work : Nikolais)\",\"Video game (Choreographic work : Nikolais)\",\"Village
+        of whispers (Choreographic work : Nikolais)\",\"Vivace (Choreographic work
+        : Louis)\",\"Where phantoms gather (Choreographic work : Louis)\"]},{\"label\":\"Dance
+        title if other\",\"input_type\":\"text\",\"position\":12,\"line\":6,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2604\"},{\"label\":\"Language\",\"input_type\":\"text\",\"position\":13,\"line\":7,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2605\"},{\"label\":\"Date
+        created (YYYY)\",\"input_type\":\"text\",\"position\":14,\"line\":7,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2606\"},{\"label\":\"Rights
+        information\",\"input_type\":\"select\",\"position\":15,\"line\":7,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2607\",\"options\":[\"\",\"No
+        copyright - United States\",\"Copyright Undetermined\",\"In Copyright - Rights-holder(s)
+        Unlocatable or Unidentifiable\",\"In copyright\"]},{\"label\":\"Description\",\"input_type\":\"textarea\",\"position\":17,\"line\":8,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2608\"},{\"label\":\"Description
+        format: (dimensions) (physical description \\u0026 format--color, black and
+        white, mounted poster etc.) poster with (content description--briefly describe
+        prominent imagery or design elements) advertising (name of dance company)
+        performance, (year).\",\"input_type\":\"description\",\"position\":18,\"line\":8,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2609\"},{\"label\":\"Transcribed
+        poster text\",\"input_type\":\"textarea\",\"position\":16,\"line\":8,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2610\"}],\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-configuration-response\"}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:57 GMT
+      ETag:
+      - W/"89f90d3705de34a178705cc79c9c387a"
+      Keep-Alive:
+      - timeout=5, max=89
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:57 GMT; secure
+      - _fromthepage_session=f6bEM%2FRkFyL49ubHVluRbYx2WynTkCvBaSN%2FGdAnCS9YqXtRuy4RyOMRq0sDbOJk3YU2nvPhG8kngQCV1tOdkg37%2FMOGW%2FpgAxsjFTKdK2YhzVX6R1KfMrsHUrPWoTWImamP9Zj261yFB5if8%2FQ7g%2BDOx5ocDdV%2Bh%2BHb%2B7VllagXQJPDT3%2FgXOBvALLDL46WCWR%2FrgitxlZQBstjJyymou71vZVxO%2F3UDzPGNQj0es8vTK7Yald24ijbjXPDg%2FiVmVN%2BWwi3qP3EW%2FjeR1cx7y04SJwJoBCB7WNhi6H%2Bji4bjWZvjnhD%2FA%3D%3D--Hs1x6yRniMFg69Cn--EXc9YD332lzGz8BPAVHhFQ%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - e5c96246-c39f-4136-825f-6908a030951e
+      X-Runtime:
+      - '0.028351'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=f6bEM%2FRkFyL49ubHVluRbYx2WynTkCvBaSN%2FGdAnCS9YqXtRuy4RyOMRq0sDbOJk3YU2nvPhG8kngQCV1tOdkg37%2FMOGW%2FpgAxsjFTKdK2YhzVX6R1KfMrsHUrPWoTWImamP9Zj261yFB5if8%2FQ7g%2BDOx5ocDdV%2Bh%2BHb%2B7VllagXQJPDT3%2FgXOBvALLDL46WCWR%2FrgitxlZQBstjJyymou71vZVxO%2F3UDzPGNQj0es8vTK7Yald24ijbjXPDg%2FiVmVN%2BWwi3qP3EW%2FjeR1cx7y04SJwJoBCB7WNhi6H%2Bji4bjWZvjnhD%2FA%3D%3D--Hs1x6yRniMFg69Cn--EXc9YD332lzGz8BPAVHhFQ%3D%3D;
+        ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56198/structured/1808940
+  response:
+    body:
+      string: '{"contributors":[{"userName":"wilsone5"},{"userName":"Sandy_G"}],"data":[{"label":"Title","value":"Nothing
+        else like it in the world poster, Nikolais Dance Theatre","config":"https://fromthepage.com/iiif/structured/config/field/2593"},{"label":"Title
+        format: (name of performance if known or name of hosting organization) poster,
+        (venue or location (city, state or country)), (name of dance company only
+        if name of perf. or hosting org. is not known) poster, (performance date range),
+        (year)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2594"},{"label":"Creator
+        (artist)","value":"Warner-Lasser Associates","config":"https://fromthepage.com/iiif/structured/config/field/2595"},{"label":"Creator
+        (artist) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2596"},{"label":"Creator
+        (photographer)","value":"Waldman, Max","config":"https://fromthepage.com/iiif/structured/config/field/2597"},{"label":"Creator
+        (photographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2598"},{"label":"Creator
+        (choreographer)","value":"Nikolais, Alwin","config":"https://fromthepage.com/iiif/structured/config/field/2599"},{"label":"Creator
+        (choreographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2600"},{"label":"Dance
+        company","value":"Nikolais Dance Theatre","config":"https://fromthepage.com/iiif/structured/config/field/2601"},{"label":"Dance
+        company if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2602"},{"label":"Dance
+        title","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2603"},{"label":"Dance
+        title if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2604"},{"label":"Language","value":"English","config":"https://fromthepage.com/iiif/structured/config/field/2605"},{"label":"Date
+        created (YYYY)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2606"},{"label":"Rights
+        information","value":"Copyright Undetermined","config":"https://fromthepage.com/iiif/structured/config/field/2607"},{"label":"Transcribed
+        poster text","value":"nikolais\r\ndance theatre\r\nnothing else \r\nlike it
+        in\r\nthe world\r\nPrinted in U.S.A\r\nDesigned by Warner-Lasser Associates,
+        Morristown, N.J. / Photograph by MaxWaldman, N.Y.\r\n","config":"https://fromthepage.com/iiif/structured/config/field/2610"},{"label":"Description","value":"14
+        x 28.75 inch color poster with image of lights projected on dancer, advertising
+        the Nikolais Dance Theatre. ","config":"https://fromthepage.com/iiif/structured/config/field/2608"},{"label":"Description
+        format: (dimensions) (physical description \u0026 format--color, black and
+        white, mounted poster etc.) poster with (content description--briefly describe
+        prominent imagery or design elements) advertising (name of dance company)
+        performance, (year).","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2609"}],"config":"https://fromthepage.com/iiif/1073/structured/config/page","profile":"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-endpoint-response","on":{"@type":"sc:Canvas","@id":"https://fromthepage.com/iiif/56198/canvas/1808940","within":"https://fromthepage.com/iiif/56198/manifest"},"@id":"https://fromthepage.com/iiif/56198/structured/1808940","label":"Structured
+        data (field-based or spreadsheet transcriptions) for canvas","pageStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56198/1808940/status","label":"Page
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1","pageStatus":["hasTranscript"]},"workStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56198/status","label":"Work
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service","pctComplete":100.0,"pctTranscribed":100.0,"pctOcrCorrected":0.0,"pctIndexed":0,"pctMarkedBlank":0,"pctNeedsReview":0,"pctTranslationComplete":0,"pctTranslated":0,"pctTranslationNeedsReview":0,"pctTranslationIndexed":0,"pctTranslationMarkedBlank":0,"metadataStatus":"undescribed"}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 Sep 2022 21:38:57 GMT
+      ETag:
+      - W/"e1dc95899711903b8cd7402973c23654"
+      Keep-Alive:
+      - timeout=5, max=88
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=b2444138-b6fd-4235-9b0a-b4b9f4420f72; path=/; expires=Wed, 07 Sep
+        2022 01:38:57 GMT; secure
+      - _fromthepage_session=rdElJ0VVYGDb6X%2FU6f2Csk3RXTwPXNRL8u5nWSAROKsPMZL%2FUNcxTsHH7rqUo2b3hNS%2FelaXMJ%2FF0bVbnFwqIitEAtec%2Fl64BKwQsRrYBpdejCKHxWtax%2FH9dbNufD2Sp3CRS8fjHVUwo6uD%2Fkpj0297yL2vBx71AiI3wUE7JhTzz1ZTVXw3O%2F4aYRK3Wh%2B0ym%2Bl5h7I7%2BfUl5ppIhUCsBhk%2BLE5gWsvHBuN44DchOoKAKLVatQnrsAFg%2FTYNlSyXiBpMiw7b8laulW3--NnQS4eCzTdG9Sp1v--VhJ1Svw4B99COjXmBY1zdg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 9149a212-9c9a-4fa6-bd3a-896b811caff9
+      X-Runtime:
+      - '0.098986'
+    status:
+      code: 200
+      message: OK
+version: 1

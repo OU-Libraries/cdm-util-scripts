@@ -43,7 +43,7 @@ def ftpfields2catcher(
 
     with requests.Session() as session:
         ftp_project = ftp_api.request_ftp_project_and_works(
-            base_url=ftp_api.FTP_HOSTED_BASE_URL,
+            instance_url=ftp_api.FTP_HOSTED_URL,
             slug=ftp_slug,
             project_label=ftp_project_name,
             session=session,
@@ -178,7 +178,7 @@ def get_ftp_work_cdm_item_info(
     ftp_work: ftp_api.FtpWork, session: requests.Session
 ) -> cdm_api.CdmItemInfo:
     return cdm_api.request_item_info(
-        instance_url=ftp_work.cdm_instance_base_url,
+        instance_url=ftp_work.cdm_instance_url,
         collection_alias=ftp_work.cdm_collection_alias,
         dmrecord=ftp_work.cdm_object_dmrecord,
         session=session,
@@ -189,7 +189,7 @@ def load_cdm_page_pointers(
     ftp_work: ftp_api.FtpWork, session: requests.Session
 ) -> None:
     page_pointers = cdm_api.request_page_pointers(
-        instance_url=ftp_work.cdm_instance_base_url,
+        instance_url=ftp_work.cdm_instance_url,
         collection_alias=ftp_work.cdm_collection_alias,
         dmrecord=ftp_work.cdm_object_dmrecord,
         session=session,

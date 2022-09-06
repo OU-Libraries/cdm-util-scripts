@@ -213,12 +213,12 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
 
 def ftpinfo(slug: str) -> None:
     with requests.Session() as session:
-        ftp_instance = ftp_api.FtpInstance(base_url=ftp_api.FTP_HOSTED_BASE_URL)
+        ftp_instance = ftp_api.FtpInstance(url=ftp_api.FTP_HOSTED_URL)
         ftp_projects = ftp_instance.request_projects(slug=slug, session=session)
 
-    for label, url in ftp_projects.projects.items():
-        print(label)
-        print(url)
+    for project in ftp_projects.projects:
+        print(project.label)
+        print(project.url)
 
 
 def cdminfo(
