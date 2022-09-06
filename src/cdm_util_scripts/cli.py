@@ -10,7 +10,6 @@ from typing import Optional, Sequence, Dict
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import catcherdiff
-from cdm_util_scripts import csv2catcher
 from cdm_util_scripts import csv2json
 from cdm_util_scripts import ftpfields2catcher
 from cdm_util_scripts import ftptr2catcher
@@ -42,33 +41,13 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "report_file_path", help="Report output file path"
     )
     catcherdiff_subparser.add_argument(
+        "-c",
         "--check-vocabs",
         action="store_const",
         const=True,
         help="Check controlled vocabulary terms",
     )
     catcherdiff_subparser.set_defaults(func=catcherdiff.catcherdiff)
-
-    # csv2catcher
-    csv2catcher_subparser = subparsers.add_parser(
-        "csv2catcher",
-        help="Reconcile and translate a CSV into cdm-catcher JSON edits",
-    )
-    csv2catcher_subparser.add_argument(
-        "reconciliation_config_path",
-        help="Path to a collection reconciliation JSON configuration file",
-    )
-    csv2catcher_subparser.add_argument(
-        "column_mapping_csv_path",
-        help="Path to CSV with columns 'name' and 'nick' mapping column names to CONTENTdm field nicknames",
-    )
-    csv2catcher_subparser.add_argument(
-        "field_data_csv_path", help="Path to field data CSV"
-    )
-    csv2catcher_subparser.add_argument(
-        "output_file_path", help="Path to output cdm-catcher JSON"
-    )
-    csv2catcher_subparser.set_defaults(func=csv2catcher.csv2catcher)
 
     # csv2json
     csv2json_subparser = subparsers.add_parser(

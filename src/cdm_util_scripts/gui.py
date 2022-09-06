@@ -8,7 +8,6 @@ from typing import Callable, Dict, Any, Hashable
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts.catcherdiff import catcherdiff
-from cdm_util_scripts.csv2catcher import csv2catcher
 from cdm_util_scripts.csv2json import csv2json
 from cdm_util_scripts.ftpfields2catcher import ftpfields2catcher, MatchModes
 from cdm_util_scripts.ftptr2catcher import ftptr2catcher
@@ -51,65 +50,6 @@ def gui() -> None:
             )
         ],
         [sg.Button("Run", key=(catcherdiff, "-RUN-"))],
-    ]
-
-    csv2catcher_layout = [
-        [
-            sg.Frame(
-                "About",
-                [
-                    [
-                        sg.Text(
-                            "Reconcile and translate a CSV into cdm-catcher JSON edits"
-                        )
-                    ]
-                ],
-            )
-        ],
-        [sg.Text("CONTENTdm instance URL")],
-        [
-            sg.InputText(key=(csv2catcher, "cdm_instance_url")),
-            sg.Button(
-                "Request collection aliases", key=(csv2catcher, "-LOAD ALIASES-")
-            ),
-        ],
-        [sg.Text("CONTENTdm collection alias")],
-        [
-            sg.Combo([], key=(csv2catcher, "cdm_collection_alias"), size=55),
-            sg.Button(
-                "Request collection field nicks", key=(csv2catcher, "-LOAD NICKS-")
-            ),
-        ],
-        [sg.Text("CONTENTdm identifier field nick")],
-        [sg.Combo([], key=(csv2catcher, "identifier_nick"), size=55)],
-        [sg.Text("Columns to CONTENTdm field nicks mapping CSV")],
-        [
-            sg.Input(key=(csv2catcher, "column_mapping_csv_path")),
-            sg.FileBrowse(),
-        ],
-        [
-            sg.Radio(
-                "Match rows to pages",
-                group_id="match_mode",
-                key=(csv2catcher, "match_mode", "pages"),
-            ),
-            sg.Radio(
-                "Match rows to objects",
-                group_id="match_mode",
-                key=(csv2catcher, "match_mode", "objects"),
-            ),
-        ],
-        [sg.Text("Field data CSV path")],
-        [
-            sg.Input(key=(csv2catcher, "field_data_csv_path")),
-            sg.FileBrowse(),
-            sg.Button("Load column names", key=(csv2catcher, "-LOAD COLUMNS-")),
-        ],
-        [sg.Text("Page position column name")],
-        [sg.Combo([], key=(csv2catcher, "page_position_column_name"), size=55)],
-        [sg.Text("Catcher JSON output file path")],
-        [sg.Input(key=(csv2catcher, "output_file_path")), sg.FileSaveAs()],
-        [sg.Button("Run", key=(csv2catcher, "-RUN-"))],
     ]
 
     ftpfields2catcher_layout = [
@@ -308,7 +248,6 @@ def gui() -> None:
                         sg.Tab("ftpfields2catcher", ftpfields2catcher_layout),
                         sg.Tab("ftptr2catcher", ftptr2catcher_layout),
                         sg.Tab("ftpmdc2catcher", ftpmdc2catcher_layout),
-                        sg.Tab("csv2catcher", csv2catcher_layout),
                         sg.Tab("csv2json", csv2json_layout),
                     ]
                 ]
