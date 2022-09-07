@@ -157,7 +157,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "field_mapping_csv_path",
         help="CSV file of FromThePage field labels mapped to CONTENTdm nicknames",
     )
-    scanftpfields_subparser.add_argument("report_path", help="Report file path")
+    scanftpvocabs_subparser.add_argument("report_path", help="Report file path")
     scanftpvocabs_subparser.add_argument(
         "--label",
         choices=list(ftp_api.RENDERING_EXTRACTORS),

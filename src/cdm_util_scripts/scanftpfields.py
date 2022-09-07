@@ -1,14 +1,21 @@
 import jinja2
-from requests import Session
+import requests
 import tqdm
 
-from datetime import datetime
-import collections
-
-import typing
-from typing import List, Dict, Any, Tuple, Iterable, Iterator, Optional, FrozenSet
+import datetime
+from typing import List, FrozenSet, Dict, overload, Union, NamedTuple
 
 from cdm_util_scripts import ftp_api
+
+
+class WorkAndFields(NamedTuple):
+    work: ftp_api.FtpWork
+    fields: ftp_api.FtpStructuredData
+
+
+class PageAndFields(NamedTuple):
+    page: ftp_api.FtpPage
+    fields: ftp_api.FtpStructuredData
 
 
 def scanftpfields(
@@ -16,85 +23,95 @@ def scanftpfields(
     ftp_project_name: str,
     report_path: str,
 ) -> None:
-    with Session() as session:
+    with requests.Session() as session:
         print("Requesting project data...")
-        ftp_project = ftp_api.request_ftp_project_and_works(
+        ftp_project = ftp_api.request_ftp_project(
             instance_url=ftp_api.FTP_HOSTED_URL,
             slug=ftp_slug,
             project_label=ftp_project_name,
             session=session,
         )
-        print("Requesting transcripts...")
-        field_transcriptions = []
-        for ftp_work in tqdm.tqdm(ftp_project.works):
-            field_transcriptions.append(
-                ftp_work.request_transcript_fields(session=session)
-            )
 
-    print("Compiling report...")
-    pages_by_schema = collate_ftp_pages_by_schema(
-        zip(ftp_project.works, field_transcriptions)
-    )
-    blank_pages = pages_by_schema.pop(None, [])
-    report = {
-        "report_datetime": datetime.now().isoformat(),
-        "slug": ftp_slug,
-        "project_id": ftp_project.project_id,
-        "project_label": ftp_project.label,
-        "project_manifest_url": ftp_project.url,
-        "works_count": len(ftp_project.works),
-        "filled_pages_count": count_filled_pages(field_transcriptions),
-        "field_label_frequencies": dict(
-            compile_field_frequencies(field_transcriptions)
-        ),
-        "pages_by_schema": pages_by_schema,
-        "blank_pages": blank_pages,
-    }
+        print("Requesting project structured data configurations...")
+        work_config = ftp_project.request_work_structured_data_config(session=session)
+        page_config = ftp_project.request_page_structured_data_config(session=session)
 
-    report_str = report_to_html(report)
-    with open(report_path, mode="w", encoding="utf-8") as fp:
-        fp.write(report_str)
+        has_work_level_description = bool(work_config.fields)
+        has_page_level_description = bool(page_config.fields)
+        if not has_work_level_description and not has_page_level_description:
+            print("Project has no structured data entry configured, exiting...")
+            return None
 
+        print("Requesting work data...")
+        ftp_project.request_works(session=session)
 
-def collate_ftp_pages_by_schema(
-    works_and_fields: Iterable[
-        Tuple[ftp_api.FtpWork, ftp_api.FtpFieldBasedTranscription]
-    ]
-) -> Dict[Optional[FrozenSet[str]], List[Tuple[ftp_api.FtpPage, ftp_api.FtpWork]]]:
-    by_schema = collections.defaultdict(list)
-    for ftp_work, field_transcription in works_and_fields:
-        for ftp_page, field_transcript in zip(ftp_work.pages, field_transcription):
-            schema = frozenset(field_transcript) if field_transcript else None
-            by_schema[schema].append((ftp_page, ftp_work))
-    return dict(by_schema)
+        print("Requesting structured descriptions...")
+        project_works_and_fields: List[WorkAndFields] = []
+        project_pages_and_fields: List[PageAndFields] = []
+        for work in tqdm.tqdm(ftp_project.works):
+            if has_work_level_description:
+                project_works_and_fields.append(
+                    (work, work.request_structured_data(session=session))
+                )
+            if has_page_level_description:
+                for page in work.pages:
+                    project_pages_and_fields.append(
+                        (page, page.request_structured_data(session=session))
+                    )
 
+    print("Collating field sets...")
+    works_by_field_set = collate_field_sets(project_works_and_fields)
+    pages_by_field_set = collate_field_sets(project_pages_and_fields)
 
-def count_filled_pages(
-    field_transcriptions: Iterable[ftp_api.FtpFieldBasedTranscription],
-) -> int:
-    return sum(
-        1
-        for field_transcription in field_transcriptions
-        for page_fields in field_transcription
-        if page_fields
-    )
-
-
-def compile_field_frequencies(
-    field_transcriptions: Iterable[ftp_api.FtpFieldBasedTranscription],
-) -> typing.Counter[str]:
-    return collections.Counter(iter_labels(field_transcriptions))
-
-
-def iter_labels(
-    field_transcriptions: Iterable[ftp_api.FtpFieldBasedTranscription],
-) -> Iterator[str]:
-    for field_transcription in field_transcriptions:
-        for page_fields in field_transcription:
-            if page_fields:
-                yield from page_fields
-
-
-def report_to_html(report: Dict[str, Any]) -> str:
     env = jinja2.Environment(loader=jinja2.PackageLoader(__package__))
-    return env.get_template("scanftpfields-report.html.j2").render(report)
+    report_html = env.get_template("scanftpfields-report.html.j2").render(
+        slug=ftp_slug,
+        project_label=ftp_project_name,
+        project_manifest_url=ftp_project.url,
+        report_datetime=datetime.datetime.now().isoformat(),
+        work_config=work_config,
+        page_config=page_config,
+        works_by_field_set=works_by_field_set,
+        pages_by_field_set=pages_by_field_set,
+        work_field_labels_by_config_id={
+            field_config.url: field_config.label
+            for field_config in work_config.fields
+        },
+        page_field_labels_by_config_id={
+            field_config.url: field_config.label
+            for field_config in page_config.fields
+        },
+    )
+
+    with open(report_path, mode="w", encoding="utf-8") as fp:
+        fp.write(report_html)
+
+
+@overload
+def collate_field_sets(
+    ftp_objects_and_fields: List[WorkAndFields],
+) -> Dict[FrozenSet[str], List[ftp_api.FtpWork]]:
+    ...
+
+
+@overload
+def collate_field_sets(
+    ftp_objects_and_fields: List[PageAndFields],
+) -> Dict[FrozenSet[str], List[ftp_api.FtpPage]]:
+    ...
+
+
+def collate_field_sets(
+    ftp_objects_and_fields: Union[List[PageAndFields], List[WorkAndFields]]
+) -> Union[
+    Dict[FrozenSet[str], List[ftp_api.FtpPage]],
+    Dict[FrozenSet[str], List[ftp_api.FtpWork]],
+]:
+    objects_by_field_set: Union[
+        Dict[FrozenSet[str], List[ftp_api.FtpPage]],
+        Dict[FrozenSet[str], List[ftp_api.FtpWork]],
+    ] = {}
+    for ftp_object, fields in ftp_objects_and_fields:
+        field_set = frozenset(field.config for field in fields.data)
+        objects_by_field_set.setdefault(field_set, []).append(ftp_object)
+    return objects_by_field_set

@@ -1,115 +1,116 @@
 {% extends 'base.html.j2' %}
-{% block headtitle %}{{project_label }} scanftpfields report{% endblock %}
+{% block headtitle %}{{ project_label }} scanftpfields report{% endblock %}
 {% block style %}
-    .field-info-table td ul {
-    margin: 0.3em 0 0.3em 0;
-    }
-
-    .field-label {
+    .literal {
     font-family: monospace;
+    background-color: gainsboro;
     }
-
-    .field-set {
-    margin-left: 1em;
-    padding-left: 1em;
-    border-left: thin solid;
+    td {
+    text-align: left
+    vertical-align: top
     }
-
-    .undercount {
-    background-color: #ffe7bc;
+    .report-metadata-table th {
+    text-align: right
     }
-
-    .page-list {}
 {% endblock %}
 {% block doctitle %}FromThePage field scan report for project {{ project_label }}{% endblock %}
 {% block content %}
     <table class="report-metadata-table">
         <tbody>
-            <tr><td>Report datetime</td><td>{{ report_datetime }}</td></tr>
-            <tr><td>FromThePage user slug</td><td>{{ slug }}</td></tr>
-            <tr><td>FromThePage project alias</td><td>{{ project_id }}</td></tr>
-            <tr><td>FromThePage project label</td><td>{{ project_label }}</td></tr>
-            <tr><td>FromThePage project manifest</td><td><a href="{{ project_manifest_url }}">{{ project_manifest_url }}</a></td></tr>
+            <tr><th>Report datetime</th><td>{{ report_datetime }}</td></tr>
+            <tr><th>FromThePage user slug</th><td>{{ slug }}</td></tr>
+            <tr><th>FromThePage project label</th><td>{{ project_label }}</td></tr>
+            <tr><th>FromThePage project manifest</th><td><a href="{{ project_manifest_url }}">{{ project_manifest_url }}</a></td></tr>
         </tbody>
     </table>
 
-    <h2>Field label frequencies</h2>
-
-    <p>
-        Works: {{ works_count }}<br/>
-        Filled pages: {{ filled_pages_count }}<br/>
-        Unfilled pages:  {{ blank_pages|length }}<br/>
-    </p>
-
-    <table class="field-info-table">
-        <thead>
-            <tr>
-                <th>Frequency</th>
-                <th>Field label</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for label, count in field_label_frequencies.items() %}
+    <h2>Work-level Metadata Description configuration</h2>
+    {% if work_config.fields %}
+        <table class="work-config">
+            <thead>
                 <tr>
-                    <td>
-                        {%- if count < filled_pages_count|int -%}
-                            <span class="undercount">{{ count }}</span>
-                        {%- else -%}
-                            <span>{{ count }}</span>
-                        {%- endif -%}
-                    </td>
-                    <td><span class="field-label">{{ label }}</span></td>
+                    <th>Label</th>
+                    <th>Input Type</th>
+                    <th>Config URL</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <h2>Field sets</h2>
-    <p>There are {{ pages_by_schema|length }} field sets used in this collection.</p>
-    {% for schema, pages_and_works in pages_by_schema.items() %}
-        <h3>{{ pages_and_works|length }} pages</h3>
-        <div class="field-set">
-            <h4>Field set</h4>
-            <ul>
-                {%- for field, count in field_label_frequencies.items() if field in schema -%}
-                    {%- if count < filled_pages_count|int %}
-                        <li><span class="field-label undercount">{{ field }}</span></li>
-                    {%- else -%}
-                        <li><span class="field-label">{{ field }}</span></li>
-                    {%- endif -%}
-                {%- endfor %}
-            </ul>
-            <h4>Omitted fields</h4>
-            {% if field_label_frequencies | reject("in", schema) | first %}
-                <ul>
-                    {%- for field in field_label_frequencies -%}
-                        {%- if field not in schema %}
-                            <li><span class="field-label undercount">{{ field }}</span></li>
-                        {%- endif -%}
-                    {%- endfor %}
-                </ul>
-            {% else %}
-                <p>None</p>
-            {% endif %}
-            <h4>Pages using this set</h4>
-            <table class="field-info-table">
-                <thead>
+            </thead>
+            <tbody>
+                {% for field in work_config.fields %}
                     <tr>
-                        <th>Edit Page</th>
-                        <th>Page</th>
-                        <th>Work</th>
+                        <td><span class="literal">{{ field.label }}</span></td>
+                        <td>{{ field.input_type }}</td>
+                        <td><a href="{{ field.url }}">{{ field.url }}</a></td>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for page, work in pages_and_works -%}
-                        <tr>
-                            <td><a href="{{ page.transcribe_url }}">✍</a></td>
-                            <td><a href="{{ page.read_url }}">{{ page.label }}</a></td>
-                            <td><a href="{{ work.read_url }}">{{ work.label }}</a></td>
-                        </tr>
-                    {%- endfor %}
-                </tbody>
-            </table>
-        </div>
-    {%- endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>None.</p>
+    {% endif %}
+
+    <h2>Page-level field transcription configuration</h2>
+    {% if page_config.fields %}
+        <table class="page-config">
+            <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>Input Type</th>
+                    <th>Config URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for field in page_config.fields %}
+                    <tr>
+                        <td><span class="literal">{{ field.label }}</span></td>
+                        <td>{{ field.input_type }}</td>
+                        <td><a href="{{ field.url }}">{{ field.url }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>None.</p>
+    {% endif %}
+
+    <h2>Work-level Metadata Description field sets</h2>
+    {% if works_by_field_set %}
+        {% for field_set, works in works_by_field_set.items() %}
+            <div class="field-set">
+                <h3>{{ works|length }} works</h3>
+                <ol>
+                    {% for url, label in work_field_labels_by_config_id.items() if url in field_set %}
+                        <li><span class="literal">{{ label }}</span></li>
+                    {% endfor %}
+                </ol>
+                <ul>
+                    {% for work in works %}
+                        <li><a href="{{ work.read_url }}">{{ work.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>None.</p>
+    {% endif %}
+
+    <h2>Page-level field transcription field sets</h2>
+    {% if pages_by_field_set %}
+        {% for field_set, pages in pages_by_field_set.items() %}
+            <div class="field-set">
+                <h3>{{ pages|length }} pages</h3>
+                <ol>
+                    {% for url, label in page_field_labels_by_config_id.items() if url in field_set %}
+                        <li><span class="literal">{{ label }}</span></li>
+                    {% endfor %}
+                </ol>
+                <ul>
+                    {% for page in pages %}
+                        <li><a href="{{ page.transcribe_url }}">{{ page.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>None.</p>
+    {% endif %}
 {% endblock %}
