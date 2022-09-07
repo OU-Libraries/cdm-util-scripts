@@ -1,21 +1,34 @@
 {% extends 'base.html.j2' %}
 {% block headtitle %}{{ project_label }} scanftpfields report{% endblock %}
 {% block style %}
+    .project-metadata th {
+    text-align: left;
+    }
     .literal {
     font-family: monospace;
-    background-color: gainsboro;
     }
-    td {
-    text-align: left
-    vertical-align: top
+    .page-config td, .work-config td {
+    border-top: dashed thin;
     }
-    .report-metadata-table th {
-    text-align: right
+    .page-config th, .work-config th {
+    text-align: left;
+    }
+    .fields-list {
+    list-style-type: none;
+    }
+    .incldued, .unincluded {
+    font-weight: bolder;
+    }
+    .included {
+    background-color: lightgreen;
+    }
+    .unincluded {
+    background-color: lightcoral;
     }
 {% endblock %}
 {% block doctitle %}FromThePage field scan report for project {{ project_label }}{% endblock %}
 {% block content %}
-    <table class="report-metadata-table">
+    <table class="project-metadata">
         <tbody>
             <tr><th>Report datetime</th><td>{{ report_datetime }}</td></tr>
             <tr><th>FromThePage user slug</th><td>{{ slug }}</td></tr>
@@ -32,14 +45,16 @@
                     <th>Label</th>
                     <th>Input Type</th>
                     <th>Config URL</th>
+                    <th>Occurences</th>
                 </tr>
             </thead>
             <tbody>
                 {% for field in work_config.fields %}
                     <tr>
-                        <td><span class="literal">{{ field.label }}</span></td>
+                        <td><span class="literal ftp-label">{{ field.label }}</span></td>
                         <td>{{ field.input_type }}</td>
                         <td><a href="{{ field.url }}">{{ field.url }}</a></td>
+                        <td>{{ work_field_counts_by_config_id[field.url] }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -56,14 +71,16 @@
                     <th>Label</th>
                     <th>Input Type</th>
                     <th>Config URL</th>
+                    <th>Occurences</th>
                 </tr>
             </thead>
             <tbody>
                 {% for field in page_config.fields %}
                     <tr>
-                        <td><span class="literal">{{ field.label }}</span></td>
+                        <td><span class="literal ftp-label">{{ field.label }}</span></td>
                         <td>{{ field.input_type }}</td>
                         <td><a href="{{ field.url }}">{{ field.url }}</a></td>
+                        <td>{{ page_field_counts_by_config_id[field.url] }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -77,9 +94,16 @@
         {% for field_set, works in works_by_field_set.items() %}
             <div class="field-set">
                 <h3>{{ works|length }} works</h3>
-                <ol>
-                    {% for url, label in work_field_labels_by_config_id.items() if url in field_set %}
-                        <li><span class="literal">{{ label }}</span></li>
+                <ol class="fields-list">
+                    {% for url, label in work_field_labels_by_config_id.items() %}
+                        <li>
+                            {% if url in field_set %}
+                                <span class="included">+</span>
+                            {% else %}
+                                <span class="unincluded">−</span>
+                            {% endif %}
+                            <span class="literal ftp-label">{{ label }}</span>
+                        </li>
                     {% endfor %}
                 </ol>
                 <ul>
@@ -98,9 +122,16 @@
         {% for field_set, pages in pages_by_field_set.items() %}
             <div class="field-set">
                 <h3>{{ pages|length }} pages</h3>
-                <ol>
+                <ol class="fields-list">
                     {% for url, label in page_field_labels_by_config_id.items() if url in field_set %}
-                        <li><span class="literal">{{ label }}</span></li>
+                        <li>
+                            {% if url in field_set %}
+                                <span class="included">+</span>
+                            {% else %}
+                                <span class="unincluded">−</span>
+                            {% endif %}
+                            <span class="literal ftp-label">{{ label }}</span>
+                        </li>
                     {% endfor %}
                 </ol>
                 <ul>

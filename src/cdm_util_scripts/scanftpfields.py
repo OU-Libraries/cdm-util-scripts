@@ -3,7 +3,9 @@ import requests
 import tqdm
 
 import datetime
-from typing import List, FrozenSet, Dict, overload, Union, NamedTuple
+import collections
+import typing
+from typing import List, FrozenSet, Dict, Union, NamedTuple, Counter
 
 from cdm_util_scripts import ftp_api
 
@@ -61,7 +63,9 @@ def scanftpfields(
 
     print("Collating field sets...")
     works_by_field_set = collate_field_sets(project_works_and_fields)
+    work_field_counts_by_config_id = count_field_occurrences(works_by_field_set)
     pages_by_field_set = collate_field_sets(project_pages_and_fields)
+    page_field_counts_by_config_id = count_field_occurrences(pages_by_field_set)
 
     env = jinja2.Environment(loader=jinja2.PackageLoader(__package__))
     report_html = env.get_template("scanftpfields-report.html.j2").render(
@@ -73,13 +77,13 @@ def scanftpfields(
         page_config=page_config,
         works_by_field_set=works_by_field_set,
         pages_by_field_set=pages_by_field_set,
+        work_field_counts_by_config_id=work_field_counts_by_config_id,
         work_field_labels_by_config_id={
-            field_config.url: field_config.label
-            for field_config in work_config.fields
+            field_config.url: field_config.label for field_config in work_config.fields
         },
+        page_field_counts_by_config_id=page_field_counts_by_config_id,
         page_field_labels_by_config_id={
-            field_config.url: field_config.label
-            for field_config in page_config.fields
+            field_config.url: field_config.label for field_config in page_config.fields
         },
     )
 
@@ -87,14 +91,14 @@ def scanftpfields(
         fp.write(report_html)
 
 
-@overload
+@typing.overload
 def collate_field_sets(
     ftp_objects_and_fields: List[WorkAndFields],
 ) -> Dict[FrozenSet[str], List[ftp_api.FtpWork]]:
     ...
 
 
-@overload
+@typing.overload
 def collate_field_sets(
     ftp_objects_and_fields: List[PageAndFields],
 ) -> Dict[FrozenSet[str], List[ftp_api.FtpPage]]:
@@ -115,3 +119,15 @@ def collate_field_sets(
         field_set = frozenset(field.config for field in fields.data)
         objects_by_field_set.setdefault(field_set, []).append(ftp_object)
     return objects_by_field_set
+
+
+def count_field_occurrences(
+    objects_by_field_set: Union[
+        Dict[FrozenSet[str], List[ftp_api.FtpPage]],
+        Dict[FrozenSet[str], List[ftp_api.FtpWork]],
+    ]
+) -> Counter[str]:
+    count: Counter[str] = collections.Counter()
+    for field_set, works in objects_by_field_set.items():
+        count.update({field: len(works) for field in field_set})
+    return count
