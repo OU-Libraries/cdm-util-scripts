@@ -86,8 +86,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -262,8 +260,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -452,8 +448,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -643,8 +637,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -834,8 +826,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -1027,8 +1017,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -1217,8 +1205,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -1407,8 +1393,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -1597,8 +1581,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -1794,8 +1776,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -1985,8 +1965,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -2169,8 +2147,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -2262,8 +2238,6 @@ interactions:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       X-Meta-Request-Version:
       - 0.7.3
       X-Powered-By:
@@ -2272,6 +2246,788 @@ interactions:
       - 9149a212-9c9a-4fa6-bd3a-896b811caff9
       X-Runtime:
       - '0.098986'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=rdElJ0VVYGDb6X%2FU6f2Csk3RXTwPXNRL8u5nWSAROKsPMZL%2FUNcxTsHH7rqUo2b3hNS%2FelaXMJ%2FF0bVbnFwqIitEAtec%2Fl64BKwQsRrYBpdejCKHxWtax%2FH9dbNufD2Sp3CRS8fjHVUwo6uD%2Fkpj0297yL2vBx71AiI3wUE7JhTzz1ZTVXw3O%2F4aYRK3Wh%2B0ym%2Bl5h7I7%2BfUl5ppIhUCsBhk%2BLE5gWsvHBuN44DchOoKAKLVatQnrsAFg%2FTYNlSyXiBpMiw7b8laulW3--NnQS4eCzTdG9Sp1v--VhJ1Svw4B99COjXmBY1zdg%3D%3D;
+        ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56195/structured/1808936
+  response:
+    body:
+      string: '{"contributors":[{"userName":"wilsone5"},{"userName":"Sandy_G"}],"data":[{"label":"Title","value":"Brooklyn
+        Adacemy of Music poster, January 18 - 30, 1972","config":"https://fromthepage.com/iiif/structured/config/field/2593"},{"label":"Title
+        format: (name of performance if known or name of hosting organization) poster,
+        (venue or location (city, state or country)), (name of dance company only
+        if name of perf. or hosting org. is not known) poster, (performance date range),
+        (year)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2594"},{"label":"Creator
+        (artist)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2595"},{"label":"Creator
+        (artist) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2596"},{"label":"Creator
+        (photographer)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2597"},{"label":"Creator
+        (photographer) if other","value":"Podolski, Michael","config":"https://fromthepage.com/iiif/structured/config/field/2598"},{"label":"Creator
+        (choreographer)","value":"Louis, Murray","config":"https://fromthepage.com/iiif/structured/config/field/2599"},{"label":"Creator
+        (choreographer) if other","value":"Nikolais, Alwin","config":"https://fromthepage.com/iiif/structured/config/field/2600"},{"label":"Dance
+        company","value":"Murray Louis Dance Company","config":"https://fromthepage.com/iiif/structured/config/field/2601"},{"label":"Dance
+        company if other","value":"Nikolais Dance Theatre","config":"https://fromthepage.com/iiif/structured/config/field/2602"},{"label":"Dance
+        title","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2603"},{"label":"Dance
+        title if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2604"},{"label":"Language","value":"English","config":"https://fromthepage.com/iiif/structured/config/field/2605"},{"label":"Date
+        created (YYYY)","value":"1972","config":"https://fromthepage.com/iiif/structured/config/field/2606"},{"label":"Rights
+        information","value":"No copyright - United States","config":"https://fromthepage.com/iiif/structured/config/field/2607"},{"label":"Transcribed
+        poster text","value":"MURRAY \r\nLOUIS\r\nALWIN\r\nNIKOLAIS\r\nDANCE COMPANIES\r\nFirst
+        time both companies on the same bill.\r\nPhoto by Michael Podolski\r\nJanuary
+        18 - 30, 1972\r\nBROOKLYN ACADEMY OF MUSIC\r\n30 Lafayette Ave., Brooklyn
+        . Tel:  783-6700 or 783-2434\r\nOrch $6.50; Mezz 6.00, 5.00; Balc 4.50, 3.50,
+        2.50.\r\nStudent rush . . . seats available.","config":"https://fromthepage.com/iiif/structured/config/field/2610"},{"label":"Description","value":"22.5
+        x 24.75 inch black-and-white poster with mirrored image of Murray Louis, Alwin
+        Nikolais and company members on rooftop. Poster advertising joint performance
+        at the Brooklyn Academy of Music, 1972.","config":"https://fromthepage.com/iiif/structured/config/field/2608"},{"label":"Description
+        format: (dimensions) (physical description \u0026 format--color, black and
+        white, mounted poster etc.) poster with (content description--briefly describe
+        prominent imagery or design elements) advertising (name of dance company)
+        performance, (year).","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2609"}],"config":"https://fromthepage.com/iiif/1073/structured/config/page","profile":"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-endpoint-response","on":{"@type":"sc:Canvas","@id":"https://fromthepage.com/iiif/56195/canvas/1808936","within":"https://fromthepage.com/iiif/56195/manifest"},"@id":"https://fromthepage.com/iiif/56195/structured/1808936","label":"Structured
+        data (field-based or spreadsheet transcriptions) for canvas","pageStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56195/1808936/status","label":"Page
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1","pageStatus":["hasTranscript"]},"workStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56195/status","label":"Work
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service","pctComplete":100.0,"pctTranscribed":100.0,"pctOcrCorrected":0.0,"pctIndexed":0,"pctMarkedBlank":0,"pctNeedsReview":0,"pctTranslationComplete":0,"pctTranslated":0,"pctTranslationNeedsReview":0,"pctTranslationIndexed":0,"pctTranslationMarkedBlank":0,"metadataStatus":"undescribed"}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 08 Sep 2022 21:36:38 GMT
+      ETag:
+      - W/"a644532d441f790e7fdc528757ebf0b9"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; path=/; expires=Fri, 09 Sep
+        2022 01:36:38 GMT; secure
+      - _fromthepage_session=IwiBm%2BDU%2FiQf%2FLewXkX%2BaCagTW3SPhM6%2FTQQBYn9pt7kTHCgKmnKbjW6iSDAOeOPSoA4vw27j7DjHEBaArMcMvoT5KX67XZv7AauDJrHPhk2Qb2AmB89%2FbsMGlEdDDbnB2sDwQiBGmbD9QcPhlNHtW0bF2jYTv6jmQVzgBYqAdCO%2F6tjbzZUt9iTMZ5Sf%2FJsS3QxP%2BCnmTnzzrL9Cz%2F87%2Fvuw4d%2Bg191c6x0e%2BNhK%2FNip7UVB1HfsHazrI3UKU%2Fcq1LC%2F7jQX9ipENK%2B--76VY%2Bhi2DCp0GIed--A2iI86vyuKZakO0CHRc00g%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - f046ac71-1347-45a8-b00f-a710424b555c
+      X-Runtime:
+      - '0.123466'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=IwiBm%2BDU%2FiQf%2FLewXkX%2BaCagTW3SPhM6%2FTQQBYn9pt7kTHCgKmnKbjW6iSDAOeOPSoA4vw27j7DjHEBaArMcMvoT5KX67XZv7AauDJrHPhk2Qb2AmB89%2FbsMGlEdDDbnB2sDwQiBGmbD9QcPhlNHtW0bF2jYTv6jmQVzgBYqAdCO%2F6tjbzZUt9iTMZ5Sf%2FJsS3QxP%2BCnmTnzzrL9Cz%2F87%2Fvuw4d%2Bg191c6x0e%2BNhK%2FNip7UVB1HfsHazrI3UKU%2Fcq1LC%2F7jQX9ipENK%2B--76VY%2Bhi2DCp0GIed--A2iI86vyuKZakO0CHRc00g%3D%3D;
+        ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56194/structured/1808935
+  response:
+    body:
+      string: '{"contributors":[{"userName":"wilsone5"},{"userName":"Sandy_G"}],"data":[{"label":"Title","value":"Charleroi
+        Danses poster, Palais des Beaux-Arts, Charleroi, Belgium, January 20, 1994","config":"https://fromthepage.com/iiif/structured/config/field/2593"},{"label":"Title
+        format: (name of performance if known or name of hosting organization) poster,
+        (venue or location (city, state or country)), (name of dance company only
+        if name of perf. or hosting org. is not known) poster, (performance date range),
+        (year)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2594"},{"label":"Creator
+        (artist)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2595"},{"label":"Creator
+        (artist) if other","value":"JP Demacq","config":"https://fromthepage.com/iiif/structured/config/field/2596"},{"label":"Creator
+        (photographer)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2597"},{"label":"Creator
+        (photographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2598"},{"label":"Creator
+        (choreographer)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2599"},{"label":"Creator
+        (choreographer) if other","value":"Louis, Murray; Nikolais, Alwin","config":"https://fromthepage.com/iiif/structured/config/field/2600"},{"label":"Dance
+        company","value":"Nikolais and Murray Louis Dance Company","config":"https://fromthepage.com/iiif/structured/config/field/2601"},{"label":"Dance
+        company if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2602"},{"label":"Dance
+        title","value":"Crucible (Choreographic work : Nikolais)","config":"https://fromthepage.com/iiif/structured/config/field/2603"},{"label":"Dance
+        title if other","value":"Mechanical Organ (Choreographic work : Nikolais);
+        Tensile involvement (Choreographic work : Nikolais); Tent (Choreographic work
+        : Nikolais)","config":"https://fromthepage.com/iiif/structured/config/field/2604"},{"label":"Language","value":"French","config":"https://fromthepage.com/iiif/structured/config/field/2605"},{"label":"Date
+        created (YYYY)","value":"1994","config":"https://fromthepage.com/iiif/structured/config/field/2606"},{"label":"Rights
+        information","value":"In copyright","config":"https://fromthepage.com/iiif/structured/config/field/2607"},{"label":"Transcribed
+        poster text","value":"CHARLEROI DANSES\r\nCentre Choregraphique de la Communaute
+        francaise de Belgique Direction artistique Frederic FLAMAND \r\nAlwin Nikolais
+        \r\nNikolais and\r\nMurray Louis \r\nCance Company\r\nCrucible (1985)\r\nMechanical
+        Organ (1980)\r\nTensile Involvement (1953)\r\nTent (1968)\r\n20-1-1994 - 20.30\r\nPALAIS
+        DES BEAUX-ARTS CHARLEROI\r\nTickets 300 bef to 900 bef\r\nReduction Carte
+        J \u0026 CLUB 001 : 30% / -25 years : 15%\r\nInfo 071/31.34.24 - Reservation
+        071/31.12.12\r\nEditeur responsable:  JP Demacq, Place du Manege - 6000 Charleroi
+        - Affichage Culturel exempt de timbre - Design by [sign''] \r\n\r\n\r\n","config":"https://fromthepage.com/iiif/structured/config/field/2610"},{"label":"Description","value":"46.5
+        x 69 inch color poster with image of dancer in costume with headpiece, advertising
+        Nikolais and Murray Louis Dance Company performance at the Palais des Beaux-Arts
+        in Charleroi, Belgium, 1994.","config":"https://fromthepage.com/iiif/structured/config/field/2608"},{"label":"Description
+        format: (dimensions) (physical description \u0026 format--color, black and
+        white, mounted poster etc.) poster with (content description--briefly describe
+        prominent imagery or design elements) advertising (name of dance company)
+        performance, (year).","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2609"}],"config":"https://fromthepage.com/iiif/1073/structured/config/page","profile":"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-endpoint-response","on":{"@type":"sc:Canvas","@id":"https://fromthepage.com/iiif/56194/canvas/1808935","within":"https://fromthepage.com/iiif/56194/manifest"},"@id":"https://fromthepage.com/iiif/56194/structured/1808935","label":"Structured
+        data (field-based or spreadsheet transcriptions) for canvas","pageStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56194/1808935/status","label":"Page
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1","pageStatus":["hasTranscript"]},"workStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56194/status","label":"Work
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service","pctComplete":100.0,"pctTranscribed":100.0,"pctOcrCorrected":0.0,"pctIndexed":0,"pctMarkedBlank":0,"pctNeedsReview":0,"pctTranslationComplete":0,"pctTranslated":0,"pctTranslationNeedsReview":0,"pctTranslationIndexed":0,"pctTranslationMarkedBlank":0,"metadataStatus":"undescribed"}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 08 Sep 2022 21:36:38 GMT
+      ETag:
+      - W/"2faf3a26a06ad6eb7bdb299276933ee8"
+      Keep-Alive:
+      - timeout=5, max=99
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; path=/; expires=Fri, 09 Sep
+        2022 01:36:38 GMT; secure
+      - _fromthepage_session=00xYsXZnWEGwaLkNeb%2Bno7fA0SE60PKZwM%2Fve8j8SwPyRavK2WkdRB5cziBI%2Bd8XuyHkxXi6kc8WSfwlB%2BTn5%2Fe6fKD6eCKHUs2RcKJbKt3bKkx4tpcaJcgsriANfxUX0B3vMdh3OXbGM3KwdGtXUCtB198D2R8XhrR2PwahYtTYzCReMyNyvMpE25ujaCfB8%2BHpXGPgiN4PqBOcb%2Bz%2BDEhKlB4v2V5x8eFzWzCYuGveTiGDvpnIrlRu%2BLLHaemGxmbb9l%2BjKFeFYQQ%2B--%2BAHxzJSSlYRyWdjy--fFHFmEOdci1i3KHys8cxFQ%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - bd4ee4f2-0fde-48f5-b354-2d6a41912fef
+      X-Runtime:
+      - '0.088176'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=00xYsXZnWEGwaLkNeb%2Bno7fA0SE60PKZwM%2Fve8j8SwPyRavK2WkdRB5cziBI%2Bd8XuyHkxXi6kc8WSfwlB%2BTn5%2Fe6fKD6eCKHUs2RcKJbKt3bKkx4tpcaJcgsriANfxUX0B3vMdh3OXbGM3KwdGtXUCtB198D2R8XhrR2PwahYtTYzCReMyNyvMpE25ujaCfB8%2BHpXGPgiN4PqBOcb%2Bz%2BDEhKlB4v2V5x8eFzWzCYuGveTiGDvpnIrlRu%2BLLHaemGxmbb9l%2BjKFeFYQQ%2B--%2BAHxzJSSlYRyWdjy--fFHFmEOdci1i3KHys8cxFQ%3D%3D;
+        ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56196/structured/1808937
+  response:
+    body:
+      string: '{"contributors":[{"userName":"wilsone5"},{"userName":"Sandy_G"}],"data":[{"label":"Title","value":"Legend
+        of the winds poster, Henry Street Playhouse, December 22 - 30, 1954","config":"https://fromthepage.com/iiif/structured/config/field/2593"},{"label":"Title
+        format: (name of performance if known or name of hosting organization) poster,
+        (venue or location (city, state or country)), (name of dance company only
+        if name of perf. or hosting org. is not known) poster, (performance date range),
+        (year)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2594"},{"label":"Creator
+        (artist)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2595"},{"label":"Creator
+        (artist) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2596"},{"label":"Creator
+        (photographer)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2597"},{"label":"Creator
+        (photographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2598"},{"label":"Creator
+        (choreographer)","value":"Nikolais, Alwin","config":"https://fromthepage.com/iiif/structured/config/field/2599"},{"label":"Creator
+        (choreographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2600"},{"label":"Dance
+        company","value":"Henry Street Playhouse Dance Company","config":"https://fromthepage.com/iiif/structured/config/field/2601"},{"label":"Dance
+        company if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2602"},{"label":"Dance
+        title","value":"Legend of the winds (Choreographic work : Nikolais)","config":"https://fromthepage.com/iiif/structured/config/field/2603"},{"label":"Dance
+        title if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2604"},{"label":"Language","value":"English","config":"https://fromthepage.com/iiif/structured/config/field/2605"},{"label":"Date
+        created (YYYY)","value":"1954","config":"https://fromthepage.com/iiif/structured/config/field/2606"},{"label":"Rights
+        information","value":"No copyright - United States","config":"https://fromthepage.com/iiif/structured/config/field/2607"},{"label":"Transcribed
+        poster text","value":"PLAYHOUSE\r\nDANCE \r\nCOMPANY\r\npresents\r\nLEGEND\r\nof
+        the\r\nWINDS\r\na new dance play for\r\nchildren and adults\r\ndirected by\r\nALWIN
+        NIKOLAIS\r\nassisted by\r\nRUTH GRAUERT\r\nfeaturing\r\nGladys Bailin\r\nPhyllis
+        Lamhut\r\nDorothy Locke\r\nBeverly Smith\r\nMurray Louis\r\nand assisting
+        dancers\r\ncostumes by Jeanne Button\r\nBenefit Premiere Performance\r\nWednesday,
+        Dec. 22, 8:30 p.m., $2.00 adm.\r\nMatinees\r\nDec. 27 through Dec. 30, 2:30
+        p. m., $1.25 adm.\r\nmail or phone reservations to,\r\nHENRY ST. PLAYHOUSE\r\n466
+        Grand St., OR 4-1100\r\nNew York 2, N. Y.\r\n\r\n","config":"https://fromthepage.com/iiif/structured/config/field/2610"},{"label":"Description","value":"17.5
+        x 24 inch color poster, sleeved in mylar. Poster with image of two penguins
+        advertising Legend of the winds performance by Playhouse Dance Company, 1954.
+        ","config":"https://fromthepage.com/iiif/structured/config/field/2608"},{"label":"Description
+        format: (dimensions) (physical description \u0026 format--color, black and
+        white, mounted poster etc.) poster with (content description--briefly describe
+        prominent imagery or design elements) advertising (name of dance company)
+        performance, (year).","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2609"}],"config":"https://fromthepage.com/iiif/1073/structured/config/page","profile":"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-endpoint-response","on":{"@type":"sc:Canvas","@id":"https://fromthepage.com/iiif/56196/canvas/1808937","within":"https://fromthepage.com/iiif/56196/manifest"},"@id":"https://fromthepage.com/iiif/56196/structured/1808937","label":"Structured
+        data (field-based or spreadsheet transcriptions) for canvas","pageStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56196/1808937/status","label":"Page
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1","pageStatus":["hasTranscript"]},"workStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56196/status","label":"Work
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service","pctComplete":100.0,"pctTranscribed":100.0,"pctOcrCorrected":0.0,"pctIndexed":0,"pctMarkedBlank":0,"pctNeedsReview":0,"pctTranslationComplete":0,"pctTranslated":0,"pctTranslationNeedsReview":0,"pctTranslationIndexed":0,"pctTranslationMarkedBlank":0,"metadataStatus":"undescribed"}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 08 Sep 2022 21:36:38 GMT
+      ETag:
+      - W/"810a462849cc0d1e7adf5ad77bfeeb1e"
+      Keep-Alive:
+      - timeout=5, max=98
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; path=/; expires=Fri, 09 Sep
+        2022 01:36:38 GMT; secure
+      - _fromthepage_session=aaYyrHgjKMh2SiUle9UGjFOQeCt07mFBlDxNwjgeKrr1xvVmikWCutgI%2BF6eG1WkY%2Fg6LGO6oLWop0ebzBSL7tQF8qmPdbRVZDcL%2BVMnh092qgYQvC6CVBVLZSLc%2FNymiwWR%2FCsArMl762klPUQ5lO%2BefHHkQxKVmWDDVoABaq7UOJwu%2BtvSQ2e9jgUZRz4nZT1OtQMt%2B320%2FuLvubpvzV214dTJ8RECsiHQx7ADCtKGul3EdiSzyPm1FwIT9CzPM8kuP%2FxQIQQDzUoh--ymhRYaSj1pVNHEBb--fkGcCJL9QSuCA6lgetS6lA%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 76c7567b-53e7-4c52-afaf-53a2565df03b
+      X-Runtime:
+      - '0.097761'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=aaYyrHgjKMh2SiUle9UGjFOQeCt07mFBlDxNwjgeKrr1xvVmikWCutgI%2BF6eG1WkY%2Fg6LGO6oLWop0ebzBSL7tQF8qmPdbRVZDcL%2BVMnh092qgYQvC6CVBVLZSLc%2FNymiwWR%2FCsArMl762klPUQ5lO%2BefHHkQxKVmWDDVoABaq7UOJwu%2BtvSQ2e9jgUZRz4nZT1OtQMt%2B320%2FuLvubpvzV214dTJ8RECsiHQx7ADCtKGul3EdiSzyPm1FwIT9CzPM8kuP%2FxQIQQDzUoh--ymhRYaSj1pVNHEBb--fkGcCJL9QSuCA6lgetS6lA%3D%3D;
+        ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56199/structured/1808941
+  response:
+    body:
+      string: '{"contributors":[{"userName":"wilsone5"},{"userName":"Sandy_G"}],"data":[{"label":"Title","value":"Maison
+        de la Culture de Rennes poster, Rennes, France, December 9, 1983 ","config":"https://fromthepage.com/iiif/structured/config/field/2593"},{"label":"Title
+        format: (name of performance if known or name of hosting organization) poster,
+        (venue or location (city, state or country)), (name of dance company only
+        if name of perf. or hosting org. is not known) poster, (performance date range),
+        (year)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2594"},{"label":"Creator
+        (artist)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2595"},{"label":"Creator
+        (artist) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2596"},{"label":"Creator
+        (photographer)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2597"},{"label":"Creator
+        (photographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2598"},{"label":"Creator
+        (choreographer)","value":"Nikolais, Alwin","config":"https://fromthepage.com/iiif/structured/config/field/2599"},{"label":"Creator
+        (choreographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2600"},{"label":"Dance
+        company","value":"Nikolais Dance Theatre","config":"https://fromthepage.com/iiif/structured/config/field/2601"},{"label":"Dance
+        company if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2602"},{"label":"Dance
+        title","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2603"},{"label":"Dance
+        title if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2604"},{"label":"Language","value":"French","config":"https://fromthepage.com/iiif/structured/config/field/2605"},{"label":"Date
+        created (YYYY)","value":"1983","config":"https://fromthepage.com/iiif/structured/config/field/2606"},{"label":"Rights
+        information","value":"No copyright - United States","config":"https://fromthepage.com/iiif/structured/config/field/2607"},{"label":"Transcribed
+        poster text","value":"ALVIN NIKOLAIS\r\nCOMPANY\r\nVENDREDI 9\r\nDECEMBRE
+        83\r\n20H30\r\ntarif:70f. adh.60f.\r\nMAISON\r\nde la CULTURE\r\nde RENNES\r\n1,Rue
+        St Helier Tel.30.30.75\r\nIMP.MCR.13\r\n\r\n","config":"https://fromthepage.com/iiif/structured/config/field/2610"},{"label":"Description","value":"11.75
+        x 26.5 inch color poster with graphic patterned image of dancer advertising
+        Alwin Nikolais company performance in Rennes, France, 1983. ","config":"https://fromthepage.com/iiif/structured/config/field/2608"},{"label":"Description
+        format: (dimensions) (physical description \u0026 format--color, black and
+        white, mounted poster etc.) poster with (content description--briefly describe
+        prominent imagery or design elements) advertising (name of dance company)
+        performance, (year).","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2609"}],"config":"https://fromthepage.com/iiif/1073/structured/config/page","profile":"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-endpoint-response","on":{"@type":"sc:Canvas","@id":"https://fromthepage.com/iiif/56199/canvas/1808941","within":"https://fromthepage.com/iiif/56199/manifest"},"@id":"https://fromthepage.com/iiif/56199/structured/1808941","label":"Structured
+        data (field-based or spreadsheet transcriptions) for canvas","pageStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56199/1808941/status","label":"Page
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1","pageStatus":["hasTranscript"]},"workStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56199/status","label":"Work
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service","pctComplete":100.0,"pctTranscribed":100.0,"pctOcrCorrected":0.0,"pctIndexed":0,"pctMarkedBlank":0,"pctNeedsReview":0,"pctTranslationComplete":0,"pctTranslated":0,"pctTranslationNeedsReview":0,"pctTranslationIndexed":0,"pctTranslationMarkedBlank":0,"metadataStatus":"undescribed"}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 08 Sep 2022 21:36:38 GMT
+      ETag:
+      - W/"bbf2f4343ec257e79d70e79ce9720392"
+      Keep-Alive:
+      - timeout=5, max=97
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; path=/; expires=Fri, 09 Sep
+        2022 01:36:38 GMT; secure
+      - _fromthepage_session=hMGZIKjFlT33VszRZYauirXqauqlfhwFBVfqjEpAGHmPrgjp3nu7XQxe7fSSpJrn62xRE7vS3Vrne%2BTFXv7qiHX6kF2TGO6dpRuw8cyGlDa%2F9aKTw10D1yv%2FHLux5vUFs9v38Bt8ah00EfLdFSA3e1TXvYt6%2FCE8AoZanm33%2FA6TL0UTZA868mxTJcpSJCA8T%2FhFnwrsUl0uW%2BnnTP7RQmQU34Yi%2FYfhPnRu7ZNyVDymuQanngi%2FggpMnmhUej5pm7YB5jry5x%2B%2BZ53T--IgvZjXTtpKd%2B6w4t--pFZvBHQ6Adx0l5qEsIPQlg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 198bf266-72a6-4693-8268-340d7b9ca0cf
+      X-Runtime:
+      - '0.086821'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=hMGZIKjFlT33VszRZYauirXqauqlfhwFBVfqjEpAGHmPrgjp3nu7XQxe7fSSpJrn62xRE7vS3Vrne%2BTFXv7qiHX6kF2TGO6dpRuw8cyGlDa%2F9aKTw10D1yv%2FHLux5vUFs9v38Bt8ah00EfLdFSA3e1TXvYt6%2FCE8AoZanm33%2FA6TL0UTZA868mxTJcpSJCA8T%2FhFnwrsUl0uW%2BnnTP7RQmQU34Yi%2FYfhPnRu7ZNyVDymuQanngi%2FggpMnmhUej5pm7YB5jry5x%2B%2BZ53T--IgvZjXTtpKd%2B6w4t--pFZvBHQ6Adx0l5qEsIPQlg%3D%3D;
+        ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56200/structured/1808942
+  response:
+    body:
+      string: '{"contributors":[{"userName":"wilsone5"},{"userName":"Sandy_G"}],"data":[{"label":"Title","value":"Rallye
+        Drouot poster, Mulhouse, France, June 12, 1976 ","config":"https://fromthepage.com/iiif/structured/config/field/2593"},{"label":"Title
+        format: (name of performance if known or name of hosting organization) poster,
+        (venue or location (city, state or country)), (name of dance company only
+        if name of perf. or hosting org. is not known) poster, (performance date range),
+        (year)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2594"},{"label":"Creator
+        (artist)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2595"},{"label":"Creator
+        (artist) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2596"},{"label":"Creator
+        (photographer)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2597"},{"label":"Creator
+        (photographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2598"},{"label":"Creator
+        (choreographer)","value":"Nikolais, Alwin","config":"https://fromthepage.com/iiif/structured/config/field/2599"},{"label":"Creator
+        (choreographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2600"},{"label":"Dance
+        company","value":"Nikolais Dance Theatre","config":"https://fromthepage.com/iiif/structured/config/field/2601"},{"label":"Dance
+        company if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2602"},{"label":"Dance
+        title","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2603"},{"label":"Dance
+        title if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2604"},{"label":"Language","value":"French","config":"https://fromthepage.com/iiif/structured/config/field/2605"},{"label":"Date
+        created (YYYY)","value":"1976","config":"https://fromthepage.com/iiif/structured/config/field/2606"},{"label":"Rights
+        information","value":"No copyright - United States","config":"https://fromthepage.com/iiif/structured/config/field/2607"},{"label":"Transcribed
+        poster text","value":"NIKOLAIS\r\nDANCE THEATRE\r\nSamedi 12 Juin a 21 h\r\nRallye
+        Drouot - Mulhouse\r\nlocation: AMC 7 Rue Alfred Engel\r\nImprimerie LIEHR
+        - Illzach\r\n","config":"https://fromthepage.com/iiif/structured/config/field/2610"},{"label":"Description","value":"11.75
+        x 23.75 inch color poster with image of graphic patterned dancer advertising
+        Nikolais Dance Theatre performance in Mulhouse, France, 1976.","config":"https://fromthepage.com/iiif/structured/config/field/2608"},{"label":"Description
+        format: (dimensions) (physical description \u0026 format--color, black and
+        white, mounted poster etc.) poster with (content description--briefly describe
+        prominent imagery or design elements) advertising (name of dance company)
+        performance, (year).","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2609"}],"config":"https://fromthepage.com/iiif/1073/structured/config/page","profile":"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-endpoint-response","on":{"@type":"sc:Canvas","@id":"https://fromthepage.com/iiif/56200/canvas/1808942","within":"https://fromthepage.com/iiif/56200/manifest"},"@id":"https://fromthepage.com/iiif/56200/structured/1808942","label":"Structured
+        data (field-based or spreadsheet transcriptions) for canvas","pageStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56200/1808942/status","label":"Page
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1","pageStatus":["hasTranscript"]},"workStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56200/status","label":"Work
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service","pctComplete":100.0,"pctTranscribed":100.0,"pctOcrCorrected":0.0,"pctIndexed":0,"pctMarkedBlank":0,"pctNeedsReview":0,"pctTranslationComplete":0,"pctTranslated":0,"pctTranslationNeedsReview":0,"pctTranslationIndexed":0,"pctTranslationMarkedBlank":0,"metadataStatus":"undescribed"}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 08 Sep 2022 21:36:38 GMT
+      ETag:
+      - W/"46330c89347907e40cb1db4c500dfda3"
+      Keep-Alive:
+      - timeout=5, max=96
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; path=/; expires=Fri, 09 Sep
+        2022 01:36:38 GMT; secure
+      - _fromthepage_session=U1%2BW7IldOR5a9wRerVQzoP1lKeL4zfz7aLYrMWcih%2F0rmu6XR7fCP8cNuAXs4d0LtptukBoldqUPM6mhqpiehqnBX6Ul1UjMSBiu1usP3oC8GCLLZk5wqY9uIwn4DcMtA86MQSWGYMIPLsccahVhTS%2FCc6eNJLV%2BLYwu6YLhDhPdwIUNyn9P%2FdTmNx7DgpEnQhhi0NgAA0cQtkFdbjHH8%2B56aGvAqxnLOTogKPsL%2FXxHWxmyTHyfTQCvfYcovQlmxF0kdBWF7kUvuZ63--bcq2Mna3%2FH5ktk5D--QArUInBfietQZupcz7gAbg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - f6b74e0a-4c95-4095-95c8-095f74d891db
+      X-Runtime:
+      - '0.089429'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=U1%2BW7IldOR5a9wRerVQzoP1lKeL4zfz7aLYrMWcih%2F0rmu6XR7fCP8cNuAXs4d0LtptukBoldqUPM6mhqpiehqnBX6Ul1UjMSBiu1usP3oC8GCLLZk5wqY9uIwn4DcMtA86MQSWGYMIPLsccahVhTS%2FCc6eNJLV%2BLYwu6YLhDhPdwIUNyn9P%2FdTmNx7DgpEnQhhi0NgAA0cQtkFdbjHH8%2B56aGvAqxnLOTogKPsL%2FXxHWxmyTHyfTQCvfYcovQlmxF0kdBWF7kUvuZ63--bcq2Mna3%2FH5ktk5D--QArUInBfietQZupcz7gAbg%3D%3D;
+        ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56197/structured/1808938
+  response:
+    body:
+      string: "{\"contributors\":[{\"userName\":\"wilsone5\"},{\"userName\":\"Sandy_G\"}],\"data\":[{\"label\":\"Title\",\"value\":\"Murray
+        Louis and Nikolais Dance poster, Patras, Greece, July 19, 1999\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2593\"},{\"label\":\"Title
+        format: (name of performance if known or name of hosting organization) poster,
+        (venue or location (city, state or country)), (name of dance company only
+        if name of perf. or hosting org. is not known) poster, (performance date range),
+        (year)\",\"value\":\"\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2594\"},{\"label\":\"Creator
+        (artist)\",\"value\":\"\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2595\"},{\"label\":\"Creator
+        (artist) if other\",\"value\":\"\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2596\"},{\"label\":\"Creator
+        (photographer)\",\"value\":\"\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2597\"},{\"label\":\"Creator
+        (photographer) if other\",\"value\":\"\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2598\"},{\"label\":\"Creator
+        (choreographer)\",\"value\":\"\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2599\"},{\"label\":\"Creator
+        (choreographer) if other\",\"value\":\"\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2600\"},{\"label\":\"Dance
+        company\",\"value\":\"Nikolais and Murray Louis Dance Company\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2601\"},{\"label\":\"Dance
+        company if other\",\"value\":\"\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2602\"},{\"label\":\"Dance
+        title\",\"value\":\"\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2603\"},{\"label\":\"Dance
+        title if other\",\"value\":\"\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2604\"},{\"label\":\"Language\",\"value\":\"English;
+        Greek\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2605\"},{\"label\":\"Date
+        created (YYYY)\",\"value\":\"1999\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2606\"},{\"label\":\"Rights
+        information\",\"value\":\"In copyright\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2607\"},{\"label\":\"Transcribed
+        poster text\",\"value\":\"\u0394\u0397\u039C\u039F\u03A3 \u03A0\u0391\u03A4\u03A1\u0395\u03A9\u039D\\r\\n\u0394IE\u0398NE\u03A3
+        \u03A6E\u03A3TIBA\u039B \u03A0ATPA\u03A3\\r\\nMurray Louis and Nikolais Dance\\r\\nAPXAIO
+        \u03A9\u0394EIO\\r\\n\u0394EYTEPA 19-7-1999 \u03A9PA 21.30    \",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2610\"},{\"label\":\"Description\",\"value\":\"18
+        x 24.75 inch color poster with image of dancers in costume joining hands.
+        Poster advertising Nikolais and Murray Louis Dance Company performance in
+        Patras, Greece, 1999.\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2608\"},{\"label\":\"Description
+        format: (dimensions) (physical description \\u0026 format--color, black and
+        white, mounted poster etc.) poster with (content description--briefly describe
+        prominent imagery or design elements) advertising (name of dance company)
+        performance, (year).\",\"value\":\"\",\"config\":\"https://fromthepage.com/iiif/structured/config/field/2609\"}],\"config\":\"https://fromthepage.com/iiif/1073/structured/config/page\",\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-endpoint-response\",\"on\":{\"@type\":\"sc:Canvas\",\"@id\":\"https://fromthepage.com/iiif/56197/canvas/1808938\",\"within\":\"https://fromthepage.com/iiif/56197/manifest\"},\"@id\":\"https://fromthepage.com/iiif/56197/structured/1808938\",\"label\":\"Structured
+        data (field-based or spreadsheet transcriptions) for canvas\",\"pageStatus\":{\"@context\":\"http://www.fromthepage.org/jsonld/1/context.json\",\"@id\":\"https://fromthepage.com/iiif/56197/1808938/status\",\"label\":\"Page
+        Status\",\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1\",\"pageStatus\":[\"hasTranscript\"]},\"workStatus\":{\"@context\":\"http://www.fromthepage.org/jsonld/1/context.json\",\"@id\":\"https://fromthepage.com/iiif/56197/status\",\"label\":\"Work
+        Status\",\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service\",\"pctComplete\":100.0,\"pctTranscribed\":100.0,\"pctOcrCorrected\":0.0,\"pctIndexed\":0,\"pctMarkedBlank\":0,\"pctNeedsReview\":0,\"pctTranslationComplete\":0,\"pctTranslated\":0,\"pctTranslationNeedsReview\":0,\"pctTranslationIndexed\":0,\"pctTranslationMarkedBlank\":0,\"metadataStatus\":\"undescribed\"}}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 08 Sep 2022 21:36:38 GMT
+      ETag:
+      - W/"204ebd9c679107749e0c948f3c6e1425"
+      Keep-Alive:
+      - timeout=5, max=95
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; path=/; expires=Fri, 09 Sep
+        2022 01:36:38 GMT; secure
+      - _fromthepage_session=jGwKWyK9GOggUUfq6fGYMauxbidkYIR30wYi7iRJzxIyEq7%2FcGIlOS5OZBv0W7CwGF3T6F7kVneTZSkX0y08yNNkGwXQHcADqmpxT3YfI0%2B9qFylcd3qfI5ddwDuPnHMyPaPi89ZelrW%2FVWybD1OEbKfSTZSAc%2BsaKqRwKVzgTTDHQvNP77%2FOz8SXPfHMG8SemyPrWAINn1YHec1iM9eXDnj3vZ%2FylPBCUlJ564sk%2B99cMbMrtxY1Va0gn2zNiydwndwRGH%2BWSC3XLlw--CdbMV4rCm81RZfGd--QyF0FreH0Ghj1clq4xMAuQ%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - fa7d3755-7a6e-4327-ac7a-d6a91f5ed70d
+      X-Runtime:
+      - '0.086458'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=jGwKWyK9GOggUUfq6fGYMauxbidkYIR30wYi7iRJzxIyEq7%2FcGIlOS5OZBv0W7CwGF3T6F7kVneTZSkX0y08yNNkGwXQHcADqmpxT3YfI0%2B9qFylcd3qfI5ddwDuPnHMyPaPi89ZelrW%2FVWybD1OEbKfSTZSAc%2BsaKqRwKVzgTTDHQvNP77%2FOz8SXPfHMG8SemyPrWAINn1YHec1iM9eXDnj3vZ%2FylPBCUlJ564sk%2B99cMbMrtxY1Va0gn2zNiydwndwRGH%2BWSC3XLlw--CdbMV4rCm81RZfGd--QyF0FreH0Ghj1clq4xMAuQ%3D%3D;
+        ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56202/structured/1808944
+  response:
+    body:
+      string: '{"contributors":[{"userName":"wilsone5"},{"userName":"Sandy_G"}],"data":[{"label":"Title","value":"Teatro
+        Duse poster, Bologna, Italy, November 28-29, 2006  ","config":"https://fromthepage.com/iiif/structured/config/field/2593"},{"label":"Title
+        format: (name of performance if known or name of hosting organization) poster,
+        (venue or location (city, state or country)), (name of dance company only
+        if name of perf. or hosting org. is not known) poster, (performance date range),
+        (year)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2594"},{"label":"Creator
+        (artist)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2595"},{"label":"Creator
+        (artist) if other","value":"Grafiche Baroncini","config":"https://fromthepage.com/iiif/structured/config/field/2596"},{"label":"Creator
+        (photographer)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2597"},{"label":"Creator
+        (photographer) if other","value":"Hayes, F.; Herridge, B.","config":"https://fromthepage.com/iiif/structured/config/field/2598"},{"label":"Creator
+        (choreographer)","value":"Nikolais, Alwin","config":"https://fromthepage.com/iiif/structured/config/field/2599"},{"label":"Creator
+        (choreographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2600"},{"label":"Dance
+        company","value":"Nikolais Dance Theatre","config":"https://fromthepage.com/iiif/structured/config/field/2601"},{"label":"Dance
+        company if other","value":"Ririe-Woodbury Dance Company","config":"https://fromthepage.com/iiif/structured/config/field/2602"},{"label":"Dance
+        title","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2603"},{"label":"Dance
+        title if other","value":"Mechanical organ (Choreographic work : Nikolais);
+        Noumenon mobilus (Choreographic work : Nikolais); Tensile involvement (Choreographic
+        work : Nikolais); Tent (Choreographic work : Nikolais)","config":"https://fromthepage.com/iiif/structured/config/field/2604"},{"label":"Language","value":"English;
+        Italian","config":"https://fromthepage.com/iiif/structured/config/field/2605"},{"label":"Date
+        created (YYYY)","value":"2006","config":"https://fromthepage.com/iiif/structured/config/field/2606"},{"label":"Rights
+        information","value":"In copyright","config":"https://fromthepage.com/iiif/structured/config/field/2607"},{"label":"Transcribed
+        poster text","value":"TEATRO DUSE\r\nFoto F. Hayes\r\n28 29\r\nNOVEMBRE\r\nFoto
+        B. Herridge\r\nFoto B. Herridge\r\nFoto F. Hayes\r\nFoto B. Herridge\r\nNIKOLAIS
+        DANCE THEATRE\r\npresentato dalla Ririe-Woodbury Dance Company\r\nDIRETTORI
+        ARTISTICI Murray Louis \u0026 Alberto del Saz\r\nFONDATORE Alwin Nikolais\r\nCOSTUMI/ARCHIVISTA
+        Frank Garcia\r\nRirie-Woodbury Dance Company\r\nCO-DIRETTORI ARTISTICI Joan
+        Woodbury \u0026Shirley Ririe\r\nDIRETTORE ARTISTICO AGGIUNTO Charlotte Boye-Christensen\r\nBALLERINI\r\nSnezana
+        Adjanski-Vajs, Jo Blake, Erin Lehua Brown,\r\nSteven Dillon, Ai Fujii, Caine
+        Keenan, Elizabeth Kelley,\r\nT J Spaur, Brandin Steffensen, Melissa McDonald\r\nDIRETTORE
+        DI PRODUZIONE James Irvine\r\nAMMINISTRATORE DI COMPAGNIA Jena Woodbury Thompson\r\nTENSILE
+        INVOLVEMENT\r\nCoreografia, fonica, costumi e luci\r\nAlwin Nikolais\r\nInterpreti:  la
+        Compagnia\r\nNOUMENON MOBILUS\r\nCoreografia, partitura, costumi, luci\r\nAlwin
+        Nikolais\r\nInterpreti:  Jo Blake-Caine Keenan,\r\nBrandin Steffensen\r\nMECHANICAL
+        ORGAN\r\nCoreografia, partitura, costumi, luci\r\nAlwin Nikolais\r\nPartitura
+        improvvisata\r\ndel David Darling Ensemble\r\nInterpreti:  la Compagnia\r\nTENT\r\nCoreografia,
+        fonica, costumi e luci\r\nAlwin Nikolais\r\nInterpreti:  la Compagnia\r\nSTAGIONE
+        TEATRALE 2006-2007\r\nTournee italiana\r\norganizzata da ATER\r\nAssociazione
+        Teatrale\r\nEmilia Romagna\r\ncon il sostegno di\r\nARTE CULTURA SPETTACOLO\r\nARCUS\r\nTEATRO
+        DUSE\r\nvia Cartoleria, 42 - Bologna\r\nbiglietteria 051231836\r\nbiglietteria@teatroduse.it\r\nwww.teatroduse.it\r\nwww.grafichebaroncini.it\r\n\r\n","config":"https://fromthepage.com/iiif/structured/config/field/2610"},{"label":"Description","value":"12.5
+        x 26.5 color poster with one large and four small images of scenes from staged
+        Alwin Nikolais dance pieces. Poster advertising Nikolais Dance Theatre performances
+        in Bologna, Italy, 2006. ","config":"https://fromthepage.com/iiif/structured/config/field/2608"},{"label":"Description
+        format: (dimensions) (physical description \u0026 format--color, black and
+        white, mounted poster etc.) poster with (content description--briefly describe
+        prominent imagery or design elements) advertising (name of dance company)
+        performance, (year).","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2609"}],"config":"https://fromthepage.com/iiif/1073/structured/config/page","profile":"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-endpoint-response","on":{"@type":"sc:Canvas","@id":"https://fromthepage.com/iiif/56202/canvas/1808944","within":"https://fromthepage.com/iiif/56202/manifest"},"@id":"https://fromthepage.com/iiif/56202/structured/1808944","label":"Structured
+        data (field-based or spreadsheet transcriptions) for canvas","pageStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56202/1808944/status","label":"Page
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1","pageStatus":["hasTranscript"]},"workStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56202/status","label":"Work
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service","pctComplete":100.0,"pctTranscribed":100.0,"pctOcrCorrected":0.0,"pctIndexed":0,"pctMarkedBlank":0,"pctNeedsReview":0,"pctTranslationComplete":0,"pctTranslated":0,"pctTranslationNeedsReview":0,"pctTranslationIndexed":0,"pctTranslationMarkedBlank":0,"metadataStatus":"undescribed"}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 08 Sep 2022 21:36:39 GMT
+      ETag:
+      - W/"e682458760a1bbb8651deddc747ad805"
+      Keep-Alive:
+      - timeout=5, max=94
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; path=/; expires=Fri, 09 Sep
+        2022 01:36:39 GMT; secure
+      - _fromthepage_session=F2NCnou67zNIzSqA2pZb28zemOt8J5WRY%2FRyblFqVTNpOhO4n%2BT1RMzda5J99%2BGt4Ndg4n6%2Fch3L7iSNwIY%2FZ5GrLjqWHCOVl7XPfnLSPkqlw3%2B8inadKhKqu5nTGSXTQbY8AX33ZUYz12WUxpOKJxP44G01GQWSsOE1qgT7YrgBa089BioJL2MuXt24ig%2FPCQs%2F78G7qg8%2BKf8nFs3vJVwTWWGoHrWoIYLNI1xQ05xlpzXbK%2FH6A7chzC0nK%2B%2BeD80l3W0WAvr%2FMCNQ--voj8dY63GXL84Cm8--5aRcx3OLPS6FHfLV2l5zWQ%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - b08ae7e6-a959-4278-8071-ead5e6f14c37
+      X-Runtime:
+      - '0.091465'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Cookie:
+      - _fromthepage_session=F2NCnou67zNIzSqA2pZb28zemOt8J5WRY%2FRyblFqVTNpOhO4n%2BT1RMzda5J99%2BGt4Ndg4n6%2Fch3L7iSNwIY%2FZ5GrLjqWHCOVl7XPfnLSPkqlw3%2B8inadKhKqu5nTGSXTQbY8AX33ZUYz12WUxpOKJxP44G01GQWSsOE1qgT7YrgBa089BioJL2MuXt24ig%2FPCQs%2F78G7qg8%2BKf8nFs3vJVwTWWGoHrWoIYLNI1xQ05xlpzXbK%2FH6A7chzC0nK%2B%2BeD80l3W0WAvr%2FMCNQ--voj8dY63GXL84Cm8--5aRcx3OLPS6FHfLV2l5zWQ%3D%3D;
+        ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; ahoy_visitor=c0cbae71-e413-4634-93ad-07637565d2dd
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/56201/structured/1808943
+  response:
+    body:
+      string: '{"contributors":[{"userName":"wilsone5"},{"userName":"Sandy_G"}],"data":[{"label":"Title","value":"Total
+        theater production poster, Alwin Nikolais Dance Company","config":"https://fromthepage.com/iiif/structured/config/field/2593"},{"label":"Title
+        format: (name of performance if known or name of hosting organization) poster,
+        (venue or location (city, state or country)), (name of dance company only
+        if name of perf. or hosting org. is not known) poster, (performance date range),
+        (year)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2594"},{"label":"Creator
+        (artist)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2595"},{"label":"Creator
+        (artist) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2596"},{"label":"Creator
+        (photographer)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2597"},{"label":"Creator
+        (photographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2598"},{"label":"Creator
+        (choreographer)","value":"Nikolais, Alwin","config":"https://fromthepage.com/iiif/structured/config/field/2599"},{"label":"Creator
+        (choreographer) if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2600"},{"label":"Dance
+        company","value":"Nikolais Dance Theatre","config":"https://fromthepage.com/iiif/structured/config/field/2601"},{"label":"Dance
+        company if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2602"},{"label":"Dance
+        title","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2603"},{"label":"Dance
+        title if other","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2604"},{"label":"Language","value":"English","config":"https://fromthepage.com/iiif/structured/config/field/2605"},{"label":"Date
+        created (YYYY)","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2606"},{"label":"Rights
+        information","value":"Copyright Undetermined","config":"https://fromthepage.com/iiif/structured/config/field/2607"},{"label":"Transcribed
+        poster text","value":"ALWIN\r\nNIKOLAIS\r\nDANCE\r\nCO.\r\nIN A \"TOTAL THEATER\"
+        PRODUCTION\r\nNEW YORK TIMES:  \"...one of the most important\r\nmen ever
+        to hit theater dance.\"","config":"https://fromthepage.com/iiif/structured/config/field/2610"},{"label":"Description","value":"14
+        x 22 inch black-and-white poster with bold, graphic text advertising the Alwin
+        Nikolais Dance Company. ","config":"https://fromthepage.com/iiif/structured/config/field/2608"},{"label":"Description
+        format: (dimensions) (physical description \u0026 format--color, black and
+        white, mounted poster etc.) poster with (content description--briefly describe
+        prominent imagery or design elements) advertising (name of dance company)
+        performance, (year).","value":"","config":"https://fromthepage.com/iiif/structured/config/field/2609"}],"config":"https://fromthepage.com/iiif/1073/structured/config/page","profile":"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-endpoint-response","on":{"@type":"sc:Canvas","@id":"https://fromthepage.com/iiif/56201/canvas/1808943","within":"https://fromthepage.com/iiif/56201/manifest"},"@id":"https://fromthepage.com/iiif/56201/structured/1808943","label":"Structured
+        data (field-based or spreadsheet transcriptions) for canvas","pageStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56201/1808943/status","label":"Page
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service-1","pageStatus":["hasTranscript"]},"workStatus":{"@context":"http://www.fromthepage.org/jsonld/1/context.json","@id":"https://fromthepage.com/iiif/56201/status","label":"Work
+        Status","profile":"https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#service","pctComplete":100.0,"pctTranscribed":100.0,"pctOcrCorrected":0.0,"pctIndexed":0,"pctMarkedBlank":0,"pctNeedsReview":0,"pctTranslationComplete":0,"pctTranslated":0,"pctTranslationNeedsReview":0,"pctTranslationIndexed":0,"pctTranslationMarkedBlank":0,"metadataStatus":"undescribed"}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 08 Sep 2022 21:36:39 GMT
+      ETag:
+      - W/"eabb0fa7e9def15549a9027d55f45c8a"
+      Keep-Alive:
+      - timeout=5, max=93
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visit=22c7dd39-c7c7-4352-b2af-a4f490b6b449; path=/; expires=Fri, 09 Sep
+        2022 01:36:39 GMT; secure
+      - _fromthepage_session=exc3o%2FujRJyr4YewSn0e5n1OjtT6auTv9Vyl29vtJD0ZDeiFSsgA2%2BG%2FTv9eWBi%2Fj6smiUW8q%2Fa%2FVM7qfRTASM8kic58VKVPUu2vtKqTD49%2F6ARVyUd1va4ws%2BZh6m46znho%2Bkb6JEo2rZuIVih7qnJJ4OKd%2BorvgPwfJjO99QZhKNpYAMdip6cxgGMKSMksdj16wjE2jL%2BsM59riuJEl0pkydTk4wJlQ5jbFCP9ok%2FNBvLYceZfnVYPZSw9vnwZLcFTPZ9LgafuueHJ--uAOsRPmWwSwwuTaD--4LzkmC3iWuaYJq6XZB%2FsYw%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - ca0db147-3b83-47d7-967c-590bae67868a
+      X-Runtime:
+      - '0.134205'
     status:
       code: 200
       message: OK

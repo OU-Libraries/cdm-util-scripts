@@ -1,0 +1,185 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://fromthepage.com/iiif/1073/structured/config/page
+  response:
+    body:
+      string: "{\"@id\":\"https://fromthepage.com/iiif/1073/structured/config/page\",\"label\":\"Transcription
+        field configuration for Dance Posters Metadata\",\"config\":[{\"label\":\"Title\",\"input_type\":\"textarea\",\"position\":1,\"line\":1,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2593\"},{\"label\":\"Title
+        format: (name of performance if known or name of hosting organization) poster,
+        (venue or location (city, state or country)), (name of dance company only
+        if name of perf. or hosting org. is not known) poster, (performance date range),
+        (year)\",\"input_type\":\"description\",\"position\":2,\"line\":1,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2594\"},{\"label\":\"Creator
+        (artist)\",\"input_type\":\"select\",\"position\":3,\"line\":2,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2595\",\"options\":[\"\",\"Achepohl,
+        Keith\",\"Benoit\",\"Brooks, Bob\",\"Constant, George\",\"Delorme, Chr.\",\"Francis,
+        Jon\",\"Graphisme Helianthe Paris\",\"Helianthe\",\"l'atelier d'impression\",\"Lacoutte,
+        Jean Louis\",\"Lieberman\",\"Lieberman, Jerry\",\"Louis, Murray\",\"M+B Schell\",\"Margotton,
+        Alain\",\"Milano, Donati\",\"Nikolais, Alwin\",\"Pointeau\",\"Thomas, Dick\",\"Warner-Lasser
+        Associates\"]},{\"label\":\"Creator (artist) if other\",\"input_type\":\"text\",\"position\":4,\"line\":2,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2596\"},{\"label\":\"Creator
+        (photographer)\",\"input_type\":\"select\",\"position\":5,\"line\":3,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2597\",\"options\":[\"\",\"Berk,
+        Otto M.\",\"Berlin, David S.\",\"Bouchard, Thomas\",\"Caravaglia, Tom\",\"Cowan,
+        Frank\",\"Goodwin, Frances\",\"Greene, Bob\",\"Harris, Brownie, 1949-\",\"Koletzke,
+        Peter\",\"Leber, Alexander\",\"Markatos\",\"Mognaz, Guy\",\"Mognez, Guy\",\"Nikolais,
+        Alwin\",\"Oleaga, Milton\",\"Peter Koletzke\",\"Petitjean, Pierre, 1947-\",\"Powell\",\"Roth,
+        Kelly\",\"Schiff-Faludi, Susan\",\"Sosenko, Robert\",\"Takeno, Kanji\",\"Three
+        Lions\",\"Vartoogian, Jack\",\"Waldman, Max\",\"Wang\",\"Weinstock\",\"Winber,
+        Steve\"]},{\"label\":\"Creator (photographer) if other\",\"input_type\":\"text\",\"position\":6,\"line\":3,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2598\"},{\"label\":\"Creator
+        (choreographer)\",\"input_type\":\"select\",\"position\":7,\"line\":4,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2599\",\"options\":[\"\",\"Bailin,
+        Gladys\",\"Blossom, Beverly\",\"Dantzig, Rudi van\",\"Frank, Bill\",\"Lamhut,
+        Phyllis\",\"Limon, Jose\",\"Louis, Murray\",\"Martindale, Coral\",\"Nikolais,
+        Alwin\",\"Senghor, Maurice Sonar\",\"Tokunaga, Yasuko\",\"Vislocky, Dorothy\"]},{\"label\":\"Creator
+        (choreographer) if other\",\"input_type\":\"text\",\"position\":8,\"line\":4,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2600\"},{\"label\":\"Dance
+        company\",\"input_type\":\"select\",\"position\":9,\"line\":5,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2601\",\"options\":[\"\",\"Boston
+        Conservatory Dance Theater\",\"Henry Street Playhouse Dance Company\",\"Kongelige
+        Teater (Denmark)\",\"Murray Louis Dance Company\",\"Nationale Ballet (Netherlands)\",\"Nikolais
+        and Murray Louis Dance Company\",\"Nikolais Dance Theatre\",\"Ririe-Woodbury
+        Dance Company\",\"The Boston Conservatory Dance Theater\",\"Young Peoples
+        Theatre Company\"]},{\"label\":\"Dance company if other\",\"input_type\":\"text\",\"position\":10,\"line\":5,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2602\"},{\"label\":\"Dance
+        title\",\"input_type\":\"select\",\"position\":11,\"line\":6,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2603\",\"options\":[\"\",\"About
+        a dark house (Choreographic work : Dantzig)\",\"Aladdin (Choreographic work
+        : Louis)\",\"Allegory (Choreographic work : Nikolais)\",\"Antechamber (Choreographic
+        work : Louis)\",\"Ap\xE9ritif (Choreographic work : Louis)\",\"Aqueouscope
+        (Choreographic work : Nikolais)\",\"Arporisms (Choreographic work : Nikolais)\",\"Asides
+        (Choreographic work : Louis)\",\"Aurora (Choreographic work : Nikolais)\",\"Aviary
+        (Choreographic work : Nikolais)\",\"Bach II (Choreographic work : Louis)\",\"Bach
+        suite (Choreographic work : Louis)\",\"Belonging to the moon (Choreographic
+        work : Louis)\",\"Bewitched (Choreographic work : Nikolais)\",\"Black traveler
+        (Choreographic work : Schmidt)\",\"Blank on blank (Choreographic work : Nikolais)\",\"Blue
+        streak (Choreographic work : Louis)\",\"Broken mirror (Choreographic work
+        : Louis)\",\"Calligraph for martyrs (Choreographic work : Louis)\",\"Canarsie
+        Venus (Choreographic work : Louis)\",\"Castings (Choreographic work : Nikolais)\",\"Catalogue
+        (Choreographic work : Louis)\",\"Ceremony (Choreographic work : Louis)\",\"Charade
+        (Choreographic work : Louis)\",\"Choros I (Choreographic work : Louis)\",\"Circus
+        dance (Choreographic work : Charmoli)\",\"City (Choreographic work : Louis)\",\"Cleopatra
+        (Choreographic work : Louis)\",\"Concerto (Choreographic work : Louis)\",\"Contact
+        (Choreographic work : Nikolais)\",\"Continuum (Choreographic work : Louis,
+        M)\",\"Corrida (Choreographic work : Louis)\",\"Count down (Choreographic
+        work : Nikolais)\",\"Cross-fade (Choreographic work : Nikolais)\",\"Crucible
+        (Choreographic work : Nikolais)\",\"Da la terre de pug (Choreographic work
+        : Louis)\",\"Dance in silver and blue (Choreographic work : Louis)\",\"Decorating
+        the Xmas tree (Choreographic work : Nikolais)\",\"De\u0301ja\u0300 vu (Choreographic
+        work : Louis)\",\"Disenchantment of Pierrot (Choreographic work : Louis)\",\"Disguise
+        (Choreographic work : Louis)\",\"Echo (Choreographic work : Nikolais)\",\"Entre-acte
+        (Choreographic work : Louis)\",\"Extrados (Choreographic work : Nikolais)\",\"Fable
+        of the donkey (Choreographic work : Nikolais)\",\"Facets (Choreographic work
+        : Louis)\",\"Faun (Choreographic work : Schayk)\",\"Figura (Choreographic
+        work : Louis)\",\"Fine line (Choreographic work : Louis)\",\"Five haikus (Choreographic
+        work : Louis)\",\"Foreplay (Choreographic work : Nikolais)\",\"Four Brubeck
+        pieces (Choreographic work : Louis)\",\"Four last songs (Choreographic work
+        : Dantzig)\",\"Frail demons (Choreographic work : Louis)\",\"Fusion (Choreographic
+        work : Nikolais)\",\"Galaxy (Choreographic work : Nikolais)\",\"Gallery (Choreographic
+        work : Nikolais)\",\"Geometrics (Choreographic work : Louis)\",\"Glances (Choreographic
+        work : Louis)\",\"Go 6 (Choreographic work : Louis)\",\"Go seven (Choreographic
+        work : Louis)\",\"Gothic tale (Choreographic work : Louis)\",\"Graph (Choreographic
+        work : Nikolais)\",\"Grotto (Choreographic work : Nikolais)\",\"Guignol (Choreographic
+        work : Nikolais)\",\"Harmonica suite (Choreographic work : Louis)\",\"Hollow
+        lady (Choreographic work : Nikolais)\",\"Hoopla (Choreographic work : Louis,
+        M)\",\"Illume (Choreographic work : Louis)\",\"Imago (Choreographic work :
+        Nikolais)\",\"Index (to necessary neuroses...) (Choreographic work : Louis)\",\"Interims
+        (Choreographic work : Louis)\",\"Intersection (Choreographic work : Louis)\",\"Isle
+        (Choreographic work : Louis)\",\"Journal (Choreographic work : Louis)\",\"Junk
+        dances (Choreographic work : Louis)\",\"Kaleidoscope (Choreographic work :
+        Nikolais)\",\"Kyldex I (Choreographic work : Nikolais)\",\"Landscapes (Choreographic
+        work : Louis)\",\"Legend of the winds (Choreographic work : Nikolais)\",\"Lobster
+        quadrille (Choreographic work : Nikolais)\",\"Masks, props and mobiles (Choreographic
+        work : Nikolais)\",\"Mechanical organ (Choreographic work : Nikolais)\",\"Mechanical
+        organ I (Choreographic work : Nikolais)\",\"Mechanical organ II (Choreographic
+        work : Nikolais)\",\"Mirrors (Choreographic work : Nikolais)\",\"Moments (Choreographic
+        work : Louis)\",\"Moor's pavane (Choreographic work : Limo\u0301n)\",\"Nimbus
+        (Choreographic work : Nikolais)\",\"Noumenon (Choreographic work : Nikolais)\",\"Noumenon
+        mobilus (Choreographic work : Nikolais)\",\"November dances (Choreographic
+        work : Louis)\",\"Odyssey (Choreographic work : Louis)\",\"Passerelle (Choreographic
+        work : Nikolais)\",\"Pavanne (Choreographic work : Nikolais)\",\"Personnae
+        (Choreographic work : Louis, M)\",\"Persons and structures (Choreographic
+        work : Nikolais)\",\"Pindaric (Choreographic work : Schmidt)\",\"Pond (Choreographic
+        work : Nikolais)\",\"Porcelain dialogues (Choreographic work : Louis)\",\"Prism
+        (Choreographic work : Nikolais)\",\"Proximities (Choreographic work : Louis)\",\"Reflections
+        (Choreographic work : Louis)\",\"Revels (Choreographic work : Louis)\",\"Runic
+        canto (Choreographic work : Nikolais)\",\"Saint George and the dragon (Choreographic
+        work : Nikolais)\",\"Sanctum (Choreographic work : Nikolais)\",\"Scenario
+        (Choreographic work : Nikolais)\",\"Scheherazade, a dream (Choreographic work
+        : Louis)\",\"Schema (Choreographic work : Nikolais)\",\"Schubert (Choreographic
+        work : Louis)\",\"Scrolls (Choreographic work : Nikolais)\",\"Shepherdess
+        and the chimneysweep (Choreographic work : Nikolais)\",\"Signal (Choreographic
+        work : Louis)\",\"Somniloquy (Choreographic work : Nikolais)\",\"Station (Choreographic
+        work : Louis)\",\"Stratus (Choreographic work : Nikolais)\",\"Stravinsky montage
+        (Choreographic work : Louis)\",\"Structures (Choreographic work : Nikolais)\",\"Study
+        of the human figure (Choreographic work : Nikolais)\",\"Styx (Choreographic
+        work : Nikolais)\",\"Suite for divers performers (Choreographic work : Louis)\",\"Temple
+        (Choreographic work : Nikolais)\",\"Tensile involvement (Choreographic work
+        : Nikolais)\",\"Tent (Choreographic work : Nikolais)\",\"Three column line
+        (Choreographic work : Nikolais)\",\"Totem (Choreographic work : Nikolais)\",\"Transcendencies
+        (Choreographic work : Louis)\",\"Triad (Choreographic work : Nikolais)\",\"Tribe
+        (Choreographic work : Nikolais)\",\"Triptych (Choreographic work : Nikolais)\",\"Vaudeville
+        of the elements  (Choreographic work : Nikolais)\",\"Vaudeville of the elements
+        (Choreographic work : Nikolais)\",\"Video game (Choreographic work : Nikolais)\",\"Village
+        of whispers (Choreographic work : Nikolais)\",\"Vivace (Choreographic work
+        : Louis)\",\"Where phantoms gather (Choreographic work : Louis)\"]},{\"label\":\"Dance
+        title if other\",\"input_type\":\"text\",\"position\":12,\"line\":6,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2604\"},{\"label\":\"Language\",\"input_type\":\"text\",\"position\":13,\"line\":7,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2605\"},{\"label\":\"Date
+        created (YYYY)\",\"input_type\":\"text\",\"position\":14,\"line\":7,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2606\"},{\"label\":\"Rights
+        information\",\"input_type\":\"select\",\"position\":15,\"line\":7,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2607\",\"options\":[\"\",\"No
+        copyright - United States\",\"Copyright Undetermined\",\"In Copyright - Rights-holder(s)
+        Unlocatable or Unidentifiable\",\"In copyright\"]},{\"label\":\"Description\",\"input_type\":\"textarea\",\"position\":17,\"line\":8,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2608\"},{\"label\":\"Description
+        format: (dimensions) (physical description \\u0026 format--color, black and
+        white, mounted poster etc.) poster with (content description--briefly describe
+        prominent imagery or design elements) advertising (name of dance company)
+        performance, (year).\",\"input_type\":\"description\",\"position\":18,\"line\":8,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2609\"},{\"label\":\"Transcribed
+        poster text\",\"input_type\":\"textarea\",\"position\":16,\"line\":8,\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-field-configuration-response\",\"@id\":\"https://fromthepage.com/iiif/structured/config/field/2610\"}],\"profile\":\"https://github.com/benwbrum/fromthepage/wiki/Structured-Data-API-for-Harvesting-Crowdsourced-Contributions#structured-data-configuration-response\"}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, Authorization
+      Access-Control-Allow-Methods:
+      - GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - Keep-Alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 08 Sep 2022 22:25:11 GMT
+      ETag:
+      - W/"89f90d3705de34a178705cc79c9c387a"
+      Keep-Alive:
+      - timeout=5, max=100
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - ahoy_visitor=b0128a55-961a-480a-8921-e6dd29daa290; path=/; expires=Sun, 08
+        Sep 2024 22:25:11 GMT; secure
+      - ahoy_visit=780c90aa-7881-4723-935b-e01d3d88b493; path=/; expires=Fri, 09 Sep
+        2022 02:25:11 GMT; secure
+      - _fromthepage_session=vd%2BxusEHDUdvLtp%2FQl700GTwZqkxiw0yyzjpV9zm3LpxBW2%2BwqNIkGfxoInbqHyDfK8gE9YjMbEJMUpwcbDfcSSdlq4oljwR%2BrpslZpXno%2BEijF8CxhXfmZunTUINAx2c%2FMbdF30eyxK%2Bw23eu%2FjAcp0TeKPo4kfzo5VwRCuBgiQZ%2B17HQjVGrhnEuIC3o0CvbeYeyyl7478hfs%2BZPhHlpAU%2BvdgsvVashmtNAxkxQ%2FLoYTJ0vpxqSrPmqS2iIlG5D1FgUjhVV%2FJjgZ5%2FItxTw%3D%3D--UGtyVMvsp8Sd58GD--NM7fBxrXF5aAeDcd4uPjEg%3D%3D;
+        path=/; secure; HttpOnly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Meta-Request-Version:
+      - 0.7.3
+      X-Powered-By:
+      - Phusion Passenger 5.3.7
+      X-Request-Id:
+      - 895d61ef-c20b-42f8-af79-f3554c045624
+      X-Runtime:
+      - '0.037873'
+    status:
+      code: 200
+      message: OK
+version: 1

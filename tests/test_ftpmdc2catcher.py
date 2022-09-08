@@ -1,9 +1,11 @@
 import pytest
+import requests
 
 import json
 
 from cdm_util_scripts import ftpmdc2catcher
 from cdm_util_scripts import cdm_api
+from cdm_util_scripts import ftp_api
 
 
 @pytest.fixture
@@ -53,12 +55,26 @@ def dance_posters_field_mapping(tmp_path):
     return field_mapping_csv_path
 
 
+@pytest.mark.vcr
+def test_umapped_fields(dance_posters_field_mapping):
+    config = ftp_api.FtpStructuredDataConfig.from_json(
+        requests.get("https://fromthepage.com/iiif/1073/structured/config/page").json()
+    )
+    field_mapping = cdm_api.read_csv_field_mapping(dance_posters_field_mapping)
+    unmapped_configs = list(ftpmdc2catcher.unmapped_fields(config=config, field_mapping=field_mapping))
+    assert unmapped_configs[0].label.startswith("Title format:")
+    assert unmapped_configs[1].label.startswith("Description format:")
+
+
 @pytest.mark.default_cassette("farfel-leaves-metadata.yaml")
 @pytest.mark.vcr
-@pytest.mark.parametrize("level", [
-    ftpmdc2catcher.Level.AUTO,
-    ftpmdc2catcher.Level.WORK,
-])
+@pytest.mark.parametrize(
+    "level",
+    [
+        ftpmdc2catcher.Level.AUTO,
+        ftpmdc2catcher.Level.WORK,
+    ],
+)
 def test_ftpmdc2catcher_farfel(tmp_path, farfel_field_mapping, level):
     ftp_slug = "ohiouniversitylibraries"
     ftp_project_name = "Farfel Leaves Metadata"
@@ -76,15 +92,18 @@ def test_ftpmdc2catcher_farfel(tmp_path, farfel_field_mapping, level):
         edits = json.load(fp)
     for edit in edits:
         assert edit["dmrecord"].isdigit()
-        assert set(edit) == {"langua", "docume", "featur", "dmrecord"}
+        assert set(edit).issubset({"langua", "docume", "featur", "dmrecord"})
 
 
 @pytest.mark.default_cassette("dance-posters-metadata.yaml")
 @pytest.mark.vcr
-@pytest.mark.parametrize("level", [
-    ftpmdc2catcher.Level.AUTO,
-    ftpmdc2catcher.Level.PAGE,
-])
+@pytest.mark.parametrize(
+    "level",
+    [
+        ftpmdc2catcher.Level.AUTO,
+        ftpmdc2catcher.Level.PAGE,
+    ],
+)
 def test_ftpmdc2catcher_dance(tmp_path, dance_posters_field_mapping, level):
     ftp_slug = "ohiouniversitylibraries"
     ftp_project_name = "Dance Posters Metadata"
@@ -102,16 +121,19 @@ def test_ftpmdc2catcher_dance(tmp_path, dance_posters_field_mapping, level):
         edits = json.load(fp)
     for edit in edits:
         assert edit["dmrecord"].isdigit()
-        assert set(edit) == {
-            "creata",
-            "creatb",
-            "creato",
-            "dance",
-            "dancea",
-            "datea",
-            "descri",
-            "langua",
-            "rightsc",
-            "title",
-            "transc",
-        }
+        assert set(edit).issubset(
+            {
+                "dmrecord",
+                "creata",
+                "creatb",
+                "creato",
+                "dance",
+                "dancea",
+                "datea",
+                "descri",
+                "langua",
+                "rightsc",
+                "title",
+                "transc",
+            }
+        )

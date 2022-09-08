@@ -4,7 +4,7 @@ import tqdm
 import json
 import enum
 
-from typing import List, Dict
+from typing import List, Dict, Iterator
 
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
@@ -39,16 +39,27 @@ def ftpmdc2catcher(
         if level in (Level.AUTO, Level.BOTH, Level.WORK):
             work_configuration = ftp_project.request_work_structured_data_config(session=session)
             work_config_ids_to_cdm_nicks = config_ids_to_cdm_nicks(work_configuration, field_mapping)
+            has_work_configuration = bool(work_configuration.fields)
         else:
             work_configuration = None
             work_config_ids_to_cdm_nicks = None
+            has_work_configuration = None
 
         if level in (Level.AUTO, Level.BOTH, Level.PAGE):
             page_configuration = ftp_project.request_page_structured_data_config(session=session)
             page_config_ids_to_cdm_nicks = config_ids_to_cdm_nicks(page_configuration, field_mapping)
+            has_page_configuration = bool(page_configuration.fields)
         else:
             page_configuration = None
             page_config_ids_to_cdm_nicks = None
+            has_page_configuration = None
+
+        if level in (Level.BOTH, Level.WORK) or (level is Level.AUTO and has_work_configuration):
+            for field_config in unmapped_fields(work_configuration, field_mapping):
+                print(f"Unmapped work-level field: {field_config.label!r}")
+        if level in (Level.BOTH, Level.PAGE) or (level is Level.AUTO and has_page_configuration):
+            for field_config in unmapped_fields(page_configuration, field_mapping):
+                print(f"Unmapped page-level field: {field_config.label!r}")
 
         if level in (Level.BOTH, Level.WORK) and not work_config_ids_to_cdm_nicks:
             raise ValueError("unable to map FromThePage work-level fields to CONTENTdm nicks")
@@ -91,12 +102,23 @@ def config_ids_to_cdm_nicks(
     return {labels_to_config_ids[name]: nicks for name, nicks in field_mapping.items()}
 
 
+def unmapped_fields(
+    config: ftp_api.FtpStructuredDataConfig, field_mapping: Dict[str, List[str]]
+) -> Iterator[ftp_api.FtpStructuredDataFieldConfig]:
+    mapped_labels = set(label for label, nicks in field_mapping.items() if nicks)
+    for field_config in config.fields:
+        if field_config.label not in mapped_labels:
+            yield field_config
+
+
 def structured_data_to_catcher_edit(
     dmrecord: str, data: ftp_api.FtpStructuredData, ids_to_nicks: Dict[str, List[str]]
 ) -> Dict[str, str]:
     edit = {"dmrecord": dmrecord}
     for field_data in data.data:
         config_id = field_data.config
+        if config_id not in ids_to_nicks:
+            continue
         nicks = ids_to_nicks[config_id]
         value = field_data.value
         value = value if isinstance(value, str) else "; ".join(value)
