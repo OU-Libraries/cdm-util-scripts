@@ -61,7 +61,9 @@ def test_umapped_fields(dance_posters_field_mapping):
         requests.get("https://fromthepage.com/iiif/1073/structured/config/page").json()
     )
     field_mapping = cdm_api.read_csv_field_mapping(dance_posters_field_mapping)
-    unmapped_configs = list(ftpmdc2catcher.unmapped_fields(config=config, field_mapping=field_mapping))
+    unmapped_configs = list(
+        ftpmdc2catcher.unmapped_fields(config=config, field_mapping=field_mapping)
+    )
     assert unmapped_configs[0].label.startswith("Title format:")
     assert unmapped_configs[1].label.startswith("Description format:")
 

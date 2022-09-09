@@ -32,13 +32,17 @@ def ftpmdc2catcher(
             instance_url=ftp_api.FTP_HOSTED_URL,
             slug=ftp_slug,
             project_label=ftp_project_name,
-            session=session
+            session=session,
         )
 
         print("Requesting structured data configuration...")
         if level in (Level.AUTO, Level.BOTH, Level.WORK):
-            work_configuration = ftp_project.request_work_structured_data_config(session=session)
-            work_config_ids_to_cdm_nicks = config_ids_to_cdm_nicks(work_configuration, field_mapping)
+            work_configuration = ftp_project.request_work_structured_data_config(
+                session=session
+            )
+            work_config_ids_to_cdm_nicks = config_ids_to_cdm_nicks(
+                work_configuration, field_mapping
+            )
             has_work_configuration = bool(work_configuration.fields)
         else:
             work_configuration = None
@@ -46,25 +50,37 @@ def ftpmdc2catcher(
             has_work_configuration = None
 
         if level in (Level.AUTO, Level.BOTH, Level.PAGE):
-            page_configuration = ftp_project.request_page_structured_data_config(session=session)
-            page_config_ids_to_cdm_nicks = config_ids_to_cdm_nicks(page_configuration, field_mapping)
+            page_configuration = ftp_project.request_page_structured_data_config(
+                session=session
+            )
+            page_config_ids_to_cdm_nicks = config_ids_to_cdm_nicks(
+                page_configuration, field_mapping
+            )
             has_page_configuration = bool(page_configuration.fields)
         else:
             page_configuration = None
             page_config_ids_to_cdm_nicks = None
             has_page_configuration = None
 
-        if level in (Level.BOTH, Level.WORK) or (level is Level.AUTO and has_work_configuration):
+        if level in (Level.BOTH, Level.WORK) or (
+            level is Level.AUTO and has_work_configuration
+        ):
             for field_config in unmapped_fields(work_configuration, field_mapping):
                 print(f"Unmapped work-level field: {field_config.label!r}")
-        if level in (Level.BOTH, Level.PAGE) or (level is Level.AUTO and has_page_configuration):
+        if level in (Level.BOTH, Level.PAGE) or (
+            level is Level.AUTO and has_page_configuration
+        ):
             for field_config in unmapped_fields(page_configuration, field_mapping):
                 print(f"Unmapped page-level field: {field_config.label!r}")
 
         if level in (Level.BOTH, Level.WORK) and not work_config_ids_to_cdm_nicks:
-            raise ValueError("unable to map FromThePage work-level fields to CONTENTdm nicks")
+            raise ValueError(
+                "unable to map FromThePage work-level fields to CONTENTdm nicks"
+            )
         if level in (Level.BOTH, Level.PAGE) and not page_config_ids_to_cdm_nicks:
-            raise ValueError("unable to map FromThePage page-level fields to CONTENTdm nicks")
+            raise ValueError(
+                "unable to map FromThePage page-level fields to CONTENTdm nicks"
+            )
         if not work_config_ids_to_cdm_nicks and not page_config_ids_to_cdm_nicks:
             raise ValueError("unable to map any FromThePage fields to CONTENTdm nicks")
 
@@ -83,7 +99,7 @@ def ftpmdc2catcher(
                 edit = structured_data_to_catcher_edit(
                     dmrecord=ftp_work.cdm_object_dmrecord,
                     data=ftp_work.request_structured_data(session=session),
-                    ids_to_nicks=work_config_ids_to_cdm_nicks
+                    ids_to_nicks=work_config_ids_to_cdm_nicks,
                 )
                 edits.append(edit)
 

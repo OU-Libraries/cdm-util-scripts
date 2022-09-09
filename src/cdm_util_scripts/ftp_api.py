@@ -12,7 +12,9 @@ from typing import List, Dict, Any, Tuple, Optional, NamedTuple, Union, NewType
 FTP_HOSTED_URL = "https://fromthepage.com"
 
 
-FtpFieldBasedTranscription = NewType("FtpFieldBasedTranscription", List[Optional[Dict[str, str]]])
+FtpFieldBasedTranscription = NewType(
+    "FtpFieldBasedTranscription", List[Optional[Dict[str, str]]]
+)
 
 
 @dataclass
@@ -46,9 +48,7 @@ class FtpProjectCollection:
             ],
         )
 
-    def request_project(
-        self, label: str, session: requests.Session
-    ) -> "FtpProject":
+    def request_project(self, label: str, session: requests.Session) -> "FtpProject":
         for project in self.projects:
             if project.label == label:
                 project.request(session=session)
@@ -89,9 +89,7 @@ class FtpProject:
         self.url = json["@id"]
         self.__post_init__()
         self.label = json["label"]
-        self.works = [
-            FtpWork.from_json(manifest) for manifest in json["manifests"]
-        ]
+        self.works = [FtpWork.from_json(manifest) for manifest in json["manifests"]]
 
     def request_works(
         self, session: requests.Session, show_progress: bool = True
@@ -124,7 +122,9 @@ class FtpProject:
 def _request_structured_data_configuration(
     instance_url: str, project_id: str, level: str, session: requests.Session
 ) -> "FtpStructuredDataConfig":
-    response = session.get(f"{instance_url}/iiif/{project_id}/structured/config/{level}")
+    response = session.get(
+        f"{instance_url}/iiif/{project_id}/structured/config/{level}"
+    )
     response.raise_for_status()
     return FtpStructuredDataConfig.from_json(response.json())
 
@@ -253,12 +253,18 @@ class FtpWork:
         return response.text
 
     def request_transcript_fields(
-            self, session: requests.Session, label: str = "XHTML Export", empty_page_is_none: bool = True
+        self,
+        session: requests.Session,
+        label: str = "XHTML Export",
+        empty_page_is_none: bool = True,
     ) -> FtpFieldBasedTranscription:
         raw_rendering = self.request_rendering(label=label, session=session)
         field_based_transcription = RENDERING_EXTRACTORS[label](raw_rendering)
         if empty_page_is_none:
-            return [fields if fields and any(fields.values()) else None for fields in field_based_transcription]
+            return [
+                fields if fields and any(fields.values()) else None
+                for fields in field_based_transcription
+            ]
         return field_based_transcription
 
     def request_structured_data(self, session: requests.Session) -> "FtpStructuredData":

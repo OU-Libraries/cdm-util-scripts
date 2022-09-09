@@ -20,7 +20,9 @@ def ftp_work():
 def test_FtpInstance_request_projects():
     instance = ftp_api.FtpInstance(url="https://fromthepage.com/")
     with requests.Session() as session:
-        projects = instance.request_projects(slug="ohiouniversitylibraries", session=session)
+        projects = instance.request_projects(
+            slug="ohiouniversitylibraries", session=session
+        )
     for project in projects.projects:
         assert project.label
         assert project.url.startswith("http")
@@ -31,8 +33,12 @@ def test_FtpInstance_request_projects():
 def test_FtpProjectCollection_request_project():
     instance = ftp_api.FtpInstance(url="https://fromthepage.com/")
     with requests.Session() as session:
-        projects = instance.request_projects(slug="ohiouniversitylibraries", session=session)
-        project = projects.request_project(label="Dance Posters Metadata", session=session)
+        projects = instance.request_projects(
+            slug="ohiouniversitylibraries", session=session
+        )
+        project = projects.request_project(
+            label="Dance Posters Metadata", session=session
+        )
     assert project.project_id == "dance-posters-metadata"
     for work in project.works:
         assert work.url
@@ -46,8 +52,12 @@ def test_FtpProjectCollection_request_project():
 def test_FtpProject_requests_works():
     instance = ftp_api.FtpInstance(url="https://fromthepage.com/")
     with requests.Session() as session:
-        projects = instance.request_projects(slug="ohiouniversitylibraries", session=session)
-        project = projects.request_project(label="Dance Posters Metadata", session=session)
+        projects = instance.request_projects(
+            slug="ohiouniversitylibraries", session=session
+        )
+        project = projects.request_project(
+            label="Dance Posters Metadata", session=session
+        )
         project.request_works(session=session)
     for work in project.works:
         assert work.metadata
@@ -78,7 +88,13 @@ def test_FtpWork_request():
     with requests.Session() as session:
         work.request(session=session)
     assert work.label == work.metadata["Title"]
-    assert {rendering.label for rendering in work.renderings} == {"Verbatim Plaintext", "Emended Plaintext", "Searchable Plaintext", "XHTML Export", "TEI Export"}
+    assert {rendering.label for rendering in work.renderings} == {
+        "Verbatim Plaintext",
+        "Emended Plaintext",
+        "Searchable Plaintext",
+        "XHTML Export",
+        "TEI Export",
+    }
     for page in work.pages:
         assert page.id_
         assert page.label
@@ -92,7 +108,9 @@ def test_FtpWork_request():
 @pytest.mark.vcr
 def test_FtpWork_request_rendering(ftp_work):
     with requests.Session() as session:
-        plaintext = ftp_work.request_rendering(label="Verbatim Plaintext", session=session)
+        plaintext = ftp_work.request_rendering(
+            label="Verbatim Plaintext", session=session
+        )
     assert plaintext.startswith("Title: ")
 
 
@@ -100,12 +118,19 @@ def test_FtpWork_request_rendering(ftp_work):
 @pytest.mark.vcr
 def test_FtpWork_request_transcript_fields(ftp_work):
     with requests.Session() as session:
-        xhtml_fields = ftp_work.request_transcript_fields(session=session, label="XHTML Export")
-        tei_fields = ftp_work.request_transcript_fields(session=session, label="TEI Export")
+        xhtml_fields = ftp_work.request_transcript_fields(
+            session=session, label="XHTML Export"
+        )
+        tei_fields = ftp_work.request_transcript_fields(
+            session=session, label="TEI Export"
+        )
     assert xhtml_fields == tei_fields
     assert len(xhtml_fields) == 1
     xhtml_page = xhtml_fields[0]
-    assert xhtml_page["Title"] == "Nothing else like it in the world poster, Nikolais Dance Theatre"
+    assert (
+        xhtml_page["Title"]
+        == "Nothing else like it in the world poster, Nikolais Dance Theatre"
+    )
     assert xhtml_page["Creator (artist)"] == "Warner-Lasser Associates"
     assert xhtml_page["Creator (artist) if other"] == ""
 
@@ -113,7 +138,9 @@ def test_FtpWork_request_transcript_fields(ftp_work):
 @pytest.mark.vcr
 def test_FtpWork_request_structured_data():
     with requests.Session() as session:
-        work = ftp_api.FtpWork(url="https://fromthepage.com/iiif/32024760/manifest", label="Test label")
+        work = ftp_api.FtpWork(
+            url="https://fromthepage.com/iiif/32024760/manifest", label="Test label"
+        )
         work.request(session=session)
         structured_data = work.request_structured_data(session=session)
     assert structured_data.contributors
@@ -127,14 +154,29 @@ def test_FtpWork_request_structured_data():
 @pytest.mark.vcr
 def test_FtpPage_request_transcript(ftp_work):
     with requests.Session() as session:
-        transcript = ftp_work.pages[0].request_transcript(label="Verbatim Plaintext", session=session)
+        transcript = ftp_work.pages[0].request_transcript(
+            label="Verbatim Plaintext", session=session
+        )
     assert transcript.startswith("Title: ")
 
 
-@pytest.mark.parametrize("url,instance_url,alias,dmrecord", [
-    ("https://cdm15808.contentdm.oclc.org/iiif/mss:188/canvas/c1", "https://cdm15808.contentdm.oclc.org", "mss", "188"),
-    ("https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll19/1959/canvas/c0", "https://cdm15808.contentdm.oclc.org", "p15808coll19", "1959"),
-    ("https://fromthepage.com/iiif/46450/canvas/1503033", None, None, None),
-])
+@pytest.mark.parametrize(
+    "url,instance_url,alias,dmrecord",
+    [
+        (
+            "https://cdm15808.contentdm.oclc.org/iiif/mss:188/canvas/c1",
+            "https://cdm15808.contentdm.oclc.org",
+            "mss",
+            "188",
+        ),
+        (
+            "https://cdm15808.contentdm.oclc.org/digital/iiif/p15808coll19/1959/canvas/c0",
+            "https://cdm15808.contentdm.oclc.org",
+            "p15808coll19",
+            "1959",
+        ),
+        ("https://fromthepage.com/iiif/46450/canvas/1503033", None, None, None),
+    ],
+)
 def test_parse_ftp_canvas_id(url, instance_url, alias, dmrecord):
     assert ftp_api.parse_ftp_canvas_id(url) == (instance_url, alias, dmrecord)

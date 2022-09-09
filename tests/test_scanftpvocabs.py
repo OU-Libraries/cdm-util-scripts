@@ -83,9 +83,12 @@ def test_scanftpvocabs(tmp_path):
     cdm_instance_url = "https://media.library.ohio.edu/"
     cdm_collection_alias = "p15808coll16"
     field_mapping_csv_path = tmp_path / "field-mapping.csv"
-    field_mapping_csv_path.write_text(data="""name,nick
+    field_mapping_csv_path.write_text(
+        data="""name,nick
 Creator (choreographer),creata
-""", encoding="utf-8")
+""",
+        encoding="utf-8",
+    )
     report_path = tmp_path / "report.html"
     scanftpvocabs.scanftpvocabs(
         ftp_slug=ftp_slug,

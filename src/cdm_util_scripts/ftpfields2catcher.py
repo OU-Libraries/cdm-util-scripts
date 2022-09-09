@@ -19,13 +19,17 @@ PagePicker = Callable[[ftp_api.FtpFieldBasedTranscription], Optional[Dict[str, s
 
 class PagePickers:
     @staticmethod
-    def first_page(pages: ftp_api.FtpFieldBasedTranscription) -> Optional[Dict[str, str]]:
+    def first_page(
+        pages: ftp_api.FtpFieldBasedTranscription,
+    ) -> Optional[Dict[str, str]]:
         if pages:
             return pages[0]
         return None
 
     @staticmethod
-    def first_filled_page(pages: ftp_api.FtpFieldBasedTranscription) -> Optional[Dict[str, str]]:
+    def first_filled_page(
+        pages: ftp_api.FtpFieldBasedTranscription,
+    ) -> Optional[Dict[str, str]]:
         for page in pages:
             if page and any(page.values()):
                 return page

@@ -169,10 +169,21 @@ def gui() -> None:
         [sg.Input(key=(ftpmdc2catcher, "field_mapping_csv_path")), sg.FileBrowse()],
         [sg.Text("Level of description to export")],
         [
-            sg.Radio("Autodetect", group_id="level", key=(ftpmdc2catcher, "level", Level.AUTO), default=True),
-            sg.Radio("Work", group_id="level", key=(ftpmdc2catcher, "level", Level.WORK)),
-            sg.Radio("Page", group_id="level", key=(ftpmdc2catcher, "level", Level.PAGE)),
-            sg.Radio("Both", group_id="level", key=(ftpmdc2catcher, "level", Level.BOTH)),
+            sg.Radio(
+                "Autodetect",
+                group_id="level",
+                key=(ftpmdc2catcher, "level", Level.AUTO),
+                default=True,
+            ),
+            sg.Radio(
+                "Work", group_id="level", key=(ftpmdc2catcher, "level", Level.WORK)
+            ),
+            sg.Radio(
+                "Page", group_id="level", key=(ftpmdc2catcher, "level", Level.PAGE)
+            ),
+            sg.Radio(
+                "Both", group_id="level", key=(ftpmdc2catcher, "level", Level.BOTH)
+            ),
         ],
         [sg.Text("Catcher JSON output file path")],
         [sg.Input(key=(ftpmdc2catcher, "output_file_path")), sg.FileSaveAs()],
@@ -324,9 +335,7 @@ def gui() -> None:
             elif event_value == "-LOAD FTP PROJECTS-":
                 print("Requesting FromThePage project names... ", end="")
                 with requests.Session() as session:
-                    ftp_instance = ftp_api.FtpInstance(
-                        url=ftp_api.FTP_HOSTED_URL
-                    )
+                    ftp_instance = ftp_api.FtpInstance(url=ftp_api.FTP_HOSTED_URL)
                     ftp_project_collection = ftp_instance.request_projects(
                         slug=tab_values["ftp_slug"], session=session
                     )
