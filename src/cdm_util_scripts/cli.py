@@ -124,6 +124,14 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     ftpmdc2catcher_subparser.add_argument(
         "output_file_path", help="Path to write cdm-catcher JSON file"
     )
+    ftpmdc2catcher_subparser.add_argument(
+        "-l",
+        "--level",
+        action="store",
+        choices=[level.value for level in ftpmdc2catcher.Level],
+        default=ftpmdc2catcher.Level.AUTO.value,
+        help="Description level to use",
+    )
     ftpmdc2catcher_subparser.set_defaults(func=ftpmdc2catcher.ftpmdc2catcher)
 
     # scanftpfields

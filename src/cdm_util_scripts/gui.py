@@ -11,7 +11,7 @@ from cdm_util_scripts.catcherdiff import catcherdiff
 from cdm_util_scripts.csv2json import csv2json
 from cdm_util_scripts.ftpfields2catcher import ftpfields2catcher, MatchModes
 from cdm_util_scripts.ftptr2catcher import ftptr2catcher
-from cdm_util_scripts.ftpmdc2catcher import ftpmdc2catcher
+from cdm_util_scripts.ftpmdc2catcher import ftpmdc2catcher, Level
 from cdm_util_scripts.scanftpvocabs import scanftpvocabs
 from cdm_util_scripts.scanftpfields import scanftpfields
 
@@ -167,6 +167,13 @@ def gui() -> None:
         [sg.Combo([], key=(ftpmdc2catcher, "ftp_project_name"), size=55)],
         [sg.Text("FromThePage field labels to CONTENTdm field nicks CSV mapping path")],
         [sg.Input(key=(ftpmdc2catcher, "field_mapping_csv_path")), sg.FileBrowse()],
+        [sg.Text("Level of description to export")],
+        [
+            sg.Radio("Autodetect", group_id="level", key=(ftpmdc2catcher, "level", Level.AUTO), default=True),
+            sg.Radio("Work", group_id="level", key=(ftpmdc2catcher, "level", Level.WORK)),
+            sg.Radio("Page", group_id="level", key=(ftpmdc2catcher, "level", Level.PAGE)),
+            sg.Radio("Both", group_id="level", key=(ftpmdc2catcher, "level", Level.BOTH)),
+        ],
         [sg.Text("Catcher JSON output file path")],
         [sg.Input(key=(ftpmdc2catcher, "output_file_path")), sg.FileSaveAs()],
         [sg.Button("Run", key=(ftpmdc2catcher, "-RUN-"))],
