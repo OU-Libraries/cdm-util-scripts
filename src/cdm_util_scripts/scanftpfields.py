@@ -5,7 +5,7 @@ import tqdm
 import datetime
 import collections
 import typing
-from typing import List, FrozenSet, Dict, Union, NamedTuple, Counter
+from typing import List, FrozenSet, Dict, Union, Counter, NamedTuple
 
 from cdm_util_scripts import ftp_api
 
@@ -26,7 +26,7 @@ def scanftpfields(
     report_path: str,
 ) -> None:
     with requests.Session() as session:
-        print("Requesting project data...")
+        print("Requesting FromThePage project data...")
         ftp_project = ftp_api.request_ftp_project(
             instance_url=ftp_api.FTP_HOSTED_URL,
             slug=ftp_slug,
@@ -34,28 +34,28 @@ def scanftpfields(
             session=session,
         )
 
-        print("Requesting project structured data configurations...")
+        print("Requesting FromThePage project structured data configuration...")
         work_config = ftp_project.request_work_structured_data_config(session=session)
+        has_work_description = bool(work_config.fields)
         page_config = ftp_project.request_page_structured_data_config(session=session)
+        has_page_description = bool(page_config.fields)
 
-        has_work_level_description = bool(work_config.fields)
-        has_page_level_description = bool(page_config.fields)
-        if not has_work_level_description and not has_page_level_description:
+        if not has_work_description and not has_page_description:
             print("Project has no structured data entry configured, exiting...")
             return None
 
-        print("Requesting work data...")
+        print("Requesting FromThePage project work data...")
         ftp_project.request_works(session=session)
 
-        print("Requesting structured descriptions...")
-        project_works_and_fields: List[WorkAndFields] = []
-        project_pages_and_fields: List[PageAndFields] = []
+        print("Requesting FromThePage project structured descriptions...")
+        project_works_and_fields: List[ftp_api.WorkAndFields] = []
+        project_pages_and_fields: List[ftp_api.PageAndFields] = []
         for work in tqdm.tqdm(ftp_project.works):
-            if has_work_level_description:
+            if has_work_description:
                 project_works_and_fields.append(
                     (work, work.request_structured_data(session=session))
                 )
-            if has_page_level_description:
+            if has_page_description:
                 for page in work.pages:
                     project_pages_and_fields.append(
                         (page, page.request_structured_data(session=session))
@@ -67,6 +67,7 @@ def scanftpfields(
     pages_by_field_set = collate_field_sets(project_pages_and_fields)
     page_field_counts_by_config_id = count_field_occurrences(pages_by_field_set)
 
+    print("Compiling report...")
     env = jinja2.Environment(loader=jinja2.PackageLoader(__package__))
     report_html = env.get_template("scanftpfields-report.html.j2").render(
         slug=ftp_slug,
