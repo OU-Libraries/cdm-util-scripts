@@ -24,7 +24,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     # catcherdiff
     catcherdiff_subparser = subparsers.add_parser(
         "catcherdiff",
-        help="Generate a HTML report on what CONTENTdm field values will change if a cdm-catcher JSON edit is implemented",
+        help=catcherdiff.catcherdiff.__doc__,
     )
     catcherdiff_subparser.add_argument(
         "cdm_instance_url", help="CONTENTdm instance URL"
@@ -50,7 +50,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     # csv2json
     csv2json_subparser = subparsers.add_parser(
         "csv2json",
-        help="Transpose CSV files into lists of JSON objects (cdm-catcher JSON edits)",
+        help=csv2json.csv2json.__doc__
     )
     csv2json_subparser.add_argument("input_csv_path", help="Path to delimited file")
     csv2json_subparser.add_argument("output_json_path", help="Path to output JSON file")
@@ -83,7 +83,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     # ftpstruct2catcher
     ftpstruct2catcher_subparser = subparsers.add_parser(
         "ftpstruct2catcher",
-        help="Get FromThePage Metadata Creation project data as cdm-catcher JSON edits",
+        help=ftpstruct2catcher.ftpstruct2catcher.__doc__,
     )
     ftpstruct2catcher_subparser.add_argument("ftp_slug", help="FromThePage user slug")
     ftpstruct2catcher_subparser.add_argument(
@@ -109,7 +109,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     # scanftpfields
     scanftpfields_subparser = subparsers.add_parser(
         "scanftpfields",
-        help="Scan and report on a FromThePage collection's field-based transcription labels",
+        help=scanftpfields.scanftpfields.__doc__,
     )
     scanftpfields_subparser.add_argument("ftp_slug", help="FromThePage user slug")
     scanftpfields_subparser.add_argument(

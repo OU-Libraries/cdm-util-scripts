@@ -24,7 +24,10 @@ def scanftpfields(
     ftp_slug: str,
     ftp_project_name: str,
     report_path: str,
+    show_progress: bool = True,
 ) -> None:
+    """Scan and report on a FromThePage collection's field-based transcription labels"""
+    progress_bar = tqdm.tqdm if show_progress else (lambda obj: obj)
     with requests.Session() as session:
         print("Requesting FromThePage project data...")
         ftp_project = ftp_api.request_ftp_project(
@@ -50,7 +53,7 @@ def scanftpfields(
         print("Requesting FromThePage project structured descriptions...")
         project_works_and_fields: List[ftp_api.WorkAndFields] = []
         project_pages_and_fields: List[ftp_api.PageAndFields] = []
-        for work in tqdm.tqdm(ftp_project.works):
+        for work in progress_bar(ftp_project.works):
             if has_work_description:
                 project_works_and_fields.append(
                     (work, work.request_structured_data(session=session))

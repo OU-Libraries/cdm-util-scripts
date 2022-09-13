@@ -13,7 +13,7 @@ from cdm_util_scripts import cdm_api
 class Level(str, enum.Enum):
     WORK = "work"
     PAGE = "page"
-    BOTH = "both"  # impossible?
+    BOTH = "both"
     AUTO = "auto"
 
 
@@ -23,7 +23,10 @@ def ftpstruct2catcher(
     field_mapping_csv_path: str,
     level: Level,
     output_file_path: str,
+    show_progress: bool = True,
 ) -> None:
+    """Get FromThePage Metadata Creation project data as cdm-catcher JSON edits"""
+    progress_bar = tqdm.tqdm if show_progress else (lambda obj: obj)
     field_mapping = cdm_api.read_csv_field_mapping(field_mapping_csv_path)
 
     with requests.Session() as session:
@@ -85,7 +88,7 @@ def ftpstruct2catcher(
             raise ValueError("unable to map any FromThePage fields to CONTENTdm nicks")
 
         edits = []
-        for ftp_work in tqdm.tqdm(ftp_project.works):
+        for ftp_work in progress_bar(ftp_project.works):
             # Keep page-level edits before object-level edits to avoid locking CONTENTdm objects
             if page_config_ids_to_cdm_nicks:
                 for ftp_page in ftp_work.pages:

@@ -17,13 +17,7 @@ def gui() -> None:
         [
             sg.Frame(
                 "About",
-                [
-                    [
-                        sg.Text(
-                            "Generate a HTML report on what CONTENTdm field values will change if a cdm-catcher JSON edit is implemented"
-                        )
-                    ]
-                ],
+                [[sg.Text(catcherdiff.__doc__)]],
             )
         ],
         [sg.Text("CONTENTdm instance URL")],
@@ -36,9 +30,15 @@ def gui() -> None:
         [sg.Text("CONTENTdm collection alias")],
         [sg.Combo([], key=(catcherdiff, "cdm_collection_alias"), size=55)],
         [sg.Text("Catcher edits JSON file path")],
-        [sg.Input(key=(catcherdiff, "catcher_json_file_path")), sg.FileBrowse()],
+        [
+            sg.Input(key=(catcherdiff, "catcher_json_file_path")),
+            sg.FileBrowse(file_types=(("JSON", "*.json"),)),
+        ],
         [sg.Text("HTML report output file path")],
-        [sg.Input(key=(catcherdiff, "report_file_path")), sg.FileSaveAs()],
+        [
+            sg.Input(key=(catcherdiff, "report_file_path")),
+            sg.FileSaveAs(file_types=(("HTML", "*.html"),), default_extension=".html"),
+        ],
         [
             sg.Checkbox(
                 "Check terms against CONTENTdm controlled vocabularies",
@@ -52,13 +52,7 @@ def gui() -> None:
         [
             sg.Frame(
                 "About",
-                [
-                    [
-                        sg.Text(
-                            "Get transcripts from a list of FromThePage manifests as cdm-catcher JSON edits"
-                        )
-                    ]
-                ],
+                [[sg.Text(ftptransc2catcher.__doc__)]],
             )
         ],
         [sg.Text("FromThePage IIIF manifests file path")],
@@ -66,7 +60,10 @@ def gui() -> None:
         [sg.Text("CONTENTdm transcript field nick")],
         [sg.InputText(key=(ftptransc2catcher, "transcript_nick"))],
         [sg.Text("Catcher JSON output file path")],
-        [sg.Input(key=(ftptransc2catcher, "output_file_path")), sg.FileSaveAs()],
+        [
+            sg.Input(key=(ftptransc2catcher, "output_file_path")),
+            sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".html"),
+        ],
         [sg.Text("FromThePage transcript type")],
         [
             sg.Combo(
@@ -82,19 +79,19 @@ def gui() -> None:
         [
             sg.Frame(
                 "About",
-                [
-                    [
-                        sg.Text(
-                            "Transpose CSV files into lists of JSON objects (cdm-catcher JSON edits)"
-                        )
-                    ]
-                ],
+                [[sg.Text(csv2json.__doc__)]],
             )
         ],
         [sg.Text("Path to input CSV file")],
-        [sg.Input(key=(csv2json, "input_csv_path")), sg.FileBrowse()],
+        [
+            sg.Input(key=(csv2json, "input_csv_path")),
+            sg.FileBrowse(file_types=(("CSV", "*.csv"),)),
+        ],
         [sg.Text("Path to output JSON file")],
-        [sg.Input(key=(csv2json, "output_json_path")), sg.FileSaveAs()],
+        [
+            sg.Input(key=(csv2json, "output_json_path")),
+            sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
+        ],
         [sg.Button("Run", key=(csv2json, "-RUN-"))],
     ]
 
@@ -102,13 +99,7 @@ def gui() -> None:
         [
             sg.Frame(
                 "About",
-                [
-                    [
-                        sg.Text(
-                            "Get FromThePage Metadata Creation project data as cdm-catcher JSON edits"
-                        )
-                    ]
-                ],
+                [[sg.Text(ftpstruct2catcher.__doc__)]],
             )
         ],
         [sg.Text("FromThePage user slug")],
@@ -121,7 +112,10 @@ def gui() -> None:
         [sg.Text("FromThePage project name")],
         [sg.Combo([], key=(ftpstruct2catcher, "ftp_project_name"), size=55)],
         [sg.Text("FromThePage field labels to CONTENTdm field nicks CSV mapping path")],
-        [sg.Input(key=(ftpstruct2catcher, "field_mapping_csv_path")), sg.FileBrowse()],
+        [
+            sg.Input(key=(ftpstruct2catcher, "field_mapping_csv_path")),
+            sg.FileBrowse(file_types=(("CSV", "*.csv"),)),
+        ],
         [sg.Text("Level of description to export")],
         [
             sg.Radio(
@@ -141,7 +135,10 @@ def gui() -> None:
             ),
         ],
         [sg.Text("Catcher JSON output file path")],
-        [sg.Input(key=(ftpstruct2catcher, "output_file_path")), sg.FileSaveAs()],
+        [
+            sg.Input(key=(ftpstruct2catcher, "output_file_path")),
+            sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
+        ],
         [sg.Button("Run", key=(ftpstruct2catcher, "-RUN-"))],
     ]
 
@@ -149,13 +146,7 @@ def gui() -> None:
         [
             sg.Frame(
                 "About",
-                [
-                    [
-                        sg.Text(
-                            "Scan and report on a FromThePage collection's field-based transcription labels"
-                        )
-                    ]
-                ],
+                [[sg.Text(scanftpfields.__doc__)]],
             )
         ],
         [sg.Text("FromThePage user slug")],
@@ -168,7 +159,10 @@ def gui() -> None:
         [sg.Text("FromThePage project name")],
         [sg.Combo([], key=(scanftpfields, "ftp_project_name"), size=55)],
         [sg.Text("HTML report output file path")],
-        [sg.Input(key=(scanftpfields, "report_path")), sg.FileSaveAs()],
+        [
+            sg.Input(key=(scanftpfields, "report_path")),
+            sg.FileSaveAs(file_types=(("HTML", "*.html"),), default_extension=".html"),
+        ],
         [sg.Button("Run", key=(scanftpfields, "-RUN-"))],
     ]
 
@@ -227,7 +221,9 @@ def gui() -> None:
                         slug=tab_values["ftp_slug"], session=session
                     )
                 window[(event_function, "ftp_project_name")].update(
-                    values=list(ftp_project_collection.projects)
+                    values=[
+                        project.label for project in ftp_project_collection.projects
+                    ]
                 )
                 print("Done")
 
@@ -241,8 +237,16 @@ def gui() -> None:
                 print(f"Running {event_function.__name__}:")
                 for key, value in tab_values.items():
                     print(f"  {key}={value!r}")
-                event_function(**tab_values)
+
+                try:
+                    event_function(**tab_values, show_progress=False)
+                except Exception as err:
+                    print(err)
+                    sg.popup(err)
+                    continue
+
                 print("Done")
+
             else:
                 raise KeyError(repr(event_value))
 

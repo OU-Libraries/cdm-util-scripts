@@ -8,7 +8,7 @@ from pathlib import Path
 
 from cdm_util_scripts import cdm_api
 
-from typing import Dict, List, Any, NamedTuple, Iterable, Optional
+from typing import Dict, List, NamedTuple, Iterable, Optional
 
 
 class Delta(NamedTuple):
@@ -22,7 +22,9 @@ def catcherdiff(
     catcher_json_file_path: str,
     report_file_path: str,
     check_vocabs: bool,
+    show_progress: bool = True,
 ) -> None:
+    """Generate a HTML report on what CONTENTdm field values will change if a cdm-catcher JSON edit is implemented"""
     with open(catcher_json_file_path, mode="r", encoding="utf-8") as fp:
         catcher_edits = json.load(fp)
 
@@ -39,6 +41,7 @@ def catcherdiff(
             instance_url=cdm_instance_url,
             collection_alias=cdm_collection_alias,
             session=session,
+            show_progress=show_progress,
         )
         if check_vocabs:
             print("Requesting CONTENTdm controlled vocabularies...")
@@ -66,24 +69,24 @@ def catcherdiff(
         f"catcherdiff found {edits_with_changes_count} out of {len(catcher_edits)} total edit actions would change at least one field."
     )
 
-    report = {
-        "cdm_repo_url": cdm_instance_url.rstrip("/"),
-        "cdm_collection_alias": cdm_collection_alias,
-        "cdm_field_infos": cdm_field_infos,
-        "vocabs_by_nick": vocabs_by_nick,
-        "catcher_json_file": Path(catcher_json_file_path).name,
-        "report_file": report_file_path,
-        "report_datetime": datetime.now().isoformat(),
-        "edits_with_changes_count": edits_with_changes_count,
-        "deltas": deltas,
-        "identifier_nick": identifier_nick,
-        "title_nick": title_nick,
-        "cdm_nick_to_name": {
+    env = jinja2.Environment(loader=jinja2.PackageLoader(__package__))
+    report_html = env.get_template("catcherdiff-report.html.j2").render(
+        cdm_repo_url=cdm_instance_url.rstrip("/"),
+        cdm_collection_alias=cdm_collection_alias,
+        cdm_field_infos=cdm_field_infos,
+        vocabs_by_nick=vocabs_by_nick,
+        catcher_json_file=Path(catcher_json_file_path).name,
+        report_file=report_file_path,
+        report_datetime=datetime.now().isoformat(),
+        edits_with_changes_count=edits_with_changes_count,
+        deltas=deltas,
+        identifier_nick=identifier_nick,
+        title_nick=title_nick,
+        cdm_nick_to_name={
             field_info.nick: field_info.name for field_info in cdm_field_infos
         },
-    }
+    )
 
-    report_html = report_to_html(report)
     with open(report_file_path, mode="w", encoding="utf-8") as fp:
         fp.write(report_html)
 
@@ -93,9 +96,11 @@ def request_deltas(
     instance_url: str,
     collection_alias: str,
     session: requests.Session,
+    show_progress: bool,
 ) -> List[Delta]:
+    progress_bar = tqdm.tqdm if show_progress else (lambda obj: obj)
     deltas: List[Delta] = []
-    for edit in tqdm.tqdm(catcher_edits):
+    for edit in progress_bar(catcher_edits):
         item_info = cdm_api.request_item_info(
             instance_url=instance_url,
             collection_alias=collection_alias,
@@ -123,8 +128,3 @@ def find_dc_field(
         return [info for info in cdm_field_infos if info.dc == dc_name][0]
     except IndexError:
         return None
-
-
-def report_to_html(report: Dict[str, Any]) -> str:
-    env = jinja2.Environment(loader=jinja2.PackageLoader(__package__))
-    return env.get_template("catcherdiff-report.html.j2").render(report)
