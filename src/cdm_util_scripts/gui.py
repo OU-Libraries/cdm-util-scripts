@@ -1,18 +1,14 @@
 import PySimpleGUI as sg
 import requests
 
-import csv
-
 from typing import Callable, Dict, Any, Hashable
 
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts.catcherdiff import catcherdiff
 from cdm_util_scripts.csv2json import csv2json
-from cdm_util_scripts.ftpfields2catcher import ftpfields2catcher, MatchModes
 from cdm_util_scripts.ftptr2catcher import ftptr2catcher
 from cdm_util_scripts.ftpmdc2catcher import ftpmdc2catcher, Level
-from cdm_util_scripts.scanftpvocabs import scanftpvocabs
 from cdm_util_scripts.scanftpfields import scanftpfields
 
 
@@ -50,47 +46,6 @@ def gui() -> None:
             )
         ],
         [sg.Button("Run", key=(catcherdiff, "-RUN-"))],
-    ]
-
-    ftpfields2catcher_layout = [
-        [
-            sg.Frame(
-                "About",
-                [
-                    [
-                        sg.Text(
-                            "Get field-based transcription metadata from FromThePage as cdm-catcher JSON edits"
-                        )
-                    ]
-                ],
-            )
-        ],
-        [
-            sg.Radio(
-                "Match fields to objects",
-                group_id="match_mode",
-                key=(ftpfields2catcher, "match_mode", MatchModes.by_object),
-            ),
-            sg.Radio(
-                "Match fields to pages",
-                group_id="match_mode",
-                key=(ftpfields2catcher, "match_mode", MatchModes.by_page),
-            ),
-        ],
-        [sg.Text("FromThePage user slug")],
-        [
-            sg.InputText(key=(ftpfields2catcher, "ftp_slug")),
-            sg.Button(
-                "Request project names", key=(ftpfields2catcher, "-LOAD FTP PROJECTS-")
-            ),
-        ],
-        [sg.Text("FromThePage project name")],
-        [sg.Combo([], key=(ftpfields2catcher, "ftp_project_name"), size=55)],
-        [sg.Text("FromThePage field labels to CONTENTdm field nicks CSV mapping path")],
-        [sg.Input(key=(ftpfields2catcher, "field_mapping_csv_path")), sg.FileBrowse()],
-        [sg.Text("Catcher JSON output file path")],
-        [sg.Input(key=(ftpfields2catcher, "output_file_path")), sg.FileSaveAs()],
-        [sg.Button("Run", key=(ftpfields2catcher, "-RUN-"))],
     ]
 
     ftptr2catcher_layout = [
@@ -190,44 +145,6 @@ def gui() -> None:
         [sg.Button("Run", key=(ftpmdc2catcher, "-RUN-"))],
     ]
 
-    scanftpvocabs_layout = [
-        [
-            sg.Frame(
-                "About",
-                [
-                    [
-                        sg.Text(
-                            "Cross check a FromThePage collection against CONTENTdm controlled vocabs"
-                        )
-                    ]
-                ],
-            )
-        ],
-        [sg.Text("FromThePage user slug")],
-        [
-            sg.InputText(key=(scanftpvocabs, "ftp_slug")),
-            sg.Button(
-                "Request project names", key=(scanftpvocabs, "-LOAD FTP PROJECTS-")
-            ),
-        ],
-        [sg.Text("FromThePage project name")],
-        [sg.Combo([], key=(scanftpvocabs, "ftp_project_name"), size=55)],
-        [sg.Text("CONTENTdm instance URL")],
-        [
-            sg.InputText(key=(scanftpvocabs, "cdm_instance_url")),
-            sg.Button(
-                "Request collection aliases", key=(scanftpvocabs, "-LOAD ALIASES-")
-            ),
-        ],
-        [sg.Text("CONTENTdm collection alias")],
-        [sg.Combo([], key=(scanftpvocabs, "cdm_collection_alias"), size=55)],
-        [sg.Text("FromThePage field labels to CONTENTdm field nicks CSV mapping path")],
-        [sg.Input(key=(scanftpvocabs, "field_mapping_csv_path")), sg.FileBrowse()],
-        [sg.Text("HTML report output file path")],
-        [sg.Input(key=(scanftpvocabs, "report_path")), sg.FileSaveAs()],
-        [sg.Button("Run", key=(scanftpvocabs, "-RUN-"))],
-    ]
-
     scanftpfields_layout = [
         [
             sg.Frame(
@@ -261,9 +178,7 @@ def gui() -> None:
                 [
                     [
                         sg.Tab("catcherdiff", catcherdiff_layout),
-                        sg.Tab("scanftpvocabs", scanftpvocabs_layout),
                         sg.Tab("scanftpfields", scanftpfields_layout),
-                        sg.Tab("ftpfields2catcher", ftpfields2catcher_layout),
                         sg.Tab("ftptr2catcher", ftptr2catcher_layout),
                         sg.Tab("ftpmdc2catcher", ftpmdc2catcher_layout),
                         sg.Tab("csv2json", csv2json_layout),
@@ -301,34 +216,6 @@ def gui() -> None:
                         f"{info.alias.lstrip('/')}={info.name}"
                         for info in cdm_collection_list
                     ]
-                )
-                print("Done")
-
-            elif event_value == "-LOAD NICKS-":
-                print("Requesting CONTENTdm field nicks... ", end="")
-                with requests.Session() as session:
-                    cdm_field_infos = cdm_api.request_field_infos(
-                        instance_url=tab_values["cdm_instance_url"],
-                        collection_alias=tab_values["cdm_collection_alias"],
-                        session=session,
-                    )
-                window[(event_function, "identifier_nick")].update(
-                    values=[f"{info.nick}={info.name}" for info in cdm_field_infos]
-                )
-                print("Done")
-
-            elif event_value == "-LOAD COLUMNS-":
-                print("Loading CSV column names... ", end="")
-                with open(
-                    tab_values["field_data_csv_path"],
-                    mode="r",
-                    encoding="utf-8",
-                    newline="",
-                ) as fp:
-                    reader = csv.DictReader(fp, dialect=cdm_api.sniff_csv_dialect(fp))
-                    fieldnames = reader.fieldnames
-                window[(event_function, "page_position_column_name")].update(
-                    values=fieldnames
                 )
                 print("Done")
 
@@ -377,7 +264,7 @@ def get_tab_values(event_function: Callable[..., None], values: Dict[Hashable, A
                     tab_value = values_value
 
                 # Handle "<alias>=<fieldname>" values
-                if tab_key in {"cdm_collection_alias", "identifier_nick"}:
+                if tab_key in {"cdm_collection_alias"}:
                     tab_value = tab_value.partition("=")[0]
 
                 if isinstance(tab_value, str):

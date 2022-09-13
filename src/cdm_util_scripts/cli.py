@@ -11,11 +11,9 @@ from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import catcherdiff
 from cdm_util_scripts import csv2json
-from cdm_util_scripts import ftpfields2catcher
 from cdm_util_scripts import ftptr2catcher
 from cdm_util_scripts import ftpmdc2catcher
 from cdm_util_scripts import scanftpfields
-from cdm_util_scripts import scanftpvocabs
 from cdm_util_scripts import gui
 
 
@@ -57,32 +55,6 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     csv2json_subparser.add_argument("input_csv_path", help="Path to delimited file")
     csv2json_subparser.add_argument("output_json_path", help="Path to output JSON file")
     csv2json_subparser.set_defaults(func=csv2json.csv2json)
-
-    # ftpfields2catcher
-    ftpfields2catcher_subparser = subparsers.add_parser(
-        "ftpfields2catcher",
-        help="Get field-based transcription metadata from FromThePage as cdm-catcher JSON edits",
-    )
-    ftpfields2catcher_subparser.add_argument(
-        "match_mode",
-        choices=[
-            ftpfields2catcher.MatchModes.by_object,
-            ftpfields2catcher.MatchModes.by_page,
-        ],
-        help="Mode for matching FromThePage metadata to CONTENTdm objects",
-    )
-    ftpfields2catcher_subparser.add_argument("ftp_slug", help="FromThePage user slug")
-    ftpfields2catcher_subparser.add_argument(
-        "ftp_project_name", help="FromThePage project name"
-    )
-    ftpfields2catcher_subparser.add_argument(
-        "field_mapping_csv_path",
-        help="CSV file of FromThePage field labels mapped to CONTENTdm nicknames",
-    )
-    ftpfields2catcher_subparser.add_argument(
-        "output_file_path", help="File name for cdm-catcher JSON output"
-    )
-    ftpfields2catcher_subparser.set_defaults(func=ftpfields2catcher.ftpfields2catcher)
 
     # ftptr2catcher
     ftptr2catcher_subparser = subparsers.add_parser(
@@ -145,34 +117,6 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     )
     scanftpfields_subparser.add_argument("report_path", help="Report file path")
     scanftpfields_subparser.set_defaults(func=scanftpfields.scanftpfields)
-
-    # scanftpvocabs
-    scanftpvocabs_subparser = subparsers.add_parser(
-        "scanftpvocabs",
-        help="Cross check a FromThePage collection against CONTENTdm controlled vocabs",
-    )
-    scanftpvocabs_subparser.add_argument("ftp_slug", help="FromThePage user slug")
-    scanftpvocabs_subparser.add_argument(
-        "ftp_project_name", help="FromThePage project name"
-    )
-    scanftpvocabs_subparser.add_argument(
-        "cdm_instance_url", help="CONTENTdm repository URL"
-    )
-    scanftpvocabs_subparser.add_argument(
-        "cdm_collection_alias", help="CONTENTdm collection alias"
-    )
-    scanftpvocabs_subparser.add_argument(
-        "field_mapping_csv_path",
-        help="CSV file of FromThePage field labels mapped to CONTENTdm nicknames",
-    )
-    scanftpvocabs_subparser.add_argument("report_path", help="Report file path")
-    scanftpvocabs_subparser.add_argument(
-        "--label",
-        choices=list(ftp_api.RENDERING_EXTRACTORS),
-        default="XHTML Export",
-        help="Choose the export to use for parsing fields",
-    )
-    scanftpvocabs_subparser.set_defaults(func=scanftpvocabs.scanftpvocabs)
 
     # GUI
     gui_subparser = subparsers.add_parser(
