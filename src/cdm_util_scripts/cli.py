@@ -11,8 +11,8 @@ from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import catcherdiff
 from cdm_util_scripts import csv2json
-from cdm_util_scripts import ftptr2catcher
-from cdm_util_scripts import ftpmdc2catcher
+from cdm_util_scripts import ftptransc2catcher
+from cdm_util_scripts import ftpstruct2catcher
 from cdm_util_scripts import scanftpfields
 from cdm_util_scripts import gui
 
@@ -56,55 +56,55 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     csv2json_subparser.add_argument("output_json_path", help="Path to output JSON file")
     csv2json_subparser.set_defaults(func=csv2json.csv2json)
 
-    # ftptr2catcher
-    ftptr2catcher_subparser = subparsers.add_parser(
-        "ftptr2catcher",
+    # ftptransc2catcher
+    ftptransc2catcher_subparser = subparsers.add_parser(
+        "ftptransc2catcher",
         help="Get transcripts from a list of FromThePage manifests as cdm-catcher JSON edits",
     )
-    ftptr2catcher_subparser.add_argument(
+    ftptransc2catcher_subparser.add_argument(
         "manifests_listing_path",
         help="Path to file listing FromThePage manifest links",
     )
-    ftptr2catcher_subparser.add_argument(
+    ftptransc2catcher_subparser.add_argument(
         "transcript_nick",
         help="CONTENTdm field nickname for the transcript field",
     )
-    ftptr2catcher_subparser.add_argument(
+    ftptransc2catcher_subparser.add_argument(
         "output_file_path",
         help="Path to write cdm-catcher JSON file",
     )
-    ftptr2catcher_subparser.add_argument(
+    ftptransc2catcher_subparser.add_argument(
         "--transcript-type",
         default="Verbatim Plaintext",
         help="FromThePage transcript type",
     )
-    ftptr2catcher_subparser.set_defaults(func=ftptr2catcher.ftptr2catcher)
+    ftptransc2catcher_subparser.set_defaults(func=ftptransc2catcher.ftptransc2catcher)
 
-    # ftpmdc2catcher
-    ftpmdc2catcher_subparser = subparsers.add_parser(
-        "ftpmdc2catcher",
+    # ftpstruct2catcher
+    ftpstruct2catcher_subparser = subparsers.add_parser(
+        "ftpstruct2catcher",
         help="Get FromThePage Metadata Creation project data as cdm-catcher JSON edits",
     )
-    ftpmdc2catcher_subparser.add_argument("ftp_slug", help="FromThePage user slug")
-    ftpmdc2catcher_subparser.add_argument(
+    ftpstruct2catcher_subparser.add_argument("ftp_slug", help="FromThePage user slug")
+    ftpstruct2catcher_subparser.add_argument(
         "ftp_project_name", help="FromThePage project name"
     )
-    ftpmdc2catcher_subparser.add_argument(
+    ftpstruct2catcher_subparser.add_argument(
         "field_mapping_csv_path",
         help="CSV file of FromThePage field labels mapped to CONTENTdm field nicknames",
     )
-    ftpmdc2catcher_subparser.add_argument(
+    ftpstruct2catcher_subparser.add_argument(
         "output_file_path", help="Path to write cdm-catcher JSON file"
     )
-    ftpmdc2catcher_subparser.add_argument(
+    ftpstruct2catcher_subparser.add_argument(
         "-l",
         "--level",
         action="store",
-        choices=[level.value for level in ftpmdc2catcher.Level],
-        default=ftpmdc2catcher.Level.AUTO.value,
+        choices=[level.value for level in ftpstruct2catcher.Level],
+        default=ftpstruct2catcher.Level.AUTO.value,
         help="Description level to use",
     )
-    ftpmdc2catcher_subparser.set_defaults(func=ftpmdc2catcher.ftpmdc2catcher)
+    ftpstruct2catcher_subparser.set_defaults(func=ftpstruct2catcher.ftpstruct2catcher)
 
     # scanftpfields
     scanftpfields_subparser = subparsers.add_parser(

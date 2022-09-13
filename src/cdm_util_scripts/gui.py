@@ -7,8 +7,8 @@ from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts.catcherdiff import catcherdiff
 from cdm_util_scripts.csv2json import csv2json
-from cdm_util_scripts.ftptr2catcher import ftptr2catcher
-from cdm_util_scripts.ftpmdc2catcher import ftpmdc2catcher, Level
+from cdm_util_scripts.ftptransc2catcher import ftptransc2catcher
+from cdm_util_scripts.ftpstruct2catcher import ftpstruct2catcher, Level
 from cdm_util_scripts.scanftpfields import scanftpfields
 
 
@@ -48,7 +48,7 @@ def gui() -> None:
         [sg.Button("Run", key=(catcherdiff, "-RUN-"))],
     ]
 
-    ftptr2catcher_layout = [
+    ftptransc2catcher_layout = [
         [
             sg.Frame(
                 "About",
@@ -62,20 +62,20 @@ def gui() -> None:
             )
         ],
         [sg.Text("FromThePage IIIF manifests file path")],
-        [sg.Input(key=(ftptr2catcher, "manifests_listing_path")), sg.FileBrowse()],
+        [sg.Input(key=(ftptransc2catcher, "manifests_listing_path")), sg.FileBrowse()],
         [sg.Text("CONTENTdm transcript field nick")],
-        [sg.InputText(key=(ftptr2catcher, "transcript_nick"))],
+        [sg.InputText(key=(ftptransc2catcher, "transcript_nick"))],
         [sg.Text("Catcher JSON output file path")],
-        [sg.Input(key=(ftptr2catcher, "output_file_path")), sg.FileSaveAs()],
+        [sg.Input(key=(ftptransc2catcher, "output_file_path")), sg.FileSaveAs()],
         [sg.Text("FromThePage transcript type")],
         [
             sg.Combo(
                 ["Verbatim Plaintext"],
                 default_value="Verbatim Plaintext",
-                key=(ftptr2catcher, "transcript_type"),
+                key=(ftptransc2catcher, "transcript_type"),
             )
         ],
-        [sg.Button("Run", key=(ftptr2catcher, "-RUN-"))],
+        [sg.Button("Run", key=(ftptransc2catcher, "-RUN-"))],
     ]
 
     csv2json_layout = [
@@ -98,7 +98,7 @@ def gui() -> None:
         [sg.Button("Run", key=(csv2json, "-RUN-"))],
     ]
 
-    ftpmdc2catcher_layout = [
+    ftpstruct2catcher_layout = [
         [
             sg.Frame(
                 "About",
@@ -113,36 +113,36 @@ def gui() -> None:
         ],
         [sg.Text("FromThePage user slug")],
         [
-            sg.InputText(key=(ftpmdc2catcher, "ftp_slug")),
+            sg.InputText(key=(ftpstruct2catcher, "ftp_slug")),
             sg.Button(
-                "Request project names", key=(ftpmdc2catcher, "-LOAD FTP PROJECTS-")
+                "Request project names", key=(ftpstruct2catcher, "-LOAD FTP PROJECTS-")
             ),
         ],
         [sg.Text("FromThePage project name")],
-        [sg.Combo([], key=(ftpmdc2catcher, "ftp_project_name"), size=55)],
+        [sg.Combo([], key=(ftpstruct2catcher, "ftp_project_name"), size=55)],
         [sg.Text("FromThePage field labels to CONTENTdm field nicks CSV mapping path")],
-        [sg.Input(key=(ftpmdc2catcher, "field_mapping_csv_path")), sg.FileBrowse()],
+        [sg.Input(key=(ftpstruct2catcher, "field_mapping_csv_path")), sg.FileBrowse()],
         [sg.Text("Level of description to export")],
         [
             sg.Radio(
                 "Autodetect",
                 group_id="level",
-                key=(ftpmdc2catcher, "level", Level.AUTO),
+                key=(ftpstruct2catcher, "level", Level.AUTO),
                 default=True,
             ),
             sg.Radio(
-                "Work", group_id="level", key=(ftpmdc2catcher, "level", Level.WORK)
+                "Work", group_id="level", key=(ftpstruct2catcher, "level", Level.WORK)
             ),
             sg.Radio(
-                "Page", group_id="level", key=(ftpmdc2catcher, "level", Level.PAGE)
+                "Page", group_id="level", key=(ftpstruct2catcher, "level", Level.PAGE)
             ),
             sg.Radio(
-                "Both", group_id="level", key=(ftpmdc2catcher, "level", Level.BOTH)
+                "Both", group_id="level", key=(ftpstruct2catcher, "level", Level.BOTH)
             ),
         ],
         [sg.Text("Catcher JSON output file path")],
-        [sg.Input(key=(ftpmdc2catcher, "output_file_path")), sg.FileSaveAs()],
-        [sg.Button("Run", key=(ftpmdc2catcher, "-RUN-"))],
+        [sg.Input(key=(ftpstruct2catcher, "output_file_path")), sg.FileSaveAs()],
+        [sg.Button("Run", key=(ftpstruct2catcher, "-RUN-"))],
     ]
 
     scanftpfields_layout = [
@@ -179,8 +179,8 @@ def gui() -> None:
                     [
                         sg.Tab("catcherdiff", catcherdiff_layout),
                         sg.Tab("scanftpfields", scanftpfields_layout),
-                        sg.Tab("ftptr2catcher", ftptr2catcher_layout),
-                        sg.Tab("ftpmdc2catcher", ftpmdc2catcher_layout),
+                        sg.Tab("ftptransc2catcher", ftptransc2catcher_layout),
+                        sg.Tab("ftpstruct2catcher", ftpstruct2catcher_layout),
                         sg.Tab("csv2json", csv2json_layout),
                     ]
                 ]

@@ -17,7 +17,7 @@ class Level(str, enum.Enum):
     AUTO = "auto"
 
 
-def ftpmdc2catcher(
+def ftpstruct2catcher(
     ftp_slug: str,
     ftp_project_name: str,
     field_mapping_csv_path: str,

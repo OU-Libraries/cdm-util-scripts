@@ -6,7 +6,7 @@ import json
 from cdm_util_scripts import ftp_api
 
 
-def ftptr2catcher(
+def ftptransc2catcher(
     manifests_listing_path: str,
     transcript_nick: str,
     output_file_path: str,

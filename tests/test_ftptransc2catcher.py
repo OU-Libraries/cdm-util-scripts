@@ -3,7 +3,7 @@ import requests
 
 import json
 
-from cdm_util_scripts import ftptr2catcher
+from cdm_util_scripts import ftptransc2catcher
 from cdm_util_scripts import ftp_api
 
 
@@ -19,13 +19,13 @@ STARTS = [
 
 
 @pytest.mark.vcr
-def test_ftptr2catcher(tmp_path):
+def test_ftptransc2catcher(tmp_path):
     manifests_listing_path = tmp_path / "manifests.txt"
     manifests_listing_path.write_text(SPECIMEN_MANIFEST_URL + "\n", encoding="utf-8")
     output_path = tmp_path / "output.json"
     transcript_nick = "transc"
 
-    ftptr2catcher.ftptr2catcher(
+    ftptransc2catcher.ftptransc2catcher(
         manifests_listing_path=manifests_listing_path,
         transcript_nick=transcript_nick,
         output_file_path=output_path,

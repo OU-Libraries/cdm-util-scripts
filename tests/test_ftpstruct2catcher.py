@@ -3,7 +3,7 @@ import requests
 
 import json
 
-from cdm_util_scripts import ftpmdc2catcher
+from cdm_util_scripts import ftpstruct2catcher
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
 
@@ -62,7 +62,7 @@ def test_umapped_fields(dance_posters_field_mapping):
     )
     field_mapping = cdm_api.read_csv_field_mapping(dance_posters_field_mapping)
     unmapped_configs = list(
-        ftpmdc2catcher.unmapped_fields(config=config, field_mapping=field_mapping)
+        ftpstruct2catcher.unmapped_fields(config=config, field_mapping=field_mapping)
     )
     assert unmapped_configs[0].label.startswith("Title format:")
     assert unmapped_configs[1].label.startswith("Description format:")
@@ -73,16 +73,16 @@ def test_umapped_fields(dance_posters_field_mapping):
 @pytest.mark.parametrize(
     "level",
     [
-        ftpmdc2catcher.Level.AUTO,
-        ftpmdc2catcher.Level.WORK,
+        ftpstruct2catcher.Level.AUTO,
+        ftpstruct2catcher.Level.WORK,
     ],
 )
-def test_ftpmdc2catcher_farfel(tmp_path, farfel_field_mapping, level):
+def test_ftpstruct2catcher_farfel(tmp_path, farfel_field_mapping, level):
     ftp_slug = "ohiouniversitylibraries"
     ftp_project_name = "Farfel Leaves Metadata"
     output_file_path = tmp_path / "output.json"
 
-    ftpmdc2catcher.ftpmdc2catcher(
+    ftpstruct2catcher.ftpstruct2catcher(
         ftp_slug=ftp_slug,
         ftp_project_name=ftp_project_name,
         field_mapping_csv_path=farfel_field_mapping,
@@ -102,20 +102,20 @@ def test_ftpmdc2catcher_farfel(tmp_path, farfel_field_mapping, level):
 @pytest.mark.parametrize(
     "level",
     [
-        ftpmdc2catcher.Level.AUTO,
-        ftpmdc2catcher.Level.PAGE,
+        ftpstruct2catcher.Level.AUTO,
+        ftpstruct2catcher.Level.PAGE,
     ],
 )
-def test_ftpmdc2catcher_dance(tmp_path, dance_posters_field_mapping, level):
+def test_ftpstruct2catcher_dance(tmp_path, dance_posters_field_mapping, level):
     ftp_slug = "ohiouniversitylibraries"
     ftp_project_name = "Dance Posters Metadata"
     output_file_path = tmp_path / "output.json"
 
-    ftpmdc2catcher.ftpmdc2catcher(
+    ftpstruct2catcher.ftpstruct2catcher(
         ftp_slug=ftp_slug,
         ftp_project_name=ftp_project_name,
         field_mapping_csv_path=dance_posters_field_mapping,
-        level=ftpmdc2catcher.Level.PAGE,
+        level=ftpstruct2catcher.Level.PAGE,
         output_file_path=output_file_path,
     )
 
