@@ -12,12 +12,15 @@ from cdm_util_scripts.ftpstruct2catcher import ftpstruct2catcher, Level
 from cdm_util_scripts.scanftpfields import scanftpfields
 
 
+HELP_SIZE = (80, 2)
+
+
 def gui() -> None:
     catcherdiff_layout = [
         [
             sg.Frame(
-                "About",
-                [[sg.Text(catcherdiff.__doc__)]],
+                "Help",
+                [[sg.Text(catcherdiff.__doc__, size=HELP_SIZE)]],
             )
         ],
         [sg.Text("CONTENTdm instance URL")],
@@ -51,8 +54,8 @@ def gui() -> None:
     ftptransc2catcher_layout = [
         [
             sg.Frame(
-                "About",
-                [[sg.Text(ftptransc2catcher.__doc__)]],
+                "Help",
+                [[sg.Text(ftptransc2catcher.__doc__, size=HELP_SIZE)]],
             )
         ],
         [sg.Text("FromThePage IIIF manifests file path")],
@@ -78,8 +81,8 @@ def gui() -> None:
     csv2json_layout = [
         [
             sg.Frame(
-                "About",
-                [[sg.Text(csv2json.__doc__)]],
+                "Help",
+                [[sg.Text(csv2json.__doc__, size=HELP_SIZE)]],
             )
         ],
         [sg.Text("Path to input CSV file")],
@@ -98,8 +101,8 @@ def gui() -> None:
     ftpstruct2catcher_layout = [
         [
             sg.Frame(
-                "About",
-                [[sg.Text(ftpstruct2catcher.__doc__)]],
+                "Help",
+                [[sg.Text(ftpstruct2catcher.__doc__, size=HELP_SIZE)]],
             )
         ],
         [sg.Text("FromThePage user slug")],
@@ -145,8 +148,8 @@ def gui() -> None:
     scanftpfields_layout = [
         [
             sg.Frame(
-                "About",
-                [[sg.Text(scanftpfields.__doc__)]],
+                "Help",
+                [[sg.Text(scanftpfields.__doc__, size=HELP_SIZE)]],
             )
         ],
         [sg.Text("FromThePage user slug")],

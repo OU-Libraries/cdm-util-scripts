@@ -49,8 +49,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
 
     # csv2json
     csv2json_subparser = subparsers.add_parser(
-        "csv2json",
-        help=csv2json.csv2json.__doc__
+        "csv2json", help=csv2json.csv2json.__doc__
     )
     csv2json_subparser.add_argument("input_csv_path", help="Path to delimited file")
     csv2json_subparser.add_argument("output_json_path", help="Path to output JSON file")
@@ -59,7 +58,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     # ftptransc2catcher
     ftptransc2catcher_subparser = subparsers.add_parser(
         "ftptransc2catcher",
-        help="Get transcripts from a list of FromThePage manifests as cdm-catcher JSON edits",
+        help=ftptransc2catcher.ftptransc2catcher.__doc__,
     )
     ftptransc2catcher_subparser.add_argument(
         "manifests_listing_path",
@@ -127,7 +126,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
 
     # ftpinfo
     ftpinfo_subparser = subparsers.add_parser(
-        "ftpinfo", description="Print FromThePage project information"
+        "ftpinfo", help="Print FromThePage project information"
     )
     ftpinfo_subparser.add_argument("slug", help="FromThePage user slug")
     ftpinfo_subparser.set_defaults(func=ftpinfo)
@@ -135,7 +134,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     # cdminfo
     cdminfo_subparser = subparsers.add_parser(
         "cdminfo",
-        description="Print CONTENTdm collection information",
+        help="Print CONTENTdm collection information",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     cdminfo_subparser.add_argument("instance_url", help="CONTENTdm repository URL")

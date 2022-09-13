@@ -26,7 +26,7 @@ def scanftpfields(
     report_path: str,
     show_progress: bool = True,
 ) -> None:
-    """Scan and report on a FromThePage collection's field-based transcription labels"""
+    """Generate a HTML report on the Metadata Fields/Transcription Fields schema(s) in a FromThePage project"""
     progress_bar = tqdm.tqdm if show_progress else (lambda obj: obj)
     with requests.Session() as session:
         print("Requesting FromThePage project data...")

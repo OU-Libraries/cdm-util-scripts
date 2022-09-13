@@ -25,7 +25,7 @@ def ftpstruct2catcher(
     output_file_path: str,
     show_progress: bool = True,
 ) -> None:
-    """Get FromThePage Metadata Creation project data as cdm-catcher JSON edits"""
+    """Request FromThePage Metadata Fields and/or Transcription Fields data as cdm-catcher JSON edits"""
     progress_bar = tqdm.tqdm if show_progress else (lambda obj: obj)
     field_mapping = cdm_api.read_csv_field_mapping(field_mapping_csv_path)
 
@@ -87,6 +87,7 @@ def ftpstruct2catcher(
         if not work_config_ids_to_cdm_nicks and not page_config_ids_to_cdm_nicks:
             raise ValueError("unable to map any FromThePage fields to CONTENTdm nicks")
 
+        print("Requesting structured data...")
         edits = []
         for ftp_work in progress_bar(ftp_project.works):
             # Keep page-level edits before object-level edits to avoid locking CONTENTdm objects
@@ -106,6 +107,7 @@ def ftpstruct2catcher(
                 )
                 edits.append(edit)
 
+    print("Writing catcher edits...")
     with open(output_file_path, mode="w", encoding="utf-8") as fp:
         json.dump(edits, fp, indent=2)
 

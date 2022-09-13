@@ -13,7 +13,7 @@ def ftptransc2catcher(
     transcript_type: str,
     show_progress: bool = True,
 ) -> None:
-    """Get transcripts from a list of FromThePage manifests as cdm-catcher JSON edits"""
+    """Request transcripts from FromThePage works corresponding to manifest URLs listed in a text file as cdm-catcher JSON edits"""
     progress_bar = tqdm.tqdm if show_progress else (lambda obj: obj)
     with open(manifests_listing_path, mode="r", encoding="utf-8") as fp:
         manifest_urls = [line.strip() for line in fp.readlines()]
