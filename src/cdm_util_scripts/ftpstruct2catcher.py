@@ -142,8 +142,16 @@ def structured_data_to_catcher_edit(
         if config_id not in ids_to_nicks:
             continue
         nicks = ids_to_nicks[config_id]
-        value = field_data.value
-        value = value if isinstance(value, str) else "; ".join(value)
+        if isinstance(field_data.value, str):
+            value = field_data.value
+        else:
+            value = "; ".join(field_data.value)
+        value = normalize_cdm_edit_str(value)
         for nick in nicks:
             edit[nick] = value
     return edit
+
+
+# CONTENTdm seems to use LF exclusively
+def normalize_cdm_edit_str(s: str) -> str:
+    return s.strip().replace("\r\n", "\n")
