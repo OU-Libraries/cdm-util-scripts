@@ -280,8 +280,3 @@ def get_tab_values(event_function: Callable[..., None], values: Dict[Hashable, A
                 tab_values[tab_key] = tab_value
 
     return tab_values
-
-
-if __name__ == "__main__":
-    gui()
-    raise SystemExit(0)
