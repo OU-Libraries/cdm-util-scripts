@@ -1,4 +1,16 @@
-{%- macro showwhitespace(s) %}{{ s|replace('\n', '↵') }}{% endmacro -%}
+{%- macro showwhitespace(s) -%}
+    {%- for c in s -%}
+        {%- if c == "\n" -%}
+            <span class="nonprinting">LF</span>
+        {%- elif c == "\r" -%}
+            <span class="nonprinting">CR</span>
+        {%- elif c == "\t" -%}
+            <span class="nonprinting">TAB</span>
+        {%- else -%}
+            {{ c }}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endmacro -%}
 {%- macro cdmnickandname(nick) %}<span class="cdm-label">{{ cdm_nick_to_name[nick] }}</span> &lt;<span class="cdm-nick">{{ nick }}</span>&gt;{% endmacro -%}
 <!DOCTYPE html>
 <html lang="en">
@@ -57,6 +69,13 @@
              position: sticky;
              top: 0;
              left: 0;
+         }
+         .nonprinting {
+             font-family: monospace;
+             border-radius: 3px;
+             font-size: 0.8em;
+             color: white;
+             background-color: black;
          }
          {% block style %}{% endblock %}
         </style>

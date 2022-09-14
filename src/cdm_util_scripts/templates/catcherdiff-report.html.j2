@@ -138,7 +138,7 @@
                     <tbody>
                         {% for nick, value in edit.items() if nick != 'dmrecord' %}
                             <tr>
-                                <td class="controlled-col">{% if nick in vocabs_by_nick %}<span title="This field has a controlled vocabulary">🔒</span>{% endif %}</th>
+                                <td class="controlled-col">{% if nick in vocabs_by_nick %}<span title="This field has a controlled vocabulary">🔒</span>{% endif %}</td>
                                 <td class="nick-col"><p><span class="cdm-label">{{ cdm_nick_to_name[nick] }}</span><br/>&lt;<span class="cdm-nick">{{ nick }}</span>&gt;</p></td>
                                 <td class="value-col"><p><span class="value">{{ showwhitespace(cdm_info[nick]) }}</span></p></td>
                                 <td class="change-col">
