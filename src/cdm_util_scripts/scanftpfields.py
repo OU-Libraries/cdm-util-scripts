@@ -48,7 +48,7 @@ def scanftpfields(
             return None
 
         print("Requesting FromThePage project work data...")
-        ftp_project.request_works(session=session)
+        ftp_project.request_works(session=session, show_progress=show_progress)
 
         print("Requesting FromThePage project structured descriptions...")
         project_works_and_fields: List[ftp_api.WorkAndFields] = []

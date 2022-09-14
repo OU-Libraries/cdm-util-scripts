@@ -36,6 +36,7 @@ def ftpstruct2catcher(
             slug=ftp_slug,
             project_label=ftp_project_name,
             session=session,
+            show_progress=show_progress,
         )
 
         print("Requesting structured data configuration...")
