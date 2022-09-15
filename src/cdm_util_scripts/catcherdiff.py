@@ -75,7 +75,7 @@ def catcherdiff(
         cdm_collection_alias=cdm_collection_alias,
         cdm_field_infos=cdm_field_infos,
         vocabs_by_nick=vocabs_by_nick,
-        catcher_json_file=Path(catcher_json_file_path).name,
+        catcher_json_file_path=Path(catcher_json_file_path),
         report_file=report_file_path,
         report_datetime=datetime.now().isoformat(),
         edits_with_changes_count=edits_with_changes_count,

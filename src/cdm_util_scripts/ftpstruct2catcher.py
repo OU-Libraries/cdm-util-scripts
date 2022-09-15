@@ -153,5 +153,6 @@ def structured_data_to_catcher_edit(
 
 
 # CONTENTdm seems to use LF exclusively
+# While FromThePage provides CRLF
 def normalize_cdm_edit_str(s: str) -> str:
     return s.strip().replace("\r\n", "\n")

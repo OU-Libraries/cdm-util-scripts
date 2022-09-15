@@ -13,9 +13,10 @@
 {%- endmacro -%}
 {%- macro cdmnickandname(nick) %}<span class="cdm-label">{{ cdm_nick_to_name[nick] }}</span> &lt;<span class="cdm-nick">{{ nick }}</span>&gt;{% endmacro -%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
         <title>{% block headtitle %}{% endblock %}</title>
         <style type="text/css">
          body {
@@ -35,17 +36,21 @@
          .cdm-nick {
              font-family: monospace;
          }
+         .ftp-label {
+             background-color: #EDB;
+         }
          .controlled:before {
              content: "🔒 ";
          }
          .report-metadata-table th {
              text-align: left;
-             padding: 0.5em;
+             padding-right: 0.5em;
          }
          .report-metadata-table td {
              text-align: left;
-             padding: 0 0.5em 0 0.5em;
-             vertical-align: text-top;
+         }
+         .field-info-table {
+             border-collapse: collapse;
          }
          .field-info-table th {
              text-align: left;
@@ -53,14 +58,13 @@
          }
          .field-info-table td {
              text-align: left;
-             padding: 0 0.5em 0 0.5em;
-             vertical-align: text-top;
+             padding: 0.5em;
          }
-         .field-info-table tr {
-             outline: thin solid;
+         .field-info-table tbody tr:nth-child(odd) {
+             background-color: gainsboro;
          }
-         .ftp-label {
-             background-color: #EDB;
+         .field-info-table tbody tr:nth-child(even) {
+             background-color: white;
          }
          .sticky-title {
              background-color: white;
@@ -72,10 +76,14 @@
          }
          .nonprinting {
              font-family: monospace;
-             border-radius: 3px;
+             border-radius: 4px;
+             margin: 0.2em;
              font-size: 0.8em;
              color: white;
              background-color: black;
+         }
+         .literal {
+             font-family: monospace;
          }
          {% block style %}{% endblock %}
         </style>

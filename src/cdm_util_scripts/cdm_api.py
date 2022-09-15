@@ -58,7 +58,7 @@ class CdmFieldInfo(NamedTuple):
     hide: int
     vocdb: str
     vocab: int
-    dc: str
+    dc: Optional[str]
     admin: int
     readonly: int
 

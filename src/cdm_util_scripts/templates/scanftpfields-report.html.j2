@@ -1,37 +1,36 @@
 {% extends 'base.html.j2' %}
 {% block headtitle %}{{ project_label }} scanftpfields report{% endblock %}
 {% block style %}
-    .project-metadata th {
-    text-align: left;
-    }
-    .literal {
-    font-family: monospace;
-    }
-    .page-config td, .work-config td {
-    border-top: dashed thin;
-    }
-    .page-config th, .work-config th {
-    text-align: left;
-    }
-    .fields-list {
-    list-style-type: none;
-    }
-    .included, .unincluded {
-    font-weight: bolder;
-    }
-    .included {
-    background-color: lightgreen;
-    }
-    .unincluded {
-    background-color: lightcoral;
-    }
+         .page-config, .work-config {
+             border-collapse: collapse;
+         }
+         .page-config td, .work-config td {
+             padding: 0.4em;
+             border-top: solid thin;
+         }
+         .page-config th, .work-config th {
+             padding: 0.4em;
+             text-align: left;
+         }
+         .fields-list {
+             list-style-type: none;
+         }
+         .included, .unincluded {
+             font-weight: bolder;
+         }
+         .included {
+             background-color: lime;
+         }
+         .unincluded {
+             background-color: crimson;
+         }
 {% endblock %}
 {% block doctitle %}FromThePage field scan report for project {{ project_label }}{% endblock %}
 {% block content %}
-    <table class="project-metadata">
+    <table class="report-metadata-table">
         <tbody>
             <tr><th>Report datetime</th><td>{{ report_datetime }}</td></tr>
-            <tr><th>FromThePage user slug</th><td>{{ slug }}</td></tr>
+            <tr><th>FromThePage user slug</th><td><span class="literal">{{ slug }}</span></td></tr>
             <tr><th>FromThePage project label</th><td>{{ project_label }}</td></tr>
             <tr><th>FromThePage project manifest</th><td><a href="{{ project_manifest_url }}">{{ project_manifest_url }}</a></td></tr>
         </tbody>
