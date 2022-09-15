@@ -190,70 +190,88 @@ def gui() -> None:
 
     window = sg.Window("cdm-util-scripts", layout, location=(25, 50))
 
-    while True:
-        event, values = window.read()
+    try:
+        while True:
+            event, values = window.read()
 
-        if event == sg.WIN_CLOSED or event == "Quit":
-            break
+            if event == sg.WIN_CLOSED or event == "Quit":
+                break
 
-        if isinstance(event, tuple):
-            event_function, event_value, *event_rest = event
+            if isinstance(event, tuple):
+                event_function, event_value, *event_rest = event
 
-            tab_values = get_tab_values(event_function, values)
+                tab_values = get_tab_values(event_function, values)
 
-            if event_value == "-LOAD ALIASES-":
-                print("Requesting CONTENTdm collection aliases... ", end="")
-                with requests.Session() as session:
-                    cdm_collection_list = cdm_api.request_collection_list(
-                        instance_url=tab_values["cdm_instance_url"],
-                        session=session,
-                    )
-                window[(event_function, "cdm_collection_alias")].update(
-                    values=[
-                        f"{info.alias.lstrip('/')}={info.name}"
-                        for info in cdm_collection_list
+                if event_value == "-LOAD ALIASES-":
+                    print("Requesting CONTENTdm collection aliases... ")
+                    try:
+                        with requests.Session() as session:
+                            cdm_collection_list = cdm_api.request_collection_list(
+                                instance_url=tab_values["cdm_instance_url"],
+                                session=session,
+                            )
+                        window[(event_function, "cdm_collection_alias")].update(
+                            values=[
+                                f"{info.alias.lstrip('/')}={info.name}"
+                                for info in cdm_collection_list
+                            ]
+                        )
+                        print("Done")
+                    except Exception as e:
+                        print("Request failed with error: ", e)
+
+                elif event_value == "-LOAD FTP PROJECTS-":
+                    print("Requesting FromThePage project names... ")
+                    try:
+                        with requests.Session() as session:
+                            ftp_instance = ftp_api.FtpInstance(
+                                url=ftp_api.FTP_HOSTED_URL
+                            )
+                            ftp_project_collection = ftp_instance.request_projects(
+                                slug=tab_values["ftp_slug"], session=session
+                            )
+                        window[(event_function, "ftp_project_name")].update(
+                            values=[
+                                project.label
+                                for project in ftp_project_collection.projects
+                            ]
+                        )
+                        print("Done")
+                    except Exception as e:
+                        print("Request failed with error:", e)
+
+                elif event_value == "-RUN-":
+                    missing_values_keys = [
+                        key
+                        for key, value in tab_values.items()
+                        if isinstance(value, str) and not value.strip()
                     ]
-                )
-                print("Done")
+                    if missing_values_keys:
+                        sg.popup(
+                            "Missing required input values:",
+                            *missing_values_keys,
+                            title="Missing input(s)",
+                        )
+                        continue
 
-            elif event_value == "-LOAD FTP PROJECTS-":
-                print("Requesting FromThePage project names... ", end="")
-                with requests.Session() as session:
-                    ftp_instance = ftp_api.FtpInstance(url=ftp_api.FTP_HOSTED_URL)
-                    ftp_project_collection = ftp_instance.request_projects(
-                        slug=tab_values["ftp_slug"], session=session
-                    )
-                window[(event_function, "ftp_project_name")].update(
-                    values=[
-                        project.label for project in ftp_project_collection.projects
-                    ]
-                )
-                print("Done")
+                    print(f"Running {event_function.__name__}(")
+                    for key, value in tab_values.items():
+                        print(f" {key}={value!r}")
+                    print(")")
 
-            elif event_value == "-RUN-":
-                missing_values_keys = [
-                    key for key, value in tab_values.items() if value == ""
-                ]
-                if missing_values_keys:
-                    sg.popup("Missing required input values")
-                    continue
-                print(f"Running {event_function.__name__}:")
-                for key, value in tab_values.items():
-                    print(f"  {key}={value!r}")
+                    try:
+                        event_function(**tab_values, show_progress=False)
+                        print("Done")
+                    except Exception as e:
+                        print("Run failed with error:", e)
+                        sg.popup("Run failed with error:", e, title="Run failed")
 
-                try:
-                    event_function(**tab_values, show_progress=False)
-                except Exception as err:
-                    print(err)
-                    sg.popup(err)
-                    continue
+                else:
+                    raise KeyError(repr(event_value))
 
-                print("Done")
-
-            else:
-                raise KeyError(repr(event_value))
-
-    window.close()
+        window.close()
+    except Exception as e:
+        sg.popup(e, title="Fatal Error")
 
 
 def get_tab_values(event_function: Callable[..., None], values: Dict[Hashable, Any]):
