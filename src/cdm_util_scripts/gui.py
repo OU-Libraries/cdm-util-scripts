@@ -1,6 +1,8 @@
 import PySimpleGUI as sg
 import requests
 
+import csv
+
 from typing import Callable, Dict, Any, Hashable
 
 from cdm_util_scripts import cdm_api
@@ -169,6 +171,30 @@ def gui() -> None:
         [sg.Button("Run", key=(scanftpfields, "-RUN-"))],
     ]
 
+    cdmfields2csv_layout = [
+        [
+            sg.Frame(
+                "Help",
+                [[sg.Text("Jump start a CONTENTdm field mapping CSV", size=HELP_SIZE)]],
+            )
+        ],
+        [sg.Text("CONTENTdm instance URL")],
+        [
+            sg.InputText(key=(cdmfields2csv, "cdm_instance_url")),
+            sg.Button(
+                "Request collection aliases", key=(cdmfields2csv, "-LOAD ALIASES-")
+            ),
+        ],
+        [sg.Text("CONTENTdm collection alias")],
+        [sg.Combo([], key=(cdmfields2csv, "cdm_collection_alias"), size=55)],
+        [sg.Text("CSV output file path")],
+        [
+            sg.Input(key=(cdmfields2csv, "csv_file_path")),
+            sg.FileSaveAs(file_types=(("CSV", "*.csv"),), default_extension=".csv"),
+        ],
+        [sg.Button("Run", key=(cdmfields2csv, "-RUN-"))],
+    ]
+
     layout = [
         [
             sg.TabGroup(
@@ -178,6 +204,7 @@ def gui() -> None:
                         sg.Tab("scanftpfields", scanftpfields_layout),
                         sg.Tab("ftptransc2catcher", ftptransc2catcher_layout),
                         sg.Tab("ftpstruct2catcher", ftpstruct2catcher_layout),
+                        sg.Tab("cdmfields2csv", cdmfields2csv_layout),
                         sg.Tab("csv2json", csv2json_layout),
                     ]
                 ]
@@ -298,3 +325,27 @@ def get_tab_values(event_function: Callable[..., None], values: Dict[Hashable, A
                 tab_values[tab_key] = tab_value
 
     return tab_values
+
+
+def cdmfields2csv(
+    cdm_instance_url: str,
+    cdm_collection_alias: str,
+    csv_file_path: str,
+    show_progress: bool = False,
+) -> None:
+    with requests.Session() as session:
+        field_infos = cdm_api.request_field_infos(
+            instance_url=cdm_instance_url,
+            collection_alias=cdm_collection_alias,
+            session=session,
+        )
+    with open(csv_file_path, mode="w", encoding="utf-8", newline="") as fp:
+        writer = csv.DictWriter(fp, fieldnames=["name", "nick"], dialect="excel")
+        writer.writeheader()
+        for field_info in field_infos:
+            writer.writerow(
+                {
+                    "name": field_info.name,
+                    "nick": field_info.nick,
+                }
+            )
