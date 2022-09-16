@@ -150,7 +150,8 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "-a", "--alias", action="store", help="CONTENTdm collection alias"
     )
     cdminfo_subparser.add_argument(
-        "--output",
+        "-f",
+        "--output-format",
         action="store",
         choices=list(OUTPUT_FORMATS),
         default="records",
