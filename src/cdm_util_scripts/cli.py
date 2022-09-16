@@ -129,12 +129,20 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "ftpinfo", help="Print FromThePage project information"
     )
     ftpinfo_subparser.add_argument("slug", help="FromThePage user slug")
+    ftpinfo_subparser.add_argument(
+        "-f",
+        "--output-format",
+        action="store",
+        choices=list(OUTPUT_FORMATS),
+        default="records",
+        help="Output format",
+    )
     ftpinfo_subparser.set_defaults(func=ftpinfo)
 
     # cdminfo
     cdminfo_subparser = subparsers.add_parser(
         "cdminfo",
-        help="Print CONTENTdm collection information",
+        help="Print CONTENTdm instance or collection information",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     cdminfo_subparser.add_argument("instance_url", help="CONTENTdm repository URL")
@@ -162,21 +170,28 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     return 0
 
 
-def ftpinfo(slug: str) -> None:
+def ftpinfo(slug: str, output_format: str) -> None:
     with requests.Session() as session:
         ftp_instance = ftp_api.FtpInstance(url=ftp_api.FTP_HOSTED_URL)
         ftp_projects = ftp_instance.request_projects(slug=slug, session=session)
 
+    records = []
     for project in ftp_projects.projects:
-        print(project.label)
-        print(project.url)
+        records.append(
+            {
+                "@id": project.url,
+                "label": project.label,
+            }
+        )
+
+    OUTPUT_FORMATS[output_format](records)
 
 
 def cdminfo(
     instance_url: str,
     alias: Optional[str],
     columns: Optional[str],
-    output: str,
+    output_format: str,
 ) -> None:
     with requests.Session() as session:
         if alias is not None:
@@ -202,26 +217,26 @@ def cdminfo(
             {column: entry[column] for column in column_names} for entry in dm_result
         ]
 
-    OUTPUT_FORMATS[output](dm_result)
+    OUTPUT_FORMATS[output_format](dm_result)
 
 
-def print_as_records(dm_result: Sequence[Dict[str, str]]) -> None:
-    max_key_len = max(len(key) for key in dm_result[0])
-    for record in dm_result:
+def print_as_records(records: Sequence[Dict[str, str]]) -> None:
+    max_key_len = max(len(key) for key in records[0])
+    for record in records:
         for key, value in record.items():
             print(f"{key.rjust(max_key_len)} : {value!r}")
-        if record is not dm_result[-1]:
+        if record is not records[-1]:
             print(end="\n")
 
 
-def print_as_csv(dm_result: Sequence[Dict[str, str]]) -> None:
-    writer = csv.DictWriter(sys.stdout, fieldnames=list(dm_result[0]))
+def print_as_csv(records: Sequence[Dict[str, str]]) -> None:
+    writer = csv.DictWriter(sys.stdout, fieldnames=list(records[0]))
     writer.writeheader()
-    writer.writerows(dm_result)
+    writer.writerows(records)
 
 
-def print_as_json(dm_result: Sequence[Dict[str, str]]) -> None:
-    print(json.dumps(dm_result, indent=2))
+def print_as_json(records: Sequence[Dict[str, str]]) -> None:
+    print(json.dumps(records, indent=2))
 
 
 OUTPUT_FORMATS = {
