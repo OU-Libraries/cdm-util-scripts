@@ -343,9 +343,10 @@ def cdmfields2csv(
         writer = csv.DictWriter(fp, fieldnames=["name", "nick"], dialect="excel")
         writer.writeheader()
         for field_info in field_infos:
-            writer.writerow(
-                {
-                    "name": field_info.name,
-                    "nick": field_info.nick,
-                }
-            )
+            if not field_info.readonly:
+                writer.writerow(
+                    {
+                        "name": field_info.name,
+                        "nick": field_info.nick,
+                    }
+                )
