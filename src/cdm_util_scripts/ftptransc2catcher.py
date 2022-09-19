@@ -15,11 +15,14 @@ def ftptransc2catcher(
 ) -> None:
     """Request transcripts from FromThePage works corresponding to manifest URLs listed in a text file as cdm-catcher JSON edits"""
     progress_bar = tqdm.tqdm if show_progress else (lambda obj: obj)
+
     with open(manifests_listing_path, mode="r", encoding="utf-8") as fp:
         manifest_urls = [line.strip() for line in fp.readlines()]
 
     with requests.Session() as session:
         catcher_edits = []
+
+        print("Requesting transcripts...")
         for manifest_url in progress_bar(manifest_urls):
             ftp_work = ftp_api.FtpWork.from_url(manifest_url, session=session)
             for ftp_page in ftp_work.pages:

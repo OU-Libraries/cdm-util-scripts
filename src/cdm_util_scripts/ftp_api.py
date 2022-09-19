@@ -2,7 +2,7 @@ import requests
 import tqdm
 
 import re
-from urllib.parse import urlparse
+from urllib.parse import urlsplit
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 
@@ -235,6 +235,16 @@ class FtpWork:
 
         if "dc:source" in self.metadata:
             cdm_iiif_manifest_url = self.metadata["dc:source"]
+
+            # Handle "dc:source" URLs that are somehow in lists with null strings
+            if isinstance(cdm_iiif_manifest_url, list):
+                for obj in cdm_iiif_manifest_url:
+                    if isinstance(obj, str) and obj.startswith("http"):
+                        cdm_iiif_manifest_url = obj
+                        break
+                else:
+                    raise ValueError("malformed dc:source metadata field")
+
             (
                 self.cdm_instance_url,
                 self.cdm_collection_alias,
@@ -380,7 +390,7 @@ def parse_ftp_collection_url(url: str) -> Tuple[str, str]:
 def parse_cdm_iiif_manifest_url(url: str) -> Tuple[str, str, str]:
     # New route: .../iiif/2/p15808coll19:872/manifest.json
     # Old route: .../iiif/info/p15808coll19/3001/manifest.json
-    cdm_instance_url = "://".join(urlparse(url)[:2])
+    cdm_instance_url = "://".join(urlsplit(url)[:2])
     match = re.search(r"/([^/:]*)[/:](\d*)/manifest.json", url)
     if match is None:
         raise ValueError(repr(url))

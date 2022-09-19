@@ -164,6 +164,27 @@ def test_FtpPage_request_transcript(ftp_work):
     "url,instance_url,alias,dmrecord",
     [
         (
+            "https://cdm15808.contentdm.oclc.org/iiif/info/p15808coll19/2147/manifest.json",
+            "https://cdm15808.contentdm.oclc.org",
+            "p15808coll19",
+            "2147",
+        ),
+        (
+            "https://media.library.ohio.edu/iiif/2/p15808coll19:3023/manifest.json",
+            "https://media.library.ohio.edu",
+            "p15808coll19",
+            "3023",
+        ),
+    ]
+)
+def test_parse_cdm_iiif_manifest_url(url, instance_url, alias, dmrecord):
+    assert ftp_api.parse_cdm_iiif_manifest_url(url) == (instance_url, alias, dmrecord)
+
+
+@pytest.mark.parametrize(
+    "url,instance_url,alias,dmrecord",
+    [
+        (
             "https://cdm15808.contentdm.oclc.org/iiif/mss:188/canvas/c1",
             "https://cdm15808.contentdm.oclc.org",
             "mss",
