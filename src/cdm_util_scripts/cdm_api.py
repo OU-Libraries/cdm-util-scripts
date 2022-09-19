@@ -264,9 +264,9 @@ CdmFieldMapping = Dict[str, List[str]]
 def read_csv_field_mapping(filename: str) -> CdmFieldMapping:
     with open(filename, mode="r", encoding="utf-8", newline="") as fp:
         reader = csv.DictReader(fp, dialect=sniff_csv_dialect(fp))
-        if reader.fieldnames != ["name", "nick"]:
+        if not {"name", "nick"}.issubset(set(reader.fieldnames or [])):
             raise ValueError(
-                "column mapping CSV must have 'name' and 'nick' column titles in that order"
+                "column mapping CSV must include 'name' and 'nick' column names"
             )
         field_mapping = collections.defaultdict(list)
         for row in reader:

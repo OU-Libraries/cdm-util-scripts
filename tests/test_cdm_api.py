@@ -1,6 +1,8 @@
 import pytest
 import requests
 
+import csv
+
 from cdm_util_scripts import cdm_api
 
 
@@ -183,3 +185,52 @@ def test_apply_mapping(field_mapping, result):
     ftp_fields = {"label": "value", "label2": "value2", "blank": ""}
     mapped = cdm_api.apply_field_mapping(ftp_fields, field_mapping)
     assert mapped == result
+
+
+@pytest.mark.parametrize(
+    "csv_rows, field_mapping",
+    [
+        (
+            [{"name": "name", "nick": "nick"}],
+            {"name": ["nick"]},
+        ),
+        (
+            [{"name": "name", "nick": "nick", "extra": "ignore"}],
+            {"name": ["nick"]},
+        ),
+        (
+            [{"name": "name", "nick": "nicka"}, {"name": "name", "nick": "nickb"}],
+            {"name": ["nicka", "nickb"]},
+        ),
+        (
+            [{"name": "name 1", "nick": "nick"}, {"name": "name 2", "nick": "nick"}],
+            {"name 1": ["nick"], "name 2": ["nick"]},
+        ),
+    ],
+)
+def test_read_csv_field_mapping(csv_rows, field_mapping, tmp_path):
+    csv_path = tmp_path / "test.csv"
+    with open(csv_path, mode="w", encoding="utf-8") as fp:
+        writer = csv.DictWriter(fp, fieldnames=list(csv_rows[0]))
+        writer.writeheader()
+        writer.writerows(csv_rows)
+    read_mapping = cdm_api.read_csv_field_mapping(csv_path)
+    assert read_mapping == field_mapping
+
+
+@pytest.mark.parametrize(
+    "csv_rows",
+    [
+        [{"name": "name", "missing nick": "not a nick"}],
+        [{"missing name": "not a name", "nick": "nick"}],
+        [{"missing both nick and name": "neither"}],
+    ]
+)
+def test_read_csv_field_mapping_raises(csv_rows, tmp_path):
+    csv_path = tmp_path / "test.csv"
+    with open(csv_path, mode="w", encoding="utf-8") as fp:
+        writer = csv.DictWriter(fp, fieldnames=list(csv_rows[0]))
+        writer.writeheader()
+        writer.writerows(csv_rows)
+    with pytest.raises(ValueError):
+        cdm_api.read_csv_field_mapping(csv_path)
