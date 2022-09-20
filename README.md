@@ -342,6 +342,12 @@ Optionally, `-l` (or `--level`) can be used to specify the level of description 
 * `both` specifies that both `work` and `page` level data should be requested
 * `auto` (the default) specifies that the FromThePage project configuration should be used to detect what data is available
 
+`ftpstruct2catcher` creates Catcher edits based on the principle of "make the fields in CONTENTdm how they are in FromThePage", meaning:
+* Blank fields in FromThePage will be passed on to Catcher and may overwrite existing CONTENTdm metadata with nothing (therefore deleting it)
+* It will take whatever (mapped) fields exist in corresponding work or page description or transcription so you must verify the integrity of a project's field schema using `scanftpfields`
+
+`ftpstruct2catcher` will print warnings about fields that exist in a FromThePage project but are not mapped to a CONTENTdm nick at the beginning of a run.
+
 <a name="ftptransc2catcher"/>
 
 ### ftptransc2catcher
