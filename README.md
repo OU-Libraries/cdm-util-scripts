@@ -92,7 +92,9 @@ The cdm-util-scripts GUI can be launched using:
 $ cdmutil gui
 ```
 
-The GUI window should then popup on your desktop. All of its functionality and arguments are the same as the CLI interface documented below, except that instead of providing the `cdminfo` and `ftpinfo` subcommands there are `Request collection aliases` and `Request project names` buttons that fill the FromThePage project names and CONTENTdm collection aliases combo boxes on request, and `cdmfields2csv` which jump starts a column mapping CSV with CONTENTdm field names and nicks.
+The GUI window should then popup on your desktop. All of its functionality and arguments are the same as the CLI interface documented below, except that instead of providing the `cdminfo` and `ftpinfo` subcommands there are `Request collection aliases` and `Request project names` buttons that fill the FromThePage project names and CONTENTdm collection aliases combo boxes on request, and `cdmschema2csv` which jump starts a column mapping CSV with CONTENTdm field names and nicks.
+
+Because the GUI interface is an overlay on the CLI functionality without a GUI progress reporting mechanism, Windows will often designate cdm-util-scripts as Non Responsive during long runs even when they're not hung or frozen.
 
 ## The CLI interface
 
