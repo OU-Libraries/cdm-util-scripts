@@ -4,7 +4,7 @@ cdm-util-scripts are Python tools developed to support Ohio University Libraries
 
 cdm-util-scripts has two interfaces, a CLI (Command Line Interface) and a GUI (Graphical User Interface) that both offer the same functionality:
 * [catcherdiff](#catcherdiff): generates a HTML report on what CONTENTdm field values will change if a cdm-catcher JSON edit is implemented.
-* [scanftpfields](#scanftpfields): generates a HTML report on the Metadata Fields/Transcription Fields schema(s) in a FromThePage project.
+* [scanftpschema](#scanftpschema): generates a HTML report on the Metadata Fields/Transcription Fields schema(s) in a FromThePage project.
 * [ftpstruct2catcher](#ftpstruct2catcher): requests FromThePage Metadata Fields and/or Transcription Fields data as cdm-catcher JSON edits.
 * [ftptransc2catcher](#ftptransc2catcher): requests transcripts from FromThePage works corresponding to manifest URLs listed in a text file as cdm-catcher JSON edits.
 * [csv2json](#csv2json): transposes a CSV file into a list of JSON objects (cdm-catcher JSON edits).
@@ -198,20 +198,20 @@ label : 'William E. Peters Papers'
 ...
 ```
 
-<a name="scanftpfields"/>
+<a name="scanftpschema"/>
 
-### scanftpfields
+### scanftpschema
 
-`scanftpfields` takes
+`scanftpschema` takes
 * A FromThePage user slug
 * A FromThePage project label
 * A HTML report output file path
 
-and outputs a detailed report on the field schemas currently in use in that FromThePage project. FromThePage's field-based transcription and Metadata Creation tools can end up using different schema for works in a FromThePage project if that feature's configuration is changed during a transcription project. The `scanftpfields` report is intended to be useful for ensuring schema consistency inside of a collection, and is especially useful for checking if a FromThePage project will be fully loaded into CONTENTdm using `ftpstruct2catcher`.
+and outputs a detailed report on the field schemas currently in use in that FromThePage project. FromThePage's field-based transcription and Metadata Creation tools can end up using different schema for works in a FromThePage project if that feature's configuration is changed during a transcription project. The `scanftpschema` report is intended to be useful for ensuring schema consistency inside of a collection, and is especially useful for checking if a FromThePage project will be fully loaded into CONTENTdm using `ftpstruct2catcher`.
 
 Example:
 ```console
-$ cdmutil scanftpfields ohiouniversitylibraries "Farfel Leaves Metadata" farfel-fields-report.html
+$ cdmutil scanftpschema ohiouniversitylibraries "Farfel Leaves Metadata" farfel-fields-report.html
 Requesting FromThePage project data...
 Requesting FromThePage project structured data configuration...
 Requesting FromThePage project work data...
@@ -346,7 +346,7 @@ Optionally, `-l` (or `--level`) can be used to specify the level of description 
 
 `ftpstruct2catcher` creates Catcher edits based on the principle of "make the fields in CONTENTdm how they are in FromThePage", meaning:
 * Blank fields in FromThePage will be passed on to Catcher and may overwrite existing CONTENTdm metadata with nothing (therefore deleting it)
-* It will take whatever (mapped) fields exist in corresponding work or page description or transcription so you must verify the integrity of a project's field schema using `scanftpfields`
+* It will take whatever (mapped) fields exist in corresponding work or page description or transcription so you must verify the integrity of a project's field schema using `scanftpschema`
 
 `ftpstruct2catcher` will print warnings about fields that exist in a FromThePage project but are not mapped to a CONTENTdm nick at the beginning of a run.
 

@@ -11,7 +11,7 @@ from cdm_util_scripts.catcherdiff import catcherdiff
 from cdm_util_scripts.csv2json import csv2json
 from cdm_util_scripts.ftptransc2catcher import ftptransc2catcher
 from cdm_util_scripts.ftpstruct2catcher import ftpstruct2catcher, Level
-from cdm_util_scripts.scanftpfields import scanftpfields
+from cdm_util_scripts.scanftpschema import scanftpschema
 
 
 HELP_SIZE = (80, 2)
@@ -147,28 +147,28 @@ def gui() -> None:
         [sg.Button("Run", key=(ftpstruct2catcher, "-RUN-"))],
     ]
 
-    scanftpfields_layout = [
+    scanftpschema_layout = [
         [
             sg.Frame(
                 "Help",
-                [[sg.Text(scanftpfields.__doc__, size=HELP_SIZE)]],
+                [[sg.Text(scanftpschema.__doc__, size=HELP_SIZE)]],
             )
         ],
         [sg.Text("FromThePage user slug")],
         [
-            sg.InputText(key=(scanftpfields, "ftp_slug")),
+            sg.InputText(key=(scanftpschema, "ftp_slug")),
             sg.Button(
-                "Request project names", key=(scanftpfields, "-LOAD FTP PROJECTS-")
+                "Request project names", key=(scanftpschema, "-LOAD FTP PROJECTS-")
             ),
         ],
         [sg.Text("FromThePage project name")],
-        [sg.Combo([], key=(scanftpfields, "ftp_project_name"), size=55)],
+        [sg.Combo([], key=(scanftpschema, "ftp_project_name"), size=55)],
         [sg.Text("HTML report output file path")],
         [
-            sg.Input(key=(scanftpfields, "report_path")),
+            sg.Input(key=(scanftpschema, "report_path")),
             sg.FileSaveAs(file_types=(("HTML", "*.html"),), default_extension=".html"),
         ],
-        [sg.Button("Run", key=(scanftpfields, "-RUN-"))],
+        [sg.Button("Run", key=(scanftpschema, "-RUN-"))],
     ]
 
     cdmschema2csv_layout = [
@@ -208,7 +208,7 @@ def gui() -> None:
                 [
                     [
                         sg.Tab("catcherdiff", catcherdiff_layout),
-                        sg.Tab("scanftpfields", scanftpfields_layout),
+                        sg.Tab("scanftpschema", scanftpschema_layout),
                         sg.Tab("ftptransc2catcher", ftptransc2catcher_layout),
                         sg.Tab("ftpstruct2catcher", ftpstruct2catcher_layout),
                         sg.Tab("cdmschema2csv", cdmschema2csv_layout),

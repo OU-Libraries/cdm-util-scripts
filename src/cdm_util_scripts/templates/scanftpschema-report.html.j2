@@ -1,12 +1,12 @@
 {% extends 'base.html.j2' %}
-{% block headtitle %}{{ project_label }} scanftpfields report{% endblock %}
+{% block headtitle %}{{ project_label }} scanftpschema report{% endblock %}
 {% block style %}
          .page-config, .work-config {
              border-collapse: collapse;
          }
          .page-config td, .work-config td {
              padding: 0.4em;
-             border-top: solid thin;
+             border: solid thin;
          }
          .page-config th, .work-config th {
              padding: 0.4em;
@@ -25,7 +25,7 @@
              background-color: crimson;
          }
 {% endblock %}
-{% block doctitle %}FromThePage field scan report for project {{ project_label }}{% endblock %}
+{% block doctitle %}{{ project_label }} scanftpschema report{% endblock %}
 {% block content %}
     <table class="report-metadata-table">
         <tbody>

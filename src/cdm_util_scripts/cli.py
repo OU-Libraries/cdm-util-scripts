@@ -13,7 +13,7 @@ from cdm_util_scripts import catcherdiff
 from cdm_util_scripts import csv2json
 from cdm_util_scripts import ftptransc2catcher
 from cdm_util_scripts import ftpstruct2catcher
-from cdm_util_scripts import scanftpfields
+from cdm_util_scripts import scanftpschema
 from cdm_util_scripts import gui
 
 
@@ -105,17 +105,17 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     )
     ftpstruct2catcher_subparser.set_defaults(func=ftpstruct2catcher.ftpstruct2catcher)
 
-    # scanftpfields
-    scanftpfields_subparser = subparsers.add_parser(
-        "scanftpfields",
-        help=scanftpfields.scanftpfields.__doc__,
+    # scanftpschema
+    scanftpschema_subparser = subparsers.add_parser(
+        "scanftpschema",
+        help=scanftpschema.scanftpschema.__doc__,
     )
-    scanftpfields_subparser.add_argument("ftp_slug", help="FromThePage user slug")
-    scanftpfields_subparser.add_argument(
+    scanftpschema_subparser.add_argument("ftp_slug", help="FromThePage user slug")
+    scanftpschema_subparser.add_argument(
         "ftp_project_name", help="FromThePage project name"
     )
-    scanftpfields_subparser.add_argument("report_path", help="Report file path")
-    scanftpfields_subparser.set_defaults(func=scanftpfields.scanftpfields)
+    scanftpschema_subparser.add_argument("report_path", help="Report file path")
+    scanftpschema_subparser.set_defaults(func=scanftpschema.scanftpschema)
 
     # GUI
     gui_subparser = subparsers.add_parser(

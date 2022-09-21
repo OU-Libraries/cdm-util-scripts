@@ -20,7 +20,7 @@ class PageAndFields(NamedTuple):
     fields: ftp_api.FtpStructuredData
 
 
-def scanftpfields(
+def scanftpschema(
     ftp_slug: str,
     ftp_project_name: str,
     report_path: str,
@@ -72,7 +72,7 @@ def scanftpfields(
 
     print("Compiling report...")
     env = jinja2.Environment(loader=jinja2.PackageLoader(__package__))
-    report_html = env.get_template("scanftpfields-report.html.j2").render(
+    report_html = env.get_template("scanftpschema-report.html.j2").render(
         slug=ftp_slug,
         project_label=ftp_project_name,
         project_manifest_url=ftp_project.url,
