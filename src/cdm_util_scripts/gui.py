@@ -171,28 +171,35 @@ def gui() -> None:
         [sg.Button("Run", key=(scanftpfields, "-RUN-"))],
     ]
 
-    cdmfields2csv_layout = [
+    cdmschema2csv_layout = [
         [
             sg.Frame(
                 "Help",
-                [[sg.Text("Jump start a CONTENTdm field mapping CSV", size=HELP_SIZE)]],
+                [
+                    [
+                        sg.Text(
+                            cdmschema2csv.__doc__,
+                            size=HELP_SIZE,
+                        )
+                    ]
+                ],
             )
         ],
         [sg.Text("CONTENTdm instance URL")],
         [
-            sg.InputText(key=(cdmfields2csv, "cdm_instance_url")),
+            sg.InputText(key=(cdmschema2csv, "cdm_instance_url")),
             sg.Button(
-                "Request collection aliases", key=(cdmfields2csv, "-LOAD ALIASES-")
+                "Request collection aliases", key=(cdmschema2csv, "-LOAD ALIASES-")
             ),
         ],
         [sg.Text("CONTENTdm collection alias")],
-        [sg.Combo([], key=(cdmfields2csv, "cdm_collection_alias"), size=55)],
+        [sg.Combo([], key=(cdmschema2csv, "cdm_collection_alias"), size=55)],
         [sg.Text("CSV output file path")],
         [
-            sg.Input(key=(cdmfields2csv, "csv_file_path")),
+            sg.Input(key=(cdmschema2csv, "csv_file_path")),
             sg.FileSaveAs(file_types=(("CSV", "*.csv"),), default_extension=".csv"),
         ],
-        [sg.Button("Run", key=(cdmfields2csv, "-RUN-"))],
+        [sg.Button("Run", key=(cdmschema2csv, "-RUN-"))],
     ]
 
     layout = [
@@ -204,14 +211,24 @@ def gui() -> None:
                         sg.Tab("scanftpfields", scanftpfields_layout),
                         sg.Tab("ftptransc2catcher", ftptransc2catcher_layout),
                         sg.Tab("ftpstruct2catcher", ftpstruct2catcher_layout),
-                        sg.Tab("cdmfields2csv", cdmfields2csv_layout),
+                        sg.Tab("cdmschema2csv", cdmschema2csv_layout),
                         sg.Tab("csv2json", csv2json_layout),
                     ]
                 ]
             )
         ],
         [sg.Text("Command Log")],
-        [sg.Output(size=(80, 10), key="-OUTPUT-")],
+        [
+            sg.Multiline(
+                auto_refresh=True,
+                autoscroll=True,
+                reroute_stdout=True,
+                write_only=True,
+                font="Courier 10",
+                size=(72, 10),
+                key="-OUTPUT-",
+            )
+        ],
         [sg.Push(), sg.Quit()],
     ]
 
@@ -283,7 +300,7 @@ def gui() -> None:
 
                     print(f"Running {event_function.__name__}(")
                     for key, value in tab_values.items():
-                        print(f" {key}={value!r}")
+                        print(f" {key}={value!r},")
                     print(")")
 
                     try:
@@ -327,12 +344,13 @@ def get_tab_values(event_function: Callable[..., None], values: Dict[Hashable, A
     return tab_values
 
 
-def cdmfields2csv(
+def cdmschema2csv(
     cdm_instance_url: str,
     cdm_collection_alias: str,
     csv_file_path: str,
     show_progress: bool = False,
 ) -> None:
+    """Jump start a CONTENTdm field mapping by writing a CONTENTdm collection's editable names and nicks to CSV"""
     with requests.Session() as session:
         field_infos = cdm_api.request_field_infos(
             instance_url=cdm_instance_url,
