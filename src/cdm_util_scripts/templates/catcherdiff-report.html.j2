@@ -122,6 +122,29 @@
                 </tbody>
             </table>
 
+            <h2>Number of edits and changes by field</h2>
+
+            <table class="field-info-table">
+                <thead>
+                    <tr>
+                        <th>Field name</th>
+                        <th>Field nick</th>
+                        <th>Number of edits</th>
+                        <th>Number of changes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nick, count in nicks_with_edits_counter.most_common() %}
+                        <tr>
+                            <td>{{ cdm_nick_to_name[nick] }}</td>
+                            <td class="literal">{{ nick }}</td>
+                            <td>{{ count }}</td>
+                            <td>{{ nicks_with_changes_counter[nick] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
             <h2>Edit actions</h2>
 
             {% for edit, cdm_info in deltas %}

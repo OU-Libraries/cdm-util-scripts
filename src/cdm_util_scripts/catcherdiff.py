@@ -3,12 +3,13 @@ import jinja2
 import tqdm
 
 import json
+import collections
 from datetime import datetime
 from pathlib import Path
 
 from cdm_util_scripts import cdm_api
 
-from typing import Dict, List, NamedTuple, Iterable, Optional
+from typing import Dict, List, NamedTuple, Iterable, Optional, Counter, Tuple
 
 
 class Delta(NamedTuple):
@@ -54,7 +55,7 @@ def catcherdiff(
         else:
             cdm_vocabs = None
 
-    edits_with_changes_count = count_changes(deltas)
+    edits_with_changes_count, nicks_with_changes_counter, nicks_with_edits_counter = count_changes(deltas)
     vocabs_by_nick = {
         field_info.nick: cdm_vocabs[field_info.get_vocab_info()] if cdm_vocabs else None
         for field_info in cdm_field_infos
@@ -79,6 +80,8 @@ def catcherdiff(
         report_file=report_file_path,
         report_datetime=datetime.now().isoformat(),
         edits_with_changes_count=edits_with_changes_count,
+        nicks_with_changes_counter=nicks_with_changes_counter,
+        nicks_with_edits_counter=nicks_with_edits_counter,
         deltas=deltas,
         identifier_nick=identifier_nick,
         title_nick=title_nick,
@@ -111,14 +114,22 @@ def request_deltas(
     return deltas
 
 
-def count_changes(deltas: List[Delta]) -> int:
-    edits_with_changes_count = 0
+def count_changes(deltas: List[Delta]) -> Tuple[int, Counter[str], Counter[str]]:
+    edits_with_changes = 0
+    nicks_with_changes: Counter[str] = collections.Counter()
+    nicks_with_edits: Counter[str] = collections.Counter()
     for delta in deltas:
+        changes = False
         for nick, value in delta.edit.items():
+            if nick == "dmrecord":
+                continue
+            nicks_with_edits[nick] += 1
             if value != delta.item_info[nick]:
-                edits_with_changes_count += 1
-                break
-    return edits_with_changes_count
+                changes = True
+                nicks_with_changes[nick] += 1
+        if changes:
+            edits_with_changes += 1
+    return edits_with_changes, nicks_with_changes, nicks_with_edits
 
 
 def find_dc_field(
