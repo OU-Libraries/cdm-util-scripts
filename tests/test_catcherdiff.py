@@ -1,6 +1,7 @@
 import pytest
 
 import json
+import collections
 
 from cdm_util_scripts import catcherdiff
 
@@ -22,3 +23,25 @@ def test_catcherdiff(tmp_path):
     )
 
     assert report_file_path.exists()
+
+
+def test_count_changes():
+    deltas = [
+        catcherdiff.Delta(
+            edit={"dmrecord": "71", "format": "PDF"},
+            item_info={"dmrecord": "71", "format": "pdf"},
+        ),
+        catcherdiff.Delta(
+            edit={"dmrecord": "72", "format": "PNG"},
+            item_info={"dmrecord": "72", "format": "PNG"},
+        ),
+        catcherdiff.Delta(
+            edit={"dmrecord": "73", "format": "JPG", "date": "2022"},
+            item_info={"dmrecord": "73", "format": "JPEG", "date": "2022"},
+        )
+
+    ]
+    edits_with_changes_count, nicks_with_changes, nicks_with_edits = catcherdiff.count_changes(deltas)
+    assert edits_with_changes_count == 2
+    assert nicks_with_changes == collections.Counter(["format", "format"])
+    assert nicks_with_edits == collections.Counter(["format", "format", "format", "date"])
