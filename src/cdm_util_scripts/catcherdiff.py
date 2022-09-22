@@ -56,11 +56,14 @@ def catcherdiff(
             cdm_vocabs = None
 
     edits_with_changes_count, nicks_with_changes_counter, nicks_with_edits_counter = count_changes(deltas)
-    vocabs_by_nick = {
-        field_info.nick: cdm_vocabs[field_info.get_vocab_info()] if cdm_vocabs else None
-        for field_info in cdm_field_infos
-        if field_info.vocab
-    }
+    vocabs_by_nick: Dict[str, Optional[List[str]]] = {}
+    for field_info in cdm_field_infos:
+        vocab_info = field_info.get_vocab_info()
+        if vocab_info:
+            if cdm_vocabs:
+                vocabs_by_nick[field_info.nick] = cdm_vocabs[vocab_info]
+            else:
+                vocabs_by_nick[field_info.nick] = None
     identifier_field_info = find_dc_field(cdm_field_infos, "Identifier")
     identifier_nick = identifier_field_info.nick if identifier_field_info else None
     title_field_info = find_dc_field(cdm_field_infos, "Title")

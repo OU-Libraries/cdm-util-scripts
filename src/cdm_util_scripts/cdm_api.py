@@ -1,21 +1,21 @@
-from requests import Session
+import requests
 
 import csv
 import collections
 import enum
 
-from typing import Dict, List, Union, Tuple, NamedTuple, Optional, Any, TextIO, Iterable
+from typing import Dict, List, Union, Tuple, NamedTuple, Optional, Any, TextIO, Iterable, Iterator
 
 
 class DmError(Exception):
     pass
 
 
-def request_dm(url: str, session: Session):
+def request_dm(url: str, session: requests.Session) -> Union[Dict[str, Any], List[str]]:
     response = session.get(url)
     response.raise_for_status()
     dm_result = response.json()
-    if "code" in dm_result and "message" in dm_result:
+    if isinstance(dm_result, dict) and "code" in dm_result and "message" in dm_result:
         raise DmError(dm_result["message"])
     return dm_result
 
@@ -28,7 +28,7 @@ class CdmCollectionInfo(NamedTuple):
 
 
 def request_collection_list(
-    instance_url: str, session: Session
+    instance_url: str, session: requests.Session
 ) -> List[CdmCollectionInfo]:
     instance_url = instance_url.rstrip("/")
     url = "/".join(
@@ -74,7 +74,7 @@ class CdmFieldInfo(NamedTuple):
 
 
 def request_field_infos(
-    instance_url: str, collection_alias: str, session: Session
+    instance_url: str, collection_alias: str, session: requests.Session
 ) -> List[CdmFieldInfo]:
     infos_url = "/".join(
         [
@@ -109,7 +109,7 @@ CdmItemInfo = Dict[str, str]
 
 
 def request_item_info(
-    instance_url: str, collection_alias: str, dmrecord: str, session: Session
+    instance_url: str, collection_alias: str, dmrecord: str, session: requests.Session
 ) -> CdmItemInfo:
     url = "/".join(
         [
@@ -128,7 +128,7 @@ CdmFieldVocab = List[str]
 
 
 def request_field_vocab(
-    instance_url: str, collection_alias: str, field_nick: str, session: Session
+    instance_url: str, collection_alias: str, field_nick: str, session: requests.Session
 ) -> CdmFieldVocab:
     url = "/".join(
         [
@@ -143,7 +143,7 @@ def request_field_vocab(
 
 
 def request_page_pointers(
-    instance_url: str, collection_alias: str, dmrecord: str, session: Session
+    instance_url: str, collection_alias: str, dmrecord: str, session: requests.Session
 ) -> List[str]:
     url = "/".join(
         [
@@ -156,44 +156,48 @@ def request_page_pointers(
     )
     cpd_object_info = request_dm(url=url, session=session)
     if cpd_object_info["type"] == "Monograph":
-        _, page_pointers = _destructure_nodes(cpd_object_info["node"])
+        root = MonographNode(**cpd_object_info["node"])
+        page_pointers = list(root.iter_page_pointers())
     else:
         page_pointers = [page["pageptr"] for page in cpd_object_info["page"]]
     return page_pointers
 
 
-def _destructure_nodes(
-    node: Union[Dict[str, Any], List[Any]]
-) -> Tuple[List[Tuple[int, str]], List[str]]:
-    pages_index = []
-    page_pointers = []
+class MonographPage(NamedTuple):
+    pagetitle: str
+    pagefile: str
+    pageptr: str
 
-    def walk_nodes(
-        node: Union[Dict[str, Any], List[Any]],
-        depth: int = 0,
+
+class MonographNode:
+    nodetitle: str
+    pages: List[MonographPage]
+    nodes: List["MonographNode"]
+
+    def __init__(
+        self,
+        nodetitle: Union[str, Dict[Any, Any]],  # {} is CONTENTdm's None
+        page: Union[Dict[str, str], List[Dict[str, str]]],
+        node: Optional[Union[Dict[str, Any], List[Dict[str, Any]]]] = None,
     ) -> None:
-        if "page" not in node:
-            node_pages = []
-        elif isinstance(node["page"], dict):
-            node_pages = [node["page"]]
+        self.nodetitle = nodetitle if isinstance(nodetitle, str) else ""
+        pages = [page] if isinstance(page, dict) else page
+        self.pages = [MonographPage(**page_) for page_ in pages]
+        if node is None:
+            self.nodes = []
         else:
-            node_pages = node["page"]
+            nodes = [node] if isinstance(node, dict) else node
+            self.nodes = [MonographNode(**node_) for node_ in nodes]
 
-        for page in node_pages:
-            page_pointers.append(page["pageptr"])
-            pages_index.append(
-                (depth, node["nodetitle"] if node["nodetitle"] != {} else "")
-            )
+    def iter_pages(self, depth: int = 0) -> Iterator[Tuple[int, str, MonographPage]]:
+        for page in self.pages:
+            yield (depth, self.nodetitle, page)
+        for node in self.nodes:
+            yield from node.iter_pages(depth=depth + 1)
 
-        if "node" in node:
-            next_nodes = (
-                [node["node"]] if isinstance(node["node"], dict) else node["node"]
-            )
-            for n in next_nodes:
-                walk_nodes(n, depth + 1)
-
-    walk_nodes(node)
-    return pages_index, page_pointers
+    def iter_page_pointers(self) -> Iterator[str]:
+        for _, _, page in self.iter_pages():
+            yield page.pageptr
 
 
 class CdmObjectRecord:
@@ -229,7 +233,7 @@ def request_collection_object_records(
     instance_url: str,
     collection_alias: str,
     field_nicks: Iterable[str],
-    session: Session,
+    session: requests.Session,
 ) -> List[CdmObjectRecord]:
     cdm_records: List[CdmObjectRecord] = []
     total = 1
@@ -311,7 +315,7 @@ def request_vocabs(
     instance_url: str,
     collection_alias: str,
     field_infos: List[CdmFieldInfo],
-    session: Session,
+    session: requests.Session,
 ) -> Dict[CdmVocabInfo, List[str]]:
     vocabs = dict()
     for field_info in field_infos:

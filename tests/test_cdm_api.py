@@ -148,8 +148,8 @@ def test_request_page_pointers():
             dmrecord="102",
             session=session,
         )
-    assert pointers
-    assert monograph_pointers
+    assert pointers == [str(i) for i in range(82, 93)]
+    assert monograph_pointers == ["96", "97", "98", "99", "100", "101"]
 
 
 @pytest.mark.vcr
