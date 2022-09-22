@@ -179,6 +179,18 @@ class FtpWork:
     cdm_instance_url: Optional[str] = None
     cdm_collection_alias: Optional[str] = None
     cdm_object_dmrecord: Optional[str] = None
+    pct_complete: Optional[int] = None
+    pct_transcribed: Optional[int] = None
+    pct_ocr_corrected: Optional[int] = None
+    pct_indexed: Optional[int] = None
+    pct_marked_blank: Optional[int] = None
+    pct_needs_review: Optional[int] = None
+    pct_translation_complete: Optional[int] = None
+    pct_translated: Optional[int] = None
+    pct_translation_needs_review: Optional[int] = None
+    pct_translation_indexed: Optional[int] = None
+    pct_translation_marked_blank: Optional[int] = None
+    metadata_status: Optional[str] = None
 
     @classmethod
     def from_json(cls, json: Dict[str, Any]) -> "FtpWork":
@@ -210,6 +222,18 @@ class FtpWork:
         self.cdm_instance_url = None
         self.cdm_collection_alias = None
         self.cdm_object_dmrecord = None
+        self.pct_complete = None
+        self.pct_transcribed = None
+        self.pct_ocr_corrected = None
+        self.pct_indexed = None
+        self.pct_marked_blank = None
+        self.pct_needs_review = None
+        self.pct_translation_complete = None
+        self.pct_translated = None
+        self.pct_translation_needs_review = None
+        self.pct_translation_indexed = None
+        self.pct_translation_marked_blank = None
+        self.metadata_status = None
 
         metadata = json.get("metadata")
         if metadata is not None:
@@ -250,6 +274,28 @@ class FtpWork:
                 self.cdm_collection_alias,
                 self.cdm_object_dmrecord,
             ) = parse_cdm_iiif_manifest_url(cdm_iiif_manifest_url)
+
+        services = json.get("service")
+        if services is not None:
+            work_status_service = {}
+            if isinstance(services, list):
+                for service in services:
+                    if service.get("label") == "Work Status":
+                        work_status_service = service
+            elif isinstance(services, dict):
+                work_status_service = services
+            self.pct_complete = work_status_service.get("pctComplete")
+            self.pct_transcribed = work_status_service.get("pctTranscribed")
+            self.pct_ocr_corrected = work_status_service.get("pctOcrCorrected")
+            self.pct_indexed = work_status_service.get("pctIndexed")
+            self.pct_marked_blank = work_status_service.get("pctMarkedBlank")
+            self.pct_needs_review = work_status_service.get("pctNeedsReview")
+            self.pct_translation_complete = work_status_service.get("pctTranslationComplete")
+            self.pct_translated = work_status_service.get("pctTranslated")
+            self.pct_translation_needs_review = work_status_service.get("pctTranslationNeedsReview")
+            self.pct_translation_indexed = work_status_service.get("pctTranslationIndexed")
+            self.pct_translation_marked_blank = work_status_service.get("pctTranslationMarkedBlank")
+            self.metadata_status = work_status_service.get("metadataStatus")
 
     def _get_rendering(self, attr: str, value: str) -> "FtpRendering":
         for rendering in self.renderings:
@@ -319,6 +365,7 @@ class FtpPage:
     cdm_instance_url: Optional[str] = None
     cdm_collection_alias: Optional[str] = None
     cdm_page_dmrecord: Optional[str] = None
+    page_status: List[str] = field(default_factory=list)
 
     @classmethod
     def from_json(cls, json: Dict[str, Any]) -> "FtpPage":
@@ -337,6 +384,7 @@ class FtpPage:
             cdm_instance_url=cdm_instance_url,
             cdm_collection_alias=cdm_collection_alias,
             cdm_page_dmrecord=cdm_page_dmrecord,
+            page_status=json["service"].get("pageStatus", [])
         )
 
     def request_transcript(self, label: str, session: requests.Session) -> str:
@@ -361,6 +409,34 @@ class FtpPage:
         response = session.get(rendering.url)
         response.raise_for_status()
         return FtpStructuredData.from_json(response.json())
+
+    @property
+    def needs_review(self) -> Optional[bool]:
+        return True if "needsReview" in self.page_status else None
+
+    @property
+    def unedited(self) -> Optional[bool]:
+        return True if "unedited" in self.page_status else None
+
+    @property
+    def marked_blank(self) -> Optional[bool]:
+        return True if "markedBlank" in self.page_status else None
+
+    @property
+    def has_transcript(self) -> Optional[bool]:
+        return True if "hasTranscript" in self.page_status else None
+
+    @property
+    def has_translation(self) -> Optional[bool]:
+        return True if "hasTranslation" in self.page_status else None
+
+    @property
+    def translation_needs_review(self) -> Optional[bool]:
+        return True if "translationNeedsReview" in self.page_status else None
+
+    @property
+    def has_subject_tags(self) -> Optional[bool]:
+        return True if "hasSubjectTags" in self.page_status else None
 
 
 @dataclass
