@@ -42,7 +42,7 @@ C:\Users\username>env\Scripts\activate
 (env) C:\Users\username>python -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
 ```
 
-The following slightly different commands can be used in Git Bash or macOS Terminal:
+The following slightly different commands can be used on macOS Terminal or Linux:
 
 ```console
 $ mkdir cdm-util-scripts
@@ -51,6 +51,17 @@ $ python -m venv env
 $ source env/bin/activate
 (env) $ python -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
 ```
+
+And the following also slightly different commands can be used on Git Bash on Windows:
+
+```console
+$ mkdir cdm-util-scripts
+$ cd cdm-util-scripts
+$ python -m venv env
+$ source env/Scripts/activate
+(env) $ python -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
+```
+
 
 You can see the virtual environment is active and `cdmutil` is available because of the `(env)` prefix on the command line prompt. To check to see if everything is working, run:
 
