@@ -308,7 +308,7 @@ and outputs a JSON file containing field data from FromThePage project for use w
 
 The FromThePage project _must_ have been imported from CONTENTdm (so that FromThePage stored the corresponding CONTENTdm object URLs).
 
-The column mapping CSV must have two columns named `name` and `nick` indicating which FromThePage fields correspond to which CONTENTdm fields (other columns will be ignored). Multiple rows in the column mapping CSV with the same CONTENTdm field nickname in `nick`' will have their corresponding field data joined with a semicolon. Multiple rows in the column mapping CSV with the same field name in `name` will have their corresponding field data appended with a semicolon to each of the fields specified in their respective `nick` values.
+The column mapping CSV must have two columns named `name` and `nick` indicating which FromThePage field `name`s correspond to which CONTENTdm fields (`nick`s). Other columns will be ignored. Multiple rows in the column mapping CSV with the same CONTENTdm field nickname in `nick` will have their corresponding field values joined with a semicolon. Multiple rows in the column mapping CSV with the same FromThePage field `name` will have their corresponding values appended with a semicolon to each of the CONTENTdm fields specified in their `nick`s.
 
 Example of a column mapping CSV mapping multiple FromThePage fields to single CONTENTdm fields:
 
@@ -328,7 +328,7 @@ name,nick
 "Additional formats (text)",format
 ```
 
-Since non-`name` and `nick` columns are ignored, they can be used as comments (below `cdm-name` is the CONTENTdm field name corresponding to the nick):
+Since non-`name` and `nick` columns are ignored, they can be used for comments (below `cdm-name` is the CONTENTdm field name corresponding to the nick):
 
 ```CSV
 name,cdm-name,nick
@@ -337,16 +337,19 @@ Document genre(s) - Search online for the leaf author and source title to determ
 Feature(s) - Identify design features present on the leaf (recto and verso),Features - AAT,featur
 ```
 
-Example:
+Example usage:
 
 ```console
 $ cdmutil ftpstruct2catcher ohiouniversitylibraries "Farfel Leaves Metadata" farfel-mapping.csv farfel-edits.json
 Requesting project information...
-100%|███████████████████████████████████| 59/59 [00:12<00:00,  4.69it/s]
+100%|███████████████████████████████████| 59/59 [00:11<00:00,  5.25it/s]
+Farfel Leaves Metadata has 59 works with 160 total pages
+Found 59 works described
+Found 0 pages with transcripts
 Requesting structured data configuration...
 Requesting structured data...
-100%|███████████████████████████████████| 59/59 [00:09<00:00,  6.00it/s]
-Writing catcher edits...
+100%|███████████████████████████████████| 59/59 [00:09<00:00,  6.38it/s]
+Writing 59 catcher edits...
 ```
 
 Optionally, `-l` (or `--level`) can be used to specify the level of description to be requested:
@@ -370,7 +373,7 @@ Optionally, `-l` (or `--level`) can be used to specify the level of description 
 * The CONTENTdm field nickname for the collection's full-text transcript field
 * An output file name
 
-and outputs a JSON file of FromThePage transcripts matched to CONTENTdm objects for upload via cdm-catcher `edit` or diffing with `catcherdiff`. `ftptransc2catcher` should to the same thing that FromThePage's "Export to CONTENTdm" feature does, but via a cdm-catcher JSON file that can be `catcherdiff`-ed.
+and outputs a JSON file of FromThePage transcripts matched to CONTENTdm objects for upload via cdm-catcher `edit`. `ftptransc2catcher` should to the same thing that FromThePage's "Export to CONTENTdm" feature does, but only on the specified works and via a cdm-catcher JSON file that can be `catcherdiff`-ed.
 
 The listed FromThePage manifests _must_ have been imported from CONTENTdm, so that the FromThePage manifest lists their CONTENTdm URLs.
 
@@ -393,7 +396,7 @@ $ head catcher-edits.json
   },
   {
     "dmrecord": "1960",
-    "transc": "#433\nFairfax\nMurray\nFol I Von sant Ambrosio  Dec 7\n(174) CLXXII - end of Sumateyls - S. Wendel Oct 21\n*(175) CLXXIII - begins Wintterteyl - St. Michel  Sept 29\n(387) CCCLXXXV - ends with - S. Eufrosina  Feb 11\n\" the democracy of the intellect\ncomes from the printed book\"\nWord Incunabula first used in connection with printing by\nBernard von Malincrodt [?Bernhard von Mallinckrodt?]  (1591 - 1664), dean of Munster Cathedral,\nin his book De ortus et progressu artis typographicae, Cologne:\napud. I Kinchium, 1639.  He contributed this tract] to the celebration\nof the 2nd centenary of Gutenberg's invention.  He describes the\nperiod from Gutenberg to 1500 as :  Prima Typographiae Incunabula\n= the Time when Typography was in its swaddling clothes.\n- incunabula period - encompasses a vital period of experimentation\nwith local scripts , all remnants of the later Middle Ages.\n$721.45\n\n\n\n"
+    "transc": "#433\nFairfax\nMurray\nFol I Von sant Ambrosio  Dec 7\n(174) CLXXII ..."
   },
   {
 ```
