@@ -163,33 +163,34 @@ def request_page_pointers(
     return page_pointers
 
 
-class MonographPage(NamedTuple):
-    pagetitle: str
-    pagefile: str
-    pageptr: str
-
-
 class MonographNode:
     nodetitle: str
-    pages: List[MonographPage]
+    pages: List["MonographPage"]
     nodes: List["MonographNode"]
 
     def __init__(
         self,
         nodetitle: Union[str, Dict[Any, Any]],  # {} is CONTENTdm's None
-        page: Union[Dict[str, str], List[Dict[str, str]]],
+        page: Optional[Union[Dict[str, str], List[Dict[str, str]]]] = None,
         node: Optional[Union[Dict[str, Any], List[Dict[str, Any]]]] = None,
     ) -> None:
         self.nodetitle = nodetitle if isinstance(nodetitle, str) else ""
-        pages = [page] if isinstance(page, dict) else page
+        if page is None:
+            pages = []
+        elif isinstance(page, dict):
+            pages = [page]
+        else:
+            pages = page
         self.pages = [MonographPage(**page_) for page_ in pages]
         if node is None:
-            self.nodes = []
+            nodes = []
+        elif isinstance(node, dict):
+            nodes = [node]
         else:
-            nodes = [node] if isinstance(node, dict) else node
-            self.nodes = [MonographNode(**node_) for node_ in nodes]
+            nodes = node
+        self.nodes = [MonographNode(**node_) for node_ in nodes]
 
-    def iter_pages(self, depth: int = 0) -> Iterator[Tuple[int, str, MonographPage]]:
+    def iter_pages(self, depth: int = 0) -> Iterator[Tuple[int, str, "MonographPage"]]:
         for page in self.pages:
             yield (depth, self.nodetitle, page)
         for node in self.nodes:
@@ -198,6 +199,12 @@ class MonographNode:
     def iter_page_pointers(self) -> Iterator[str]:
         for _, _, page in self.iter_pages():
             yield page.pageptr
+
+
+class MonographPage(NamedTuple):
+    pagetitle: str
+    pagefile: str
+    pageptr: str
 
 
 class CdmObjectRecord:
