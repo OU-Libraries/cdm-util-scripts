@@ -8,6 +8,7 @@ from typing import Callable, Dict, Any, Hashable
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts.catcherdiff import catcherdiff
+from cdm_util_scripts.catchercombine import catchercombine
 from cdm_util_scripts.csv2json import csv2json
 from cdm_util_scripts.ftptransc2catcher import ftptransc2catcher
 from cdm_util_scripts.ftpstruct2catcher import ftpstruct2catcher, Level
@@ -53,6 +54,41 @@ def gui() -> None:
         [sg.Button("Run", key=(catcherdiff, "-RUN-"))],
     ]
 
+    catchercombine_layout = [
+        [
+            sg.Frame(
+                "Help",
+                [[sg.Text(catchercombine.__doc__, size=HELP_SIZE)]],
+            )
+        ],
+        [sg.Text("CONTENTdm instance URL")],
+        [
+            sg.InputText(key=(catchercombine, "cdm_instance_url")),
+            sg.Button(
+                "Request collection aliases", key=(catchercombine, "-LOAD ALIASES-")
+            ),
+        ],
+        [sg.Text("CONTENTdm collection alias")],
+        [sg.Combo([], key=(catchercombine, "cdm_collection_alias"), size=55)],
+        [sg.Text("Catcher edits JSON file path")],
+        [
+            sg.Input(key=(catchercombine, "catcher_json_file_path")),
+            sg.FileBrowse(file_types=(("JSON", "*.json"),)),
+        ],
+        [sg.Text("Catcher JSON output file path")],
+        [
+            sg.Input(key=(catchercombine, "output_file_path")),
+            sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
+        ],
+        [
+            sg.Checkbox(
+                "Prepend values",
+                key=(catchercombine, "prepend"),
+            )
+        ],
+        [sg.Button("Run", key=(catchercombine, "-RUN-"))],
+    ]
+
     ftptransc2catcher_layout = [
         [
             sg.Frame(
@@ -67,7 +103,7 @@ def gui() -> None:
         [sg.Text("Catcher JSON output file path")],
         [
             sg.Input(key=(ftptransc2catcher, "output_file_path")),
-            sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".html"),
+            sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
         ],
         [sg.Text("FromThePage transcript type")],
         [
@@ -208,6 +244,7 @@ def gui() -> None:
                 [
                     [
                         sg.Tab("catcherdiff", catcherdiff_layout),
+                        sg.Tab("catchercombine", catchercombine_layout),
                         sg.Tab("scanftpschema", scanftpschema_layout),
                         sg.Tab("ftptransc2catcher", ftptransc2catcher_layout),
                         sg.Tab("ftpstruct2catcher", ftpstruct2catcher_layout),

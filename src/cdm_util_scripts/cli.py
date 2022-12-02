@@ -10,6 +10,7 @@ from typing import Optional, Sequence, Dict
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import catcherdiff
+from cdm_util_scripts import catchercombine
 from cdm_util_scripts import csv2json
 from cdm_util_scripts import ftptransc2catcher
 from cdm_util_scripts import ftpstruct2catcher
@@ -46,6 +47,31 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         help="Check controlled vocabulary terms",
     )
     catcherdiff_subparser.set_defaults(func=catcherdiff.catcherdiff)
+
+    # catchercombine
+    catchercombine_subparser = subparsers.add_parser(
+        "catchercombine",
+        help=catchercombine.catchercombine.__doc__,
+    )
+    catchercombine_subparser.add_argument(
+        "cdm_instance_url", help="CONTENTdm instance URL"
+    )
+    catchercombine_subparser.add_argument(
+        "cdm_collection_alias", help="CONTENTdm collection alias"
+    )
+    catchercombine_subparser.add_argument(
+        "catcher_json_file_path", help="Path to cdm-catcher JSON file"
+    )
+    catchercombine_subparser.add_argument(
+        "output_file_path",
+        help="Path to write combined cdm-catcher JSON file",
+    )
+    catchercombine_subparser.add_argument(
+        "-p",
+        "--prepend",
+        default=False,
+        help="Prepend instead of append values",
+    )
 
     # csv2json
     csv2json_subparser = subparsers.add_parser(
