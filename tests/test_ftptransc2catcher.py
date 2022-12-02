@@ -37,4 +37,5 @@ def test_ftptransc2catcher(tmp_path):
     for edit, (dmrecord, start) in zip(output_json, STARTS):
         assert edit["dmrecord"] == dmrecord
         assert edit[transcript_nick].startswith(start)
+        assert edit[transcript_nick] == edit[transcript_nick].strip()
         assert set(edit) == {"dmrecord", transcript_nick}

@@ -182,7 +182,7 @@ def structured_data_to_catcher_edit(
     return edit
 
 
-# CONTENTdm seems to use LF exclusively
-# While FromThePage provides CRLF
+# CONTENTdm seems to use LF exclusively, while FromThePage provides CRLF
+# Catcher seems to trim whitespace from edits, so strip here for cleaner diffs
 def normalize_cdm_edit_str(s: str) -> str:
     return s.strip().replace("\r\n", "\n")
