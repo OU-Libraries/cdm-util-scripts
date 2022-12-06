@@ -10,8 +10,9 @@ from typing import Optional, Sequence, Dict
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import catcherdiff
-from cdm_util_scripts import catchercombine
+from cdm_util_scripts import catchercombineterms
 from cdm_util_scripts import csv2json
+from cdm_util_scripts import json2csv
 from cdm_util_scripts import ftptransc2catcher
 from cdm_util_scripts import ftpstruct2catcher
 from cdm_util_scripts import scanftpschema
@@ -48,30 +49,35 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     )
     catcherdiff_subparser.set_defaults(func=catcherdiff.catcherdiff)
 
-    # catchercombine
-    catchercombine_subparser = subparsers.add_parser(
-        "catchercombine",
-        help=catchercombine.catchercombine.__doc__,
+    # catchercombineterms
+    catchercombineterms_subparser = subparsers.add_parser(
+        "catchercombineterms",
+        help=catchercombineterms.catchercombineterms.__doc__,
     )
-    catchercombine_subparser.add_argument(
+    catchercombineterms_subparser.add_argument(
         "cdm_instance_url", help="CONTENTdm instance URL"
     )
-    catchercombine_subparser.add_argument(
+    catchercombineterms_subparser.add_argument(
         "cdm_collection_alias", help="CONTENTdm collection alias"
     )
-    catchercombine_subparser.add_argument(
+    catchercombineterms_subparser.add_argument(
         "catcher_json_file_path", help="Path to cdm-catcher JSON file"
     )
-    catchercombine_subparser.add_argument(
+    catchercombineterms_subparser.add_argument(
         "output_file_path",
         help="Path to write combined cdm-catcher JSON file",
     )
-    catchercombine_subparser.add_argument(
-        "-p",
-        "--prepend",
-        default=False,
-        help="Prepend instead of append values",
+    catchercombineterms_subparser.add_argument(
+        "-u",
+        "--unsorted",
+        action="store_false",
+        help="Do not sort combined terms",
     )
+
+    def catchercombineterms_func(*args, unsorted, **kwargs):
+        catchercombineterms.catchercombineterms(*args, sort_terms=unsorted, **kwargs)
+
+    catchercombineterms_subparser.set_defaults(func=catchercombineterms_func)
 
     # csv2json
     csv2json_subparser = subparsers.add_parser(
@@ -79,7 +85,28 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     )
     csv2json_subparser.add_argument("input_csv_path", help="Path to delimited file")
     csv2json_subparser.add_argument("output_json_path", help="Path to output JSON file")
-    csv2json_subparser.set_defaults(func=csv2json.csv2json)
+    csv2json_subparser.add_argument("-k", "--keep-empty-cells", action="store_false", help="Include edits for empty cells in CSV")
+
+    def csv2json_func(*args, keep_empty_cells, **kwargs):
+        csv2json.csv2json(*args, drop_empty_cells=keep_empty_cells, **kwargs)
+
+    csv2json_subparser.set_defaults(func=csv2json_func)
+
+    # json2csv
+    json2csv_subparser = subparsers.add_parser(
+        "json2csv", help=json2csv.json2csv.__doc__
+    )
+    json2csv_subparser.add_argument("input_json_path", help="Path to input JSON file")
+    json2csv_subparser.add_argument("output_csv_path", help="Path to output CSV file")
+    json2csv_subparser.add_argument(
+        "-d",
+        "--csv-dialect",
+        action="store",
+        choices=csv.list_dialects(),
+        default="excel-tab",
+        help="CSV dialect to use for output"
+    )
+    json2csv_subparser.set_defaults(func=json2csv.json2csv)
 
     # ftptransc2catcher
     ftptransc2catcher_subparser = subparsers.add_parser(

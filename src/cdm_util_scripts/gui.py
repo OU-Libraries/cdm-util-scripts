@@ -8,8 +8,9 @@ from typing import Callable, Dict, Any, Hashable
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts.catcherdiff import catcherdiff
-from cdm_util_scripts.catchercombine import catchercombine
+from cdm_util_scripts.catchercombineterms import catchercombineterms
 from cdm_util_scripts.csv2json import csv2json
+from cdm_util_scripts.json2csv import json2csv
 from cdm_util_scripts.ftptransc2catcher import ftptransc2catcher
 from cdm_util_scripts.ftpstruct2catcher import ftpstruct2catcher, Level
 from cdm_util_scripts.scanftpschema import scanftpschema
@@ -54,39 +55,40 @@ def gui() -> None:
         [sg.Button("Run", key=(catcherdiff, "-RUN-"))],
     ]
 
-    catchercombine_layout = [
+    catchercombineterms_layout = [
         [
             sg.Frame(
                 "Help",
-                [[sg.Text(catchercombine.__doc__, size=HELP_SIZE)]],
+                [[sg.Text(catchercombineterms.__doc__, size=HELP_SIZE)]],
             )
         ],
         [sg.Text("CONTENTdm instance URL")],
         [
-            sg.InputText(key=(catchercombine, "cdm_instance_url")),
+            sg.InputText(key=(catchercombineterms, "cdm_instance_url")),
             sg.Button(
-                "Request collection aliases", key=(catchercombine, "-LOAD ALIASES-")
+                "Request collection aliases", key=(catchercombineterms, "-LOAD ALIASES-")
             ),
         ],
         [sg.Text("CONTENTdm collection alias")],
-        [sg.Combo([], key=(catchercombine, "cdm_collection_alias"), size=55)],
+        [sg.Combo([], key=(catchercombineterms, "cdm_collection_alias"), size=55)],
         [sg.Text("Catcher edits JSON file path")],
         [
-            sg.Input(key=(catchercombine, "catcher_json_file_path")),
+            sg.Input(key=(catchercombineterms, "catcher_json_file_path")),
             sg.FileBrowse(file_types=(("JSON", "*.json"),)),
         ],
         [sg.Text("Catcher JSON output file path")],
         [
-            sg.Input(key=(catchercombine, "output_file_path")),
+            sg.Input(key=(catchercombineterms, "output_file_path")),
             sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
         ],
         [
             sg.Checkbox(
-                "Prepend values",
-                key=(catchercombine, "prepend"),
+                "Sort terms",
+                default=True,
+                key=(catchercombineterms, "sort_terms"),
             )
         ],
-        [sg.Button("Run", key=(catchercombine, "-RUN-"))],
+        [sg.Button("Run", key=(catchercombineterms, "-RUN-"))],
     ]
 
     ftptransc2catcher_layout = [
@@ -133,7 +135,38 @@ def gui() -> None:
             sg.Input(key=(csv2json, "output_json_path")),
             sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
         ],
+        [
+            sg.Checkbox(
+                "Drop empty CSV cells",
+                default=True,
+                key=(csv2json, "drop_empty_cells"),
+            )
+        ],
         [sg.Button("Run", key=(csv2json, "-RUN-"))],
+    ]
+
+    json2csv_layout = [
+        [
+            sg.Frame(
+                "Help",
+                [[sg.Text(json2csv.__doc__, size=HELP_SIZE)]],
+            )
+        ],
+        [sg.Text("Path to input JSON file")],
+        [
+            sg.Input(key=(json2csv, "input_json_path")),
+            sg.FileBrowse(file_types=(("JSON", "*.json"),)),
+        ],
+        [sg.Text("Path to output CSV file")],
+        [
+            sg.Input(key=(json2csv, "output_csv_path")),
+            sg.FileSaveAs(file_types=(("CSV", "*.csv"),), default_extension=".csv"),
+        ],
+        [sg.Text("CSV dialect")],
+        [
+            sg.Combo(csv.list_dialects(), default_value="excel-tab", key=(json2csv, "csv_dialect")),
+        ],
+        [sg.Button("Run", key=(json2csv, "-RUN-"))],
     ]
 
     ftpstruct2catcher_layout = [
@@ -244,12 +277,13 @@ def gui() -> None:
                 [
                     [
                         sg.Tab("catcherdiff", catcherdiff_layout),
-                        sg.Tab("catchercombine", catchercombine_layout),
+                        sg.Tab("catchercombineterms", catchercombineterms_layout),
                         sg.Tab("scanftpschema", scanftpschema_layout),
                         sg.Tab("ftptransc2catcher", ftptransc2catcher_layout),
                         sg.Tab("ftpstruct2catcher", ftpstruct2catcher_layout),
                         sg.Tab("cdmschema2csv", cdmschema2csv_layout),
                         sg.Tab("csv2json", csv2json_layout),
+                        sg.Tab("json2csv", json2csv_layout),
                     ]
                 ]
             )
