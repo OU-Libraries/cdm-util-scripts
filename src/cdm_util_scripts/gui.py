@@ -16,7 +16,10 @@ from cdm_util_scripts.ftpstruct2catcher import ftpstruct2catcher, Level
 from cdm_util_scripts.scanftpschema import scanftpschema
 
 
-HELP_SIZE = (80, 2)
+HELP_SIZE = (90, 2)
+COMMAND_LOG_SIZE = (89, 12)
+COMBO_SIZE = 70
+INPUT_SIZE = 70
 
 
 def gui() -> None:
@@ -29,21 +32,21 @@ def gui() -> None:
         ],
         [sg.Text("CONTENTdm instance URL")],
         [
-            sg.InputText(key=(catcherdiff, "cdm_instance_url")),
+            sg.InputText(key=(catcherdiff, "cdm_instance_url"), size=INPUT_SIZE),
             sg.Button(
                 "Request collection aliases", key=(catcherdiff, "-LOAD ALIASES-")
             ),
         ],
         [sg.Text("CONTENTdm collection alias")],
-        [sg.Combo([], key=(catcherdiff, "cdm_collection_alias"), size=55)],
+        [sg.Combo([], key=(catcherdiff, "cdm_collection_alias"), size=COMBO_SIZE)],
         [sg.Text("Catcher edits JSON file path")],
         [
-            sg.Input(key=(catcherdiff, "catcher_json_file_path")),
+            sg.Input(key=(catcherdiff, "catcher_json_file_path"), size=INPUT_SIZE),
             sg.FileBrowse(file_types=(("JSON", "*.json"),)),
         ],
         [sg.Text("HTML report output file path")],
         [
-            sg.Input(key=(catcherdiff, "report_file_path")),
+            sg.Input(key=(catcherdiff, "report_file_path"), size=INPUT_SIZE),
             sg.FileSaveAs(file_types=(("HTML", "*.html"),), default_extension=".html"),
         ],
         [
@@ -64,21 +67,21 @@ def gui() -> None:
         ],
         [sg.Text("CONTENTdm instance URL")],
         [
-            sg.InputText(key=(catchercombineterms, "cdm_instance_url")),
+            sg.InputText(key=(catchercombineterms, "cdm_instance_url"), size=INPUT_SIZE),
             sg.Button(
                 "Request collection aliases", key=(catchercombineterms, "-LOAD ALIASES-")
             ),
         ],
         [sg.Text("CONTENTdm collection alias")],
-        [sg.Combo([], key=(catchercombineterms, "cdm_collection_alias"), size=55)],
+        [sg.Combo([], key=(catchercombineterms, "cdm_collection_alias"), size=COMBO_SIZE)],
         [sg.Text("Catcher edits JSON file path")],
         [
-            sg.Input(key=(catchercombineterms, "catcher_json_file_path")),
+            sg.Input(key=(catchercombineterms, "catcher_json_file_path"), size=INPUT_SIZE),
             sg.FileBrowse(file_types=(("JSON", "*.json"),)),
         ],
         [sg.Text("Catcher JSON output file path")],
         [
-            sg.Input(key=(catchercombineterms, "output_file_path")),
+            sg.Input(key=(catchercombineterms, "output_file_path"), size=INPUT_SIZE),
             sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
         ],
         [
@@ -99,12 +102,12 @@ def gui() -> None:
             )
         ],
         [sg.Text("FromThePage IIIF manifests file path")],
-        [sg.Input(key=(ftptransc2catcher, "manifests_listing_path")), sg.FileBrowse()],
+        [sg.Input(key=(ftptransc2catcher, "manifests_listing_path"), size=INPUT_SIZE), sg.FileBrowse()],
         [sg.Text("CONTENTdm transcript field nick")],
-        [sg.InputText(key=(ftptransc2catcher, "transcript_nick"))],
+        [sg.InputText(key=(ftptransc2catcher, "transcript_nick"), size=INPUT_SIZE)],
         [sg.Text("Catcher JSON output file path")],
         [
-            sg.Input(key=(ftptransc2catcher, "output_file_path")),
+            sg.Input(key=(ftptransc2catcher, "output_file_path"), size=INPUT_SIZE),
             sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
         ],
         [sg.Text("FromThePage transcript type")],
@@ -127,12 +130,12 @@ def gui() -> None:
         ],
         [sg.Text("Path to input CSV file")],
         [
-            sg.Input(key=(csv2json, "input_csv_path")),
+            sg.Input(key=(csv2json, "input_csv_path"), size=INPUT_SIZE),
             sg.FileBrowse(file_types=(("CSV", "*.csv"),)),
         ],
         [sg.Text("Path to output JSON file")],
         [
-            sg.Input(key=(csv2json, "output_json_path")),
+            sg.Input(key=(csv2json, "output_json_path"), size=INPUT_SIZE),
             sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
         ],
         [
@@ -154,12 +157,12 @@ def gui() -> None:
         ],
         [sg.Text("Path to input JSON file")],
         [
-            sg.Input(key=(json2csv, "input_json_path")),
+            sg.Input(key=(json2csv, "input_json_path"), size=INPUT_SIZE),
             sg.FileBrowse(file_types=(("JSON", "*.json"),)),
         ],
         [sg.Text("Path to output CSV file")],
         [
-            sg.Input(key=(json2csv, "output_csv_path")),
+            sg.Input(key=(json2csv, "output_csv_path"), size=INPUT_SIZE),
             sg.FileSaveAs(file_types=(("CSV", "*.csv"),), default_extension=".csv"),
         ],
         [sg.Text("CSV dialect")],
@@ -178,16 +181,16 @@ def gui() -> None:
         ],
         [sg.Text("FromThePage user slug")],
         [
-            sg.InputText(key=(ftpstruct2catcher, "ftp_slug")),
+            sg.InputText(key=(ftpstruct2catcher, "ftp_slug"), size=INPUT_SIZE),
             sg.Button(
                 "Request project names", key=(ftpstruct2catcher, "-LOAD FTP PROJECTS-")
             ),
         ],
         [sg.Text("FromThePage project name")],
-        [sg.Combo([], key=(ftpstruct2catcher, "ftp_project_name"), size=55)],
+        [sg.Combo([], key=(ftpstruct2catcher, "ftp_project_name"), size=COMBO_SIZE)],
         [sg.Text("FromThePage field labels to CONTENTdm field nicks CSV mapping path")],
         [
-            sg.Input(key=(ftpstruct2catcher, "field_mapping_csv_path")),
+            sg.Input(key=(ftpstruct2catcher, "field_mapping_csv_path"), size=INPUT_SIZE),
             sg.FileBrowse(file_types=(("CSV", "*.csv"),)),
         ],
         [sg.Text("Level of description to export")],
@@ -210,7 +213,7 @@ def gui() -> None:
         ],
         [sg.Text("Catcher JSON output file path")],
         [
-            sg.Input(key=(ftpstruct2catcher, "output_file_path")),
+            sg.Input(key=(ftpstruct2catcher, "output_file_path"), size=INPUT_SIZE),
             sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
         ],
         [sg.Button("Run", key=(ftpstruct2catcher, "-RUN-"))],
@@ -225,16 +228,16 @@ def gui() -> None:
         ],
         [sg.Text("FromThePage user slug")],
         [
-            sg.InputText(key=(scanftpschema, "ftp_slug")),
+            sg.InputText(key=(scanftpschema, "ftp_slug"), size=INPUT_SIZE),
             sg.Button(
                 "Request project names", key=(scanftpschema, "-LOAD FTP PROJECTS-")
             ),
         ],
         [sg.Text("FromThePage project name")],
-        [sg.Combo([], key=(scanftpschema, "ftp_project_name"), size=55)],
+        [sg.Combo([], key=(scanftpschema, "ftp_project_name"), size=COMBO_SIZE)],
         [sg.Text("HTML report output file path")],
         [
-            sg.Input(key=(scanftpschema, "report_path")),
+            sg.Input(key=(scanftpschema, "report_path"), size=INPUT_SIZE),
             sg.FileSaveAs(file_types=(("HTML", "*.html"),), default_extension=".html"),
         ],
         [sg.Button("Run", key=(scanftpschema, "-RUN-"))],
@@ -256,16 +259,16 @@ def gui() -> None:
         ],
         [sg.Text("CONTENTdm instance URL")],
         [
-            sg.InputText(key=(cdmschema2csv, "cdm_instance_url")),
+            sg.InputText(key=(cdmschema2csv, "cdm_instance_url"), size=INPUT_SIZE),
             sg.Button(
                 "Request collection aliases", key=(cdmschema2csv, "-LOAD ALIASES-")
             ),
         ],
         [sg.Text("CONTENTdm collection alias")],
-        [sg.Combo([], key=(cdmschema2csv, "cdm_collection_alias"), size=55)],
+        [sg.Combo([], key=(cdmschema2csv, "cdm_collection_alias"), size=COMBO_SIZE)],
         [sg.Text("CSV output file path")],
         [
-            sg.Input(key=(cdmschema2csv, "csv_file_path")),
+            sg.Input(key=(cdmschema2csv, "csv_file_path"), size=INPUT_SIZE),
             sg.FileSaveAs(file_types=(("CSV", "*.csv"),), default_extension=".csv"),
         ],
         [sg.Button("Run", key=(cdmschema2csv, "-RUN-"))],
@@ -296,7 +299,7 @@ def gui() -> None:
                 reroute_stdout=True,
                 write_only=True,
                 font="Courier 10",
-                size=(72, 10),
+                size=COMMAND_LOG_SIZE,
                 key="-OUTPUT-",
             )
         ],
