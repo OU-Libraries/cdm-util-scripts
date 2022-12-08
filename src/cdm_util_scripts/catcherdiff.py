@@ -113,7 +113,7 @@ def request_deltas(
             dmrecord=edit["dmrecord"],
             session=session,
         )
-        deltas.append(Delta(edit=edit, item_info=item_info))
+        deltas.append(Delta(edit=strip_edit(edit), item_info=item_info))
     return deltas
 
 
@@ -142,3 +142,7 @@ def find_dc_field(
         return [info for info in cdm_field_infos if info.dc == dc_name][0]
     except IndexError:
         return None
+
+
+def strip_edit(edit: Dict[str, str]) -> Dict[str, str]:
+    return {nick: value.strip() for nick, value in edit.items()}
