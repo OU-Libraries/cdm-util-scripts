@@ -4,9 +4,11 @@ cdm-util-scripts are Python tools developed to support Ohio University Libraries
 
 cdm-util-scripts has two interfaces, a CLI (Command Line Interface) and a GUI (Graphical User Interface) that both offer the same functionality:
 * [catcherdiff](#catcherdiff): generates a HTML report on what CONTENTdm field values will change if a cdm-catcher JSON edit is implemented.
+* [catchercombineterms](#catchercombineterms): combines a cdm-catcher JSON edit of controlled vocabulary fields with terms currently in CONTENTdm.
 * [scanftpschema](#scanftpschema): generates a HTML report on the Metadata Fields/Transcription Fields schema(s) in a FromThePage project.
 * [ftpstruct2catcher](#ftpstruct2catcher): requests FromThePage Metadata Fields and/or Transcription Fields data as cdm-catcher JSON edits.
 * [ftptransc2catcher](#ftptransc2catcher): requests transcripts from FromThePage works corresponding to manifest URLs listed in a text file as cdm-catcher JSON edits.
+* [json2csv](#json2csv): transposes a list of JSON objects (cdm-catcher JSON edits) into a CSV file.
 * [csv2json](#csv2json): transposes a CSV file into a list of JSON objects (cdm-catcher JSON edits).
 
 ## Installation
@@ -105,7 +107,7 @@ $ cdmutil gui
 
 The GUI window should then popup on your desktop. All of its functionality and arguments are the same as the CLI interface documented below, except that instead of providing the `cdminfo` and `ftpinfo` subcommands there are `Request collection aliases` and `Request project names` buttons that fill the FromThePage project names and CONTENTdm collection aliases combo boxes on request, and `cdmschema2csv` which jump starts a column mapping CSV with CONTENTdm field names and nicks.
 
-Because the GUI interface is an overlay on the CLI functionality without a GUI progress reporting mechanism, Windows will often designate cdm-util-scripts as Non Responsive during long runs even when they're not hung or frozen.
+Because the GUI interface is an overlay on the CLI functionality without a GUI progress reporting mechanism, Windows will often designate cdm-util-scripts as "Non Responsive" during long runs even when they're not hung or frozen.
 
 ## The CLI interface
 
@@ -247,6 +249,8 @@ The HTML report can then be reviewed by opening it in a web browser.
 
 and outputs an HTML report showing on a per-item basis what fields would be changed in a CONTENTdm collection if that cdm-catcher JSON file were used in a cdm-catcher `edit` action. This script is intended to be useful for cross-checking the output of the 2catcher series of subcommands and checking to see if a Catcher edit action has been completely implemented by the Catcher service.
 
+Because Catcher trims leading and trailing whitespace from applied edits, `catcherdiff` ignores it when comparing values.
+
 ```console
 $ cdmutil catcherdiff https://media.library.ohio.edu p15808coll19 catcher-edits.json report.html
 Requesting CONTENTdm field info...
@@ -294,6 +298,52 @@ catcherdiff found 59 out of 59 total edit actions would change at least one fiel
 
 The HTML report can then be reviewed by opening it in a web browser.
 
+<a name="catchercombineterms"/>
+
+### catchercombineterms
+
+`catchercombineterms` takes:
+* A CONTENTdm instance URL
+* A CONTENTdm collection alias
+* A cdm-catcher `edit` action JSON file which edits _only_ controlled vocabulary fields
+* An output file name
+
+and outputs a JSON file containing the controlled vocabulary terms from the input cdm-catcher edits combined with the existing terms in those CONTENTdm fields. It is intended to allow terms to be added to CONTENTdm controlled vocabulary fields given that Catcher only overwrites field values. Terms are de-duplicated and sorted alphabetically default, but the optional `-u` flag (or unchecking the "Sort terms" box in the GUI) can be used to append new terms instead of sorting them.
+
+Example usage:
+
+```console
+$ head  -n 12 farfel-leaves-metadata-edits.json
+[
+  {
+    "dmrecord": "3001",
+    "langua": "German; Latin",
+    "docume": "Incunabula"
+  },
+  {
+    "dmrecord": "3012",
+    "langua": "Latin",
+    "docume": "Comedies (literary works); Drama (literary genre); Incunabula",
+    "featur": "Glosses (annotations); Illustrations (layout features); Marginalia (annotations); Woodcuts (prints)"
+  },
+$ cdmutil catchercombineterms https://media.library.ohio.edu/ p15808coll19 farfel-leaves-metadata-edits.json farfel-leaves-metadata-edits-combined.json
+Requesting CONTENTdm item info...
+100%|███████████████████████████████████| 59/59 [00:06<00:00,  9.26it/s]
+$ head -n 12 farfel-leaves-metadata-edits-combined.json
+[
+  {
+    "dmrecord": "3001",
+    "langua": "German; Latin",
+    "docume": "Incunabula"
+  },
+  {
+    "dmrecord": "3012",
+    "langua": "Latin",
+    "docume": "Comedies (literary works); Drama (literary genre); Incunabula; Printed materials (object genre)",
+    "featur": "Glosses (annotations); Illustrations (layout features); Marginalia (annotations); Woodcuts (prints)"
+  },
+```
+
 <a name="ftpstruct2catcher"/>
 
 ### ftpstruct2catcher
@@ -308,7 +358,9 @@ and outputs a JSON file containing field data from FromThePage project for use w
 
 The FromThePage project _must_ have been imported from CONTENTdm (so that FromThePage stored the corresponding CONTENTdm object URLs).
 
-The column mapping CSV must have two columns named `name` and `nick` indicating which FromThePage field `name`s correspond to which CONTENTdm fields (`nick`s). Other columns will be ignored. Multiple rows in the column mapping CSV with the same CONTENTdm field nickname in `nick` will have their corresponding field values joined with a semicolon. Multiple rows in the column mapping CSV with the same FromThePage field `name` will have their corresponding values appended with a semicolon to each of the CONTENTdm fields specified in their `nick`s.
+* The column mapping CSV must have two columns named `name` and `nick` indicating which FromThePage field `name`s correspond to which CONTENTdm fields (`nick`s). Other columns will be ignored.
+* Multiple rows in the column mapping CSV with the same CONTENTdm field nickname in `nick` will have their corresponding field values joined with a semicolon.
+* Multiple rows in the column mapping CSV with the same FromThePage field `name` will have their corresponding values appended with a semicolon to each of the CONTENTdm fields specified in their `nick`s.
 
 Example of a column mapping CSV mapping multiple FromThePage fields to single CONTENTdm fields:
 
@@ -364,6 +416,8 @@ Optionally, `-l` (or `--level`) can be used to specify the level of description 
 
 `ftpstruct2catcher` will print warnings about fields that exist in a FromThePage project but are not mapped to a CONTENTdm nick at the beginning of a run.
 
+`ftpstruct2catcher` strips leading and trailing whitespace from field values and replaces CRLF line endings with LF.
+
 <a name="ftptransc2catcher"/>
 
 ### ftptransc2catcher
@@ -376,6 +430,8 @@ Optionally, `-l` (or `--level`) can be used to specify the level of description 
 and outputs a JSON file of FromThePage transcripts matched to CONTENTdm objects for upload via cdm-catcher `edit`. `ftptransc2catcher` should to the same thing that FromThePage's "Export to CONTENTdm" feature does, but only on the specified works and via a cdm-catcher JSON file that can be `catcherdiff`-ed.
 
 The listed FromThePage manifests _must_ have been imported from CONTENTdm, so that the FromThePage manifest lists their CONTENTdm URLs.
+
+`ftptransc2catcher` trims leading and trailing whitespace from transcript edit values.
 
 Optionally, a FromThePage [transcript type](https://github.com/benwbrum/fromthepage/wiki/FromThePage-Support-for-the-IIIF-Presentation-API-and-Web-Annotations#seealso) may be specified via the `--transcript-type` argument. The default is `Verbatim Plaintext`.
 
@@ -401,11 +457,38 @@ $ head catcher-edits.json
   {
 ```
 
+<a name="json2csv"/>
+
+### json2csv
+
+`json2csv` accepts a cdm-catcher `edit` action JSON file (of the sort output by the 2catcher scripts and `csv2json`) and transposes it into a CSV formatted file, suitable for editing in a spreadsheet. Optionally, the `-d` flag can be used to specify the dialect of CSV (tab-separated is the default).
+
+Example usage:
+
+```console
+$ head example.json
+[
+  {
+    "dmrecord": "3001",
+    "docume": "Incunabula"
+  },
+  {
+    "dmrecord": "3012",
+    "langua": "Latin"
+  }
+]
+$ cdmutil json2csv -d excel example.json example.csv
+$ head example.csv
+dmrecord,langua,docume
+3001,,Incunabula
+3012,Latin,
+```
+
 <a name="csv2json"/>
 
 ### csv2json
 
-`csv2json` accepts a CSV file and transposes its rows into a list of JSON objects with column headers as keys, perhaps suitable for use with cdm-catcher's `edit` action if the column names are CONTENTdm field nicks and one is `dmrecord`:
+`csv2json` accepts a CSV file and transposes its rows into a list of JSON objects with column headers as keys, suitable for use with cdm-catcher's `edit` action (if the column names are CONTENTdm field nicks and one is `dmrecord`):
 
 ```console
 $ head example.csv
@@ -424,6 +507,39 @@ $ head example-edits.json
     "dmrecord": "3012",
     "langua": "Latin",
     "docume": "Comedies (library works); Drama (literary genre); Incunabula"
+```
+
+By default `csv2json` will drop empty cells from the CSV when creating edits, but will include them as empty strings if the `-k` flag is provided (or "Drop empty CSV cells" is unchecked in the GUI):
+
+```console
+$ head example.csv
+dmrecord,langua,docume
+3001,,Incunabula
+3012,Latin,
+$ cdmutil csv2json example.csv example.json
+$ head example.json
+[
+  {
+    "dmrecord": "3001",
+    "docume": "Incunabula"
+  },
+  {
+    "dmrecord": "3012",
+    "langua": "Latin"
+  }
+$ cdmutil csv2json -k example.csv example.json
+$ head -n 12 example.json
+[
+  {
+    "dmrecord": "3001",
+    "langua": "",
+    "docume": "Incunabula"
+  },
+  {
+    "dmrecord": "3012",
+    "langua": "Latin",
+    "docume": ""
+  }
 ```
 
 ## Development
