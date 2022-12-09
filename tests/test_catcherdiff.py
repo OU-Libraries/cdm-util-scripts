@@ -3,6 +3,7 @@ import pytest
 import json
 import collections
 import xml.etree.ElementTree as ET
+import html
 
 from cdm_util_scripts import catcherdiff
 
@@ -60,9 +61,9 @@ def scrape_report(path):
                     dmrecord=dmrecord,
                     controlled=is_controlled(ctrl_col),
                     nick=nick_col.find("./span[@class='cdm-nick']").text,
-                    curr_val="".join(curr_col.find('span').itertext()),
+                    curr_val=html.unescape("".join(curr_col.find('span').itertext())),
                     change=change_col.text,
-                    edit_val="".join(edit_col.find('span').itertext()),
+                    edit_val=html.unescape("".join(edit_col.find('span').itertext())),
                 )
             )
     return rows
@@ -97,3 +98,4 @@ def test_count_changes():
     assert edits_with_changes_count == 2
     assert nicks_with_changes == collections.Counter(["format", "format"])
     assert nicks_with_edits == collections.Counter(["format", "format", "format", "date"])
+

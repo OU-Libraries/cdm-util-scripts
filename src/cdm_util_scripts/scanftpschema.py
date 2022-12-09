@@ -71,7 +71,12 @@ def scanftpschema(
     page_field_counts_by_config_id = count_field_occurrences(pages_by_field_set)
 
     print("Compiling report...")
-    env = jinja2.Environment(loader=jinja2.PackageLoader(__package__))
+    env = jinja2.Environment(
+        loader=jinja2.PackageLoader(__package__),
+        autoescape=True,
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
     report_html = env.get_template("scanftpschema-report.html.j2").render(
         slug=ftp_slug,
         project_label=ftp_project_name,

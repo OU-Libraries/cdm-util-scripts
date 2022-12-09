@@ -73,7 +73,12 @@ def catcherdiff(
         f"catcherdiff found {edits_with_changes_count} out of {len(catcher_edits)} total edit actions would change at least one field."
     )
 
-    env = jinja2.Environment(loader=jinja2.PackageLoader(__package__))
+    env = jinja2.Environment(
+        loader=jinja2.PackageLoader(__package__),
+        autoescape=True,
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
     report_html = env.get_template("catcherdiff-report.html.j2").render(
         cdm_repo_url=cdm_instance_url.rstrip("/"),
         cdm_collection_alias=cdm_collection_alias,
