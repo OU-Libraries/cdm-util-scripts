@@ -17,7 +17,7 @@ from cdm_util_scripts.scanftpschema import scanftpschema
 
 
 HELP_SIZE = (90, 2)
-COMMAND_LOG_SIZE = (89, 12)
+COMMAND_LOG_SIZE = (85, 12)
 COMBO_SIZE = 70
 INPUT_SIZE = 70
 
@@ -303,7 +303,7 @@ def gui() -> None:
                 key="-OUTPUT-",
             )
         ],
-        [sg.Push(), sg.Quit()],
+        [sg.Quit()],
     ]
 
     window = sg.Window("cdm-util-scripts", layout, location=(25, 50))
