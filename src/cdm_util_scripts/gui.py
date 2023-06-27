@@ -2,13 +2,15 @@ import PySimpleGUI as sg
 import requests
 
 import csv
+import json
 
-from typing import Callable, Dict, Any, Hashable
+from typing import Callable, Dict, Any, Hashable, Set, List, Iterable, Tuple
 
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts.catcherdiff import catcherdiff
 from cdm_util_scripts.catchercombineterms import catchercombineterms
+from cdm_util_scripts.catchertidy import catchertidy as run_catchertidy
 from cdm_util_scripts.csv2json import csv2json
 from cdm_util_scripts.json2csv import json2csv
 from cdm_util_scripts.ftptransc2catcher import ftptransc2catcher
@@ -92,6 +94,54 @@ def gui() -> None:
             )
         ],
         [sg.Button("Run", key=(catchercombineterms, "-RUN-"))],
+    ]
+
+    catchertidy_layout = [
+        [
+            sg.Frame(
+                "Help",
+                [[sg.Text(catchertidy.__doc__, size=HELP_SIZE)]],
+            )
+        ],
+        [
+            sg.Column(
+                layout=[
+                    [sg.Text("CONTENTdm instance URL")],
+                    [
+                        sg.InputText(key=(catchertidy, "cdm_instance_url"), size=INPUT_SIZE),
+                        sg.Button(
+                            "Request collection aliases", key=(catchertidy, "-LOAD ALIASES-")
+                        ),
+                    ],
+                    [sg.Text("CONTENTdm collection alias")],
+                    [
+                        sg.Combo([], key=(catchertidy, "cdm_collection_alias"), size=COMBO_SIZE),
+                    ],
+
+                    [sg.Text("Catcher edits JSON file path")],
+                    [
+                        sg.Input(key=(catchertidy, "catcher_json_file_path"), size=INPUT_SIZE),
+                        sg.FileBrowse(file_types=(("JSON", "*.json"),)),
+                    ],
+                    [sg.Text("Configure tidy operations")],
+                    [sg.Button("Configure...", key=(catchertidy, "-CONFIG TIDY-"))],
+                    [sg.Text("Catcher JSON output file path")],
+                    [
+                        sg.Input(key=(catchertidy, "output_file_path"), size=INPUT_SIZE),
+                        sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
+                    ],
+                    [sg.Button("Run", key=(catchertidy, "-RUN-"))],
+                ]
+            ),
+            sg.Column(
+                layout=[
+                    [sg.Frame("Tidy Operations", size=(450, 600), layout=[], key=(catchertidy, "-TIDY OPS FRAME-"))],
+                ],
+                scrollable=True,
+                vertical_alignment="top",
+                key=(catchertidy, "-TIDY OPS COLUMN-"),
+            ),
+        ],
     ]
 
     ftptransc2catcher_layout = [
@@ -281,6 +331,7 @@ def gui() -> None:
                     [
                         sg.Tab("catcherdiff", catcherdiff_layout),
                         sg.Tab("catchercombineterms", catchercombineterms_layout),
+                        sg.Tab("catchertidy", catchertidy_layout),
                         sg.Tab("scanftpschema", scanftpschema_layout),
                         sg.Tab("ftptransc2catcher", ftptransc2catcher_layout),
                         sg.Tab("ftpstruct2catcher", ftpstruct2catcher_layout),
@@ -338,6 +389,44 @@ def gui() -> None:
                     except Exception as e:
                         print("Request failed with error: ", e)
 
+                elif event_value == "-CONFIG TIDY-":
+                    cdm_instance_url = tab_values["cdm_instance_url"]
+                    cdm_collection_alias = tab_values["cdm_collection_alias"]
+                    if cdm_instance_url and cdm_collection_alias:
+                        print("Requesting collection field info...")
+                        try:
+                            with requests.Session() as session:
+                                field_infos = cdm_api.request_field_infos(
+                                    instance_url=cdm_instance_url,
+                                    collection_alias=cdm_collection_alias,
+                                    session=session,
+                                )
+                        except Exception as e:
+                            print("Request failed with error: ", e)
+                            continue
+                    catcher_json_file_path = tab_values["catcher_json_file_path"]
+                    if not catcher_json_file_path:
+                        print("Configuration requires Catcher edits JSON file path")
+                        continue
+                    print("Scanning Catcher edits for nicks...")
+                    nicks = get_nicks_from_edit(catcher_json_file_path)
+                    window.extend_layout(
+                        window[(event_function, "-TIDY OPS FRAME-")],
+                        [
+                            [
+                                sg.Checkbox("whitespace", default=True, key=(catchertidy, "normalize_whitespace", fi.nick)),
+                                sg.Checkbox("quotes", default=True, key=(catchertidy, "replace_smart_chars", fi.nick)),
+                                sg.Checkbox("lcsh", default=False, key=(catchertidy, "normalize_lcsh", fi.nick)),
+                                sg.Checkbox("sort", default=bool(fi.vocab), key=(catchertidy, "sort_terms", fi.nick)),
+                                sg.Text(fi.name),
+                            ] for fi in field_infos if fi.nick in nicks
+                        ],
+                    )
+                    window[(event_function, "-TIDY OPS COLUMN-")].contents_changed()
+                    window[(event_function, "-CONFIG TIDY-")].update(
+                        disabled=True,
+                    )
+
                 elif event_value == "-LOAD FTP PROJECTS-":
                     print("Requesting FromThePage project names... ")
                     try:
@@ -393,7 +482,7 @@ def gui() -> None:
 
 
 def get_tab_values(event_function: Callable[..., None], values: Dict[Hashable, Any]):
-    tab_values: Dict[str, Any] = dict()
+    tab_values: Dict[str, Any] = {}
     for values_key, values_value in values.items():
         if isinstance(values_key, tuple):
             tab_function, tab_key, *tab_rest = values_key
@@ -409,6 +498,17 @@ def get_tab_values(event_function: Callable[..., None], values: Dict[Hashable, A
                 # Handle "<alias>=<fieldname>" values
                 if tab_key in {"cdm_collection_alias"}:
                     tab_value = tab_value.partition("=")[0]
+
+                # Handle catchertidy operations
+                if tab_key in [
+                        "normalize_whitespace",
+                        "replace_smart_chars",
+                        "normalize_lcsh",
+                        "sort_terms"
+                ]:
+                    tab_value = tab_values.get(tab_key, [])
+                    if values_value:
+                        tab_value.append(tab_rest[0])
 
                 if isinstance(tab_value, str):
                     tab_value = tab_value.strip()
@@ -442,3 +542,24 @@ def cdmschema2csv(
                         "nick": field_info.nick,
                     }
                 )
+
+
+def catchertidy(*args, **kwargs) -> None:
+    arguments = {
+        k: v for k, v in kwargs.items()
+        if k not in ["cdm_instance_url", "cdm_collection_alias"]
+    }
+    run_catchertidy(
+        *args,
+        **arguments,
+    )
+
+
+def get_nicks_from_edit(path: str) -> List[str]:
+    nicks: Set[str] = set()
+    with open(path, mode="r", encoding="utf-8") as fp:
+        catcher_edits = json.load(fp)
+    for edit in catcher_edits:
+        nicks.update(edit)
+    nicks.discard("dmrecord")
+    return sorted(nicks)
