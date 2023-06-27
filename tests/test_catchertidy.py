@@ -19,8 +19,8 @@ def test_catchertidy(tmp_path):
     catchertidy.catchertidy(
         catcher_json_file_path=edits_path,
         output_file_path=output_path,
-        normalize_whitespace=True,
-        replace_smart_chars=True,
+        normalize_whitespace=["nicka", "nickb"],
+        replace_smart_chars=["nicka", "nickb"],
         normalize_lcsh=["nickb"],
         sort_terms=["nickb"],
     )

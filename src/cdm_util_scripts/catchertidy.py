@@ -7,10 +7,11 @@ from typing import Optional, List, Dict
 def catchertidy(
     catcher_json_file_path: str,
     output_file_path: str,
-    normalize_whitespace: bool,
-    replace_smart_chars: bool,
+    normalize_whitespace: List[str],
+    replace_smart_chars: List[str],
     normalize_lcsh: List[str],
     sort_terms: List[str],
+    show_progress: bool,
 ) -> None:
     """Tidy up a cdm-catcher JSON edit."""
     with open(catcher_json_file_path, mode="r", encoding="utf-8") as fp:
@@ -23,10 +24,10 @@ def catchertidy(
             if nick == "dmrecord":
                 continue
 
-            if normalize_whitespace:
+            if nick in normalize_whitespace:
                 edit_value = normalize_whitespace_(edit_value)
 
-            if replace_smart_chars:
+            if nick in replace_smart_chars:
                 edit_value = replace_smart_chars_(edit_value)
 
             if nick in normalize_lcsh:
@@ -39,7 +40,7 @@ def catchertidy(
         tidy_edits.append(tidy_edit)
 
     with open(output_file_path, mode="w", encoding="utf-8") as fp:
-        json.dump(tidy_edits, fp)
+        json.dump(tidy_edits, fp, indent=2)
 
 
 def normalize_whitespace_(value: str) -> str:
