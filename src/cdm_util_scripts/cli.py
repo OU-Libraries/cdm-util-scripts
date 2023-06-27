@@ -11,6 +11,7 @@ from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import catcherdiff
 from cdm_util_scripts import catchercombineterms
+from cdm_util_scripts import catchertidy
 from cdm_util_scripts import csv2json
 from cdm_util_scripts import json2csv
 from cdm_util_scripts import ftptransc2catcher
@@ -78,6 +79,37 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         catchercombineterms.catchercombineterms(*args, sort_terms=unsorted, **kwargs)
 
     catchercombineterms_subparser.set_defaults(func=catchercombineterms_func)
+
+    # catchertidy
+    catchertidy_subparser = subparsers.add_parser(
+        "catchertidy",
+        help=catchertidy.catchertidy.__doc__,
+    )
+    catchertidy_subparser.add_argument(
+        "-w", "--normalize-whitespace", action="append",
+        help="catcher edit nicks to normalize whitespace"
+    )
+    catchertidy_subparser.add_argument(
+        "-r", "--replace-smart-chars", action="append",
+        help="catcher edit nicks to replace smart characters"
+    )
+    catchertidy_subparser.add_argument(
+        "-l", "--normalize-lcsh", action="append",
+        help="catcher edit nicks to normalize LC subjects"
+    )
+    catchertidy_subparser.add_argument(
+        "-s", "--sort-terms", action="append",
+        help="catcher edit nicks to sort controlled vocab terms"
+    )
+    catchertidy_subparser.add_argument(
+        "catcher_json_file_path",
+        help="Path to cdm-catcher JSON file",
+    )
+    catchertidy_subparser.add_argument(
+        "output_file_path",
+        help="Path to write tidied cdm-catcher JSON file",
+    )
+    catchertidy_subparser.set_defaults(func=catchertidy.catchertidy)
 
     # csv2json
     csv2json_subparser = subparsers.add_parser(
