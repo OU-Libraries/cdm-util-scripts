@@ -23,6 +23,7 @@ def test_catchertidy(tmp_path):
         replace_smart_chars=["nicka", "nickb"],
         normalize_lcsh=["nickb"],
         sort_terms=["nickb"],
+        show_progress=False,
     )
     json.load(output_path.open()) == [
         {
@@ -79,3 +80,13 @@ def test_normalize_lcsh_(before, after):
 )
 def test_split_controlled_vocab(before, after):
     assert catchertidy.split_controlled_vocab(before) == after
+
+
+@pytest.mark.parametrize(
+    "before,after",
+    [
+        ("B term; A term", "A term; B term"),
+    ]
+)
+def test_sort_terms_(before, after):
+    assert catchertidy.sort_terms_(before) == after

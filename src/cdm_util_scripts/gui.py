@@ -100,7 +100,7 @@ def gui() -> None:
         [
             sg.Frame(
                 "Help",
-                [[sg.Text(catchertidy.__doc__, size=HELP_SIZE)]],
+                [[sg.Text(run_catchertidy.__doc__, size=HELP_SIZE)]],
             )
         ],
         [

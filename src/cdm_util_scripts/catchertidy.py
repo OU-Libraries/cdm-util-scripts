@@ -70,7 +70,7 @@ def normalize_lcsh_(terms: str) -> str:
 
 
 def sort_terms_(terms: str) -> str:
-    return sorted(split_controlled_vocab(terms))
+    return "; ".join(sorted(split_controlled_vocab(terms)))
 
 
 VOCAB_SPLIT_PAT = re.compile(r";\s*")
