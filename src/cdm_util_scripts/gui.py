@@ -3,8 +3,9 @@ import requests
 
 import csv
 import json
+import collections
 
-from typing import Callable, Dict, Any, Hashable, Set, List, Iterable, Tuple
+from typing import Callable, Dict, Any, Hashable, Set, List, Iterable, Tuple, Set
 
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
@@ -22,6 +23,8 @@ HELP_SIZE = (90, 2)
 COMMAND_LOG_SIZE = (85, 12)
 COMBO_SIZE = 70
 INPUT_SIZE = 70
+
+optional_keys: Set[Hashable] = set()
 
 
 def gui() -> None:
@@ -135,7 +138,7 @@ def gui() -> None:
             ),
             sg.Column(
                 layout=[
-                    [sg.Frame("Tidy Operations", size=(450, 600), layout=[], key=(catchertidy, "-TIDY OPS FRAME-"))],
+                    [sg.Frame("Tidy Operations", size=(450, 400), layout=[], key=(catchertidy, "-TIDY OPS FRAME-"))],
                 ],
                 scrollable=True,
                 vertical_alignment="top",
@@ -143,6 +146,11 @@ def gui() -> None:
             ),
         ],
     ]
+
+    optional_keys.update([
+        (catchertidy, "cdm_instance_url"),
+        (catchertidy, "cdm_collection_alias"),
+    ])
 
     ftptransc2catcher_layout = [
         [
@@ -390,6 +398,14 @@ def gui() -> None:
                         print("Request failed with error: ", e)
 
                 elif event_value == "-CONFIG TIDY-":
+                    ShortInfo = collections.namedtuple("ShortInfo", "name nick vocab")
+                    catcher_json_file_path = tab_values["catcher_json_file_path"]
+                    if not catcher_json_file_path:
+                        print("Configuration requires Catcher edits JSON file path")
+                        continue
+                    print("Scanning Catcher edits for nicks...")
+                    nicks = get_nicks_from_edit(catcher_json_file_path)
+
                     cdm_instance_url = tab_values["cdm_instance_url"]
                     cdm_collection_alias = tab_values["cdm_collection_alias"]
                     if cdm_instance_url and cdm_collection_alias:
@@ -404,22 +420,23 @@ def gui() -> None:
                         except Exception as e:
                             print("Request failed with error: ", e)
                             continue
-                    catcher_json_file_path = tab_values["catcher_json_file_path"]
-                    if not catcher_json_file_path:
-                        print("Configuration requires Catcher edits JSON file path")
-                        continue
-                    print("Scanning Catcher edits for nicks...")
-                    nicks = get_nicks_from_edit(catcher_json_file_path)
+                        short_infos = [
+                            ShortInfo(name=fi.name, nick=fi.nick, vocab=bool(fi.vocab)) for fi in field_infos
+                        ]
+                    else:
+                        short_infos = [
+                            ShortInfo(name=nick, nick=nick, vocab=False) for nick in nicks
+                        ]
                     window.extend_layout(
                         window[(event_function, "-TIDY OPS FRAME-")],
                         [
                             [
-                                sg.Checkbox("whitespace", default=True, key=(catchertidy, "normalize_whitespace", fi.nick)),
-                                sg.Checkbox("quotes", default=True, key=(catchertidy, "replace_smart_chars", fi.nick)),
-                                sg.Checkbox("lcsh", default=False, key=(catchertidy, "normalize_lcsh", fi.nick)),
-                                sg.Checkbox("sort", default=bool(fi.vocab), key=(catchertidy, "sort_terms", fi.nick)),
-                                sg.Text(fi.name),
-                            ] for fi in field_infos if fi.nick in nicks
+                                sg.Checkbox("whitespace", default=True, key=(catchertidy, "normalize_whitespace", si.nick)),
+                                sg.Checkbox("quotes", default=True, key=(catchertidy, "replace_smart_chars", si.nick)),
+                                sg.Checkbox("lcsh", default=is_lcsh_guess(si.name), key=(catchertidy, "normalize_lcsh", si.nick)),
+                                sg.Checkbox("sort", default=si.vocab, key=(catchertidy, "sort_terms", si.nick)),
+                                sg.Text(si.name),
+                            ] for si in short_infos if si.nick in nicks
                         ],
                     )
                     window[(event_function, "-TIDY OPS COLUMN-")].contents_changed()
@@ -448,12 +465,15 @@ def gui() -> None:
                         print("Request failed with error:", e)
 
                 elif event_value == "-RUN-":
-                    missing_values_keys = [
+                    missing_values_keys = {
                         key
                         for key, value in tab_values.items()
                         if isinstance(value, str) and not value.strip()
+                    }
+                    required_missing_values_keys = [
+                        key for key in missing_values_keys if (event_function, key) not in optional_keys
                     ]
-                    if missing_values_keys:
+                    if required_missing_values_keys:
                         sg.popup(
                             "Missing required input values:",
                             *missing_values_keys,
@@ -563,3 +583,7 @@ def get_nicks_from_edit(path: str) -> List[str]:
         nicks.update(edit)
     nicks.discard("dmrecord")
     return sorted(nicks)
+
+
+def is_lcsh_guess(fieldname: str) -> bool:
+    return "LCSH" in fieldname or "LCNAF" in fieldname
