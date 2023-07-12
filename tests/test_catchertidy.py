@@ -23,7 +23,6 @@ def test_catchertidy(tmp_path):
         replace_smart_chars=["nicka", "nickb"],
         normalize_lcsh=["nickb"],
         sort_terms=["nickb"],
-        show_progress=False,
     )
     json.load(output_path.open()) == [
         {

@@ -1,17 +1,17 @@
 import json
 import re
 
-from typing import Optional, List, Dict
+from typing import List, Dict, Optional, Container
 
 
 def catchertidy(
     catcher_json_file_path: str,
     output_file_path: str,
-    normalize_whitespace: List[str],
-    replace_smart_chars: List[str],
-    normalize_lcsh: List[str],
-    sort_terms: List[str],
-    show_progress: bool,
+    normalize_whitespace: Optional[Container[str]] = None,
+    replace_smart_chars: Optional[Container[str]] = None,
+    normalize_lcsh: Optional[Container[str]] = None,
+    sort_terms: Optional[Container[str]] = None,
+    show_progress: bool = True,
 ) -> None:
     """Tidy up a cdm-catcher JSON edit."""
     with open(catcher_json_file_path, mode="r", encoding="utf-8") as fp:
@@ -24,16 +24,16 @@ def catchertidy(
             if nick == "dmrecord":
                 continue
 
-            if nick in normalize_whitespace:
+            if normalize_whitespace and nick in normalize_whitespace:
                 edit_value = normalize_whitespace_(edit_value)
 
-            if nick in replace_smart_chars:
+            if replace_smart_chars and nick in replace_smart_chars:
                 edit_value = replace_smart_chars_(edit_value)
 
-            if nick in normalize_lcsh:
+            if normalize_lcsh and nick in normalize_lcsh:
                 edit_value = normalize_lcsh_(edit_value)
 
-            if nick in sort_terms:
+            if sort_terms and nick in sort_terms:
                 edit_value = sort_terms_(edit_value)
 
             tidy_edit[nick] = edit_value
