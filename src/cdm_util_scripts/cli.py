@@ -4,6 +4,7 @@ import requests
 import json
 import csv
 import sys
+import itertools
 
 from typing import Optional, Sequence, Dict
 
@@ -18,6 +19,16 @@ from cdm_util_scripts import ftptransc2catcher
 from cdm_util_scripts import ftpstruct2catcher
 from cdm_util_scripts import scanftpschema
 from cdm_util_scripts import gui
+
+
+def catchertidy_compound_options():
+    options = "wrls"
+    combos = []
+    for r in range(2, len(options) + 1):
+        combos.extend(
+            "".join(combo) for combo in itertools.combinations(options, r)
+        )
+    return combos
 
 
 def main(test_args: Optional[Sequence[str]] = None) -> int:
@@ -86,21 +97,27 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         help=catchertidy.catchertidy.__doc__,
     )
     catchertidy_subparser.add_argument(
-        "-w", "--normalize-whitespace", action="append",
+        "-w", "--normalize-whitespace", action="append", metavar="CATCHER_NICK",
         help="catcher edit nicks to normalize whitespace"
     )
     catchertidy_subparser.add_argument(
-        "-r", "--replace-smart-chars", action="append",
+        "-r", "--replace-smart-chars", action="append", metavar="CATCHER_NICK",
         help="catcher edit nicks to replace smart characters"
     )
     catchertidy_subparser.add_argument(
-        "-l", "--normalize-lcsh", action="append",
+        "-l", "--normalize-lcsh", action="append", metavar="CATCHER_NICK",
         help="catcher edit nicks to normalize LC subjects"
     )
     catchertidy_subparser.add_argument(
-        "-s", "--sort-terms", action="append",
+        "-s", "--sort-terms", action="append", metavar="CATCHER_NICK",
         help="catcher edit nicks to sort controlled vocab terms"
     )
+    for option in catchertidy_compound_options():
+        help_list = ", ".join(f"-{o}" for o in option)
+        catchertidy_subparser.add_argument(
+            f"--{option}", action="append", metavar="CATCHER_NICK",
+            help=f"Do all of {help_list} to edit nick"
+        )
     catchertidy_subparser.add_argument(
         "catcher_json_file_path",
         help="Path to cdm-catcher JSON file",
@@ -109,7 +126,42 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "output_file_path",
         help="Path to write tidied cdm-catcher JSON file",
     )
-    catchertidy_subparser.set_defaults(func=catchertidy.catchertidy)
+
+    def catchertidy_func(
+            *,
+            normalize_whitespace,
+            replace_smart_chars,
+            normalize_lcsh,
+            sort_terms,
+            catcher_json_file_path,
+            output_file_path,
+            **kwargs
+    ):
+        normalize_whitespace = normalize_whitespace or []
+        replace_smart_chars = replace_smart_chars or []
+        normalize_lcsh = normalize_lcsh or []
+        sort_terms = sort_terms or []
+        for key, value in kwargs.items():
+            if not value:
+                continue
+            if "w" in key:
+                normalize_whitespace.extend(value)
+            if "r" in key:
+                replace_smart_chars.extend(value)
+            if "l" in key:
+                normalize_lcsh.extend(value)
+            if "s" in key:
+                sort_terms.extend(value)
+        catchertidy.catchertidy(
+            catcher_json_file_path=catcher_json_file_path,
+            output_file_path=output_file_path,
+            normalize_whitespace=normalize_whitespace,
+            replace_smart_chars=replace_smart_chars,
+            normalize_lcsh=normalize_lcsh,
+            sort_terms=sort_terms,
+        )
+
+    catchertidy_subparser.set_defaults(func=catchertidy_func)
 
     # csv2json
     csv2json_subparser = subparsers.add_parser(
