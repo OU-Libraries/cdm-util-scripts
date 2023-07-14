@@ -5,6 +5,7 @@ cdm-util-scripts are Python tools developed to support Ohio University Libraries
 cdm-util-scripts has two interfaces, a CLI (Command Line Interface) and a GUI (Graphical User Interface) that both offer the same functionality:
 * [catcherdiff](#catcherdiff): generates a HTML report on what CONTENTdm field values will change if a cdm-catcher JSON edit is implemented.
 * [catchercombineterms](#catchercombineterms): combines a cdm-catcher JSON edit of controlled vocabulary fields with terms currently in CONTENTdm.
+* [catchertidy](#catchertidy): tidy up Catcher edits, including options for normalizing whitespace, replacing Microsoft Word smart characters, and sorting controlled vocabularies.
 * [scanftpschema](#scanftpschema): generates a HTML report on the Metadata Fields/Transcription Fields schema(s) in a FromThePage project.
 * [ftpstruct2catcher](#ftpstruct2catcher): requests FromThePage Metadata Fields and/or Transcription Fields data as cdm-catcher JSON edits.
 * [ftptransc2catcher](#ftptransc2catcher): requests transcripts from FromThePage works corresponding to manifest URLs listed in a text file as cdm-catcher JSON edits.
@@ -18,7 +19,7 @@ To run cdm-util-scripts, you need Python 3 version 3.7 or later installed and av
 First, check that Python 3.7 or later is available. On Command Prompt:
 
 ```console
-C:\Users\username>python --version
+C:\Users\username>python3 --version
 Python 3.7.12
 
 ```
@@ -26,22 +27,22 @@ Python 3.7.12
 On Git Bash or macOS Terminal (`$` is the prompt used here but yours might be different):
 
 ```console
-$ python --version
+$ python3 --version
 Python 3.7.12
 ```
 
-Some systems might use `python3` instead of `python`. cdm-util-scripts is best installed using a Python [virtual environment](https://docs.python.org/3/tutorial/venv.html) that makes `cdmutil` available as a command and can be switched on and off to avoid interfering with other Python software. To do this, the following commands can be executed in Windows' Command Prompt, where `username` is your username and cdm-util-scripts could be any subdirectory of your choice:
+Some systems might use `py` or `python` instead of `python3`. cdm-util-scripts is best installed using a Python [virtual environment](https://docs.python.org/3/tutorial/venv.html) that makes `cdmutil` available as a command and can be switched on and off to avoid interfering with other Python software. To do this, the following commands can be executed in Windows' Command Prompt, where `username` is your username and cdm-util-scripts could be any subdirectory of your choice:
 
 ```console
 C:\Users\username>mkdir cdm-util-scripts
 
 C:\Users\username>cd cdm-util-scripts
 
-C:\Users\username>python -m venv env
+C:\Users\username>python3 -m venv env
 
 C:\Users\username>env\Scripts\activate
 
-(env) C:\Users\username>python -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
+(env) C:\Users\username>python3 -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
 ```
 
 The following slightly different commands can be used on macOS Terminal or Linux:
@@ -49,9 +50,9 @@ The following slightly different commands can be used on macOS Terminal or Linux
 ```console
 $ mkdir cdm-util-scripts
 $ cd cdm-util-scripts
-$ python -m venv env
+$ python3 -m venv env
 $ source env/bin/activate
-(env) $ python -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
+(env) $ python3 -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
 ```
 
 And the following also slightly different commands can be used on Git Bash on Windows:
@@ -59,9 +60,9 @@ And the following also slightly different commands can be used on Git Bash on Wi
 ```console
 $ mkdir cdm-util-scripts
 $ cd cdm-util-scripts
-$ python -m venv env
+$ python3 -m venv env
 $ source env/Scripts/activate
-(env) $ python -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
+(env) $ python3 -m pip install git+https://github.com/OU-Libraries/cdm-util-scripts@main
 ```
 
 
@@ -91,9 +92,9 @@ Several cdm-util-scripts are intended for use with [cdm-catcher](https://github.
 
     git clone https://github.com/Baledin/cdm-catcher
     cd cdm-catcher
-    python -m venv env
+    python3 -m venv env
     source env/Scripts/activate
-    python -m pip install -r requirements.txt
+    python3 -m pip install -r requirements.txt
 
 It should be configured according to its instructions. It can then be invoked from its cloned cdm-catcher directory.
 
@@ -342,6 +343,65 @@ $ head -n 12 farfel-leaves-metadata-edits-combined.json
     "docume": "Comedies (literary works); Drama (literary genre); Incunabula; Printed materials (object genre)",
     "featur": "Glosses (annotations); Illustrations (layout features); Marginalia (annotations); Woodcuts (prints)"
   },
+```
+
+<a name="catchertidy"/>
+
+### catchertidy
+
+Unlike the other cdm-util-scripts, `catchertidy` GUI and CLI interfaces differ in their required inputs because the GUI has a configuration feature that reconciles field nicks with field metadata not present in the CLI. The GUI `catchertidy` interface takes:
+* An optional CONTENTdm instance URL
+* An optional CONTENTdm collection alias
+* A cdm-catcher `edit` action JSON file
+* A tidy operations configuration initiated by the `Configure...` button
+* An output file name
+
+and outputs a tidied `cdm-catcher` JSON file with the configured tidy operations performed on the specified fields.
+
+The tidy operations `Configure...` button fills the tidy operations frame with a list of field names with checkboxes corresponding to the available tidy operations. `Configure` can be clicked only once per GUI session (due to GUI library limitations). If the user has provided both the optional CONTENTdm URL and collection alias, cdm-util-scripts will request that collection's field information from CONTENTdm and use it to initialize the tidy operations configuration with operation defaults and full field names. If the URL and alias are not provided, only the field nicks in the Catcher edit will appear in the tidy operations configuration table and only `quotes` and `whitespace` will be checked by default.
+
+There are four tidy operations:
+
+- `whitespace` (GUI), `-w` / `--normalize-whitespace` (CLI): reduces all whitespace (newlines, tabs, double spaces etc.) to single spaces between words
+- `quotes` (GUI), `-r` / `--replace-smart-chars` (CLI): replaces smart characters frequently inserted into text by Microsoft Word:
+  - `‘` and `’` become `'`
+  - `“` and `”` become `"`
+  - `—` (em dash) becomes `--`
+  - `–` (en dash) becomes `-`
+- `lcsh` (GUI), `-l` / `--normalize-lcsh` (CLI): inserts single spaces between `--` divided subfields in LCSH and LCNAF terms
+- `sort` (GUI), `-s` / `--sort-terms` (CLI): lexically sort controlled vocabulary terms separated by `;`
+
+The `catchertidy` CLI takes:
+* Zero or more tidy operation options with field nicks as arguments
+* A cdm-catcher `edit` action JSON file path
+* An output file path
+
+and outputs a tidied `cdm-catcher` JSON file with the configured operations performed on the specified fields.
+
+The CLI interface offers "compound" tidy operation options that run more than one tidy operation on the specified edit nick argument, such as `--wr`, which tidies white space and replaces smart characters. `cdmutil catchertidy --help` shows the full list of compound options.
+
+Example usage:
+
+``` console
+$ head edit.json
+[
+  {
+    "dmrecord": "1",
+    "origin": "This string has “smart” quotes",
+    "series": "7.\tPress and   promotion\n",
+    "locati": "Zanesville (Ohio); Athens (Ohio)--Social life and customs"
+  }
+]
+$ cdmutil catchertidy --wr origin --wr series --wrls locati edit.json edit-tidy.json
+$ head dance-edit-tidy.json
+[
+  {
+    "dmrecord": "1",
+    "origin": "This string has \"smart\" quotes",
+    "series": "7. Press and promotion",
+    "locati": "Athens (Ohio) -- Social life and customs; Zanesville (Ohio)"
+  }
+]
 ```
 
 <a name="ftpstruct2catcher"/>
