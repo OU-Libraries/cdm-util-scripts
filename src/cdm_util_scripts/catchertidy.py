@@ -25,16 +25,16 @@ def catchertidy(
                 continue
 
             if normalize_whitespace and nick in normalize_whitespace:
-                edit_value = normalize_whitespace_(edit_value)
+                edit_value = normalize_whitespace_operation(edit_value)
 
             if replace_smart_chars and nick in replace_smart_chars:
-                edit_value = replace_smart_chars_(edit_value)
+                edit_value = replace_smart_chars_operation(edit_value)
 
             if normalize_lcsh and nick in normalize_lcsh:
-                edit_value = normalize_lcsh_(edit_value)
+                edit_value = normalize_lcsh_operation(edit_value)
 
             if sort_terms and nick in sort_terms:
-                edit_value = sort_terms_(edit_value)
+                edit_value = sort_terms_operation(edit_value)
 
             tidy_edit[nick] = edit_value
         tidy_edits.append(tidy_edit)
@@ -43,11 +43,11 @@ def catchertidy(
         json.dump(tidy_edits, fp, indent=2)
 
 
-def normalize_whitespace_(value: str) -> str:
+def normalize_whitespace_operation(value: str) -> str:
     return " ".join(value.split())
 
 
-def replace_smart_chars_(value: str) -> str:
+def replace_smart_chars_operation(value: str) -> str:
     return value.translate(
         {
             0x201C: '"',
@@ -60,16 +60,16 @@ def replace_smart_chars_(value: str) -> str:
     )
 
 
-def normalize_lcsh_(terms: str) -> str:
+def normalize_lcsh_operation(terms: str) -> str:
     normalized_terms: List[str] = []
     for term in split_controlled_vocab(terms):
-        term = replace_smart_chars_(normalize_whitespace_(term))
+        term = replace_smart_chars_operation(normalize_whitespace_operation(term))
         parts = [part.strip() for part in term.rsplit("--")]
         normalized_terms.append(" -- ".join(parts))
     return "; ".join(normalized_terms)
 
 
-def sort_terms_(terms: str) -> str:
+def sort_terms_operation(terms: str) -> str:
     return "; ".join(sorted(split_controlled_vocab(terms)))
 
 

@@ -44,8 +44,8 @@ def test_catchertidy(tmp_path):
         ("en–dash", "en-dash"),
     ],
 )
-def test_replace_smart_chars_(before, after):
-    assert catchertidy.replace_smart_chars_(before) == after
+def test_replace_smart_chars_operation(before, after):
+    assert catchertidy.replace_smart_chars_operation(before) == after
 
 
 @pytest.mark.parametrize(
@@ -63,8 +63,8 @@ def test_replace_smart_chars_(before, after):
         ),
     ],
 )
-def test_normalize_lcsh_(before, after):
-    assert catchertidy.normalize_lcsh_(before) == after
+def test_normalize_lcsh_operation(before, after):
+    assert catchertidy.normalize_lcsh_operation(before) == after
 
 
 @pytest.mark.parametrize(
@@ -87,5 +87,5 @@ def test_split_controlled_vocab(before, after):
         ("B term; A term", "A term; B term"),
     ]
 )
-def test_sort_terms_(before, after):
-    assert catchertidy.sort_terms_(before) == after
+def test_sort_terms_operation(before, after):
+    assert catchertidy.sort_terms_operation(before) == after
