@@ -5,7 +5,7 @@ cdm-util-scripts are Python tools developed to support Ohio University Libraries
 cdm-util-scripts has two interfaces, a CLI (Command Line Interface) and a GUI (Graphical User Interface) that both offer the same functionality:
 * [catcherdiff](#catcherdiff): generates a HTML report on what CONTENTdm field values will change if a cdm-catcher JSON edit is implemented.
 * [catchercombineterms](#catchercombineterms): combines a cdm-catcher JSON edit of controlled vocabulary fields with terms currently in CONTENTdm.
-* [catchertidy](#catchertidy): tidy up Catcher edits, including options for normalizing whitespace, replacing Microsoft Word smart characters, and sorting controlled vocabularies.
+* [catchertidy](#catchertidy): tidies up cdm-catcher JSON edits, including options for normalizing whitespace, replacing Microsoft Word smart characters, and sorting controlled vocabularies.
 * [scanftpschema](#scanftpschema): generates a HTML report on the Metadata Fields/Transcription Fields schema(s) in a FromThePage project.
 * [ftpstruct2catcher](#ftpstruct2catcher): requests FromThePage Metadata Fields and/or Transcription Fields data as cdm-catcher JSON edits.
 * [ftptransc2catcher](#ftptransc2catcher): requests transcripts from FromThePage works corresponding to manifest URLs listed in a text file as cdm-catcher JSON edits.
@@ -106,7 +106,7 @@ The cdm-util-scripts GUI can be launched using:
 $ cdmutil gui
 ```
 
-The GUI window should then popup on your desktop. All of its functionality and arguments are the same as the CLI interface documented below, except that instead of providing the `cdminfo` and `ftpinfo` subcommands there are `Request collection aliases` and `Request project names` buttons that fill the FromThePage project names and CONTENTdm collection aliases combo boxes on request, and `cdmschema2csv` which jump starts a column mapping CSV with CONTENTdm field names and nicks.
+The GUI window should then popup on your desktop. Most of its functionality and arguments are the same as the CLI interface documented below, except that instead of providing the `cdminfo` and `ftpinfo` subcommands there are `Request collection aliases` and `Request project names` buttons that fill the FromThePage project names and CONTENTdm collection aliases combo boxes on request, and `cdmschema2csv` which jump starts a column mapping CSV with CONTENTdm field names and nicks.
 
 Because the GUI interface is an overlay on the CLI functionality without a GUI progress reporting mechanism, Windows will often designate cdm-util-scripts as "Non Responsive" during long runs even when they're not hung or frozen.
 
@@ -349,7 +349,7 @@ $ head -n 12 farfel-leaves-metadata-edits-combined.json
 
 ### catchertidy
 
-Unlike the other cdm-util-scripts, `catchertidy` GUI and CLI interfaces differ in their required inputs because the GUI has a configuration feature that reconciles field nicks with field metadata not present in the CLI. The GUI `catchertidy` interface takes:
+Unlike the other cdm-util-scripts, `catchertidy` GUI and CLI interfaces differ in their inputs because the GUI has a configuration feature that reconciles field nicks with field metadata not present in the CLI. The GUI `catchertidy` interface takes:
 * An optional CONTENTdm instance URL
 * An optional CONTENTdm collection alias
 * A cdm-catcher `edit` action JSON file
@@ -371,6 +371,8 @@ There are four tidy operations:
 - `lcsh` (GUI), `-l` / `--normalize-lcsh` (CLI): inserts single spaces between `--` divided subfields in LCSH and LCNAF terms
 - `sort` (GUI), `-s` / `--sort-terms` (CLI): lexically sort controlled vocabulary terms separated by `;`
 
+`lcsh` / `--normalize-lcsh` also normalizes whitespace and replaces smart characters. `sort` / `--sort-terms` also normalizes whitespace between terms.
+
 The `catchertidy` CLI takes:
 * Zero or more tidy operation options with field nicks as arguments
 * A cdm-catcher `edit` action JSON file path
@@ -378,7 +380,7 @@ The `catchertidy` CLI takes:
 
 and outputs a tidied `cdm-catcher` JSON file with the configured operations performed on the specified fields.
 
-The CLI interface offers "compound" tidy operation options that run more than one tidy operation on the specified edit nick argument, such as `--wr`, which tidies white space and replaces smart characters. `cdmutil catchertidy --help` shows the full list of compound options.
+The CLI interface offers "compound" tidy operation options that run more than one tidy operation on the specified edit nick argument, such as `--wr`, which both tidies white space and replaces smart characters. `cdmutil catchertidy --help` shows the full list of compound options.
 
 Example usage:
 
@@ -609,8 +611,8 @@ cdm-util-scripts is tested with [pytest](https://pypi.org/project/pytest/) and [
     git clone https://github.com/OU-Libraries/cdm-util-scripts
     cd cdm-util-scripts
     git checkout development
-    python -m venv env
+    python3 -m venv env
     source env/Scripts/activate
-    python -m pip install -e .[dev]
+    python3 -m pip install -e .[dev]
 
 vcrpy records web API responses in local cache files called "cassettes" so tests can be reliably run against real, version-controlled data without the lag of using the network every time they are run.
