@@ -6,15 +6,13 @@ from urllib.parse import urlsplit
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 
-from typing import List, Dict, Any, Tuple, Optional, NamedTuple, Union, NewType
+from typing import List, Dict, Any, Tuple, Optional, NamedTuple, Union
 
 
 FTP_HOSTED_URL = "https://fromthepage.com"
 
 
-FtpFieldBasedTranscription = NewType(
-    "FtpFieldBasedTranscription", List[Optional[Dict[str, str]]]
-)
+FtpFieldBasedTranscription = List[Optional[Dict[str, str]]]
 
 
 @dataclass

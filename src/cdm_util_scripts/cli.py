@@ -6,7 +6,7 @@ import csv
 import sys
 import itertools
 
-from typing import Optional, Sequence, Dict
+from typing import Optional, Sequence, Dict, List
 
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
@@ -23,7 +23,7 @@ from cdm_util_scripts import gui
 
 def catchertidy_compound_options():
     options = "wrls"
-    combos = []
+    combos: List[str] = []
     for r in range(2, len(options) + 1):
         combos.extend(
             "".join(combo) for combo in itertools.combinations(options, r)

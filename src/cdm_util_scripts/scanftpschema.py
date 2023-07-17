@@ -51,17 +51,17 @@ def scanftpschema(
         ftp_project.request_works(session=session, show_progress=show_progress)
 
         print("Requesting FromThePage project structured descriptions...")
-        project_works_and_fields: List[ftp_api.WorkAndFields] = []
-        project_pages_and_fields: List[ftp_api.PageAndFields] = []
+        project_works_and_fields: List[WorkAndFields] = []
+        project_pages_and_fields: List[PageAndFields] = []
         for work in progress_bar(ftp_project.works):
             if has_work_description:
                 project_works_and_fields.append(
-                    (work, work.request_structured_data(session=session))
+                    WorkAndFields(work, work.request_structured_data(session=session))
                 )
             if has_page_description:
                 for page in work.pages:
                     project_pages_and_fields.append(
-                        (page, page.request_structured_data(session=session))
+                        PageAndFields(page, page.request_structured_data(session=session))
                     )
 
     print("Collating field sets...")
