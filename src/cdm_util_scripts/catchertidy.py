@@ -11,6 +11,7 @@ def catchertidy(
     replace_smart_chars: Optional[Container[str]] = None,
     normalize_lcsh: Optional[Container[str]] = None,
     sort_terms: Optional[Container[str]] = None,
+    lcsh_separator_spaces: bool = True,
     show_progress: bool = True,
 ) -> None:
     """Tidy up a cdm-catcher JSON edit."""
@@ -31,7 +32,9 @@ def catchertidy(
                 edit_value = replace_smart_chars_operation(edit_value)
 
             if normalize_lcsh and nick in normalize_lcsh:
-                edit_value = normalize_lcsh_operation(edit_value)
+                edit_value = normalize_lcsh_operation(
+                    edit_value, separator_spaces=lcsh_separator_spaces
+                )
 
             if sort_terms and nick in sort_terms:
                 edit_value = sort_terms_operation(edit_value)
@@ -60,12 +63,13 @@ def replace_smart_chars_operation(value: str) -> str:
     )
 
 
-def normalize_lcsh_operation(terms: str) -> str:
+def normalize_lcsh_operation(terms: str, separator_spaces: bool = True) -> str:
+    subfield_separator = " -- " if separator_spaces else "--"
     normalized_terms: List[str] = []
     for term in split_controlled_vocab(terms):
         term = replace_smart_chars_operation(normalize_whitespace_operation(term))
         parts = [part.strip() for part in term.rsplit("--")]
-        normalized_terms.append(" -- ".join(parts))
+        normalized_terms.append(subfield_separator.join(parts))
     return "; ".join(normalized_terms)
 
 

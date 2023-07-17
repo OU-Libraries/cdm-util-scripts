@@ -128,6 +128,13 @@ def gui() -> None:
                     ],
                     [sg.Text("Configure tidy operations")],
                     [sg.Button("Configure...", key=(catchertidy, "-CONFIG TIDY-"))],
+                    [
+                        sg.Checkbox(
+                            "Insert subfield separator spaces in normalized LCSH",
+                            default=True,
+                            key=(catchertidy, "lcsh_separator_spaces"),
+                        )
+                    ],
                     [sg.Text("Catcher JSON output file path")],
                     [
                         sg.Input(key=(catchertidy, "output_file_path"), size=INPUT_SIZE),

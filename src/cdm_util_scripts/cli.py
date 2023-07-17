@@ -119,6 +119,10 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
             help=f"Do all of {help_list} to edit nick"
         )
     catchertidy_subparser.add_argument(
+        "-e", "--no-sep-space", action="store_true",
+        help="Don't use spaces around subfield delimiters when normalizing LCSH"
+    )
+    catchertidy_subparser.add_argument(
         "catcher_json_file_path",
         help="Path to cdm-catcher JSON file",
     )
@@ -133,6 +137,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
             replace_smart_chars,
             normalize_lcsh,
             sort_terms,
+            no_sep_space,
             catcher_json_file_path,
             output_file_path,
             **kwargs
@@ -159,6 +164,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
             replace_smart_chars=replace_smart_chars,
             normalize_lcsh=normalize_lcsh,
             sort_terms=sort_terms,
+            lcsh_separator_spaces=not no_sep_space,
         )
 
     catchertidy_subparser.set_defaults(func=catchertidy_func)

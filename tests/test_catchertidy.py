@@ -49,22 +49,30 @@ def test_replace_smart_chars_operation(before, after):
 
 
 @pytest.mark.parametrize(
-    "before,after",
+    "before,after,separator_spaces",
     [
-        ("World War, 1939-1945--Journalists", "World War, 1939-1945 -- Journalists"),
+        ("World War, 1939-1945--Journalists", "World War, 1939-1945 -- Journalists", True),
+        ("World War, 1939-1945 -- Journalists", "World War, 1939-1945--Journalists", False),
         (
             "Soldiers--United States--20th century",
             "Soldiers -- United States -- 20th century",
+            True,
         ),
-        ("Francis Pope, 1936---Biography", "Francis Pope, 1936- -- Biography"),
+        ("Francis Pope, 1936---Biography", "Francis Pope, 1936- -- Biography", True),
         (
             "World War, 1939-1945--Journalists; Soldiers -- United States -- 20th century",
             "World War, 1939-1945 -- Journalists; Soldiers -- United States -- 20th century",
+            True,
+        ),
+        (
+            "World War, 1939-1945--Journalists; Soldiers -- United States -- 20th century",
+            "World War, 1939-1945--Journalists; Soldiers--United States--20th century",
+            False,
         ),
     ],
 )
-def test_normalize_lcsh_operation(before, after):
-    assert catchertidy.normalize_lcsh_operation(before) == after
+def test_normalize_lcsh_operation(before, after, separator_spaces):
+    assert catchertidy.normalize_lcsh_operation(before, separator_spaces=separator_spaces) == after
 
 
 @pytest.mark.parametrize(
