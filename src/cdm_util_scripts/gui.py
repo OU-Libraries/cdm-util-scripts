@@ -1,11 +1,9 @@
-import PySimpleGUI as sg
-import requests
-
+import collections
 import csv
 import json
-import collections
 
-from typing import Callable, Dict, Any, Hashable, Set, List, Iterable, Tuple, Set
+import PySimpleGUI as sg
+import requests
 
 from cdm_util_scripts import cdm_api
 from cdm_util_scripts import ftp_api
@@ -17,6 +15,8 @@ from cdm_util_scripts.json2csv import json2csv
 from cdm_util_scripts.ftptransc2catcher import ftptransc2catcher
 from cdm_util_scripts.ftpstruct2catcher import ftpstruct2catcher, Level
 from cdm_util_scripts.scanftpschema import scanftpschema
+
+from typing import Callable, Dict, Any, Hashable, Set, List
 
 
 HELP_SIZE = (90, 2)
@@ -202,6 +202,10 @@ def gui() -> None:
         [
             sg.Input(key=(csv2json, "output_json_path"), size=INPUT_SIZE),
             sg.FileSaveAs(file_types=(("JSON", "*.json"),), default_extension=".json"),
+        ],
+        [sg.Text("CSV dialect")],
+        [
+            sg.Combo(csv.list_dialects(), default_value="google-csv", key=(csv2json, "csv_dialect"))
         ],
         [
             sg.Checkbox(

@@ -176,6 +176,14 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     csv2json_subparser.add_argument("input_csv_path", help="Path to delimited file")
     csv2json_subparser.add_argument("output_json_path", help="Path to output JSON file")
     csv2json_subparser.add_argument("-k", "--keep-empty-cells", action="store_false", help="Include edits for empty cells in CSV")
+    csv2json_subparser.add_argument(
+        "-d",
+        "--csv-dialect",
+        action="store",
+        choices=csv.list_dialects(),  # TODO: offer a sniffer option?
+        default="google-csv",
+        help="Dialect of input CSV",
+    )
 
     def csv2json_func(*args, keep_empty_cells, **kwargs):
         csv2json.csv2json(*args, drop_empty_cells=keep_empty_cells, **kwargs)

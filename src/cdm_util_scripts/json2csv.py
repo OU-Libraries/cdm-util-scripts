@@ -1,10 +1,15 @@
 import csv
 import json
 
-from typing import List
+from typing import List, Union
 
 
-def json2csv(input_json_path: str, output_csv_path: str, csv_dialect: str = "excel-tab", show_progress: bool = False) -> None:
+def json2csv(
+    input_json_path: str,
+    output_csv_path: str,
+    csv_dialect: Union[str, csv.Dialect],
+    show_progress: bool = False
+) -> None:
     """Transpose a list of JSON objects (cdm-catcher JSON edits) into a CSV file."""
     with open(input_json_path, mode="r", encoding="utf-8") as fp:
         input_json = json.load(fp)
