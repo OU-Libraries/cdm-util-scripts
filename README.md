@@ -358,20 +358,20 @@ Unlike the other cdm-util-scripts, `catchertidy` GUI and CLI interfaces differ i
 
 and outputs a tidied `cdm-catcher` JSON file with the configured tidy operations performed on the specified fields.
 
-The tidy operations `Configure Tidy Operations...` button fills the tidy operations frame with a list of field names with checkboxes corresponding to the available tidy operations. If the user has provided both the optional CONTENTdm URL and collection alias, cdm-util-scripts will request that collection's field information from CONTENTdm and use it to initialize the tidy operations configuration with operation defaults and full field names. If the URL and alias are not provided, only the field nicks in the Catcher edit will appear in the tidy operations configuration table and only `quotes` and `whitespace` will be checked by default.
+The tidy operations `Configure Tidy Operations...` button initiates a pop-up window with a list of field names with checkboxes corresponding to the available tidy operations. If the user has provided both the optional CONTENTdm URL and collection alias, cdm-util-scripts will request that collection's field information from CONTENTdm and use it to initialize the tidy operations configuration with operation defaults and full field names. If the URL and alias are not provided, only the field nicks in the Catcher edit will appear in the tidy operations configuration table and only `Quotes` and `Whitespace` will be checked by default.
 
 There are four tidy operations:
 
-- `whitespace` (GUI), `-w` / `--normalize-whitespace` (CLI): reduces all whitespace (newlines, tabs, double spaces etc.) to single spaces between words
-- `quotes` (GUI), `-r` / `--replace-smart-chars` (CLI): replaces smart characters frequently inserted into text by Microsoft Word:
+- `Whitespace` (GUI), `-w` / `--normalize-whitespace` (CLI): reduces all whitespace (newlines, tabs, double spaces etc.) to single spaces between words
+- `Quotes` (GUI), `-r` / `--replace-smart-chars` (CLI): replaces smart characters frequently inserted into text by Microsoft Word:
   - `‘` and `’` become `'`
   - `“` and `”` become `"`
   - `—` (em dash) becomes `--`
   - `–` (en dash) becomes `-`
-- `lcsh` (GUI), `-l` / `--normalize-lcsh` (CLI): inserts single spaces between `--` divided subfields in LCSH and LCNAF terms
-- `sort` (GUI), `-s` / `--sort-terms` (CLI): lexically sort controlled vocabulary terms separated by `;`
+- `LCSH` (GUI), `-l` / `--normalize-lcsh` (CLI): inserts single spaces between `--` divided subfields in LCSH and LCNAF terms
+- `Sort` (GUI), `-s` / `--sort-terms` (CLI): lexically sort controlled vocabulary terms separated by `;`
 
-`lcsh` / `--normalize-lcsh` also normalizes whitespace and replaces smart characters. `sort` / `--sort-terms` also normalizes whitespace between terms.
+`LCSH` / `--normalize-lcsh` also normalizes whitespace and replaces smart characters. `Sort` / `--sort-terms` also normalizes whitespace between terms.
 
 The `catchertidy` CLI takes:
 * Zero or more tidy operation options with field nicks as arguments
