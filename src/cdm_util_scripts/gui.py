@@ -62,7 +62,7 @@ class Console:
         console = scrolledtext.ScrolledText(
             frame,
             height=12,
-            width=103,
+            width=100,
             font=("consolas", "8", "normal"),
             state="disabled",
         )
@@ -709,7 +709,7 @@ class FtpTransc2Catcher:
         ttk.Entry(
             nick_frame,
             textvariable=self.transcript_nick,
-            width=10,
+            width=20,
         ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.output_file_path = tk.StringVar()
