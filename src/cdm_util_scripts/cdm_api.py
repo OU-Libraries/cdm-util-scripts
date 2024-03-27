@@ -286,7 +286,7 @@ def read_csv_field_mapping(filename: str) -> CdmFieldMapping:
 
 
 def write_csv_field_mapping(filename: str, field_mapping: CdmFieldMapping) -> None:
-    with open(filename, mode="w", encoding="utf-8") as fp:
+    with open(filename, mode="w", encoding="utf-8", newline="") as fp:
         writer = csv.DictWriter(fp, fieldnames=["name", "nick"])
         writer.writeheader()
         for name, nicks in field_mapping.items():

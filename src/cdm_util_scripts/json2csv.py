@@ -22,7 +22,7 @@ def json2csv(
         for column_name in edit:
             if column_name not in fieldnames:
                 fieldnames.append(column_name)
-    with open(output_csv_path, mode="w", encoding="utf-8") as fp:
+    with open(output_csv_path, mode="w", encoding="utf-8", newline="") as fp:
         writer = csv.DictWriter(fp, dialect=csv_dialect, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(input_json)
