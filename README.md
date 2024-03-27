@@ -353,12 +353,12 @@ Unlike the other cdm-util-scripts, `catchertidy` GUI and CLI interfaces differ i
 * An optional CONTENTdm instance URL
 * An optional CONTENTdm collection alias
 * A cdm-catcher `edit` action JSON file
-* A tidy operations configuration initiated by the `Configure...` button
+* A tidy operations configuration initiated by the `Configure Tidy Operations...` button
 * An output file name
 
 and outputs a tidied `cdm-catcher` JSON file with the configured tidy operations performed on the specified fields.
 
-The tidy operations `Configure...` button fills the tidy operations frame with a list of field names with checkboxes corresponding to the available tidy operations. `Configure` can be clicked only once per GUI session (due to GUI library limitations). If the user has provided both the optional CONTENTdm URL and collection alias, cdm-util-scripts will request that collection's field information from CONTENTdm and use it to initialize the tidy operations configuration with operation defaults and full field names. If the URL and alias are not provided, only the field nicks in the Catcher edit will appear in the tidy operations configuration table and only `quotes` and `whitespace` will be checked by default.
+The tidy operations `Configure Tidy Operations...` button fills the tidy operations frame with a list of field names with checkboxes corresponding to the available tidy operations. If the user has provided both the optional CONTENTdm URL and collection alias, cdm-util-scripts will request that collection's field information from CONTENTdm and use it to initialize the tidy operations configuration with operation defaults and full field names. If the URL and alias are not provided, only the field nicks in the Catcher edit will appear in the tidy operations configuration table and only `quotes` and `whitespace` will be checked by default.
 
 There are four tidy operations:
 
