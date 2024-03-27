@@ -33,6 +33,7 @@ PADX, PADY = (4, 4)
 def gui() -> int:
     root = tk.Tk()
     root.title("cdm-util-scripts")
+    root.report_callback_exception = report_callback_exception
 
     Console(root)
 
@@ -52,6 +53,11 @@ def gui() -> int:
     root.mainloop()
 
     return 0
+
+
+def report_callback_exception(exc, val, tb) -> None:
+    print(val)
+    messagebox.showerror("Exception", message=val)
 
 
 # https://stackoverflow.com/questions/68198575/how-can-i-displaymy-console-output-in-tkinter
