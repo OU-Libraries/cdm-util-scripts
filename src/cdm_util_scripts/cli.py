@@ -39,6 +39,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     catcherdiff_subparser = subparsers.add_parser(
         "catcherdiff",
         help=catcherdiff.catcherdiff.__doc__,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     catcherdiff_subparser.add_argument(
         "cdm_instance_url", help="CONTENTdm instance URL"
@@ -65,6 +66,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     catchercombineterms_subparser = subparsers.add_parser(
         "catchercombineterms",
         help=catchercombineterms.catchercombineterms.__doc__,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     catchercombineterms_subparser.add_argument(
         "cdm_instance_url", help="CONTENTdm instance URL"
@@ -95,6 +97,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     catchertidy_subparser = subparsers.add_parser(
         "catchertidy",
         help=catchertidy.catchertidy.__doc__,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     catchertidy_subparser.add_argument(
         "-w", "--normalize-whitespace", action="append", metavar="CATCHER_NICK",
@@ -171,7 +174,9 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
 
     # csv2json
     csv2json_subparser = subparsers.add_parser(
-        "csv2json", help=csv2json.csv2json.__doc__
+        "csv2json",
+        help=csv2json.csv2json.__doc__,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     csv2json_subparser.add_argument("input_csv_path", help="Path to delimited file")
     csv2json_subparser.add_argument("output_json_path", help="Path to output JSON file")
@@ -192,7 +197,9 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
 
     # json2csv
     json2csv_subparser = subparsers.add_parser(
-        "json2csv", help=json2csv.json2csv.__doc__
+        "json2csv",
+        help=json2csv.json2csv.__doc__,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     json2csv_subparser.add_argument("input_json_path", help="Path to input JSON file")
     json2csv_subparser.add_argument("output_csv_path", help="Path to output CSV file")
@@ -210,6 +217,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     ftptransc2catcher_subparser = subparsers.add_parser(
         "ftptransc2catcher",
         help=ftptransc2catcher.ftptransc2catcher.__doc__,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     ftptransc2catcher_subparser.add_argument(
         "manifests_listing_path",
@@ -234,6 +242,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     ftpstruct2catcher_subparser = subparsers.add_parser(
         "ftpstruct2catcher",
         help=ftpstruct2catcher.ftpstruct2catcher.__doc__,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     ftpstruct2catcher_subparser.add_argument("ftp_slug", help="FromThePage user slug")
     ftpstruct2catcher_subparser.add_argument(
@@ -260,6 +269,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     scanftpschema_subparser = subparsers.add_parser(
         "scanftpschema",
         help=scanftpschema.scanftpschema.__doc__,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     scanftpschema_subparser.add_argument("ftp_slug", help="FromThePage user slug")
     scanftpschema_subparser.add_argument(
@@ -272,12 +282,15 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     gui_subparser = subparsers.add_parser(
         "gui",
         help="Launch a GUI version of this utility",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     gui_subparser.set_defaults(func=gui.gui)
 
     # ftpinfo
     ftpinfo_subparser = subparsers.add_parser(
-        "ftpinfo", help="Print FromThePage project information"
+        "ftpinfo",
+        help="Print FromThePage project information",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     ftpinfo_subparser.add_argument("slug", help="FromThePage user slug")
     ftpinfo_subparser.add_argument(

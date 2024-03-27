@@ -16,7 +16,7 @@ def catchercombineterms(
     sort_terms: bool = True,
     show_progress: bool = True,
 ) -> None:
-    """Combine a cdm-catcher JSON edit of controlled vocabulary fields with terms currently in CONTENTdm."""
+    """Combine a cdm-catcher JSON edit of controlled vocabulary fields with terms currently in CONTENTdm"""
     progress_bar = tqdm.tqdm if show_progress else (lambda obj: obj)
     with open(catcher_json_file_path, mode="r", encoding="utf-8") as fp:
         catcher_edits = json.load(fp)

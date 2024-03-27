@@ -14,7 +14,7 @@ def catchertidy(
     lcsh_separator_spaces: bool = True,
     show_progress: bool = True,
 ) -> None:
-    """Tidy up a cdm-catcher JSON edit."""
+    """Tidy up a cdm-catcher JSON edit's whitespace, quotes, and vocab term formatting"""
     with open(catcher_json_file_path, mode="r", encoding="utf-8") as fp:
         catcher_edits: List[Dict[str, str]] = json.load(fp)
 

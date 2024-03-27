@@ -56,7 +56,7 @@ def gui() -> int:
 
 
 def report_callback_exception(exc, val, tb) -> None:
-    print(val)
+    print("Exception:", val)
     messagebox.showerror("Exception", message=val)
 
 
@@ -1278,7 +1278,7 @@ class Csv2Json:
                 variable=self.csv_dialect,
                 value=csv_dialect,
             ).grid(column=0, row=row, sticky="w")
-        self.csv_dialect.set("google-csv")
+        self.csv_dialect.set("excel")
 
         self.drop_empty_cells = tk.BooleanVar(value=True)
         ttk.Checkbutton(
@@ -1406,7 +1406,7 @@ class Json2Csv:
                 variable=self.csv_dialect,
                 value=csv_dialect
             ).grid(column=0, row=row, sticky="w")
-        self.csv_dialect.set("google-csv")
+        self.csv_dialect.set("excel")
 
         ttk.Button(
             frame,
