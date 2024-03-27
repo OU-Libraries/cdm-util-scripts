@@ -557,7 +557,7 @@ $ head example.csv
 dmrecord,langua,docume
 3001,German; Latin,Incunabula
 3012,Latin,Comedies (library works); Drama (literary genre); Incunabula
-$ cdmutil csv2json example.csv example-edits.json
+$ cdmutil csv2json -d excel example.csv example-edits.json
 $ head example-edits.json
 [
   {
@@ -570,6 +570,8 @@ $ head example-edits.json
     "langua": "Latin",
     "docume": "Comedies (library works); Drama (literary genre); Incunabula"
 ```
+
+The `-d` or `--csv-dialect` option should be used to specify the input CSV dialect. Dialects for Google Sheets (`google-csv` and `google-tsv`) have been included to avoid ambiguity, even though they are currently the same as `excel` and `excel-tab`.
 
 By default `csv2json` will drop empty cells from the CSV when creating edits, but will include them as empty strings if the `-k` flag is provided (or "Drop empty CSV cells" is unchecked in the GUI):
 
