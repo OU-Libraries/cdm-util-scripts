@@ -24,6 +24,12 @@ from cdm_util_scripts.json2csv import json2csv
 from typing import Dict, List, NamedTuple
 
 
+HELP_LABEL_WRAP = 625
+ENTRY_WIDTH = 80
+COMBO_WIDTH = 78
+PADX, PADY = (4, 4)
+
+
 def gui() -> int:
     root = tk.Tk()
     root.title("cdm-util-scripts")
@@ -38,8 +44,9 @@ def gui() -> int:
     FtpTransc2Catcher(notebook)
     FtpStruct2Catcher(notebook)
     ScanFtpSchema(notebook)
-    Csv2json(notebook)
-    Json2csv(notebook)
+    CdmSchema2Csv(notebook)
+    Csv2Json(notebook)
+    Json2Csv(notebook)
 
     notebook.grid(column=0, row=1, sticky="nsew")
     root.mainloop()
@@ -51,15 +58,15 @@ def gui() -> int:
 class Console:
     def __init__(self, parent) -> None:
         frame = ttk.Labelframe(parent, text="Console Log")
-        frame.grid(column=0, row=0, sticky="nsew")
+        frame.grid(column=0, row=0, sticky="w")
         console = scrolledtext.ScrolledText(
             frame,
             height=12,
-            width=100,
+            width=103,
             font=("consolas", "8", "normal"),
             state="disabled",
         )
-        console.grid(column=0, row=0, sticky="nsew")
+        console.grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         console_out = ConsoleOut(console)
         sys.stdout = console_out
         sys.stderr = console_out
@@ -79,11 +86,6 @@ class ConsoleOut:
         pass
 
 
-ENTRY_WIDTH = 90
-COMBO_WIDTH = 88
-PADX, PADY = (4, 4)
-
-
 class CatcherDiff:
     cdm_instance_url: tk.StringVar
     cdm_collection_alias: tk.StringVar
@@ -101,6 +103,7 @@ class CatcherDiff:
         ttk.Label(
             help_frame,
             text=catcherdiff.__doc__ or "",
+            wraplength=HELP_LABEL_WRAP,
         ).grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
 
         self.cdm_instance_url = tk.StringVar()
@@ -131,7 +134,7 @@ class CatcherDiff:
             textvariable=self.cdm_collection_alias,
             width=COMBO_WIDTH,
         )
-        self._alias_picker.grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
+        self._alias_picker.grid(column=0, row=0, sticky="ew", padx=PADX, pady=PADY)
 
         self.catcher_json_file_path = tk.StringVar()
         input_frame = ttk.Labelframe(
@@ -143,12 +146,12 @@ class CatcherDiff:
             input_frame,
             textvariable=self.catcher_json_file_path,
             width=ENTRY_WIDTH,
-        ).grid(column=0, row=0, sticky="ew", padx=PADX, pady=PADY)
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
             input_frame,
-            text="Choose Catcher JSON file...",
+            text="Browse...",
             command=self.choose_input,
-        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.report_file_path = tk.StringVar()
         output_frame = ttk.Labelframe(
@@ -163,9 +166,9 @@ class CatcherDiff:
         ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
             output_frame,
-            text="Save HTML Report As...",
+            text="Save as...",
             command=self.choose_output,
-        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.check_vocabs = tk.BooleanVar(value=False)
         ttk.Checkbutton(
@@ -174,13 +177,13 @@ class CatcherDiff:
             variable=self.check_vocabs,
             onvalue=True,
             offvalue=False,
-        ).grid(column=0, row=10, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=0, row=5, sticky="w", padx=PADX, pady=PADY)
 
         ttk.Button(
             frame,
             text="Run",
             command=self.run,
-        ).grid(column=0, row=11, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=0, row=6, sticky="w", padx=PADX, pady=PADY)
 
     def request_aliases(self) -> None:
         cdm_instance_url = self.cdm_instance_url.get()
@@ -264,6 +267,7 @@ class CatcherCombineTerms:
         ttk.Label(
             help_frame,
             text=catchercombineterms.__doc__ or "",
+            wraplength=HELP_LABEL_WRAP,
         ).grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
 
         self.cdm_instance_url = tk.StringVar()
@@ -294,7 +298,7 @@ class CatcherCombineTerms:
             textvariable=self.cdm_collection_alias,
             width=COMBO_WIDTH,
         )
-        self._alias_picker.grid(column=0, row=0, sticky="ew", padx=PADX, pady=PADY)
+        self._alias_picker.grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.catcher_json_file_path = tk.StringVar()
         input_frame = ttk.Labelframe(
@@ -309,9 +313,9 @@ class CatcherCombineTerms:
         ).grid(column=0, row=0, sticky="ew", padx=PADX, pady=PADY)
         ttk.Button(
             input_frame,
-            text="Choose Catcher JSON file...",
+            text="Browse...",
             command=self.choose_input,
-        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.output_file_path = tk.StringVar()
         output_frame = ttk.Labelframe(
@@ -326,9 +330,9 @@ class CatcherCombineTerms:
         ).grid(column=0, row=0, sticky="ew", padx=PADX, pady=PADY)
         ttk.Button(
             output_frame,
-            text="Save combined Catcher JSON as...",
+            text="Save as...",
             command=self.choose_output,
-        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.sort_terms = tk.BooleanVar(value=True)
         ttk.Checkbutton(
@@ -429,6 +433,7 @@ class CatcherTidy:
         ttk.Label(
             help_frame,
             text=catchertidy.__doc__ or "",
+            wraplength=HELP_LABEL_WRAP,
         ).grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
 
         self.cdm_instance_url = tk.StringVar()
@@ -471,12 +476,12 @@ class CatcherTidy:
             input_frame,
             textvariable=self.catcher_json_file_path,
             width=ENTRY_WIDTH,
-        ).grid(column=0, row=0, sticky="ew", padx=PADX, pady=PADY)
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
             input_frame,
-            text="Choose Catcher JSON file...",
+            text="Browse...",
             command=self.choose_input,
-        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self._tidy_ops_rows = []
         ttk.Button(
@@ -490,17 +495,17 @@ class CatcherTidy:
             frame,
             text="Tidied Catcher JSON",
         )
-        output_frame.grid(column=0, row=5, padx=PADX, pady=PADY)
+        output_frame.grid(column=0, row=5, sticky="ew", padx=PADX, pady=PADY)
         ttk.Entry(
             output_frame,
             textvariable=self.output_file_path,
             width=ENTRY_WIDTH,
-        ).grid(column=0, row=9, sticky="ew", padx=PADX, pady=PADY)
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
             output_frame,
-            text="Save Tidy Catcher JSON As...",
+            text="Save as...",
             command=self.choose_output,
-        ).grid(column=0, row=10, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.lcsh_separator_spaces = tk.BooleanVar(value=True)
         ttk.Checkbutton(
@@ -509,13 +514,13 @@ class CatcherTidy:
             variable=self.lcsh_separator_spaces,
             onvalue=True,
             offvalue=False,
-        ).grid(column=0, row=11, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=0, row=6, sticky="w", padx=PADX, pady=PADY)
 
         ttk.Button(
             frame,
             text="Run",
             command=self.run,
-        ).grid(column=0, row=12, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=0, row=7, sticky="w", padx=PADX, pady=PADY)
 
     def request_aliases(self) -> None:
         cdm_instance_url = self.cdm_instance_url.get()
@@ -675,6 +680,7 @@ class FtpTransc2Catcher:
         ttk.Label(
             help_frame,
             text=ftptransc2catcher.__doc__ or "",
+            wraplength=HELP_LABEL_WRAP,
         ).grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
 
         self.manifests_listing_path = tk.StringVar()
@@ -690,9 +696,9 @@ class FtpTransc2Catcher:
         ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
             manifests_frame,
-            text="Choose FromThePage IIIF manifests file...",
+            text="Browse...",
             command=self.choose_input,
-        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.transcript_nick = tk.StringVar()
         nick_frame = ttk.Labelframe(
@@ -719,9 +725,9 @@ class FtpTransc2Catcher:
         ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
             output_frame,
-            text="Save Catcher JSON As...",
+            text="Save as...",
             command=self.choose_output,
-        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.transcript_type = tk.StringVar()
         type_frame = ttk.Labelframe(
@@ -811,6 +817,7 @@ class FtpStruct2Catcher:
         ttk.Label(
             help_frame,
             text=ftpstruct2catcher.__doc__ or "",
+            wraplength=HELP_LABEL_WRAP,
         ).grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
 
         self.ftp_slug = tk.StringVar()
@@ -818,7 +825,7 @@ class FtpStruct2Catcher:
             frame,
             text="FromThePage user slug",
         )
-        slug_frame.grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+        slug_frame.grid(column=0, row=1, sticky="ew", padx=PADX, pady=PADY)
         ttk.Entry(
             slug_frame,
             textvariable=self.ftp_slug,
@@ -848,7 +855,7 @@ class FtpStruct2Catcher:
             frame,
             text="FromThePage field labels to CONTENTdm field nicks mapping CSV"
         )
-        mapping_frame.grid(column=0, row=3)
+        mapping_frame.grid(column=0, row=3, sticky="ew", padx=PADX, pady=PADY)
         ttk.Entry(
             mapping_frame,
             textvariable=self.field_mapping_csv_path,
@@ -856,9 +863,9 @@ class FtpStruct2Catcher:
         ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
             mapping_frame,
-            text="Choose CSV...",
+            text="Browse...",
             command=self.choose_input,
-        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.level = tk.StringVar()
         level_frame = ttk.Labelframe(
@@ -885,9 +892,9 @@ class FtpStruct2Catcher:
         ).grid(column=0, row=0, sticky="ew", padx=PADX, pady=PADY)
         ttk.Button(
             output_frame,
-            text="Save Catcher JSON As...",
+            text="Save as...",
             command=self.choose_output,
-        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         ttk.Button(
             frame,
@@ -978,54 +985,65 @@ class ScanFtpSchema:
         notebook.add(frame, text="scanftpschema")
 
         help_frame = ttk.Labelframe(frame, text="Help")
-        help_frame.grid(column=0, row=0, sticky="nsew")
+        help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
         ttk.Label(
             help_frame,
             text=scanftpschema.__doc__ or "",
-        ).grid(column=0, row=0, sticky="nsew")
+            wraplength=HELP_LABEL_WRAP,
+        ).grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
 
         self.ftp_slug = tk.StringVar()
-        ttk.Label(
+        slug_frame = ttk.Labelframe(
             frame,
             text="FromThePage user slug",
-        ).grid(column=0, row=1, sticky="w")
-        ttk.Entry(
-            frame,
-            textvariable=self.ftp_slug,
-        ).grid(column=0, row=2, sticky="ew")
-
-        self.ftp_project_name = tk.StringVar()
-        ttk.Label(
-            frame,
-            text="FromThePage project name",
-        ).grid(column=0, row=3, sticky="ew")
-        self._project_picker = ttk.Combobox(
-            frame,
-            textvariable=self.ftp_project_name,
         )
-        self._project_picker.grid(column=0, row=4, sticky="ew")
+        slug_frame.grid(column=0, row=1, sticky="ew", padx=PADX, pady=PADY)
+        ttk.Entry(
+            slug_frame,
+            textvariable=self.ftp_slug,
+            width=ENTRY_WIDTH,
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
-            frame,
+            slug_frame,
             text="Request project names",
             command=self.request_project_names,
-        ).grid(column=0, row=5, sticky="w")
+        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+
+        self.ftp_project_name = tk.StringVar()
+        project_frame = ttk.Labelframe(
+            frame,
+            text="FromThePage project name",
+        )
+        project_frame.grid(column=0, row=2, sticky="ew", padx=PADX, pady=PADY)
+        self._project_picker = ttk.Combobox(
+            project_frame,
+            textvariable=self.ftp_project_name,
+            width=COMBO_WIDTH,
+        )
+        self._project_picker.grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.report_path = tk.StringVar()
+        report_frame = ttk.Labelframe(
+            frame,
+            text="HTML report output",
+        )
+        report_frame.grid(column=0, row=3, sticky="ew", padx=PADX, pady=PADY)
         ttk.Entry(
-            frame,
+            report_frame,
             textvariable=self.report_path,
-        ).grid(column=0, row=6, sticky="ew")
+            width=ENTRY_WIDTH,
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
-            frame,
-            text="Save HTML Report As...",
+            report_frame,
+            text="Save as...",
             command=self.choose_output,
-        ).grid(column=0, row=7, sticky="w")
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         ttk.Button(
             frame,
             text="Run",
             command=self.run,
-        ).grid(column=0, row=8, sticky="w")
+        ).grid(column=0, row=4, sticky="w", padx=PADX, pady=PADY)
 
     def request_project_names(self) -> None:
         ftp_slug = self.ftp_slug.get()
@@ -1037,7 +1055,7 @@ class ScanFtpSchema:
 
     def choose_output(self) -> None:
         result = filedialog.asksaveasfilename(
-            title="Save HTML Report As",
+            title="Save HTML report as",
             defaultextension=".html",
         )
         if result is not None:
@@ -1071,7 +1089,125 @@ class ScanFtpSchema:
         )
 
 
-class Csv2json:
+class CdmSchema2Csv:
+    cdm_instance_url: tk.StringVar
+    cdm_collection_alias: tk.StringVar
+    csv_file_path: tk.StringVar
+    _alias_picker: ttk.Combobox
+
+    def __init__(self, notebook: ttk.Notebook) -> None:
+        frame = ttk.Frame(notebook)
+        notebook.add(frame, text="cdmschema2csv")
+
+        help_frame = ttk.Labelframe(frame, text="Help")
+        help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
+        ttk.Label(
+            help_frame,
+            text=cdmschema2csv.__doc__ or "",
+            wraplength=HELP_LABEL_WRAP,
+        ).grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
+
+        self.cdm_instance_url = tk.StringVar()
+        url_frame = ttk.Labelframe(
+            frame,
+            text="CONTENTdm instance URL",
+        )
+        url_frame.grid(column=0, row=1, sticky="ew", padx=PADX, pady=PADY)
+        ttk.Entry(
+            url_frame,
+            textvariable=self.cdm_instance_url,
+            width=ENTRY_WIDTH,
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
+        ttk.Button(
+            url_frame,
+            text="Request collection aliases",
+            command=self.request_aliases,
+        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+
+        self.cdm_collection_alias = tk.StringVar()
+        alias_frame = ttk.Labelframe(
+            frame,
+            text="CONTENTdm collection alias",
+        )
+        alias_frame.grid(column=0, row=2, sticky="ew", padx=PADX, pady=PADY)
+        self._alias_picker = ttk.Combobox(
+            alias_frame,
+            textvariable=self.cdm_collection_alias,
+            width=COMBO_WIDTH,
+        )
+        self._alias_picker.grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
+
+        self.csv_file_path = tk.StringVar()
+        output_frame = ttk.Labelframe(
+            frame,
+            text="Output CSV file",
+        )
+        output_frame.grid(column=0, row=3, sticky="ew", padx=PADX, pady=PADY)
+        ttk.Entry(
+            output_frame,
+            textvariable=self.csv_file_path,
+            width=ENTRY_WIDTH,
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
+        ttk.Button(
+            output_frame,
+            text="Save as...",
+            command=self.choose_output,
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
+
+        ttk.Button(
+            frame,
+            text="Run",
+            command=self.run,
+        ).grid(column=0, row=4, sticky="w", padx=PADX, pady=PADY)
+
+    def request_aliases(self) -> None:
+        cdm_instance_url = self.cdm_instance_url.get()
+        if not cdm_instance_url:
+            messagebox.showerror(message="Please enter a CONTENTdm instance URL")
+            return
+        collection_aliases = request_contentdm_collection_aliases(cdm_instance_url)
+        self._alias_picker["values"] = tuple(
+            f"{alias}={name}" for name, alias in collection_aliases.items()
+        )
+
+    def choose_output(self) -> None:
+        result = filedialog.asksaveasfilename(
+            title="Save output CSV file as",
+            defaultextension=".csv",
+        )
+        if result is not None:
+            self.csv_file_path.set(result)
+
+    def run(self) -> None:
+        cdm_instance_url = self.cdm_instance_url.get()
+        if not cdm_instance_url:
+            messagebox.showerror(message="Please enter a CONTENTdm instance URL")
+            return
+        cdm_collection_and_alias = self.cdm_collection_alias.get()
+        if not cdm_collection_and_alias:
+            messagebox.showerror(message="Please enter an CONTENTdm collection alias")
+            return
+        cdm_collection_alias = cdm_collection_and_alias.rpartition("=")[0]
+        csv_file_path = self.csv_file_path.get()
+        if not csv_file_path:
+            messagebox.showerror(message="Please enter an output CSV file path")
+            return
+        print(
+            textwrap.dedent(f"""\
+        cdmschema2csv(
+            cdm_instance_url={cdm_instance_url},
+            cdm_collection_alias={cdm_collection_alias},
+            csv_file_path={csv_file_path},
+        )"""))
+        cdmschema2csv(
+            cdm_instance_url=cdm_instance_url,
+            cdm_collection_alias=cdm_collection_alias,
+            csv_file_path=csv_file_path,
+            show_progress=False,
+        )
+
+
+class Csv2Json:
     input_csv_path: tk.StringVar
     output_json_path: tk.StringVar
     csv_dialect: tk.StringVar
@@ -1082,46 +1218,59 @@ class Csv2json:
         notebook.add(frame, text="csv2json")
 
         help_frame = ttk.Labelframe(frame, text="Help")
-        help_frame.grid(column=0, row=0, sticky="nsew")
+        help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
         ttk.Label(
             help_frame,
             text=csv2json.__doc__ or "",
-        ).grid(column=0, row=0, sticky="nsew")
+            wraplength=HELP_LABEL_WRAP,
+        ).grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
 
         self.input_csv_path = tk.StringVar()
+        input_frame = ttk.Labelframe(
+            frame,
+            text="Input CSV file",
+        )
+        input_frame.grid(column=0, row=1, sticky="ew", padx=PADX, pady=PADY)
         ttk.Entry(
-            frame,
+            input_frame,
             textvariable=self.input_csv_path,
-        ).grid(column=0, row=1, sticky="ew")
+            width=ENTRY_WIDTH,
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
-            frame,
-            text="Choose Input CSV File...",
+            input_frame,
+            text="Browse...",
             command=self.choose_input,
-        ).grid(column=0, row=2, sticky="w")
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.output_json_path = tk.StringVar()
+        output_frame = ttk.Labelframe(
+            frame,
+            text="Output JSON file",
+        )
+        output_frame.grid(column=0, row=2, sticky="ew", padx=PADX, pady=PADY)
         ttk.Entry(
-            frame,
+            output_frame,
             textvariable=self.output_json_path,
-        ).grid(column=0, row=3, sticky="ew")
+            width=ENTRY_WIDTH,
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
-            frame,
-            text="Save JSON File As...",
+            output_frame,
+            text="Save as...",
             command=self.choose_output
-        ).grid(column=0, row=4, sticky="w")
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.csv_dialect = tk.StringVar()
         dialect_frame = ttk.Labelframe(
             frame,
             text="Input CSV dialect",
         )
-        dialect_frame.grid(column=0, row=5, sticky="w")
+        dialect_frame.grid(column=0, row=3, sticky="w", padx=PADX, pady=PADY)
         for row, csv_dialect in enumerate(csv.list_dialects()):
             ttk.Radiobutton(
                 dialect_frame,
                 text=csv_dialect,
                 variable=self.csv_dialect,
-                value=csv_dialect
+                value=csv_dialect,
             ).grid(column=0, row=row, sticky="w")
         self.csv_dialect.set("google-csv")
 
@@ -1132,13 +1281,13 @@ class Csv2json:
             variable=self.drop_empty_cells,
             onvalue=True,
             offvalue=False,
-        ).grid(column=0, row=6, sticky="w")
+        ).grid(column=0, row=4, sticky="w", padx=PADX, pady=PADY)
 
         ttk.Button(
             frame,
             text="Run",
             command=self.run
-        ).grid(column=0, row=7, sticky="w")
+        ).grid(column=0, row=5, sticky="w", padx=PADX, pady=PADY)
 
     def choose_input(self) -> None:
         result = filedialog.askopenfilename(
@@ -1187,7 +1336,7 @@ class Csv2json:
         )
 
 
-class Json2csv:
+class Json2Csv:
     input_json_path: tk.StringVar
     output_csv_path: tk.StringVar
     csv_dialect: tk.StringVar
@@ -1197,40 +1346,53 @@ class Json2csv:
         notebook.add(frame, text="json2csv")
 
         help_frame = ttk.Labelframe(frame, text="Help")
-        help_frame.grid(column=0, row=0, sticky="nsew")
+        help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
         ttk.Label(
             help_frame,
             text=json2csv.__doc__ or "",
-        ).grid(column=0, row=0, sticky="nsew")
+            wraplength=HELP_LABEL_WRAP,
+        ).grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
 
         self.input_json_path = tk.StringVar()
+        input_frame = ttk.Labelframe(
+            frame,
+            text="Input JSON file",
+        )
+        input_frame.grid(column=0, row=1, sticky="ew", padx=PADX, pady=PADY)
         ttk.Entry(
-            frame,
+            input_frame,
             textvariable=self.input_json_path,
-        ).grid(column=0, row=1, sticky="ew")
+            width=ENTRY_WIDTH,
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
-            frame,
-            text="Choose input JSON file...",
-            command=self.choose_input
-        ).grid(column=0, row=2, sticky="w")
+            input_frame,
+            text="Browse...",
+            command=self.choose_input,
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.output_csv_path = tk.StringVar()
+        output_frame = ttk.Labelframe(
+            frame,
+            text="Output CSV file",
+        )
+        output_frame.grid(column=0, row=2, sticky="ew", padx=PADX, pady=PADY)
         ttk.Entry(
-            frame,
+            output_frame,
             textvariable=self.output_csv_path,
-        ).grid(column=0, row=3, sticky="ew")
+            width=ENTRY_WIDTH,
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
         ttk.Button(
-            frame,
-            text="Save CSV file as...",
-            command=self.choose_output
-        ).grid(column=0, row=4, sticky="w")
+            output_frame,
+            text="Save as...",
+            command=self.choose_output,
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self.csv_dialect = tk.StringVar()
         dialect_frame = ttk.Labelframe(
             frame,
             text="Output CSV dialect",
         )
-        dialect_frame.grid(column=0, row=5, sticky="w")
+        dialect_frame.grid(column=0, row=5, sticky="w", padx=PADX, pady=PADY)
         for row, csv_dialect in enumerate(csv.list_dialects()):
             ttk.Radiobutton(
                 dialect_frame,
@@ -1244,11 +1406,11 @@ class Json2csv:
             frame,
             text="Run",
             command=self.run,
-        ).grid(column=0, row=6, sticky="w")
+        ).grid(column=0, row=6, sticky="w", padx=PADX, pady=PADY)
 
     def choose_input(self) -> None:
         result = filedialog.askopenfilename(
-            title="Choose input JSON file name",
+            title="Choose input JSON file",
             filetypes=[
                 ("JSON", "*.json"),
             ],
@@ -1258,7 +1420,7 @@ class Json2csv:
 
     def choose_output(self) -> None:
         result = filedialog.asksaveasfilename(
-            title="Choose output CSV file name",
+            title="Save output CSV file as",
             defaultextension=".csv",
         )
         if result is not None:
