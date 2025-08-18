@@ -81,7 +81,7 @@
                 </tbody>
             </table>
 
-            <p>catcherdiff found {{ edits_with_changes_count }} out of {{ deltas|length }} total edit actions would change at least one field.</p>
+            <p>catcherdiff found {{ change_counts.edits_with_changes }} out of {{ deltas|length }} total edit actions would change at least one field.</p>
 
             <h2>Field info</h2>
 
@@ -134,36 +134,52 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for nick, count in nicks_with_edits_counter.most_common() %}
+                    {% for nick, count in change_counts.nicks_with_edits.most_common() %}
                         <tr>
                             <td>{{ cdm_nick_to_name[nick] }}</td>
                             <td class="literal">{{ nick }}</td>
                             <td>{{ count }}</td>
-                            <td>{{ nicks_with_changes_counter[nick] }}</td>
+                            <td>{{ change_counts.nicks_with_changes[nick] }}</td>
                         </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h2>Types of edits</h2>
+
+            <table class="field-info-table">
+                <thead>
+                    <tr>
+                        <th>Edit type</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for change_type, count in change_counts.kinds_of_changes.most_common() %}
+                        <tr><td>{{ change_type.value }}</td><td>{{ count }}</td></tr>
                     {% endfor %}
                 </tbody>
             </table>
 
             <h2>Edit actions</h2>
 
-            {% for edit, cdm_info in deltas %}
-                <h3>dmrecord {{ edit['dmrecord'] }}</h3>
+            {% for delta in deltas %}
+                <h3>dmrecord {{ delta.edit['dmrecord'] }}</h3>
                 <table class="metadata-table">
                     <tr>
                         <th>URL</th>
-                        <td><a href="{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}">{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ edit['dmrecord'] }}</a></td>
+                        <td><a href="{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ delta.edit['dmrecord'] }}">{{ cdm_repo_url }}/digital/collection/{{ cdm_collection_alias }}/id/{{ delta.edit['dmrecord'] }}</a></td>
                     </tr>
                     {% if title_nick is not none -%}
                         <tr>
                             <th>dc:Title</th>
-                            <td>&quot;{{ cdm_info[title_nick] }}&quot;</td>
+                            <td>&quot;{{ delta.item_info[title_nick] }}&quot;</td>
                         </tr>
                     {%- endif %}
                     {% if identifier_nick is not none -%}
                         <tr>
                             <th>dc:Identifier</th>
-                            <td class="literal">{{ cdm_info[identifier_nick] }}</td>
+                            <td class="literal">{{ delta.item_info[identifier_nick] }}</td>
                         </tr>
                     {%- endif %}
                 </table>
@@ -178,27 +194,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for nick, value in edit.items() if nick != 'dmrecord' %}
+                        {% for change in delta.changes() %}
                             <tr>
-                                <td class="controlled-col">{% if nick in vocabs_by_nick %}<span title="This field has a controlled vocabulary">🔒</span>{% endif %}</td>
-                                <td class="nick-col"><span class="cdm-label">{{ cdm_nick_to_name[nick] }}</span><br/><span class="cdm-nick">{{ nick }}</span></td>
-                                <td class="value-col"><span class="value">{{ showwhitespace(cdm_info[nick]) }}</span></td>
-                                {%- if not cdm_info[nick] and not value %}
+                                <td class="controlled-col">{% if change.nick in vocabs_by_nick %}<span title="This field has a controlled vocabulary">🔒</span>{% endif %}</td>
+                                <td class="nick-col"><span class="cdm-label">{{ cdm_nick_to_name[change.nick] }}</span><br/><span class="cdm-nick">{{ change.nick }}</span></td>
+                                <td class="value-col"><span class="value">{{ showwhitespace(change.original_value) }}</span></td>
+                                {%- if not change.original_value and not change.edit_value %}
                                     <td class="change-col change equal-blanks">None</td>
-                                {%- elif cdm_info[nick] and not value %}
+                                {%- elif change.original_value and not change.edit_value %}
                                     <td class="change-col change overwrite-value-with-blank">Delete</td>
-                                {%- elif not cdm_info[nick] and value %}
+                                {%- elif not change.original_value and change.edit_value %}
                                     <td class="change-col change overwrite-blank-with-value">New</td>
-                                {%- elif cdm_info[nick] == value %}
+                                {%- elif change.original_value == change.edit_value %}
                                     <td class="change-col change equal-values">None</td>
                                 {%- else %}
                                     <td class="change-col change overwrite-value-with-value">Replace</td>
                                 {%- endif %}
                                 <td class="value-col">
-                                    <span class="value">{{ showwhitespace(value) }}</span>
-                                    {%- if nick in vocabs_by_nick and vocabs_by_nick[nick] is not none %}
+                                    <span class="value">{{ showwhitespace(change.edit_value) }}</span>
+                                    {%- if change.nick in vocabs_by_nick and vocabs_by_nick[change.nick] is not none %}
                                         <ul class="terms-list">
-                                            {%- for term in value.split('; ') if term %}
+                                            {%- for term in change.edit_value.split('; ') if term %}
                                                 {%- if term in vocabs_by_nick[nick] %}
                                                     <li class="controlled-term"><span class="value">{{ term }}</span></li>
                                                 {%- else %}

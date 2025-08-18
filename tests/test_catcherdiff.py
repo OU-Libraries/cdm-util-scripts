@@ -94,8 +94,19 @@ def test_count_changes():
         )
 
     ]
-    edits_with_changes_count, nicks_with_changes, nicks_with_edits = catcherdiff.count_changes(deltas)
-    assert edits_with_changes_count == 2
-    assert nicks_with_changes == collections.Counter(["format", "format"])
-    assert nicks_with_edits == collections.Counter(["format", "format", "format", "date"])
-
+    change_counts = catcherdiff.ChangeCounts(deltas)
+    assert change_counts.edits_with_changes == 2
+    assert change_counts.nicks_with_changes == collections.Counter(
+        ["format", "format"]
+    )
+    assert change_counts.nicks_with_edits == collections.Counter(
+        ["format", "format", "format", "date"]
+    )
+    assert change_counts.kinds_of_changes == collections.Counter(
+        [
+            catcherdiff.ChangeType.REPLACE,
+            catcherdiff.ChangeType.NONE,
+            catcherdiff.ChangeType.REPLACE,
+            catcherdiff.ChangeType.NONE,
+        ]
+    )

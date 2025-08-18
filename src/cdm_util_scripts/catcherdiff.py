@@ -2,6 +2,7 @@ import requests
 import jinja2
 import tqdm
 
+import enum
 import json
 import collections
 from datetime import datetime
@@ -9,12 +10,48 @@ from pathlib import Path
 
 from cdm_util_scripts import cdm_api
 
-from typing import Dict, List, NamedTuple, Iterable, Optional, Counter, Tuple
+from typing import Dict, List, NamedTuple, Iterable, Optional, Counter, Iterator
 
 
 class Delta(NamedTuple):
     edit: Dict[str, str]
     item_info: cdm_api.CdmItemInfo
+
+    def changes(self) -> Iterator["Change"]:
+        for nick, edit_value in self.edit.items():
+            if nick == "dmrecord":
+                continue
+            original_value = self.item_info[nick]
+            if not original_value and not edit_value:
+                change_type = ChangeType.NONE
+            elif original_value and not edit_value:
+                change_type = ChangeType.DELETE
+            elif not original_value and edit_value:
+                change_type = ChangeType.NEW
+            elif original_value == edit_value:
+                change_type = ChangeType.NONE
+            else:
+                change_type = ChangeType.REPLACE
+            yield Change(
+                nick=nick,
+                change_type=change_type,
+                original_value=original_value,
+                edit_value=edit_value,
+            )
+
+
+class Change(NamedTuple):
+    nick: str
+    change_type: "ChangeType"
+    original_value: str
+    edit_value: str
+
+
+class ChangeType(enum.Enum):
+    NONE = "None"
+    DELETE = "Delete"
+    NEW = "New"
+    REPLACE = "Replace"
 
 
 def catcherdiff(
@@ -55,7 +92,7 @@ def catcherdiff(
         else:
             cdm_vocabs = None
 
-    edits_with_changes_count, nicks_with_changes_counter, nicks_with_edits_counter = count_changes(deltas)
+    change_counts = ChangeCounts(deltas)
     vocabs_by_nick: Dict[str, Optional[List[str]]] = {}
     for field_info in cdm_field_infos:
         vocab_info = field_info.get_vocab_info()
@@ -70,7 +107,7 @@ def catcherdiff(
     title_nick = title_field_info.nick if title_field_info else None
 
     print(
-        f"catcherdiff found {edits_with_changes_count} out of {len(catcher_edits)} total edit actions would change at least one field."
+        f"catcherdiff found {change_counts.edits_with_changes} out of {len(catcher_edits)} total edit actions would change at least one field."
     )
 
     env = jinja2.Environment(
@@ -87,9 +124,7 @@ def catcherdiff(
         catcher_json_file_path=Path(catcher_json_file_path),
         report_file=report_file_path,
         report_datetime=datetime.now().isoformat(),
-        edits_with_changes_count=edits_with_changes_count,
-        nicks_with_changes_counter=nicks_with_changes_counter,
-        nicks_with_edits_counter=nicks_with_edits_counter,
+        change_counts=change_counts,
         deltas=deltas,
         identifier_nick=identifier_nick,
         title_nick=title_nick,
@@ -122,22 +157,27 @@ def request_deltas(
     return deltas
 
 
-def count_changes(deltas: List[Delta]) -> Tuple[int, Counter[str], Counter[str]]:
-    edits_with_changes = 0
-    nicks_with_changes: Counter[str] = collections.Counter()
-    nicks_with_edits: Counter[str] = collections.Counter()
-    for delta in deltas:
-        changes = False
-        for nick, value in delta.edit.items():
-            if nick == "dmrecord":
-                continue
-            nicks_with_edits[nick] += 1
-            if value != delta.item_info[nick]:
-                changes = True
-                nicks_with_changes[nick] += 1
-        if changes:
-            edits_with_changes += 1
-    return edits_with_changes, nicks_with_changes, nicks_with_edits
+class ChangeCounts:
+    edits_with_changes: int
+    nicks_with_changes: Counter[str]
+    nicks_with_edits: Counter[str]
+    kinds_of_changes: Counter[ChangeType]
+
+    def __init__(self, deltas: List[Delta]) -> None:
+        self.edits_with_changes = 0
+        self.nicks_with_edits = collections.Counter()
+        self.nicks_with_changes = collections.Counter()
+        self.kinds_of_changes = collections.Counter()
+        for delta in deltas:
+            makes_change = False
+            for change in delta.changes():
+                self.nicks_with_edits[change.nick] += 1
+                self.kinds_of_changes[change.change_type] += 1
+                if change.change_type is not ChangeType.NONE:
+                    self.nicks_with_changes[change.nick] += 1
+                    makes_change = True
+            if makes_change:
+                self.edits_with_changes += 1
 
 
 def find_dc_field(
