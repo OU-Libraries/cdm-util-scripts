@@ -2,6 +2,45 @@
 requires = ["setuptools>=42.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "cdm-util-scripts"
+version = "0.11.0"
+description = "Ohio University CONTENTdm utility scripts"
+authors = [{name = "Nick Ver Steegh"}]
+license = {text = "GPLv3"}
+requires-python = ">=3.7"
+dependencies = [
+    "requests>=2",
+    "jinja2>=3",
+    "tqdm>=4",
+]
+
+[project.urls]
+Repository = "https://github.com/OU-Libraries/cdm-util-scripts"
+
+[project.scripts]
+cdmutil = "cdm_util_scripts.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6",
+    "pytest-cov>=3",
+    "pytest-recording>=0.12",
+    "vcrpy>=4",
+    "mypy>=0.9",
+    "flake8>=3.9",
+    "black>=21",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cdm_util_scripts = [
+    "templates/*",
+    "py.typed",
+]
+
 [tool.pytest.ini_options]
 addopts = "--cov=cdm_util_scripts --cov-report html:htmlcov"
 testpaths = [
