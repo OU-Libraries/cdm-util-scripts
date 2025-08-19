@@ -1,16 +1,24 @@
-import requests
-import jinja2
-import tqdm
-
 import enum
 import json
 import collections
 from datetime import datetime
 from pathlib import Path
 
+import requests
+import jinja2
+import tqdm
+
 from cdm_util_scripts import cdm_api
 
-from typing import Dict, List, NamedTuple, Iterable, Optional, Counter, Iterator
+from typing import (
+    Counter,
+    Dict,
+    Iterable,
+    Iterator,
+    List,
+    NamedTuple,
+    Optional,
+)
 
 
 class Delta(NamedTuple):
@@ -102,12 +110,16 @@ def catcherdiff(
             else:
                 vocabs_by_nick[field_info.nick] = None
     identifier_field_info = find_dc_field(cdm_field_infos, "Identifier")
-    identifier_nick = identifier_field_info.nick if identifier_field_info else None
+    identifier_nick = (
+        identifier_field_info.nick if identifier_field_info else None
+    )
     title_field_info = find_dc_field(cdm_field_infos, "Title")
     title_nick = title_field_info.nick if title_field_info else None
 
     print(
-        f"catcherdiff found {change_counts.edits_with_changes} out of {len(catcher_edits)} total edit actions would change at least one field."
+        f"catcherdiff found {change_counts.edits_with_changes} out of "
+        f"{len(catcher_edits)} total edit actions would change at least one "
+        "field."
     )
 
     env = jinja2.Environment(
