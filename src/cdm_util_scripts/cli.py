@@ -1,15 +1,15 @@
 import argparse
-import requests
-
-import json
 import csv
-import sys
+import functools
 import itertools
+import json
+import sys
 
-from typing import Optional, Sequence, Dict, List
+import requests
 
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
+from cdm_util_scripts import catcher
 from cdm_util_scripts import catcherdiff
 from cdm_util_scripts import catchercombineterms
 from cdm_util_scripts import catchertidy
@@ -19,6 +19,8 @@ from cdm_util_scripts import ftptransc2catcher
 from cdm_util_scripts import ftpstruct2catcher
 from cdm_util_scripts import scanftpschema
 from cdm_util_scripts import gui
+
+from typing import Optional, Sequence, Dict, List
 
 
 def catchertidy_compound_options():
@@ -34,6 +36,128 @@ def catchertidy_compound_options():
 def main(test_args: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="cdm-util-scripts")
     subparsers = parser.add_subparsers()
+
+    # catcher
+    catcher_subparser = subparsers.add_parser(
+        name="catcher",
+        help="Implement Catcher operations",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    catcher_subparsers = catcher_subparser.add_subparsers()
+
+    # catcher version
+    catcher_version_subparser = catcher_subparsers.add_parser(name="version")
+    catcher_version_subparsers = catcher_version_subparser.add_subparsers()
+
+    # catcher version ws
+    catcher_ws_version_subparser = catcher_version_subparsers.add_parser(
+        name="ws",
+        help="Print the Cetcher WS version",
+    )
+    catcher_ws_version_subparser.set_defaults(func=catcher.catcher_ws_version)
+
+    # catcher version http-transfer
+    catcher_http_transfer_version_subparser = (
+        catcher_version_subparsers.add_parser(
+            name="http-transfer",
+            help="Print the Catcher HTTP transfer version",
+        )
+    )
+    catcher_http_transfer_version_subparser.set_defaults(
+        func=catcher.credentials_from_environ(
+            catcher.catcher_http_transfer_version
+        ),
+    )
+
+    # catcher catalog
+    catcher_catalog_subparser = catcher_subparsers.add_parser(
+        name="catalog",
+        help="Print the Catcher catalog",
+    )
+    catcher_catalog_subparser.add_argument(
+        "cdm_collection_alias", help="CONTENTdm collection alias",
+    )
+    catcher_catalog_subparser.set_defaults(
+        func=catcher.credentials_from_environ(catcher.catcher_catalog),
+    )
+
+    # catcher collection
+    catcher_collection_subparser = catcher_subparsers.add_parser(
+        name="collection",
+        help="Print collection configuration",
+    )
+    catcher_collection_subparser.add_argument(
+        "cdm_collection_alias", help="CONTENTdm collection alias",
+    )
+    catcher_collection_subparser.set_defaults(
+        func=catcher.credentials_from_environ(catcher.catcher_collection)
+    )
+
+    # catcher terms
+    catcher_terms_subparser = catcher_subparsers.add_parser(
+        name="terms",
+        help="Print controlled vocabulary terms for a collection and field",
+    )
+    catcher_terms_subparser.add_argument(
+        "cdm_collection_alias", help="CONTENTdm collection alias",
+    )
+    catcher_terms_subparser.add_argument(
+        "cdm_field_nickname", help="CONTENTdm field nickname",
+    )
+    catcher_terms_subparser.set_defaults(
+        func=catcher.credentials_from_environ(catcher.catcher_terms)
+    )
+
+    # catcher add
+    catcher_add_subparser = catcher_subparsers.add_parser(
+        name="add",
+        help="Add a list of JSON objects as new objects to CONTENTdm",
+    )
+    catcher_add_subparser.add_argument(
+        "cdm_collection_alias", help="CONTENTdm collection alias"
+    )
+    catcher_add_subparser.add_argument(
+        "catcher_json_file_path", help="Path to cdm-catcher JSON file",
+    )
+    catcher_add_subparser.set_defaults(
+        func=catcher.credentials_from_environ(
+            functools.partial(catcher.catcher_process, action="add")
+        )
+    )
+
+    # catcher edit
+    catcher_edit_subparser = catcher_subparsers.add_parser(
+        name="edit",
+        help="Implement a list of CONTENTdm Catcher edits",
+    )
+    catcher_edit_subparser.add_argument(
+        "cdm_collection_alias", help="CONTENTdm collection alias"
+    )
+    catcher_edit_subparser.add_argument(
+        "catcher_json_file_path", help="Path to cdm-catcher JSON file",
+    )
+    catcher_edit_subparser.set_defaults(
+        func=catcher.credentials_from_environ(
+            functools.partial(catcher.catcher_process, action="edit")
+        )
+    )
+
+    # catcher delete
+    catcher_delete_subparser = catcher_subparsers.add_parser(
+        name="delete",
+        help="Implement a list of CONTENTdm Catcher deletes",
+    )
+    catcher_delete_subparser.add_argument(
+        "cdm_collection_alias", help="CONTENTdm collection alias"
+    )
+    catcher_delete_subparser.add_argument(
+        "catcher_json_file_path", help="Path to cdm-catcher JSON file",
+    )
+    catcher_delete_subparser.set_defaults(
+        func=catcher.credentials_from_environ(
+            functools.partial(catcher.catcher_process, action="delete")
+        )
+    )
 
     # catcherdiff
     catcherdiff_subparser = subparsers.add_parser(
