@@ -181,9 +181,21 @@ def catcher_process(
                 metadataList={
                     "metadata": [
                         factory.metadata(field=field, value=value)
-                        for field, value in json_object.items()
+                        for field, value in sort_metadata_json_object(
+                            json_object
+                        ).items()
                     ],
                 },
             ),
         )
         print(response, file=sys.stderr)
+
+
+def sort_metadata_json_object(obj: JsonObject) -> JsonObject:
+    sort_order: list[str] = []
+    if "dmrecord" in obj:
+        sort_order.append("dmrecord")
+    if "title" in obj:
+        sort_order.append("title")
+    sort_order.extend(key for key in obj if key not in ["dmrecord", "title"])
+    return {key: obj[key] for key in sort_order}
