@@ -28,6 +28,7 @@ HELP_LABEL_WRAP = 625
 ENTRY_WIDTH = 80
 COMBO_WIDTH = 78
 PADX, PADY = (4, 4)
+TAB_CHAR_WIDTH = 20
 
 
 def gui() -> int:
@@ -37,7 +38,10 @@ def gui() -> int:
 
     Console(root)
 
-    notebook = ttk.Notebook(root)
+    style = ttk.Style(root)
+    style.configure("lefttab.TNotebook", tabposition="wn")
+    style.configure("TNotebook.Tab", font="Courier")
+    notebook = ttk.Notebook(root, style="lefttab.TNotebook")
 
     CatcherDiff(notebook)
     CatcherCombineTerms(notebook)
@@ -102,7 +106,7 @@ class CatcherDiff:
 
     def __init__(self, notebook: ttk.Notebook) -> None:
         frame = ttk.Frame(notebook, width=80)
-        notebook.add(frame, text="catcherdiff")
+        notebook.add(frame, text="catcherdiff".rjust(TAB_CHAR_WIDTH))
 
         help_frame = ttk.Labelframe(frame, text="Help")
         help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
@@ -266,7 +270,7 @@ class CatcherCombineTerms:
 
     def __init__(self, notebook: ttk.Notebook) -> None:
         frame = ttk.Frame(notebook)
-        notebook.add(frame, text="catchercombineterms")
+        notebook.add(frame, text="catchercombineterms".rjust(TAB_CHAR_WIDTH))
 
         help_frame = ttk.Labelframe(frame, text="Help")
         help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
@@ -386,20 +390,28 @@ class CatcherCombineTerms:
     def run(self) -> None:
         cdm_instance_url = self.cdm_instance_url.get()
         if not cdm_instance_url:
-            messagebox.showerror(message="Please enter a CONTENTdm instance URL")
+            messagebox.showerror(
+                message="Please enter a CONTENTdm instance URL"
+            )
             return
         cdm_collection_and_alias = self.cdm_collection_alias.get()
         if not cdm_collection_and_alias:
-            messagebox.showerror(message="Please enter an CONTENTdm collection alias")
+            messagebox.showerror(
+                message="Please enter an CONTENTdm collection alias"
+            )
             return
         cdm_collection_alias = cdm_collection_and_alias.partition("=")[0]
         catcher_json_file_path = self.catcher_json_file_path.get()
         if not catcher_json_file_path:
-            messagebox.showerror(message="Please enter a Catcher JSON file path")
+            messagebox.showerror(
+                message="Please enter a Catcher JSON file path"
+            )
             return
         output_file_path = self.output_file_path.get()
         if not output_file_path:
-            messagebox.showerror(message="Please enter a Combined Catcher JSON file path")
+            messagebox.showerror(
+                message="Please enter a Combined Catcher JSON file path"
+            )
             return
         sort_terms = self.sort_terms.get()
         print(
@@ -432,7 +444,7 @@ class CatcherTidy:
 
     def __init__(self, notebook: ttk.Notebook) -> None:
         frame = ttk.Frame(notebook)
-        notebook.add(frame, text="catchertidy")
+        notebook.add(frame, text="catchertidy".rjust(TAB_CHAR_WIDTH))
 
         help_frame = ttk.Labelframe(frame, text="Help")
         help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
@@ -679,7 +691,7 @@ class FtpTransc2Catcher:
 
     def __init__(self, notebook: ttk.Notebook) -> None:
         frame = ttk.Frame(notebook)
-        notebook.add(frame, text="ftptransc2catcher")
+        notebook.add(frame, text="ftptransc2catcher".rjust(TAB_CHAR_WIDTH))
 
         help_frame = ttk.Labelframe(frame, text="Help")
         help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
@@ -816,7 +828,7 @@ class FtpStruct2Catcher:
 
     def __init__(self, notebook: ttk.Notebook) -> None:
         frame = ttk.Frame(notebook)
-        notebook.add(frame, text="ftpstruct2catcher")
+        notebook.add(frame, text="ftpstruct2catcher".rjust(TAB_CHAR_WIDTH))
 
         help_frame = ttk.Labelframe(frame, text="Help")
         help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
@@ -988,7 +1000,7 @@ class ScanFtpSchema:
 
     def __init__(self, notebook: ttk.Notebook) -> None:
         frame = ttk.Frame(notebook)
-        notebook.add(frame, text="scanftpschema")
+        notebook.add(frame, text="scanftpschema".rjust(TAB_CHAR_WIDTH))
 
         help_frame = ttk.Labelframe(frame, text="Help")
         help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
@@ -1103,7 +1115,7 @@ class CdmSchema2Csv:
 
     def __init__(self, notebook: ttk.Notebook) -> None:
         frame = ttk.Frame(notebook)
-        notebook.add(frame, text="cdmschema2csv")
+        notebook.add(frame, text="cdmschema2csv".rjust(TAB_CHAR_WIDTH))
 
         help_frame = ttk.Labelframe(frame, text="Help")
         help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
@@ -1221,7 +1233,7 @@ class Csv2Json:
 
     def __init__(self, notebook: ttk.Notebook) -> None:
         frame = ttk.Frame(notebook)
-        notebook.add(frame, text="csv2json")
+        notebook.add(frame, text="csv2json".rjust(TAB_CHAR_WIDTH))
 
         help_frame = ttk.Labelframe(frame, text="Help")
         help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
@@ -1349,7 +1361,7 @@ class Json2Csv:
 
     def __init__(self, notebook: ttk.Notebook) -> None:
         frame = ttk.Frame(notebook)
-        notebook.add(frame, text="json2csv")
+        notebook.add(frame, text="json2csv".rjust(TAB_CHAR_WIDTH))
 
         help_frame = ttk.Labelframe(frame, text="Help")
         help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
