@@ -46,7 +46,10 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     catcher_subparsers = catcher_subparser.add_subparsers()
 
     # catcher version
-    catcher_version_subparser = catcher_subparsers.add_parser(name="version")
+    catcher_version_subparser = catcher_subparsers.add_parser(
+        name="version",
+        help="Print Catcher service version information",
+    )
     catcher_version_subparsers = catcher_version_subparser.add_subparsers()
 
     # catcher version ws
@@ -54,7 +57,9 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         name="ws",
         help="Print the Cetcher WS version",
     )
-    catcher_ws_version_subparser.set_defaults(func=catcher.catcher_ws_version)
+    catcher_ws_version_subparser.set_defaults(
+        func=catcher.print_result(catcher.catcher_ws_version),
+    )
 
     # catcher version http-transfer
     catcher_http_transfer_version_subparser = (
@@ -64,8 +69,10 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         )
     )
     catcher_http_transfer_version_subparser.set_defaults(
-        func=catcher.credentials_from_environ(
-            catcher.catcher_http_transfer_version
+        func=catcher.print_result(
+            catcher.credentials_from_environ(
+                catcher.catcher_http_transfer_version
+            )
         ),
     )
 
@@ -75,11 +82,20 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         help="Print the Catcher catalog",
     )
     catcher_catalog_subparser.add_argument(
-        "cdm_collection_alias", help="CONTENTdm collection alias",
+        "-f",
+        "--output-format",
+        choices=["xml", "tsv"],
+        help="What format to print",
     )
-    catcher_catalog_subparser.set_defaults(
-        func=catcher.credentials_from_environ(catcher.catcher_catalog),
-    )
+
+    def catcher_catalog_func(output_format: str) -> None:
+        printer = {
+            "xml": catcher.print_result,
+            "tsv": catcher.print_catalog_as_tsv
+        }[output_format]
+        printer(catcher.credentials_from_environ(catcher.catcher_catalog))()
+
+    catcher_catalog_subparser.set_defaults(func=catcher_catalog_func)
 
     # catcher collection
     catcher_collection_subparser = catcher_subparsers.add_parser(
@@ -90,7 +106,9 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "cdm_collection_alias", help="CONTENTdm collection alias",
     )
     catcher_collection_subparser.set_defaults(
-        func=catcher.credentials_from_environ(catcher.catcher_collection)
+        func=catcher.print_result(
+            catcher.credentials_from_environ(catcher.catcher_collection)
+        )
     )
 
     # catcher terms
@@ -105,7 +123,9 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "cdm_field_nickname", help="CONTENTdm field nickname",
     )
     catcher_terms_subparser.set_defaults(
-        func=catcher.credentials_from_environ(catcher.catcher_terms)
+        func=catcher.print_result(
+            catcher.credentials_from_environ(catcher.catcher_terms)
+        )
     )
 
     # catcher add

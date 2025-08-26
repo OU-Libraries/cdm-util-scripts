@@ -1,10 +1,12 @@
+import csv
 import json
 import os
 import sys
+import xml.etree.ElementTree as ET
 
 import zeep
 
-from typing import Any, Literal
+from typing import Any, Literal, Iterator, NamedTuple
 from typing_extensions import TypeAlias
 
 
@@ -13,8 +15,8 @@ JsonObject: TypeAlias = dict[str, Any]
 
 def credentials_from_environ(func):
 
-    def run_func_with_credentials(*args, **kwargs) -> None:
-        func(
+    def run_func_with_credentials(*args, **kwargs) -> str:
+        return func(
             *args,
             **kwargs,
             cdm_instance_url=os.environ["CATCHER_URL"].rstrip(" /"),
@@ -26,6 +28,15 @@ def credentials_from_environ(func):
     return run_func_with_credentials
 
 
+def print_result(func):
+
+    def result_printer(*args, **kwargs) -> None:
+        result = func(*args, **kwargs)
+        print(result)
+
+    return print_result
+
+
 CATCHER_SERVICE_URL = (
     "https://worldcat.org/webservices/contentdm/catcher/6.0/CatcherService.wsdl"
 )
@@ -34,10 +45,9 @@ CATCHER_SERVICE_URL = (
 # getWSVersion() -> return: xsd:string
 
 
-def catcher_ws_version() -> None:
+def catcher_ws_version() -> str:
     catcher = zeep.Client(CATCHER_SERVICE_URL)
-    ws_version = catcher.service.getWSVersion()
-    print(ws_version)
+    return catcher.service.getWSVersion()
 
 
 # getCONTENTdmHTTPTransferVersion(
@@ -52,14 +62,13 @@ def catcher_http_transfer_version(
     username: str,
     password: str,
     license: str,
-) -> None:
+) -> str:
     catcher = zeep.Client(CATCHER_SERVICE_URL)
-    http_version = catcher.service.getCONTENTdmHTTPTransferVersion(
+    return catcher.service.getCONTENTdmHTTPTransferVersion(
         cdmurl=cdm_instance_url,
         username=username,
         password=password,
     )
-    print(http_version)
 
 
 # getCONTENTdmCatalog(
@@ -75,15 +84,52 @@ def catcher_catalog(
     username: str,
     password: str,
     license: str,
-) -> None:
+) -> str:
     catcher = zeep.Client(CATCHER_SERVICE_URL)
-    catalog = catcher.service.getCONTENTdmCatalog(
+    return catcher.service.getCONTENTdmCatalog(
         cdmurl=cdm_instance_url,
         username=username,
         password=password,
         license=license,
     )
-    print(catalog)
+
+
+class CatalogCollectionInfo(NamedTuple):
+    alias: str
+    name: str
+    fullres_enabled: bool
+
+
+def parse_catalog(catalog: str) -> Iterator[CatalogCollectionInfo]:
+    root = ET.fromstring(catalog)
+    for collection_elem in root.iter("collection"):
+        fullres_value = (
+            collection_elem
+            .find("collection_fullres")
+            .find("fullres_enabled")
+            .text
+        )
+        yield CatalogCollectionInfo(
+            alias=collection_elem.find("collection_alias").text,
+            name=collection_elem.find("collection_name").text,
+            fullres_enabled=fullres_value != "no",
+        )
+
+
+def print_catalog_as_tsv(func):
+
+    def tsv_printer(*args, **kwargs) -> None:
+        catalog_xml = func(*args, **kwargs)
+        writer = csv.DictWriter(
+            f=sys.stdout,
+            fieldnames=CatalogCollectionInfo._fields,
+            dialect="excel-tab",
+        )
+        writer.writeheader()
+        for collection_info in parse_catalog(catalog_xml):
+            writer.writerow(collection_info._asdict())
+
+    return tsv_printer
 
 
 # getCONTENTdmCollectionConfig(
@@ -101,16 +147,15 @@ def catcher_collection(
     username: str,
     password: str,
     license: str,
-) -> None:
+) -> str:
     catcher = zeep.Client(CATCHER_SERVICE_URL)
-    collection_config = catcher.service.getCONTENTdmCollectionConfig(
+    return catcher.service.getCONTENTdmCollectionConfig(
         cdmurl=cdm_instance_url,
         username=username,
         password=password,
         license=license,
         collection=f"/{cdm_collection_alias.lstrip('/')}",
     )
-    print(collection_config)
 
 
 # getCONTENTdmControlledVocabTerms(
@@ -130,9 +175,9 @@ def catcher_terms(
     username: str,
     password: str,
     license: str,
-) -> None:
+) -> str:
     catcher = zeep.Client(CATCHER_SERVICE_URL)
-    terms = catcher.service.getCONTENTdmControlledVocabTerms(
+    return catcher.service.getCONTENTdmControlledVocabTerms(
         cdmurl=cdm_instance_url,
         username=username,
         password=password,
@@ -140,7 +185,6 @@ def catcher_terms(
         collection=f"/{cdm_collection_alias.lstrip('/')}",
         field=cdm_field_nickname,
     )
-    print(terms)
 
 
 # processCONTENTdm(
@@ -164,6 +208,7 @@ def catcher_process(
     password: str,
     license: str,
 ) -> None:
+    """Implement Catcher additions, deletions, and edits"""
     with open(catcher_json_file_path, mode="r", encoding="utf-8") as fp:
         additions: list[JsonObject] = json.load(fp=fp)
     catcher = zeep.Client(CATCHER_SERVICE_URL)

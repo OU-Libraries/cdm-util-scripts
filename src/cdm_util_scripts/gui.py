@@ -1,4 +1,5 @@
 import csv
+import datetime
 import json
 import sys
 import textwrap
@@ -20,6 +21,7 @@ from cdm_util_scripts.ftpstruct2catcher import ftpstruct2catcher, Level
 from cdm_util_scripts.scanftpschema import scanftpschema
 from cdm_util_scripts.csv2json import csv2json
 from cdm_util_scripts.json2csv import json2csv
+from cdm_util_scripts import catcher
 
 from typing import Dict, List, NamedTuple
 
@@ -37,12 +39,14 @@ def gui() -> int:
     root.report_callback_exception = report_callback_exception
 
     Console(root)
+    print("cdmutil gui started at", datetime.datetime.now().isoformat())
 
     style = ttk.Style(root)
     style.configure("lefttab.TNotebook", tabposition="wn")
     style.configure("TNotebook.Tab", font="Courier")
     notebook = ttk.Notebook(root, style="lefttab.TNotebook")
 
+    Catcher(notebook)
     CatcherDiff(notebook)
     CatcherCombineTerms(notebook)
     CatcherTidy(notebook)
@@ -72,11 +76,11 @@ class Console:
         console = scrolledtext.ScrolledText(
             frame,
             height=12,
-            width=100,
+            width=120,
             font=("consolas", "8", "normal"),
             state="disabled",
         )
-        console.grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
+        console.grid(column=0, row=0, sticky="we", padx=PADX, pady=PADY)
         console_out = ConsoleOut(console)
         sys.stdout = console_out
         sys.stderr = console_out
@@ -94,6 +98,225 @@ class ConsoleOut:
 
     def flush(self) -> None:
         pass
+
+
+class Catcher:
+    catcher_service_url: tk.StringVar  # TODO: is not the same as the API URL
+    cdm_collection_alias: tk.StringVar
+    catcher_json_file_path: tk.StringVar
+    action: tk.StringVar
+    username: tk.StringVar
+    password: tk.StringVar
+    license: tk.StringVar
+    _alias_picker: ttk.Combobox
+
+    def __init__(self, notebook: ttk.Notebook) -> None:
+        frame = ttk.Frame(notebook, width=80)
+        notebook.add(frame, text="catcher".rjust(TAB_CHAR_WIDTH))
+
+        help_frame = ttk.Labelframe(frame, text="Help")
+        help_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
+        ttk.Label(
+            help_frame,
+            text=catcher.catcher_process.__doc__ or "",
+        ).grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
+
+        self.username = tk.StringVar()
+        self.password = tk.StringVar()
+        self.license = tk.StringVar()
+        credentials_frame = ttk.Labelframe(
+            frame,
+            text="Catcher credentials",
+        )
+        credentials_frame.grid(column=0, row=1, sticky="ew", padx=PADX, pady=PADY)
+        ttk.Label(
+            credentials_frame,
+            text="Username",
+        ).grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
+        ttk.Entry(
+            credentials_frame,
+            textvariable=self.username,
+            width=15,
+        ).grid(column=0, row=1, sticky="nsew", padx=PADX, pady=PADY)
+        ttk.Label(
+            credentials_frame,
+            text="Password",
+        ).grid(column=1, row=0, sticky="nsew", padx=PADX, pady=PADY)
+        ttk.Entry(
+            credentials_frame,
+            show="*",
+            textvariable=self.password,
+            width=20,
+        ).grid(column=1, row=1, sticky="nsew", padx=PADX, pady=PADY)
+        ttk.Label(
+            credentials_frame,
+            text="License",
+        ).grid(column=2, row=0, sticky="nsew", padx=PADX, pady=PADY)
+        ttk.Entry(
+            credentials_frame,
+            textvariable=self.license,
+            width=24,
+        ).grid(column=2, row=1, sticky="nsew", padx=PADX, pady=PADY)
+
+        self.action = tk.StringVar()
+        action_frame = ttk.Labelframe(
+            frame,
+            text="Catcher action",
+        )
+        action_frame.grid(column=0, row=2, sticky="nsew", padx=PADX, pady=PADY)
+        for row, action in enumerate(["edit", "add", "delete"]):
+            ttk.Radiobutton(
+                action_frame,
+                text=action,
+                variable=self.action,
+                value=action,
+            ).grid(column=0, row=row, sticky="w")
+        self.action.set("edit")
+
+        self.catcher_service_url = tk.StringVar()
+        url_frame = ttk.Labelframe(
+            frame,
+            text="Catcher service URL",
+        )
+        url_frame.grid(column=0, row=3, sticky="ew", padx=PADX, pady=PADY)
+        ttk.Entry(
+            url_frame,
+            textvariable=self.catcher_service_url,
+            width=ENTRY_WIDTH,
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
+        ttk.Button(
+            url_frame,
+            text="Request collection aliases",
+            command=self.request_aliases,
+        ).grid(column=0, row=1, sticky="w", padx=PADX, pady=PADY)
+
+        self.cdm_collection_alias = tk.StringVar()
+        alias_frame = ttk.Labelframe(
+            frame,
+            text="CONTENTdm collection alias",
+        )
+        alias_frame.grid(column=0, row=4, sticky="ew", padx=PADX, pady=PADY)
+        self._alias_picker = ttk.Combobox(
+            alias_frame,
+            textvariable=self.cdm_collection_alias,
+            width=COMBO_WIDTH,
+        )
+        self._alias_picker.grid(column=0, row=0, sticky="ew", padx=PADX, pady=PADY)
+
+        self.catcher_json_file_path = tk.StringVar()
+        input_frame = ttk.Labelframe(
+            frame,
+            text="Catcher JSON input file",
+        )
+        input_frame.grid(column=0, row=5, sticky="ew", padx=PADX, pady=PADY)
+        ttk.Entry(
+            input_frame,
+            textvariable=self.catcher_json_file_path,
+            width=ENTRY_WIDTH,
+        ).grid(column=0, row=0, sticky="w", padx=PADX, pady=PADY)
+        ttk.Button(
+            input_frame,
+            text="Browse...",
+            command=self.choose_input,
+        ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
+
+        ttk.Button(
+            frame,
+            text="Run",
+            command=self.run
+        ).grid(column=0, row=6, sticky="w", padx=PADX, pady=PADY)
+
+    def request_aliases(self) -> None:
+        cdm_instance_url = self.catcher_service_url.get()
+        if not cdm_instance_url:
+            messagebox.showerror(
+                message="Please enter a Catcher service URL"
+            )
+            return
+        username = self.username.get()
+        if not username:
+            messagebox.showerror(message="Please enter a username")
+            return
+        password = self.password.get()
+        if not password:
+            messagebox.showerror(message="Please enter a password")
+            return
+        license = self.license.get()
+        if not license:
+            messagebox.showerror(message="Please enter a CONTENTdm license code")
+            return
+        collection_aliases = {
+            coll.alias.lstrip("/"): coll.name
+            for coll in catcher.parse_catalog(
+                catcher.catcher_catalog(
+                    cdm_instance_url=cdm_instance_url,
+                    username=username,
+                    password=password,
+                    license=license,
+                )
+            )
+        }
+        self._alias_picker["values"] = tuple(
+            f"{alias}={name}" for name, alias in collection_aliases.items()
+        )
+
+    def choose_input(self) -> None:
+        result = filedialog.askopenfilename(
+            title="Choose Catcher JSON file",
+            filetypes=[
+                ("JSON", "*.json"),
+            ],
+        )
+        if result is not None:
+            self.catcher_json_file_path.set(result)
+
+    def run(self) -> None:
+        username = self.username.get()
+        if not username:
+            messagebox.showerror(message="Please enter a username")
+            return
+        password = self.password.get()
+        if not password:
+            messagebox.showerror(message="Please enter a password")
+            return
+        license = self.license.get()
+        if not license:
+            messagebox.showerror(message="Please enter a CONTENTdm license code")
+            return
+        action = self.action.get()
+        cdm_instance_url = self.catcher_service_url.get()
+        if not cdm_instance_url:
+            messagebox.showerror(message="Please enter a Catcher service URL")
+            return
+        cdm_collection_and_alias = self.cdm_collection_alias.get()
+        if not cdm_collection_and_alias:
+            messagebox.showerror(message="Please enter an CONTENTdm collection alias")
+            return
+        cdm_collection_alias = cdm_collection_and_alias.rpartition("=")[0]
+        catcher_json_file_path = self.catcher_json_file_path.get()
+        if not catcher_json_file_path:
+            messagebox.showerror(message="Please enter a Catcher JSON file")
+            return
+        print(
+            textwrap.dedent(f"""\
+        catcher_process(
+            cdm_instance_url={cdm_instance_url},
+            cdm_collection_alias={cdm_collection_alias},
+            action={action},
+            catcher_json_file_path={catcher_json_file_path},
+            username={username},
+            password={'*' * len(password)},
+            license={license},
+        )"""))
+        catcher.catcher_process(
+            cdm_instance_url=cdm_instance_url,
+            cdm_collection_alias=cdm_collection_alias,
+            action=action,
+            catcher_json_file_path=catcher_json_file_path,
+            username=username,
+            password=password,
+            license=license,
+        )
 
 
 class CatcherDiff:
@@ -1520,9 +1743,8 @@ def get_nicks_from_edit(path: str) -> List[str]:
     nicks: List[str] = []
     for edit in catcher_edits:
         for nick in edit:
-            if nick not in nicks:
+            if nick not in nicks and nick != "dmrecord":
                 nicks.append(nick)
-    nicks.remove("dmrecord")
     return nicks
 
 
