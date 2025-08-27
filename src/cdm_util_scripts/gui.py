@@ -109,6 +109,7 @@ class Catcher:
     password: tk.StringVar
     license: tk.StringVar
     _alias_picker: ttk.Combobox
+    _show_password: tk.BooleanVar
 
     def __init__(self, notebook: ttk.Notebook) -> None:
         frame = ttk.Frame(notebook, width=80)
@@ -142,12 +143,33 @@ class Catcher:
             credentials_frame,
             text="Password",
         ).grid(column=1, row=0, sticky="nsew", padx=PADX, pady=PADY)
-        ttk.Entry(
+
+        self._show_password = tk.BooleanVar(value=False)
+        password_entry = ttk.Entry(
             credentials_frame,
             show="*",
             textvariable=self.password,
             width=20,
-        ).grid(column=1, row=1, sticky="nsew", padx=PADX, pady=PADY)
+        )
+        password_entry.grid(
+            column=1, row=1, sticky="nsew", padx=PADX, pady=PADY
+        )
+
+        def toggle_show():
+            if self._show_password.get():
+                password_entry.config(show="")
+            else:
+                password_entry.config(show="*")
+
+        ttk.Checkbutton(
+            credentials_frame,
+            text="Show password",
+            command=toggle_show,
+            variable=self._show_password,
+            onvalue=True,
+            offvalue=False,
+        ).grid(column=1, row=2, sticky="nsew", padx=PADX, pady=PADY)
+
         ttk.Label(
             credentials_frame,
             text="License",
@@ -158,27 +180,12 @@ class Catcher:
             width=24,
         ).grid(column=2, row=1, sticky="nsew", padx=PADX, pady=PADY)
 
-        self.action = tk.StringVar()
-        action_frame = ttk.Labelframe(
-            frame,
-            text="Catcher action",
-        )
-        action_frame.grid(column=0, row=2, sticky="nsew", padx=PADX, pady=PADY)
-        for row, action in enumerate(["edit", "add", "delete"]):
-            ttk.Radiobutton(
-                action_frame,
-                text=action,
-                variable=self.action,
-                value=action,
-            ).grid(column=0, row=row, sticky="w")
-        self.action.set("edit")
-
         self.catcher_service_url = tk.StringVar()
         url_frame = ttk.Labelframe(
             frame,
             text="Catcher service URL",
         )
-        url_frame.grid(column=0, row=3, sticky="ew", padx=PADX, pady=PADY)
+        url_frame.grid(column=0, row=2, sticky="ew", padx=PADX, pady=PADY)
         ttk.Entry(
             url_frame,
             textvariable=self.catcher_service_url,
@@ -195,13 +202,28 @@ class Catcher:
             frame,
             text="CONTENTdm collection alias",
         )
-        alias_frame.grid(column=0, row=4, sticky="ew", padx=PADX, pady=PADY)
+        alias_frame.grid(column=0, row=3, sticky="ew", padx=PADX, pady=PADY)
         self._alias_picker = ttk.Combobox(
             alias_frame,
             textvariable=self.cdm_collection_alias,
             width=COMBO_WIDTH,
         )
         self._alias_picker.grid(column=0, row=0, sticky="ew", padx=PADX, pady=PADY)
+
+        self.action = tk.StringVar()
+        action_frame = ttk.Labelframe(
+            frame,
+            text="Catcher action",
+        )
+        action_frame.grid(column=0, row=4, sticky="nsew", padx=PADX, pady=PADY)
+        for row, action in enumerate(["edit", "add", "delete"]):
+            ttk.Radiobutton(
+                action_frame,
+                text=action,
+                variable=self.action,
+                value=action,
+            ).grid(column=0, row=row, sticky="w")
+        self.action.set("edit")
 
         self.catcher_json_file_path = tk.StringVar()
         input_frame = ttk.Labelframe(
