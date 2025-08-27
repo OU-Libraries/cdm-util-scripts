@@ -13,33 +13,12 @@ from typing_extensions import TypeAlias
 JsonObject: TypeAlias = dict[str, Any]
 
 
-def credentials_from_environ(func: Callable[..., str]) -> Callable[..., str]:
-
-    def run_func_with_credentials(*args, **kwargs) -> str:
-        return func(
-            *args,
-            **kwargs,
-            cdm_instance_url=os.environ["CATCHER_URL"].rstrip(" /"),
-            username=os.environ["CATCHER_USERNAME"],
-            password=os.environ["CATCHER_PASSWORD"],
-            license=os.environ["CATCHER_LICENSE"],
-        )
-
-    return run_func_with_credentials
-
-
-def print_result(func: Callable[..., str]) -> Callable[..., None]:
-
-    def result_printer(*args, **kwargs) -> None:
-        result = func(*args, **kwargs)
-        print(result)
-
-    return result_printer
-
-
 CATCHER_SERVICE_URL = (
     "https://worldcat.org/webservices/contentdm/catcher/6.0/CatcherService.wsdl"
 )
+
+
+# Catcher operations
 
 
 # getWSVersion() -> return: xsd:string
@@ -92,44 +71,6 @@ def catcher_catalog(
         password=password,
         license=license,
     )
-
-
-class CatalogCollectionInfo(NamedTuple):
-    alias: str
-    name: str
-    fullres_enabled: bool
-
-
-def parse_catalog(catalog: str) -> Iterator[CatalogCollectionInfo]:
-    root = ET.fromstring(catalog)
-    for collection_elem in root.iter("collection"):
-        fullres_value = (
-            collection_elem
-            .find("collection_fullres")
-            .find("fullres_enabled")
-            .text
-        )
-        yield CatalogCollectionInfo(
-            alias=collection_elem.find("collection_alias").text,
-            name=collection_elem.find("collection_name").text,
-            fullres_enabled=fullres_value != "no",
-        )
-
-
-def print_catalog_as_tsv(func: Callable[..., str]) -> Callable[..., None]:
-
-    def tsv_printer(*args, **kwargs) -> None:
-        catalog_xml = func(*args, **kwargs)
-        writer = csv.DictWriter(
-            f=sys.stdout,
-            fieldnames=CatalogCollectionInfo._fields,
-            dialect="excel-tab",
-        )
-        writer.writeheader()
-        for collection_info in parse_catalog(catalog_xml):
-            writer.writerow(collection_info._asdict())
-
-    return tsv_printer
 
 
 # getCONTENTdmCollectionConfig(
@@ -226,7 +167,7 @@ def catcher_process(
                 metadataList={
                     "metadata": [
                         factory.metadata(field=field, value=value)
-                        for field, value in sort_metadata_json_object(
+                        for field, value in sorted_metadata_json_object(
                             json_object
                         ).items()
                     ],
@@ -236,7 +177,7 @@ def catcher_process(
         print(response, file=sys.stderr)
 
 
-def sort_metadata_json_object(obj: JsonObject) -> JsonObject:
+def sorted_metadata_json_object(obj: JsonObject) -> JsonObject:
     sort_order: list[str] = []
     if "dmrecord" in obj:
         sort_order.append("dmrecord")
@@ -244,3 +185,68 @@ def sort_metadata_json_object(obj: JsonObject) -> JsonObject:
         sort_order.append("title")
     sort_order.extend(key for key in obj if key not in ["dmrecord", "title"])
     return {key: obj[key] for key in sort_order}
+
+
+# CLI utilities
+
+
+def credentials_from_environ(func: Callable[..., str]) -> Callable[..., str]:
+
+    def run_func_with_credentials(*args, **kwargs) -> str:
+        return func(
+            *args,
+            **kwargs,
+            cdm_instance_url=os.environ["CATCHER_URL"].rstrip(" /"),
+            username=os.environ["CATCHER_USERNAME"],
+            password=os.environ["CATCHER_PASSWORD"],
+            license=os.environ["CATCHER_LICENSE"],
+        )
+
+    return run_func_with_credentials
+
+
+def print_result(func: Callable[..., str]) -> Callable[..., None]:
+
+    def result_printer(*args, **kwargs) -> None:
+        result = func(*args, **kwargs)
+        print(result)
+
+    return result_printer
+
+
+def print_catalog_as_tsv(func: Callable[..., str]) -> Callable[..., None]:
+
+    def tsv_printer(*args, **kwargs) -> None:
+        catalog_xml = func(*args, **kwargs)
+        writer = csv.DictWriter(
+            f=sys.stdout,
+            fieldnames=CatalogCollectionInfo._fields,
+            dialect="excel-tab",
+        )
+        writer.writeheader()
+        for collection_info in parse_catalog(catalog_xml):
+            writer.writerow(collection_info._asdict())
+
+    return tsv_printer
+
+
+class CatalogCollectionInfo(NamedTuple):
+    alias: str
+    name: str
+    fullres_enabled: bool
+
+
+def parse_catalog(catalog: str) -> Iterator[CatalogCollectionInfo]:
+    root = ET.fromstring(catalog)
+    for collection_elem in root.iter("collection"):
+        fullres_value = (
+            collection_elem
+            .find("collection_fullres")
+            .find("fullres_enabled")
+            .text
+        )
+        yield CatalogCollectionInfo(
+            alias=collection_elem.find("collection_alias").text,
+            name=collection_elem.find("collection_name").text,
+            fullres_enabled=fullres_value != "no",
+        )
