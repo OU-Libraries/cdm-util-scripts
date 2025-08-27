@@ -70,20 +70,37 @@ def report_callback_exception(exc, val, tb) -> None:
 
 # https://stackoverflow.com/questions/68198575/how-can-i-displaymy-console-output-in-tkinter
 class Console:
+    console: scrolledtext.ScrolledText
+
     def __init__(self, parent) -> None:
         frame = ttk.Labelframe(parent, text="Console Log")
         frame.grid(column=0, row=0, sticky="w")
-        console = scrolledtext.ScrolledText(
+        self.console = scrolledtext.ScrolledText(
             frame,
             height=12,
             width=120,
             font=("consolas", "8", "normal"),
             state="disabled",
         )
-        console.grid(column=0, row=0, sticky="we", padx=PADX, pady=PADY)
-        console_out = ConsoleOut(console)
+        self.console.grid(column=0, row=0, sticky="we", padx=PADX, pady=PADY)
+        console_out = ConsoleOut(self.console)
         sys.stdout = console_out
         sys.stderr = console_out
+
+        ttk.Button(
+            frame,
+            text="Save Log As...",
+            command=self.save_text,
+        ).grid(column=1, row=0, sticky="wn", padx=PADX, pady=PADY)
+
+    def save_text(self) -> None:
+        result = filedialog.asksaveasfilename(
+            title="Save Console Log As",
+            defaultextension=".txt",
+        )
+        if result:
+            with open(result, mode="w", encoding="utf-8") as fp:
+                fp.write(self.console.get("1.0", tk.END))
 
 
 class ConsoleOut:
@@ -289,7 +306,7 @@ class Catcher:
                 ("JSON", "*.json"),
             ],
         )
-        if result is not None:
+        if result:
             self.catcher_json_file_path.set(result)
 
     def run(self) -> None:
@@ -457,7 +474,7 @@ class CatcherDiff:
                 ("JSON", "*.json"),
             ],
         )
-        if result is not None:
+        if result:
             self.catcher_json_file_path.set(result)
 
     def choose_output(self) -> None:
@@ -465,7 +482,7 @@ class CatcherDiff:
             title="Save HTML Report As",
             defaultextension=".html",
         )
-        if result is not None:
+        if result:
             self.report_file_path.set(result)
 
     def run(self) -> None:
@@ -621,7 +638,7 @@ class CatcherCombineTerms:
                 ("JSON", "*.json"),
             ],
         )
-        if result is not None:
+        if result:
             self.catcher_json_file_path.set(result)
 
     def choose_output(self) -> None:
@@ -629,7 +646,7 @@ class CatcherCombineTerms:
             title="Save Combined Catcher JSON As",
             defaultextension=".json",
         )
-        if result is not None:
+        if result:
             self.output_file_path.set(result)
 
     def run(self) -> None:
@@ -802,7 +819,7 @@ class CatcherTidy:
                 ("JSON", "*.json"),
             ],
         )
-        if result is not None:
+        if result:
             self.catcher_json_file_path.set(result)
 
     def choose_output(self) -> None:
@@ -810,7 +827,7 @@ class CatcherTidy:
             title="Save Tidy Catcher JSON As",
             defaultextension=".json",
         )
-        if result is not None:
+        if result:
             self.output_file_path.set(result)
 
     def configure_tidy_operations(self) -> None:
@@ -1020,7 +1037,7 @@ class FtpTransc2Catcher:
                 ("TXT", "*.txt"),
             ],
         )
-        if result is not None:
+        if result:
             self.manifests_listing_path.set(result)
 
     def choose_output(self) -> None:
@@ -1028,7 +1045,7 @@ class FtpTransc2Catcher:
             title="Save Catcher JSON File As",
             defaultextension=".json",
         )
-        if result is not None:
+        if result:
             self.output_file_path.set(result)
 
     def run(self) -> None:
@@ -1181,7 +1198,7 @@ class FtpStruct2Catcher:
                 ("TSV", "*.tsv"),
             ],
         )
-        if result is not None:
+        if result:
             self.field_mapping_csv_path.set(result)
 
     def choose_output(self) -> None:
@@ -1189,7 +1206,7 @@ class FtpStruct2Catcher:
             title="Save Catcher JSON File As",
             defaultextension=".json",
         )
-        if result is not None:
+        if result:
             self.output_file_path.set(result)
 
     def run(self) -> None:
@@ -1321,7 +1338,7 @@ class ScanFtpSchema:
             title="Save HTML report as",
             defaultextension=".html",
         )
-        if result is not None:
+        if result:
             self.report_path.set(result)
 
     def run(self) -> None:
@@ -1438,7 +1455,7 @@ class CdmSchema2Csv:
             title="Save output CSV file as",
             defaultextension=".csv",
         )
-        if result is not None:
+        if result:
             self.csv_file_path.set(result)
 
     def run(self) -> None:
@@ -1560,7 +1577,7 @@ class Csv2Json:
                 ("TSV", "*.tsv"),
             ],
         )
-        if result is not None:
+        if result:
             self.input_csv_path.set(result)
 
     def choose_output(self) -> None:
@@ -1568,7 +1585,7 @@ class Csv2Json:
             title="Save JSON File As",
             defaultextension=".json",
         )
-        if result is not None:
+        if result:
             self.output_json_path.set(result)
 
     def run(self) -> None:
@@ -1678,7 +1695,7 @@ class Json2Csv:
                 ("JSON", "*.json"),
             ],
         )
-        if result is not None:
+        if result:
             self.input_json_path.set(result)
 
     def choose_output(self) -> None:
@@ -1686,7 +1703,7 @@ class Json2Csv:
             title="Save output CSV file as",
             defaultextension=".csv",
         )
-        if result is not None:
+        if result:
             self.output_csv_path.set(result)
 
     def run(self) -> None:
