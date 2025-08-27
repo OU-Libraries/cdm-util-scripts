@@ -1,4 +1,5 @@
 import csv
+import functools
 import json
 import os
 import sys
@@ -214,18 +215,22 @@ def print_result(func: Callable[..., str]) -> Callable[..., None]:
     return result_printer
 
 
-def print_catalog_as_tsv(func: Callable[..., str]) -> Callable[..., None]:
+def print_namedtuples_as_tsv(
+    func: Callable[..., str],
+    namedtuple_type: type[NamedTuple],
+    parser: Callable[[str], Iterator[NamedTuple]]
+) -> Callable[..., None]:
 
     def tsv_printer(*args, **kwargs) -> None:
-        catalog_xml = func(*args, **kwargs)
+        xml_str = func(*args, **kwargs)
         writer = csv.DictWriter(
             f=sys.stdout,
-            fieldnames=CatalogCollectionInfo._fields,
+            fieldnames=namedtuple_type._fields,
             dialect="excel-tab",
         )
         writer.writeheader()
-        for collection_info in parse_catalog(catalog_xml):
-            writer.writerow(collection_info._asdict())
+        for nt in parser(xml_str):
+            writer.writerow(nt._asdict())
 
     return tsv_printer
 
@@ -250,3 +255,77 @@ def parse_catalog(catalog: str) -> Iterator[CatalogCollectionInfo]:
             name=collection_elem.find("collection_name").text,
             fullres_enabled=fullres_value != "no",
         )
+
+
+print_catalog_as_tsv = functools.partial(
+    print_namedtuples_as_tsv,
+    namedtuple_type=CatalogCollectionInfo,
+    parser=parse_catalog,
+)
+
+
+class CollectionFieldInfo(NamedTuple):
+    admin: bool
+    nickname: str
+    name: str
+    type: str
+    size: bool
+    search: bool
+    hidden: bool
+    vocab: bool
+    vocdb: str
+    dcmap: str
+    req: bool
+    readonly: bool
+    tag: str
+
+
+def parse_collection_config(
+    collection_config: str,
+) -> Iterator[CollectionFieldInfo]:
+    root = ET.fromstring(collection_config)
+    for field_elem in root.iter("field"):
+        yield CollectionFieldInfo(
+            admin=int_str_to_bool(field_elem.find("admin").text),
+            nickname=field_elem.find("nickname").text,
+            name=field_elem.find("name").text,
+            type=field_elem.find("type").text,
+            size=int_str_to_bool(field_elem.find("size").text),
+            search=int_str_to_bool(field_elem.find("search").text),
+            hidden=int_str_to_bool(field_elem.find("hidden").text),
+            vocab=int_str_to_bool(field_elem.find("vocab").text),
+            vocdb=field_elem.find("vocdb").text,
+            dcmap=field_elem.find("dcmap").text,
+            req=int_str_to_bool(field_elem.find("req").text),
+            readonly=int_str_to_bool(field_elem.find("readonly").text),
+            tag=field_elem.find("tag").text,
+        )
+
+
+def int_str_to_bool(int_str: str) -> bool:
+    if "0" == int_str:
+        return False
+    if "1" == int_str:
+        return True
+    raise ValueError(int_str)
+
+
+print_collection_config_as_tsv = functools.partial(
+    print_namedtuples_as_tsv,
+    namedtuple_type=CollectionFieldInfo,
+    parser=parse_collection_config,
+)
+
+
+def print_terms_as_text(func: Callable[..., str]) -> Callable[..., None]:
+
+    def text_printer(*args, **kwargs) -> None:
+        terms_xml = func(*args, **kwargs)
+        print("\n".join(parse_terms(terms_xml)))
+
+    return text_printer
+
+
+def parse_terms(terms: str) -> list[str]:
+    root = ET.fromstring(terms)
+    return [term_elem.text for term_elem in root.iter("term")]

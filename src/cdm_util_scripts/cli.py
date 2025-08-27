@@ -92,7 +92,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
     def catcher_catalog_func(output_format: str) -> None:
         printer = {
             "xml": catcher.print_result,
-            "tsv": catcher.print_catalog_as_tsv
+            "tsv": catcher.print_catalog_as_tsv,
         }[output_format]
         printer(catcher.credentials_from_environ(catcher.catcher_catalog))()
 
@@ -104,13 +104,29 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         help="Print collection configuration",
     )
     catcher_collection_subparser.add_argument(
+        "-f",
+        "--output-format",
+        choices=["xml", "tsv"],
+        default="xml",
+        help="What format to print",
+    )
+    catcher_collection_subparser.add_argument(
         "cdm_collection_alias", help="CONTENTdm collection alias",
     )
-    catcher_collection_subparser.set_defaults(
-        func=catcher.print_result(
+
+    def catcher_collection_func(
+        output_format: str,
+        cdm_collection_alias: str,
+    ) -> None:
+        printer = {
+            "xml": catcher.print_result,
+            "tsv": catcher.print_collection_config_as_tsv,
+        }[output_format]
+        printer(
             catcher.credentials_from_environ(catcher.catcher_collection)
-        )
-    )
+        )(cdm_collection_alias=cdm_collection_alias)
+
+    catcher_collection_subparser.set_defaults(func=catcher_collection_func)
 
     # catcher terms
     catcher_terms_subparser = catcher_subparsers.add_parser(
@@ -118,16 +134,36 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         help="Print controlled vocabulary terms for a collection and field",
     )
     catcher_terms_subparser.add_argument(
+        "-f",
+        "--output-format",
+        choices=["xml", "tsv"],
+        default="xml",
+        help="What format to print",
+    )
+    catcher_terms_subparser.add_argument(
         "cdm_collection_alias", help="CONTENTdm collection alias",
     )
     catcher_terms_subparser.add_argument(
         "cdm_field_nickname", help="CONTENTdm field nickname",
     )
-    catcher_terms_subparser.set_defaults(
-        func=catcher.print_result(
+
+    def catcher_terms_func(
+        output_format: str,
+        cdm_collection_alias: str,
+        cdm_field_nickname: str,
+    ) -> None:
+        printer = {
+            "xml": catcher.print_result,
+            "tsv": catcher.print_terms_as_text,
+        }[output_format]
+        printer(
             catcher.credentials_from_environ(catcher.catcher_terms)
+        )(
+            cdm_collection_alias=cdm_collection_alias,
+            cdm_field_nickname=cdm_field_nickname,
         )
-    )
+
+    catcher_terms_subparser.set_defaults(func=catcher_terms_func)
 
     # catcher add
     catcher_add_subparser = catcher_subparsers.add_parser(
