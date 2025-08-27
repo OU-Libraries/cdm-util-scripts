@@ -296,7 +296,7 @@ class Catcher:
             )
         }
         self._alias_picker["values"] = tuple(
-            f"{alias}={name}" for name, alias in collection_aliases.items()
+            f"{alias}={name}" for alias, name in collection_aliases.items()
         )
 
     def choose_input(self) -> None:
