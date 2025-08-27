@@ -20,9 +20,10 @@ def catchertidy(
 
     tidy_edits: List[Dict[str, str]] = []
     for edit in catcher_edits:
-        tidy_edit: Dict[str, str] = {"dmrecord": edit["dmrecord"]}
+        tidy_edit: Dict[str, str] = {}
         for nick, edit_value in edit.items():
             if nick == "dmrecord":
+                tidy_edit[nick] = edit_value
                 continue
 
             if normalize_whitespace and nick in normalize_whitespace:
@@ -44,6 +45,7 @@ def catchertidy(
 
     with open(output_file_path, mode="w", encoding="utf-8") as fp:
         json.dump(tidy_edits, fp, indent=2)
+        fp.write("\n")
 
 
 def normalize_whitespace_operation(value: str) -> str:
