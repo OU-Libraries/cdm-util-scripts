@@ -23,7 +23,7 @@ from cdm_util_scripts.csv2json import csv2json
 from cdm_util_scripts.json2csv import json2csv
 from cdm_util_scripts import catcher
 
-from typing import Dict, List, NamedTuple
+from typing import Dict, List, NamedTuple, Optional
 
 
 HELP_LABEL_WRAP = 625
@@ -702,7 +702,8 @@ class CatcherTidy:
     output_file_path: tk.StringVar
     lcsh_separator_spaces: tk.BooleanVar
     _tidy_ops_rows: List["TidyOpsRow"]
-    _tidy_ops_frame: ttk.Labelframe
+    _tidy_ops_configure_button: ttk.Button
+    _tidy_ops_window: Optional[tk.Toplevel]
 
     def __init__(self, notebook: ttk.Notebook) -> None:
         frame = ttk.Frame(notebook)
@@ -764,11 +765,15 @@ class CatcherTidy:
         ).grid(column=1, row=0, sticky="w", padx=PADX, pady=PADY)
 
         self._tidy_ops_rows = []
-        ttk.Button(
+        self._tidy_ops_window = None
+        self._tidy_ops_configure_button = ttk.Button(
             frame,
             text="Configure Tidy Operations...",
             command=self.configure_tidy_operations,
-        ).grid(column=0, row=4, sticky="w", padx=PADX, pady=PADY)
+        )
+        self._tidy_ops_configure_button.grid(
+            column=0, row=4, sticky="w", padx=PADX, pady=PADY
+        )
 
         self.output_file_path = tk.StringVar()
         output_frame = ttk.Labelframe(
@@ -831,38 +836,64 @@ class CatcherTidy:
             self.output_file_path.set(result)
 
     def configure_tidy_operations(self) -> None:
-        catcher_json_file_path = self.catcher_json_file_path.get()
-        if not catcher_json_file_path:
-            messagebox.showerror(message="Please enter a Catcher JSON file path")
+        if self._tidy_ops_window is not None:
             return
+        self._tidy_ops_configure_button.config(state=tk.DISABLED)
+
+        if not self._tidy_ops_rows:
+            catcher_json_file_path = self.catcher_json_file_path.get()
+            if not catcher_json_file_path:
+                messagebox.showerror(message="Please enter a Catcher JSON file path")
+                self._tidy_ops_configure_button.config(state=tk.NORMAL)
+                return
+            self.initalize_tidy_ops_rows(
+                catcher_json_file_path=catcher_json_file_path
+            )
+
+        def delete_window() -> None:
+            self._tidy_ops_window.destroy()
+            self._tidy_ops_window = None
+            self._tidy_ops_configure_button.config(state=tk.NORMAL)
+
+        self._tidy_ops_window = tk.Toplevel()
+        self._tidy_ops_window.protocol("WM_DELETE_WINDOW", delete_window)
+        self._tidy_ops_window.title("Tidy Operations Configuration")
+        config_frame = ttk.Frame(self._tidy_ops_window)
+        config_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
+        TidyOpsRow.add_label_row(config_frame, row=0)
+
+        for row_num, tidy_ops_row in enumerate(self._tidy_ops_rows, start=1):
+            tidy_ops_row.add(config_frame, row=row_num)
+
+    def initalize_tidy_ops_rows(self, catcher_json_file_path: str) -> None:
         nicks = get_nicks_from_edit(catcher_json_file_path)
 
         cdm_instance_url = self.cdm_instance_url.get()
         cdm_collection_alias = self.cdm_collection_alias.get().partition("=")[0]
+
         if cdm_instance_url and cdm_collection_alias:
             long_field_infos = request_contentdm_field_info(
                 cdm_instance_url=cdm_instance_url,
                 cdm_collection_alias=cdm_collection_alias,
             )
             short_field_infos = [
-                ShortFieldInfo(name=field_info.name, nick=field_info.nick, vocab=bool(field_info.vocab))
+                ShortFieldInfo(
+                    name=field_info.name,
+                    nick=field_info.nick,
+                    vocab=bool(field_info.vocab)
+                )
                 for field_info in long_field_infos if field_info.nick in nicks
             ]
         else:
-            short_field_infos = [ShortFieldInfo(name=nick, nick=nick, vocab=False) for nick in nicks]
+            short_field_infos = [
+                ShortFieldInfo(name=nick, nick=nick, vocab=False)
+                for nick in nicks
+            ]
 
         self._tidy_ops_rows = []
-
-        config_window = tk.Toplevel()
-        config_window.title("Tidy Operations Configuration")
-        config_frame = ttk.Frame(config_window)
-        config_frame.grid(column=0, row=0, sticky="nsew", padx=PADX, pady=PADY)
-        TidyOpsRow.add_label_row(config_frame, row=0)
-
         for row, field_info in enumerate(short_field_infos, start=1):
             ops = TidyOpsRow.from_short_info(field_info)
             self._tidy_ops_rows.append(ops)
-            ops.add(config_frame, row=row)
 
     def run(self) -> None:
         catcher_json_file_path = self.catcher_json_file_path.get()
