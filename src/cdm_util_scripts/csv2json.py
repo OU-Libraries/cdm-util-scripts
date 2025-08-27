@@ -32,6 +32,7 @@ def csv2json(
 
     with open(output_json_path, mode="w", encoding="utf-8") as fp:
         json.dump(rows, fp, indent=2)
+        fp.write("\n")
 
 
 class CSVParsingError(Exception):

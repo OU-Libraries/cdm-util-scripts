@@ -131,6 +131,7 @@ def ftpstruct2catcher(
     print(f"Writing {len(edits)} catcher edits...")
     with open(output_file_path, mode="w", encoding="utf-8") as fp:
         json.dump(edits, fp, indent=2)
+        fp.write("\n")
 
 
 def config_ids_to_cdm_nicks(

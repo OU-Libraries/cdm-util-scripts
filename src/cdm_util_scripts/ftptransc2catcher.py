@@ -40,3 +40,4 @@ def ftptransc2catcher(
     print("Writing JSON file...")
     with open(output_file_path, mode="w", encoding="utf-8") as fp:
         json.dump(catcher_edits, fp, indent=2)
+        fp.write("\n")

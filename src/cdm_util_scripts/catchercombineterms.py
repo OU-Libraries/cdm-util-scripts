@@ -48,6 +48,7 @@ def catchercombineterms(
 
     with open(output_file_path, mode="w", encoding="utf-8") as fp:
         json.dump(combined_edits, fp, indent=2)
+        fp.write("\n")
 
 
 def split_terms(value: str) -> List[str]:
