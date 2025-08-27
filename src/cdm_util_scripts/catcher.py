@@ -6,14 +6,14 @@ import xml.etree.ElementTree as ET
 
 import zeep
 
-from typing import Any, Literal, Iterator, NamedTuple
+from typing import Any, Literal, Iterator, NamedTuple, Callable
 from typing_extensions import TypeAlias
 
 
 JsonObject: TypeAlias = dict[str, Any]
 
 
-def credentials_from_environ(func):
+def credentials_from_environ(func: Callable[..., str]) -> Callable[..., str]:
 
     def run_func_with_credentials(*args, **kwargs) -> str:
         return func(
@@ -28,13 +28,13 @@ def credentials_from_environ(func):
     return run_func_with_credentials
 
 
-def print_result(func):
+def print_result(func: Callable[..., str]) -> Callable[..., None]:
 
     def result_printer(*args, **kwargs) -> None:
         result = func(*args, **kwargs)
         print(result)
 
-    return print_result
+    return result_printer
 
 
 CATCHER_SERVICE_URL = (
@@ -116,7 +116,7 @@ def parse_catalog(catalog: str) -> Iterator[CatalogCollectionInfo]:
         )
 
 
-def print_catalog_as_tsv(func):
+def print_catalog_as_tsv(func: Callable[..., str]) -> Callable[..., None]:
 
     def tsv_printer(*args, **kwargs) -> None:
         catalog_xml = func(*args, **kwargs)

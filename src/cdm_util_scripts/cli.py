@@ -85,6 +85,7 @@ def main(test_args: Optional[Sequence[str]] = None) -> int:
         "-f",
         "--output-format",
         choices=["xml", "tsv"],
+        default="xml",
         help="What format to print",
     )
 
