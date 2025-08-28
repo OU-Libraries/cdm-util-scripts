@@ -8,7 +8,7 @@ version = "0.11.0"
 description = "Ohio University CONTENTdm utility scripts"
 authors = [{name = "Nick Ver Steegh"}]
 license = {text = "GPLv3"}
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 dependencies = [
     "jinja2>=3",
     "requests>=2",
