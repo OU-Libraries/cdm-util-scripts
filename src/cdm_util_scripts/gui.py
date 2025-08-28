@@ -284,6 +284,7 @@ class Catcher:
         if not license:
             messagebox.showerror(message="Please enter a CONTENTdm license code")
             return
+        print("\nRequesting CONTENTdm field info from Catcher...")
         collection_aliases = {
             coll.alias.lstrip("/"): coll.name
             for coll in catcher.parse_catalog(
@@ -295,6 +296,7 @@ class Catcher:
                 )
             )
         }
+        print("Done")
         self._alias_picker["values"] = tuple(
             f"{alias}={name}" for alias, name in collection_aliases.items()
         )
@@ -336,16 +338,17 @@ class Catcher:
         if not catcher_json_file_path:
             messagebox.showerror(message="Please enter a Catcher JSON file")
             return
+        print(f"\nRun started at {datetime.datetime.now().isoformat()}")
         print(
             textwrap.dedent(f"""\
         catcher_process(
-            cdm_instance_url={cdm_instance_url},
-            cdm_collection_alias={cdm_collection_alias},
-            action={action},
-            catcher_json_file_path={catcher_json_file_path},
-            username={username},
+            cdm_instance_url={cdm_instance_url!r},
+            cdm_collection_alias={cdm_collection_alias!r},
+            action={action!r},
+            catcher_json_file_path={catcher_json_file_path!r},
+            username={username!r},
             password={'*' * len(password)},
-            license={license},
+            license={license!r},
         )"""))
         catcher.catcher_process(
             cdm_instance_url=cdm_instance_url,
@@ -356,6 +359,7 @@ class Catcher:
             password=password,
             license=license,
         )
+        print(f"Run ended at {datetime.datetime.now().isoformat()}")
 
 
 class CatcherDiff:
@@ -504,14 +508,15 @@ class CatcherDiff:
             messagebox.showerror(message="Please enter an HTML report file path")
             return
         check_vocabs = self.check_vocabs.get()
+        print(f"\nRun started at {datetime.datetime.now().isoformat()}")
         print(
             textwrap.dedent(f"""\
         catcherdiff(
-            cdm_instance_url={cdm_instance_url},
-            cdm_collection_alias={cdm_collection_alias},
-            catcher_json_file_path={catcher_json_file_path},
-            report_file_path={report_file_path},
-            check_vocabs={check_vocabs},
+            cdm_instance_url={cdm_instance_url!r},
+            cdm_collection_alias={cdm_collection_alias!r},
+            catcher_json_file_path={catcher_json_file_path!r},
+            report_file_path={report_file_path!r},
+            check_vocabs={check_vocabs!r},
         )"""))
         catcherdiff(
             cdm_instance_url=cdm_instance_url,
@@ -521,6 +526,7 @@ class CatcherDiff:
             check_vocabs=check_vocabs,
             show_progress=False,
         )
+        print(f"Run ended at {datetime.datetime.now().isoformat()}")
 
 
 class CatcherCombineTerms:
@@ -676,14 +682,15 @@ class CatcherCombineTerms:
             )
             return
         sort_terms = self.sort_terms.get()
+        print(f"\nRun started at {datetime.datetime.now().isoformat()}")
         print(
             textwrap.dedent(f"""\
         catchercombineterms(
-            cdm_instance_url={cdm_instance_url},
-            cdm_collection_alias={cdm_collection_alias},
-            catcher_json_file_path={catcher_json_file_path},
-            output_file_path={output_file_path},
-            sort_terms={sort_terms},
+            cdm_instance_url={cdm_instance_url!r},
+            cdm_collection_alias={cdm_collection_alias!r},
+            catcher_json_file_path={catcher_json_file_path!r},
+            output_file_path={output_file_path!r},
+            sort_terms={sort_terms!r},
         )"""))
         catchercombineterms(
             cdm_instance_url=cdm_instance_url,
@@ -693,6 +700,7 @@ class CatcherCombineTerms:
             sort_terms=sort_terms,
             show_progress=False,
         )
+        print(f"Run ended at {datetime.datetime.now().isoformat()}")
 
 
 class CatcherTidy:
@@ -918,16 +926,17 @@ class CatcherTidy:
             if row.sort.get():
                 sort_terms.append(row.nick)
         lcsh_seperator_spaces = self.lcsh_separator_spaces.get()
+        print(f"\nRun started at {datetime.datetime.now().isoformat()}")
         print(
             textwrap.dedent(f"""\
         catchertidy(
-            catcher_json_file_path={catcher_json_file_path},
-            output_file_path={output_file_path},
-            normalize_whitespace={normalize_whitespace},
-            replace_smart_chars={replace_smart_chars},
-            normalize_lcsh={normalize_lcsh},
-            sort_terms={sort_terms},
-            lcsh_seperator_spaces={lcsh_seperator_spaces},
+            catcher_json_file_path={catcher_json_file_path!r},
+            output_file_path={output_file_path!r},
+            normalize_whitespace={normalize_whitespace!r},
+            replace_smart_chars={replace_smart_chars!r},
+            normalize_lcsh={normalize_lcsh!r},
+            sort_terms={sort_terms!r},
+            lcsh_seperator_spaces={lcsh_seperator_spaces!r},
         )"""))
         catchertidy(
             catcher_json_file_path=catcher_json_file_path,
@@ -939,6 +948,7 @@ class CatcherTidy:
             lcsh_separator_spaces=lcsh_seperator_spaces,
             show_progress=False,
         )
+        print(f"Run ended at {datetime.datetime.now().isoformat()}")
 
 
 class TidyOpsRow(NamedTuple):
@@ -1095,13 +1105,14 @@ class FtpTransc2Catcher:
         transcript_type = self.transcript_type.get()
         if not transcript_type:
             messagebox.showerror(message="Please enter a FromThePage transcript type")
+        print(f"\nRun started at {datetime.datetime.now().isoformat()}")
         print(
             textwrap.dedent(f"""\
         ftptransc2catcher(
-            manifests_listing_path={manifests_listing_path},
-            transcript_nick={transcript_nick},
-            output_file_path={output_file_path},
-            transcript_type={transcript_type},
+            manifests_listing_path={manifests_listing_path!r},
+            transcript_nick={transcript_nick!r},
+            output_file_path={output_file_path!r},
+            transcript_type={transcript_type!r},
         )"""))
         ftptransc2catcher(
             manifests_listing_path=manifests_listing_path,
@@ -1110,6 +1121,7 @@ class FtpTransc2Catcher:
             transcript_type=transcript_type,
             show_progress=False,
         )
+        print(f"Run ended at {datetime.datetime.now().isoformat()}")
 
 
 class FtpStruct2Catcher:
@@ -1258,14 +1270,15 @@ class FtpStruct2Catcher:
         if not output_file_path:
             messagebox.showerror(message="Please enter a Catcher JSON output file path")
             return
+        print(f"\nRun started at {datetime.datetime.now().isoformat()}")
         print(
             textwrap.dedent(f"""\
         ftpstruct2catcher(
-            ftp_slug={ftp_slug},
-            ftp_project_name={ftp_project_name},
-            field_mapping_csv_path={field_mapping_csv_path},
-            level={level},
-            output_file_path={output_file_path},
+            ftp_slug={ftp_slug!r},
+            ftp_project_name={ftp_project_name!r},
+            field_mapping_csv_path={field_mapping_csv_path!r},
+            level={level!r},
+            output_file_path={output_file_path!r},
         )"""))
         ftpstruct2catcher(
             ftp_slug=ftp_slug,
@@ -1275,6 +1288,7 @@ class FtpStruct2Catcher:
             output_file_path=output_file_path,
             show_progress=False,
         )
+        print(f"Run ended at {datetime.datetime.now().isoformat()}")
 
 
 FTP_LEVELS = {
@@ -1385,12 +1399,13 @@ class ScanFtpSchema:
         if not report_path:
             messagebox.showerror(message="Please enter an HTML report path")
             return
+        print(f"\nRun started at {datetime.datetime.now().isoformat()}")
         print(
             textwrap.dedent(f"""\
         scanftpschema(
-            ftp_slug={ftp_slug},
-            ftp_project_name={ftp_project_name},
-            report_path={report_path},
+            ftp_slug={ftp_slug!r},
+            ftp_project_name={ftp_project_name!r},
+            report_path={report_path!r},
         )"""))
         scanftpschema(
             ftp_slug=ftp_slug,
@@ -1398,6 +1413,7 @@ class ScanFtpSchema:
             report_path=report_path,
             show_progress=False,
         )
+        print(f"Run ended at {datetime.datetime.now().isoformat()}")
 
 
 class CdmSchema2Csv:
@@ -1503,12 +1519,13 @@ class CdmSchema2Csv:
         if not csv_file_path:
             messagebox.showerror(message="Please enter an output CSV file path")
             return
+        print(f"\nRun started at {datetime.datetime.now().isoformat()}")
         print(
             textwrap.dedent(f"""\
         cdmschema2csv(
-            cdm_instance_url={cdm_instance_url},
-            cdm_collection_alias={cdm_collection_alias},
-            csv_file_path={csv_file_path},
+            cdm_instance_url={cdm_instance_url!r},
+            cdm_collection_alias={cdm_collection_alias!r},
+            csv_file_path={csv_file_path!r},
         )"""))
         cdmschema2csv(
             cdm_instance_url=cdm_instance_url,
@@ -1516,6 +1533,7 @@ class CdmSchema2Csv:
             csv_file_path=csv_file_path,
             show_progress=False,
         )
+        print(f"Run ended at {datetime.datetime.now().isoformat()}")
 
 
 class Csv2Json:
@@ -1630,13 +1648,14 @@ class Csv2Json:
             return
         csv_dialect = self.csv_dialect.get()
         drop_empty_cells = self.drop_empty_cells.get()
+        print(f"\nRun started at {datetime.datetime.now().isoformat()}")
         print(
             textwrap.dedent(f"""\
         csv2json(
-            input_csv_path={input_csv_path},
-            output_json_path={output_json_path},
-            csv_dialect={csv_dialect},
-            drop_empty_cells={drop_empty_cells},
+            input_csv_path={input_csv_path!r},
+            output_json_path={output_json_path!r},
+            csv_dialect={csv_dialect!r},
+            drop_empty_cells={drop_empty_cells!r},
         )"""))
         csv2json(
             input_csv_path=input_csv_path,
@@ -1645,6 +1664,7 @@ class Csv2Json:
             drop_empty_cells=drop_empty_cells,
             show_progress=False,
         )
+        print(f"Run ended at {datetime.datetime.now().isoformat()}")
 
 
 class Json2Csv:
@@ -1747,12 +1767,13 @@ class Json2Csv:
             messagebox.showerror(message="Please enter an output CSV file path")
             return
         csv_dialect = self.csv_dialect.get()
+        print(f"\nRun started at {datetime.datetime.now().isoformat()}")
         print(
             textwrap.dedent(f"""\
         json2csv(
-            input_json_path={input_json_path},
-            output_csv_path={output_csv_path},
-            csv_dialect={csv_dialect}
+            input_json_path={input_json_path!r},
+            output_csv_path={output_csv_path!r},
+            csv_dialect={csv_dialect!r}
         )"""))
         json2csv(
             input_json_path=input_json_path,
@@ -1760,10 +1781,11 @@ class Json2Csv:
             csv_dialect=csv_dialect,
             show_progress=False,
         )
+        print(f"Run ended at {datetime.datetime.now().isoformat()}")
 
 
 def request_contentdm_collection_aliases(cdm_instance_url: str) -> Dict[str, str]:
-    print("Requesting CONTENTdm collection aliases...")
+    print("\nRequesting CONTENTdm collection aliases...")
     with requests.Session() as session:
         cdm_collection_list = cdm_api.request_collection_list(
             instance_url=cdm_instance_url,
@@ -1782,7 +1804,7 @@ class ShortFieldInfo(NamedTuple):
 
 
 def request_contentdm_field_info(cdm_instance_url: str, cdm_collection_alias: str) -> List[cdm_api.CdmFieldInfo]:
-    print("Requesting CONTENTdm field info...")
+    print("\nRequesting CONTENTdm field info...")
     with requests.Session() as session:
         field_infos = cdm_api.request_field_infos(
             instance_url=cdm_instance_url,
@@ -1794,7 +1816,7 @@ def request_contentdm_field_info(cdm_instance_url: str, cdm_collection_alias: st
 
 
 def request_fromthepage_project_names(ftp_slug: str) -> List[str]:
-    print("Requesting FromThePage project names...")
+    print("\nRequesting FromThePage project names...")
     with requests.Session() as session:
         ftp_instance = ftp_api.FtpInstance(
             url=ftp_api.FTP_HOSTED_URL,
