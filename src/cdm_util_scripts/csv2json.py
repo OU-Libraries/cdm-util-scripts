@@ -1,7 +1,7 @@
 import csv
 import json
 
-from typing import Union, Dict, List
+from typing import Union
 
 
 def csv2json(
@@ -17,15 +17,27 @@ def csv2json(
         if not reader.fieldnames:
             raise CSVParsingError("CSV has no fieldnames")
         if len(reader.fieldnames) == 1:
-            raise CSVParsingError(f"CSV has only one fieldname {reader.fieldnames[0]!r} (check CSV dialect)")
-        rows: List[Dict[str, str]] = []
+            raise CSVParsingError(
+                f"CSV has only one fieldname {reader.fieldnames[0]!r} (check "
+                "CSV dialect)"
+            )
+        rows: list[dict[str, str]] = []
         for rownum, row in enumerate(reader, start=1):
             if not row.get("dmrecord"):
-                raise CSVParsingError(f"CSV row {rownum} is missing dmrecord number")
+                raise CSVParsingError(
+                    f"CSV row {rownum} is missing dmrecord number"
+                )
             if None in row:
-                raise CSVParsingError(f"CSV row {rownum} has more fields than fieldnames (check CSV dialect)")
+                raise CSVParsingError(
+                    f"CSV row {rownum} has more fields than fieldnames (check "
+                    "CSV dialect)"
+                )
             if drop_empty_cells:
-                json_row = {nick: value.strip() for nick, value in row.items() if value and not value.isspace()}
+                json_row = {
+                    nick: value.strip()
+                    for nick, value in row.items()
+                    if value and not value.isspace()
+                }
             else:
                 json_row = {nick: value.strip() for nick, value in row.items()}
             rows.append(json_row)

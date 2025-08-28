@@ -1,13 +1,13 @@
-import requests
-import tqdm
-
 import json
 import enum
 
-from typing import List, Dict, Iterator, Tuple
+import requests
+import tqdm
 
 from cdm_util_scripts import ftp_api
 from cdm_util_scripts import cdm_api
+
+from typing import Iterator
 
 
 class Level(str, enum.Enum):
@@ -40,18 +40,29 @@ def ftpstruct2catcher(
         )
 
         works_count = len(ftp_project.works)
-        pages_count = sum(len(ftp_work.pages) for ftp_work in ftp_project.works)
-        works_described_count, pages_with_transcripts_count = count_statuses(ftp_project)
-        print(f"{ftp_project.label} has {works_count} works with {pages_count} total pages")
+        pages_count = sum(
+            len(ftp_work.pages) for ftp_work in ftp_project.works
+        )
+        works_described_count, pages_with_transcripts_count = count_statuses(
+            ftp_project
+        )
+        print(
+            f"{ftp_project.label} has {works_count} works with {pages_count} "
+            "total pages"
+        )
         if level is not Level.PAGE:
             print(f"Found {works_described_count} works described")
         if level is not Level.WORK:
-            print(f"Found {pages_with_transcripts_count} pages with transcripts")
+            print(
+                f"Found {pages_with_transcripts_count} pages with transcripts"
+            )
 
         print("Requesting structured data configuration...")
         if level in (Level.AUTO, Level.BOTH, Level.WORK):
-            work_configuration = ftp_project.request_work_structured_data_config(
-                session=session
+            work_configuration = (
+                ftp_project.request_work_structured_data_config(
+                    session=session,
+                )
             )
             work_config_ids_to_cdm_nicks = config_ids_to_cdm_nicks(
                 work_configuration, field_mapping
@@ -63,8 +74,10 @@ def ftpstruct2catcher(
             has_work_configuration = None
 
         if level in (Level.AUTO, Level.BOTH, Level.PAGE):
-            page_configuration = ftp_project.request_page_structured_data_config(
-                session=session
+            page_configuration = (
+                ftp_project.request_page_structured_data_config(
+                    session=session
+                )
             )
             page_config_ids_to_cdm_nicks = config_ids_to_cdm_nicks(
                 page_configuration, field_mapping
@@ -75,39 +88,64 @@ def ftpstruct2catcher(
             page_config_ids_to_cdm_nicks = None
             has_page_configuration = None
 
-        if level in (Level.BOTH, Level.WORK) or (
-            level is Level.AUTO and has_work_configuration
+        if (
+            level in (Level.BOTH, Level.WORK)
+            or (level is Level.AUTO and has_work_configuration)
         ):
-            unmapped_work_fields = list(unmapped_fields(work_configuration, field_mapping))
+            unmapped_work_fields = list(
+                unmapped_fields(work_configuration, field_mapping)
+            )
             if unmapped_work_fields:
-                print(f"Warning: {len(unmapped_work_fields)} unmapped work-level field(s):")
+                print(
+                    f"Warning: {len(unmapped_work_fields)} unmapped work-level"
+                    " field(s):"
+                )
                 for field_config in unmapped_work_fields:
                     print(f"  {field_config.label!r}")
 
         if level in (Level.BOTH, Level.PAGE) or (
             level is Level.AUTO and has_page_configuration
         ):
-            unmapped_page_fields = list(unmapped_fields(page_configuration, field_mapping))
+            unmapped_page_fields = list(
+                unmapped_fields(page_configuration, field_mapping)
+            )
             if unmapped_page_fields:
-                print(f"Warning: {len(unmapped_page_fields)} unmapped page-level field(s):")
+                print(
+                    f"Warning: {len(unmapped_page_fields)} unmapped "
+                    "page-level field(s):"
+                )
                 for field_config in unmapped_page_fields:
                     print(f"  {field_config.label!r}")
 
-        if level in (Level.BOTH, Level.WORK) and not work_config_ids_to_cdm_nicks:
+        if (
+            level in (Level.BOTH, Level.WORK)
+            and not work_config_ids_to_cdm_nicks
+        ):
             raise ValueError(
-                "unable to map FromThePage work-level fields to CONTENTdm nicks"
+                "unable to map FromThePage work-level fields to CONTENTdm "
+                "nicks"
             )
-        if level in (Level.BOTH, Level.PAGE) and not page_config_ids_to_cdm_nicks:
+        if (
+            level in (Level.BOTH, Level.PAGE)
+            and not page_config_ids_to_cdm_nicks
+        ):
             raise ValueError(
-                "unable to map FromThePage page-level fields to CONTENTdm nicks"
+                "unable to map FromThePage page-level fields to CONTENTdm"
+                " nicks"
             )
-        if not work_config_ids_to_cdm_nicks and not page_config_ids_to_cdm_nicks:
-            raise ValueError("unable to map any FromThePage fields to CONTENTdm nicks")
+        if (
+            not work_config_ids_to_cdm_nicks
+            and not page_config_ids_to_cdm_nicks
+        ):
+            raise ValueError(
+                "unable to map any FromThePage fields to CONTENTdm nicks"
+            )
 
         print("Requesting structured data...")
         edits = []
         for ftp_work in progress_bar(ftp_project.works):
-            # Keep page-level edits before object-level edits to avoid locking CONTENTdm objects
+            # Keep page-level edits before object-level edits to avoid locking
+            # CONTENTdm objects
             if page_config_ids_to_cdm_nicks:
                 for ftp_page in ftp_work.pages:
                     if not ftp_page.has_transcript:
@@ -135,26 +173,31 @@ def ftpstruct2catcher(
 
 
 def config_ids_to_cdm_nicks(
-    config: ftp_api.FtpStructuredDataConfig, field_mapping: Dict[str, List[str]]
-) -> Dict[str, List[str]]:
+    config: ftp_api.FtpStructuredDataConfig,
+    field_mapping: dict[str, list[str]],
+) -> dict[str, list[str]]:
     if not config.fields:
         return {}
     labels_to_config_ids = {
         field_config.label: field_config.url for field_config in config.fields
     }
-    return {labels_to_config_ids[name]: nicks for name, nicks in field_mapping.items()}
+    return {
+        labels_to_config_ids[name]: nicks
+        for name, nicks in field_mapping.items()
+    }
 
 
 def unmapped_fields(
-    config: ftp_api.FtpStructuredDataConfig, field_mapping: Dict[str, List[str]]
+    config: ftp_api.FtpStructuredDataConfig,
+    field_mapping: dict[str, list[str]]
 ) -> Iterator[ftp_api.FtpStructuredDataFieldConfig]:
-    mapped_labels = set(label for label, nicks in field_mapping.items() if nicks)
+    mapped_labels = {label for label, nicks in field_mapping.items() if nicks}
     for field_config in config.fields:
         if field_config.label not in mapped_labels:
             yield field_config
 
 
-def count_statuses(ftp_project: ftp_api.FtpProject) -> Tuple[int, int]:
+def count_statuses(ftp_project: ftp_api.FtpProject) -> tuple[int, int]:
     works_described = 0
     pages_with_transcripts = 0
     for ftp_work in ftp_project.works:
@@ -165,8 +208,10 @@ def count_statuses(ftp_project: ftp_api.FtpProject) -> Tuple[int, int]:
 
 
 def structured_data_to_catcher_edit(
-    dmrecord: str, data: ftp_api.FtpStructuredData, ids_to_nicks: Dict[str, List[str]]
-) -> Dict[str, str]:
+    dmrecord: str,
+    data: ftp_api.FtpStructuredData,
+    ids_to_nicks: dict[str, list[str]],
+) -> dict[str, str]:
     edit = {"dmrecord": dmrecord}
     for field_data in data.data:
         config_id = field_data.config

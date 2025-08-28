@@ -5,8 +5,6 @@ import json
 
 from cdm_util_scripts import cdm_api
 
-from typing import List, Dict
-
 
 def catchercombineterms(
     cdm_instance_url: str,
@@ -21,7 +19,7 @@ def catchercombineterms(
     with open(catcher_json_file_path, mode="r", encoding="utf-8") as fp:
         catcher_edits = json.load(fp)
 
-    combined_edits: List[Dict[str, str]] = []
+    combined_edits: list[dict[str, str]] = []
     with requests.Session() as session:
         print("Requesting CONTENTdm item info...")
         for edit in progress_bar(catcher_edits):
@@ -51,5 +49,5 @@ def catchercombineterms(
         fp.write("\n")
 
 
-def split_terms(value: str) -> List[str]:
+def split_terms(value: str) -> list[str]:
     return [term.strip() for term in value.split(";") if term and not term.isspace()]

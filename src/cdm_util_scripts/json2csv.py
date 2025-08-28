@@ -1,7 +1,7 @@
 import csv
 import json
 
-from typing import List, Union
+from typing import Union
 
 
 def json2csv(
@@ -15,7 +15,7 @@ def json2csv(
         input_json = json.load(fp)
     if not isinstance(input_json, list):
         raise ValueError("invalid input JSON: must be a list of rows")
-    fieldnames: List[str] = []
+    fieldnames: list[str] = []
     for edit in input_json:
         if not isinstance(edit, dict):
             raise ValueError("invalid input JSON: rows must be JSON objects")

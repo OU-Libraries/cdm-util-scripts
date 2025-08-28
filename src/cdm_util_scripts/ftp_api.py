@@ -6,13 +6,14 @@ from urllib.parse import urlsplit
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 
-from typing import List, Dict, Any, Tuple, Optional, NamedTuple, Union
+from typing import Any, Optional, NamedTuple, Union
+from typing_extensions import TypeAlias
 
 
 FTP_HOSTED_URL = "https://fromthepage.com"
 
 
-FtpFieldBasedTranscription = List[Optional[Dict[str, str]]]
+FtpFieldBasedTranscription: TypeAlias = list[Optional[dict[str, str]]]
 
 
 @dataclass
@@ -34,10 +35,10 @@ class FtpInstance:
 @dataclass
 class FtpProjectCollection:
     url: str
-    projects: List["FtpProject"] = field(default_factory=list)
+    projects: list["FtpProject"] = field(default_factory=list)
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FtpProjectCollection":
+    def from_json(cls, json: dict[str, Any]) -> "FtpProjectCollection":
         return cls(
             url=json["@id"],
             projects=[
@@ -46,7 +47,11 @@ class FtpProjectCollection:
             ],
         )
 
-    def request_project(self, label: str, session: requests.Session) -> "FtpProject":
+    def request_project(
+        self,
+        label: str,
+        session: requests.Session,
+    ) -> "FtpProject":
         for project in self.projects:
             if project.label == label:
                 project.request(session=session)
@@ -58,7 +63,7 @@ class FtpProjectCollection:
 class FtpProject:
     url: str
     label: Optional[str] = None
-    works: List["FtpWork"] = field(default_factory=list)
+    works: list["FtpWork"] = field(default_factory=list)
     instance_url: str = field(init=False)
     project_id: str = field(init=False)
 
@@ -66,7 +71,7 @@ class FtpProject:
         self.instance_url, self.project_id = parse_ftp_collection_url(self.url)
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FtpProject":
+    def from_json(cls, json: dict[str, Any]) -> "FtpProject":
         project = cls(url=json["@id"])
         project._load(json)
         return project
@@ -83,11 +88,13 @@ class FtpProject:
         json = response.json()
         self._load(json)
 
-    def _load(self, json: Dict[str, Any]) -> None:
+    def _load(self, json: dict[str, Any]) -> None:
         self.url = json["@id"]
         self.__post_init__()
         self.label = json["label"]
-        self.works = [FtpWork.from_json(manifest) for manifest in json["manifests"]]
+        self.works = [
+            FtpWork.from_json(manifest) for manifest in json["manifests"]
+        ]
 
     def request_works(
         self, session: requests.Session, show_progress: bool = True
@@ -131,10 +138,10 @@ def _request_structured_data_configuration(
 class FtpStructuredDataConfig:
     url: str
     label: str
-    fields: List["FtpStructuredDataFieldConfig"] = field(default_factory=list)
+    fields: list["FtpStructuredDataFieldConfig"] = field(default_factory=list)
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FtpStructuredDataConfig":
+    def from_json(cls, json: dict[str, Any]) -> "FtpStructuredDataConfig":
         return cls(
             url=json["@id"],
             label=json["label"],
@@ -151,10 +158,10 @@ class FtpStructuredDataFieldConfig(NamedTuple):
     position: int
     line: int
     url: str
-    options: List[str]
+    options: list[str]
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FtpStructuredDataFieldConfig":
+    def from_json(cls, json: dict[str, Any]) -> "FtpStructuredDataFieldConfig":
         return cls(
             url=json["@id"],
             label=json["label"],
@@ -169,11 +176,11 @@ class FtpStructuredDataFieldConfig(NamedTuple):
 class FtpWork:
     url: str
     label: Optional[str] = None
-    metadata: Dict[str, str] = field(default_factory=dict)
+    metadata: dict[str, str] = field(default_factory=dict)
     read_url: Optional[str] = None
     contents_url: Optional[str] = None
-    renderings: List["FtpRendering"] = field(default_factory=list)
-    pages: List["FtpPage"] = field(default_factory=list)
+    renderings: list["FtpRendering"] = field(default_factory=list)
+    pages: list["FtpPage"] = field(default_factory=list)
     cdm_instance_url: Optional[str] = None
     cdm_collection_alias: Optional[str] = None
     cdm_object_dmrecord: Optional[str] = None
@@ -191,7 +198,7 @@ class FtpWork:
     metadata_status: Optional[str] = None
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FtpWork":
+    def from_json(cls, json: dict[str, Any]) -> "FtpWork":
         work = cls(url=json["@id"])
         work._load(json)
         return work
@@ -208,7 +215,7 @@ class FtpWork:
         json = response.json()
         self._load(json)
 
-    def _load(self, json: Dict[str, Any]) -> None:
+    def _load(self, json: dict[str, Any]) -> None:
         # Update everything based on the new data
         self.url = json["@id"]
         self.label = json["label"]
@@ -242,7 +249,8 @@ class FtpWork:
             self.read_url = related[0]["@id"]
             self.contents_url = related[1]["@id"]
 
-        # TODO: conflating seeAlso and renderings duplicates Verbatim Plaintext: problem or not?
+        # TODO: conflating seeAlso and renderings duplicates Verbatim
+        # Plaintext: problem or not?
         seeAlsos = json.get("seeAlso")
         if seeAlsos is not None:
             for seeAlso in seeAlsos:
@@ -253,12 +261,15 @@ class FtpWork:
             sequence = sequences[0]
             for rendering in sequence["rendering"]:
                 self.renderings.append(FtpRendering.from_json(rendering))
-            self.pages = [FtpPage.from_json(canvas) for canvas in sequence["canvases"]]
+            self.pages = [
+                FtpPage.from_json(canvas) for canvas in sequence["canvases"]
+            ]
 
         if "dc:source" in self.metadata:
             cdm_iiif_manifest_url = self.metadata["dc:source"]
 
-            # Handle "dc:source" URLs that are somehow in lists with null strings
+            # Handle "dc:source" URLs that are somehow in lists with null
+            # strings
             if isinstance(cdm_iiif_manifest_url, list):
                 for obj in cdm_iiif_manifest_url:
                     if isinstance(obj, str) and obj.startswith("http"):
@@ -288,11 +299,19 @@ class FtpWork:
             self.pct_indexed = work_status_service.get("pctIndexed")
             self.pct_marked_blank = work_status_service.get("pctMarkedBlank")
             self.pct_needs_review = work_status_service.get("pctNeedsReview")
-            self.pct_translation_complete = work_status_service.get("pctTranslationComplete")
+            self.pct_translation_complete = work_status_service.get(
+                "pctTranslationComplete"
+            )
             self.pct_translated = work_status_service.get("pctTranslated")
-            self.pct_translation_needs_review = work_status_service.get("pctTranslationNeedsReview")
-            self.pct_translation_indexed = work_status_service.get("pctTranslationIndexed")
-            self.pct_translation_marked_blank = work_status_service.get("pctTranslationMarkedBlank")
+            self.pct_translation_needs_review = work_status_service.get(
+                "pctTranslationNeedsReview"
+            )
+            self.pct_translation_indexed = work_status_service.get(
+                "pctTranslationIndexed"
+            )
+            self.pct_translation_marked_blank = work_status_service.get(
+                "pctTranslationMarkedBlank"
+            )
             self.metadata_status = work_status_service.get("metadataStatus")
 
     def _get_rendering(self, attr: str, value: str) -> "FtpRendering":
@@ -302,7 +321,9 @@ class FtpWork:
         raise KeyError(repr(value))
 
     def request_rendering(self, label: str, session: requests.Session) -> str:
-        response = session.get(self._get_rendering(attr="label", value=label).url)
+        response = session.get(
+            self._get_rendering(attr="label", value=label).url
+        )
         response.raise_for_status()
         return response.text
 
@@ -321,7 +342,10 @@ class FtpWork:
             ]
         return field_based_transcription
 
-    def request_structured_data(self, session: requests.Session) -> "FtpStructuredData":
+    def request_structured_data(
+        self,
+        session: requests.Session,
+    ) -> "FtpStructuredData":
         for rendering in self.renderings:
             if rendering.context and rendering.context.endswith(
                 "/jsonld/structured/1/context.json"
@@ -343,7 +367,7 @@ class FtpRendering(NamedTuple):
     context: Optional[str] = None
 
     @classmethod
-    def from_json(cls, json: Dict[str, str]) -> "FtpRendering":
+    def from_json(cls, json: dict[str, str]) -> "FtpRendering":
         return cls(
             url=json["@id"],
             label=json["label"],
@@ -359,14 +383,14 @@ class FtpPage:
     label: Optional[str] = None
     read_url: Optional[str] = None
     transcribe_url: Optional[str] = None
-    renderings: List[FtpRendering] = field(default_factory=list)
+    renderings: list[FtpRendering] = field(default_factory=list)
     cdm_instance_url: Optional[str] = None
     cdm_collection_alias: Optional[str] = None
     cdm_page_dmrecord: Optional[str] = None
-    page_status: List[str] = field(default_factory=list)
+    page_status: list[str] = field(default_factory=list)
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FtpPage":
+    def from_json(cls, json: dict[str, Any]) -> "FtpPage":
         id_ = json["@id"]
         (
             cdm_instance_url,
@@ -378,7 +402,9 @@ class FtpPage:
             label=json["label"],
             read_url=json["related"][0]["@id"],
             transcribe_url=json["related"][1]["@id"],
-            renderings=[FtpRendering.from_json(seeAlso) for seeAlso in json["seeAlso"]],
+            renderings=[
+                FtpRendering.from_json(seeAlso) for seeAlso in json["seeAlso"]
+            ],
             cdm_instance_url=cdm_instance_url,
             cdm_collection_alias=cdm_collection_alias,
             cdm_page_dmrecord=cdm_page_dmrecord,
@@ -386,7 +412,9 @@ class FtpPage:
         )
 
     def request_transcript(self, label: str, session: requests.Session) -> str:
-        response = session.get(self._get_rendering(attr="label", value=label).url)
+        response = session.get(
+            self._get_rendering(attr="label", value=label).url
+        )
         response.raise_for_status()
         return response.text
 
@@ -396,7 +424,10 @@ class FtpPage:
                 return rendering
         raise KeyError(repr(value))
 
-    def request_structured_data(self, session: requests.Session) -> "FtpStructuredData":
+    def request_structured_data(
+        self,
+        session: requests.Session,
+    ) -> "FtpStructuredData":
         for rendering in self.renderings:
             if rendering.context and rendering.context.endswith(
                 "/jsonld/structured/1/context.json"
@@ -439,29 +470,32 @@ class FtpPage:
 
 @dataclass
 class FtpStructuredData:
-    contributors: List[Dict[str, str]] = field(default_factory=list)
-    data: List["FtpStructuredDataField"] = field(default_factory=list)
+    contributors: list[dict[str, str]] = field(default_factory=list)
+    data: list["FtpStructuredDataField"] = field(default_factory=list)
 
     @classmethod
-    def from_json(cls, json: Dict[str, Any]) -> "FtpStructuredData":
+    def from_json(cls, json: dict[str, Any]) -> "FtpStructuredData":
         return cls(
             contributors=json["contributors"],
-            data=[FtpStructuredDataField(**field_data) for field_data in json["data"]],
+            data=[
+                FtpStructuredDataField(**field_data)
+                for field_data in json["data"]
+            ],
         )
 
 
 class FtpStructuredDataField(NamedTuple):
     label: str
-    value: Union[str, List[str]]
+    value: Union[str, list[str]]
     config: str
 
 
-def parse_ftp_collection_url(url: str) -> Tuple[str, str]:
+def parse_ftp_collection_url(url: str) -> tuple[str, str]:
     instance_url, _, collection_id = url.partition("/iiif/collection/")
     return instance_url, collection_id
 
 
-def parse_cdm_iiif_manifest_url(url: str) -> Tuple[str, str, str]:
+def parse_cdm_iiif_manifest_url(url: str) -> tuple[str, str, str]:
     # New route: .../iiif/2/p15808coll19:872/manifest.json
     # Old route: .../iiif/info/p15808coll19/3001/manifest.json
     cdm_instance_url = "://".join(urlsplit(url)[:2])
@@ -471,7 +505,9 @@ def parse_cdm_iiif_manifest_url(url: str) -> Tuple[str, str, str]:
     return (cdm_instance_url, *match.groups())
 
 
-def parse_ftp_canvas_id(id_: str) -> Tuple[Optional[str], Optional[str], Optional[str]]:
+def parse_ftp_canvas_id(
+    id_: str,
+) -> tuple[Optional[str], Optional[str], Optional[str]]:
     match = re.match(r"(https?://[^/]*)/.*/([^/:]*)[/:](\d*)/canvas/c\d+", id_)
     if match:
         return match.groups()
@@ -517,7 +553,8 @@ def extract_fields_from_tei(tei: str) -> FtpFieldBasedTranscription:
 
 def extract_fields_from_xhtml(xhtml: str) -> FtpFieldBasedTranscription:
     NS = {"ns": "http://www.w3.org/1999/xhtml"}
-    # The FromThePage XHTML Export isn't valid XHTML because of the JS blob on line 6
+    # The FromThePage XHTML Export isn't valid XHTML because of the JS blob on
+    # line 6
     html_no_scripts = re.sub(r"<script>?.*</script>", "", xhtml).strip()
     html_root = ET.fromstring(html_no_scripts)
     html_pages = html_root.findall(
@@ -534,13 +571,14 @@ def extract_fields_from_xhtml(xhtml: str) -> FtpFieldBasedTranscription:
 
 
 def extract_fields_from_p_span_xml(
-    xml_ps: List[ET.Element], namespaces: Dict[str, str]
-) -> Optional[Dict[str, str]]:
+    xml_ps: list[ET.Element], namespaces: dict[str, str]
+) -> Optional[dict[str, str]]:
     fields = dict()
     last_label: Optional[str] = None
     for xml_p in xml_ps:
         label = xml_p.find("ns:span", namespaces=namespaces)
-        # Element truthiness is on existence of child Elements, so test for None
+        # Element truthiness is on existence of child Elements, so test for
+        # None
         if label is not None:
             label_text = last_label = removesuffix(label.text, ": ")
             fields[label_text] = "".join(list(xml_p.itertext())[1:]).strip()

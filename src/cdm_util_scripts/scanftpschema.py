@@ -1,13 +1,14 @@
+import datetime
+import collections
+import typing
+
 import jinja2
 import requests
 import tqdm
 
-import datetime
-import collections
-import typing
-from typing import List, FrozenSet, Dict, Union, Counter, NamedTuple
-
 from cdm_util_scripts import ftp_api
+
+from typing import Union, Counter, NamedTuple
 
 
 class WorkAndFields(NamedTuple):
@@ -37,38 +38,56 @@ def scanftpschema(
             session=session,
         )
 
-        print("Requesting FromThePage project structured data configuration...")
-        work_config = ftp_project.request_work_structured_data_config(session=session)
+        print(
+            "Requesting FromThePage project structured data configuration..."
+        )
+        work_config = ftp_project.request_work_structured_data_config(
+            session=session,
+        )
         has_work_description = bool(work_config.fields)
-        page_config = ftp_project.request_page_structured_data_config(session=session)
+        page_config = ftp_project.request_page_structured_data_config(
+            session=session,
+        )
         has_page_description = bool(page_config.fields)
 
         if not has_work_description and not has_page_description:
-            print("Project has no structured data entry configured, exiting...")
+            print(
+                "Project has no structured data entry configured, exiting..."
+            )
             return None
 
         print("Requesting FromThePage project work data...")
         ftp_project.request_works(session=session, show_progress=show_progress)
 
         print("Requesting FromThePage project structured descriptions...")
-        project_works_and_fields: List[WorkAndFields] = []
-        project_pages_and_fields: List[PageAndFields] = []
+        project_works_and_fields: list[WorkAndFields] = []
+        project_pages_and_fields: list[PageAndFields] = []
         for work in progress_bar(ftp_project.works):
             if has_work_description:
                 project_works_and_fields.append(
-                    WorkAndFields(work, work.request_structured_data(session=session))
+                    WorkAndFields(
+                        work,
+                        work.request_structured_data(session=session)
+                    )
                 )
             if has_page_description:
                 for page in work.pages:
                     project_pages_and_fields.append(
-                        PageAndFields(page, page.request_structured_data(session=session))
+                        PageAndFields(
+                            page,
+                            page.request_structured_data(session=session),
+                        )
                     )
 
     print("Collating field sets...")
     works_by_field_set = collate_field_sets(project_works_and_fields)
-    work_field_counts_by_config_id = count_field_occurrences(works_by_field_set)
+    work_field_counts_by_config_id = count_field_occurrences(
+        works_by_field_set
+    )
     pages_by_field_set = collate_field_sets(project_pages_and_fields)
-    page_field_counts_by_config_id = count_field_occurrences(pages_by_field_set)
+    page_field_counts_by_config_id = count_field_occurrences(
+        pages_by_field_set
+    )
 
     print("Compiling report...")
     env = jinja2.Environment(
@@ -88,11 +107,13 @@ def scanftpschema(
         pages_by_field_set=pages_by_field_set,
         work_field_counts_by_config_id=work_field_counts_by_config_id,
         work_field_labels_by_config_id={
-            field_config.url: field_config.label for field_config in work_config.fields
+            field_config.url: field_config.label
+            for field_config in work_config.fields
         },
         page_field_counts_by_config_id=page_field_counts_by_config_id,
         page_field_labels_by_config_id={
-            field_config.url: field_config.label for field_config in page_config.fields
+            field_config.url: field_config.label
+            for field_config in page_config.fields
         },
     )
 
@@ -102,27 +123,27 @@ def scanftpschema(
 
 @typing.overload
 def collate_field_sets(
-    ftp_objects_and_fields: List[WorkAndFields],
-) -> Dict[FrozenSet[str], List[ftp_api.FtpWork]]:
+    ftp_objects_and_fields: list[WorkAndFields],
+) -> dict[frozenset[str], list[ftp_api.FtpWork]]:
     ...
 
 
 @typing.overload
 def collate_field_sets(
-    ftp_objects_and_fields: List[PageAndFields],
-) -> Dict[FrozenSet[str], List[ftp_api.FtpPage]]:
+    ftp_objects_and_fields: list[PageAndFields],
+) -> dict[frozenset[str], list[ftp_api.FtpPage]]:
     ...
 
 
 def collate_field_sets(
-    ftp_objects_and_fields: Union[List[PageAndFields], List[WorkAndFields]]
+    ftp_objects_and_fields: Union[list[PageAndFields], list[WorkAndFields]]
 ) -> Union[
-    Dict[FrozenSet[str], List[ftp_api.FtpPage]],
-    Dict[FrozenSet[str], List[ftp_api.FtpWork]],
+    dict[frozenset[str], list[ftp_api.FtpPage]],
+    dict[frozenset[str], list[ftp_api.FtpWork]],
 ]:
     objects_by_field_set: Union[
-        Dict[FrozenSet[str], List[ftp_api.FtpPage]],
-        Dict[FrozenSet[str], List[ftp_api.FtpWork]],
+        dict[frozenset[str], list[ftp_api.FtpPage]],
+        dict[frozenset[str], list[ftp_api.FtpWork]],
     ] = {}
     for ftp_object, fields in ftp_objects_and_fields:
         field_set = frozenset(field.config for field in fields.data)
@@ -132,8 +153,8 @@ def collate_field_sets(
 
 def count_field_occurrences(
     objects_by_field_set: Union[
-        Dict[FrozenSet[str], List[ftp_api.FtpPage]],
-        Dict[FrozenSet[str], List[ftp_api.FtpWork]],
+        dict[frozenset[str], list[ftp_api.FtpPage]],
+        dict[frozenset[str], list[ftp_api.FtpWork]],
     ]
 ) -> Counter[str]:
     count: Counter[str] = collections.Counter()

@@ -12,17 +12,15 @@ from cdm_util_scripts import cdm_api
 
 from typing import (
     Counter,
-    Dict,
     Iterable,
     Iterator,
-    List,
     NamedTuple,
     Optional,
 )
 
 
 class Delta(NamedTuple):
-    edit: Dict[str, str]
+    edit: dict[str, str]
     item_info: cdm_api.CdmItemInfo
 
     def changes(self) -> Iterator["Change"]:
@@ -101,7 +99,7 @@ def catcherdiff(
             cdm_vocabs = None
 
     change_counts = ChangeCounts(deltas)
-    vocabs_by_nick: Dict[str, Optional[List[str]]] = {}
+    vocabs_by_nick: dict[str, Optional[list[str]]] = {}
     for field_info in cdm_field_infos:
         vocab_info = field_info.get_vocab_info()
         if vocab_info:
@@ -150,14 +148,14 @@ def catcherdiff(
 
 
 def request_deltas(
-    catcher_edits: List[Dict[str, str]],
+    catcher_edits: list[dict[str, str]],
     instance_url: str,
     collection_alias: str,
     session: requests.Session,
     show_progress: bool,
-) -> List[Delta]:
+) -> list[Delta]:
     progress_bar = tqdm.tqdm if show_progress else (lambda obj: obj)
-    deltas: List[Delta] = []
+    deltas: list[Delta] = []
     for edit in progress_bar(catcher_edits):
         item_info = cdm_api.request_item_info(
             instance_url=instance_url,
@@ -175,7 +173,7 @@ class ChangeCounts:
     nicks_with_edits: Counter[str]
     kinds_of_changes: Counter[ChangeType]
 
-    def __init__(self, deltas: List[Delta]) -> None:
+    def __init__(self, deltas: list[Delta]) -> None:
         self.edits_with_changes = 0
         self.nicks_with_edits = collections.Counter()
         self.nicks_with_changes = collections.Counter()
@@ -201,5 +199,5 @@ def find_dc_field(
         return None
 
 
-def strip_edit(edit: Dict[str, str]) -> Dict[str, str]:
+def strip_edit(edit: dict[str, str]) -> dict[str, str]:
     return {nick: value.strip() for nick, value in edit.items()}

@@ -1,7 +1,7 @@
 import json
 import re
 
-from typing import List, Dict, Optional, Container
+from typing import Optional, Container
 
 
 def catchertidy(
@@ -16,11 +16,11 @@ def catchertidy(
 ) -> None:
     """Tidy up a cdm-catcher JSON edit's whitespace, quotes, and vocab term formatting"""
     with open(catcher_json_file_path, mode="r", encoding="utf-8") as fp:
-        catcher_edits: List[Dict[str, str]] = json.load(fp)
+        catcher_edits: list[dict[str, str]] = json.load(fp)
 
-    tidy_edits: List[Dict[str, str]] = []
+    tidy_edits: list[dict[str, str]] = []
     for edit in catcher_edits:
-        tidy_edit: Dict[str, str] = {}
+        tidy_edit: dict[str, str] = {}
         for nick, edit_value in edit.items():
             if nick == "dmrecord":
                 tidy_edit[nick] = edit_value
@@ -67,7 +67,7 @@ def replace_smart_chars_operation(value: str) -> str:
 
 def normalize_lcsh_operation(terms: str, separator_spaces: bool = True) -> str:
     subfield_separator = " -- " if separator_spaces else "--"
-    normalized_terms: List[str] = []
+    normalized_terms: list[str] = []
     for term in split_controlled_vocab(terms):
         term = replace_smart_chars_operation(normalize_whitespace_operation(term))
         parts = [part.strip() for part in term.rsplit("--")]
@@ -82,5 +82,5 @@ def sort_terms_operation(terms: str) -> str:
 VOCAB_SPLIT_PAT = re.compile(r";\s*")
 
 
-def split_controlled_vocab(values: str) -> List[str]:
+def split_controlled_vocab(values: str) -> list[str]:
     return [term for term in VOCAB_SPLIT_PAT.split(values) if term]

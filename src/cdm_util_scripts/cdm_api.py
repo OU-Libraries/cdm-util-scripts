@@ -4,18 +4,34 @@ import csv
 import collections
 import enum
 
-from typing import Dict, List, Union, Tuple, NamedTuple, Optional, Any, TextIO, Iterable, Iterator
+from typing import (
+    Any,
+    Iterable,
+    Iterator,
+    NamedTuple,
+    Optional,
+    TextIO,
+    Union,
+)
+from typing_extensions import TypeAlias
 
 
 class DmError(Exception):
     pass
 
 
-def request_dm(url: str, session: requests.Session) -> Union[Dict[str, Any], List[str]]:
+def request_dm(
+    url: str,
+    session: requests.Session,
+) -> Any:
     response = session.get(url)
     response.raise_for_status()
     dm_result = response.json()
-    if isinstance(dm_result, dict) and "code" in dm_result and "message" in dm_result:
+    if (
+        isinstance(dm_result, dict)
+        and "code" in dm_result
+        and "message" in dm_result
+    ):
         raise DmError(dm_result["message"])
     return dm_result
 
@@ -28,13 +44,17 @@ class CdmCollectionInfo(NamedTuple):
 
 
 def request_collection_list(
-    instance_url: str, session: requests.Session
-) -> List[CdmCollectionInfo]:
-    instance_url = instance_url.rstrip("/")
-    url = "/".join(
-        [instance_url, "digital/bl/dmwebservices/index.php?q=dmGetCollectionList/json"]
+    instance_url: str,
+    session: requests.Session
+) -> list[CdmCollectionInfo]:
+    url = (
+        f"{instance_url.rstrip('/')}/digital/bl/dmwebservices/index.php"
+        "?q=dmGetCollectionList/json"
     )
-    return [CdmCollectionInfo(**info) for info in request_dm(url=url, session=session)]
+    return [
+        CdmCollectionInfo(**info)
+        for info in request_dm(url=url, session=session)
+    ]
 
 
 class CdmVocabType(enum.Enum):
@@ -65,7 +85,9 @@ class CdmFieldInfo(NamedTuple):
     def get_vocab_info(self) -> Optional[CdmVocabInfo]:
         if not self.vocab:
             return None
-        vocab_type = CdmVocabType.builtin if self.vocdb else CdmVocabType.custom
+        vocab_type = (
+            CdmVocabType.builtin if self.vocdb else CdmVocabType.custom
+        )
         key = self.vocdb if self.vocdb else self.nick
         return CdmVocabInfo(
             vocab_type=vocab_type,
@@ -74,8 +96,10 @@ class CdmFieldInfo(NamedTuple):
 
 
 def request_field_infos(
-    instance_url: str, collection_alias: str, session: requests.Session
-) -> List[CdmFieldInfo]:
+    instance_url: str,
+    collection_alias: str,
+    session: requests.Session,
+) -> list[CdmFieldInfo]:
     infos_url = "/".join(
         [
             instance_url.rstrip("/"),
@@ -85,11 +109,9 @@ def request_field_infos(
         ]
     )
     raw_infos = request_dm(url=infos_url, session=session)
-    dc_mappings_url = "/".join(
-        [
-            instance_url.rstrip("/"),
-            "digital/bl/dmwebservices/index.php?q=dmGetDublinCoreFieldInfo/json",
-        ]
+    dc_mappings_url = (
+        f"{instance_url.rstrip('/')}/digital/bl/dmwebservices/index.php"
+        "?q=dmGetDublinCoreFieldInfo/json"
     )
     raw_dc_mappings = request_dm(url=dc_mappings_url, session=session)
     dc_nicks_to_names = {
@@ -105,11 +127,14 @@ def request_field_infos(
     return infos
 
 
-CdmItemInfo = Dict[str, str]
+CdmItemInfo: TypeAlias = dict[str, str]
 
 
 def request_item_info(
-    instance_url: str, collection_alias: str, dmrecord: str, session: requests.Session
+    instance_url: str,
+    collection_alias: str,
+    dmrecord: str,
+    session: requests.Session,
 ) -> CdmItemInfo:
     url = "/".join(
         [
@@ -124,27 +149,29 @@ def request_item_info(
     return {nick: value or "" for nick, value in item_info.items()}
 
 
-CdmFieldVocab = List[str]
+CdmFieldVocab: TypeAlias = list[str]
 
 
 def request_field_vocab(
-    instance_url: str, collection_alias: str, field_nick: str, session: requests.Session
+    instance_url: str,
+    collection_alias: str,
+    field_nick: str,
+    session: requests.Session,
 ) -> CdmFieldVocab:
-    url = "/".join(
-        [
-            instance_url.rstrip("/"),
-            "digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary",
-            collection_alias,
-            field_nick,
-            "0/1/json",
-        ]
+    url = (
+        f"{instance_url.rstrip('/')}/digital/bl/dmwebservices/index.php"
+        f"?q=dmGetCollectionFieldVocabulary/{collection_alias}/{field_nick}"
+        "/0/1/json"
     )
     return request_dm(url=url, session=session)
 
 
 def request_page_pointers(
-    instance_url: str, collection_alias: str, dmrecord: str, session: requests.Session
-) -> List[str]:
+    instance_url: str,
+    collection_alias: str,
+    dmrecord: str,
+    session: requests.Session,
+) -> list[str]:
     url = "/".join(
         [
             instance_url.rstrip("/"),
@@ -165,14 +192,14 @@ def request_page_pointers(
 
 class MonographNode:
     nodetitle: str
-    pages: List["MonographPage"]
-    nodes: List["MonographNode"]
+    pages: list["MonographPage"]
+    nodes: list["MonographNode"]
 
     def __init__(
         self,
-        nodetitle: Union[str, Dict[Any, Any]],  # {} is CONTENTdm's None
-        page: Optional[Union[Dict[str, str], List[Dict[str, str]]]] = None,
-        node: Optional[Union[Dict[str, Any], List[Dict[str, Any]]]] = None,
+        nodetitle: Union[str, dict[Any, Any]],  # {} is CONTENTdm's None
+        page: Optional[Union[dict[str, str], list[dict[str, str]]]] = None,
+        node: Optional[Union[dict[str, Any], list[dict[str, Any]]]] = None,
     ) -> None:
         self.nodetitle = nodetitle if isinstance(nodetitle, str) else ""
         if page is None:
@@ -190,7 +217,10 @@ class MonographNode:
             nodes = node
         self.nodes = [MonographNode(**node_) for node_ in nodes]
 
-    def iter_pages(self, depth: int = 0) -> Iterator[Tuple[int, str, "MonographPage"]]:
+    def iter_pages(
+        self,
+        depth: int = 0,
+    ) -> Iterator[tuple[int, str, "MonographPage"]]:
         for page in self.pages:
             yield (depth, self.nodetitle, page)
         for node in self.nodes:
@@ -213,7 +243,7 @@ class CdmObjectRecord:
     filetype: str
     parentobject: int
     find: str
-    fields: Dict[str, Any]
+    fields: dict[str, Any]
 
     def __init__(
         self,
@@ -241,8 +271,8 @@ def request_collection_object_records(
     collection_alias: str,
     field_nicks: Iterable[str],
     session: requests.Session,
-) -> List[CdmObjectRecord]:
-    cdm_records: List[CdmObjectRecord] = []
+) -> list[CdmObjectRecord]:
+    cdm_records: list[CdmObjectRecord] = []
     total = 1
     start = 1
     maxrecs = 1024
@@ -265,11 +295,13 @@ def request_collection_object_records(
         )
         total = int(result["pager"]["total"])
         start += maxrecs
-        cdm_records.extend(CdmObjectRecord(**record) for record in result["records"])
+        cdm_records.extend(
+            CdmObjectRecord(**record) for record in result["records"]
+        )
     return cdm_records
 
 
-CdmFieldMapping = Dict[str, List[str]]
+CdmFieldMapping: TypeAlias = dict[str, list[str]]
 
 
 def read_csv_field_mapping(filename: str) -> CdmFieldMapping:
@@ -277,7 +309,8 @@ def read_csv_field_mapping(filename: str) -> CdmFieldMapping:
         reader = csv.DictReader(fp, dialect=sniff_csv_dialect(fp))
         if not {"name", "nick"}.issubset(set(reader.fieldnames or [])):
             raise ValueError(
-                "column mapping CSV must include 'name' and 'nick' column names"
+                "column mapping CSV must include 'name' and 'nick' column "
+                "names"
             )
         field_mapping = collections.defaultdict(list)
         for row in reader:
@@ -285,7 +318,10 @@ def read_csv_field_mapping(filename: str) -> CdmFieldMapping:
     return dict(field_mapping)
 
 
-def write_csv_field_mapping(filename: str, field_mapping: CdmFieldMapping) -> None:
+def write_csv_field_mapping(
+    filename: str,
+    field_mapping: CdmFieldMapping,
+) -> None:
     with open(filename, mode="w", encoding="utf-8", newline="") as fp:
         writer = csv.DictWriter(fp, fieldnames=["name", "nick"])
         writer.writeheader()
@@ -295,16 +331,19 @@ def write_csv_field_mapping(filename: str, field_mapping: CdmFieldMapping) -> No
 
 
 def apply_field_mapping(
-    fields: Dict[str, str], field_mapping: CdmFieldMapping
-) -> Dict[str, str]:
-    accumulator: Dict[str, str] = dict()
+    fields: dict[str, str],
+    field_mapping: CdmFieldMapping,
+) -> dict[str, str]:
+    accumulator: dict[str, str] = dict()
     for label, nicks in field_mapping.items():
         field = fields[label]
         for nick in nicks:
             if nick in accumulator:
                 if field:
                     if accumulator[nick]:
-                        accumulator[nick] = "; ".join([accumulator[nick], field])
+                        accumulator[nick] = "; ".join(
+                            [accumulator[nick], field]
+                        )
                     else:
                         accumulator[nick] = field
             else:
@@ -312,7 +351,7 @@ def apply_field_mapping(
     return accumulator
 
 
-def sniff_csv_dialect(fp: TextIO) -> csv.Dialect:
+def sniff_csv_dialect(fp: TextIO) -> type[csv.Dialect]:
     dialect = csv.Sniffer().sniff(fp.read(1024))
     fp.seek(0)
     return dialect
@@ -321,17 +360,20 @@ def sniff_csv_dialect(fp: TextIO) -> csv.Dialect:
 def request_vocabs(
     instance_url: str,
     collection_alias: str,
-    field_infos: List[CdmFieldInfo],
+    field_infos: list[CdmFieldInfo],
     session: requests.Session,
-) -> Dict[CdmVocabInfo, List[str]]:
-    vocabs = dict()
+) -> dict[CdmVocabInfo, CdmFieldVocab]:
+    vocabs: dict[CdmVocabInfo, CdmFieldVocab] = {}
     for field_info in field_infos:
         vocab_info = field_info.get_vocab_info()
         if vocab_info is None or vocab_info in vocabs:
             continue
-        print(
-            f"Requesting {field_info.name if vocab_info.vocab_type is CdmVocabType.custom else vocab_info.key!r} vocab..."
+        vocab_name = (
+            field_info.name
+            if vocab_info.vocab_type is CdmVocabType.custom
+            else vocab_info.key
         )
+        print(f"Requesting {vocab_name!r} vocab...")
         vocabs[vocab_info] = request_field_vocab(
             instance_url=instance_url,
             collection_alias=collection_alias,

@@ -23,7 +23,7 @@ from cdm_util_scripts.csv2json import csv2json
 from cdm_util_scripts.json2csv import json2csv
 from cdm_util_scripts import catcher
 
-from typing import Dict, List, NamedTuple, Optional
+from typing import NamedTuple, Optional
 
 
 HELP_LABEL_WRAP = 625
@@ -709,7 +709,7 @@ class CatcherTidy:
     catcher_json_file_path: tk.StringVar
     output_file_path: tk.StringVar
     lcsh_separator_spaces: tk.BooleanVar
-    _tidy_ops_rows: List["TidyOpsRow"]
+    _tidy_ops_rows: list["TidyOpsRow"]
     _tidy_ops_configure_button: ttk.Button
     _tidy_ops_window: Optional[tk.Toplevel]
 
@@ -1784,7 +1784,9 @@ class Json2Csv:
         print(f"Run ended at {datetime.datetime.now().isoformat()}")
 
 
-def request_contentdm_collection_aliases(cdm_instance_url: str) -> Dict[str, str]:
+def request_contentdm_collection_aliases(
+    cdm_instance_url: str,
+) -> dict[str, str]:
     print("\nRequesting CONTENTdm collection aliases...")
     with requests.Session() as session:
         cdm_collection_list = cdm_api.request_collection_list(
@@ -1803,7 +1805,10 @@ class ShortFieldInfo(NamedTuple):
     vocab: bool
 
 
-def request_contentdm_field_info(cdm_instance_url: str, cdm_collection_alias: str) -> List[cdm_api.CdmFieldInfo]:
+def request_contentdm_field_info(
+    cdm_instance_url: str,
+    cdm_collection_alias: str,
+) -> list[cdm_api.CdmFieldInfo]:
     print("\nRequesting CONTENTdm field info...")
     with requests.Session() as session:
         field_infos = cdm_api.request_field_infos(
@@ -1815,7 +1820,7 @@ def request_contentdm_field_info(cdm_instance_url: str, cdm_collection_alias: st
         return field_infos
 
 
-def request_fromthepage_project_names(ftp_slug: str) -> List[str]:
+def request_fromthepage_project_names(ftp_slug: str) -> list[str]:
     print("\nRequesting FromThePage project names...")
     with requests.Session() as session:
         ftp_instance = ftp_api.FtpInstance(
@@ -1829,10 +1834,10 @@ def request_fromthepage_project_names(ftp_slug: str) -> List[str]:
         return [project.label for project in ftp_project_collection.projects]
 
 
-def get_nicks_from_edit(path: str) -> List[str]:
+def get_nicks_from_edit(path: str) -> list[str]:
     with open(path, mode="r", encoding="utf-8") as fp:
         catcher_edits = json.load(fp)
-    nicks: List[str] = []
+    nicks: list[str] = []
     for edit in catcher_edits:
         for nick in edit:
             if nick not in nicks and nick != "dmrecord":
@@ -1858,7 +1863,11 @@ def cdmschema2csv(
             session=session,
         )
     with open(csv_file_path, mode="w", encoding="utf-8", newline="") as fp:
-        writer = csv.DictWriter(fp, fieldnames=["name", "nick"], dialect="excel")
+        writer = csv.DictWriter(
+            f=fp,
+            fieldnames=["name", "nick"],
+            dialect="excel",
+        )
         writer.writeheader()
         for field_info in field_infos:
             if not field_info.readonly:

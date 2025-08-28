@@ -1,7 +1,7 @@
+import json
+
 import requests
 import tqdm
-
-import json
 
 from cdm_util_scripts import ftp_api
 
