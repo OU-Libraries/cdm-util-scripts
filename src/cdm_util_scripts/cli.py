@@ -136,7 +136,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     catcher_terms_subparser.add_argument(
         "-f",
         "--output-format",
-        choices=["xml", "tsv"],
+        choices=["xml", "txt"],
         default="xml",
         help="What format to print",
     )
@@ -154,7 +154,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     ) -> None:
         printer = {
             "xml": catcher.print_result,
-            "tsv": catcher.print_terms_as_text,
+            "txt": catcher.print_terms_as_text,
         }[output_format]
         printer(
             catcher.credentials_from_environ(catcher.catcher_terms)
