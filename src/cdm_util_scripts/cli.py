@@ -37,6 +37,62 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="cdm-util-scripts")
     subparsers = parser.add_subparsers()
 
+    # GUI
+    gui_subparser = subparsers.add_parser(
+        "gui",
+        help="Launch a GUI version of this utility",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    gui_subparser.set_defaults(func=gui.gui)
+
+    # ftpinfo
+    ftpinfo_subparser = subparsers.add_parser(
+        "ftpinfo",
+        help="Print FromThePage project information",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    ftpinfo_subparser.add_argument("slug", help="FromThePage user slug")
+    ftpinfo_subparser.add_argument(
+        "-f",
+        "--output-format",
+        action="store",
+        choices=OUTPUT_FORMATS,
+        default="records",
+        help="Output format",
+    )
+    ftpinfo_subparser.set_defaults(func=ftpinfo)
+
+    # cdminfo
+    cdminfo_subparser = subparsers.add_parser(
+        "cdminfo",
+        help="Print CONTENTdm instance or collection information",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    cdminfo_subparser.add_argument(
+        "instance_url", help="CONTENTdm repository URL"
+    )
+    cdminfo_subparser.add_argument(
+        "-a", "--alias", action="store", help="CONTENTdm collection alias"
+    )
+    cdminfo_subparser.add_argument(
+        "-f",
+        "--output-format",
+        action="store",
+        choices=OUTPUT_FORMATS,
+        default="records",
+        help="Output format",
+    )
+    cdminfo_subparser.add_argument(
+        "-c",
+        "--columns",
+        action="store",
+        help=(
+            "Specify columns to print in a comma separated string, as "
+            "--columns name,nick"
+        )
+    )
+    cdminfo_subparser.set_defaults(func=cdminfo)
+
     # catcher
     catcher_subparser = subparsers.add_parser(
         name="catcher",
@@ -490,62 +546,6 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         help="Report file path",
     )
     scanftpschema_subparser.set_defaults(func=scanftpschema.scanftpschema)
-
-    # GUI
-    gui_subparser = subparsers.add_parser(
-        "gui",
-        help="Launch a GUI version of this utility",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    )
-    gui_subparser.set_defaults(func=gui.gui)
-
-    # ftpinfo
-    ftpinfo_subparser = subparsers.add_parser(
-        "ftpinfo",
-        help="Print FromThePage project information",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    )
-    ftpinfo_subparser.add_argument("slug", help="FromThePage user slug")
-    ftpinfo_subparser.add_argument(
-        "-f",
-        "--output-format",
-        action="store",
-        choices=OUTPUT_FORMATS,
-        default="records",
-        help="Output format",
-    )
-    ftpinfo_subparser.set_defaults(func=ftpinfo)
-
-    # cdminfo
-    cdminfo_subparser = subparsers.add_parser(
-        "cdminfo",
-        help="Print CONTENTdm instance or collection information",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    )
-    cdminfo_subparser.add_argument(
-        "instance_url", help="CONTENTdm repository URL"
-    )
-    cdminfo_subparser.add_argument(
-        "-a", "--alias", action="store", help="CONTENTdm collection alias"
-    )
-    cdminfo_subparser.add_argument(
-        "-f",
-        "--output-format",
-        action="store",
-        choices=OUTPUT_FORMATS,
-        default="records",
-        help="Output format",
-    )
-    cdminfo_subparser.add_argument(
-        "-c",
-        "--columns",
-        action="store",
-        help=(
-            "Specify columns to print in a comma separated string, as "
-            "--columns name,nick"
-        )
-    )
-    cdminfo_subparser.set_defaults(func=cdminfo)
 
     args = parser.parse_args(argv)
     args.func(
