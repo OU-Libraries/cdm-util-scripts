@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cdm-util-scripts"
-version = "0.11.0"
+version = "1.0.0"
 description = "Ohio University CONTENTdm utility scripts"
 authors = [{name = "Nick Ver Steegh"}]
 license = {text = "GPLv3"}
