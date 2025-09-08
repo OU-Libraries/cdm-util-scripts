@@ -7,13 +7,12 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 
 from typing import Any, Optional, NamedTuple, Union
-from typing_extensions import TypeAlias
 
 
 FTP_HOSTED_URL = "https://fromthepage.com"
 
 
-FtpFieldBasedTranscription: TypeAlias = list[Optional[dict[str, str]]]
+FtpFieldBasedTranscription = list[Optional[dict[str, str]]]
 
 
 @dataclass

@@ -8,10 +8,9 @@ import xml.etree.ElementTree as ET
 import zeep
 
 from typing import Any, Literal, Iterator, NamedTuple, Callable, Optional
-from typing_extensions import TypeAlias
 
 
-JsonObject: TypeAlias = dict[str, Any]
+JsonObject = dict[str, Any]
 
 
 CATCHER_SERVICE_URL = (

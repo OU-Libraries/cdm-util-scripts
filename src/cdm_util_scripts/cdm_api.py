@@ -13,7 +13,6 @@ from typing import (
     TextIO,
     Union,
 )
-from typing_extensions import TypeAlias
 
 
 class DmError(Exception):
@@ -127,7 +126,7 @@ def request_field_infos(
     return infos
 
 
-CdmItemInfo: TypeAlias = dict[str, str]
+CdmItemInfo = dict[str, str]
 
 
 def request_item_info(
@@ -149,7 +148,7 @@ def request_item_info(
     return {nick: value or "" for nick, value in item_info.items()}
 
 
-CdmFieldVocab: TypeAlias = list[str]
+CdmFieldVocab = list[str]
 
 
 def request_field_vocab(
@@ -301,7 +300,7 @@ def request_collection_object_records(
     return cdm_records
 
 
-CdmFieldMapping: TypeAlias = dict[str, list[str]]
+CdmFieldMapping = dict[str, list[str]]
 
 
 def read_csv_field_mapping(filename: str) -> CdmFieldMapping:

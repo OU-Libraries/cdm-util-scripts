@@ -912,10 +912,10 @@ class CatcherTidy:
         if not output_file_path:
             messagebox.showerror(message="Please enter a tidied Catcher JSON file path")
             return
-        normalize_whitespace: List[str] = []
-        replace_smart_chars: List[str] = []
-        normalize_lcsh: List[str] = []
-        sort_terms: List[str] = []
+        normalize_whitespace: list[str] = []
+        replace_smart_chars: list[str] = []
+        normalize_lcsh: list[str] = []
+        sort_terms: list[str] = []
         for row in self._tidy_ops_rows:
             if row.whitespace.get():
                 normalize_whitespace.append(row.nick)
