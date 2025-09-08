@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 
 import zeep
 
-from typing import Any, Literal, Iterator, NamedTuple, Callable
+from typing import Any, Literal, Iterator, NamedTuple, Callable, Optional
 from typing_extensions import TypeAlias
 
 
@@ -236,23 +236,22 @@ def print_namedtuples_as_tsv(
 
 
 class CatalogCollectionInfo(NamedTuple):
-    alias: str
-    name: str
-    fullres_enabled: bool
+    alias: Optional[str]
+    name: Optional[str]
+    fullres_enabled: Optional[bool]
 
 
 def parse_catalog(catalog: str) -> Iterator[CatalogCollectionInfo]:
     root = ET.fromstring(catalog)
     for collection_elem in root.iter("collection"):
-        fullres_value = (
-            collection_elem
-            .find("collection_fullres")
-            .find("fullres_enabled")
-            .text
+        fullres_value = get_elem_text_or_none(
+            collection_elem,
+            "collection_fullres",
+            "fullres_enabled",
         )
         yield CatalogCollectionInfo(
-            alias=collection_elem.find("collection_alias").text,
-            name=collection_elem.find("collection_name").text,
+            alias=get_elem_text_or_none(collection_elem, "collection_alias"),
+            name=get_elem_text_or_none(collection_elem, "collection_name"),
             fullres_enabled=fullres_value != "no",
         )
 
@@ -265,19 +264,19 @@ print_catalog_as_tsv = functools.partial(
 
 
 class CollectionFieldInfo(NamedTuple):
-    admin: bool
-    nickname: str
-    name: str
-    type: str
-    size: bool
-    search: bool
-    hidden: bool
-    vocab: bool
-    vocdb: str
-    dcmap: str
-    req: bool
-    readonly: bool
-    tag: str
+    admin: Optional[bool]
+    nickname: Optional[str]
+    name: Optional[str]
+    type: Optional[str]
+    size: Optional[bool]
+    search: Optional[bool]
+    hidden: Optional[bool]
+    vocab: Optional[bool]
+    vocdb: Optional[str]
+    dcmap: Optional[str]
+    req: Optional[bool]
+    readonly: Optional[bool]
+    tag: Optional[str]
 
 
 def parse_collection_config(
@@ -285,20 +284,27 @@ def parse_collection_config(
 ) -> Iterator[CollectionFieldInfo]:
     root = ET.fromstring(collection_config)
     for field_elem in root.iter("field"):
+        admin = get_elem_text_or_none(field_elem, "admin")
+        size = get_elem_text_or_none(field_elem, "size")
+        search = get_elem_text_or_none(field_elem, "search")
+        hidden = get_elem_text_or_none(field_elem, "hidden")
+        vocab = get_elem_text_or_none(field_elem, "vocab")
+        req = get_elem_text_or_none(field_elem, "req")
+        readonly = get_elem_text_or_none(field_elem, "readonly")
         yield CollectionFieldInfo(
-            admin=int_str_to_bool(field_elem.find("admin").text),
-            nickname=field_elem.find("nickname").text,
-            name=field_elem.find("name").text,
-            type=field_elem.find("type").text,
-            size=int_str_to_bool(field_elem.find("size").text),
-            search=int_str_to_bool(field_elem.find("search").text),
-            hidden=int_str_to_bool(field_elem.find("hidden").text),
-            vocab=int_str_to_bool(field_elem.find("vocab").text),
-            vocdb=field_elem.find("vocdb").text,
-            dcmap=field_elem.find("dcmap").text,
-            req=int_str_to_bool(field_elem.find("req").text),
-            readonly=int_str_to_bool(field_elem.find("readonly").text),
-            tag=field_elem.find("tag").text,
+            admin=None if admin is None else int_str_to_bool(admin),
+            nickname=get_elem_text_or_none(field_elem, "nickname"),
+            name=get_elem_text_or_none(field_elem, "name"),
+            type=get_elem_text_or_none(field_elem, "type"),
+            size=None if size is None else int_str_to_bool(size),
+            search=None if search is None else int_str_to_bool(search),
+            hidden=None if hidden is None else int_str_to_bool(hidden),
+            vocab=None if vocab is None else int_str_to_bool(vocab),
+            vocdb=get_elem_text_or_none(field_elem, "vocdb"),
+            dcmap=get_elem_text_or_none(field_elem, "dcmap"),
+            req=None if req is None else int_str_to_bool(req),
+            readonly=None if readonly is None else int_str_to_bool(readonly),
+            tag=get_elem_text_or_none(field_elem, "tag"),
         )
 
 
@@ -328,4 +334,17 @@ def print_terms_as_text(func: Callable[..., str]) -> Callable[..., None]:
 
 def parse_terms(terms: str) -> list[str]:
     root = ET.fromstring(terms)
-    return [term_elem.text for term_elem in root.iter("term")]
+    return [
+        term for term_elem in root.iter("term") if (term := term_elem.text)
+    ]
+
+
+def get_elem_text_or_none(elem: ET.Element, *tag: str) -> Optional[str]:
+    if not tag:
+        raise ValueError("no tags given")
+    result: Optional[ET.Element] = elem
+    for t in tag:
+        result = result.find(t)
+        if result is None:
+            return None
+    return result.text
