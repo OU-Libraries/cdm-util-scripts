@@ -19,7 +19,7 @@ To run cdm-util-scripts, you need Python 3 version 3.9 or later installed and av
 
 First, check that Python 3.9 or later is available by running python with the `--version` option. Python 3 goes by different names on different systems, usually `python` or `python3`. Check for the other if one seems to be missing. Modern Windows systems may also have `py`, a launcher that tries to find Python on your computer, and/or a `python3` shortcut that can install Python from the Microsoft Store.
 
-On Windows Command Prompt or Git Bash:
+On Windows Command Prompt or Git Bash (here showing the Command Prompt `C:\Users` prompt, which might look like `name@HOST MINGW64 ~ $` on Git Bash):
 
 ```console
 C:\Users\username>python --version
@@ -34,7 +34,7 @@ Python 3.11.4
 
 In the above case, use `python` or `py`.
 
-On Linux or macOS Terminal (`$` is the prompt used here but yours might be different):
+On Linux or macOS Terminal (using `$` as a shorthand for whatever prompt appears on your machine):
 
 ```console
 $ python --version
@@ -586,7 +586,7 @@ and outputs a JSON file containing the controlled vocabulary terms from the inpu
 Example usage:
 
 ```console
-$ head  -n 12 farfel-leaves-metadata-edits.json
+$ head -n 12 farfel-leaves-metadata-edits.json
 [
   {
     "dmrecord": "3001",
