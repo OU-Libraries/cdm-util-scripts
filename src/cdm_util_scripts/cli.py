@@ -224,7 +224,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     # catcher add
     catcher_add_subparser = catcher_subparsers.add_parser(
         name="add",
-        help="Add a list of JSON objects as new objects to CONTENTdm",
+        help="Implement a JSON list of CONTENTdm Catcher adds",
     )
     catcher_add_subparser.add_argument(
         "cdm_collection_alias", help="CONTENTdm collection alias"
@@ -241,7 +241,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     # catcher edit
     catcher_edit_subparser = catcher_subparsers.add_parser(
         name="edit",
-        help="Implement a list of CONTENTdm Catcher edits",
+        help="Implement a JSON list of CONTENTdm Catcher edits",
     )
     catcher_edit_subparser.add_argument(
         "cdm_collection_alias", help="CONTENTdm collection alias"
@@ -258,7 +258,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     # catcher delete
     catcher_delete_subparser = catcher_subparsers.add_parser(
         name="delete",
-        help="Implement a list of CONTENTdm Catcher deletes",
+        help="Implement a JSON list of CONTENTdm Catcher deletes",
     )
     catcher_delete_subparser.add_argument(
         "cdm_collection_alias", help="CONTENTdm collection alias"
@@ -411,64 +411,6 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     catchertidy_subparser.set_defaults(func=catchertidy_func)
 
-    # csv2json
-    csv2json_subparser = subparsers.add_parser(
-        "csv2json",
-        help=csv2json.csv2json.__doc__,
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    )
-    csv2json_subparser.add_argument(
-        "input_csv_path",
-        help="Path to delimited file",
-    )
-    csv2json_subparser.add_argument(
-        "output_json_path",
-        help="Path to output JSON file",
-    )
-    csv2json_subparser.add_argument(
-        "-k",
-        "--keep-empty-cells",
-        action="store_false",
-        help="Include edits for empty cells in CSV",
-    )
-    csv2json_subparser.add_argument(
-        "-d",
-        "--csv-dialect",
-        action="store",
-        choices=csv.list_dialects(),  # TODO: offer a sniffer option?
-        default="google-csv",
-        help="Dialect of input CSV",
-    )
-
-    def csv2json_func(*args, keep_empty_cells, **kwargs):
-        csv2json.csv2json(*args, drop_empty_cells=keep_empty_cells, **kwargs)
-
-    csv2json_subparser.set_defaults(func=csv2json_func)
-
-    # json2csv
-    json2csv_subparser = subparsers.add_parser(
-        "json2csv",
-        help=json2csv.json2csv.__doc__,
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    )
-    json2csv_subparser.add_argument(
-        "input_json_path",
-        help="Path to input JSON file",
-    )
-    json2csv_subparser.add_argument(
-        "output_csv_path",
-        help="Path to output CSV file",
-    )
-    json2csv_subparser.add_argument(
-        "-d",
-        "--csv-dialect",
-        action="store",
-        choices=csv.list_dialects(),
-        default="excel-tab",
-        help="CSV dialect to use for output",
-    )
-    json2csv_subparser.set_defaults(func=json2csv.json2csv)
-
     # ftptransc2catcher
     ftptransc2catcher_subparser = subparsers.add_parser(
         "ftptransc2catcher",
@@ -546,6 +488,64 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         help="Report file path",
     )
     scanftpschema_subparser.set_defaults(func=scanftpschema.scanftpschema)
+
+    # csv2json
+    csv2json_subparser = subparsers.add_parser(
+        "csv2json",
+        help=csv2json.csv2json.__doc__,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    csv2json_subparser.add_argument(
+        "input_csv_path",
+        help="Path to delimited file",
+    )
+    csv2json_subparser.add_argument(
+        "output_json_path",
+        help="Path to output JSON file",
+    )
+    csv2json_subparser.add_argument(
+        "-k",
+        "--keep-empty-cells",
+        action="store_false",
+        help="Include edits for empty cells in CSV",
+    )
+    csv2json_subparser.add_argument(
+        "-d",
+        "--csv-dialect",
+        action="store",
+        choices=csv.list_dialects(),  # TODO: offer a sniffer option?
+        default="google-csv",
+        help="Dialect of input CSV",
+    )
+
+    def csv2json_func(*args, keep_empty_cells, **kwargs):
+        csv2json.csv2json(*args, drop_empty_cells=keep_empty_cells, **kwargs)
+
+    csv2json_subparser.set_defaults(func=csv2json_func)
+
+    # json2csv
+    json2csv_subparser = subparsers.add_parser(
+        "json2csv",
+        help=json2csv.json2csv.__doc__,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    json2csv_subparser.add_argument(
+        "input_json_path",
+        help="Path to input JSON file",
+    )
+    json2csv_subparser.add_argument(
+        "output_csv_path",
+        help="Path to output CSV file",
+    )
+    json2csv_subparser.add_argument(
+        "-d",
+        "--csv-dialect",
+        action="store",
+        choices=csv.list_dialects(),
+        default="excel-tab",
+        help="CSV dialect to use for output",
+    )
+    json2csv_subparser.set_defaults(func=json2csv.json2csv)
 
     args = parser.parse_args(argv)
     args.func(
