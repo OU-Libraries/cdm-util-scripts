@@ -200,7 +200,7 @@ class Catcher:
         ttk.Entry(
             credentials_frame,
             textvariable=self.license,
-            width=24,
+            width=30,
         ).grid(column=2, row=1, sticky="nsew", padx=PADX, pady=PADY)
 
         self.catcher_service_url = tk.StringVar()
