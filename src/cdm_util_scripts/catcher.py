@@ -149,21 +149,20 @@ def catcher_process(
     password: str,
     license: str,
 ) -> None:
-    """Implement Catcher additions, deletions, and edits"""
+    """Implement Catcher addition, deletion, and edit actions"""
     with open(catcher_json_file_path, mode="r", encoding="utf-8") as fp:
         additions: list[JsonObject] = json.load(fp=fp)
     catcher = zeep.Client(CATCHER_SERVICE_URL)
     factory = catcher.type_factory("ns0")
     for json_object in additions:
-        response = catcher.service.processCONTENTdm(
-            action=action,
-            cdmurl=cdm_instance_url,
-            username=username,
-            password=password,
-            license=license,
-            collection=f"/{cdm_collection_alias.lstrip('/')}",
-            disableValidation="true",
-            metadata=factory.metadataWrapper(
+        process_args = {
+            "action": action,
+            "cdmurl": cdm_instance_url,
+            "username": username,
+            "password": password,
+            "license": license,
+            "collection": f"/{cdm_collection_alias.lstrip('/')}",
+            "metadata": factory.metadataWrapper(
                 metadataList={
                     "metadata": [
                         factory.metadata(field=field, value=value)
@@ -173,7 +172,10 @@ def catcher_process(
                     ],
                 },
             ),
-        )
+        }
+        if action == "edit":
+            process_args["disableValidation"] = "true"
+        response = catcher.service.processCONTENTdm(**process_args)
         print(response, file=sys.stderr)
 
 

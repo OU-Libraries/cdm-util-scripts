@@ -284,7 +284,7 @@ $ source catchercred.sh
 
 You should now be able to run the `catcher` sub-commands. If the environment variables don't exist, Python will raise a `KeyError: 'CATCHER_URL'` exception.
 
-The `catcher` series of sub-commands are a simplified replacement for Python CLI tool [cdm-catcher](https://github.com/Baledin/cdm-catcher), and are structured similarly. The `catcher` `add`, `edit`, and `delete` actions all disable Catcher's troublesome built-in controlled vocabulary validation using the `<disableValidation>true</disableValidation>` parameter added to the Catcher API in [April 2025](https://help.oclc.org/Metadata_Services/CONTENTdm/Release_notes/2025_release_notes/100CONTENTdm_Catcher_API_Release_Notes_April_2025).
+The `catcher` series of sub-commands are a simplified replacement for Python CLI tool [cdm-catcher](https://github.com/Baledin/cdm-catcher), and are structured similarly. `catcher`'s `edit` action also disables Catcher's troublesome built-in controlled vocabulary validation using the `<disableValidation>true</disableValidation>` parameter added to the Catcher API in [April 2025](https://help.oclc.org/Metadata_Services/CONTENTdm/Release_notes/2025_release_notes/100CONTENTdm_Catcher_API_Release_Notes_April_2025), so it should not be necessary to disable a collection's controlled vocabularies to successfully implement edits. However, since `<disableValidation>` also ignores record locks, there's an increased possibility of interference from simultaneous edits made by other users or processes.
 
 #### catcher version ws
 
