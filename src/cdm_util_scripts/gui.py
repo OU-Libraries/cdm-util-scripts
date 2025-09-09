@@ -1,5 +1,6 @@
 import csv
 import datetime
+import importlib.metadata
 import json
 import sys
 import textwrap
@@ -39,7 +40,12 @@ def gui() -> int:
     root.report_callback_exception = report_callback_exception
 
     Console(root)
-    print("cdmutil gui started at", datetime.datetime.now().isoformat())
+    print(
+        "cdmutil",
+        importlib.metadata.version("cdm-util-scripts"),
+        "gui started at",
+        datetime.datetime.now().isoformat(),
+    )
 
     style = ttk.Style(root)
     style.configure("lefttab.TNotebook", tabposition="wn")

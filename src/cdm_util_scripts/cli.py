@@ -1,6 +1,7 @@
 import argparse
 import csv
 import functools
+import importlib.metadata
 import itertools
 import json
 import sys
@@ -35,6 +36,11 @@ def catchertidy_compound_options():
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="cdm-util-scripts")
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=importlib.metadata.version("cdm-util-scripts"),
+    )
     subparsers = parser.add_subparsers()
 
     # GUI
